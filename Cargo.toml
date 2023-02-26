@@ -1,0 +1,5 @@
+[workspace]
+members = [
+    "csbindgen",
+    "csbindgen-tests",
+]

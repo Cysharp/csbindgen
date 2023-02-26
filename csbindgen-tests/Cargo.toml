@@ -1,0 +1,15 @@
+[package]
+name = "csbindgen-tests"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+csbindgen = { path = "../csbindgen" }
+
+[build-dependencies]
+cc = "1.0.79"
+bindgen = "0.64.0"
+csbindgen = { path = "../csbindgen" }

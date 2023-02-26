@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.33414.496
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CsbindgenDotnetConsoleApp", "CsbindgenDotnetConsoleApp.csproj", "{3ED7C644-A880-426C-9BF1-24675D7A6299}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{3ED7C644-A880-426C-9BF1-24675D7A6299}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3ED7C644-A880-426C-9BF1-24675D7A6299}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3ED7C644-A880-426C-9BF1-24675D7A6299}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3ED7C644-A880-426C-9BF1-24675D7A6299}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DD647440-C307-4A09-9D97-DEA74660F797}
+	EndGlobalSection
+EndGlobal

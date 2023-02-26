@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "CsbindgenDotnetConsoleApp": {
+      "commandName": "Project",
+      "nativeDebugging": true
+    }
+  }
+}
