@@ -50,3 +50,17 @@ pub(crate) fn generate(options: &BindgenOptions) -> Result<(String, String), Box
 
     return Ok((rust, csharp));
 }
+
+// #[test]
+// fn test() {
+//     let path = std::env::current_dir().unwrap();
+//     println!("starting dir: {}", path.display()); // csbindgen/csbindgen
+
+//     Builder::new()
+//         .input_bindgen_file("../csbindgen-tests/src/quiche.rs")
+//         .rust_method_prefix("csbindgen_quiche_")
+//         .csharp_class_name("LibQuiche")
+//         .csharp_dll_name("libquiche")
+//         .generate_to_file("../csbindgen-tests/src/quiche_ffi.rs", "../csbindgen-tests/../dotnet-sandbox/quiche_bindgen.cs")
+//         .unwrap();
+// }

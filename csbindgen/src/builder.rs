@@ -82,6 +82,21 @@ impl Builder {
     pub fn rust_method_prefix<T: Into<String>>(mut self, rust_method_prefix: T) -> Builder {
         self.options.rust_method_prefix = rust_method_prefix.into();
         self
+
+    }
+
+    /// configure C# class name(default is `NativeMethods`),
+    /// `public static unsafe partial class {csharp_class_name}`
+    pub fn csharp_class_name<T: Into<String>>(mut self, csharp_class_name: T) -> Builder {
+        self.options.csharp_class_name = csharp_class_name.into();
+        self
+    }
+    
+    /// configure C# load dll name,
+    /// `[DllImport({csharp_dll_name})]`
+    pub fn csharp_dll_name<T: Into<String>>(mut self, csharp_dll_name: T) -> Builder {
+        self.options.csharp_dll_name = csharp_dll_name.into();
+        self
     }
 
     // pub fn generate_csharp_file<T: AsRef<Path>>(&self, csharp_output_path: T) -> io::Result<()> {
@@ -103,10 +118,10 @@ impl Builder {
         rust_output_path: P,
         csharp_output_path: P,
     ) -> Result<(), Box<dyn Error>> {
+        let (rust, csharp) = generate(&self.options)?;
+
         let mut rust_file = make_file(rust_output_path)?;
         let mut csharp_file = make_file(csharp_output_path)?;
-
-        let (rust, csharp) = generate(&self.options)?;
 
         rust_file.write_all(rust.as_bytes())?;
         rust_file.flush()?;

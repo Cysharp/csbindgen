@@ -89,14 +89,14 @@ pub fn emit_csharp(
     for item in methods {
         let method_name = &item.method_name;
         let return_type = match &item.return_type {
-            Some(x) => x.to_csharp_string(&options),
+            Some(x) => x.to_csharp_string(&options, &aliases),
             None => "void".to_string(),
         };
 
         let parameters = item
             .parameters
             .iter()
-            .map(|p| format!("{} {}", p.rust_type.to_csharp_string(&options), p.name))
+            .map(|p| format!("{} {}", p.rust_type.to_csharp_string(&options, &aliases), p.escape_name()))
             .collect::<Vec<_>>()
             .join(", ");
 
@@ -107,15 +107,6 @@ pub fn emit_csharp(
             format!("        public static extern {return_type} {method_prefix}{method_name}({parameters});").as_str(),
         );
         method_list_string.push_str("\n");
-    }
-
-    let mut alias_string = String::new();
-    let mut aliases: Vec<_> = aliases.iter().collect();
-    aliases.sort_by_key(|x| x.0);
-    for (name, rust_type) in aliases {
-        alias_string.push_str_ln(
-            format!("    using {} = {};", name, rust_type.to_csharp_string(&options)).as_str(),
-        );
     }
 
     let mut structs_string = String::new();
@@ -138,7 +129,7 @@ pub fn emit_csharp(
             structs_string.push_str(
                 format!(
                     "        public {} {}",
-                    field.rust_type.to_csharp_string(&options),
+                    field.rust_type.to_csharp_string(&options, &aliases),
                     field.name
                 )
                 .as_str(),
@@ -168,8 +159,6 @@ using System.Runtime.InteropServices;
 
 namespace {namespace}
 {{
-{alias_string}
-
     public static unsafe partial class {class_name}
     {{
         const string __DllName = \"{dll_name}\";

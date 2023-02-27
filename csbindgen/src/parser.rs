@@ -1,5 +1,5 @@
-use std::collections::{HashSet, HashMap};
 use crate::type_meta::*;
+use std::collections::{HashMap, HashSet};
 use syn::{ForeignItem, Item, Pat, ReturnType};
 
 pub fn collect_method(ast: &syn::File) -> Vec<ExternMethod> {
@@ -63,10 +63,25 @@ pub fn collect_type_alias(ast: &syn::File) -> Vec<(String, RustType)> {
         if let Item::Type(t) = item {
             let name = t.ident.to_string();
             let alias = parse_type(&t.ty);
-
-            // pointer can not use alias.
-            if !alias.is_pointer || !alias.is_pointer_pointer {
-                result.push((name, alias));
+            result.push((name, alias));
+        } else if let Item::Use(t) = item {
+            if let syn::UseTree::Path(t) = &t.tree {
+                if let syn::UseTree::Rename(t) = &*t.tree {
+                    let name = t.rename.to_string();
+                    let alias = t.ident.to_string();
+                    result.push((
+                        name,
+                        RustType {
+                            is_const: false,
+                            is_fixed_array: false,
+                            is_mut: false,
+                            is_pointer: false,
+                            is_pointer_pointer: false,
+                            fixed_array_digits : "".to_string(),
+                            type_name: alias.to_string(),
+                        },
+                    ));
+                }
             }
         }
     }

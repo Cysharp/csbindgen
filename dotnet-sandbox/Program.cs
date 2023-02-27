@@ -1,10 +1,10 @@
 ﻿// See https://aka.ms/new-console-template for more information
-using Csbindgen;
+//using Csbindgen;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 unsafe
 {
-    var v = NativeMethods.csbindgen_LZ4_versionString();
+    //var v = NativeMethods.csbindgen_LZ4_versionString();
 
 
     //var bytes = new byte[] { 1, 10, 100, 100, 100, 100, 100, 100 };
@@ -19,8 +19,8 @@ unsafe
     //}
 
 
-    var vvv = new string((sbyte*)v);
+    // var vvv = new string((sbyte*)v);
 
-    Console.WriteLine(vvv);
+    // Console.WriteLine(vvv);
 
 }

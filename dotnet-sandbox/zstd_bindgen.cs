@@ -7,26 +7,12 @@ using System.Runtime.InteropServices;
 
 namespace CsBindgen
 {
-    using ZSTD_CCtx = ZSTD_CCtx_s;
-    using ZSTD_CDict = ZSTD_CDict_s;
-    using ZSTD_CStream = ZSTD_CCtx_s;
-    using ZSTD_DCtx = ZSTD_DCtx_s;
-    using ZSTD_DDict = ZSTD_DDict_s;
-    using ZSTD_DStream = ZSTD_DCtx_s;
-    using ZSTD_EndDirective = Int32;
-    using ZSTD_ResetDirective = Int32;
-    using ZSTD_cParameter = Int32;
-    using ZSTD_dParameter = Int32;
-    using ZSTD_inBuffer = ZSTD_inBuffer_s;
-    using ZSTD_outBuffer = ZSTD_outBuffer_s;
-
-
-    public static unsafe partial class NativeMethods
+    public static unsafe partial class LibZstd
     {
-        const string __DllName = "";
+        const string __DllName = "libzsd";
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void __va_start(Byte** arg1);
+        public static extern void __va_start(byte** arg1);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern void __security_init_cookie();
@@ -35,22 +21,22 @@ namespace CsBindgen
         public static extern void __security_check_cookie(UIntPtr _StackCookie);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UInt32 ZSTD_versionNumber();
+        public static extern uint ZSTD_versionNumber();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern Byte* ZSTD_versionString();
+        public static extern byte* ZSTD_versionString();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_compress(void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize, Int32 compressionLevel);
+        public static extern UIntPtr ZSTD_compress(void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize, int compressionLevel);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern UIntPtr ZSTD_decompress(void* dst, UIntPtr dstCapacity, void* src, UIntPtr compressedSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UInt64 ZSTD_getFrameContentSize(void* src, UIntPtr srcSize);
+        public static extern ulong ZSTD_getFrameContentSize(void* src, UIntPtr srcSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UInt64 ZSTD_getDecompressedSize(void* src, UIntPtr srcSize);
+        public static extern ulong ZSTD_getDecompressedSize(void* src, UIntPtr srcSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern UIntPtr ZSTD_findFrameCompressedSize(void* src, UIntPtr srcSize);
@@ -59,70 +45,70 @@ namespace CsBindgen
         public static extern UIntPtr ZSTD_compressBound(UIntPtr srcSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UInt32 ZSTD_isError(UIntPtr code);
+        public static extern uint ZSTD_isError(UIntPtr code);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern Byte* ZSTD_getErrorName(UIntPtr code);
+        public static extern byte* ZSTD_getErrorName(UIntPtr code);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 ZSTD_minCLevel();
+        public static extern int ZSTD_minCLevel();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 ZSTD_maxCLevel();
+        public static extern int ZSTD_maxCLevel();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern Int32 ZSTD_defaultCLevel();
+        public static extern int ZSTD_defaultCLevel();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ZSTD_CCtx* ZSTD_createCCtx();
+        public static extern ZSTD_CCtx_s* ZSTD_createCCtx();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_freeCCtx(ZSTD_CCtx* cctx);
+        public static extern UIntPtr ZSTD_freeCCtx(ZSTD_CCtx_s* cctx);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_compressCCtx(ZSTD_CCtx* cctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize, Int32 compressionLevel);
+        public static extern UIntPtr ZSTD_compressCCtx(ZSTD_CCtx_s* cctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize, int compressionLevel);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ZSTD_DCtx* ZSTD_createDCtx();
+        public static extern ZSTD_DCtx_s* ZSTD_createDCtx();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_freeDCtx(ZSTD_DCtx* dctx);
+        public static extern UIntPtr ZSTD_freeDCtx(ZSTD_DCtx_s* dctx);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_decompressDCtx(ZSTD_DCtx* dctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize);
+        public static extern UIntPtr ZSTD_decompressDCtx(ZSTD_DCtx_s* dctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ZSTD_bounds ZSTD_cParam_getBounds(ZSTD_cParameter cParam);
+        public static extern ZSTD_bounds ZSTD_cParam_getBounds(int cParam);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_CCtx_setParameter(ZSTD_CCtx* cctx, ZSTD_cParameter param, Int32 value);
+        public static extern UIntPtr ZSTD_CCtx_setParameter(ZSTD_CCtx_s* cctx, int param, int value);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_CCtx_setPledgedSrcSize(ZSTD_CCtx* cctx, UInt64 pledgedSrcSize);
+        public static extern UIntPtr ZSTD_CCtx_setPledgedSrcSize(ZSTD_CCtx_s* cctx, ulong pledgedSrcSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_CCtx_reset(ZSTD_CCtx* cctx, ZSTD_ResetDirective reset);
+        public static extern UIntPtr ZSTD_CCtx_reset(ZSTD_CCtx_s* cctx, int reset);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_compress2(ZSTD_CCtx* cctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize);
+        public static extern UIntPtr ZSTD_compress2(ZSTD_CCtx_s* cctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ZSTD_bounds ZSTD_dParam_getBounds(ZSTD_dParameter dParam);
+        public static extern ZSTD_bounds ZSTD_dParam_getBounds(int dParam);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_DCtx_setParameter(ZSTD_DCtx* dctx, ZSTD_dParameter param, Int32 value);
+        public static extern UIntPtr ZSTD_DCtx_setParameter(ZSTD_DCtx_s* dctx, int param, int value);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_DCtx_reset(ZSTD_DCtx* dctx, ZSTD_ResetDirective reset);
+        public static extern UIntPtr ZSTD_DCtx_reset(ZSTD_DCtx_s* dctx, int reset);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ZSTD_CStream* ZSTD_createCStream();
+        public static extern ZSTD_CCtx_s* ZSTD_createCStream();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_freeCStream(ZSTD_CStream* zcs);
+        public static extern UIntPtr ZSTD_freeCStream(ZSTD_CCtx_s* zcs);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_compressStream2(ZSTD_CCtx* cctx, ZSTD_outBuffer* output, ZSTD_inBuffer* input, ZSTD_EndDirective endOp);
+        public static extern UIntPtr ZSTD_compressStream2(ZSTD_CCtx_s* cctx, ZSTD_outBuffer_s* output, ZSTD_inBuffer_s* input, int endOp);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern UIntPtr ZSTD_CStreamInSize();
@@ -131,28 +117,28 @@ namespace CsBindgen
         public static extern UIntPtr ZSTD_CStreamOutSize();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_initCStream(ZSTD_CStream* zcs, Int32 compressionLevel);
+        public static extern UIntPtr ZSTD_initCStream(ZSTD_CCtx_s* zcs, int compressionLevel);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_compressStream(ZSTD_CStream* zcs, ZSTD_outBuffer* output, ZSTD_inBuffer* input);
+        public static extern UIntPtr ZSTD_compressStream(ZSTD_CCtx_s* zcs, ZSTD_outBuffer_s* output, ZSTD_inBuffer_s* input);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_flushStream(ZSTD_CStream* zcs, ZSTD_outBuffer* output);
+        public static extern UIntPtr ZSTD_flushStream(ZSTD_CCtx_s* zcs, ZSTD_outBuffer_s* output);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_endStream(ZSTD_CStream* zcs, ZSTD_outBuffer* output);
+        public static extern UIntPtr ZSTD_endStream(ZSTD_CCtx_s* zcs, ZSTD_outBuffer_s* output);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ZSTD_DStream* ZSTD_createDStream();
+        public static extern ZSTD_DCtx_s* ZSTD_createDStream();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_freeDStream(ZSTD_DStream* zds);
+        public static extern UIntPtr ZSTD_freeDStream(ZSTD_DCtx_s* zds);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_initDStream(ZSTD_DStream* zds);
+        public static extern UIntPtr ZSTD_initDStream(ZSTD_DCtx_s* zds);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_decompressStream(ZSTD_DStream* zds, ZSTD_outBuffer* output, ZSTD_inBuffer* input);
+        public static extern UIntPtr ZSTD_decompressStream(ZSTD_DCtx_s* zds, ZSTD_outBuffer_s* output, ZSTD_inBuffer_s* input);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
         public static extern UIntPtr ZSTD_DStreamInSize();
@@ -161,76 +147,76 @@ namespace CsBindgen
         public static extern UIntPtr ZSTD_DStreamOutSize();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_compress_usingDict(ZSTD_CCtx* ctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize, void* dict, UIntPtr dictSize, Int32 compressionLevel);
+        public static extern UIntPtr ZSTD_compress_usingDict(ZSTD_CCtx_s* ctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize, void* dict, UIntPtr dictSize, int compressionLevel);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_decompress_usingDict(ZSTD_DCtx* dctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize, void* dict, UIntPtr dictSize);
+        public static extern UIntPtr ZSTD_decompress_usingDict(ZSTD_DCtx_s* dctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize, void* dict, UIntPtr dictSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ZSTD_CDict* ZSTD_createCDict(void* dictBuffer, UIntPtr dictSize, Int32 compressionLevel);
+        public static extern ZSTD_CDict_s* ZSTD_createCDict(void* dictBuffer, UIntPtr dictSize, int compressionLevel);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_freeCDict(ZSTD_CDict* CDict);
+        public static extern UIntPtr ZSTD_freeCDict(ZSTD_CDict_s* CDict);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_compress_usingCDict(ZSTD_CCtx* cctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize, ZSTD_CDict* cdict);
+        public static extern UIntPtr ZSTD_compress_usingCDict(ZSTD_CCtx_s* cctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize, ZSTD_CDict_s* cdict);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern ZSTD_DDict* ZSTD_createDDict(void* dictBuffer, UIntPtr dictSize);
+        public static extern ZSTD_DDict_s* ZSTD_createDDict(void* dictBuffer, UIntPtr dictSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_freeDDict(ZSTD_DDict* ddict);
+        public static extern UIntPtr ZSTD_freeDDict(ZSTD_DDict_s* ddict);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_decompress_usingDDict(ZSTD_DCtx* dctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize, ZSTD_DDict* ddict);
+        public static extern UIntPtr ZSTD_decompress_usingDDict(ZSTD_DCtx_s* dctx, void* dst, UIntPtr dstCapacity, void* src, UIntPtr srcSize, ZSTD_DDict_s* ddict);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UInt32 ZSTD_getDictID_fromDict(void* dict, UIntPtr dictSize);
+        public static extern uint ZSTD_getDictID_fromDict(void* dict, UIntPtr dictSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UInt32 ZSTD_getDictID_fromCDict(ZSTD_CDict* cdict);
+        public static extern uint ZSTD_getDictID_fromCDict(ZSTD_CDict_s* cdict);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UInt32 ZSTD_getDictID_fromDDict(ZSTD_DDict* ddict);
+        public static extern uint ZSTD_getDictID_fromDDict(ZSTD_DDict_s* ddict);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UInt32 ZSTD_getDictID_fromFrame(void* src, UIntPtr srcSize);
+        public static extern uint ZSTD_getDictID_fromFrame(void* src, UIntPtr srcSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_CCtx_loadDictionary(ZSTD_CCtx* cctx, void* dict, UIntPtr dictSize);
+        public static extern UIntPtr ZSTD_CCtx_loadDictionary(ZSTD_CCtx_s* cctx, void* dict, UIntPtr dictSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_CCtx_refCDict(ZSTD_CCtx* cctx, ZSTD_CDict* cdict);
+        public static extern UIntPtr ZSTD_CCtx_refCDict(ZSTD_CCtx_s* cctx, ZSTD_CDict_s* cdict);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_CCtx_refPrefix(ZSTD_CCtx* cctx, void* prefix, UIntPtr prefixSize);
+        public static extern UIntPtr ZSTD_CCtx_refPrefix(ZSTD_CCtx_s* cctx, void* prefix, UIntPtr prefixSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_DCtx_loadDictionary(ZSTD_DCtx* dctx, void* dict, UIntPtr dictSize);
+        public static extern UIntPtr ZSTD_DCtx_loadDictionary(ZSTD_DCtx_s* dctx, void* dict, UIntPtr dictSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_DCtx_refDDict(ZSTD_DCtx* dctx, ZSTD_DDict* ddict);
+        public static extern UIntPtr ZSTD_DCtx_refDDict(ZSTD_DCtx_s* dctx, ZSTD_DDict_s* ddict);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_DCtx_refPrefix(ZSTD_DCtx* dctx, void* prefix, UIntPtr prefixSize);
+        public static extern UIntPtr ZSTD_DCtx_refPrefix(ZSTD_DCtx_s* dctx, void* prefix, UIntPtr prefixSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_sizeof_CCtx(ZSTD_CCtx* cctx);
+        public static extern UIntPtr ZSTD_sizeof_CCtx(ZSTD_CCtx_s* cctx);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_sizeof_DCtx(ZSTD_DCtx* dctx);
+        public static extern UIntPtr ZSTD_sizeof_DCtx(ZSTD_DCtx_s* dctx);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_sizeof_CStream(ZSTD_CStream* zcs);
+        public static extern UIntPtr ZSTD_sizeof_CStream(ZSTD_CCtx_s* zcs);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_sizeof_DStream(ZSTD_DStream* zds);
+        public static extern UIntPtr ZSTD_sizeof_DStream(ZSTD_DCtx_s* zds);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_sizeof_CDict(ZSTD_CDict* cdict);
+        public static extern UIntPtr ZSTD_sizeof_CDict(ZSTD_CDict_s* cdict);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern UIntPtr ZSTD_sizeof_DDict(ZSTD_DDict* ddict);
+        public static extern UIntPtr ZSTD_sizeof_DDict(ZSTD_DDict_s* ddict);
 
 
     }
@@ -238,21 +224,21 @@ namespace CsBindgen
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct ZSTD_CCtx_s
     {
-        public fixed Byte _unused[1];
+        public fixed byte _unused[1];
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct ZSTD_DCtx_s
     {
-        public fixed Byte _unused[1];
+        public fixed byte _unused[1];
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct ZSTD_bounds
     {
         public UIntPtr error;
-        public Int32 lowerBound;
-        public Int32 upperBound;
+        public int lowerBound;
+        public int upperBound;
     }
 
     [StructLayout(LayoutKind.Sequential)]
@@ -274,13 +260,13 @@ namespace CsBindgen
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct ZSTD_CDict_s
     {
-        public fixed Byte _unused[1];
+        public fixed byte _unused[1];
     }
 
     [StructLayout(LayoutKind.Sequential)]
     public unsafe struct ZSTD_DDict_s
     {
-        public fixed Byte _unused[1];
+        public fixed byte _unused[1];
     }
 
     
