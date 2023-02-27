@@ -63,8 +63,8 @@ impl Builder {
                 csharp_class_name: "NativeMethods".to_string(),
                 csharp_dll_name: "".to_string(),
                 csharp_method_prefix: "".to_string(),
-                csharp_c_long_convert: "Int32".to_string(),
-                csharp_c_ulong_convert: "UInt32".to_string(),
+                csharp_c_long_convert: "int".to_string(),
+                csharp_c_ulong_convert: "uint".to_string(),
             },
         }
     }
@@ -75,14 +75,32 @@ impl Builder {
         self
     }
 
-    // TODO:method chain methods...
+    /// add original extern call type prefix to rust wrapper,
+    /// `return {rust_method_type_path}::foo()`
+    pub fn rust_method_type_path<T: Into<String>>(mut self, rust_method_type_path: T) -> Builder {
+        self.options.rust_method_type_path = rust_method_type_path.into();
+        self
+    }
 
     /// add method prefix to rust wrapper,
     /// `pub extern "C" fn {rust_method_prefix}foo()`
     pub fn rust_method_prefix<T: Into<String>>(mut self, rust_method_prefix: T) -> Builder {
         self.options.rust_method_prefix = rust_method_prefix.into();
         self
+    }
 
+    /// add file header string to rust wrapper,
+    /// `mod lz4;`, `use super::lz4;`
+    pub fn rust_file_header<T: Into<String>>(mut self, rust_file_header: T) -> Builder {
+        self.options.rust_file_header = rust_file_header.into();
+        self
+    }
+
+    /// configure C# file namespace(default is `CsBindgen`),
+    /// "namespace {csharp_namespace}"
+    pub fn csharp_namespace<T: Into<String>>(mut self, csharp_namespace: T) -> Builder {
+        self.options.csharp_namespace = csharp_namespace.into();
+        self
     }
 
     /// configure C# class name(default is `NativeMethods`),
@@ -96,6 +114,27 @@ impl Builder {
     /// `[DllImport({csharp_dll_name})]`
     pub fn csharp_dll_name<T: Into<String>>(mut self, csharp_dll_name: T) -> Builder {
         self.options.csharp_dll_name = csharp_dll_name.into();
+        self
+    }
+
+    /// configure C# calling method name prefix,
+    /// `public static extern void {csharp_method_prefix}foo()`
+    pub fn csharp_method_prefix<T: Into<String>>(mut self, csharp_method_prefix: T) -> Builder {
+        self.options.csharp_method_prefix = csharp_method_prefix.into();
+        self
+    }
+    
+    /// configure c_long to {csharp_c_long_convert} type,
+    /// default is `int`.
+    pub fn csharp_c_long_convert<T: Into<String>>(mut self, csharp_c_long_convert: T) -> Builder {
+        self.options.csharp_c_long_convert = csharp_c_long_convert.into();
+        self
+    }
+
+    /// configure c_long to {csharp_c_long_convert} type,
+    /// default is `uint`.
+    pub fn csharp_c_ulong_convert<T: Into<String>>(mut self, csharp_c_ulong_convert: T) -> Builder {
+        self.options.csharp_c_ulong_convert = csharp_c_ulong_convert.into();
         self
     }
 

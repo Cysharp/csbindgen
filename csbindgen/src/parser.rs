@@ -48,7 +48,10 @@ pub fn collect_method(ast: &syn::File) -> Vec<ExternMethod> {
                         return_type: retrun_type,
                     };
 
-                    list.push(t.clone());
+                    // TODO:filter
+                    if !(t.method_name.starts_with("_") || t.method_name == "") {
+                        list.push(t.clone());
+                    }
                 }
             }
         }
@@ -77,7 +80,7 @@ pub fn collect_type_alias(ast: &syn::File) -> Vec<(String, RustType)> {
                             is_mut: false,
                             is_pointer: false,
                             is_pointer_pointer: false,
-                            fixed_array_digits : "".to_string(),
+                            fixed_array_digits: "".to_string(),
                             type_name: alias.to_string(),
                         },
                     ));

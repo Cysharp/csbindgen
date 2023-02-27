@@ -42,9 +42,6 @@ pub(crate) fn generate(options: &BindgenOptions) -> Result<(String, String), Box
 
     let structs = reduce_struct(&structs, &using_types);
 
-    // TODO: filter methods
-    //if !(t.method_name.starts_with("_") || t.method_name == "") {
-
     let rust = emit_rust_method(&methods, &options);
     let csharp = emit_csharp(&methods, &aliases, &structs, &options);
 
