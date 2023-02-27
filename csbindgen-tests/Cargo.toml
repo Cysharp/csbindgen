@@ -3,8 +3,13 @@ name = "csbindgen-tests"
 version = "0.1.0"
 edition = "2021"
 
+# [[bin]]
+# name = "csbindgen-test-app"
+# path = "src/main.rs"
+
 [lib]
 crate-type = ["cdylib"]
+path = "src/lib.rs"
 
 [dependencies]
 csbindgen = { path = "../csbindgen" }
