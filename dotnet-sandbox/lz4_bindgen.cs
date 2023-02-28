@@ -289,63 +289,6 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4F_resetDecompressionContext", CallingConvention = CallingConvention.Cdecl)]
         public static extern void LZ4F_resetDecompressionContext(LZ4F_dctx_s* dctx);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH_versionNumber", CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint XXH_versionNumber();
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH32", CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint XXH32(void* input, UIntPtr length, uint seed);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH32_createState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern XXH32_state_s* XXH32_createState();
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH32_freeState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int XXH32_freeState(XXH32_state_s* statePtr);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH32_copyState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void XXH32_copyState(XXH32_state_s* dst_state, XXH32_state_s* src_state);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH32_reset", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int XXH32_reset(XXH32_state_s* statePtr, uint seed);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH32_update", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int XXH32_update(XXH32_state_s* statePtr, void* input, UIntPtr length);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH32_digest", CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint XXH32_digest(XXH32_state_s* statePtr);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH32_canonicalFromHash", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void XXH32_canonicalFromHash(XXH32_canonical_t* dst, uint hash);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH32_hashFromCanonical", CallingConvention = CallingConvention.Cdecl)]
-        public static extern uint XXH32_hashFromCanonical(XXH32_canonical_t* src);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH64", CallingConvention = CallingConvention.Cdecl)]
-        public static extern ulong XXH64(void* input, UIntPtr length, ulong seed);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH64_createState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern XXH64_state_s* XXH64_createState();
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH64_freeState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int XXH64_freeState(XXH64_state_s* statePtr);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH64_copyState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void XXH64_copyState(XXH64_state_s* dst_state, XXH64_state_s* src_state);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH64_reset", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int XXH64_reset(XXH64_state_s* statePtr, ulong seed);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH64_update", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int XXH64_update(XXH64_state_s* statePtr, void* input, UIntPtr length);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH64_digest", CallingConvention = CallingConvention.Cdecl)]
-        public static extern ulong XXH64_digest(XXH64_state_s* statePtr);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH64_canonicalFromHash", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void XXH64_canonicalFromHash(XXH64_canonical_t* dst, ulong hash);
-
-        [DllImport(__DllName, EntryPoint = "csbindgen_XXH64_hashFromCanonical", CallingConvention = CallingConvention.Cdecl)]
-        public static extern ulong XXH64_hashFromCanonical(XXH64_canonical_t* src);
-
 
     }
 
@@ -461,30 +404,6 @@ namespace CsBindgen
         public uint skipChecksums;
         public uint reserved1;
         public uint reserved0;
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct XXH32_state_s
-    {
-        public fixed byte _unused[1];
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct XXH32_canonical_t
-    {
-        public fixed byte digest[4];
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct XXH64_state_s
-    {
-        public fixed byte _unused[1];
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct XXH64_canonical_t
-    {
-        public fixed byte digest[8];
     }
 
     
