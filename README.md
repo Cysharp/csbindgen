@@ -69,7 +69,7 @@ using System.Runtime.InteropServices;
 
 namespace CsBindgen
 {
-    public static unsafe partial class NativeMethods
+    internal static unsafe partial class NativeMethods
     {
         const string __DllName = "liblz4";
 
@@ -126,7 +126,7 @@ using System.Runtime.InteropServices;
 
 namespace CsBindgen
 {
-    public static unsafe partial class NativeMethods
+    internal static unsafe partial class NativeMethods
     {
         const string __DllName = "nativelib";
 
@@ -148,6 +148,7 @@ csbindgen::Builder::default()
     .rust_file_header("use super::lz4;")
     .rust_method_type_path("lz4")
     .csharp_class_name("LibLz4")
+    .csharp_class_accessibility("public")
     .csharp_namespace("CsBindgen")
     .csharp_dll_name("csbindgen_tests")
     .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal")
@@ -182,7 +183,7 @@ using System.Runtime.InteropServices;
 
 namespace {csharp_namespace}
 {
-    public static unsafe partial class {csharp_class_name}
+    {csharp_class_accessibility} static unsafe partial class {csharp_class_name}
     {
 #if {csharp_dll_name_if(if_symbol,...)}
         const string __DllName = "{csharp_dll_name_if(...,if_dll_name)}";
@@ -207,7 +208,7 @@ Adjust `rust_file_header` and `rust_method_type_path` to match your module confi
 If the file path to be loaded needs to be changed depending on the operating system, the following load code can be used.
 
 ```csharp
-public static unsafe partial class NativeMethods
+internal static unsafe partial class NativeMethods
 {
     // https://docs.microsoft.com/en-us/dotnet/standard/native-interop/cross-platform
     // Library path will search

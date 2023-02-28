@@ -52,6 +52,7 @@ fn main() {
         .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal")
         .csharp_entry_point_prefix("csbindgen_")
         .csharp_method_prefix("")
+        .csharp_class_accessibility("public")
         .csharp_c_long_convert("int")
         .csharp_c_ulong_convert("uint")
         .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs")

@@ -7,7 +7,7 @@ using System.Runtime.InteropServices;
 
 namespace CsBindgen
 {
-    public static unsafe partial class LibRust
+    internal static unsafe partial class LibRust
     {
         const string __DllName = "csbindgen_tests";
 

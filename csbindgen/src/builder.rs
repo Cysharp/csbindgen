@@ -21,6 +21,7 @@ pub struct BindgenOptions {
     pub csharp_namespace: String,
     pub csharp_class_name: String,
     pub csharp_dll_name: String,
+    pub csharp_class_accessibility: String,
     pub csharp_entry_point_prefix: String,
     pub csharp_method_prefix: String,
     pub csharp_c_long_convert: String,
@@ -44,6 +45,7 @@ impl Default for Builder {
                 csharp_dll_name: "".to_string(),
                 csharp_entry_point_prefix: "".to_string(),
                 csharp_method_prefix: "".to_string(),
+                csharp_class_accessibility: "internal".to_string(),
                 csharp_c_long_convert: "int".to_string(),
                 csharp_c_ulong_convert: "uint".to_string(),
                 csharp_if_symbol: "".to_string(),
@@ -132,6 +134,13 @@ impl Builder {
     /// `public static extern void {csharp_method_prefix}foo()`
     pub fn csharp_method_prefix<T: Into<String>>(mut self, csharp_method_prefix: T) -> Builder {
         self.options.csharp_method_prefix = csharp_method_prefix.into();
+        self
+    }
+
+    /// configure C# class accessibility, default is internal
+    /// `{csharp_class_accessibility} static unsafe partial class NativeMethods`
+    pub fn csharp_class_accessibility<T: Into<String>>(mut self, csharp_class_accessibility: T) -> Builder {
+        self.options.csharp_class_accessibility = csharp_class_accessibility.into();
         self
     }
 

@@ -11,7 +11,7 @@ unsafe
     var z = LibRust.my_add(100, 200);
     Console.WriteLine(z);
 
-    var s = LibLz4.LZ4_versionString();
+    var s = CsBindgen.LibLz4.LZ4_versionString();
     var ss = new string((sbyte*)s);
     Console.WriteLine(ss);
 
@@ -33,7 +33,6 @@ unsafe
 
 }
 
-namespace CsBindgen
 {
     public static unsafe partial class LibLz4
     {

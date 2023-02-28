@@ -87,6 +87,7 @@ pub fn emit_csharp(
     let namespace = &options.csharp_namespace;
     let class_name = &options.csharp_class_name;
     let method_prefix = &options.csharp_method_prefix;
+    let accessibility = &options.csharp_class_accessibility;
 
     let dll_name = match options.csharp_if_symbol.as_str() {
         "" => format!("        const string __DllName = \"{}\";", options.csharp_dll_name),
@@ -176,7 +177,7 @@ using System.Runtime.InteropServices;
 
 namespace {namespace}
 {{
-    public static unsafe partial class {class_name}
+    {accessibility} static unsafe partial class {class_name}
     {{
 {dll_name}
 
