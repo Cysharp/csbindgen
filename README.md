@@ -268,7 +268,7 @@ public static unsafe partial class NativeMethods
 
 Rust to C# is similar workflow as C to C#, use the `input_extern_file` -> setup options -> `generate_csharp_file`.
 
-```csharp
+```rust
 csbindgen::Builder::default()
     .input_extern_file("src/lib.rs")
     .csharp_class_name("LibRust")
