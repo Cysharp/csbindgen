@@ -1,6 +1,4 @@
-use std::{
-    error::Error,
-};
+use std::error::Error;
 
 fn main() -> Result<(), Box<dyn Error>> {
     bindgen::Builder::default()

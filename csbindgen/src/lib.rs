@@ -16,7 +16,7 @@ pub(crate) fn generate(options: &BindgenOptions) -> Result<(String, String), Box
     let file_content = std::fs::read_to_string(path)?;
     let file_ast = syn::parse_file(file_content.as_str())?;
 
-    let methods = collect_method(&file_ast);
+    let methods = collect_method(&file_ast, options);
     let aliases = collect_type_alias(&file_ast);
     let structs = collect_struct(&file_ast);
 

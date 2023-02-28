@@ -1,8 +1,8 @@
-use crate::type_meta::*;
+use crate::{builder::BindgenOptions, type_meta::*};
 use std::collections::{HashMap, HashSet};
 use syn::{ForeignItem, Item, Pat, ReturnType};
 
-pub fn collect_method(ast: &syn::File) -> Vec<ExternMethod> {
+pub fn collect_method(ast: &syn::File, options: &BindgenOptions) -> Vec<ExternMethod> {
     let mut list: Vec<ExternMethod> = Vec::new();
 
     for item in ast.items.iter() {
@@ -42,15 +42,12 @@ pub fn collect_method(ast: &syn::File) -> Vec<ExternMethod> {
                         retrun_type = Some(rust_type);
                     }
 
-                    let t = ExternMethod {
-                        method_name: method_name.clone(),
-                        parameters: parameters,
-                        return_type: retrun_type,
-                    };
-
-                    // TODO:filter
-                    if !(t.method_name.starts_with("_") || t.method_name == "") {
-                        list.push(t.clone());
+                    if method_name != "" && (&options.method_filter)(method_name.clone()) {
+                        list.push(ExternMethod {
+                            method_name: method_name.clone(),
+                            parameters: parameters,
+                            return_type: retrun_type,
+                        });
                     }
                 }
             }
