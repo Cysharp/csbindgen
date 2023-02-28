@@ -1,2 +1,2 @@
-csbindgen-tests/c/** linguist-vendored
+csbindgen-tests/** linguist-vendored
 dotnet-sandbox/** linguist-vendored
