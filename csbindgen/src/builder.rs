@@ -13,42 +13,18 @@ pub struct Builder {
 
 pub struct BindgenOptions {
     pub input_bindgen_file: String,
-
-    /// add original extern call type prefix to rust wrapper,
-    /// `return {rust_method_type_path}::foo()`
     pub rust_method_type_path: String,
-
-    /// add method prefix to rust wrapper,
-    /// `pub extern "C" fn {rust_method_prefix}foo()`
     pub rust_method_prefix: String,
-
-    /// add file header string to rust wrapper,
-    /// `mod lz4;`, `use super::lz4;`
     pub rust_file_header: String,
-
-    /// configure C# file namespace(default is `CsBindgen`),
-    /// "namespace {csharp_namespace}"
     pub csharp_namespace: String,
-
-    /// configure C# class name(default is `NativeMethods`),
-    /// `public static unsafe partial class {csharp_class_name}`
     pub csharp_class_name: String,
-
-    /// configure C# load dll name,
-    /// `[DllImport({csharp_dll_name})]`
     pub csharp_dll_name: String,
-
-    /// configure C# calling method name prefix,
-    /// `public static extern void {csharp_method_prefix}foo()`
+    pub csharp_entry_point_prefix: String,
     pub csharp_method_prefix: String,
-
-    /// configure c_long to {csharp_c_long_convert} type,
-    /// default is `Int32`.
     pub csharp_c_long_convert: String,
-
-    /// configure c_long to {csharp_c_long_convert} type,
-    /// default is `UInt32`.
     pub csharp_c_ulong_convert: String,
+    pub csharp_if_symbol: String,
+    pub csharp_if_dll_name: String,
 }
 
 impl Builder {
@@ -62,9 +38,12 @@ impl Builder {
                 csharp_namespace: "CsBindgen".to_string(),
                 csharp_class_name: "NativeMethods".to_string(),
                 csharp_dll_name: "".to_string(),
+                csharp_entry_point_prefix: "".to_string(),
                 csharp_method_prefix: "".to_string(),
                 csharp_c_long_convert: "int".to_string(),
                 csharp_c_ulong_convert: "uint".to_string(),
+                csharp_if_symbol: "".to_string(),
+                csharp_if_dll_name: "".to_string(),
             },
         }
     }
@@ -109,11 +88,21 @@ impl Builder {
         self.options.csharp_class_name = csharp_class_name.into();
         self
     }
-    
+
     /// configure C# load dll name,
     /// `[DllImport({csharp_dll_name})]`
     pub fn csharp_dll_name<T: Into<String>>(mut self, csharp_dll_name: T) -> Builder {
         self.options.csharp_dll_name = csharp_dll_name.into();
+        self
+    }
+
+    /// configure C# DllImport EntryPoint prefix,
+    /// `[DllImport(, EntryPoint ="{csharp_entry_point_prefix}foo")]`
+    pub fn csharp_entry_point_prefix<T: Into<String>>(
+        mut self,
+        csharp_entry_point_prefix: T,
+    ) -> Builder {
+        self.options.csharp_entry_point_prefix = csharp_entry_point_prefix.into();
         self
     }
 
@@ -123,7 +112,7 @@ impl Builder {
         self.options.csharp_method_prefix = csharp_method_prefix.into();
         self
     }
-    
+
     /// configure c_long to {csharp_c_long_convert} type,
     /// default is `int`.
     pub fn csharp_c_long_convert<T: Into<String>>(mut self, csharp_c_long_convert: T) -> Builder {
@@ -135,6 +124,12 @@ impl Builder {
     /// default is `uint`.
     pub fn csharp_c_ulong_convert<T: Into<String>>(mut self, csharp_c_ulong_convert: T) -> Builder {
         self.options.csharp_c_ulong_convert = csharp_c_ulong_convert.into();
+        self
+    }
+
+    pub fn csharp_dll_name_if<T: Into<String>>(mut self, if_symbol: T, if_dll_name: T) -> Builder {
+        self.options.csharp_if_symbol = if_symbol.into();
+        self.options.csharp_if_dll_name = if_dll_name.into();
         self
     }
 

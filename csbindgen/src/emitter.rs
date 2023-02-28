@@ -86,12 +86,26 @@ pub fn emit_csharp(
     // configure
     let namespace = &options.csharp_namespace;
     let class_name = &options.csharp_class_name;
-    let dll_name = &options.csharp_dll_name;
     let method_prefix = &options.csharp_method_prefix;
+
+    let dll_name = match options.csharp_if_symbol.as_str() {
+        "" => format!("        const string __DllName = \"{}\";", options.csharp_dll_name),
+        _ => { format!("#if {0}
+        const string __DllName = \"{1}\";
+#else
+        const string __DllName = \"{2}\";
+#endif
+        ", options.csharp_if_symbol, options.csharp_if_dll_name, options.csharp_dll_name)
+        }
+    };
 
     let mut method_list_string = String::new();
     for item in methods {
         let method_name = &item.method_name;
+        let entry_point = match options.csharp_entry_point_prefix.as_str() {
+             "" => format!("{method_prefix}{method_name}"),
+             x => format!("{x}{method_name}"),
+        };
         let return_type = match &item.return_type {
             Some(x) => x.to_csharp_string(&options, &aliases),
             None => "void".to_string(),
@@ -105,7 +119,7 @@ pub fn emit_csharp(
             .join(", ");
 
         method_list_string.push_str_ln(
-            "        [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]",
+            format!("        [DllImport(__DllName, EntryPoint = \"{entry_point}\", CallingConvention = CallingConvention.Cdecl)]").as_str(),
         );
         method_list_string.push_str_ln(
             format!("        public static extern {return_type} {method_prefix}{method_name}({parameters});").as_str(),
@@ -165,7 +179,7 @@ namespace {namespace}
 {{
     public static unsafe partial class {class_name}
     {{
-        const string __DllName = \"{dll_name}\";
+{dll_name}
 
 {method_list_string}
     }}

@@ -7,7 +7,7 @@ unsafe
 {
     //var v = NativeMethods();
 
-    var s = LibLz4.csbindgen_LZ4_versionString();
+    var s = LibLz4.LZ4_versionString();
     var ss = new string((sbyte*)s);
     Console.WriteLine(ss);
 
