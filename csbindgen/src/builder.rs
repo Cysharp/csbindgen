@@ -37,7 +37,7 @@ impl Default for Builder {
                 input_extern_file: "".to_string(),
                 method_filter: |x| !x.starts_with('_'),
                 rust_method_type_path: "".to_string(),
-                rust_method_prefix: "".to_string(),
+                rust_method_prefix: "csbindgen_".to_string(),
                 rust_file_header: "".to_string(),
                 csharp_namespace: "CsBindgen".to_string(),
                 csharp_class_name: "NativeMethods".to_string(),
@@ -83,7 +83,7 @@ impl Builder {
         self
     }
 
-    /// add method prefix to rust wrapper,
+    /// add method prefix to rust wrapper, default is `csbindgen_`
     /// `pub extern "C" fn {rust_method_prefix}foo()`
     pub fn rust_method_prefix<T: Into<String>>(mut self, rust_method_prefix: T) -> Builder {
         self.options.rust_method_prefix = rust_method_prefix.into();
