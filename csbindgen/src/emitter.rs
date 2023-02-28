@@ -74,7 +74,7 @@ use ::std::os::raw::*;
     "
     );
 
-    return result;
+    result
 }
 
 pub fn emit_csharp(
@@ -107,14 +107,14 @@ pub fn emit_csharp(
              x => format!("{x}{method_name}"),
         };
         let return_type = match &item.return_type {
-            Some(x) => x.to_csharp_string(&options, &aliases),
+            Some(x) => x.to_csharp_string(options, aliases),
             None => "void".to_string(),
         };
 
         let parameters = item
             .parameters
             .iter()
-            .map(|p| format!("{} {}", p.rust_type.to_csharp_string(&options, &aliases), p.escape_name()))
+            .map(|p| format!("{} {}", p.rust_type.to_csharp_string(options, aliases), p.escape_name()))
             .collect::<Vec<_>>()
             .join(", ");
 
@@ -124,7 +124,7 @@ pub fn emit_csharp(
         method_list_string.push_str_ln(
             format!("        public static extern {return_type} {method_prefix}{method_name}({parameters});").as_str(),
         );
-        method_list_string.push_str("\n");
+        method_list_string.push('\n');
     }
 
     let mut structs_string = String::new();
@@ -147,7 +147,7 @@ pub fn emit_csharp(
             structs_string.push_str(
                 format!(
                     "        public {} {}",
-                    field.rust_type.to_csharp_string(&options, &aliases),
+                    field.rust_type.to_csharp_string(options, aliases),
                     field.name
                 )
                 .as_str(),
@@ -163,7 +163,7 @@ pub fn emit_csharp(
             structs_string.push_str_ln(";");
         }
         structs_string.push_str_ln("    }");
-        structs_string.push_str("\n");
+        structs_string.push('\n');
     }
 
     // TODO: for Unity, `__Intern`.
@@ -189,5 +189,5 @@ namespace {namespace}
     "
     );
 
-    return result;
+    result
 }

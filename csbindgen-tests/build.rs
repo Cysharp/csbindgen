@@ -3,14 +3,20 @@ use std::error::Error;
 fn main() -> Result<(), Box<dyn Error>> {
     bindgen::Builder::default()
         .header("c/lz4/lz4.h")
-        //.header("c/lz4/lz4hc.h")
-        //.header("c/lz4/lz4frame.h")
-        //.header("c/lz4/xxhash.h")
+        .header("c/lz4/lz4hc.h")
+        .header("c/lz4/lz4frame.h")
+        .header("c/lz4/xxhash.h")
         .generate()?
         .write_to_file("src/lz4.rs")?;
 
-    // TODO:build this
-    cc::Build::new().file("c/lz4/lz4.c").compile("lz4");
+    cc::Build::new()
+        .files([
+            "c/lz4/lz4.c",
+            "c/lz4/lz4hc.c",
+            "c/lz4/lz4frame.c",
+            "c/lz4/xxhash.c",
+        ])
+        .compile("lz4");
 
     // bindgen::Builder::default()
     //     .header("c/zstd/zstd.h")
@@ -31,7 +37,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     //     .generate()?
     //     .write_to_file("src/bullet3.rs")?;
 
-    csbindgen::Builder::new()
+    csbindgen::Builder::default()
         .input_bindgen_file("src/lz4.rs")
         .rust_method_prefix("csbindgen_")
         .rust_file_header("use super::lz4;")
@@ -42,6 +48,12 @@ fn main() -> Result<(), Box<dyn Error>> {
         .csharp_entry_point_prefix("csbindgen_")
         .csharp_method_prefix("")
         .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs")?;
+
+    csbindgen::Builder::default()
+        .input_extern_file("src/lib.rs")
+        .csharp_class_name("LibRust")
+        .csharp_dll_name("csbindgen_tests")
+        .generate_csharp_file("../dotnet-sandbox/method_call.cs")?;
 
     // csbindgen::Builder::new()
     //     .input_bindgen_file("src/zstd.rs")

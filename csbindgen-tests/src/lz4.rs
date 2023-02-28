@@ -31,6 +31,31 @@ pub const WINT_MIN: u32 = 0;
 pub const WINT_MAX: u32 = 65535;
 pub const LZ4_STREAM_MINSIZE: u32 = 16416;
 pub const LZ4_STREAMDECODE_MINSIZE: u32 = 32;
+pub const LZ4HC_CLEVEL_MIN: u32 = 3;
+pub const LZ4HC_CLEVEL_DEFAULT: u32 = 9;
+pub const LZ4HC_CLEVEL_OPT_MIN: u32 = 10;
+pub const LZ4HC_CLEVEL_MAX: u32 = 12;
+pub const LZ4HC_DICTIONARY_LOGSIZE: u32 = 16;
+pub const LZ4HC_MAXD: u32 = 65536;
+pub const LZ4HC_MAXD_MASK: u32 = 65535;
+pub const LZ4HC_HASH_LOG: u32 = 15;
+pub const LZ4HC_HASHTABLESIZE: u32 = 32768;
+pub const LZ4HC_HASH_MASK: u32 = 32767;
+pub const LZ4_STREAMHC_MINSIZE: u32 = 262200;
+pub const LZ4F_VERSION: u32 = 100;
+pub const LZ4F_HEADER_SIZE_MIN: u32 = 7;
+pub const LZ4F_HEADER_SIZE_MAX: u32 = 19;
+pub const LZ4F_BLOCK_HEADER_SIZE: u32 = 4;
+pub const LZ4F_BLOCK_CHECKSUM_SIZE: u32 = 4;
+pub const LZ4F_CONTENT_CHECKSUM_SIZE: u32 = 4;
+pub const LZ4F_MAGICNUMBER: u32 = 407708164;
+pub const LZ4F_MAGIC_SKIPPABLE_START: u32 = 407710288;
+pub const LZ4F_MIN_SIZE_TO_KNOW_HEADER_LENGTH: u32 = 5;
+pub const XXHASH_H_5627135585666179: u32 = 1;
+pub const XXH_VERSION_MAJOR: u32 = 0;
+pub const XXH_VERSION_MINOR: u32 = 6;
+pub const XXH_VERSION_RELEASE: u32 = 5;
+pub const XXH_VERSION_NUMBER: u32 = 605;
 pub type wchar_t = ::std::os::raw::c_ushort;
 pub type max_align_t = f64;
 extern "C" {
@@ -595,4 +620,1000 @@ extern "C" {
 extern "C" {
     #[doc = " LZ4_resetStream() :\n  An LZ4_stream_t structure must be initialized at least once.\n  This is done with LZ4_initStream(), or LZ4_resetStream().\n  Consider switching to LZ4_initStream(),\n  invoking LZ4_resetStream() will trigger deprecation warnings in the future."]
     pub fn LZ4_resetStream(streamPtr: *mut LZ4_stream_t);
+}
+extern "C" {
+    #[doc = " LZ4_compress_HC() :\n  Compress data from `src` into `dst`, using the powerful but slower \"HC\" algorithm.\n `dst` must be already allocated.\n  Compression is guaranteed to succeed if `dstCapacity >= LZ4_compressBound(srcSize)` (see \"lz4.h\")\n  Max supported `srcSize` value is LZ4_MAX_INPUT_SIZE (see \"lz4.h\")\n `compressionLevel` : any value between 1 and LZ4HC_CLEVEL_MAX will work.\n                      Values > LZ4HC_CLEVEL_MAX behave the same as LZ4HC_CLEVEL_MAX.\n @return : the number of bytes written into 'dst'\n           or 0 if compression fails."]
+    pub fn LZ4_compress_HC(
+        src: *const ::std::os::raw::c_char,
+        dst: *mut ::std::os::raw::c_char,
+        srcSize: ::std::os::raw::c_int,
+        dstCapacity: ::std::os::raw::c_int,
+        compressionLevel: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = " LZ4_compress_HC_extStateHC() :\n  Same as LZ4_compress_HC(), but using an externally allocated memory segment for `state`.\n `state` size is provided by LZ4_sizeofStateHC().\n  Memory segment must be aligned on 8-bytes boundaries (which a normal malloc() should do properly)."]
+    pub fn LZ4_sizeofStateHC() -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_compress_HC_extStateHC(
+        stateHC: *mut ::std::os::raw::c_void,
+        src: *const ::std::os::raw::c_char,
+        dst: *mut ::std::os::raw::c_char,
+        srcSize: ::std::os::raw::c_int,
+        maxDstSize: ::std::os::raw::c_int,
+        compressionLevel: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = " LZ4_compress_HC_destSize() : v1.9.0+\n  Will compress as much data as possible from `src`\n  to fit into `targetDstSize` budget.\n  Result is provided in 2 parts :\n @return : the number of bytes written into 'dst' (necessarily <= targetDstSize)\n           or 0 if compression fails.\n `srcSizePtr` : on success, *srcSizePtr is updated to indicate how much bytes were read from `src`"]
+    pub fn LZ4_compress_HC_destSize(
+        stateHC: *mut ::std::os::raw::c_void,
+        src: *const ::std::os::raw::c_char,
+        dst: *mut ::std::os::raw::c_char,
+        srcSizePtr: *mut ::std::os::raw::c_int,
+        targetDstSize: ::std::os::raw::c_int,
+        compressionLevel: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+pub type LZ4_streamHC_t = LZ4_streamHC_u;
+extern "C" {
+    #[doc = " LZ4_createStreamHC() and LZ4_freeStreamHC() :\n  These functions create and release memory for LZ4 HC streaming state.\n  Newly created states are automatically initialized.\n  A same state can be used multiple times consecutively,\n  starting with LZ4_resetStreamHC_fast() to start a new stream of blocks."]
+    pub fn LZ4_createStreamHC() -> *mut LZ4_streamHC_t;
+}
+extern "C" {
+    pub fn LZ4_freeStreamHC(streamHCPtr: *mut LZ4_streamHC_t) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_resetStreamHC_fast(
+        streamHCPtr: *mut LZ4_streamHC_t,
+        compressionLevel: ::std::os::raw::c_int,
+    );
+}
+extern "C" {
+    pub fn LZ4_loadDictHC(
+        streamHCPtr: *mut LZ4_streamHC_t,
+        dictionary: *const ::std::os::raw::c_char,
+        dictSize: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_compress_HC_continue(
+        streamHCPtr: *mut LZ4_streamHC_t,
+        src: *const ::std::os::raw::c_char,
+        dst: *mut ::std::os::raw::c_char,
+        srcSize: ::std::os::raw::c_int,
+        maxDstSize: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = " LZ4_compress_HC_continue_destSize() : v1.9.0+\n  Similar to LZ4_compress_HC_continue(),\n  but will read as much data as possible from `src`\n  to fit into `targetDstSize` budget.\n  Result is provided into 2 parts :\n @return : the number of bytes written into 'dst' (necessarily <= targetDstSize)\n           or 0 if compression fails.\n `srcSizePtr` : on success, *srcSizePtr will be updated to indicate how much bytes were read from `src`.\n           Note that this function may not consume the entire input."]
+    pub fn LZ4_compress_HC_continue_destSize(
+        LZ4_streamHCPtr: *mut LZ4_streamHC_t,
+        src: *const ::std::os::raw::c_char,
+        dst: *mut ::std::os::raw::c_char,
+        srcSizePtr: *mut ::std::os::raw::c_int,
+        targetDstSize: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_saveDictHC(
+        streamHCPtr: *mut LZ4_streamHC_t,
+        safeBuffer: *mut ::std::os::raw::c_char,
+        maxDictSize: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct LZ4HC_CCtx_internal {
+    pub hashTable: [LZ4_u32; 32768usize],
+    pub chainTable: [LZ4_u16; 65536usize],
+    pub end: *const LZ4_byte,
+    pub prefixStart: *const LZ4_byte,
+    pub dictStart: *const LZ4_byte,
+    pub dictLimit: LZ4_u32,
+    pub lowLimit: LZ4_u32,
+    pub nextToUpdate: LZ4_u32,
+    pub compressionLevel: ::std::os::raw::c_short,
+    pub favorDecSpeed: LZ4_i8,
+    pub dirty: LZ4_i8,
+    pub dictCtx: *const LZ4HC_CCtx_internal,
+}
+#[test]
+fn bindgen_test_layout_LZ4HC_CCtx_internal() {
+    const UNINIT: ::std::mem::MaybeUninit<LZ4HC_CCtx_internal> = ::std::mem::MaybeUninit::uninit();
+    let ptr = UNINIT.as_ptr();
+    assert_eq!(
+        ::std::mem::size_of::<LZ4HC_CCtx_internal>(),
+        262192usize,
+        concat!("Size of: ", stringify!(LZ4HC_CCtx_internal))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<LZ4HC_CCtx_internal>(),
+        8usize,
+        concat!("Alignment of ", stringify!(LZ4HC_CCtx_internal))
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).hashTable) as usize - ptr as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4HC_CCtx_internal),
+            "::",
+            stringify!(hashTable)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).chainTable) as usize - ptr as usize },
+        131072usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4HC_CCtx_internal),
+            "::",
+            stringify!(chainTable)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).end) as usize - ptr as usize },
+        262144usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4HC_CCtx_internal),
+            "::",
+            stringify!(end)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).prefixStart) as usize - ptr as usize },
+        262152usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4HC_CCtx_internal),
+            "::",
+            stringify!(prefixStart)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).dictStart) as usize - ptr as usize },
+        262160usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4HC_CCtx_internal),
+            "::",
+            stringify!(dictStart)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).dictLimit) as usize - ptr as usize },
+        262168usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4HC_CCtx_internal),
+            "::",
+            stringify!(dictLimit)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).lowLimit) as usize - ptr as usize },
+        262172usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4HC_CCtx_internal),
+            "::",
+            stringify!(lowLimit)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).nextToUpdate) as usize - ptr as usize },
+        262176usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4HC_CCtx_internal),
+            "::",
+            stringify!(nextToUpdate)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).compressionLevel) as usize - ptr as usize },
+        262180usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4HC_CCtx_internal),
+            "::",
+            stringify!(compressionLevel)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).favorDecSpeed) as usize - ptr as usize },
+        262182usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4HC_CCtx_internal),
+            "::",
+            stringify!(favorDecSpeed)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).dirty) as usize - ptr as usize },
+        262183usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4HC_CCtx_internal),
+            "::",
+            stringify!(dirty)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).dictCtx) as usize - ptr as usize },
+        262184usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4HC_CCtx_internal),
+            "::",
+            stringify!(dictCtx)
+        )
+    );
+}
+#[repr(C)]
+#[derive(Copy, Clone)]
+pub union LZ4_streamHC_u {
+    pub minStateSize: [::std::os::raw::c_char; 262200usize],
+    pub internal_donotuse: LZ4HC_CCtx_internal,
+}
+#[test]
+fn bindgen_test_layout_LZ4_streamHC_u() {
+    const UNINIT: ::std::mem::MaybeUninit<LZ4_streamHC_u> = ::std::mem::MaybeUninit::uninit();
+    let ptr = UNINIT.as_ptr();
+    assert_eq!(
+        ::std::mem::size_of::<LZ4_streamHC_u>(),
+        262200usize,
+        concat!("Size of: ", stringify!(LZ4_streamHC_u))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<LZ4_streamHC_u>(),
+        8usize,
+        concat!("Alignment of ", stringify!(LZ4_streamHC_u))
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).minStateSize) as usize - ptr as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4_streamHC_u),
+            "::",
+            stringify!(minStateSize)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).internal_donotuse) as usize - ptr as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4_streamHC_u),
+            "::",
+            stringify!(internal_donotuse)
+        )
+    );
+}
+extern "C" {
+    pub fn LZ4_initStreamHC(
+        buffer: *mut ::std::os::raw::c_void,
+        size: usize,
+    ) -> *mut LZ4_streamHC_t;
+}
+extern "C" {
+    pub fn LZ4_compressHC(
+        source: *const ::std::os::raw::c_char,
+        dest: *mut ::std::os::raw::c_char,
+        inputSize: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_compressHC_limitedOutput(
+        source: *const ::std::os::raw::c_char,
+        dest: *mut ::std::os::raw::c_char,
+        inputSize: ::std::os::raw::c_int,
+        maxOutputSize: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_compressHC2(
+        source: *const ::std::os::raw::c_char,
+        dest: *mut ::std::os::raw::c_char,
+        inputSize: ::std::os::raw::c_int,
+        compressionLevel: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_compressHC2_limitedOutput(
+        source: *const ::std::os::raw::c_char,
+        dest: *mut ::std::os::raw::c_char,
+        inputSize: ::std::os::raw::c_int,
+        maxOutputSize: ::std::os::raw::c_int,
+        compressionLevel: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_compressHC_withStateHC(
+        state: *mut ::std::os::raw::c_void,
+        source: *const ::std::os::raw::c_char,
+        dest: *mut ::std::os::raw::c_char,
+        inputSize: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_compressHC_limitedOutput_withStateHC(
+        state: *mut ::std::os::raw::c_void,
+        source: *const ::std::os::raw::c_char,
+        dest: *mut ::std::os::raw::c_char,
+        inputSize: ::std::os::raw::c_int,
+        maxOutputSize: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_compressHC2_withStateHC(
+        state: *mut ::std::os::raw::c_void,
+        source: *const ::std::os::raw::c_char,
+        dest: *mut ::std::os::raw::c_char,
+        inputSize: ::std::os::raw::c_int,
+        compressionLevel: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_compressHC2_limitedOutput_withStateHC(
+        state: *mut ::std::os::raw::c_void,
+        source: *const ::std::os::raw::c_char,
+        dest: *mut ::std::os::raw::c_char,
+        inputSize: ::std::os::raw::c_int,
+        maxOutputSize: ::std::os::raw::c_int,
+        compressionLevel: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_compressHC_continue(
+        LZ4_streamHCPtr: *mut LZ4_streamHC_t,
+        source: *const ::std::os::raw::c_char,
+        dest: *mut ::std::os::raw::c_char,
+        inputSize: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_compressHC_limitedOutput_continue(
+        LZ4_streamHCPtr: *mut LZ4_streamHC_t,
+        source: *const ::std::os::raw::c_char,
+        dest: *mut ::std::os::raw::c_char,
+        inputSize: ::std::os::raw::c_int,
+        maxOutputSize: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_createHC(inputBuffer: *const ::std::os::raw::c_char) -> *mut ::std::os::raw::c_void;
+}
+extern "C" {
+    pub fn LZ4_freeHC(LZ4HC_Data: *mut ::std::os::raw::c_void) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_slideInputBufferHC(
+        LZ4HC_Data: *mut ::std::os::raw::c_void,
+    ) -> *mut ::std::os::raw::c_char;
+}
+extern "C" {
+    pub fn LZ4_compressHC2_continue(
+        LZ4HC_Data: *mut ::std::os::raw::c_void,
+        source: *const ::std::os::raw::c_char,
+        dest: *mut ::std::os::raw::c_char,
+        inputSize: ::std::os::raw::c_int,
+        compressionLevel: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_compressHC2_limitedOutput_continue(
+        LZ4HC_Data: *mut ::std::os::raw::c_void,
+        source: *const ::std::os::raw::c_char,
+        dest: *mut ::std::os::raw::c_char,
+        inputSize: ::std::os::raw::c_int,
+        maxOutputSize: ::std::os::raw::c_int,
+        compressionLevel: ::std::os::raw::c_int,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_sizeofStreamStateHC() -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_resetStreamStateHC(
+        state: *mut ::std::os::raw::c_void,
+        inputBuffer: *mut ::std::os::raw::c_char,
+    ) -> ::std::os::raw::c_int;
+}
+extern "C" {
+    pub fn LZ4_resetStreamHC(
+        streamHCPtr: *mut LZ4_streamHC_t,
+        compressionLevel: ::std::os::raw::c_int,
+    );
+}
+pub type LZ4F_errorCode_t = usize;
+extern "C" {
+    pub fn LZ4F_isError(code: LZ4F_errorCode_t) -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    pub fn LZ4F_getErrorName(code: LZ4F_errorCode_t) -> *const ::std::os::raw::c_char;
+}
+pub const LZ4F_blockSizeID_t_LZ4F_default: LZ4F_blockSizeID_t = 0;
+pub const LZ4F_blockSizeID_t_LZ4F_max64KB: LZ4F_blockSizeID_t = 4;
+pub const LZ4F_blockSizeID_t_LZ4F_max256KB: LZ4F_blockSizeID_t = 5;
+pub const LZ4F_blockSizeID_t_LZ4F_max1MB: LZ4F_blockSizeID_t = 6;
+pub const LZ4F_blockSizeID_t_LZ4F_max4MB: LZ4F_blockSizeID_t = 7;
+pub type LZ4F_blockSizeID_t = ::std::os::raw::c_int;
+pub const LZ4F_blockMode_t_LZ4F_blockLinked: LZ4F_blockMode_t = 0;
+pub const LZ4F_blockMode_t_LZ4F_blockIndependent: LZ4F_blockMode_t = 1;
+pub type LZ4F_blockMode_t = ::std::os::raw::c_int;
+pub const LZ4F_contentChecksum_t_LZ4F_noContentChecksum: LZ4F_contentChecksum_t = 0;
+pub const LZ4F_contentChecksum_t_LZ4F_contentChecksumEnabled: LZ4F_contentChecksum_t = 1;
+pub type LZ4F_contentChecksum_t = ::std::os::raw::c_int;
+pub const LZ4F_blockChecksum_t_LZ4F_noBlockChecksum: LZ4F_blockChecksum_t = 0;
+pub const LZ4F_blockChecksum_t_LZ4F_blockChecksumEnabled: LZ4F_blockChecksum_t = 1;
+pub type LZ4F_blockChecksum_t = ::std::os::raw::c_int;
+pub const LZ4F_frameType_t_LZ4F_frame: LZ4F_frameType_t = 0;
+pub const LZ4F_frameType_t_LZ4F_skippableFrame: LZ4F_frameType_t = 1;
+pub type LZ4F_frameType_t = ::std::os::raw::c_int;
+#[doc = " LZ4F_frameInfo_t :\n  makes it possible to set or read frame parameters.\n  Structure must be first init to 0, using memset() or LZ4F_INIT_FRAMEINFO,\n  setting all parameters to default.\n  It's then possible to update selectively some parameters"]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct LZ4F_frameInfo_t {
+    pub blockSizeID: LZ4F_blockSizeID_t,
+    pub blockMode: LZ4F_blockMode_t,
+    pub contentChecksumFlag: LZ4F_contentChecksum_t,
+    pub frameType: LZ4F_frameType_t,
+    pub contentSize: ::std::os::raw::c_ulonglong,
+    pub dictID: ::std::os::raw::c_uint,
+    pub blockChecksumFlag: LZ4F_blockChecksum_t,
+}
+#[test]
+fn bindgen_test_layout_LZ4F_frameInfo_t() {
+    const UNINIT: ::std::mem::MaybeUninit<LZ4F_frameInfo_t> = ::std::mem::MaybeUninit::uninit();
+    let ptr = UNINIT.as_ptr();
+    assert_eq!(
+        ::std::mem::size_of::<LZ4F_frameInfo_t>(),
+        32usize,
+        concat!("Size of: ", stringify!(LZ4F_frameInfo_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<LZ4F_frameInfo_t>(),
+        8usize,
+        concat!("Alignment of ", stringify!(LZ4F_frameInfo_t))
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).blockSizeID) as usize - ptr as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_frameInfo_t),
+            "::",
+            stringify!(blockSizeID)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).blockMode) as usize - ptr as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_frameInfo_t),
+            "::",
+            stringify!(blockMode)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).contentChecksumFlag) as usize - ptr as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_frameInfo_t),
+            "::",
+            stringify!(contentChecksumFlag)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).frameType) as usize - ptr as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_frameInfo_t),
+            "::",
+            stringify!(frameType)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).contentSize) as usize - ptr as usize },
+        16usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_frameInfo_t),
+            "::",
+            stringify!(contentSize)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).dictID) as usize - ptr as usize },
+        24usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_frameInfo_t),
+            "::",
+            stringify!(dictID)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).blockChecksumFlag) as usize - ptr as usize },
+        28usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_frameInfo_t),
+            "::",
+            stringify!(blockChecksumFlag)
+        )
+    );
+}
+#[doc = " LZ4F_preferences_t :\n  makes it possible to supply advanced compression instructions to streaming interface.\n  Structure must be first init to 0, using memset() or LZ4F_INIT_PREFERENCES,\n  setting all parameters to default.\n  All reserved fields must be set to zero."]
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct LZ4F_preferences_t {
+    pub frameInfo: LZ4F_frameInfo_t,
+    pub compressionLevel: ::std::os::raw::c_int,
+    pub autoFlush: ::std::os::raw::c_uint,
+    pub favorDecSpeed: ::std::os::raw::c_uint,
+    pub reserved: [::std::os::raw::c_uint; 3usize],
+}
+#[test]
+fn bindgen_test_layout_LZ4F_preferences_t() {
+    const UNINIT: ::std::mem::MaybeUninit<LZ4F_preferences_t> = ::std::mem::MaybeUninit::uninit();
+    let ptr = UNINIT.as_ptr();
+    assert_eq!(
+        ::std::mem::size_of::<LZ4F_preferences_t>(),
+        56usize,
+        concat!("Size of: ", stringify!(LZ4F_preferences_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<LZ4F_preferences_t>(),
+        8usize,
+        concat!("Alignment of ", stringify!(LZ4F_preferences_t))
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).frameInfo) as usize - ptr as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_preferences_t),
+            "::",
+            stringify!(frameInfo)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).compressionLevel) as usize - ptr as usize },
+        32usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_preferences_t),
+            "::",
+            stringify!(compressionLevel)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).autoFlush) as usize - ptr as usize },
+        36usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_preferences_t),
+            "::",
+            stringify!(autoFlush)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).favorDecSpeed) as usize - ptr as usize },
+        40usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_preferences_t),
+            "::",
+            stringify!(favorDecSpeed)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).reserved) as usize - ptr as usize },
+        44usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_preferences_t),
+            "::",
+            stringify!(reserved)
+        )
+    );
+}
+extern "C" {
+    pub fn LZ4F_compressionLevel_max() -> ::std::os::raw::c_int;
+}
+extern "C" {
+    #[doc = " LZ4F_compressFrameBound() :\n  Returns the maximum possible compressed size with LZ4F_compressFrame() given srcSize and preferences.\n `preferencesPtr` is optional. It can be replaced by NULL, in which case, the function will assume default preferences.\n  Note : this result is only usable with LZ4F_compressFrame().\n         It may also be relevant to LZ4F_compressUpdate() _only if_ no flush() operation is ever performed."]
+    pub fn LZ4F_compressFrameBound(
+        srcSize: usize,
+        preferencesPtr: *const LZ4F_preferences_t,
+    ) -> usize;
+}
+extern "C" {
+    #[doc = " LZ4F_compressFrame() :\n  Compress srcBuffer content into an LZ4-compressed frame.\n  It's a one shot operation, all input content is consumed, and all output is generated.\n\n  Note : it's a stateless operation (no LZ4F_cctx state needed).\n  In order to reduce load on the allocator, LZ4F_compressFrame(), by default,\n  uses the stack to allocate space for the compression state and some table.\n  If this usage of the stack is too much for your application,\n  consider compiling `lz4frame.c` with compile-time macro LZ4F_HEAPMODE set to 1 instead.\n  All state allocations will use the Heap.\n  It also means each invocation of LZ4F_compressFrame() will trigger several internal alloc/free invocations.\n\n @dstCapacity MUST be >= LZ4F_compressFrameBound(srcSize, preferencesPtr).\n @preferencesPtr is optional : one can provide NULL, in which case all preferences are set to default.\n @return : number of bytes written into dstBuffer.\n           or an error code if it fails (can be tested using LZ4F_isError())"]
+    pub fn LZ4F_compressFrame(
+        dstBuffer: *mut ::std::os::raw::c_void,
+        dstCapacity: usize,
+        srcBuffer: *const ::std::os::raw::c_void,
+        srcSize: usize,
+        preferencesPtr: *const LZ4F_preferences_t,
+    ) -> usize;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct LZ4F_cctx_s {
+    _unused: [u8; 0],
+}
+pub type LZ4F_cctx = LZ4F_cctx_s;
+pub type LZ4F_compressionContext_t = *mut LZ4F_cctx;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct LZ4F_compressOptions_t {
+    pub stableSrc: ::std::os::raw::c_uint,
+    pub reserved: [::std::os::raw::c_uint; 3usize],
+}
+#[test]
+fn bindgen_test_layout_LZ4F_compressOptions_t() {
+    const UNINIT: ::std::mem::MaybeUninit<LZ4F_compressOptions_t> =
+        ::std::mem::MaybeUninit::uninit();
+    let ptr = UNINIT.as_ptr();
+    assert_eq!(
+        ::std::mem::size_of::<LZ4F_compressOptions_t>(),
+        16usize,
+        concat!("Size of: ", stringify!(LZ4F_compressOptions_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<LZ4F_compressOptions_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(LZ4F_compressOptions_t))
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).stableSrc) as usize - ptr as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_compressOptions_t),
+            "::",
+            stringify!(stableSrc)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).reserved) as usize - ptr as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_compressOptions_t),
+            "::",
+            stringify!(reserved)
+        )
+    );
+}
+extern "C" {
+    pub fn LZ4F_getVersion() -> ::std::os::raw::c_uint;
+}
+extern "C" {
+    #[doc = " LZ4F_createCompressionContext() :\n  The first thing to do is to create a compressionContext object,\n  which will keep track of operation state during streaming compression.\n  This is achieved using LZ4F_createCompressionContext(), which takes as argument a version,\n  and a pointer to LZ4F_cctx*, to write the resulting pointer into.\n  @version provided MUST be LZ4F_VERSION. It is intended to track potential version mismatch, notably when using DLL.\n  The function provides a pointer to a fully allocated LZ4F_cctx object.\n  @cctxPtr MUST be != NULL.\n  If @return != zero, context creation failed.\n  A created compression context can be employed multiple times for consecutive streaming operations.\n  Once all streaming compression jobs are completed,\n  the state object can be released using LZ4F_freeCompressionContext().\n  Note1 : LZ4F_freeCompressionContext() is always successful. Its return value can be ignored.\n  Note2 : LZ4F_freeCompressionContext() works fine with NULL input pointers (do nothing)."]
+    pub fn LZ4F_createCompressionContext(
+        cctxPtr: *mut *mut LZ4F_cctx,
+        version: ::std::os::raw::c_uint,
+    ) -> LZ4F_errorCode_t;
+}
+extern "C" {
+    pub fn LZ4F_freeCompressionContext(cctx: *mut LZ4F_cctx) -> LZ4F_errorCode_t;
+}
+extern "C" {
+    #[doc = " LZ4F_compressBegin() :\n  will write the frame header into dstBuffer.\n  dstCapacity must be >= LZ4F_HEADER_SIZE_MAX bytes.\n `prefsPtr` is optional : NULL can be provided to set all preferences to default.\n @return : number of bytes written into dstBuffer for the header\n           or an error code (which can be tested using LZ4F_isError())"]
+    pub fn LZ4F_compressBegin(
+        cctx: *mut LZ4F_cctx,
+        dstBuffer: *mut ::std::os::raw::c_void,
+        dstCapacity: usize,
+        prefsPtr: *const LZ4F_preferences_t,
+    ) -> usize;
+}
+extern "C" {
+    #[doc = " LZ4F_compressBound() :\n  Provides minimum dstCapacity required to guarantee success of\n  LZ4F_compressUpdate(), given a srcSize and preferences, for a worst case scenario.\n  When srcSize==0, LZ4F_compressBound() provides an upper bound for LZ4F_flush() and LZ4F_compressEnd() instead.\n  Note that the result is only valid for a single invocation of LZ4F_compressUpdate().\n  When invoking LZ4F_compressUpdate() multiple times,\n  if the output buffer is gradually filled up instead of emptied and re-used from its start,\n  one must check if there is enough remaining capacity before each invocation, using LZ4F_compressBound().\n @return is always the same for a srcSize and prefsPtr.\n  prefsPtr is optional : when NULL is provided, preferences will be set to cover worst case scenario.\n  tech details :\n @return if automatic flushing is not enabled, includes the possibility that internal buffer might already be filled by up to (blockSize-1) bytes.\n  It also includes frame footer (ending + checksum), since it might be generated by LZ4F_compressEnd().\n @return doesn't include frame header, as it was already generated by LZ4F_compressBegin()."]
+    pub fn LZ4F_compressBound(srcSize: usize, prefsPtr: *const LZ4F_preferences_t) -> usize;
+}
+extern "C" {
+    #[doc = " LZ4F_compressUpdate() :\n  LZ4F_compressUpdate() can be called repetitively to compress as much data as necessary.\n  Important rule: dstCapacity MUST be large enough to ensure operation success even in worst case situations.\n  This value is provided by LZ4F_compressBound().\n  If this condition is not respected, LZ4F_compress() will fail (result is an errorCode).\n  After an error, the state is left in a UB state, and must be re-initialized or freed.\n  If previously an uncompressed block was written, buffered data is flushed\n  before appending compressed data is continued.\n `cOptPtr` is optional : NULL can be provided, in which case all options are set to default.\n @return : number of bytes written into `dstBuffer` (it can be zero, meaning input data was just buffered).\n           or an error code if it fails (which can be tested using LZ4F_isError())"]
+    pub fn LZ4F_compressUpdate(
+        cctx: *mut LZ4F_cctx,
+        dstBuffer: *mut ::std::os::raw::c_void,
+        dstCapacity: usize,
+        srcBuffer: *const ::std::os::raw::c_void,
+        srcSize: usize,
+        cOptPtr: *const LZ4F_compressOptions_t,
+    ) -> usize;
+}
+extern "C" {
+    #[doc = " LZ4F_flush() :\n  When data must be generated and sent immediately, without waiting for a block to be completely filled,\n  it's possible to call LZ4_flush(). It will immediately compress any data buffered within cctx.\n `dstCapacity` must be large enough to ensure the operation will be successful.\n `cOptPtr` is optional : it's possible to provide NULL, all options will be set to default.\n @return : nb of bytes written into dstBuffer (can be zero, when there is no data stored within cctx)\n           or an error code if it fails (which can be tested using LZ4F_isError())\n  Note : LZ4F_flush() is guaranteed to be successful when dstCapacity >= LZ4F_compressBound(0, prefsPtr)."]
+    pub fn LZ4F_flush(
+        cctx: *mut LZ4F_cctx,
+        dstBuffer: *mut ::std::os::raw::c_void,
+        dstCapacity: usize,
+        cOptPtr: *const LZ4F_compressOptions_t,
+    ) -> usize;
+}
+extern "C" {
+    #[doc = " LZ4F_compressEnd() :\n  To properly finish an LZ4 frame, invoke LZ4F_compressEnd().\n  It will flush whatever data remained within `cctx` (like LZ4_flush())\n  and properly finalize the frame, with an endMark and a checksum.\n `cOptPtr` is optional : NULL can be provided, in which case all options will be set to default.\n @return : nb of bytes written into dstBuffer, necessarily >= 4 (endMark),\n           or an error code if it fails (which can be tested using LZ4F_isError())\n  Note : LZ4F_compressEnd() is guaranteed to be successful when dstCapacity >= LZ4F_compressBound(0, prefsPtr).\n  A successful call to LZ4F_compressEnd() makes `cctx` available again for another compression task."]
+    pub fn LZ4F_compressEnd(
+        cctx: *mut LZ4F_cctx,
+        dstBuffer: *mut ::std::os::raw::c_void,
+        dstCapacity: usize,
+        cOptPtr: *const LZ4F_compressOptions_t,
+    ) -> usize;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct LZ4F_dctx_s {
+    _unused: [u8; 0],
+}
+pub type LZ4F_dctx = LZ4F_dctx_s;
+pub type LZ4F_decompressionContext_t = *mut LZ4F_dctx;
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct LZ4F_decompressOptions_t {
+    pub stableDst: ::std::os::raw::c_uint,
+    pub skipChecksums: ::std::os::raw::c_uint,
+    pub reserved1: ::std::os::raw::c_uint,
+    pub reserved0: ::std::os::raw::c_uint,
+}
+#[test]
+fn bindgen_test_layout_LZ4F_decompressOptions_t() {
+    const UNINIT: ::std::mem::MaybeUninit<LZ4F_decompressOptions_t> =
+        ::std::mem::MaybeUninit::uninit();
+    let ptr = UNINIT.as_ptr();
+    assert_eq!(
+        ::std::mem::size_of::<LZ4F_decompressOptions_t>(),
+        16usize,
+        concat!("Size of: ", stringify!(LZ4F_decompressOptions_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<LZ4F_decompressOptions_t>(),
+        4usize,
+        concat!("Alignment of ", stringify!(LZ4F_decompressOptions_t))
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).stableDst) as usize - ptr as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_decompressOptions_t),
+            "::",
+            stringify!(stableDst)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).skipChecksums) as usize - ptr as usize },
+        4usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_decompressOptions_t),
+            "::",
+            stringify!(skipChecksums)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).reserved1) as usize - ptr as usize },
+        8usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_decompressOptions_t),
+            "::",
+            stringify!(reserved1)
+        )
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).reserved0) as usize - ptr as usize },
+        12usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(LZ4F_decompressOptions_t),
+            "::",
+            stringify!(reserved0)
+        )
+    );
+}
+extern "C" {
+    #[doc = " LZ4F_createDecompressionContext() :\n  Create an LZ4F_dctx object, to track all decompression operations.\n  @version provided MUST be LZ4F_VERSION.\n  @dctxPtr MUST be valid.\n  The function fills @dctxPtr with the value of a pointer to an allocated and initialized LZ4F_dctx object.\n  The @return is an errorCode, which can be tested using LZ4F_isError().\n  dctx memory can be released using LZ4F_freeDecompressionContext();\n  Result of LZ4F_freeDecompressionContext() indicates current state of decompressionContext when being released.\n  That is, it should be == 0 if decompression has been completed fully and correctly."]
+    pub fn LZ4F_createDecompressionContext(
+        dctxPtr: *mut *mut LZ4F_dctx,
+        version: ::std::os::raw::c_uint,
+    ) -> LZ4F_errorCode_t;
+}
+extern "C" {
+    pub fn LZ4F_freeDecompressionContext(dctx: *mut LZ4F_dctx) -> LZ4F_errorCode_t;
+}
+extern "C" {
+    #[doc = " LZ4F_headerSize() : v1.9.0+\n  Provide the header size of a frame starting at `src`.\n `srcSize` must be >= LZ4F_MIN_SIZE_TO_KNOW_HEADER_LENGTH,\n  which is enough to decode the header length.\n @return : size of frame header\n           or an error code, which can be tested using LZ4F_isError()\n  note : Frame header size is variable, but is guaranteed to be\n         >= LZ4F_HEADER_SIZE_MIN bytes, and <= LZ4F_HEADER_SIZE_MAX bytes."]
+    pub fn LZ4F_headerSize(src: *const ::std::os::raw::c_void, srcSize: usize) -> usize;
+}
+extern "C" {
+    #[doc = " LZ4F_getFrameInfo() :\n  This function extracts frame parameters (max blockSize, dictID, etc.).\n  Its usage is optional: user can also invoke LZ4F_decompress() directly.\n\n  Extracted information will fill an existing LZ4F_frameInfo_t structure.\n  This can be useful for allocation and dictionary identification purposes.\n\n  LZ4F_getFrameInfo() can work in the following situations :\n\n  1) At the beginning of a new frame, before any invocation of LZ4F_decompress().\n     It will decode header from `srcBuffer`,\n     consuming the header and starting the decoding process.\n\n     Input size must be large enough to contain the full frame header.\n     Frame header size can be known beforehand by LZ4F_headerSize().\n     Frame header size is variable, but is guaranteed to be >= LZ4F_HEADER_SIZE_MIN bytes,\n     and not more than <= LZ4F_HEADER_SIZE_MAX bytes.\n     Hence, blindly providing LZ4F_HEADER_SIZE_MAX bytes or more will always work.\n     It's allowed to provide more input data than the header size,\n     LZ4F_getFrameInfo() will only consume the header.\n\n     If input size is not large enough,\n     aka if it's smaller than header size,\n     function will fail and return an error code.\n\n  2) After decoding has been started,\n     it's possible to invoke LZ4F_getFrameInfo() anytime\n     to extract already decoded frame parameters stored within dctx.\n\n     Note that, if decoding has barely started,\n     and not yet read enough information to decode the header,\n     LZ4F_getFrameInfo() will fail.\n\n  The number of bytes consumed from srcBuffer will be updated in *srcSizePtr (necessarily <= original value).\n  LZ4F_getFrameInfo() only consumes bytes when decoding has not yet started,\n  and when decoding the header has been successful.\n  Decompression must then resume from (srcBuffer + *srcSizePtr).\n\n @return : a hint about how many srcSize bytes LZ4F_decompress() expects for next call,\n           or an error code which can be tested using LZ4F_isError().\n  note 1 : in case of error, dctx is not modified. Decoding operation can resume from beginning safely.\n  note 2 : frame parameters are *copied into* an already allocated LZ4F_frameInfo_t structure."]
+    pub fn LZ4F_getFrameInfo(
+        dctx: *mut LZ4F_dctx,
+        frameInfoPtr: *mut LZ4F_frameInfo_t,
+        srcBuffer: *const ::std::os::raw::c_void,
+        srcSizePtr: *mut usize,
+    ) -> usize;
+}
+extern "C" {
+    #[doc = " LZ4F_decompress() :\n  Call this function repetitively to regenerate data compressed in `srcBuffer`.\n\n  The function requires a valid dctx state.\n  It will read up to *srcSizePtr bytes from srcBuffer,\n  and decompress data into dstBuffer, of capacity *dstSizePtr.\n\n  The nb of bytes consumed from srcBuffer will be written into *srcSizePtr (necessarily <= original value).\n  The nb of bytes decompressed into dstBuffer will be written into *dstSizePtr (necessarily <= original value).\n\n  The function does not necessarily read all input bytes, so always check value in *srcSizePtr.\n  Unconsumed source data must be presented again in subsequent invocations.\n\n `dstBuffer` can freely change between each consecutive function invocation.\n `dstBuffer` content will be overwritten.\n\n  Note: if `LZ4F_getFrameInfo()` is called before `LZ4F_decompress()`, srcBuffer must be updated to reflect\n  the number of bytes consumed after reading the frame header. Failure to update srcBuffer before calling\n  `LZ4F_decompress()` will cause decompression failure or, even worse, successful but incorrect decompression.\n  See the `LZ4F_getFrameInfo()` docs for details.\n\n @return : an hint of how many `srcSize` bytes LZ4F_decompress() expects for next call.\n  Schematically, it's the size of the current (or remaining) compressed block + header of next block.\n  Respecting the hint provides some small speed benefit, because it skips intermediate buffers.\n  This is just a hint though, it's always possible to provide any srcSize.\n\n  When a frame is fully decoded, @return will be 0 (no more data expected).\n  When provided with more bytes than necessary to decode a frame,\n  LZ4F_decompress() will stop reading exactly at end of current frame, and @return 0.\n\n  If decompression failed, @return is an error code, which can be tested using LZ4F_isError().\n  After a decompression error, the `dctx` context is not resumable.\n  Use LZ4F_resetDecompressionContext() to return to clean state.\n\n  After a frame is fully decoded, dctx can be used again to decompress another frame."]
+    pub fn LZ4F_decompress(
+        dctx: *mut LZ4F_dctx,
+        dstBuffer: *mut ::std::os::raw::c_void,
+        dstSizePtr: *mut usize,
+        srcBuffer: *const ::std::os::raw::c_void,
+        srcSizePtr: *mut usize,
+        dOptPtr: *const LZ4F_decompressOptions_t,
+    ) -> usize;
+}
+extern "C" {
+    #[doc = " LZ4F_resetDecompressionContext() : added in v1.8.0\n  In case of an error, the context is left in \"undefined\" state.\n  In which case, it's necessary to reset it, before re-using it.\n  This method can also be used to abruptly stop any unfinished decompression,\n  and start a new one using same context resources."]
+    pub fn LZ4F_resetDecompressionContext(dctx: *mut LZ4F_dctx);
+}
+pub const XXH_errorcode_XXH_OK: XXH_errorcode = 0;
+pub const XXH_errorcode_XXH_ERROR: XXH_errorcode = 1;
+pub type XXH_errorcode = ::std::os::raw::c_int;
+extern "C" {
+    pub fn XXH_versionNumber() -> ::std::os::raw::c_uint;
+}
+pub type XXH32_hash_t = ::std::os::raw::c_uint;
+extern "C" {
+    #[doc = " XXH32() :\nCalculate the 32-bit hash of sequence \"length\" bytes stored at memory address \"input\".\nThe memory between input & input+length must be valid (allocated and read-accessible).\n\"seed\" can be used to alter the result predictably.\nSpeed on Core 2 Duo @ 3 GHz (single thread, SMHasher benchmark) : 5.4 GB/s"]
+    pub fn XXH32(
+        input: *const ::std::os::raw::c_void,
+        length: usize,
+        seed: ::std::os::raw::c_uint,
+    ) -> XXH32_hash_t;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct XXH32_state_s {
+    _unused: [u8; 0],
+}
+pub type XXH32_state_t = XXH32_state_s;
+extern "C" {
+    pub fn XXH32_createState() -> *mut XXH32_state_t;
+}
+extern "C" {
+    pub fn XXH32_freeState(statePtr: *mut XXH32_state_t) -> XXH_errorcode;
+}
+extern "C" {
+    pub fn XXH32_copyState(dst_state: *mut XXH32_state_t, src_state: *const XXH32_state_t);
+}
+extern "C" {
+    pub fn XXH32_reset(statePtr: *mut XXH32_state_t, seed: ::std::os::raw::c_uint)
+        -> XXH_errorcode;
+}
+extern "C" {
+    pub fn XXH32_update(
+        statePtr: *mut XXH32_state_t,
+        input: *const ::std::os::raw::c_void,
+        length: usize,
+    ) -> XXH_errorcode;
+}
+extern "C" {
+    pub fn XXH32_digest(statePtr: *const XXH32_state_t) -> XXH32_hash_t;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct XXH32_canonical_t {
+    pub digest: [::std::os::raw::c_uchar; 4usize],
+}
+#[test]
+fn bindgen_test_layout_XXH32_canonical_t() {
+    const UNINIT: ::std::mem::MaybeUninit<XXH32_canonical_t> = ::std::mem::MaybeUninit::uninit();
+    let ptr = UNINIT.as_ptr();
+    assert_eq!(
+        ::std::mem::size_of::<XXH32_canonical_t>(),
+        4usize,
+        concat!("Size of: ", stringify!(XXH32_canonical_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<XXH32_canonical_t>(),
+        1usize,
+        concat!("Alignment of ", stringify!(XXH32_canonical_t))
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).digest) as usize - ptr as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(XXH32_canonical_t),
+            "::",
+            stringify!(digest)
+        )
+    );
+}
+extern "C" {
+    pub fn XXH32_canonicalFromHash(dst: *mut XXH32_canonical_t, hash: XXH32_hash_t);
+}
+extern "C" {
+    pub fn XXH32_hashFromCanonical(src: *const XXH32_canonical_t) -> XXH32_hash_t;
+}
+pub type XXH64_hash_t = ::std::os::raw::c_ulonglong;
+extern "C" {
+    #[doc = " XXH64() :\nCalculate the 64-bit hash of sequence of length \"len\" stored at memory address \"input\".\n\"seed\" can be used to alter the result predictably.\nThis function runs faster on 64-bit systems, but slower on 32-bit systems (see benchmark)."]
+    pub fn XXH64(
+        input: *const ::std::os::raw::c_void,
+        length: usize,
+        seed: ::std::os::raw::c_ulonglong,
+    ) -> XXH64_hash_t;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct XXH64_state_s {
+    _unused: [u8; 0],
+}
+pub type XXH64_state_t = XXH64_state_s;
+extern "C" {
+    pub fn XXH64_createState() -> *mut XXH64_state_t;
+}
+extern "C" {
+    pub fn XXH64_freeState(statePtr: *mut XXH64_state_t) -> XXH_errorcode;
+}
+extern "C" {
+    pub fn XXH64_copyState(dst_state: *mut XXH64_state_t, src_state: *const XXH64_state_t);
+}
+extern "C" {
+    pub fn XXH64_reset(
+        statePtr: *mut XXH64_state_t,
+        seed: ::std::os::raw::c_ulonglong,
+    ) -> XXH_errorcode;
+}
+extern "C" {
+    pub fn XXH64_update(
+        statePtr: *mut XXH64_state_t,
+        input: *const ::std::os::raw::c_void,
+        length: usize,
+    ) -> XXH_errorcode;
+}
+extern "C" {
+    pub fn XXH64_digest(statePtr: *const XXH64_state_t) -> XXH64_hash_t;
+}
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct XXH64_canonical_t {
+    pub digest: [::std::os::raw::c_uchar; 8usize],
+}
+#[test]
+fn bindgen_test_layout_XXH64_canonical_t() {
+    const UNINIT: ::std::mem::MaybeUninit<XXH64_canonical_t> = ::std::mem::MaybeUninit::uninit();
+    let ptr = UNINIT.as_ptr();
+    assert_eq!(
+        ::std::mem::size_of::<XXH64_canonical_t>(),
+        8usize,
+        concat!("Size of: ", stringify!(XXH64_canonical_t))
+    );
+    assert_eq!(
+        ::std::mem::align_of::<XXH64_canonical_t>(),
+        1usize,
+        concat!("Alignment of ", stringify!(XXH64_canonical_t))
+    );
+    assert_eq!(
+        unsafe { ::std::ptr::addr_of!((*ptr).digest) as usize - ptr as usize },
+        0usize,
+        concat!(
+            "Offset of field: ",
+            stringify!(XXH64_canonical_t),
+            "::",
+            stringify!(digest)
+        )
+    );
+}
+extern "C" {
+    pub fn XXH64_canonicalFromHash(dst: *mut XXH64_canonical_t, hash: XXH64_hash_t);
+}
+extern "C" {
+    pub fn XXH64_hashFromCanonical(src: *const XXH64_canonical_t) -> XXH64_hash_t;
 }

@@ -5,7 +5,7 @@ use std::{
     path::Path,
 };
 
-use crate::generate;
+use crate::{generate, GenerateKind};
 
 pub struct Builder {
     options: BindgenOptions,
@@ -13,6 +13,7 @@ pub struct Builder {
 
 pub struct BindgenOptions {
     pub input_bindgen_file: String,
+    pub input_extern_file: String,
     pub method_filter: fn(method_name: String) -> bool,
     pub rust_method_type_path: String,
     pub rust_method_prefix: String,
@@ -28,12 +29,13 @@ pub struct BindgenOptions {
     pub csharp_if_dll_name: String,
 }
 
-impl Builder {
-    pub fn new() -> Self {
+impl Default for Builder {
+    fn default() -> Self {
         Self {
             options: BindgenOptions {
                 input_bindgen_file: "".to_string(),
-                method_filter: |x| !x.starts_with("_"),
+                input_extern_file: "".to_string(),
+                method_filter: |x| !x.starts_with('_'),
                 rust_method_type_path: "".to_string(),
                 rust_method_prefix: "".to_string(),
                 rust_file_header: "".to_string(),
@@ -49,6 +51,12 @@ impl Builder {
             },
         }
     }
+}
+
+impl Builder {
+    pub fn new() -> Self {
+        Self::default()
+    }
 
     /// Change an input .rs file(such as generated from bindgen) to generate binding.
     pub fn input_bindgen_file<T: Into<String>>(mut self, input_bindgen_file: T) -> Builder {
@@ -56,7 +64,13 @@ impl Builder {
         self
     }
 
-    /// Filter generate method callback, default is `!x.starts_with("_")`
+    /// Change an input .rs file for collect extern methods to C# binding.
+    pub fn input_extern_file<T: Into<String>>(mut self, input_extern_file: T) -> Builder {
+        self.options.input_extern_file = input_extern_file.into();
+        self
+    }
+
+    /// Filter generate method callback, default is `!x.starts_with('_')`
     pub fn method_filter(mut self, method_filter: fn(method_name: String) -> bool) -> Builder {
         self.options.method_filter = method_filter;
         self
@@ -141,35 +155,63 @@ impl Builder {
         self
     }
 
-    // pub fn generate_csharp_file<T: AsRef<Path>>(&self, csharp_output_path: T) -> io::Result<()> {
-    //     let mut file = OpenOptions::new()
-    //         .write(true)
-    //         .truncate(true)
-    //         .create(true)
-    //         .open(csharp_output_path.as_ref())?;
+    pub fn generate_csharp_file<P: AsRef<Path>>(
+        &self,
+        csharp_output_path: P,
+    ) -> Result<(), Box<dyn Error>> {
+        if !self.options.input_bindgen_file.is_empty() {
+            let (_, csharp) = generate(GenerateKind::InputBindgen, &self.options)?;
 
-    //     let code = self.generate();
-    //     file.write_all(code.as_bytes())?;
-    //     file.flush()?;
+            let mut csharp_file = make_file(csharp_output_path.as_ref())?;
+            csharp_file.write_all(csharp.as_bytes())?;
+            csharp_file.flush()?;
+        }
 
-    //     Ok(())
-    // }
+        if !self.options.input_extern_file.is_empty() {
+            let (_, csharp) = generate(GenerateKind::InputExtern, &self.options)?;
+
+            let mut csharp_file = make_file(csharp_output_path.as_ref())?;
+            csharp_file.write_all(csharp.as_bytes())?;
+            csharp_file.flush()?;
+        }
+
+        Ok(())
+    }
 
     pub fn generate_to_file<P: AsRef<Path>>(
         &self,
         rust_output_path: P,
         csharp_output_path: P,
     ) -> Result<(), Box<dyn Error>> {
-        let (rust, csharp) = generate(&self.options)?;
+        if !self.options.input_bindgen_file.is_empty() {
+            let (rust, csharp) = generate(GenerateKind::InputBindgen, &self.options)?;
 
-        let mut rust_file = make_file(rust_output_path)?;
-        let mut csharp_file = make_file(csharp_output_path)?;
+            if let Some(rust) = rust {
+                let mut rust_file = make_file(rust_output_path.as_ref())?;
 
-        rust_file.write_all(rust.as_bytes())?;
-        rust_file.flush()?;
+                rust_file.write_all(rust.as_bytes())?;
+                rust_file.flush()?;
+            }
 
-        csharp_file.write_all(csharp.as_bytes())?;
-        csharp_file.flush()?;
+            let mut csharp_file = make_file(csharp_output_path.as_ref())?;
+            csharp_file.write_all(csharp.as_bytes())?;
+            csharp_file.flush()?;
+        }
+
+        if !self.options.input_extern_file.is_empty() {
+            let (rust, csharp) = generate(GenerateKind::InputExtern, &self.options)?;
+
+            if let Some(rust) = rust {
+                let mut rust_file = make_file(rust_output_path.as_ref())?;
+
+                rust_file.write_all(rust.as_bytes())?;
+                rust_file.flush()?;
+            }
+
+            let mut csharp_file = make_file(csharp_output_path.as_ref())?;
+            csharp_file.write_all(csharp.as_bytes())?;
+            csharp_file.flush()?;
+        }
 
         Ok(())
     }

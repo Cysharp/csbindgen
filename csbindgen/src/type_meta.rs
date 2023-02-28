@@ -64,7 +64,7 @@ impl RustType {
         let mut sb = String::new();
 
         if self.is_pointer || self.is_pointer_pointer {
-            sb.push_str("*");
+            sb.push('*');
         }
         if self.is_const {
             sb.push_str("const");
@@ -80,18 +80,19 @@ impl RustType {
             }
         }
 
-        sb.push_str(" ");
+        sb.push(' ');
 
         if self.is_fixed_array {
-            sb.push_str("[");
+            sb.push('[');
             sb.push_str(self.type_name.as_str());
             sb.push_str("; ");
             sb.push_str(self.fixed_array_digits.as_str());
-            sb.push_str("]");
+            sb.push(']');
         } else {
-            if !self.type_name.starts_with("c_")
-                && !(self.type_name == "usize" || self.type_name == "isize")
-                && !(type_path == "")
+            if !(self.type_name.starts_with("c_")
+                || self.type_name == "usize"
+                || self.type_name == "isize"
+                || (type_path.is_empty()))
             {
                 sb.push_str(type_path);
                 sb.push_str("::");
@@ -157,7 +158,7 @@ impl RustType {
         if self.is_fixed_array {
             sb.push_str("fixed ");
 
-            let type_name = convert_type_name(use_type.type_name.as_str(), &options);
+            let type_name = convert_type_name(use_type.type_name.as_str(), options);
             let type_name = match type_name.as_str() {
                 // C# fixed allow types
                 "bool" | "byte" | "short" | "int" | "long" | "char" | "sbyte" | "ushort"
@@ -167,10 +168,10 @@ impl RustType {
 
             sb.push_str(type_name.as_str());
         } else {
-            sb.push_str(convert_type_name(use_type.type_name.as_str(), &options).as_str());
+            sb.push_str(convert_type_name(use_type.type_name.as_str(), options).as_str());
             if use_alias {
                 if use_type.is_pointer {
-                    sb.push_str("*");
+                    sb.push('*');
                 }
                 if use_type.is_pointer_pointer {
                     sb.push_str("**");
@@ -178,7 +179,7 @@ impl RustType {
             }
 
             if self.is_pointer {
-                sb.push_str("*");
+                sb.push('*');
             }
             if self.is_pointer_pointer {
                 sb.push_str("**");

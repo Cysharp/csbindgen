@@ -11,12 +11,26 @@ use emitter::*;
 use parser::*;
 use std::{collections::HashSet, error::Error};
 
-pub(crate) fn generate(options: &BindgenOptions) -> Result<(String, String), Box<dyn Error>> {
-    let path = &options.input_bindgen_file;
-    let file_content = std::fs::read_to_string(path)?;
+enum GenerateKind {
+    InputBindgen,
+    InputExtern,
+}
+
+pub(crate) fn generate(
+    generate_kind: GenerateKind,
+    options: &BindgenOptions,
+) -> Result<(Option<String>, String), Box<dyn Error>> {
+    let path = match generate_kind{
+        GenerateKind::InputBindgen => &options.input_bindgen_file,
+        GenerateKind::InputExtern => &options.input_extern_file,
+    };
+    let file_content = std::fs::read_to_string(path).expect(("input file not found, path:".to_string() + path).as_str());
     let file_ast = syn::parse_file(file_content.as_str())?;
 
-    let methods = collect_method(&file_ast, options);
+    let (methods, generate_rust) = match generate_kind {
+        GenerateKind::InputBindgen => (collect_foreign_method(&file_ast, options), true),
+        GenerateKind::InputExtern => (collect_extern_method(&file_ast, options), false),
+    };
     let aliases = collect_type_alias(&file_ast);
     let structs = collect_struct(&file_ast);
 
@@ -42,10 +56,14 @@ pub(crate) fn generate(options: &BindgenOptions) -> Result<(String, String), Box
 
     let structs = reduce_struct(&structs, &using_types);
 
-    let rust = emit_rust_method(&methods, &options);
-    let csharp = emit_csharp(&methods, &aliases, &structs, &options);
+    let rust = if generate_rust {
+        Some(emit_rust_method(&methods, options))
+    } else {
+        None
+    };
+    let csharp = emit_csharp(&methods, &aliases, &structs, options);
 
-    return Ok((rust, csharp));
+    Ok((rust, csharp))
 }
 
 // #[test]
