@@ -39,7 +39,8 @@ fn main() -> Result<(), Box<dyn Error>> {
         .rust_file_header("use super::lz4;")
         .rust_method_type_path("lz4")
         .csharp_class_name("LibLz4")
-        .csharp_dll_name("liblz4")
+        .csharp_dll_name("csbindgen_tests")
+        .csharp_method_prefix("csbindgen_")
         .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs")?;
 
     // csbindgen::Builder::new()

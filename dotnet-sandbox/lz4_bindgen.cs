@@ -9,133 +9,133 @@ namespace CsBindgen
 {
     public static unsafe partial class LibLz4
     {
-        const string __DllName = "liblz4";
+        const string __DllName = "csbindgen_tests";
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_versionNumber();
+        public static extern int csbindgen_LZ4_versionNumber();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* LZ4_versionString();
+        public static extern byte* csbindgen_LZ4_versionString();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_default(byte* src, byte* dst, int srcSize, int dstCapacity);
+        public static extern int csbindgen_LZ4_compress_default(byte* src, byte* dst, int srcSize, int dstCapacity);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_safe(byte* src, byte* dst, int compressedSize, int dstCapacity);
+        public static extern int csbindgen_LZ4_decompress_safe(byte* src, byte* dst, int compressedSize, int dstCapacity);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressBound(int inputSize);
+        public static extern int csbindgen_LZ4_compressBound(int inputSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_fast(byte* src, byte* dst, int srcSize, int dstCapacity, int acceleration);
+        public static extern int csbindgen_LZ4_compress_fast(byte* src, byte* dst, int srcSize, int dstCapacity, int acceleration);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_sizeofState();
+        public static extern int csbindgen_LZ4_sizeofState();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_fast_extState(void* state, byte* src, byte* dst, int srcSize, int dstCapacity, int acceleration);
+        public static extern int csbindgen_LZ4_compress_fast_extState(void* state, byte* src, byte* dst, int srcSize, int dstCapacity, int acceleration);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_destSize(byte* src, byte* dst, int* srcSizePtr, int targetDstSize);
+        public static extern int csbindgen_LZ4_compress_destSize(byte* src, byte* dst, int* srcSizePtr, int targetDstSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_safe_partial(byte* src, byte* dst, int srcSize, int targetOutputSize, int dstCapacity);
+        public static extern int csbindgen_LZ4_decompress_safe_partial(byte* src, byte* dst, int srcSize, int targetOutputSize, int dstCapacity);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern LZ4_stream_u* LZ4_createStream();
+        public static extern LZ4_stream_u* csbindgen_LZ4_createStream();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_freeStream(LZ4_stream_u* streamPtr);
+        public static extern int csbindgen_LZ4_freeStream(LZ4_stream_u* streamPtr);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void LZ4_resetStream_fast(LZ4_stream_u* streamPtr);
+        public static extern void csbindgen_LZ4_resetStream_fast(LZ4_stream_u* streamPtr);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_loadDict(LZ4_stream_u* streamPtr, byte* dictionary, int dictSize);
+        public static extern int csbindgen_LZ4_loadDict(LZ4_stream_u* streamPtr, byte* dictionary, int dictSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_fast_continue(LZ4_stream_u* streamPtr, byte* src, byte* dst, int srcSize, int dstCapacity, int acceleration);
+        public static extern int csbindgen_LZ4_compress_fast_continue(LZ4_stream_u* streamPtr, byte* src, byte* dst, int srcSize, int dstCapacity, int acceleration);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_saveDict(LZ4_stream_u* streamPtr, byte* safeBuffer, int maxDictSize);
+        public static extern int csbindgen_LZ4_saveDict(LZ4_stream_u* streamPtr, byte* safeBuffer, int maxDictSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern LZ4_streamDecode_u* LZ4_createStreamDecode();
+        public static extern LZ4_streamDecode_u* csbindgen_LZ4_createStreamDecode();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_freeStreamDecode(LZ4_streamDecode_u* LZ4_stream);
+        public static extern int csbindgen_LZ4_freeStreamDecode(LZ4_streamDecode_u* LZ4_stream);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_setStreamDecode(LZ4_streamDecode_u* LZ4_streamDecode, byte* dictionary, int dictSize);
+        public static extern int csbindgen_LZ4_setStreamDecode(LZ4_streamDecode_u* LZ4_streamDecode, byte* dictionary, int dictSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decoderRingBufferSize(int maxBlockSize);
+        public static extern int csbindgen_LZ4_decoderRingBufferSize(int maxBlockSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_safe_continue(LZ4_streamDecode_u* LZ4_streamDecode, byte* src, byte* dst, int srcSize, int dstCapacity);
+        public static extern int csbindgen_LZ4_decompress_safe_continue(LZ4_streamDecode_u* LZ4_streamDecode, byte* src, byte* dst, int srcSize, int dstCapacity);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_safe_usingDict(byte* src, byte* dst, int srcSize, int dstCapacity, byte* dictStart, int dictSize);
+        public static extern int csbindgen_LZ4_decompress_safe_usingDict(byte* src, byte* dst, int srcSize, int dstCapacity, byte* dictStart, int dictSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_safe_partial_usingDict(byte* src, byte* dst, int compressedSize, int targetOutputSize, int maxOutputSize, byte* dictStart, int dictSize);
+        public static extern int csbindgen_LZ4_decompress_safe_partial_usingDict(byte* src, byte* dst, int compressedSize, int targetOutputSize, int maxOutputSize, byte* dictStart, int dictSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern LZ4_stream_u* LZ4_initStream(void* buffer, UIntPtr size);
+        public static extern LZ4_stream_u* csbindgen_LZ4_initStream(void* buffer, UIntPtr size);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress(byte* src, byte* dest, int srcSize);
+        public static extern int csbindgen_LZ4_compress(byte* src, byte* dest, int srcSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_limitedOutput(byte* src, byte* dest, int srcSize, int maxOutputSize);
+        public static extern int csbindgen_LZ4_compress_limitedOutput(byte* src, byte* dest, int srcSize, int maxOutputSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_withState(void* state, byte* source, byte* dest, int inputSize);
+        public static extern int csbindgen_LZ4_compress_withState(void* state, byte* source, byte* dest, int inputSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_limitedOutput_withState(void* state, byte* source, byte* dest, int inputSize, int maxOutputSize);
+        public static extern int csbindgen_LZ4_compress_limitedOutput_withState(void* state, byte* source, byte* dest, int inputSize, int maxOutputSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_continue(LZ4_stream_u* LZ4_streamPtr, byte* source, byte* dest, int inputSize);
+        public static extern int csbindgen_LZ4_compress_continue(LZ4_stream_u* LZ4_streamPtr, byte* source, byte* dest, int inputSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_limitedOutput_continue(LZ4_stream_u* LZ4_streamPtr, byte* source, byte* dest, int inputSize, int maxOutputSize);
+        public static extern int csbindgen_LZ4_compress_limitedOutput_continue(LZ4_stream_u* LZ4_streamPtr, byte* source, byte* dest, int inputSize, int maxOutputSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_uncompress(byte* source, byte* dest, int outputSize);
+        public static extern int csbindgen_LZ4_uncompress(byte* source, byte* dest, int outputSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_uncompress_unknownOutputSize(byte* source, byte* dest, int isize_, int maxOutputSize);
+        public static extern int csbindgen_LZ4_uncompress_unknownOutputSize(byte* source, byte* dest, int isize_, int maxOutputSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void* LZ4_create(byte* inputBuffer);
+        public static extern void* csbindgen_LZ4_create(byte* inputBuffer);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_sizeofStreamState();
+        public static extern int csbindgen_LZ4_sizeofStreamState();
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_resetStreamState(void* state, byte* inputBuffer);
+        public static extern int csbindgen_LZ4_resetStreamState(void* state, byte* inputBuffer);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* LZ4_slideInputBuffer(void* state);
+        public static extern byte* csbindgen_LZ4_slideInputBuffer(void* state);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_safe_withPrefix64k(byte* src, byte* dst, int compressedSize, int maxDstSize);
+        public static extern int csbindgen_LZ4_decompress_safe_withPrefix64k(byte* src, byte* dst, int compressedSize, int maxDstSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_fast_withPrefix64k(byte* src, byte* dst, int originalSize);
+        public static extern int csbindgen_LZ4_decompress_fast_withPrefix64k(byte* src, byte* dst, int originalSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_fast(byte* src, byte* dst, int originalSize);
+        public static extern int csbindgen_LZ4_decompress_fast(byte* src, byte* dst, int originalSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_fast_continue(LZ4_streamDecode_u* LZ4_streamDecode, byte* src, byte* dst, int originalSize);
+        public static extern int csbindgen_LZ4_decompress_fast_continue(LZ4_streamDecode_u* LZ4_streamDecode, byte* src, byte* dst, int originalSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_fast_usingDict(byte* src, byte* dst, int originalSize, byte* dictStart, int dictSize);
+        public static extern int csbindgen_LZ4_decompress_fast_usingDict(byte* src, byte* dst, int originalSize, byte* dictStart, int dictSize);
 
         [DllImport(__DllName, CallingConvention = CallingConvention.Cdecl)]
-        public static extern void LZ4_resetStream(LZ4_stream_u* streamPtr);
+        public static extern void csbindgen_LZ4_resetStream(LZ4_stream_u* streamPtr);
 
 
     }
