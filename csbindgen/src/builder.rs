@@ -142,7 +142,7 @@ impl Builder {
         self
     }
 
-    /// configure c_long to {csharp_c_long_convert} type,
+    /// configure c_ulong to {csharp_c_ulong_convert} type,
     /// default is `uint`.
     pub fn csharp_c_ulong_convert<T: Into<String>>(mut self, csharp_c_ulong_convert: T) -> Builder {
         self.options.csharp_c_ulong_convert = csharp_c_ulong_convert.into();

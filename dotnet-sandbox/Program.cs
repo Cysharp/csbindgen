@@ -1,6 +1,7 @@
 ﻿// See https://aka.ms/new-console-template for more information
 //using Csbindgen;
 using CsBindgen;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 unsafe
@@ -30,4 +31,55 @@ unsafe
 
     // Console.WriteLine(vvv);
 
+}
+
+namespace CsBindgen
+{
+    public static unsafe partial class LibLz4
+    {
+        static LibLz4()
+        {
+            NativeLibrary.SetDllImportResolver(typeof(LibLz4).Assembly, DllImportResolver);
+        }
+
+        static IntPtr DllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
+        {
+            if (libraryName == __DllName)
+            {
+                var path = "runtimes/";
+                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+                {
+                    path += "win-";
+
+                }
+                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+                {
+                    path += "osx-";
+                }
+                else
+                {
+                    path += "linux-";
+                }
+
+                if (RuntimeInformation.OSArchitecture == Architecture.X86)
+                {
+                    path += "x86";
+                }
+                else if (RuntimeInformation.OSArchitecture == Architecture.X64)
+                {
+                    path += "x64";
+                }
+                else if (RuntimeInformation.OSArchitecture == Architecture.Arm64)
+                {
+                    path += "arm64";
+                }
+
+                path += "/native/" + __DllName;
+
+                return NativeLibrary.Load(path, assembly, searchPath);
+            }
+
+            return IntPtr.Zero;
+        }
+    }
 }

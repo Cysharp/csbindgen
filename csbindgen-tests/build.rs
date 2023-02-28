@@ -53,7 +53,7 @@ fn main() {
         .csharp_entry_point_prefix("csbindgen_")
         .csharp_method_prefix("")
         .csharp_c_long_convert("int")
-        .csharp_c_long_convert("uint")
+        .csharp_c_ulong_convert("uint")
         .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs")
         .unwrap();
 

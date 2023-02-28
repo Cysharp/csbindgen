@@ -154,10 +154,12 @@ csbindgen::Builder::default()
     .csharp_entry_point_prefix("csbindgen_")
     .csharp_method_prefix("")
     .csharp_c_long_convert("int")
-    .csharp_c_long_convert("uint")
+    .csharp_c_ulong_convert("uint")
     .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs")
     .unwrap();
 ```
+
+It will be embedded in the placeholder of the output file.
 
 ```rust
 #[allow(unused)]
@@ -194,19 +196,88 @@ namespace {csharp_namespace}
 }
 ```
 
-Builder options: Rust to C#
----
+Adjust `rust_file_header` and `rust_method_type_path` to match your module configuration.
 
-    csbindgen::Builder::default()
-        .input_extern_file("src/lib.rs")
-        .csharp_class_name("LibRust")
-        .csharp_dll_name("csbindgen_tests")
-        .generate_csharp_file("../dotnet-sandbox/method_call.cs")
-        .unwrap();
+`method_filter` allows you to specify which methods to exclude; if unspecified, methods prefixed with `_` are excluded by default.
 
+`rust_method_prefix` and `csharp_method_prefix` or `csharp_entry_point_prefix` must be adjusted to match the method name to be called.
 
+`csharp_dll_name_if` is optional. If specified, `#if` allows two DllName to be specified, which is useful if the name must be `__Internal` at iOS build.
 
+If the file path to be loaded needs to be changed depending on the operating system, the following load code can be used.
 
+```csharp
+public static unsafe partial class NativeMethods
+{
+    // https://docs.microsoft.com/en-us/dotnet/standard/native-interop/cross-platform
+    // Library path will search
+    // win => __DllName, __DllName.dll
+    // linux, osx => __DllName.so, __DllName.dylib
+    // __DllName
+
+    static NativeMethods()
+    {
+        NativeLibrary.SetDllImportResolver(typeof(NativeMethods).Assembly, DllImportResolver);
+    }
+
+    static IntPtr DllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
+    {
+        if (libraryName == __DllName)
+        {
+            var path = "runtimes/";
+            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
+            {
+                path += "win-";
+
+            }
+            else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
+            {
+                path += "osx-";
+            }
+            else
+            {
+                path += "linux-";
+            }
+
+            if (RuntimeInformation.OSArchitecture == Architecture.X86)
+            {
+                path += "x86";
+            }
+            else if (RuntimeInformation.OSArchitecture == Architecture.X64)
+            {
+                path += "x64";
+            }
+            else if (RuntimeInformation.OSArchitecture == Architecture.Arm64)
+            {
+                path += "arm64";
+            }
+
+            path += "/native/" + __DllName;
+
+            return NativeLibrary.Load(path, assembly, searchPath);
+        }
+
+        return IntPtr.Zero;
+    }
+}
+```
+
+`csharp_c_long_convert` and `csharp_c_ulong_convert` configure how handles `c_long` and `c_ulong` to C# type. default is to `int` and `uint` because `LLP64` is 32bit representation but you can change it to 64bit.
+
+## Builder options: Rust to C#
+
+Rust to C# is similar workflow as C to C#, use the `input_extern_file` -> setup options -> `generate_csharp_file`.
+
+```csharp
+csbindgen::Builder::default()
+    .input_extern_file("src/lib.rs")
+    .csharp_class_name("LibRust")
+    .csharp_dll_name("csbindgen_tests")
+    .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs")
+    .unwrap();
+```
+
+`generate_csharp_file` does not generate Rust file so no need to use `rust_` option.
 
 License
 ---
