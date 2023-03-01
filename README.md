@@ -263,7 +263,7 @@ internal static unsafe partial class NativeMethods
 }
 ```
 
-`csharp_c_long_convert` and `csharp_c_ulong_convert` configure how handles `c_long` and `c_ulong` to C# type. default is to `int` and `uint` because `LLP64` is 32bit representation but you can change it to 64bit.
+`csharp_c_long_convert` and `csharp_c_ulong_convert` configure how handles `c_long` and `c_ulong` to C# type. default is to `int` and `uint` because `LLP64` is 32bit representation but you can change it to 64bit or use [CLong](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.clong)/CULong struct after .NET 6.
 
 ## Builder options: Rust to C#
 
