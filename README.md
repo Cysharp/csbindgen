@@ -1,7 +1,7 @@
 # csbindgen
 [![Crates](https://img.shields.io/crates/v/csbindgen.svg)](https://crates.io/crates/csbindgen) [![Api Rustdoc](https://img.shields.io/badge/api-rustdoc-blue)](https://docs.rs/csbindgen)
 
-Generate C# FFI from Rust for brings C native library to .NET and Unity easily.
+Generate C# FFI from Rust for automatically brings native code and C native library to .NET and Unity.
 
 There are usually many pains involved in using the C Library with C#. Not only is it difficult to create bindings, but cross-platform builds are very difficult. In this day and age, you have to build for multiple platforms and architectures, windows, osx, linux, android, ios, each with x64, x86, arm.
 
@@ -143,7 +143,7 @@ Builder options(configure template)
 ```rust
 csbindgen::Builder::default()
     .input_bindgen_file("src/lz4.rs")
-    .method_filter(|x| { !x.starts_with("_") && !x.starts_with("XXH") } )
+    .method_filter(|x| { x.starts_with("LZ4") } )
     .rust_method_prefix("csbindgen_")
     .rust_file_header("use super::lz4;")
     .rust_method_type_path("lz4")
