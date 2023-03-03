@@ -9,7 +9,7 @@ pub fn emit_rust_method(list: &Vec<ExternMethod>, options: &BindgenOptions) -> S
     let method_type_path = options.rust_method_type_path.as_str();
     let method_type_path2 = match options.rust_method_type_path.as_str() {
         "" => "".to_string(),
-        x => x.to_string() + "::"
+        x => x.to_string() + "::",
     };
     let method_prefix = &options.rust_method_prefix;
     let file_header = &options.rust_file_header;
@@ -81,7 +81,7 @@ pub fn emit_csharp(
     methods: &Vec<ExternMethod>,
     aliases: &HashMap<String, RustType>,
     structs: &Vec<RustStruct>,
-    options: &BindgenOptions
+    options: &BindgenOptions,
 ) -> String {
     // configure
     let namespace = &options.csharp_namespace;
@@ -90,13 +90,20 @@ pub fn emit_csharp(
     let accessibility = &options.csharp_class_accessibility;
 
     let dll_name = match options.csharp_if_symbol.as_str() {
-        "" => format!("        const string __DllName = \"{}\";", options.csharp_dll_name),
-        _ => { format!("#if {0}
+        "" => format!(
+            "        const string __DllName = \"{}\";",
+            options.csharp_dll_name
+        ),
+        _ => {
+            format!(
+                "#if {0}
         const string __DllName = \"{1}\";
 #else
         const string __DllName = \"{2}\";
 #endif
-        ", options.csharp_if_symbol, options.csharp_if_dll_name, options.csharp_dll_name)
+        ",
+                options.csharp_if_symbol, options.csharp_if_dll_name, options.csharp_dll_name
+            )
         }
     };
 
@@ -104,8 +111,8 @@ pub fn emit_csharp(
     for item in methods {
         let method_name = &item.method_name;
         let entry_point = match options.csharp_entry_point_prefix.as_str() {
-             "" => format!("{method_prefix}{method_name}"),
-             x => format!("{x}{method_name}"),
+            "" => format!("{method_prefix}{method_name}"),
+            x => format!("{x}{method_name}"),
         };
         let return_type = match &item.return_type {
             Some(x) => x.to_csharp_string(options, aliases),
@@ -115,13 +122,23 @@ pub fn emit_csharp(
         let parameters = item
             .parameters
             .iter()
-            .map(|p| format!("{} {}", p.rust_type.to_csharp_string(options, aliases), p.escape_name()))
+            .map(|p| {
+                let mut type_name = p.rust_type.to_csharp_string(options, aliases);
+                if type_name == "bool" {
+                    type_name = "[MarshalAs(UnmanagedType.U1)] bool".to_string();
+                }
+
+                format!("{} {}", type_name, p.escape_name())
+            })
             .collect::<Vec<_>>()
             .join(", ");
 
         method_list_string.push_str_ln(
             format!("        [DllImport(__DllName, EntryPoint = \"{entry_point}\", CallingConvention = CallingConvention.Cdecl)]").as_str(),
         );
+        if return_type == "bool" {
+            method_list_string.push_str_ln("        [return: MarshalAs(UnmanagedType.U1)]");
+        }
         method_list_string.push_str_ln(
             format!("        public static extern {return_type} {method_prefix}{method_name}({parameters});").as_str(),
         );

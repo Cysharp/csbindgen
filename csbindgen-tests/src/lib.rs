@@ -14,6 +14,17 @@ pub extern "C" fn my_add(x: i32, y: i32) -> i32 {
     x + y
 }
 
+#[allow(unused)]
+#[no_mangle]
+pub extern "C" fn my_bool(x: bool, y: bool, z: bool, xr: *mut bool, yr: *mut bool, zr: *mut bool) -> bool {
+    unsafe {
+        *xr = x;
+        *yr = y;
+        *zr = z;
+        true
+    }
+}
+
 #[test]
 fn build_test() {
     // let path = std::env::current_dir().unwrap();
