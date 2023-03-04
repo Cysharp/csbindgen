@@ -27,7 +27,19 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "unsafe_destroy_string", CallingConvention = CallingConvention.Cdecl)]
         public static extern void unsafe_destroy_string(String* s);
 
+        [DllImport(__DllName, EntryPoint = "create_context", CallingConvention = CallingConvention.Cdecl)]
+        public static extern Context* create_context();
 
+        [DllImport(__DllName, EntryPoint = "delete_context", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void delete_context(Context* context);
+
+
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe struct Context
+    {
+        [MarshalAs(UnmanagedType.U1)] public bool foo;
     }
 
     

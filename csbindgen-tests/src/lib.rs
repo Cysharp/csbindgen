@@ -1,5 +1,3 @@
-use std::io::Bytes;
-
 #[allow(dead_code)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
@@ -34,15 +32,15 @@ pub extern "C" fn my_bool(
     true
 }
 
-#[no_mangle]
-pub unsafe extern "C" fn new(x: *mut *mut Vec<u8>) {
-    let v = Box::new(Vec::new());
-    *x = Box::into_raw(v);
-}
+// #[no_mangle]
+// pub unsafe extern "C" fn new(x: *mut *mut Vec<u8>) {
+//     let v = Box::new(Vec::new());
+//     *x = Box::into_raw(v);
+// }
 
 #[no_mangle]
 pub unsafe extern "C" fn unsafe_return_string() -> *const u8 {
-todo!();
+    todo!();
 }
 
 #[no_mangle]
@@ -53,6 +51,23 @@ pub unsafe extern "C" fn unsafe_return_string2() -> *const u8 {
 #[no_mangle]
 pub extern "C" fn unsafe_destroy_string(s: *mut String) {
     unsafe { Box::from_raw(s) };
+}
+
+#[no_mangle]
+pub extern "C" fn create_context() -> *mut Context {
+    let ctx = Box::new(Context { foo: true });
+    Box::into_raw(ctx)
+}
+
+#[no_mangle]
+pub extern "C" fn delete_context(context: *mut Context) {
+    unsafe { Box::from_raw(context) };
+}
+
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct Context {
+    pub foo: bool,
 }
 
 #[test]

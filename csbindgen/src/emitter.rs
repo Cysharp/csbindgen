@@ -154,20 +154,22 @@ pub fn emit_csharp(
 
         structs_string
             .push_str_ln(format!("    [StructLayout(LayoutKind.{layout_kind})]").as_str());
-        structs_string.push_str_ln(format!("    public unsafe struct {name}").as_str());
+        structs_string.push_str_ln(format!("    {accessibility} unsafe struct {name}").as_str());
         structs_string.push_str_ln("    {");
         for field in &item.fields {
             if item.is_union {
                 structs_string.push_str_ln("        [FieldOffset(0)]");
             }
-            structs_string.push_str(
-                format!(
-                    "        public {} {}",
-                    field.rust_type.to_csharp_string(options, aliases),
-                    field.name
-                )
-                .as_str(),
-            );
+
+            let type_name = field.rust_type.to_csharp_string(options, aliases);
+            let attr = if type_name == "bool" {
+                "[MarshalAs(UnmanagedType.U1)] ".to_string()
+            } else {
+                "".to_string()
+            };
+
+            structs_string
+                .push_str(format!("        {}public {} {}", attr, type_name, field.name).as_str());
             if field.rust_type.is_fixed_array {
                 let mut digits = field.rust_type.fixed_array_digits.clone();
                 if digits == "0" {
