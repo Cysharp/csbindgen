@@ -1,5 +1,7 @@
 use crate::{builder::BindgenOptions, type_meta::*};
-use std::collections::{HashMap, HashSet};
+use std::{
+    collections::{HashMap, HashSet},
+};
 use syn::{ForeignItem, Item, Pat, ReturnType};
 
 enum FnItem {
@@ -65,7 +67,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
             }
 
             let rust_type = parse_type(&t.ty);
-            if  rust_type.type_name.is_empty(){
+            if rust_type.type_name.is_empty() {
                 println!("Csbindgen can't handle this parameter type so ignore generate, method_name: {} parameter_name: {}", method_name, parameter_name);
                 return None;
             }
@@ -81,7 +83,10 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     if let ReturnType::Type(_, b) = &sig.output {
         let rust_type = parse_type(b);
         if rust_type.type_name.is_empty() {
-            println!("Csbindgen can't handle this return type so ignore generate, method_name: {}", method_name);
+            println!(
+                "Csbindgen can't handle this return type so ignore generate, method_name: {}",
+                method_name
+            );
             return None;
         }
 
@@ -114,14 +119,9 @@ pub fn collect_type_alias(ast: &syn::File) -> Vec<(String, RustType)> {
                     result.push((
                         name,
                         RustType {
-                            is_const: false,
-                            is_fixed_array: false,
-                            is_mut: false,
-                            is_pointer: false,
-                            is_pointer_pointer: false,
-                            fixed_array_digits: "".to_string(),
                             type_name: alias.to_string(),
-                        },
+                            type_kind: TypeKind::Normal
+                        }
                     ));
                 }
             }
@@ -209,59 +209,62 @@ pub fn reduce_struct(structs: &Vec<RustStruct>, using_types: &HashSet<String>) -
 }
 
 fn parse_type(t: &syn::Type) -> RustType {
-    let mut has_star = false;
-    let mut has_star_star = false;
-    let mut has_const = false;
-    let mut has_mut = false;
-    let mut digits: String = "".to_string();
-
-    let name = match t {
+    match t {
         syn::Type::Ptr(t) => {
-            has_star = true;
-            has_const = t.const_token.is_some();
-            has_mut = t.mutability.is_some();
+            let has_const = t.const_token.is_some();
+            // let has_mut = t.mutability.is_some();
 
             if let syn::Type::Path(path) = &*t.elem {
-                path.path.segments.last().unwrap().ident.to_string()
+                return RustType {
+                    type_name: path.path.segments.last().unwrap().ident.to_string(),
+                    type_kind: TypeKind::Pointer(if has_const { PointerType::ConstPointer } else { PointerType::MutPointer })
+                };
             } else if let syn::Type::Ptr(t) = &*t.elem {
-                has_star = false;
-                has_star_star = true;
                 if let syn::Type::Path(path) = &*t.elem {
-                    path.path.segments.last().unwrap().ident.to_string()
-                } else {
-                    "".to_string()
+                    return RustType {
+                        type_name: path.path.segments.last().unwrap().ident.to_string(),
+                        type_kind: TypeKind::Pointer(if has_const { PointerType::ConstPointerPointer } else { PointerType::MutPointerPointer })
+                    };
                 }
-            } else {
-                "".to_string()
-            }
+            } 
         }
-        syn::Type::Path(t) => t.path.segments.last().unwrap().ident.to_string(),
+        syn::Type::Path(t) => {
+             return RustType{
+                type_name:t.path.segments.last().unwrap().ident.to_string(),
+                type_kind: TypeKind::Normal
+             }
+        }
         syn::Type::Array(t) => {
+            let mut digits = "".to_string();
             if let syn::Expr::Lit(x) = &t.len {
                 if let syn::Lit::Int(x) = &x.lit {
                     digits = x.base10_digits().to_string();
                 }
             };
 
-            parse_type(&t.elem).type_name // maybe ok, only retrieve type_name
+            let type_name = parse_type(&t.elem).type_name; // maybe ok, only retrieve type_name
+            return RustType {
+                type_name,
+                type_kind: TypeKind::FixedArray(digits, None),
+            };
         }
         syn::Type::Tuple(t) => {
             if t.elems.len() == 0 {
-                "()".to_string()
-            } else {
-                "".to_string()
-            }
+                return RustType {
+                    type_name: "()".to_string(),
+                    type_kind: TypeKind::Normal,
+                };
+            };
         }
-        _ => "".to_string(),
+        syn::Type::BareFn(_) => {
+            //todo!();
+        }
+        _ => {}
     };
 
+    // type_name = "" will ignore in collect method
     RustType {
-        is_const: has_const,
-        is_mut: has_mut,
-        is_pointer: has_star,
-        is_pointer_pointer: has_star_star,
-        is_fixed_array: !digits.is_empty(),
-        type_name: name,
-        fixed_array_digits: digits,
+        type_name: "".to_string(),
+        type_kind: TypeKind::Normal,
     }
 }

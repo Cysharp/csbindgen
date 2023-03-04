@@ -17,6 +17,15 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "my_add", CallingConvention = CallingConvention.Cdecl)]
         public static extern int my_add(int x, int y);
 
+        [DllImport(__DllName, EntryPoint = "create_counter_context", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void* create_counter_context();
+
+        [DllImport(__DllName, EntryPoint = "insert_counter_context", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void insert_counter_context(void* context, int value);
+
+        [DllImport(__DllName, EntryPoint = "delete_counter_context", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void delete_counter_context(void* context);
+
         [DllImport(__DllName, EntryPoint = "my_bool", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.U1)]
         public static extern bool my_bool([MarshalAs(UnmanagedType.U1)] bool x, [MarshalAs(UnmanagedType.U1)] bool y, [MarshalAs(UnmanagedType.U1)] bool z, bool* xr, bool* yr, bool* zr);

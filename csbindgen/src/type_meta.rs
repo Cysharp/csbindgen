@@ -41,54 +41,49 @@ pub struct ExternMethod {
     pub return_type: Option<RustType>,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+#[derive(Clone, Debug)]
 pub struct RustType {
     pub type_name: String,
-    pub is_pointer: bool,
-    pub is_pointer_pointer: bool,
-    pub is_const: bool,
-    pub is_mut: bool,
-    pub is_fixed_array: bool,
-    pub fixed_array_digits: String,
+    pub type_kind: TypeKind,
+}
+
+#[derive(Clone, Debug)]
+pub enum TypeKind {
+    Normal,
+    Pointer(PointerType),
+    FixedArray(String, Option<PointerType>),        // digits
+    Function(Vec<RustType>, Option<Box<RustType>>), // parameter, return
+}
+
+#[derive(Clone, Debug)]
+pub enum PointerType {
+    ConstPointer,
+    MutPointer,
+    ConstPointerPointer,
+    MutPointerPointer,
 }
 
 #[derive(Clone, Debug)]
 pub struct RustStruct {
     pub struct_name: String,
     pub fields: Vec<FieldMember>,
-    pub is_union: bool
+    pub is_union: bool,
 }
 
 impl RustType {
     pub fn to_string(&self, type_path: &str) -> String {
         let mut sb = String::new();
 
-        if self.is_pointer || self.is_pointer_pointer {
-            sb.push('*');
-        }
-        if self.is_const {
-            sb.push_str("const");
-        }
-        if self.is_mut {
-            sb.push_str("mut");
-        }
-        if self.is_pointer_pointer {
-            if self.is_const {
-                sb.push_str(" *const");
-            } else {
-                sb.push_str(" *mut");
-            }
+        fn emit_pointer(sb: &mut String, p: &PointerType) {
+            match p {
+                ConstPointer => sb.push_str("*const"),
+                MutPointer => sb.push_str("*mut"),
+                ConstPointerPointer => sb.push_str("*const *const"),
+                MutPointerPointer => sb.push_str("*mut *mut"),
+            };
         }
 
-        sb.push(' ');
-
-        if self.is_fixed_array {
-            sb.push('[');
-            sb.push_str(self.type_name.as_str());
-            sb.push_str("; ");
-            sb.push_str(self.fixed_array_digits.as_str());
-            sb.push(']');
-        } else {
+        let emit_type_name = |sb: &mut String| {
             if !(self.type_name.starts_with("c_")
                 || self.type_name == "usize"
                 || self.type_name == "isize"
@@ -98,7 +93,35 @@ impl RustType {
                 sb.push_str("::");
             }
             sb.push_str(self.type_name.as_str());
-        }
+        };
+
+        use PointerType::*;
+        use TypeKind::*;
+        match &self.type_kind {
+            Normal => {
+                emit_type_name(&mut sb);
+            }
+            Pointer(p) => {
+                emit_pointer(&mut sb, p);
+                sb.push(' ');
+                emit_type_name(&mut sb);
+            }
+            FixedArray(digits, pointer) => {
+                if let Some(p) = pointer {
+                    emit_pointer(&mut sb, p);
+                    sb.push(' ');
+                }
+
+                sb.push('[');
+                emit_type_name(&mut sb);
+                sb.push_str("; ");
+                sb.push_str(digits.as_str());
+                sb.push(']');
+            }
+            Function(x, y) => {
+                todo!();
+            }
+        };
 
         sb
     }
@@ -157,36 +180,48 @@ impl RustType {
 
         let mut sb = String::new();
 
-        if self.is_fixed_array {
-            sb.push_str("fixed ");
+        match self.type_kind {
+            TypeKind::FixedArray(_, _) => {
+                sb.push_str("fixed ");
 
-            let type_name = convert_type_name(use_type.type_name.as_str(), options);
-            let type_name = match type_name.as_str() {
-                // C# fixed allow types
-                "bool" | "byte" | "short" | "int" | "long" | "char" | "sbyte" | "ushort"
-                | "uint" | "ulong" | "float" | "double" => type_name,
-                _ => format!("byte/* {}, this length is invalid so must keep pointer and can't edit from C# */", type_name)
-            };
+                let type_name = convert_type_name(use_type.type_name.as_str(), options);
+                let type_name = match type_name.as_str() {
+                    // C# fixed allow types
+                    "bool" | "byte" | "short" | "int" | "long" | "char" | "sbyte" | "ushort"
+                    | "uint" | "ulong" | "float" | "double" => type_name,
+                    _ => format!("byte/* {}, this length is invalid so must keep pointer and can't edit from C# */", type_name)
+                };
 
-            sb.push_str(type_name.as_str());
-        } else {
-            sb.push_str(convert_type_name(use_type.type_name.as_str(), options).as_str());
-            if use_alias {
-                if use_type.is_pointer {
-                    sb.push('*');
+                sb.push_str(type_name.as_str());
+            }
+            _ => {
+                sb.push_str(convert_type_name(use_type.type_name.as_str(), options).as_str());
+
+                if use_alias {
+                    if let TypeKind::Pointer(p) = &use_type.type_kind {
+                        match p {
+                            PointerType::MutPointer | PointerType::ConstPointer => {
+                                sb.push('*');
+                            }
+                            PointerType::MutPointerPointer | PointerType::ConstPointerPointer => {
+                                sb.push_str("**");
+                            }
+                        }
+                    }
                 }
-                if use_type.is_pointer_pointer {
-                    sb.push_str("**");
+
+                if let TypeKind::Pointer(p) = &self.type_kind {
+                    match p {
+                        PointerType::MutPointer | PointerType::ConstPointer => {
+                            sb.push('*');
+                        }
+                        PointerType::MutPointerPointer | PointerType::ConstPointerPointer => {
+                            sb.push_str("**");
+                        }
+                    }
                 }
             }
-
-            if self.is_pointer {
-                sb.push('*');
-            }
-            if self.is_pointer_pointer {
-                sb.push_str("**");
-            }
-        }
+        };
 
         sb
     }

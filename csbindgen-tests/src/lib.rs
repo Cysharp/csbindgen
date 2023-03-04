@@ -1,4 +1,7 @@
-use std::ffi::{c_char, CString};
+use std::{
+    collections::HashSet,
+    ffi::{c_char, c_void, CString},
+};
 
 #[allow(dead_code)]
 #[allow(non_snake_case)]
@@ -11,8 +14,6 @@ mod lz4;
 #[allow(non_camel_case_types)]
 mod lz4_ffi;
 
-
-
 #[no_mangle]
 #[allow(improper_ctypes_definitions)]
 pub extern "C" fn ignore_nop() -> (i32, i32) {
@@ -20,16 +21,48 @@ pub extern "C" fn ignore_nop() -> (i32, i32) {
     (1, 2)
 }
 
-
 #[no_mangle]
 pub extern "C" fn nop() -> () {
     println!("hello nop!");
 }
 
-
 #[no_mangle]
 pub extern "C" fn my_add(x: i32, y: i32) -> i32 {
     x + y
+}
+
+#[no_mangle]
+pub extern "C" fn callback_test(cb: extern fn(a: i32) -> i32) -> i32 {
+    // Fn
+    cb(100)
+}
+
+#[no_mangle]
+pub extern "C" fn create_counter_context() -> *mut c_void {
+    let ctx = Box::new(CounterContext {
+        set: HashSet::new(),
+    });
+    Box::into_raw(ctx) as *mut c_void
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn insert_counter_context(context: *mut c_void, value: i32) {
+    let mut counter = Box::from_raw(context as *mut CounterContext);
+    counter.set.insert(value);
+    Box::into_raw(counter);
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn delete_counter_context(context: *mut c_void) {
+    let counter = Box::from_raw(context as *mut CounterContext);
+    for value in counter.set.iter() {
+        println!("counter value: {}", value)
+    }
+}
+
+#[repr(C)]
+pub struct CounterContext {
+    pub set: HashSet<i32>,
 }
 
 #[no_mangle]
@@ -114,7 +147,6 @@ pub extern "C" fn delete_context(context: *mut Context) {
     unsafe { Box::from_raw(context) };
 }
 
-
 #[no_mangle]
 pub extern "C" fn call_bindgen() {
     let path = std::env::current_dir().unwrap();
@@ -143,7 +175,6 @@ fn build_test() {
     // //     let num = lz4::LZ4_versionNumber();
     // //     println!("lz4 num: {}", num);
     // // }
-
 
     csbindgen::Builder::default()
         .input_extern_file("csbindgen-tests/src/lib.rs")

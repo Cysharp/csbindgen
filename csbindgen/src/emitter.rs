@@ -170,8 +170,8 @@ pub fn emit_csharp(
 
             structs_string
                 .push_str(format!("        {}public {} {}", attr, type_name, field.name).as_str());
-            if field.rust_type.is_fixed_array {
-                let mut digits = field.rust_type.fixed_array_digits.clone();
+            if let TypeKind::FixedArray(digits, _) = &field.rust_type.type_kind  {
+                let mut digits = digits.clone();
                 if digits == "0" {
                     digits = "1".to_string(); // 0 fixed array is not allowed in C#
                 };

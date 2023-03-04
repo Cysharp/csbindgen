@@ -13,47 +13,54 @@ using System.Text;
 
 unsafe
 {
-    LibRust.call_bindgen();
-    
+    // LibRust.call_bindgen();
 
 
-    var cString = LibRust.alloc_c_string();
-    var u8String = LibRust.alloc_u8_string();
-    var u8Buffer = LibRust.alloc_u8_buffer();
-    var i32Buffer = LibRust.alloc_i32_buffer();
-    try
-    {
-        var str = new String((sbyte*)cString);
-        Console.WriteLine(str);
+    var ctx = LibRust.create_counter_context();
+    LibRust.insert_counter_context(ctx, 10);
+    LibRust.insert_counter_context(ctx, 20);
+    LibRust.insert_counter_context(ctx, 20);
+    LibRust.insert_counter_context(ctx, 30);
+    LibRust.insert_counter_context(ctx, 99);
+    LibRust.delete_counter_context(ctx);
 
-        Console.WriteLine("----");
+    //var cString = LibRust.alloc_c_string();
+    //var u8String = LibRust.alloc_u8_string();
+    //var u8Buffer = LibRust.alloc_u8_buffer();
+    //var i32Buffer = LibRust.alloc_i32_buffer();
+    //try
+    //{
+    //    var str = new String((sbyte*)cString);
+    //    Console.WriteLine(str);
 
-        var str2 = Encoding.UTF8.GetString(u8String->AsSpan());
-        Console.WriteLine(str2);
+    //    Console.WriteLine("----");
 
-        Console.WriteLine("----");
+    //    var str2 = Encoding.UTF8.GetString(u8String->AsSpan());
+    //    Console.WriteLine(str2);
 
-        var buffer3 = u8Buffer->AsSpan();
-        foreach (var item in buffer3)
-        {
-            Console.WriteLine(item);
-        }
+    //    Console.WriteLine("----");
 
-        Console.WriteLine("----");
+    //    var buffer3 = u8Buffer->AsSpan();
+    //    foreach (var item in buffer3)
+    //    {
+    //        Console.WriteLine(item);
+    //    }
 
-        var i32Span = i32Buffer->AsSpan<int>();
-        foreach (var item in i32Span)
-        {
-            Console.WriteLine(item);
-        }
-    }
-    finally
-    {
-        LibRust.free_c_string(cString);
-        LibRust.free_u8_string(u8String);
-        LibRust.free_u8_buffer(u8Buffer);
-        LibRust.free_i32_buffer(i32Buffer);
-    }
+    //    Console.WriteLine("----");
+
+    //    var i32Span = i32Buffer->AsSpan<int>();
+    //    foreach (var item in i32Span)
+    //    {
+    //        Console.WriteLine(item);
+    //    }
+    //}
+    //finally
+    //{
+    //    LibRust.free_c_string(cString);
+    //    LibRust.free_u8_string(u8String);
+    //    LibRust.free_u8_buffer(u8Buffer);
+    //    LibRust.free_i32_buffer(i32Buffer);
+    //}
 
 
     //var buf = LibRust.return_raw_buffer();
