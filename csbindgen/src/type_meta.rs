@@ -56,7 +56,7 @@ pub struct RustType {
 pub struct RustStruct {
     pub struct_name: String,
     pub fields: Vec<FieldMember>,
-    pub is_union: bool,
+    pub is_union: bool
 }
 
 impl RustType {

@@ -42,7 +42,7 @@ fn main() {
 
     csbindgen::Builder::default()
         .input_bindgen_file("src/lz4.rs")
-        .method_filter(|x| { x.starts_with("LZ4")} )
+        .method_filter(|x| x.starts_with("LZ4"))
         .rust_method_prefix("csbindgen_")
         .rust_file_header("use super::lz4;")
         .rust_method_type_path("lz4")

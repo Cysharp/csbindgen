@@ -13,26 +13,74 @@ using System.Text;
 
 unsafe
 {
-    var a = false;
-    var b = false;
-    var c = false;
-    Console.WriteLine(Encoding.Default);
+    LibRust.call_bindgen();
+    
 
 
-    var p = LibRust.unsafe_return_string();
+    var cString = LibRust.alloc_c_string();
+    var u8String = LibRust.alloc_u8_string();
+    var u8Buffer = LibRust.alloc_u8_buffer();
+    var i32Buffer = LibRust.alloc_i32_buffer();
+    try
+    {
+        var str = new String((sbyte*)cString);
+        Console.WriteLine(str);
 
-    var s = Encoding.UTF8.GetString(p, 5);
-    Console.WriteLine(s);
+        Console.WriteLine("----");
+
+        var str2 = Encoding.UTF8.GetString(u8String->AsSpan());
+        Console.WriteLine(str2);
+
+        Console.WriteLine("----");
+
+        var buffer3 = u8Buffer->AsSpan();
+        foreach (var item in buffer3)
+        {
+            Console.WriteLine(item);
+        }
+
+        Console.WriteLine("----");
+
+        var i32Span = i32Buffer->AsSpan<int>();
+        foreach (var item in i32Span)
+        {
+            Console.WriteLine(item);
+        }
+    }
+    finally
+    {
+        LibRust.free_c_string(cString);
+        LibRust.free_u8_string(u8String);
+        LibRust.free_u8_buffer(u8Buffer);
+        LibRust.free_i32_buffer(i32Buffer);
+    }
+
+
+    //var buf = LibRust.return_raw_buffer();
+    //try
+    //{
+
+    //    var span = buf->AsSpan();
 
 
 
-    var z = LibRust.my_bool(true, false, true, &a, &b, &c);
 
 
-    Console.WriteLine(a);
-    Console.WriteLine(b);
-    Console.WriteLine(c);
-    Console.WriteLine(z);
+    //    var str = Encoding.UTF8.GetString(span);
+    //    Console.WriteLine(str);
+
+    //    //foreach (var item in span)
+    //    //{
+    //    //    Console.WriteLine(item);
+    //    //}
+
+    //}
+    //finally
+    //{
+    //    LibRust.delete_raw_buffer(buf);
+    //}
+
+
 
 }
 
@@ -55,4 +103,20 @@ public static unsafe partial class LibraryImportNativeMethods
 public struct Foo
 {
     [MarshalAs(UnmanagedType.U1)] public bool A;
+}
+
+namespace CsBindgen
+{
+    partial struct ByteBuffer
+    {
+        public unsafe Span<byte> AsSpan()
+        {
+            return new Span<byte>(ptr, length);
+        }
+
+        public unsafe Span<T> AsSpan<T>()
+        {
+            return MemoryMarshal.CreateSpan(ref Unsafe.AsRef<T>(ptr), length / Unsafe.SizeOf<T>());
+        }
+    }
 }

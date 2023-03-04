@@ -293,7 +293,7 @@ namespace CsBindgen
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct LZ4_stream_t_internal
+    public unsafe partial struct LZ4_stream_t_internal
     {
         public fixed uint hashTable[4096];
         public byte* dictionary;
@@ -304,7 +304,7 @@ namespace CsBindgen
     }
 
     [StructLayout(LayoutKind.Explicit)]
-    public unsafe struct LZ4_stream_u
+    public unsafe partial struct LZ4_stream_u
     {
         [FieldOffset(0)]
         public fixed byte minStateSize[16416];
@@ -313,7 +313,7 @@ namespace CsBindgen
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct LZ4_streamDecode_t_internal
+    public unsafe partial struct LZ4_streamDecode_t_internal
     {
         public byte* externalDict;
         public byte* prefixEnd;
@@ -322,7 +322,7 @@ namespace CsBindgen
     }
 
     [StructLayout(LayoutKind.Explicit)]
-    public unsafe struct LZ4_streamDecode_u
+    public unsafe partial struct LZ4_streamDecode_u
     {
         [FieldOffset(0)]
         public fixed byte minStateSize[32];
@@ -331,7 +331,7 @@ namespace CsBindgen
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct LZ4HC_CCtx_internal
+    public unsafe partial struct LZ4HC_CCtx_internal
     {
         public fixed uint hashTable[32768];
         public fixed ushort chainTable[65536];
@@ -348,7 +348,7 @@ namespace CsBindgen
     }
 
     [StructLayout(LayoutKind.Explicit)]
-    public unsafe struct LZ4_streamHC_u
+    public unsafe partial struct LZ4_streamHC_u
     {
         [FieldOffset(0)]
         public fixed byte minStateSize[262200];
@@ -357,7 +357,7 @@ namespace CsBindgen
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct LZ4F_frameInfo_t
+    public unsafe partial struct LZ4F_frameInfo_t
     {
         public int blockSizeID;
         public int blockMode;
@@ -369,7 +369,7 @@ namespace CsBindgen
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct LZ4F_preferences_t
+    public unsafe partial struct LZ4F_preferences_t
     {
         public LZ4F_frameInfo_t frameInfo;
         public int compressionLevel;
@@ -379,26 +379,26 @@ namespace CsBindgen
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct LZ4F_cctx_s
+    public unsafe partial struct LZ4F_cctx_s
     {
         public fixed byte _unused[1];
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct LZ4F_compressOptions_t
+    public unsafe partial struct LZ4F_compressOptions_t
     {
         public uint stableSrc;
         public fixed uint reserved[3];
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct LZ4F_dctx_s
+    public unsafe partial struct LZ4F_dctx_s
     {
         public fixed byte _unused[1];
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    public unsafe struct LZ4F_decompressOptions_t
+    public unsafe partial struct LZ4F_decompressOptions_t
     {
         public uint stableDst;
         public uint skipChecksums;

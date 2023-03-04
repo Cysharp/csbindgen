@@ -154,7 +154,7 @@ pub fn emit_csharp(
 
         structs_string
             .push_str_ln(format!("    [StructLayout(LayoutKind.{layout_kind})]").as_str());
-        structs_string.push_str_ln(format!("    {accessibility} unsafe struct {name}").as_str());
+        structs_string.push_str_ln(format!("    {accessibility} unsafe partial struct {name}").as_str());
         structs_string.push_str_ln("    {");
         for field in &item.fields {
             if item.is_union {

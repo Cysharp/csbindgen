@@ -1,3 +1,5 @@
+use std::ffi::{c_char, CString};
+
 #[allow(dead_code)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
@@ -8,6 +10,22 @@ mod lz4;
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
 mod lz4_ffi;
+
+
+
+#[no_mangle]
+#[allow(improper_ctypes_definitions)]
+pub extern "C" fn ignore_nop() -> (i32, i32) {
+    println!("hello ignore!");
+    (1, 2)
+}
+
+
+#[no_mangle]
+pub extern "C" fn nop() -> () {
+    println!("hello nop!");
+}
+
 
 #[no_mangle]
 pub extern "C" fn my_add(x: i32, y: i32) -> i32 {
@@ -32,25 +50,57 @@ pub extern "C" fn my_bool(
     true
 }
 
-// #[no_mangle]
-// pub unsafe extern "C" fn new(x: *mut *mut Vec<u8>) {
-//     let v = Box::new(Vec::new());
-//     *x = Box::into_raw(v);
-// }
-
 #[no_mangle]
-pub unsafe extern "C" fn unsafe_return_string() -> *const u8 {
-    todo!();
+pub extern "C" fn alloc_c_string() -> *mut c_char {
+    let str = CString::new("foo bar baz").unwrap();
+    str.into_raw()
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn unsafe_return_string2() -> *const u8 {
-    todo!();
+pub extern "C" fn free_c_string(str: *mut c_char) {
+    unsafe { CString::from_raw(str) };
 }
 
 #[no_mangle]
-pub extern "C" fn unsafe_destroy_string(s: *mut String) {
-    unsafe { Box::from_raw(s) };
+pub extern "C" fn alloc_u8_string() -> *mut ByteBuffer {
+    let str = format!("foo bar baz");
+    let buf = ByteBuffer::from_vec(str.into_bytes());
+    Box::into_raw(Box::new(buf))
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn free_u8_string(buffer: *mut ByteBuffer) {
+    let buf = Box::from_raw(buffer);
+    // drop inner buffer, if you need String, use String::from_utf8_unchecked(buf.destroy_into_vec()) instead.
+    buf.destroy();
+}
+
+#[no_mangle]
+pub extern "C" fn alloc_u8_buffer() -> *mut ByteBuffer {
+    let vec: Vec<u8> = vec![1, 10, 100];
+    let buf = ByteBuffer::from_vec(vec);
+    Box::into_raw(Box::new(buf))
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn free_u8_buffer(buffer: *mut ByteBuffer) {
+    let buf = Box::from_raw(buffer);
+    // drop inner buffer, if you need Vec<u8>, use buf.destroy_into_vec() instead.
+    buf.destroy();
+}
+
+#[no_mangle]
+pub extern "C" fn alloc_i32_buffer() -> *mut ByteBuffer {
+    let vec: Vec<i32> = vec![1, 10, 100, 1000, 10000];
+    let buf = ByteBuffer::from_vec_struct(vec);
+    Box::into_raw(Box::new(buf))
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn free_i32_buffer(buffer: *mut ByteBuffer) {
+    let buf = Box::from_raw(buffer);
+    // drop inner buffer, if you need Vec<i32>, use buf.destroy_into_vec_struct::<i32>() instead.
+    buf.destroy();
 }
 
 #[no_mangle]
@@ -64,6 +114,20 @@ pub extern "C" fn delete_context(context: *mut Context) {
     unsafe { Box::from_raw(context) };
 }
 
+
+#[no_mangle]
+pub extern "C" fn call_bindgen() {
+    let path = std::env::current_dir().unwrap();
+    println!("starting dir: {}", path.display()); // csbindgen/csbindgen-tests
+
+    csbindgen::Builder::default()
+        .input_extern_file("../../../../csbindgen-tests/src/lib.rs")
+        .csharp_class_name("LibRust")
+        .csharp_dll_name("csbindgen_tests")
+        .generate_csharp_file("../../../../dotnet-sandbox/method_call.cs")
+        .unwrap();
+}
+
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Context {
@@ -72,24 +136,97 @@ pub struct Context {
 
 #[test]
 fn build_test() {
-    // let path = std::env::current_dir().unwrap();
-    // println!("starting dir: {}", path.display()); // csbindgen/csbindgen-tests
+    let path = std::env::current_dir().unwrap();
+    println!("starting dir: {}", path.display()); // csbindgen/csbindgen-tests
 
     // // unsafe {
     // //     let num = lz4::LZ4_versionNumber();
     // //     println!("lz4 num: {}", num);
     // // }
 
-    // csbindgen::Builder::default()
-    //     .input_bindgen_file("src/lz4.rs")
-    //     .rust_method_prefix("csbindgen_")
-    //     .rust_file_header("use super::lz4;")
-    //     .rust_method_type_path("lz4")
-    //     .csharp_class_name("LibLz4")
-    //     .csharp_dll_name("csbindgen_tests")
-    //     .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal")
-    //     .csharp_entry_point_prefix("csbindgen_")
-    //     .csharp_method_prefix("")
-    //     .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs")
-    //     .unwrap();
+
+    csbindgen::Builder::default()
+        .input_extern_file("csbindgen-tests/src/lib.rs")
+        .csharp_class_name("LibRust")
+        .csharp_dll_name("csbindgen_tests")
+        .generate_csharp_file("dotnet-sandbox/method_call.cs")
+        .unwrap();
+}
+
+#[repr(C)]
+pub struct ByteBuffer {
+    ptr: *mut u8,
+    length: i32,
+    capacity: i32,
+}
+
+impl ByteBuffer {
+    pub fn len(&self) -> usize {
+        self.length
+            .try_into()
+            .expect("buffer length negative or overflowed")
+    }
+
+    pub fn from_vec(bytes: Vec<u8>) -> Self {
+        let length = i32::try_from(bytes.len()).expect("buffer length cannot fit into a i32.");
+        let capacity =
+            i32::try_from(bytes.capacity()).expect("buffer capacity cannot fit into a i32.");
+
+        // keep memory until call delete
+        let mut v = std::mem::ManuallyDrop::new(bytes);
+
+        Self {
+            ptr: v.as_mut_ptr(),
+            length,
+            capacity,
+        }
+    }
+
+    pub fn from_vec_struct<T: Sized>(bytes: Vec<T>) -> Self {
+        let element_size = std::mem::size_of::<T>() as i32;
+
+        let length = (bytes.len() as i32) * element_size;
+        let capacity = (bytes.capacity() as i32) * element_size;
+
+        let mut v = std::mem::ManuallyDrop::new(bytes);
+
+        Self {
+            ptr: v.as_mut_ptr() as *mut u8,
+            length,
+            capacity,
+        }
+    }
+
+    pub fn destroy_into_vec(self) -> Vec<u8> {
+        if self.ptr.is_null() {
+            vec![]
+        } else {
+            let capacity: usize = self
+                .capacity
+                .try_into()
+                .expect("buffer capacity negative or overflowed");
+            let length: usize = self
+                .length
+                .try_into()
+                .expect("buffer length negative or overflowed");
+
+            unsafe { Vec::from_raw_parts(self.ptr, length, capacity) }
+        }
+    }
+
+    pub fn destroy_into_vec_struct<T: Sized>(self) -> Vec<T> {
+        if self.ptr.is_null() {
+            vec![]
+        } else {
+            let element_size = std::mem::size_of::<T>() as i32;
+            let length = (self.length * element_size) as usize;
+            let capacity = (self.capacity * element_size) as usize;
+
+            unsafe { Vec::from_raw_parts(self.ptr as *mut T, length, capacity) }
+        }
+    }
+
+    pub fn destroy(self) {
+        drop(self.destroy_into_vec());
+    }
 }

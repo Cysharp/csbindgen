@@ -31,7 +31,8 @@ pub fn collect_extern_method(ast: &syn::File, options: &BindgenOptions) -> Vec<E
 
     for item in ast.items.iter() {
         if let Item::Fn(m) = item {
-            if let Some(_) = &m.sig.abi { // has extern
+            if let Some(_) = &m.sig.abi {
+                // has extern
                 let method = parse_method(FnItem::Item(m.clone()), options);
                 if let Some(x) = method {
                     list.push(x);
@@ -64,6 +65,10 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
             }
 
             let rust_type = parse_type(&t.ty);
+            if  rust_type.type_name.is_empty(){
+                println!("Csbindgen can't handle this parameter type so ignore generate, method_name: {} parameter_name: {}", method_name, parameter_name);
+                return None;
+            }
 
             parameters.push(Parameter {
                 name: parameter_name,
@@ -76,6 +81,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     if let ReturnType::Type(_, b) = &sig.output {
         let rust_type = parse_type(b);
         if rust_type.type_name.is_empty() {
+            println!("Csbindgen can't handle this return type so ignore generate, method_name: {}", method_name);
             return None;
         }
 
@@ -238,6 +244,13 @@ fn parse_type(t: &syn::Type) -> RustType {
             };
 
             parse_type(&t.elem).type_name // maybe ok, only retrieve type_name
+        }
+        syn::Type::Tuple(t) => {
+            if t.elems.len() == 0 {
+                "()".to_string()
+            } else {
+                "".to_string()
+            }
         }
         _ => "".to_string(),
     };

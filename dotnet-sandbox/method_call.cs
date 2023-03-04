@@ -11,6 +11,9 @@ namespace CsBindgen
     {
         const string __DllName = "csbindgen_tests";
 
+        [DllImport(__DllName, EntryPoint = "nop", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void nop();
+
         [DllImport(__DllName, EntryPoint = "my_add", CallingConvention = CallingConvention.Cdecl)]
         public static extern int my_add(int x, int y);
 
@@ -18,14 +21,29 @@ namespace CsBindgen
         [return: MarshalAs(UnmanagedType.U1)]
         public static extern bool my_bool([MarshalAs(UnmanagedType.U1)] bool x, [MarshalAs(UnmanagedType.U1)] bool y, [MarshalAs(UnmanagedType.U1)] bool z, bool* xr, bool* yr, bool* zr);
 
-        [DllImport(__DllName, EntryPoint = "unsafe_return_string", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* unsafe_return_string();
+        [DllImport(__DllName, EntryPoint = "alloc_c_string", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte* alloc_c_string();
 
-        [DllImport(__DllName, EntryPoint = "unsafe_return_string2", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte* unsafe_return_string2();
+        [DllImport(__DllName, EntryPoint = "free_c_string", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void free_c_string(byte* str);
 
-        [DllImport(__DllName, EntryPoint = "unsafe_destroy_string", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void unsafe_destroy_string(String* s);
+        [DllImport(__DllName, EntryPoint = "alloc_u8_string", CallingConvention = CallingConvention.Cdecl)]
+        public static extern ByteBuffer* alloc_u8_string();
+
+        [DllImport(__DllName, EntryPoint = "free_u8_string", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void free_u8_string(ByteBuffer* buffer);
+
+        [DllImport(__DllName, EntryPoint = "alloc_u8_buffer", CallingConvention = CallingConvention.Cdecl)]
+        public static extern ByteBuffer* alloc_u8_buffer();
+
+        [DllImport(__DllName, EntryPoint = "free_u8_buffer", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void free_u8_buffer(ByteBuffer* buffer);
+
+        [DllImport(__DllName, EntryPoint = "alloc_i32_buffer", CallingConvention = CallingConvention.Cdecl)]
+        public static extern ByteBuffer* alloc_i32_buffer();
+
+        [DllImport(__DllName, EntryPoint = "free_i32_buffer", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void free_i32_buffer(ByteBuffer* buffer);
 
         [DllImport(__DllName, EntryPoint = "create_context", CallingConvention = CallingConvention.Cdecl)]
         public static extern Context* create_context();
@@ -33,13 +51,24 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "delete_context", CallingConvention = CallingConvention.Cdecl)]
         public static extern void delete_context(Context* context);
 
+        [DllImport(__DllName, EntryPoint = "call_bindgen", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void call_bindgen();
+
 
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe struct Context
+    internal unsafe partial struct Context
     {
         [MarshalAs(UnmanagedType.U1)] public bool foo;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct ByteBuffer
+    {
+        public byte* ptr;
+        public int length;
+        public int capacity;
     }
 
     
