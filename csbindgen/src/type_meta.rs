@@ -111,6 +111,7 @@ impl RustType {
         fn convert_type_name(type_name: &str, options: &BindgenOptions) -> String {
             let name = match type_name {
                 // std::os::raw https://doc.rust-lang.org/std/os/raw/index.html
+                // std::ffi::raw https://doc.rust-lang.org/core/ffi/index.html
                 "c_char" => "byte",
                 "c_schar" => "sbyte",
                 "c_uchar" => "byte",
@@ -125,6 +126,7 @@ impl RustType {
                 "c_float" => "float",
                 "c_double" => "double",
                 "c_void" => "void",
+                "CString" => "sbyte",
                 // rust primitives
                 "i8" => "sbyte",
                 "i16" => "short",

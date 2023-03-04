@@ -39,22 +39,20 @@ pub fn emit_rust_method(list: &Vec<ExternMethod>, options: &BindgenOptions) -> S
         let parameter_only_names = item
             .parameters
             .iter()
-            .map(|p| format!("            {}", p.name))
+            .map(|p| format!("        {}", p.name))
             .collect::<Vec<_>>()
             .join(",\n");
 
         let template = format!(
             "
 #[no_mangle]
-pub extern \"C\" fn {method_prefix}{method_name}(
+pub unsafe extern \"C\" fn {method_prefix}{method_name}(
 {parameters}    
 ){return_line}
 {{
-    unsafe {{
-        return {method_type_path2}{method_name}(
+    {method_type_path2}{method_name}(
 {parameter_only_names}
-        )
-    }}
+    )
 }}
 "
         );

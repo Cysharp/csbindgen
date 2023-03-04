@@ -18,6 +18,15 @@ namespace CsBindgen
         [return: MarshalAs(UnmanagedType.U1)]
         public static extern bool my_bool([MarshalAs(UnmanagedType.U1)] bool x, [MarshalAs(UnmanagedType.U1)] bool y, [MarshalAs(UnmanagedType.U1)] bool z, bool* xr, bool* yr, bool* zr);
 
+        [DllImport(__DllName, EntryPoint = "unsafe_return_string", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte* unsafe_return_string();
+
+        [DllImport(__DllName, EntryPoint = "unsafe_return_string2", CallingConvention = CallingConvention.Cdecl)]
+        public static extern byte* unsafe_return_string2();
+
+        [DllImport(__DllName, EntryPoint = "unsafe_destroy_string", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void unsafe_destroy_string(String* s);
+
 
     }
 

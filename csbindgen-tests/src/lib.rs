@@ -1,3 +1,5 @@
+use std::io::Bytes;
+
 #[allow(dead_code)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
@@ -14,15 +16,43 @@ pub extern "C" fn my_add(x: i32, y: i32) -> i32 {
     x + y
 }
 
-#[allow(unused)]
 #[no_mangle]
-pub extern "C" fn my_bool(x: bool, y: bool, z: bool, xr: *mut bool, yr: *mut bool, zr: *mut bool) -> bool {
+pub extern "C" fn my_bool(
+    x: bool,
+    y: bool,
+    z: bool,
+    xr: *mut bool,
+    yr: *mut bool,
+    zr: *mut bool,
+) -> bool {
     unsafe {
         *xr = x;
         *yr = y;
         *zr = z;
-        true
     }
+
+    true
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn new(x: *mut *mut Vec<u8>) {
+    let v = Box::new(Vec::new());
+    *x = Box::into_raw(v);
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn unsafe_return_string() -> *const u8 {
+todo!();
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn unsafe_return_string2() -> *const u8 {
+    todo!();
+}
+
+#[no_mangle]
+pub extern "C" fn unsafe_destroy_string(s: *mut String) {
+    unsafe { Box::from_raw(s) };
 }
 
 #[test]
