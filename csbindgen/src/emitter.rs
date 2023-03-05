@@ -25,7 +25,7 @@ pub fn emit_rust_method(list: &Vec<ExternMethod>, options: &BindgenOptions) -> S
                 format!(
                     "    {}: {}",
                     p.name,
-                    p.rust_type.to_string(method_type_path)
+                    p.rust_type.to_rust_string(method_type_path)
                 )
             })
             .collect::<Vec<_>>()
@@ -33,7 +33,7 @@ pub fn emit_rust_method(list: &Vec<ExternMethod>, options: &BindgenOptions) -> S
 
         let return_line = match &item.return_type {
             None => "".to_string(),
-            Some(v) => format!(" -> {}", v.to_string(method_type_path)),
+            Some(v) => format!(" -> {}", v.to_rust_string(method_type_path)),
         };
 
         let parameter_only_names = item

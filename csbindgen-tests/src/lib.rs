@@ -15,6 +15,28 @@ mod lz4;
 mod lz4_ffi;
 
 #[no_mangle]
+pub extern "C" fn callback_test(cb: extern "C" fn(a: i32) -> i32) -> i32 {
+    cb(100)
+}
+
+#[no_mangle]
+pub extern "C" fn nullable_callback_test(cb: Option<extern "C" fn(a: i32) -> i32>) -> i32 {
+    match cb {
+        Some(f) => f(100),
+        None => -1,
+    }
+}
+
+#[no_mangle]
+pub extern "C" fn callback_test2() -> extern "C" fn(a: i32) -> i32 {
+    callback
+}
+
+extern "C" fn callback(a: i32) -> i32 {
+    a * a
+}
+
+#[no_mangle]
 #[allow(improper_ctypes_definitions)]
 pub extern "C" fn ignore_nop() -> (i32, i32) {
     println!("hello ignore!");
@@ -29,12 +51,6 @@ pub extern "C" fn nop() -> () {
 #[no_mangle]
 pub extern "C" fn my_add(x: i32, y: i32) -> i32 {
     x + y
-}
-
-#[no_mangle]
-pub extern "C" fn callback_test(cb: extern fn(a: i32) -> i32) -> i32 {
-    // Fn
-    cb(100)
 }
 
 #[no_mangle]

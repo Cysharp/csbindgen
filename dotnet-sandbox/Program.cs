@@ -13,16 +13,24 @@ using System.Text;
 
 unsafe
 {
-    // LibRust.call_bindgen();
+    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
+    static int Method(int x) => x * x;
+
+    var tako = LibRust.callback_test(&Method);
+
+    
+    var n = LibRust.nullable_callback_test(null);
+
+    Console.WriteLine(n);
 
 
-    var ctx = LibRust.create_counter_context();
-    LibRust.insert_counter_context(ctx, 10);
-    LibRust.insert_counter_context(ctx, 20);
-    LibRust.insert_counter_context(ctx, 20);
-    LibRust.insert_counter_context(ctx, 30);
-    LibRust.insert_counter_context(ctx, 99);
-    LibRust.delete_counter_context(ctx);
+    //var ctx = LibRust.create_counter_context();
+    //LibRust.insert_counter_context(ctx, 10);
+    //LibRust.insert_counter_context(ctx, 20);
+    //LibRust.insert_counter_context(ctx, 20);
+    //LibRust.insert_counter_context(ctx, 30);
+    //LibRust.insert_counter_context(ctx, 99);
+    //LibRust.delete_counter_context(ctx);
 
     //var cString = LibRust.alloc_c_string();
     //var u8String = LibRust.alloc_u8_string();

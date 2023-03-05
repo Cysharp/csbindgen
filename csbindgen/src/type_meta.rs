@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap};
 
 use crate::builder::BindgenOptions;
 
@@ -51,8 +51,9 @@ pub struct RustType {
 pub enum TypeKind {
     Normal,
     Pointer(PointerType),
-    FixedArray(String, Option<PointerType>),        // digits
-    Function(Vec<RustType>, Option<Box<RustType>>), // parameter, return
+    FixedArray(String, Option<PointerType>),         // digits
+    Function(Vec<Parameter>, Option<Box<RustType>>), // parameter, return
+    Option(Box<RustType>),
 }
 
 #[derive(Clone, Debug)]
@@ -71,7 +72,7 @@ pub struct RustStruct {
 }
 
 impl RustType {
-    pub fn to_string(&self, type_path: &str) -> String {
+    pub fn to_rust_string(&self, type_path: &str) -> String {
         let mut sb = String::new();
 
         fn emit_pointer(sb: &mut String, p: &PointerType) {
@@ -118,8 +119,25 @@ impl RustType {
                 sb.push_str(digits.as_str());
                 sb.push(']');
             }
-            Function(x, y) => {
-                todo!();
+            Function(parameters, return_type) => {
+                emit_type_name(&mut sb); // extern fn
+                sb.push('(');
+                let params = parameters
+                    .iter()
+                    .map(|x| format!("{}: {}", x.escape_name(), x.rust_type.to_rust_string(type_path)))
+                    .collect::<Vec<_>>()
+                    .join(", ");
+                sb.push_str(params.as_str());
+                sb.push(')');
+                if let Some(t) = return_type {
+                    sb.push_str(" -> ");
+                    sb.push_str(t.to_rust_string(type_path).as_str());
+                }
+            },
+            Option(inner) =>  {
+                sb.push_str("Option<");
+                sb.push_str(inner.to_rust_string(type_path).as_str());
+                sb.push('>');
             }
         };
 
@@ -180,7 +198,7 @@ impl RustType {
 
         let mut sb = String::new();
 
-        match self.type_kind {
+        match &self.type_kind {
             TypeKind::FixedArray(_, _) => {
                 sb.push_str("fixed ");
 
@@ -194,6 +212,27 @@ impl RustType {
 
                 sb.push_str(type_name.as_str());
             }
+            TypeKind::Function(parameters, return_type) => {
+                sb.push_str("delegate* unmanaged[Cdecl]");
+                sb.push('<');
+                for p in parameters {
+                    sb.push_str(&p.rust_type.to_csharp_string(options, alias_map));
+                    sb.push_str(", ");
+                }
+                match return_type {
+                    Some(x) => {
+                        sb.push_str(&x.to_csharp_string(options, alias_map));
+                    }
+                    None => {
+                        sb.push_str("void");
+                    }
+                };
+                sb.push('>');
+            },
+            TypeKind::Option(inner) =>{
+                // function pointer can not annotate ? so emit inner only
+                sb.push_str(inner.to_csharp_string(options, alias_map).as_str());
+            },
             _ => {
                 sb.push_str(convert_type_name(use_type.type_name.as_str(), options).as_str());
 
@@ -229,6 +268,6 @@ impl RustType {
 
 impl std::fmt::Display for RustType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.to_string(""))
+        write!(f, "{}", self.to_rust_string(""))
     }
 }

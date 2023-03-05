@@ -11,6 +11,18 @@ namespace CsBindgen
     {
         const string __DllName = "csbindgen_tests";
 
+        [DllImport(__DllName, EntryPoint = "callback_test", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int callback_test(delegate* unmanaged[Cdecl]<int, int> cb);
+
+        [DllImport(__DllName, EntryPoint = "nullable_callback_test", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int nullable_callback_test(delegate* unmanaged[Cdecl]<int, int> cb);
+
+        [DllImport(__DllName, EntryPoint = "callback_test2", CallingConvention = CallingConvention.Cdecl)]
+        public static extern delegate* unmanaged[Cdecl]<int, int> callback_test2();
+
+        [DllImport(__DllName, EntryPoint = "callback", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int callback(int a);
+
         [DllImport(__DllName, EntryPoint = "nop", CallingConvention = CallingConvention.Cdecl)]
         public static extern void nop();
 

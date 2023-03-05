@@ -1,8 +1,6 @@
 use crate::{builder::BindgenOptions, type_meta::*};
-use std::{
-    collections::{HashMap, HashSet},
-};
-use syn::{ForeignItem, Item, Pat, ReturnType};
+use std::collections::{HashMap, HashSet};
+use syn::{ForeignItem,  Item, Pat, ReturnType};
 
 enum FnItem {
     ForeignItem(syn::ForeignItemFn),
@@ -120,8 +118,8 @@ pub fn collect_type_alias(ast: &syn::File) -> Vec<(String, RustType)> {
                         name,
                         RustType {
                             type_name: alias.to_string(),
-                            type_kind: TypeKind::Normal
-                        }
+                            type_kind: TypeKind::Normal,
+                        },
                     ));
                 }
             }
@@ -217,22 +215,46 @@ fn parse_type(t: &syn::Type) -> RustType {
             if let syn::Type::Path(path) = &*t.elem {
                 return RustType {
                     type_name: path.path.segments.last().unwrap().ident.to_string(),
-                    type_kind: TypeKind::Pointer(if has_const { PointerType::ConstPointer } else { PointerType::MutPointer })
+                    type_kind: TypeKind::Pointer(if has_const {
+                        PointerType::ConstPointer
+                    } else {
+                        PointerType::MutPointer
+                    }),
                 };
             } else if let syn::Type::Ptr(t) = &*t.elem {
                 if let syn::Type::Path(path) = &*t.elem {
                     return RustType {
                         type_name: path.path.segments.last().unwrap().ident.to_string(),
-                        type_kind: TypeKind::Pointer(if has_const { PointerType::ConstPointerPointer } else { PointerType::MutPointerPointer })
+                        type_kind: TypeKind::Pointer(if has_const {
+                            PointerType::ConstPointerPointer
+                        } else {
+                            PointerType::MutPointerPointer
+                        }),
                     };
                 }
-            } 
+            }
         }
         syn::Type::Path(t) => {
-             return RustType{
-                type_name:t.path.segments.last().unwrap().ident.to_string(),
-                type_kind: TypeKind::Normal
-             }
+            let last_segment = t.path.segments.last().unwrap();
+            if let syn::PathArguments::AngleBracketed(x) = &last_segment.arguments {
+                // generics, only supports Option<> for null function pointer
+                if last_segment.ident.to_string() == "Option" {
+                    if let Some(x) = x.args.first() {
+                        if let syn::GenericArgument::Type(t) = x {
+                            let rust_type = parse_type(t);
+                            return RustType {
+                                type_name: "Option".to_string(),
+                                type_kind: TypeKind::Option(Box::new(rust_type)),
+                            };
+                        }
+                    }
+                }
+            } else {
+                return RustType {
+                    type_name: last_segment.ident.to_string(),
+                    type_kind: TypeKind::Normal,
+                };
+            }
         }
         syn::Type::Array(t) => {
             let mut digits = "".to_string();
@@ -256,8 +278,29 @@ fn parse_type(t: &syn::Type) -> RustType {
                 };
             };
         }
-        syn::Type::BareFn(_) => {
-            //todo!();
+        syn::Type::BareFn(t) => {
+            let mut parameters = Vec::new();
+
+            for arg in t.inputs.iter() {
+                let rust_type = parse_type(&arg.ty);
+
+                let name = if let Some((ident, _)) = &arg.name {
+                    ident.to_string()
+                } else {
+                    "".to_string()
+                };
+                parameters.push(Parameter { name, rust_type });
+            }
+
+            let ret = match &t.output {
+                syn::ReturnType::Default => None,
+                syn::ReturnType::Type(_, t) => Some(Box::new(parse_type(&t))),
+            };
+
+            return RustType {
+                type_name: "extern \"C\" fn".to_string(),
+                type_kind: TypeKind::Function(parameters, ret),
+            };
         }
         _ => {}
     };
