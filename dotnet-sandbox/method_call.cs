@@ -23,6 +23,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "callback", CallingConvention = CallingConvention.Cdecl)]
         public static extern int callback(int a);
 
+        [DllImport(__DllName, EntryPoint = "enum_test", CallingConvention = CallingConvention.Cdecl)]
+        public static extern int enum_test(IntEnumTest i);
+
         [DllImport(__DllName, EntryPoint = "nop", CallingConvention = CallingConvention.Cdecl)]
         public static extern void nop();
 
@@ -92,6 +95,14 @@ namespace CsBindgen
         public int capacity;
     }
 
-    
+
+    internal enum IntEnumTest : byte
+    {
+        A = 1,
+        B = 2,
+        C = 10,
+    }
+
+
 }
     

@@ -1,0 +1,5 @@
+{
+    "rust-analyzer.typing.autoClosingAngleBrackets.enable": false,
+    "editor.autoClosingQuotes": "never",
+    "editor.autoClosingBrackets": "never"
+}

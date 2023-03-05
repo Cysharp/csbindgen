@@ -1,4 +1,4 @@
-use std::{collections::HashMap};
+use std::collections::HashMap;
 
 use crate::builder::BindgenOptions;
 
@@ -37,8 +37,25 @@ pub struct FieldMember {
 #[derive(Clone, Debug)]
 pub struct ExternMethod {
     pub method_name: String,
+    pub doc_comment: Option<String>,
     pub parameters: Vec<Parameter>,
     pub return_type: Option<RustType>,
+}
+
+impl ExternMethod {
+    pub fn escape_doc_comment(&self) -> Option<String> {
+        match &self.doc_comment {
+            Some(x) => {
+                let s = x
+                    .trim_matches(&['=', ' ', '\"'] as &[_])
+                    .replace("\\n", "")
+                    .replace("<", "&lt;")
+                    .replace(">", "&gt;");
+                Some(s)
+            }
+            None => None,
+        }
+    }
 }
 
 #[derive(Clone, Debug)]
@@ -69,6 +86,13 @@ pub struct RustStruct {
     pub struct_name: String,
     pub fields: Vec<FieldMember>,
     pub is_union: bool,
+}
+
+#[derive(Clone, Debug)]
+pub struct RustEnum {
+    pub enum_name: String,
+    pub fields: Vec<(String, Option<String>)>, // name, value
+    pub repr: Option<String>,
 }
 
 impl RustType {
@@ -124,7 +148,13 @@ impl RustType {
                 sb.push('(');
                 let params = parameters
                     .iter()
-                    .map(|x| format!("{}: {}", x.escape_name(), x.rust_type.to_rust_string(type_path)))
+                    .map(|x| {
+                        format!(
+                            "{}: {}",
+                            x.escape_name(),
+                            x.rust_type.to_rust_string(type_path)
+                        )
+                    })
                     .collect::<Vec<_>>()
                     .join(", ");
                 sb.push_str(params.as_str());
@@ -133,8 +163,8 @@ impl RustType {
                     sb.push_str(" -> ");
                     sb.push_str(t.to_rust_string(type_path).as_str());
                 }
-            },
-            Option(inner) =>  {
+            }
+            Option(inner) => {
                 sb.push_str("Option<");
                 sb.push_str(inner.to_rust_string(type_path).as_str());
                 sb.push('>');
@@ -228,11 +258,11 @@ impl RustType {
                     }
                 };
                 sb.push('>');
-            },
-            TypeKind::Option(inner) =>{
+            }
+            TypeKind::Option(inner) => {
                 // function pointer can not annotate ? so emit inner only
                 sb.push_str(inner.to_csharp_string(options, alias_map).as_str());
-            },
+            }
             _ => {
                 sb.push_str(convert_type_name(use_type.type_name.as_str(), options).as_str());
 

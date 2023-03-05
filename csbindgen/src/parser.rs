@@ -1,6 +1,6 @@
 use crate::{builder::BindgenOptions, type_meta::*};
 use std::collections::{HashMap, HashSet};
-use syn::{ForeignItem,  Item, Pat, ReturnType};
+use syn::{ForeignItem, Item, Pat, ReturnType};
 
 enum FnItem {
     ForeignItem(syn::ForeignItemFn),
@@ -45,9 +45,9 @@ pub fn collect_extern_method(ast: &syn::File, options: &BindgenOptions) -> Vec<E
 }
 
 fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> {
-    let sig = match item {
-        FnItem::ForeignItem(x) => x.sig,
-        FnItem::Item(x) => x.sig,
+    let (sig, attrs) = match item {
+        FnItem::ForeignItem(x) => (x.sig, x.attrs),
+        FnItem::Item(x) => (x.sig, x.attrs),
     };
 
     let method_name = sig.ident.to_string();
@@ -91,11 +91,21 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
         return_type = Some(rust_type);
     }
 
+    // doc
+    let mut doc_comment = None;
+    for attr in attrs {
+        let last_segment = attr.path.segments.last().unwrap();
+        if last_segment.ident.to_string() == "doc" {
+            doc_comment = Some(attr.tokens.to_string());
+        }
+    }
+
     if !method_name.is_empty() && (options.method_filter)(method_name.clone()) {
         return Some(ExternMethod {
             method_name,
             parameters,
             return_type,
+            doc_comment
         });
     }
 
@@ -174,6 +184,48 @@ fn collect_fields(fields: &syn::FieldsNamed) -> Vec<FieldMember> {
     result
 }
 
+pub fn collect_enum(ast: &syn::File) -> Vec<RustEnum> {
+    let mut result = Vec::new();
+
+    for item in ast.items.iter() {
+        if let Item::Enum(t) = item {
+            let mut repr = None;
+            for attr in &t.attrs {
+                let last_segment = attr.path.segments.last().unwrap();
+                if last_segment.ident.to_string() == "repr" {
+                    repr = Some(attr.tokens.to_string());
+                }
+            }
+
+            let enum_name = t.ident.to_string();
+            let mut fields = Vec::new(); // Vec<(String, Option<String>)>
+
+            for v in &t.variants {
+                let name = v.ident.to_string();
+                let mut value = None;
+                if let Some((_, expr)) = &v.discriminant {
+                    if let syn::Expr::Lit(x) = expr {
+                        if let syn::Lit::Int(x) = &x.lit {
+                            let digits = x.base10_digits().to_string();
+                            value = Some(digits);
+                        }
+                    };
+                }
+
+                fields.push((name, value));
+            }
+
+            result.push(RustEnum {
+                enum_name,
+                fields,
+                repr,
+            });
+        }
+    }
+
+    result
+}
+
 pub fn reduce_type_alias(
     aliases: &Vec<(String, RustType)>,
     using_types: &HashSet<String>,
@@ -199,6 +251,17 @@ pub fn reduce_struct(structs: &Vec<RustStruct>, using_types: &HashSet<String>) -
     let mut result = Vec::new();
     for item in structs {
         if using_types.contains(&item.struct_name) {
+            result.push(item.clone());
+        }
+    }
+
+    result
+}
+
+pub fn reduce_enum(enums: &Vec<RustEnum>, using_types: &HashSet<String>) -> Vec<RustEnum> {
+    let mut result = Vec::new();
+    for item in enums {
+        if using_types.contains(&item.enum_name) {
             result.push(item.clone());
         }
     }

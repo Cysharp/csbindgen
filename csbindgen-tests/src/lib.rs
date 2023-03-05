@@ -37,6 +37,18 @@ extern "C" fn callback(a: i32) -> i32 {
 }
 
 #[no_mangle]
+pub extern "C" fn enum_test(i:IntEnumTest) -> i32 {
+    i as i32
+}
+
+#[repr(u8)]
+pub enum IntEnumTest {
+    A = 1,
+    B = 2,
+    C = 10,
+}
+
+#[no_mangle]
 #[allow(improper_ctypes_definitions)]
 pub extern "C" fn ignore_nop() -> (i32, i32) {
     println!("hello ignore!");

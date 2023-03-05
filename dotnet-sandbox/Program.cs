@@ -18,8 +18,13 @@ unsafe
 
     var tako = LibRust.callback_test(&Method);
 
-    
+
     var n = LibRust.nullable_callback_test(null);
+
+
+
+    var cc = LibRust.enum_test(IntEnumTest.C);
+    Console.WriteLine(cc);
 
     Console.WriteLine(n);
 
@@ -77,7 +82,7 @@ unsafe
 
     //    var span = buf->AsSpan();
 
-
+    
 
 
 
@@ -113,6 +118,9 @@ public static unsafe partial class LibraryImportNativeMethods
 
     [LibraryImport(__DllName)]
     public static partial void foo(Foo f);
+
+
+
 }
 
 public struct Foo
@@ -135,3 +143,4 @@ namespace CsBindgen
         }
     }
 }
+

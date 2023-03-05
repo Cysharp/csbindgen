@@ -79,6 +79,7 @@ pub fn emit_csharp(
     methods: &Vec<ExternMethod>,
     aliases: &HashMap<String, RustType>,
     structs: &Vec<RustStruct>,
+    enums: &Vec<RustEnum>,
     options: &BindgenOptions,
 ) -> String {
     // configure
@@ -131,6 +132,10 @@ pub fn emit_csharp(
             .collect::<Vec<_>>()
             .join(", ");
 
+        if let Some(x) = item.escape_doc_comment() {
+            method_list_string.push_str_ln(format!("        /// <summary>{}</summary>", x).as_str());
+        }
+
         method_list_string.push_str_ln(
             format!("        [DllImport(__DllName, EntryPoint = \"{entry_point}\", CallingConvention = CallingConvention.Cdecl)]").as_str(),
         );
@@ -154,7 +159,8 @@ pub fn emit_csharp(
 
         structs_string
             .push_str_ln(format!("    [StructLayout(LayoutKind.{layout_kind})]").as_str());
-        structs_string.push_str_ln(format!("    {accessibility} unsafe partial struct {name}").as_str());
+        structs_string
+            .push_str_ln(format!("    {accessibility} unsafe partial struct {name}").as_str());
         structs_string.push_str_ln("    {");
         for field in &item.fields {
             if item.is_union {
@@ -170,7 +176,7 @@ pub fn emit_csharp(
 
             structs_string
                 .push_str(format!("        {}public {} {}", attr, type_name, field.name).as_str());
-            if let TypeKind::FixedArray(digits, _) = &field.rust_type.type_kind  {
+            if let TypeKind::FixedArray(digits, _) = &field.rust_type.type_kind {
                 let mut digits = digits.clone();
                 if digits == "0" {
                     digits = "1".to_string(); // 0 fixed array is not allowed in C#
@@ -182,6 +188,26 @@ pub fn emit_csharp(
         }
         structs_string.push_str_ln("    }");
         structs_string.push('\n');
+    }
+
+    let mut enum_string = String::new();
+    for item in enums {
+        let repr = match &item.repr {
+            Some(x) => format!(" : {}", convert_token_enum_repr(x)),
+            None => "".to_string(),
+        };
+        let name = &item.enum_name;
+        enum_string.push_str_ln(format!("    {accessibility} enum {name}{repr}").as_str());
+        enum_string.push_str_ln("    {");
+        for (name, value) in &item.fields {
+            let value = match value {
+                Some(x) => format!(" = {x},"),
+                None => ",".to_string(),
+            };
+            enum_string.push_str_ln(format!("        {name}{value}").as_str());
+        }
+        enum_string.push_str_ln("    }");
+        enum_string.push('\n');
     }
 
     let result = format!(
@@ -201,10 +227,25 @@ namespace {namespace}
 {method_list_string}
     }}
 
-{structs_string}    
+{structs_string}
+{enum_string}
 }}
     "
     );
 
     result
+}
+
+fn convert_token_enum_repr(repr: &String) -> String {
+    match repr.as_str() {
+        "(u8)" => "byte".to_string(),
+        "(u16)" => "ushort".to_string(),
+        "(u32)" => "uint".to_string(),
+        "(u64)" => "ulong".to_string(),
+        "(i8)" => "sbyte".to_string(),
+        "(i16)" => "short".to_string(),
+        "(i32)" => "int".to_string(),
+        "(i64)" => "long".to_string(),
+        x => x.to_string(),
+    }
 }
