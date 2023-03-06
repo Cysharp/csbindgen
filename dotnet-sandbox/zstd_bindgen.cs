@@ -18,7 +18,7 @@ namespace CsBindgen
 
         /// <summary>ZSTD_versionString() :  Return runtime library version, like \"1.4.5\". Requires v1.3.0+.</summary>
         [DllImport(__DllName, EntryPoint = "ZSTD_versionString", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte** ZSTD_versionString();
+        public static extern byte* ZSTD_versionString();
 
         /// <summary>Simple API//*! ZSTD_compress() :  Compresses `src` content as a single zstd compressed frame into already allocated `dst`.  Hint : compression runs faster if `dstCapacity` &gt;=  `ZSTD_compressBound(srcSize)`.  @return : compressed size written into `dst` (&lt;= `dstCapacity),            or an error code if it fails (which can be tested using ZSTD_isError()).</summary>
         [DllImport(__DllName, EntryPoint = "ZSTD_compress", CallingConvention = CallingConvention.Cdecl)]
@@ -46,7 +46,7 @@ namespace CsBindgen
         public static extern uint ZSTD_isError(UIntPtr code);
 
         [DllImport(__DllName, EntryPoint = "ZSTD_getErrorName", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte** ZSTD_getErrorName(UIntPtr code);
+        public static extern byte* ZSTD_getErrorName(UIntPtr code);
 
         [DllImport(__DllName, EntryPoint = "ZSTD_minCLevel", CallingConvention = CallingConvention.Cdecl)]
         public static extern int ZSTD_minCLevel();

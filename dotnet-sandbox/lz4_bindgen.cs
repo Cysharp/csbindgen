@@ -21,15 +21,15 @@ namespace CsBindgen
         public static extern int LZ4_versionNumber();
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_versionString", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte** LZ4_versionString();
+        public static extern byte* LZ4_versionString();
 
         /// <summary>LZ4_compress_default() :  Compresses 'srcSize' bytes from buffer 'src'  into already allocated 'dst' buffer of size 'dstCapacity'.  Compression is guaranteed to succeed if 'dstCapacity' &gt;= LZ4_compressBound(srcSize).  It also runs faster, so it's a recommended setting.  If the function cannot compress 'src' into a more limited 'dst' budget,  compression stops *immediately*, and the function result is zero.  In which case, 'dst' content is undefined (invalid).      srcSize : max supported value is LZ4_MAX_INPUT_SIZE.      dstCapacity : size of buffer 'dst' (which must be already allocated)     @return  : the number of bytes written into buffer 'dst' (necessarily &lt;= dstCapacity)                or 0 if compression fails Note : This function is protected against buffer overflow scenarios (never writes outside 'dst' buffer, nor read outside 'source' buffer).</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_default", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_default(byte** src, byte** dst, int srcSize, int dstCapacity);
+        public static extern int LZ4_compress_default(byte* src, byte* dst, int srcSize, int dstCapacity);
 
         /// <summary>LZ4_decompress_safe() : @compressedSize : is the exact complete size of the compressed block. @dstCapacity : is the size of destination buffer (which must be already allocated),                is an upper bound of decompressed size. @return : the number of bytes decompressed into destination buffer (necessarily &lt;= dstCapacity)           If destination buffer is not large enough, decoding will stop and output an error code (negative value).           If the source stream is detected malformed, the function will stop decoding and return a negative result. Note 1 : This function is protected against malicious data packets :          it will never writes outside 'dst' buffer, nor read outside 'source' buffer,          even if the compressed block is maliciously modified to order the decoder to do these actions.          In such case, the decoder stops immediately, and considers the compressed block malformed. Note 2 : compressedSize and dstCapacity must be provided to the function, the compressed block does not contain them.          The implementation is free to send / store / derive this information in whichever way is most beneficial.          If there is a need for a different format which bundles together both compressed data and its metadata, consider looking at lz4frame.h instead.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_decompress_safe", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_safe(byte** src, byte** dst, int compressedSize, int dstCapacity);
+        public static extern int LZ4_decompress_safe(byte* src, byte* dst, int compressedSize, int dstCapacity);
 
         /// <summary>LZ4_compressBound() :Provides the maximum size that LZ4 compression may output in a \"worst case\" scenario (input data not compressible)This function is primarily useful for memory allocation purposes (destination buffer size).Macro LZ4_COMPRESSBOUND() is also provided for compilation-time evaluation (stack memory allocation for example).Note that LZ4_compress_default() compresses faster when dstCapacity is &gt;= LZ4_compressBound(srcSize)inputSize  : max supported value is LZ4_MAX_INPUT_SIZEreturn : maximum output size in a \"worst case\" scenarioor 0, if input size is incorrect (too large or negative)</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressBound", CallingConvention = CallingConvention.Cdecl)]
@@ -37,22 +37,22 @@ namespace CsBindgen
 
         /// <summary>LZ4_compress_fast() :Same as LZ4_compress_default(), but allows selection of \"acceleration\" factor.The larger the acceleration value, the faster the algorithm, but also the lesser the compression.It's a trade-off. It can be fine tuned, with each successive value providing roughly +~3% to speed.An acceleration value of \"1\" is the same as regular LZ4_compress_default()Values &lt;= 0 will be replaced by LZ4_ACCELERATION_DEFAULT (currently == 1, see lz4.c).Values &gt; LZ4_ACCELERATION_MAX will be replaced by LZ4_ACCELERATION_MAX (currently == 65537, see lz4.c).</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_fast", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_fast(byte** src, byte** dst, int srcSize, int dstCapacity, int acceleration);
+        public static extern int LZ4_compress_fast(byte* src, byte* dst, int srcSize, int dstCapacity, int acceleration);
 
         /// <summary>LZ4_compress_fast_extState() :  Same as LZ4_compress_fast(), using an externally allocated memory space for its state.  Use LZ4_sizeofState() to know how much memory must be allocated,  and allocate it on 8-bytes boundaries (using `malloc()` typically).  Then, provide this buffer as `void* state` to compression function.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_sizeofState", CallingConvention = CallingConvention.Cdecl)]
         public static extern int LZ4_sizeofState();
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_fast_extState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_fast_extState(void* state, byte** src, byte** dst, int srcSize, int dstCapacity, int acceleration);
+        public static extern int LZ4_compress_fast_extState(void* state, byte* src, byte* dst, int srcSize, int dstCapacity, int acceleration);
 
         /// <summary>LZ4_compress_destSize() :  Reverse the logic : compresses as much data as possible from 'src' buffer  into already allocated buffer 'dst', of size &gt;= 'targetDestSize'.  This function either compresses the entire 'src' content into 'dst' if it's large enough,  or fill 'dst' buffer completely with as much data as possible from 'src'.  note: acceleration parameter is fixed to \"default\". *srcSizePtr : will be modified to indicate how many bytes where read from 'src' to fill 'dst'.               New value is necessarily &lt;= input value. @return : Nb bytes written into 'dst' (necessarily &lt;= targetDestSize)           or 0 if compression fails. Note : from v1.8.2 to v1.9.1, this function had a bug (fixed un v1.9.2+):        the produced compressed content could, in specific circumstances,        require to be decompressed into a destination buffer larger        by at least 1 byte than the content to decompress.        If an application uses `LZ4_compress_destSize()`,        it's highly recommended to update liblz4 to v1.9.2 or better.        If this can't be done or ensured,        the receiving decompression function should provide        a dstCapacity which is &gt; decompressedSize, by at least 1 byte.        See https://github.com/lz4/lz4/issues/859 for details</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_destSize", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_destSize(byte** src, byte** dst, int* srcSizePtr, int targetDstSize);
+        public static extern int LZ4_compress_destSize(byte* src, byte* dst, int* srcSizePtr, int targetDstSize);
 
         /// <summary>LZ4_decompress_safe_partial() :  Decompress an LZ4 compressed block, of size 'srcSize' at position 'src',  into destination buffer 'dst' of size 'dstCapacity'.  Up to 'targetOutputSize' bytes will be decoded.  The function stops decoding on reaching this objective.  This can be useful to boost performance  whenever only the beginning of a block is required. @return : the number of bytes decoded in `dst` (necessarily &lt;= targetOutputSize)           If source stream is detected malformed, function returns a negative result.  Note 1 : @return can be &lt; targetOutputSize, if compressed block contains less data.  Note 2 : targetOutputSize must be &lt;= dstCapacity  Note 3 : this function effectively stops decoding on reaching targetOutputSize,           so dstCapacity is kind of redundant.           This is because in older versions of this function,           decoding operation would still write complete sequences.           Therefore, there was no guarantee that it would stop writing at exactly targetOutputSize,           it could write more bytes, though only up to dstCapacity.           Some \"margin\" used to be required for this operation to work properly.           Thankfully, this is no longer necessary.           The function nonetheless keeps the same signature, in an effort to preserve API compatibility.  Note 4 : If srcSize is the exact size of the block,           then targetOutputSize can be any value,           including larger than the block's decompressed size.           The function will, at most, generate block's decompressed size.  Note 5 : If srcSize is _larger_ than block's compressed size,           then targetOutputSize **MUST** be &lt;= block's decompressed size.           Otherwise, *silent corruption will occur*.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_decompress_safe_partial", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_safe_partial(byte** src, byte** dst, int srcSize, int targetOutputSize, int dstCapacity);
+        public static extern int LZ4_decompress_safe_partial(byte* src, byte* dst, int srcSize, int targetOutputSize, int dstCapacity);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_createStream", CallingConvention = CallingConvention.Cdecl)]
         public static extern LZ4_stream_u* LZ4_createStream();
@@ -66,15 +66,15 @@ namespace CsBindgen
 
         /// <summary>LZ4_loadDict() :  Use this function to reference a static dictionary into LZ4_stream_t.  The dictionary must remain available during compression.  LZ4_loadDict() triggers a reset, so any previous data will be forgotten.  The same dictionary will have to be loaded on decompression side for successful decoding.  Dictionary are useful for better compression of small data (KB range).  While LZ4 accept any input as dictionary,  results are generally better when using Zstandard's Dictionary Builder.  Loading a size of 0 is allowed, and is the same as reset. @return : loaded dictionary size, in bytes (necessarily &lt;= 64 KB)</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_loadDict", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_loadDict(LZ4_stream_u* streamPtr, byte** dictionary, int dictSize);
+        public static extern int LZ4_loadDict(LZ4_stream_u* streamPtr, byte* dictionary, int dictSize);
 
         /// <summary>LZ4_compress_fast_continue() :  Compress 'src' content using data from previously compressed blocks, for better compression ratio. 'dst' buffer must be already allocated.  If dstCapacity &gt;= LZ4_compressBound(srcSize), compression is guaranteed to succeed, and runs faster. @return : size of compressed block           or 0 if there is an error (typically, cannot fit into 'dst').  Note 1 : Each invocation to LZ4_compress_fast_continue() generates a new block.           Each block has precise boundaries.           Each block must be decompressed separately, calling LZ4_decompress_*() with relevant metadata.           It's not possible to append blocks together and expect a single invocation of LZ4_decompress_*() to decompress them together.  Note 2 : The previous 64KB of source data is __assumed__ to remain present, unmodified, at same address in memory !  Note 3 : When input is structured as a double-buffer, each buffer can have any size, including &lt; 64 KB.           Make sure that buffers are separated, by at least one byte.           This construction ensures that each block only depends on previous block.  Note 4 : If input buffer is a ring-buffer, it can have any size, including &lt; 64 KB.  Note 5 : After an error, the stream status is undefined (invalid), it can only be reset or freed.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_fast_continue", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_fast_continue(LZ4_stream_u* streamPtr, byte** src, byte** dst, int srcSize, int dstCapacity, int acceleration);
+        public static extern int LZ4_compress_fast_continue(LZ4_stream_u* streamPtr, byte* src, byte* dst, int srcSize, int dstCapacity, int acceleration);
 
         /// <summary>LZ4_saveDict() :  If last 64KB data cannot be guaranteed to remain available at its current memory location,  save it into a safer place (char* safeBuffer).  This is schematically equivalent to a memcpy() followed by LZ4_loadDict(),  but is much faster, because LZ4_saveDict() doesn't need to rebuild tables. @return : saved dictionary size in bytes (necessarily &lt;= maxDictSize), or 0 if error.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_saveDict", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_saveDict(LZ4_stream_u* streamPtr, byte** safeBuffer, int maxDictSize);
+        public static extern int LZ4_saveDict(LZ4_stream_u* streamPtr, byte* safeBuffer, int maxDictSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_createStreamDecode", CallingConvention = CallingConvention.Cdecl)]
         public static extern LZ4_streamDecode_u* LZ4_createStreamDecode();
@@ -84,7 +84,7 @@ namespace CsBindgen
 
         /// <summary>LZ4_setStreamDecode() :  An LZ4_streamDecode_t context can be allocated once and re-used multiple times.  Use this function to start decompression of a new stream of blocks.  A dictionary can optionally be set. Use NULL or size 0 for a reset order.  Dictionary is presumed stable : it must remain accessible and unmodified during next decompression. @return : 1 if OK, 0 if error</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_setStreamDecode", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_setStreamDecode(LZ4_streamDecode_u* LZ4_streamDecode, byte** dictionary, int dictSize);
+        public static extern int LZ4_setStreamDecode(LZ4_streamDecode_u* LZ4_streamDecode, byte* dictionary, int dictSize);
 
         /// <summary>LZ4_decoderRingBufferSize() : v1.8.2+  Note : in a ring buffer scenario (optional),  blocks are presumed decompressed next to each other  up to the moment there is not enough remaining space for next block (remainingSize &lt; maxBlockSize),  at which stage it resumes from beginning of ring buffer.  When setting such a ring buffer for streaming decompression,  provides the minimum size of this ring buffer  to be compatible with any source respecting maxBlockSize condition. @return : minimum ring buffer size,           or 0 if there is an error (invalid maxBlockSize).</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_decoderRingBufferSize", CallingConvention = CallingConvention.Cdecl)]
@@ -92,15 +92,15 @@ namespace CsBindgen
 
         /// <summary>LZ4_decompress_safe_continue() :  This decoding function allows decompression of consecutive blocks in \"streaming\" mode.  The difference with the usual independent blocks is that  new blocks are allowed to find references into former blocks.  A block is an unsplittable entity, and must be presented entirely to the decompression function.  LZ4_decompress_safe_continue() only accepts one block at a time.  It's modeled after `LZ4_decompress_safe()` and behaves similarly. @LZ4_streamDecode : decompression state, tracking the position in memory of past data @compressedSize : exact complete size of one compressed block. @dstCapacity : size of destination buffer (which must be already allocated),                must be an upper bound of decompressed size. @return : number of bytes decompressed into destination buffer (necessarily &lt;= dstCapacity)           If destination buffer is not large enough, decoding will stop and output an error code (negative value).           If the source stream is detected malformed, the function will stop decoding and return a negative result.  The last 64KB of previously decoded data *must* remain available and unmodified  at the memory position where they were previously decoded.  If less than 64KB of data has been decoded, all the data must be present.  Special : if decompression side sets a ring buffer, it must respect one of the following conditions :  - Decompression buffer size is _at least_ LZ4_decoderRingBufferSize(maxBlockSize).    maxBlockSize is the maximum size of any single block. It can have any value &gt; 16 bytes.    In which case, encoding and decoding buffers do not need to be synchronized.    Actually, data can be produced by any source compliant with LZ4 format specification, and respecting maxBlockSize.  - Synchronized mode :    Decompression buffer size is _exactly_ the same as compression buffer size,    and follows exactly same update rule (block boundaries at same positions),    and decoding function is provided with exact decompressed size of each block (exception for last block of the stream),    _then_ decoding & encoding ring buffer can have any size, including small ones ( &lt; 64 KB).  - Decompression buffer is larger than encoding buffer, by a minimum of maxBlockSize more bytes.    In which case, encoding and decoding buffers do not need to be synchronized,    and encoding ring buffer can have any size, including small ones ( &lt; 64 KB).  Whenever these conditions are not possible,  save the last 64KB of decoded data into a safe buffer where it can't be modified during decompression,  then indicate where this data is saved using LZ4_setStreamDecode(), before decompressing next block.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_decompress_safe_continue", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_safe_continue(LZ4_streamDecode_u* LZ4_streamDecode, byte** src, byte** dst, int srcSize, int dstCapacity);
+        public static extern int LZ4_decompress_safe_continue(LZ4_streamDecode_u* LZ4_streamDecode, byte* src, byte* dst, int srcSize, int dstCapacity);
 
         /// <summary>LZ4_decompress_safe_usingDict() :  Works the same as  a combination of LZ4_setStreamDecode() followed by LZ4_decompress_safe_continue()  However, it's stateless: it doesn't need any LZ4_streamDecode_t state.  Dictionary is presumed stable : it must remain accessible and unmodified during decompression.  Performance tip : Decompression speed can be substantially increased                    when dst == dictStart + dictSize.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_decompress_safe_usingDict", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_safe_usingDict(byte** src, byte** dst, int srcSize, int dstCapacity, byte** dictStart, int dictSize);
+        public static extern int LZ4_decompress_safe_usingDict(byte* src, byte* dst, int srcSize, int dstCapacity, byte* dictStart, int dictSize);
 
         /// <summary>LZ4_decompress_safe_partial_usingDict() :  Behaves the same as LZ4_decompress_safe_partial()  with the added ability to specify a memory segment for past data.  Performance tip : Decompression speed can be substantially increased                    when dst == dictStart + dictSize.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_decompress_safe_partial_usingDict", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_safe_partial_usingDict(byte** src, byte** dst, int compressedSize, int targetOutputSize, int maxOutputSize, byte** dictStart, int dictSize);
+        public static extern int LZ4_decompress_safe_partial_usingDict(byte* src, byte* dst, int compressedSize, int targetOutputSize, int maxOutputSize, byte* dictStart, int dictSize);
 
         /// <summary>LZ4_initStream() : v1.9.0+  An LZ4_stream_t structure must be initialized at least once.  This is automatically done when invoking LZ4_createStream(),  but it's not when the structure is simply declared on stack (for example).  Use LZ4_initStream() to properly initialize a newly declared LZ4_stream_t.  It can also initialize any arbitrary buffer of sufficient size,  and will @return a pointer of proper type upon initialization.  Note : initialization fails if size and alignment conditions are not respected.         In which case, the function will @return NULL.  Note2: An LZ4_stream_t structure guarantees correct alignment and size.  Note3: Before v1.9.0, use LZ4_resetStream() instead</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_initStream", CallingConvention = CallingConvention.Cdecl)]
@@ -108,58 +108,58 @@ namespace CsBindgen
 
         /// <summary>Obsolete compression functions (since v1.7.3)</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress(byte** src, byte** dest, int srcSize);
+        public static extern int LZ4_compress(byte* src, byte* dest, int srcSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_limitedOutput", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_limitedOutput(byte** src, byte** dest, int srcSize, int maxOutputSize);
+        public static extern int LZ4_compress_limitedOutput(byte* src, byte* dest, int srcSize, int maxOutputSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_withState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_withState(void* state, byte** source, byte** dest, int inputSize);
+        public static extern int LZ4_compress_withState(void* state, byte* source, byte* dest, int inputSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_limitedOutput_withState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_limitedOutput_withState(void* state, byte** source, byte** dest, int inputSize, int maxOutputSize);
+        public static extern int LZ4_compress_limitedOutput_withState(void* state, byte* source, byte* dest, int inputSize, int maxOutputSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_continue", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_continue(LZ4_stream_u* LZ4_streamPtr, byte** source, byte** dest, int inputSize);
+        public static extern int LZ4_compress_continue(LZ4_stream_u* LZ4_streamPtr, byte* source, byte* dest, int inputSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_limitedOutput_continue", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_limitedOutput_continue(LZ4_stream_u* LZ4_streamPtr, byte** source, byte** dest, int inputSize, int maxOutputSize);
+        public static extern int LZ4_compress_limitedOutput_continue(LZ4_stream_u* LZ4_streamPtr, byte* source, byte* dest, int inputSize, int maxOutputSize);
 
         /// <summary>Obsolete decompression functions (since v1.8.0)</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_uncompress", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_uncompress(byte** source, byte** dest, int outputSize);
+        public static extern int LZ4_uncompress(byte* source, byte* dest, int outputSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_uncompress_unknownOutputSize", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_uncompress_unknownOutputSize(byte** source, byte** dest, int isize_, int maxOutputSize);
+        public static extern int LZ4_uncompress_unknownOutputSize(byte* source, byte* dest, int isize_, int maxOutputSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_create", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void* LZ4_create(byte** inputBuffer);
+        public static extern void* LZ4_create(byte* inputBuffer);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_sizeofStreamState", CallingConvention = CallingConvention.Cdecl)]
         public static extern int LZ4_sizeofStreamState();
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_resetStreamState", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_resetStreamState(void* state, byte** inputBuffer);
+        public static extern int LZ4_resetStreamState(void* state, byte* inputBuffer);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_slideInputBuffer", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte** LZ4_slideInputBuffer(void* state);
+        public static extern byte* LZ4_slideInputBuffer(void* state);
 
         /// <summary>Obsolete streaming decoding functions (since v1.7.0)</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_decompress_safe_withPrefix64k", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_safe_withPrefix64k(byte** src, byte** dst, int compressedSize, int maxDstSize);
+        public static extern int LZ4_decompress_safe_withPrefix64k(byte* src, byte* dst, int compressedSize, int maxDstSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_decompress_fast_withPrefix64k", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_fast_withPrefix64k(byte** src, byte** dst, int originalSize);
+        public static extern int LZ4_decompress_fast_withPrefix64k(byte* src, byte* dst, int originalSize);
 
         /// <summary>Obsolete LZ4_decompress_fast variants (since v1.9.0) :  These functions used to be faster than LZ4_decompress_safe(),  but this is no longer the case. They are now slower.  This is because LZ4_decompress_fast() doesn't know the input size,  and therefore must progress more cautiously into the input buffer to not read beyond the end of block.  On top of that `LZ4_decompress_fast()` is not protected vs malformed or malicious inputs, making it a security liability.  As a consequence, LZ4_decompress_fast() is strongly discouraged, and deprecated.  The last remaining LZ4_decompress_fast() specificity is that  it can decompress a block without knowing its compressed size.  Such functionality can be achieved in a more secure manner  by employing LZ4_decompress_safe_partial().  Parameters:  originalSize : is the uncompressed size to regenerate.                 `dst` must be already allocated, its size must be &gt;= 'originalSize' bytes. @return : number of bytes read from source buffer (== compressed size).           The function expects to finish at block's end exactly.           If the source stream is detected malformed, the function stops decoding and returns a negative result.  note : LZ4_decompress_fast*() requires originalSize. Thanks to this information, it never writes past the output buffer.         However, since it doesn't know its 'src' size, it may read an unknown amount of input, past input buffer bounds.         Also, since match offsets are not validated, match reads from 'src' may underflow too.         These issues never happen if input (compressed) data is correct.         But they may happen if input data is invalid (error or intentional tampering).         As a consequence, use these functions in trusted environments with trusted data **only**.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_decompress_fast", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_fast(byte** src, byte** dst, int originalSize);
+        public static extern int LZ4_decompress_fast(byte* src, byte* dst, int originalSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_decompress_fast_continue", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_fast_continue(LZ4_streamDecode_u* LZ4_streamDecode, byte** src, byte** dst, int originalSize);
+        public static extern int LZ4_decompress_fast_continue(LZ4_streamDecode_u* LZ4_streamDecode, byte* src, byte* dst, int originalSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_decompress_fast_usingDict", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_decompress_fast_usingDict(byte** src, byte** dst, int originalSize, byte** dictStart, int dictSize);
+        public static extern int LZ4_decompress_fast_usingDict(byte* src, byte* dst, int originalSize, byte* dictStart, int dictSize);
 
         /// <summary>LZ4_resetStream() :  An LZ4_stream_t structure must be initialized at least once.  This is done with LZ4_initStream(), or LZ4_resetStream().  Consider switching to LZ4_initStream(),  invoking LZ4_resetStream() will trigger deprecation warnings in the future.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_resetStream", CallingConvention = CallingConvention.Cdecl)]
@@ -167,18 +167,18 @@ namespace CsBindgen
 
         /// <summary>LZ4_compress_HC() :  Compress data from `src` into `dst`, using the powerful but slower \"HC\" algorithm. `dst` must be already allocated.  Compression is guaranteed to succeed if `dstCapacity &gt;= LZ4_compressBound(srcSize)` (see \"lz4.h\")  Max supported `srcSize` value is LZ4_MAX_INPUT_SIZE (see \"lz4.h\") `compressionLevel` : any value between 1 and LZ4HC_CLEVEL_MAX will work.                      Values &gt; LZ4HC_CLEVEL_MAX behave the same as LZ4HC_CLEVEL_MAX. @return : the number of bytes written into 'dst'           or 0 if compression fails.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_HC", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_HC(byte** src, byte** dst, int srcSize, int dstCapacity, int compressionLevel);
+        public static extern int LZ4_compress_HC(byte* src, byte* dst, int srcSize, int dstCapacity, int compressionLevel);
 
         /// <summary>LZ4_compress_HC_extStateHC() :  Same as LZ4_compress_HC(), but using an externally allocated memory segment for `state`. `state` size is provided by LZ4_sizeofStateHC().  Memory segment must be aligned on 8-bytes boundaries (which a normal malloc() should do properly).</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_sizeofStateHC", CallingConvention = CallingConvention.Cdecl)]
         public static extern int LZ4_sizeofStateHC();
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_HC_extStateHC", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_HC_extStateHC(void* stateHC, byte** src, byte** dst, int srcSize, int maxDstSize, int compressionLevel);
+        public static extern int LZ4_compress_HC_extStateHC(void* stateHC, byte* src, byte* dst, int srcSize, int maxDstSize, int compressionLevel);
 
         /// <summary>LZ4_compress_HC_destSize() : v1.9.0+  Will compress as much data as possible from `src`  to fit into `targetDstSize` budget.  Result is provided in 2 parts : @return : the number of bytes written into 'dst' (necessarily &lt;= targetDstSize)           or 0 if compression fails. `srcSizePtr` : on success, *srcSizePtr is updated to indicate how much bytes were read from `src`</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_HC_destSize", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_HC_destSize(void* stateHC, byte** src, byte** dst, int* srcSizePtr, int targetDstSize, int compressionLevel);
+        public static extern int LZ4_compress_HC_destSize(void* stateHC, byte* src, byte* dst, int* srcSizePtr, int targetDstSize, int compressionLevel);
 
         /// <summary>LZ4_createStreamHC() and LZ4_freeStreamHC() :  These functions create and release memory for LZ4 HC streaming state.  Newly created states are automatically initialized.  A same state can be used multiple times consecutively,  starting with LZ4_resetStreamHC_fast() to start a new stream of blocks.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_createStreamHC", CallingConvention = CallingConvention.Cdecl)]
@@ -191,71 +191,71 @@ namespace CsBindgen
         public static extern void LZ4_resetStreamHC_fast(LZ4_streamHC_u* streamHCPtr, int compressionLevel);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_loadDictHC", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_loadDictHC(LZ4_streamHC_u* streamHCPtr, byte** dictionary, int dictSize);
+        public static extern int LZ4_loadDictHC(LZ4_streamHC_u* streamHCPtr, byte* dictionary, int dictSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_HC_continue", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_HC_continue(LZ4_streamHC_u* streamHCPtr, byte** src, byte** dst, int srcSize, int maxDstSize);
+        public static extern int LZ4_compress_HC_continue(LZ4_streamHC_u* streamHCPtr, byte* src, byte* dst, int srcSize, int maxDstSize);
 
         /// <summary>LZ4_compress_HC_continue_destSize() : v1.9.0+  Similar to LZ4_compress_HC_continue(),  but will read as much data as possible from `src`  to fit into `targetDstSize` budget.  Result is provided into 2 parts : @return : the number of bytes written into 'dst' (necessarily &lt;= targetDstSize)           or 0 if compression fails. `srcSizePtr` : on success, *srcSizePtr will be updated to indicate how much bytes were read from `src`.           Note that this function may not consume the entire input.</summary>
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_HC_continue_destSize", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compress_HC_continue_destSize(LZ4_streamHC_u* LZ4_streamHCPtr, byte** src, byte** dst, int* srcSizePtr, int targetDstSize);
+        public static extern int LZ4_compress_HC_continue_destSize(LZ4_streamHC_u* LZ4_streamHCPtr, byte* src, byte* dst, int* srcSizePtr, int targetDstSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_saveDictHC", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_saveDictHC(LZ4_streamHC_u* streamHCPtr, byte** safeBuffer, int maxDictSize);
+        public static extern int LZ4_saveDictHC(LZ4_streamHC_u* streamHCPtr, byte* safeBuffer, int maxDictSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_initStreamHC", CallingConvention = CallingConvention.Cdecl)]
         public static extern LZ4_streamHC_u* LZ4_initStreamHC(void* buffer, UIntPtr size);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressHC", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressHC(byte** source, byte** dest, int inputSize);
+        public static extern int LZ4_compressHC(byte* source, byte* dest, int inputSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressHC_limitedOutput", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressHC_limitedOutput(byte** source, byte** dest, int inputSize, int maxOutputSize);
+        public static extern int LZ4_compressHC_limitedOutput(byte* source, byte* dest, int inputSize, int maxOutputSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressHC2", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressHC2(byte** source, byte** dest, int inputSize, int compressionLevel);
+        public static extern int LZ4_compressHC2(byte* source, byte* dest, int inputSize, int compressionLevel);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressHC2_limitedOutput", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressHC2_limitedOutput(byte** source, byte** dest, int inputSize, int maxOutputSize, int compressionLevel);
+        public static extern int LZ4_compressHC2_limitedOutput(byte* source, byte* dest, int inputSize, int maxOutputSize, int compressionLevel);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressHC_withStateHC", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressHC_withStateHC(void* state, byte** source, byte** dest, int inputSize);
+        public static extern int LZ4_compressHC_withStateHC(void* state, byte* source, byte* dest, int inputSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressHC_limitedOutput_withStateHC", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressHC_limitedOutput_withStateHC(void* state, byte** source, byte** dest, int inputSize, int maxOutputSize);
+        public static extern int LZ4_compressHC_limitedOutput_withStateHC(void* state, byte* source, byte* dest, int inputSize, int maxOutputSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressHC2_withStateHC", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressHC2_withStateHC(void* state, byte** source, byte** dest, int inputSize, int compressionLevel);
+        public static extern int LZ4_compressHC2_withStateHC(void* state, byte* source, byte* dest, int inputSize, int compressionLevel);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressHC2_limitedOutput_withStateHC", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressHC2_limitedOutput_withStateHC(void* state, byte** source, byte** dest, int inputSize, int maxOutputSize, int compressionLevel);
+        public static extern int LZ4_compressHC2_limitedOutput_withStateHC(void* state, byte* source, byte* dest, int inputSize, int maxOutputSize, int compressionLevel);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressHC_continue", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressHC_continue(LZ4_streamHC_u* LZ4_streamHCPtr, byte** source, byte** dest, int inputSize);
+        public static extern int LZ4_compressHC_continue(LZ4_streamHC_u* LZ4_streamHCPtr, byte* source, byte* dest, int inputSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressHC_limitedOutput_continue", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressHC_limitedOutput_continue(LZ4_streamHC_u* LZ4_streamHCPtr, byte** source, byte** dest, int inputSize, int maxOutputSize);
+        public static extern int LZ4_compressHC_limitedOutput_continue(LZ4_streamHC_u* LZ4_streamHCPtr, byte* source, byte* dest, int inputSize, int maxOutputSize);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_createHC", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void* LZ4_createHC(byte** inputBuffer);
+        public static extern void* LZ4_createHC(byte* inputBuffer);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_freeHC", CallingConvention = CallingConvention.Cdecl)]
         public static extern int LZ4_freeHC(void* LZ4HC_Data);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_slideInputBufferHC", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte** LZ4_slideInputBufferHC(void* LZ4HC_Data);
+        public static extern byte* LZ4_slideInputBufferHC(void* LZ4HC_Data);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressHC2_continue", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressHC2_continue(void* LZ4HC_Data, byte** source, byte** dest, int inputSize, int compressionLevel);
+        public static extern int LZ4_compressHC2_continue(void* LZ4HC_Data, byte* source, byte* dest, int inputSize, int compressionLevel);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compressHC2_limitedOutput_continue", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_compressHC2_limitedOutput_continue(void* LZ4HC_Data, byte** source, byte** dest, int inputSize, int maxOutputSize, int compressionLevel);
+        public static extern int LZ4_compressHC2_limitedOutput_continue(void* LZ4HC_Data, byte* source, byte* dest, int inputSize, int maxOutputSize, int compressionLevel);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_sizeofStreamStateHC", CallingConvention = CallingConvention.Cdecl)]
         public static extern int LZ4_sizeofStreamStateHC();
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_resetStreamStateHC", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int LZ4_resetStreamStateHC(void* state, byte** inputBuffer);
+        public static extern int LZ4_resetStreamStateHC(void* state, byte* inputBuffer);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_resetStreamHC", CallingConvention = CallingConvention.Cdecl)]
         public static extern void LZ4_resetStreamHC(LZ4_streamHC_u* streamHCPtr, int compressionLevel);
@@ -264,7 +264,7 @@ namespace CsBindgen
         public static extern uint LZ4F_isError(UIntPtr code);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4F_getErrorName", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte** LZ4F_getErrorName(UIntPtr code);
+        public static extern byte* LZ4F_getErrorName(UIntPtr code);
 
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4F_compressionLevel_max", CallingConvention = CallingConvention.Cdecl)]
         public static extern int LZ4F_compressionLevel_max();

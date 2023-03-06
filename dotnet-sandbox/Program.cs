@@ -14,7 +14,10 @@ using System.Text;
 unsafe
 {
 
-    LibRust.call_bindgen_lz4();
+
+    LibRust.alias_test1(null);
+
+    //LibRust.call_bindgen_lz4();
 
 
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]

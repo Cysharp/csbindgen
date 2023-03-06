@@ -1,93 +1,46 @@
-use std::{cell::RefCell, collections::HashMap, rc::Rc};
+use std::collections::HashMap;
 
 use crate::type_meta::{RustType, TypeKind};
 
 #[derive(Clone, Debug)]
 pub struct AliasMap {
-    nodes: HashMap<String, Rc<RefCell<Node>>>,
+    // type FOO = ::std::os::raw::c_longlong;
+    type_aliases: HashMap<String, RustType>,
 }
 
 impl AliasMap {
     pub fn new() -> Self {
         Self {
-            nodes: HashMap::new(),
+            type_aliases: HashMap::new(),
         }
     }
-}
 
-#[derive(Clone, Debug)]
-struct Node {
-    pub value: RustType,
-    pub next: Option<Rc<RefCell<Node>>>,
-}
-
-impl Node {
-    pub fn get_last_value(&self) -> RustType {
-        match &self.next {
-            Some(x) => x.borrow().get_last_value(),
-            None => self.value.clone(),
-        }
-    }
-}
-
-impl AliasMap {
     pub fn insert(&mut self, name: &String, alias: &RustType) {
-        match (self.nodes.get(name), self.nodes.get(&alias.type_name)) {
-            (Some(_), Some(_)) => {} // duplicate is not allowed in system
-            (Some(left), None) => {
-                let right_node = Rc::new(RefCell::new(Node {
-                    value: alias.clone(),
-                    next: None,
-                }));
-
-                left.borrow_mut().next = Some(right_node.clone());
-                self.nodes.insert(alias.type_name.to_owned(), right_node);
-            }
-            (None, Some(right)) => {
-                let left_node = Rc::new(RefCell::new(Node {
-                    value: RustType {
-                        type_name: name.to_owned(),
-                        type_kind: TypeKind::Normal,
-                    },
-                    next: Some(right.clone()),
-                }));
-                self.nodes.insert(name.to_owned(), left_node);
-            }
-            (None, None) => {
-                let right_node = Rc::new(RefCell::new(Node {
-                    value: alias.clone(),
-                    next: None,
-                }));
-
-                let left_node = Rc::new(RefCell::new(Node {
-                    value: RustType {
-                        type_name: name.to_owned(),
-                        type_kind: TypeKind::Normal,
-                    },
-                    next: Some(right_node.clone()),
-                }));
-
-                self.nodes.insert(name.to_owned(), left_node);
-                self.nodes.insert(alias.type_name.to_owned(), right_node);
-            }
-        }
-    }
-
-    #[allow(dead_code)]
-    pub fn contains(&self, name: &String) -> bool {
-        self.nodes.contains_key(name)
+        self.type_aliases.insert(name.to_owned(), alias.clone());
     }
 
     pub fn get_mapped_value(&self, name: &String) -> Option<RustType> {
-        match self.nodes.get(name) {
-            Some(x) => Some(x.borrow().get_last_value()),
+        match self.type_aliases.get(name) {
+            Some(x) => {
+                if let Some(x2) = self.get_mapped_value(&x.type_name) {
+                    // currently multiple pointer alias not supported, only one layer.
+                    if let TypeKind::Pointer(_) = &x.type_kind {
+                        return Some(RustType {
+                            type_name: x2.type_name.clone(),
+                            type_kind: x.type_kind.clone(),
+                        });
+                    }
+                    return Some(x2);
+                }
+                Some(x.clone())
+            }
             None => None,
         }
     }
 
-    pub fn get_mapped_name_or_self(&self, name: &String) -> String {
-        match self.get_mapped_value(name) {
-            Some(x) => x.type_name.to_owned(),
+    pub fn normalize(&self, name: &String) -> String {
+        match self.type_aliases.get(name) {
+            Some(x) => self.normalize(&x.type_name),
             None => name.to_owned(),
         }
     }
@@ -95,6 +48,8 @@ impl AliasMap {
 
 #[cfg(test)]
 mod test {
+    use crate::type_meta::TypeKind;
+
     use super::*;
 
     #[test]
@@ -125,10 +80,10 @@ mod test {
             },
         );
 
-        assert!(map.contains(&"LONG_PTR".to_string()));
-        assert!(map.contains(&"c_longlong".to_string()));
-        assert!(map.contains(&"SSIZE_T".to_string()));
-        assert!(map.contains(&"SSIZE_T2".to_string()));
+        assert_eq!(map.normalize(&"SSIZE_T".to_string()), "c_longlong");
+        assert_eq!(map.normalize(&"SSIZE_T2".to_string()), "c_longlong");
+        assert_eq!(map.normalize(&"c_longlong".to_string()), "c_longlong");
+        assert_eq!(map.normalize(&"c_longlong".to_string()), "c_longlong");
 
         assert_eq!(
             map.get_mapped_value(&"SSIZE_T".to_string())
@@ -148,11 +103,6 @@ mod test {
                 .type_name,
             "c_longlong"
         );
-        assert_eq!(
-            map.get_mapped_value(&"c_longlong".to_string())
-                .unwrap()
-                .type_name,
-            "c_longlong"
-        );
+        assert!(map.get_mapped_value(&"c_longlong".to_string()).is_none());
     }
 }

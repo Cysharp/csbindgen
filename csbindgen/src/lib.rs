@@ -44,11 +44,11 @@ pub(crate) fn generate(
     for method in &methods {
         // add to using_types with normalize
         if let Some(x) = &method.return_type {
-            let normalized = aliases.get_mapped_name_or_self(&x.type_name);
+            let normalized = aliases.normalize(&x.type_name);
             using_types.insert(normalized.clone());
         }
         for p in &method.parameters {
-            let normalized = aliases.get_mapped_name_or_self(&p.rust_type.type_name);
+            let normalized = aliases.normalize(&p.rust_type.type_name);
             using_types.insert(normalized);
         }
     }
@@ -56,8 +56,8 @@ pub(crate) fn generate(
     let mut field_map = FieldMap::new();
     for struct_type in &structs {
         for field in &struct_type.fields {
-            let struct_type_normalized = aliases.get_mapped_name_or_self(&struct_type.struct_name);
-            let field_type_normalized = aliases.get_mapped_name_or_self(&field.rust_type.type_name);
+            let struct_type_normalized = aliases.normalize(&struct_type.struct_name);
+            let field_type_normalized = aliases.normalize(&field.rust_type.type_name);
             field_map.insert(&struct_type_normalized, &field_type_normalized);
         }
     }

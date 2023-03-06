@@ -14,6 +14,26 @@ mod lz4;
 #[allow(non_camel_case_types)]
 mod lz4_ffi;
 
+#[allow(non_camel_case_types)]
+pub type LONG_PTR = ::std::os::raw::c_longlong;
+#[allow(non_camel_case_types)]
+pub type PSSIZE_T = *mut LONG_PTR;
+
+#[no_mangle]
+pub extern "C" fn alias_test1(_a: PSSIZE_T) {}
+
+#[no_mangle]
+pub extern "C" fn alias_test2(_b: LONG_PTR) {}
+
+#[no_mangle]
+pub unsafe extern "C" fn nullpointer_test(p: *const u8) {
+    let ptr = unsafe { p.as_ref() };
+    match ptr {
+        Some(p2) => print!("pointer address: {}", *p2),
+        None => println!("null pointer!"),
+    };
+}
+
 #[no_mangle]
 pub extern "C" fn callback_test(cb: extern "C" fn(a: i32) -> i32) -> i32 {
     cb(100)
@@ -37,7 +57,7 @@ extern "C" fn callback(a: i32) -> i32 {
 }
 
 #[no_mangle]
-pub extern "C" fn enum_test(i:IntEnumTest) -> i32 {
+pub extern "C" fn enum_test(i: IntEnumTest) -> i32 {
     i as i32
 }
 
@@ -194,10 +214,17 @@ pub extern "C" fn call_bindgen_lz4() {
     println!("starting dir: {}", path.display()); // csbindgen/csbindgen-tests
 
     csbindgen::Builder::default()
-        .input_extern_file("../../../../csbindgen-tests/src/lz4.rs")
+        .input_bindgen_file("../../../../csbindgen-tests/src/lz4.rs")
+        .method_filter(|x| x.starts_with("LZ4"))
+        .rust_method_prefix("csbindgen_")
+        .rust_file_header("use super::lz4;")
+        .rust_method_type_path("lz4")
         .csharp_class_name("LibLz4")
         .csharp_dll_name("csbindgen_tests")
-        .generate_to_file("../../../../csbindgen-tests/src/lz4_ffi.cs", "../../../../dotnet-sandbox/lz4_bindgen.cs")
+        .generate_to_file(
+            "../../../../csbindgen-tests/src/lz4_ffi.cs",
+            "../../../../dotnet-sandbox/lz4_bindgen.cs",
+        )
         .unwrap();
 }
 
@@ -305,5 +332,4 @@ impl ByteBuffer {
 
 trait Ex {}
 
-impl Ex for i32{
-}
+impl Ex for i32 {}

@@ -13,25 +13,25 @@ namespace CsBindgen
         const string __DllName = "libquiche";
 
         [DllImport(__DllName, EntryPoint = "quiche_version", CallingConvention = CallingConvention.Cdecl)]
-        public static extern byte** quiche_version();
+        public static extern byte* quiche_version();
 
         [DllImport(__DllName, EntryPoint = "quiche_enable_debug_logging", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int quiche_enable_debug_logging(delegate* unmanaged[Cdecl]<byte**, void**, void> cb, void** argp);
+        public static extern int quiche_enable_debug_logging(delegate* unmanaged[Cdecl]<byte*, void*, void> cb, void* argp);
 
         [DllImport(__DllName, EntryPoint = "quiche_config_new", CallingConvention = CallingConvention.Cdecl)]
         public static extern quiche_config* quiche_config_new(uint version);
 
         [DllImport(__DllName, EntryPoint = "quiche_config_load_cert_chain_from_pem_file", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int quiche_config_load_cert_chain_from_pem_file(quiche_config* config, byte** path);
+        public static extern int quiche_config_load_cert_chain_from_pem_file(quiche_config* config, byte* path);
 
         [DllImport(__DllName, EntryPoint = "quiche_config_load_priv_key_from_pem_file", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int quiche_config_load_priv_key_from_pem_file(quiche_config* config, byte** path);
+        public static extern int quiche_config_load_priv_key_from_pem_file(quiche_config* config, byte* path);
 
         [DllImport(__DllName, EntryPoint = "quiche_config_load_verify_locations_from_file", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int quiche_config_load_verify_locations_from_file(quiche_config* config, byte** path);
+        public static extern int quiche_config_load_verify_locations_from_file(quiche_config* config, byte* path);
 
         [DllImport(__DllName, EntryPoint = "quiche_config_load_verify_locations_from_directory", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int quiche_config_load_verify_locations_from_directory(quiche_config* config, byte** path);
+        public static extern int quiche_config_load_verify_locations_from_directory(quiche_config* config, byte* path);
 
         [DllImport(__DllName, EntryPoint = "quiche_config_verify_peer", CallingConvention = CallingConvention.Cdecl)]
         public static extern void quiche_config_verify_peer(quiche_config* config, [MarshalAs(UnmanagedType.U1)] bool v);
@@ -118,7 +118,7 @@ namespace CsBindgen
         public static extern quiche_conn* quiche_accept(byte* scid, UIntPtr scid_len, byte* odcid, UIntPtr odcid_len, sockaddr* local, UIntPtr local_len, sockaddr* peer, UIntPtr peer_len, quiche_config* config);
 
         [DllImport(__DllName, EntryPoint = "quiche_connect", CallingConvention = CallingConvention.Cdecl)]
-        public static extern quiche_conn* quiche_connect(byte** server_name, byte* scid, UIntPtr scid_len, sockaddr* local, UIntPtr local_len, sockaddr* peer, UIntPtr peer_len, quiche_config* config);
+        public static extern quiche_conn* quiche_connect(byte* server_name, byte* scid, UIntPtr scid_len, sockaddr* local, UIntPtr local_len, sockaddr* peer, UIntPtr peer_len, quiche_config* config);
 
         [DllImport(__DllName, EntryPoint = "quiche_negotiate_version", CallingConvention = CallingConvention.Cdecl)]
         public static extern long quiche_negotiate_version(byte* scid, UIntPtr scid_len, byte* dcid, UIntPtr dcid_len, byte* @out, UIntPtr out_len);
@@ -131,21 +131,21 @@ namespace CsBindgen
         public static extern bool quiche_version_is_supported(uint version);
 
         [DllImport(__DllName, EntryPoint = "quiche_conn_new_with_tls", CallingConvention = CallingConvention.Cdecl)]
-        public static extern quiche_conn* quiche_conn_new_with_tls(byte* scid, UIntPtr scid_len, byte* odcid, UIntPtr odcid_len, sockaddr* local, UIntPtr local_len, sockaddr* peer, UIntPtr peer_len, quiche_config* config, void** ssl, [MarshalAs(UnmanagedType.U1)] bool is_server);
+        public static extern quiche_conn* quiche_conn_new_with_tls(byte* scid, UIntPtr scid_len, byte* odcid, UIntPtr odcid_len, sockaddr* local, UIntPtr local_len, sockaddr* peer, UIntPtr peer_len, quiche_config* config, void* ssl, [MarshalAs(UnmanagedType.U1)] bool is_server);
 
         [DllImport(__DllName, EntryPoint = "quiche_conn_set_keylog_path", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool quiche_conn_set_keylog_path(quiche_conn* conn, byte** path);
+        public static extern bool quiche_conn_set_keylog_path(quiche_conn* conn, byte* path);
 
         [DllImport(__DllName, EntryPoint = "quiche_conn_set_keylog_fd", CallingConvention = CallingConvention.Cdecl)]
         public static extern void quiche_conn_set_keylog_fd(quiche_conn* conn, int fd);
 
         [DllImport(__DllName, EntryPoint = "quiche_conn_set_qlog_path", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool quiche_conn_set_qlog_path(quiche_conn* conn, byte** path, byte** log_title, byte** log_desc);
+        public static extern bool quiche_conn_set_qlog_path(quiche_conn* conn, byte* path, byte* log_title, byte* log_desc);
 
         [DllImport(__DllName, EntryPoint = "quiche_conn_set_qlog_fd", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void quiche_conn_set_qlog_fd(quiche_conn* conn, int fd, byte** log_title, byte** log_desc);
+        public static extern void quiche_conn_set_qlog_fd(quiche_conn* conn, int fd, byte* log_title, byte* log_desc);
 
         [DllImport(__DllName, EntryPoint = "quiche_conn_set_session", CallingConvention = CallingConvention.Cdecl)]
         public static extern int quiche_conn_set_session(quiche_conn* conn, byte* buf, UIntPtr buf_len);
@@ -269,10 +269,10 @@ namespace CsBindgen
         public static extern bool quiche_conn_local_error(quiche_conn* conn, bool* is_app, ulong* error_code, byte** reason, UIntPtr* reason_len);
 
         [DllImport(__DllName, EntryPoint = "quiche_conn_stream_init_application_data", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int quiche_conn_stream_init_application_data(quiche_conn* conn, ulong stream_id, void** data);
+        public static extern int quiche_conn_stream_init_application_data(quiche_conn* conn, ulong stream_id, void* data);
 
         [DllImport(__DllName, EntryPoint = "quiche_conn_stream_application_data", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void** quiche_conn_stream_application_data(quiche_conn* conn, ulong stream_id);
+        public static extern void* quiche_conn_stream_application_data(quiche_conn* conn, ulong stream_id);
 
         [DllImport(__DllName, EntryPoint = "quiche_stream_iter_next", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.U1)]
@@ -354,10 +354,10 @@ namespace CsBindgen
         public static extern int quiche_h3_event_type(quiche_h3_event* ev);
 
         [DllImport(__DllName, EntryPoint = "quiche_h3_event_for_each_header", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int quiche_h3_event_for_each_header(quiche_h3_event* ev, delegate* unmanaged[Cdecl]<byte*, UIntPtr, byte*, UIntPtr, void**, int> cb, void** argp);
+        public static extern int quiche_h3_event_for_each_header(quiche_h3_event* ev, delegate* unmanaged[Cdecl]<byte*, UIntPtr, byte*, UIntPtr, void*, int> cb, void* argp);
 
         [DllImport(__DllName, EntryPoint = "quiche_h3_for_each_setting", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int quiche_h3_for_each_setting(quiche_h3_conn* conn, delegate* unmanaged[Cdecl]<ulong, ulong, void**, int> cb, void** argp);
+        public static extern int quiche_h3_for_each_setting(quiche_h3_conn* conn, delegate* unmanaged[Cdecl]<ulong, ulong, void*, int> cb, void* argp);
 
         [DllImport(__DllName, EntryPoint = "quiche_h3_event_headers_has_body", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.U1)]
@@ -393,7 +393,7 @@ namespace CsBindgen
         public static extern int quiche_h3_send_priority_update_for_request(quiche_h3_conn* conn, quiche_conn* quic_conn, ulong stream_id, quiche_h3_priority* priority);
 
         [DllImport(__DllName, EntryPoint = "quiche_h3_take_last_priority_update", CallingConvention = CallingConvention.Cdecl)]
-        public static extern int quiche_h3_take_last_priority_update(quiche_h3_conn* conn, ulong prioritized_element_id, delegate* unmanaged[Cdecl]<byte*, ulong, void**, int> cb, void** argp);
+        public static extern int quiche_h3_take_last_priority_update(quiche_h3_conn* conn, ulong prioritized_element_id, delegate* unmanaged[Cdecl]<byte*, ulong, void*, int> cb, void* argp);
 
         [DllImport(__DllName, EntryPoint = "quiche_h3_dgram_enabled_by_peer", CallingConvention = CallingConvention.Cdecl)]
         [return: MarshalAs(UnmanagedType.U1)]
@@ -431,7 +431,7 @@ namespace CsBindgen
     internal unsafe partial struct timespec
     {
         public long tv_sec;
-        public int* tv_nsec;
+        public int tv_nsec;
     }
 
     [StructLayout(LayoutKind.Sequential)]
