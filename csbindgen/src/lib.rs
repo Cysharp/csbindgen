@@ -1,3 +1,4 @@
+mod alias_map;
 mod builder;
 mod emitter;
 mod parser;
@@ -45,15 +46,13 @@ pub(crate) fn generate(
             using_types.insert(p.rust_type.type_name.clone());
         }
     }
-    for item in &structs {
-        for item in &item.fields {
-            using_types.insert(item.rust_type.type_name.clone());
-        }
-    }
 
-    let aliases = reduce_type_alias(&aliases, &using_types);
-    for alias in &aliases {
-        using_types.insert(alias.1.type_name.clone());
+    for item in &structs {
+        if using_types.contains(&item.struct_name) {
+            for item in &item.fields {
+                using_types.insert(item.rust_type.type_name.clone());
+            }
+        }
     }
 
     let structs = reduce_struct(&structs, &using_types);

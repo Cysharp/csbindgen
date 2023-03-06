@@ -1,5 +1,4 @@
-use std::collections::HashMap;
-
+use crate::alias_map::AliasMap;
 use crate::builder::BindgenOptions;
 use crate::type_meta::*;
 use crate::util::*;
@@ -77,7 +76,7 @@ use ::std::os::raw::*;
 
 pub fn emit_csharp(
     methods: &Vec<ExternMethod>,
-    aliases: &HashMap<String, RustType>,
+    aliases: &AliasMap,
     structs: &Vec<RustStruct>,
     enums: &Vec<RustEnum>,
     options: &BindgenOptions,

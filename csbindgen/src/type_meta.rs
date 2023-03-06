@@ -1,6 +1,4 @@
-use std::collections::HashMap;
-
-use crate::builder::BindgenOptions;
+use crate::{builder::BindgenOptions, alias_map::AliasMap};
 
 #[derive(Clone, Debug)]
 pub struct Parameter {
@@ -177,7 +175,7 @@ impl RustType {
     pub fn to_csharp_string(
         &self,
         options: &BindgenOptions,
-        alias_map: &HashMap<String, RustType>,
+        alias_map: &AliasMap,
     ) -> String {
         fn convert_type_name(type_name: &str, options: &BindgenOptions) -> String {
             let name = match type_name {
@@ -221,9 +219,9 @@ impl RustType {
         }
 
         // resolve alias
-        let (use_type, use_alias) = match alias_map.get(&self.type_name) {
+        let (use_type, use_alias) = match alias_map.get_mapped_value(&self.type_name) {
             Some(x) => (x, true),
-            None => (self, false),
+            None => (self.clone(), false),
         };
 
         let mut sb = String::new();

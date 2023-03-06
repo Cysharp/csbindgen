@@ -1,5 +1,5 @@
-use crate::{builder::BindgenOptions, type_meta::*};
-use std::collections::{HashMap, HashSet};
+use crate::{alias_map::AliasMap, builder::BindgenOptions, type_meta::*};
+use std::collections::HashSet;
 use syn::{ForeignItem, Item, Pat, ReturnType};
 
 enum FnItem {
@@ -105,36 +105,37 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
             method_name,
             parameters,
             return_type,
-            doc_comment
+            doc_comment,
         });
     }
 
     None
 }
 
-pub fn collect_type_alias(ast: &syn::File) -> Vec<(String, RustType)> {
-    let mut result = Vec::new();
+pub fn collect_type_alias(ast: &syn::File) -> AliasMap {
+    let mut result = AliasMap::new();
     for item in ast.items.iter() {
         if let Item::Type(t) = item {
             let name = t.ident.to_string();
             let alias = parse_type(&t.ty);
-            result.push((name, alias));
+            result.insert(&name, &alias);
         } else if let Item::Use(t) = item {
             if let syn::UseTree::Path(t) = &t.tree {
                 if let syn::UseTree::Rename(t) = &*t.tree {
                     let name = t.rename.to_string();
                     let alias = t.ident.to_string();
-                    result.push((
-                        name,
-                        RustType {
-                            type_name: alias.to_string(),
+                    result.insert(
+                        &name,
+                        &RustType {
+                            type_name: alias,
                             type_kind: TypeKind::Normal,
                         },
-                    ));
+                    );
                 }
             }
         }
     }
+
     result
 }
 
@@ -224,27 +225,6 @@ pub fn collect_enum(ast: &syn::File) -> Vec<RustEnum> {
     }
 
     result
-}
-
-pub fn reduce_type_alias(
-    aliases: &Vec<(String, RustType)>,
-    using_types: &HashSet<String>,
-) -> HashMap<String, RustType> {
-    let mut map = HashMap::new();
-    for (name, rust_type) in aliases {
-        if using_types.contains(name) {
-            map.insert(name.clone(), rust_type.clone());
-        }
-    }
-
-    for (name, rust_type) in aliases {
-        let pointed = map.get(rust_type.type_name.as_str());
-        if let Some(x) = pointed {
-            map.insert(name.to_string(), x.clone());
-        }
-    }
-
-    map
 }
 
 pub fn reduce_struct(structs: &Vec<RustStruct>, using_types: &HashSet<String>) -> Vec<RustStruct> {
