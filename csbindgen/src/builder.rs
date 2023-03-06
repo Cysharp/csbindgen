@@ -24,10 +24,9 @@ pub struct BindgenOptions {
     pub csharp_class_accessibility: String,
     pub csharp_entry_point_prefix: String,
     pub csharp_method_prefix: String,
-    pub csharp_c_long_convert: String,
-    pub csharp_c_ulong_convert: String,
     pub csharp_if_symbol: String,
     pub csharp_if_dll_name: String,
+    pub csharp_use_function_pointer: bool,
 }
 
 impl Default for Builder {
@@ -46,10 +45,9 @@ impl Default for Builder {
                 csharp_entry_point_prefix: "".to_string(),
                 csharp_method_prefix: "".to_string(),
                 csharp_class_accessibility: "internal".to_string(),
-                csharp_c_long_convert: "int".to_string(),
-                csharp_c_ulong_convert: "uint".to_string(),
                 csharp_if_symbol: "".to_string(),
                 csharp_if_dll_name: "".to_string(),
+                csharp_use_function_pointer: true
             },
         }
     }
@@ -144,23 +142,17 @@ impl Builder {
         self
     }
 
-    /// configure c_long to {csharp_c_long_convert} type,
-    /// default is `int`.
-    pub fn csharp_c_long_convert<T: Into<String>>(mut self, csharp_c_long_convert: T) -> Builder {
-        self.options.csharp_c_long_convert = csharp_c_long_convert.into();
-        self
-    }
-
-    /// configure c_ulong to {csharp_c_ulong_convert} type,
-    /// default is `uint`.
-    pub fn csharp_c_ulong_convert<T: Into<String>>(mut self, csharp_c_ulong_convert: T) -> Builder {
-        self.options.csharp_c_ulong_convert = csharp_c_ulong_convert.into();
-        self
-    }
-
+    /// configure add C# dll name if directive,
+    /// #if {if_symbol} __DllName = {if_dll_name}
     pub fn csharp_dll_name_if<T: Into<String>>(mut self, if_symbol: T, if_dll_name: T) -> Builder {
         self.options.csharp_if_symbol = if_symbol.into();
         self.options.csharp_if_dll_name = if_dll_name.into();
+        self
+    }
+
+    /// conifure C# generate function pointer as delegate* or Func/Action, default is true(generate delegate*)
+    pub fn csharp_use_function_pointer(mut self, csharp_use_function_pointer: bool) -> Builder {
+        self.options.csharp_use_function_pointer = csharp_use_function_pointer;
         self
     }
 

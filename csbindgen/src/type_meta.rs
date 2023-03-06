@@ -1,6 +1,4 @@
-use std::collections::HashMap;
-
-use crate::builder::BindgenOptions;
+use crate::{alias_map::AliasMap, builder::BindgenOptions};
 
 #[derive(Clone, Debug)]
 pub struct Parameter {
@@ -37,19 +35,48 @@ pub struct FieldMember {
 #[derive(Clone, Debug)]
 pub struct ExternMethod {
     pub method_name: String,
+    pub doc_comment: Option<String>,
     pub parameters: Vec<Parameter>,
     pub return_type: Option<RustType>,
 }
 
-#[derive(Clone, Debug, PartialEq, Eq, Hash)]
+impl ExternMethod {
+    pub fn escape_doc_comment(&self) -> Option<String> {
+        match &self.doc_comment {
+            Some(x) => {
+                let s = x
+                    .trim_matches(&['=', ' ', '\"'] as &[_])
+                    .replace("\\n", "")
+                    .replace("<", "&lt;")
+                    .replace(">", "&gt;");
+                Some(s)
+            }
+            None => None,
+        }
+    }
+}
+
+#[derive(Clone, Debug)]
 pub struct RustType {
     pub type_name: String,
-    pub is_pointer: bool,
-    pub is_pointer_pointer: bool,
-    pub is_const: bool,
-    pub is_mut: bool,
-    pub is_fixed_array: bool,
-    pub fixed_array_digits: String,
+    pub type_kind: TypeKind,
+}
+
+#[derive(Clone, Debug)]
+pub enum TypeKind {
+    Normal,
+    Pointer(PointerType),
+    FixedArray(String, Option<PointerType>),         // digits
+    Function(Vec<Parameter>, Option<Box<RustType>>), // parameter, return
+    Option(Box<RustType>),
+}
+
+#[derive(Clone, Debug)]
+pub enum PointerType {
+    ConstPointer,
+    MutPointer,
+    ConstPointerPointer,
+    MutPointerPointer,
 }
 
 #[derive(Clone, Debug)]
@@ -59,36 +86,27 @@ pub struct RustStruct {
     pub is_union: bool,
 }
 
+#[derive(Clone, Debug)]
+pub struct RustEnum {
+    pub enum_name: String,
+    pub fields: Vec<(String, Option<String>)>, // name, value
+    pub repr: Option<String>,
+}
+
 impl RustType {
-    pub fn to_string(&self, type_path: &str) -> String {
+    pub fn to_rust_string(&self, type_path: &str) -> String {
         let mut sb = String::new();
 
-        if self.is_pointer || self.is_pointer_pointer {
-            sb.push('*');
-        }
-        if self.is_const {
-            sb.push_str("const");
-        }
-        if self.is_mut {
-            sb.push_str("mut");
-        }
-        if self.is_pointer_pointer {
-            if self.is_const {
-                sb.push_str(" *const");
-            } else {
-                sb.push_str(" *mut");
-            }
+        fn emit_pointer(sb: &mut String, p: &PointerType) {
+            match p {
+                ConstPointer => sb.push_str("*const"),
+                MutPointer => sb.push_str("*mut"),
+                ConstPointerPointer => sb.push_str("*const *const"),
+                MutPointerPointer => sb.push_str("*mut *mut"),
+            };
         }
 
-        sb.push(' ');
-
-        if self.is_fixed_array {
-            sb.push('[');
-            sb.push_str(self.type_name.as_str());
-            sb.push_str("; ");
-            sb.push_str(self.fixed_array_digits.as_str());
-            sb.push(']');
-        } else {
+        let emit_type_name = |sb: &mut String| {
             if !(self.type_name.starts_with("c_")
                 || self.type_name == "usize"
                 || self.type_name == "isize"
@@ -98,7 +116,58 @@ impl RustType {
                 sb.push_str("::");
             }
             sb.push_str(self.type_name.as_str());
-        }
+        };
+
+        use PointerType::*;
+        use TypeKind::*;
+        match &self.type_kind {
+            Normal => {
+                emit_type_name(&mut sb);
+            }
+            Pointer(p) => {
+                emit_pointer(&mut sb, p);
+                sb.push(' ');
+                emit_type_name(&mut sb);
+            }
+            FixedArray(digits, pointer) => {
+                if let Some(p) = pointer {
+                    emit_pointer(&mut sb, p);
+                    sb.push(' ');
+                }
+
+                sb.push('[');
+                emit_type_name(&mut sb);
+                sb.push_str("; ");
+                sb.push_str(digits.as_str());
+                sb.push(']');
+            }
+            Function(parameters, return_type) => {
+                emit_type_name(&mut sb); // extern fn
+                sb.push('(');
+                let params = parameters
+                    .iter()
+                    .map(|x| {
+                        format!(
+                            "{}: {}",
+                            x.escape_name(),
+                            x.rust_type.to_rust_string(type_path)
+                        )
+                    })
+                    .collect::<Vec<_>>()
+                    .join(", ");
+                sb.push_str(params.as_str());
+                sb.push(')');
+                if let Some(t) = return_type {
+                    sb.push_str(" -> ");
+                    sb.push_str(t.to_rust_string(type_path).as_str());
+                }
+            }
+            Option(inner) => {
+                sb.push_str("Option<");
+                sb.push_str(inner.to_rust_string(type_path).as_str());
+                sb.push('>');
+            }
+        };
 
         sb
     }
@@ -106,11 +175,13 @@ impl RustType {
     pub fn to_csharp_string(
         &self,
         options: &BindgenOptions,
-        alias_map: &HashMap<String, RustType>,
+        alias_map: &AliasMap,
+        emit_from_struct: bool,
     ) -> String {
-        fn convert_type_name(type_name: &str, options: &BindgenOptions) -> String {
+        fn convert_type_name(type_name: &str) -> &str {
             let name = match type_name {
                 // std::os::raw https://doc.rust-lang.org/std/os/raw/index.html
+                // std::ffi::raw https://doc.rust-lang.org/core/ffi/index.html
                 "c_char" => "byte",
                 "c_schar" => "sbyte",
                 "c_uchar" => "byte",
@@ -118,20 +189,21 @@ impl RustType {
                 "c_ushort" => "ushort",
                 "c_int" => "int",
                 "c_uint" => "uint",
-                "c_long" => &options.csharp_c_long_convert,
-                "c_ulong" => &options.csharp_c_ulong_convert,
+                "c_long" => "CLong",   // .NET 6
+                "c_ulong" => "CULong", // .NET 6
                 "c_longlong" => "long",
                 "c_ulonglong" => "ulong",
                 "c_float" => "float",
                 "c_double" => "double",
                 "c_void" => "void",
+                "CString" => "sbyte",
                 // rust primitives
                 "i8" => "sbyte",
                 "i16" => "short",
                 "i32" => "int",
                 "i64" => "long",
                 "i128" => "Int128", // .NET 7
-                "isize" => "IntPtr",
+                "isize" => "nint",  // C# 9.0
                 "u8" => "byte",
                 "u16" => "ushort",
                 "u32" => "uint",
@@ -140,51 +212,123 @@ impl RustType {
                 "f32" => "float",
                 "f64" => "double",
                 "bool" => "bool",
-                "usize" => "UIntPtr",
+                "usize" => "nuint", // C# 9.0
                 "()" => "void",
                 _ => type_name, // as is
             };
-            name.to_string()
+            name
         }
 
         // resolve alias
-        let (use_type, use_alias) = match alias_map.get(&self.type_name) {
+        let (use_type, use_alias) = match alias_map.get_mapped_value(&self.type_name) {
             Some(x) => (x, true),
-            None => (self, false),
+            None => (self.clone(), false),
         };
 
         let mut sb = String::new();
 
-        if self.is_fixed_array {
-            sb.push_str("fixed ");
+        match &self.type_kind {
+            TypeKind::FixedArray(_, _) => {
+                sb.push_str("fixed ");
 
-            let type_name = convert_type_name(use_type.type_name.as_str(), options);
-            let type_name = match type_name.as_str() {
-                // C# fixed allow types
-                "bool" | "byte" | "short" | "int" | "long" | "char" | "sbyte" | "ushort"
-                | "uint" | "ulong" | "float" | "double" => type_name,
-                _ => format!("byte/* {}, this length is invalid so must keep pointer and can't edit from C# */", type_name)
-            };
+                let type_name = convert_type_name(use_type.type_name.as_str());
+                let type_name = match type_name {
+                    // C# fixed allow types
+                    "bool" | "byte" | "short" | "int" | "long" | "char" | "sbyte" | "ushort"
+                    | "uint" | "ulong" | "float" | "double" => type_name.to_owned(),
+                    _ => format!("byte/* {}, this length is invalid so must keep pointer and can't edit from C# */", type_name)
+                };
 
-            sb.push_str(type_name.as_str());
-        } else {
-            sb.push_str(convert_type_name(use_type.type_name.as_str(), options).as_str());
-            if use_alias {
-                if use_type.is_pointer {
-                    sb.push('*');
+                sb.push_str(type_name.as_str());
+            }
+            TypeKind::Function(parameters, return_type) => {
+                if emit_from_struct && !options.csharp_use_function_pointer {
+                    sb.push_str("void*");
+                } else if options.csharp_use_function_pointer {
+                    sb.push_str("delegate* unmanaged[Cdecl]");
+                    sb.push('<');
+                    for p in parameters {
+                        sb.push_str(&p.rust_type.to_csharp_string(
+                            options,
+                            alias_map,
+                            emit_from_struct,
+                        ));
+                        sb.push_str(", ");
+                    }
+                    match return_type {
+                        Some(x) => {
+                            sb.push_str(&x.to_csharp_string(options, alias_map, emit_from_struct));
+                        }
+                        None => {
+                            sb.push_str("void");
+                        }
+                    };
+                    sb.push('>');
+                } else {
+                    if return_type.is_some() {
+                        sb.push_str("Func<")
+                    } else {
+                        sb.push_str("Action<")
+                    }
+
+                    let joined_param = parameters
+                        .iter()
+                        .map(|p| {
+                            p.rust_type
+                                .to_csharp_string(options, alias_map, emit_from_struct)
+                        })
+                        .collect::<Vec<_>>()
+                        .join(", ");
+
+                    sb.push_str(joined_param.as_str());
+                    match return_type {
+                        Some(x) => {
+                            if !parameters.is_empty() {
+                                sb.push_str(", ");
+                            }
+                            sb.push_str(&x.to_csharp_string(options, alias_map, emit_from_struct));
+                        }
+                        None => {}
+                    };
+                    sb.push('>');
                 }
-                if use_type.is_pointer_pointer {
-                    sb.push_str("**");
+            }
+            TypeKind::Option(inner) => {
+                // function pointer can not annotate ? so emit inner only
+                sb.push_str(
+                    inner
+                        .to_csharp_string(options, alias_map, emit_from_struct)
+                        .as_str(),
+                );
+            }
+            _ => {
+                sb.push_str(convert_type_name(use_type.type_name.as_str()));
+
+                if use_alias {
+                    if let TypeKind::Pointer(p) = &use_type.type_kind {
+                        match p {
+                            PointerType::MutPointer | PointerType::ConstPointer => {
+                                sb.push('*');
+                            }
+                            PointerType::MutPointerPointer | PointerType::ConstPointerPointer => {
+                                sb.push_str("**");
+                            }
+                        }
+                    }
+                }
+
+                if let TypeKind::Pointer(p) = &self.type_kind {
+                    match p {
+                        PointerType::MutPointer | PointerType::ConstPointer => {
+                            sb.push('*');
+                        }
+                        PointerType::MutPointerPointer | PointerType::ConstPointerPointer => {
+                            sb.push_str("**");
+                        }
+                    }
                 }
             }
-
-            if self.is_pointer {
-                sb.push('*');
-            }
-            if self.is_pointer_pointer {
-                sb.push_str("**");
-            }
-        }
+        };
 
         sb
     }
@@ -192,6 +336,6 @@ impl RustType {
 
 impl std::fmt::Display for RustType {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        write!(f, "{}", self.to_string(""))
+        write!(f, "{}", self.to_rust_string(""))
     }
 }

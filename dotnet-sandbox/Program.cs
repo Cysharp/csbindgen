@@ -1,84 +1,183 @@
-﻿// See https://aka.ms/new-console-template for more information
+﻿
+
+// See https://aka.ms/new-console-template for more information
 //using Csbindgen;
 using CsBindgen;
+using System.Buffers.Text;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Text;
+
+
+
 unsafe
 {
-    //var v = NativeMethods();
 
-    var z = LibRust.my_add(100, 200);
-    Console.WriteLine(z);
 
-    var s = CsBindgen.LibLz4.LZ4_versionString();
-    var ss = new string((sbyte*)s);
-    Console.WriteLine(ss);
+    LibRust.alias_test1(null);
 
-    //var bytes = new byte[] { 1, 10, 100, 100, 100, 100, 100, 100 };
-    //var dest = new byte[100];
+    //LibRust.call_bindgen_lz4();
 
-    //fixed (byte* p = bytes)
-    //fixed (byte* d = dest)
+
+    // C# -> Rust, pass static UnmanagedCallersOnly method with `&`
+    [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
+    static int Sum(int x, int y) => x + y;
+
+    LibRust.csharp_to_rust(&Sum);
+
+    // Rust -> C#, get typed delegate*
+    var f = LibRust.rust_to_csharp();
+
+    var v = f(20, 30);
+    Console.WriteLine(v); // 50
+
+
+
+
+
+
+    // var tako = LibRust.callback_test(&Method);
+
+    //var tako = LibRust.callback_test(&Method);
+
+
+    //Console.WriteLine(tako);
+
+
+    //var cc = LibRust.enum_test(IntEnumTest.C);
+    //Console.WriteLine(cc);
+
+
+        var context = LibRust.create_context();
+
+        // do anything...
+
+        LibRust.delete_context(context);
+
+    var ctx = LibRust.create_counter_context(); // ctx = void*
+    
+    LibRust.insert_counter_context(ctx, 10);
+    LibRust.insert_counter_context(ctx, 20);
+
+    LibRust.delete_counter_context(ctx);
+
+    //LibRust.insert_counter_context(ctx, 20);
+    //LibRust.insert_counter_context(ctx, 30);
+    //LibRust.insert_counter_context(ctx, 99);
+    //LibRust.delete_counter_context(ctx);
+
+    // var cString = LibRust.alloc_c_string();
+    //var u8String = LibRust.alloc_u8_string();
+    //var u8Buffer = LibRust.alloc_u8_buffer();
+    //var i32Buffer = LibRust.alloc_i32_buffer();
+    //try
     //{
+    //    var str = new String((sbyte*)cString);
+    //    Console.WriteLine(str);
 
-    //    var len = NativeMethods.csbindgen_LZ4_compress_default(p, d, bytes.Length, dest.Length);
+    //    Console.WriteLine("----");
 
+    //    var str2 = Encoding.UTF8.GetString(u8String->AsSpan());
+    //    Console.WriteLine(str2);
+
+    //    Console.WriteLine("----");
+
+    //    var buffer3 = u8Buffer->AsSpan();
+    //    foreach (var item in buffer3)
+    //    {
+    //        Console.WriteLine(item);
+    //    }
+
+    //    Console.WriteLine("----");
+
+    //    var i32Span = i32Buffer->AsSpan<int>();
+    //    foreach (var item in i32Span)
+    //    {
+    //        Console.WriteLine(item);
+    //    }
+    //}
+    //finally
+    //{
+    //    LibRust.free_c_string(cString);
+    //    LibRust.free_u8_string(u8String);
+    //    LibRust.free_u8_buffer(u8Buffer);
+    //    LibRust.free_i32_buffer(i32Buffer);
     //}
 
 
-    // var vvv = new string((sbyte*)v);
+    //var buf = LibRust.return_raw_buffer();
+    //try
+    //{
 
-    // Console.WriteLine(vvv);
+    //    var span = buf->AsSpan();
+
+
+
+
+
+    //    var str = Encoding.UTF8.GetString(span);
+    //    Console.WriteLine(str);
+
+    //    //foreach (var item in span)
+    //    //{
+    //    //    Console.WriteLine(item);
+    //    //}
+
+    //}
+    //finally
+    //{
+    //    LibRust.delete_raw_buffer(buf);
+    //}
+
+
 
 }
 
+
+public static unsafe partial class LibraryImportNativeMethods
 {
-    public static unsafe partial class LibLz4
+    const string __DllName = "csbindgen_tests";
+
+
+    [LibraryImport(__DllName, EntryPoint = "my_bool")]
+    [return: MarshalAs(UnmanagedType.U1)]
+    public static partial bool my_bool([MarshalAs(UnmanagedType.U1)] bool x, [MarshalAs(UnmanagedType.U1)] bool y, [MarshalAs(UnmanagedType.U1)] bool z, bool* xr, bool* yr, bool* zr);
+
+
+
+    //[LibraryImport(__DllName)]
+    //public static partial void foo(Foo f);
+
+
+
+
+    [LibraryImport(__DllName, EntryPoint = "nullable_callback_test")]
+    public static partial int nullable_callback_test([MarshalAs(UnmanagedType.FunctionPtr)] Func<int, int> cb);
+
+    [LibraryImport(__DllName, EntryPoint = "nullable_callback_test")]
+    public static partial int nullable_callback_test2(delegate* unmanaged[Cdecl]<int, int> cb);
+
+}
+
+public struct Foo
+{
+    [MarshalAs(UnmanagedType.U1)] public bool A;
+}
+
+namespace CsBindgen
+{
+    partial struct ByteBuffer
     {
-        static LibLz4()
+        public unsafe Span<byte> AsSpan()
         {
-            NativeLibrary.SetDllImportResolver(typeof(LibLz4).Assembly, DllImportResolver);
+            return new Span<byte>(ptr, length);
         }
 
-        static IntPtr DllImportResolver(string libraryName, Assembly assembly, DllImportSearchPath? searchPath)
+        public unsafe Span<T> AsSpan<T>()
         {
-            if (libraryName == __DllName)
-            {
-                var path = "runtimes/";
-                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                {
-                    path += "win-";
-
-                }
-                else if (RuntimeInformation.IsOSPlatform(OSPlatform.OSX))
-                {
-                    path += "osx-";
-                }
-                else
-                {
-                    path += "linux-";
-                }
-
-                if (RuntimeInformation.OSArchitecture == Architecture.X86)
-                {
-                    path += "x86";
-                }
-                else if (RuntimeInformation.OSArchitecture == Architecture.X64)
-                {
-                    path += "x64";
-                }
-                else if (RuntimeInformation.OSArchitecture == Architecture.Arm64)
-                {
-                    path += "arm64";
-                }
-
-                path += "/native/" + __DllName;
-
-                return NativeLibrary.Load(path, assembly, searchPath);
-            }
-
-            return IntPtr.Zero;
+            return MemoryMarshal.CreateSpan(ref Unsafe.AsRef<T>(ptr), length / Unsafe.SizeOf<T>());
         }
     }
 }
+

@@ -1,5 +1,4 @@
-use std::collections::HashMap;
-
+use crate::alias_map::AliasMap;
 use crate::builder::BindgenOptions;
 use crate::type_meta::*;
 use crate::util::*;
@@ -9,7 +8,7 @@ pub fn emit_rust_method(list: &Vec<ExternMethod>, options: &BindgenOptions) -> S
     let method_type_path = options.rust_method_type_path.as_str();
     let method_type_path2 = match options.rust_method_type_path.as_str() {
         "" => "".to_string(),
-        x => x.to_string() + "::"
+        x => x.to_string() + "::",
     };
     let method_prefix = &options.rust_method_prefix;
     let file_header = &options.rust_file_header;
@@ -25,7 +24,7 @@ pub fn emit_rust_method(list: &Vec<ExternMethod>, options: &BindgenOptions) -> S
                 format!(
                     "    {}: {}",
                     p.name,
-                    p.rust_type.to_string(method_type_path)
+                    p.rust_type.to_rust_string(method_type_path)
                 )
             })
             .collect::<Vec<_>>()
@@ -33,28 +32,26 @@ pub fn emit_rust_method(list: &Vec<ExternMethod>, options: &BindgenOptions) -> S
 
         let return_line = match &item.return_type {
             None => "".to_string(),
-            Some(v) => format!(" -> {}", v.to_string(method_type_path)),
+            Some(v) => format!(" -> {}", v.to_rust_string(method_type_path)),
         };
 
         let parameter_only_names = item
             .parameters
             .iter()
-            .map(|p| format!("            {}", p.name))
+            .map(|p| format!("        {}", p.name))
             .collect::<Vec<_>>()
             .join(",\n");
 
         let template = format!(
             "
 #[no_mangle]
-pub extern \"C\" fn {method_prefix}{method_name}(
+pub unsafe extern \"C\" fn {method_prefix}{method_name}(
 {parameters}    
 ){return_line}
 {{
-    unsafe {{
-        return {method_type_path2}{method_name}(
+    {method_type_path2}{method_name}(
 {parameter_only_names}
-        )
-    }}
+    )
 }}
 "
         );
@@ -79,9 +76,10 @@ use ::std::os::raw::*;
 
 pub fn emit_csharp(
     methods: &Vec<ExternMethod>,
-    aliases: &HashMap<String, RustType>,
+    aliases: &AliasMap,
     structs: &Vec<RustStruct>,
-    options: &BindgenOptions
+    enums: &Vec<RustEnum>,
+    options: &BindgenOptions,
 ) -> String {
     // configure
     let namespace = &options.csharp_namespace;
@@ -90,13 +88,20 @@ pub fn emit_csharp(
     let accessibility = &options.csharp_class_accessibility;
 
     let dll_name = match options.csharp_if_symbol.as_str() {
-        "" => format!("        const string __DllName = \"{}\";", options.csharp_dll_name),
-        _ => { format!("#if {0}
+        "" => format!(
+            "        const string __DllName = \"{}\";",
+            options.csharp_dll_name
+        ),
+        _ => {
+            format!(
+                "#if {0}
         const string __DllName = \"{1}\";
 #else
         const string __DllName = \"{2}\";
 #endif
-        ", options.csharp_if_symbol, options.csharp_if_dll_name, options.csharp_dll_name)
+        ",
+                options.csharp_if_symbol, options.csharp_if_dll_name, options.csharp_dll_name
+            )
         }
     };
 
@@ -104,24 +109,39 @@ pub fn emit_csharp(
     for item in methods {
         let method_name = &item.method_name;
         let entry_point = match options.csharp_entry_point_prefix.as_str() {
-             "" => format!("{method_prefix}{method_name}"),
-             x => format!("{x}{method_name}"),
+            "" => format!("{method_prefix}{method_name}"),
+            x => format!("{x}{method_name}"),
         };
         let return_type = match &item.return_type {
-            Some(x) => x.to_csharp_string(options, aliases),
+            Some(x) => x.to_csharp_string(options, aliases, false),
             None => "void".to_string(),
         };
 
         let parameters = item
             .parameters
             .iter()
-            .map(|p| format!("{} {}", p.rust_type.to_csharp_string(options, aliases), p.escape_name()))
+            .map(|p| {
+                let mut type_name = p.rust_type.to_csharp_string(options, aliases, false);
+                if type_name == "bool" {
+                    type_name = "[MarshalAs(UnmanagedType.U1)] bool".to_string();
+                }
+
+                format!("{} {}", type_name, p.escape_name())
+            })
             .collect::<Vec<_>>()
             .join(", ");
+
+        if let Some(x) = item.escape_doc_comment() {
+            method_list_string
+                .push_str_ln(format!("        /// <summary>{}</summary>", x).as_str());
+        }
 
         method_list_string.push_str_ln(
             format!("        [DllImport(__DllName, EntryPoint = \"{entry_point}\", CallingConvention = CallingConvention.Cdecl)]").as_str(),
         );
+        if return_type == "bool" {
+            method_list_string.push_str_ln("        [return: MarshalAs(UnmanagedType.U1)]");
+        }
         method_list_string.push_str_ln(
             format!("        public static extern {return_type} {method_prefix}{method_name}({parameters});").as_str(),
         );
@@ -139,22 +159,25 @@ pub fn emit_csharp(
 
         structs_string
             .push_str_ln(format!("    [StructLayout(LayoutKind.{layout_kind})]").as_str());
-        structs_string.push_str_ln(format!("    public unsafe struct {name}").as_str());
+        structs_string
+            .push_str_ln(format!("    {accessibility} unsafe partial struct {name}").as_str());
         structs_string.push_str_ln("    {");
         for field in &item.fields {
             if item.is_union {
                 structs_string.push_str_ln("        [FieldOffset(0)]");
             }
-            structs_string.push_str(
-                format!(
-                    "        public {} {}",
-                    field.rust_type.to_csharp_string(options, aliases),
-                    field.name
-                )
-                .as_str(),
-            );
-            if field.rust_type.is_fixed_array {
-                let mut digits = field.rust_type.fixed_array_digits.clone();
+
+            let type_name = field.rust_type.to_csharp_string(options, aliases, true);
+            let attr = if type_name == "bool" {
+                "[MarshalAs(UnmanagedType.U1)] ".to_string()
+            } else {
+                "".to_string()
+            };
+
+            structs_string
+                .push_str(format!("        {}public {} {}", attr, type_name, field.name).as_str());
+            if let TypeKind::FixedArray(digits, _) = &field.rust_type.type_kind {
+                let mut digits = digits.clone();
                 if digits == "0" {
                     digits = "1".to_string(); // 0 fixed array is not allowed in C#
                 };
@@ -167,11 +190,32 @@ pub fn emit_csharp(
         structs_string.push('\n');
     }
 
+    let mut enum_string = String::new();
+    for item in enums {
+        let repr = match &item.repr {
+            Some(x) => format!(" : {}", convert_token_enum_repr(x)),
+            None => "".to_string(),
+        };
+        let name = &item.enum_name;
+        enum_string.push_str_ln(format!("    {accessibility} enum {name}{repr}").as_str());
+        enum_string.push_str_ln("    {");
+        for (name, value) in &item.fields {
+            let value = match value {
+                Some(x) => format!(" = {x},"),
+                None => ",".to_string(),
+            };
+            enum_string.push_str_ln(format!("        {name}{value}").as_str());
+        }
+        enum_string.push_str_ln("    }");
+        enum_string.push('\n');
+    }
+
     let result = format!(
         "// <auto-generated>
 // This code is generated by csbindgen.
 // DON'T CHANGE THIS DIRECTLY.
 // </auto-generated>
+#pragma warning disable CS8981
 using System;
 using System.Runtime.InteropServices;
 
@@ -184,10 +228,25 @@ namespace {namespace}
 {method_list_string}
     }}
 
-{structs_string}    
+{structs_string}
+{enum_string}
 }}
     "
     );
 
     result
+}
+
+fn convert_token_enum_repr(repr: &str) -> &str {
+    match repr {
+        "(u8)" => "byte",
+        "(u16)" => "ushort",
+        "(u32)" => "uint",
+        "(u64)" => "ulong",
+        "(i8)" => "sbyte",
+        "(i16)" => "short",
+        "(i32)" => "int",
+        "(i64)" => "long",
+        x => x,
+    }
 }
