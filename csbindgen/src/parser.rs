@@ -31,7 +31,7 @@ pub fn collect_extern_method(ast: &syn::File, options: &BindgenOptions) -> Vec<E
 
     for item in ast.items.iter() {
         if let Item::Fn(m) = item {
-            if let Some(_) = &m.sig.abi {
+            if m.sig.abi.is_some() {
                 // has extern
                 let method = parse_method(FnItem::Item(m.clone()), options);
                 if let Some(x) = method {
@@ -66,7 +66,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
 
             let rust_type = parse_type(&t.ty);
             if rust_type.type_name.is_empty() {
-                println!("Csbindgen can't handle this parameter type so ignore generate, method_name: {} parameter_name: {}", method_name, parameter_name);
+                println!("csbindgen can't handle this parameter type so ignore generate, method_name: {} parameter_name: {}", method_name, parameter_name);
                 return None;
             }
 
@@ -82,7 +82,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
         let rust_type = parse_type(b);
         if rust_type.type_name.is_empty() {
             println!(
-                "Csbindgen can't handle this return type so ignore generate, method_name: {}",
+                "csbindgen can't handle this return type so ignore generate, method_name: {}",
                 method_name
             );
             return None;
@@ -95,7 +95,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     let mut doc_comment = None;
     for attr in attrs {
         let last_segment = attr.path.segments.last().unwrap();
-        if last_segment.ident.to_string() == "doc" {
+        if last_segment.ident == "doc" {
             doc_comment = Some(attr.tokens.to_string());
         }
     }
@@ -193,7 +193,7 @@ pub fn collect_enum(ast: &syn::File) -> Vec<RustEnum> {
             let mut repr = None;
             for attr in &t.attrs {
                 let last_segment = attr.path.segments.last().unwrap();
-                if last_segment.ident.to_string() == "repr" {
+                if last_segment.ident == "repr" {
                     repr = Some(attr.tokens.to_string());
                 }
             }
@@ -204,13 +204,11 @@ pub fn collect_enum(ast: &syn::File) -> Vec<RustEnum> {
             for v in &t.variants {
                 let name = v.ident.to_string();
                 let mut value = None;
-                if let Some((_, expr)) = &v.discriminant {
-                    if let syn::Expr::Lit(x) = expr {
-                        if let syn::Lit::Int(x) = &x.lit {
-                            let digits = x.base10_digits().to_string();
-                            value = Some(digits);
-                        }
-                    };
+                if let Some((_, syn::Expr::Lit(x))) = &v.discriminant {
+                    if let syn::Lit::Int(x) = &x.lit {
+                        let digits = x.base10_digits().to_string();
+                        value = Some(digits);
+                    }
                 }
 
                 fields.push((name, value));
@@ -289,15 +287,13 @@ fn parse_type(t: &syn::Type) -> RustType {
             let last_segment = t.path.segments.last().unwrap();
             if let syn::PathArguments::AngleBracketed(x) = &last_segment.arguments {
                 // generics, only supports Option<> for null function pointer
-                if last_segment.ident.to_string() == "Option" {
-                    if let Some(x) = x.args.first() {
-                        if let syn::GenericArgument::Type(t) = x {
-                            let rust_type = parse_type(t);
-                            return RustType {
-                                type_name: "Option".to_string(),
-                                type_kind: TypeKind::Option(Box::new(rust_type)),
-                            };
-                        }
+                if last_segment.ident == "Option" {
+                    if let Some(syn::GenericArgument::Type(t)) = x.args.first() {
+                        let rust_type = parse_type(t);
+                        return RustType {
+                            type_name: "Option".to_string(),
+                            type_kind: TypeKind::Option(Box::new(rust_type)),
+                        };
                     }
                 }
             } else {

@@ -21,24 +21,24 @@ fn main() -> Result<(), Box<dyn Error>> {
         ])
         .compile("lz4");
 
-    bindgen::Builder::default()
-        .header("c/zstd/zstd.h")
-        .generate()?
-        .write_to_file("src/zstd.rs")?;
+    // bindgen::Builder::default()
+    //     .header("c/zstd/zstd.h")
+    //     .generate()?
+    //     .write_to_file("src/zstd.rs")?;
 
-    bindgen::Builder::default()
-        .header("c/quiche/quiche.h")
-        .generate()?
-        .write_to_file("src/quiche.rs")?;
+    // bindgen::Builder::default()
+    //     .header("c/quiche/quiche.h")
+    //     .generate()?
+    //     .write_to_file("src/quiche.rs")?;
 
-    bindgen::Builder::default()
-        .header("c/bullet3/PhysicsClientC_API.h")
-        .header("c/bullet3/PhysicsClientSharedMemory_C_API.h")
-        .header("c/bullet3/PhysicsClientSharedMemory2_C_API.h")
-        .header("c/bullet3/PhysicsDirectC_API.h")
-        .header("c/bullet3/SharedMemoryPublic.h")
-        .generate()?
-        .write_to_file("src/bullet3.rs")?;
+    // bindgen::Builder::default()
+    //     .header("c/bullet3/PhysicsClientC_API.h")
+    //     .header("c/bullet3/PhysicsClientSharedMemory_C_API.h")
+    //     .header("c/bullet3/PhysicsClientSharedMemory2_C_API.h")
+    //     .header("c/bullet3/PhysicsDirectC_API.h")
+    //     .header("c/bullet3/SharedMemoryPublic.h")
+    //     .generate()?
+    //     .write_to_file("src/bullet3.rs")?;
 
     csbindgen::Builder::default()
         .input_bindgen_file("src/lz4.rs")
@@ -53,8 +53,9 @@ fn main() -> Result<(), Box<dyn Error>> {
         .csharp_entry_point_prefix("csbindgen_")
         .csharp_method_prefix("")
         .csharp_class_accessibility("public")
-        .csharp_c_long_convert("int")
-        .csharp_c_ulong_convert("uint")
+        //.csharp_c_long_convert("int")
+        //.csharp_c_ulong_convert("uint")
+        // .csharp_use_function_pointer(true)
         .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs")
         .unwrap();
 
@@ -62,32 +63,33 @@ fn main() -> Result<(), Box<dyn Error>> {
         .input_extern_file("src/lib.rs")
         .csharp_class_name("LibRust")
         .csharp_dll_name("csbindgen_tests")
+        .csharp_use_function_pointer(true)
         .generate_csharp_file("../dotnet-sandbox/method_call.cs")
         .unwrap();
 
-    csbindgen::Builder::new()
-        .input_bindgen_file("src/zstd.rs")
-        .method_filter(|x| x.starts_with("ZSTD_"))
-        .rust_method_prefix("csbindgen_zstd_")
-        .csharp_class_name("LibZstd")
-        .csharp_dll_name("libzsd")
-        .generate_to_file("src/zstd_ffi.rs", "../dotnet-sandbox/zstd_bindgen.cs")?;
+    // csbindgen::Builder::new()
+    //     .input_bindgen_file("src/zstd.rs")
+    //     .method_filter(|x| x.starts_with("ZSTD_"))
+    //     .rust_method_prefix("csbindgen_zstd_")
+    //     .csharp_class_name("LibZstd")
+    //     .csharp_dll_name("libzsd")
+    //     .generate_to_file("src/zstd_ffi.rs", "../dotnet-sandbox/zstd_bindgen.cs")?;
 
-    csbindgen::Builder::new()
-        .input_bindgen_file("src/quiche.rs")
-        .method_filter(|x| x.starts_with("quiche_"))
-        .rust_method_prefix("csbindgen_quiche_")
-        .csharp_class_name("LibQuiche")
-        .csharp_dll_name("libquiche")
-        .generate_to_file("src/quiche_ffi.rs", "../dotnet-sandbox/quiche_bindgen.cs")?;
+    // csbindgen::Builder::new()
+    //     .input_bindgen_file("src/quiche.rs")
+    //     .method_filter(|x| x.starts_with("quiche_"))
+    //     .rust_method_prefix("csbindgen_quiche_")
+    //     .csharp_class_name("LibQuiche")
+    //     .csharp_dll_name("libquiche")
+    //     .generate_to_file("src/quiche_ffi.rs", "../dotnet-sandbox/quiche_bindgen.cs")?;
 
-    csbindgen::Builder::new()
-        .input_bindgen_file("src/bullet3.rs")
-        .method_filter(|x| x.starts_with("b3"))
-        .rust_method_prefix("csbindgen_bullet3_")
-        .csharp_class_name("LibBullet3")
-        .csharp_dll_name("libbullet3")
-        .generate_to_file("src/bullet3_ffi.rs", "../dotnet-sandbox/bullet3_bindgen.cs")?;
+    // csbindgen::Builder::new()
+    //     .input_bindgen_file("src/bullet3.rs")
+    //     .method_filter(|x| x.starts_with("b3"))
+    //     .rust_method_prefix("csbindgen_bullet3_")
+    //     .csharp_class_name("LibBullet3")
+    //     .csharp_dll_name("libbullet3")
+    //     .generate_to_file("src/bullet3_ffi.rs", "../dotnet-sandbox/bullet3_bindgen.cs")?;
 
     Ok(())
 }

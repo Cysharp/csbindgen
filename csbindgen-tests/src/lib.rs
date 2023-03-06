@@ -1,6 +1,6 @@
 use std::{
     collections::HashSet,
-    ffi::{c_char, c_void, CString},
+    ffi::{c_char, c_long, c_ulong, c_void, CString},
 };
 
 #[allow(dead_code)]
@@ -40,12 +40,33 @@ pub extern "C" fn callback_test(cb: extern "C" fn(a: i32) -> i32) -> i32 {
 }
 
 #[no_mangle]
+pub extern "C" fn csharp_to_rust(cb: extern "C" fn(x: i32, y: i32) -> i32) {
+    let sum = cb(10, 20); // invoke C# method
+    println!("{sum}");
+}
+
+#[no_mangle]
+pub extern "C" fn rust_to_csharp() -> extern fn(x: i32, y: i32) -> i32 {
+    sum // return rust method
+}
+
+extern "C" fn sum(x:i32, y:i32) -> i32 {
+    x + y
+}
+
+#[no_mangle]
+pub extern "C" fn cbt(_cb: CallbackTable) {}
+
+#[no_mangle]
 pub extern "C" fn nullable_callback_test(cb: Option<extern "C" fn(a: i32) -> i32>) -> i32 {
     match cb {
         Some(f) => f(100),
         None => -1,
     }
 }
+
+#[no_mangle]
+pub extern "C" fn types_iroiro(_i: isize, _u: usize, _cl: c_long, _cul: c_ulong) {}
 
 #[no_mangle]
 pub extern "C" fn callback_test2() -> extern "C" fn(a: i32) -> i32 {
@@ -61,7 +82,7 @@ pub extern "C" fn enum_test(i: IntEnumTest) -> i32 {
     i as i32
 }
 
-#[repr(u8)]
+#[repr(i8)]
 pub enum IntEnumTest {
     A = 1,
     B = 2,
@@ -108,6 +129,29 @@ pub unsafe extern "C" fn delete_counter_context(context: *mut c_void) {
     }
 }
 
+#[no_mangle]
+pub extern "C" fn pass_vector3(v3: MyVector3) {
+    println!("{}, {}, {}", v3.x, v3.y, v3.z);
+}
+
+#[no_mangle]
+pub extern "C" fn return_union() -> MyUnion {
+    MyUnion { bar: 53 }
+}
+
+#[repr(C)]
+pub union MyUnion {
+    pub foo: i32,
+    pub bar: i64,
+}
+
+#[repr(C)]
+pub struct MyVector3 {
+    pub x: f32,
+    pub y: f32,
+    pub z: f32,
+}
+
 #[repr(C)]
 pub struct CounterContext {
     pub set: HashSet<i32>,
@@ -138,7 +182,7 @@ pub extern "C" fn alloc_c_string() -> *mut c_char {
 }
 
 #[no_mangle]
-pub extern "C" fn free_c_string(str: *mut c_char) {
+pub unsafe extern "C" fn free_c_string(str: *mut c_char) {
     unsafe { CString::from_raw(str) };
 }
 
@@ -330,6 +374,8 @@ impl ByteBuffer {
     }
 }
 
-trait Ex {}
-
-impl Ex for i32 {}
+#[repr(C)]
+pub struct CallbackTable {
+    pub foo: extern "C" fn(),
+    pub foobar: extern "C" fn(i: i32) -> i32,
+}

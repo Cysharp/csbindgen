@@ -26,7 +26,7 @@ impl AliasMap {
                     // currently multiple pointer alias not supported, only one layer.
                     if let TypeKind::Pointer(_) = &x.type_kind {
                         return Some(RustType {
-                            type_name: x2.type_name.clone(),
+                            type_name: x2.type_name,
                             type_kind: x.type_kind.clone(),
                         });
                     }

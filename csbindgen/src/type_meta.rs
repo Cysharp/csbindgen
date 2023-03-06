@@ -1,4 +1,4 @@
-use crate::{builder::BindgenOptions, alias_map::AliasMap};
+use crate::{alias_map::AliasMap, builder::BindgenOptions};
 
 #[derive(Clone, Debug)]
 pub struct Parameter {
@@ -176,8 +176,9 @@ impl RustType {
         &self,
         options: &BindgenOptions,
         alias_map: &AliasMap,
+        emit_from_struct: bool,
     ) -> String {
-        fn convert_type_name(type_name: &str, options: &BindgenOptions) -> String {
+        fn convert_type_name(type_name: &str) -> &str {
             let name = match type_name {
                 // std::os::raw https://doc.rust-lang.org/std/os/raw/index.html
                 // std::ffi::raw https://doc.rust-lang.org/core/ffi/index.html
@@ -188,8 +189,8 @@ impl RustType {
                 "c_ushort" => "ushort",
                 "c_int" => "int",
                 "c_uint" => "uint",
-                "c_long" => &options.csharp_c_long_convert,
-                "c_ulong" => &options.csharp_c_ulong_convert,
+                "c_long" => "CLong",   // .NET 6
+                "c_ulong" => "CULong", // .NET 6
                 "c_longlong" => "long",
                 "c_ulonglong" => "ulong",
                 "c_float" => "float",
@@ -202,7 +203,7 @@ impl RustType {
                 "i32" => "int",
                 "i64" => "long",
                 "i128" => "Int128", // .NET 7
-                "isize" => "IntPtr",
+                "isize" => "nint",  // C# 9.0
                 "u8" => "byte",
                 "u16" => "ushort",
                 "u32" => "uint",
@@ -211,11 +212,11 @@ impl RustType {
                 "f32" => "float",
                 "f64" => "double",
                 "bool" => "bool",
-                "usize" => "UIntPtr",
+                "usize" => "nuint", // C# 9.0
                 "()" => "void",
                 _ => type_name, // as is
             };
-            name.to_string()
+            name
         }
 
         // resolve alias
@@ -230,39 +231,78 @@ impl RustType {
             TypeKind::FixedArray(_, _) => {
                 sb.push_str("fixed ");
 
-                let type_name = convert_type_name(use_type.type_name.as_str(), options);
-                let type_name = match type_name.as_str() {
+                let type_name = convert_type_name(use_type.type_name.as_str());
+                let type_name = match type_name {
                     // C# fixed allow types
                     "bool" | "byte" | "short" | "int" | "long" | "char" | "sbyte" | "ushort"
-                    | "uint" | "ulong" | "float" | "double" => type_name,
+                    | "uint" | "ulong" | "float" | "double" => type_name.to_owned(),
                     _ => format!("byte/* {}, this length is invalid so must keep pointer and can't edit from C# */", type_name)
                 };
 
                 sb.push_str(type_name.as_str());
             }
             TypeKind::Function(parameters, return_type) => {
-                sb.push_str("delegate* unmanaged[Cdecl]");
-                sb.push('<');
-                for p in parameters {
-                    sb.push_str(&p.rust_type.to_csharp_string(options, alias_map));
-                    sb.push_str(", ");
+                if emit_from_struct && !options.csharp_use_function_pointer {
+                    sb.push_str("void*");
+                } else if options.csharp_use_function_pointer {
+                    sb.push_str("delegate* unmanaged[Cdecl]");
+                    sb.push('<');
+                    for p in parameters {
+                        sb.push_str(&p.rust_type.to_csharp_string(
+                            options,
+                            alias_map,
+                            emit_from_struct,
+                        ));
+                        sb.push_str(", ");
+                    }
+                    match return_type {
+                        Some(x) => {
+                            sb.push_str(&x.to_csharp_string(options, alias_map, emit_from_struct));
+                        }
+                        None => {
+                            sb.push_str("void");
+                        }
+                    };
+                    sb.push('>');
+                } else {
+                    if return_type.is_some() {
+                        sb.push_str("Func<")
+                    } else {
+                        sb.push_str("Action<")
+                    }
+
+                    let joined_param = parameters
+                        .iter()
+                        .map(|p| {
+                            p.rust_type
+                                .to_csharp_string(options, alias_map, emit_from_struct)
+                        })
+                        .collect::<Vec<_>>()
+                        .join(", ");
+
+                    sb.push_str(joined_param.as_str());
+                    match return_type {
+                        Some(x) => {
+                            if !parameters.is_empty() {
+                                sb.push_str(", ");
+                            }
+                            sb.push_str(&x.to_csharp_string(options, alias_map, emit_from_struct));
+                        }
+                        None => {}
+                    };
+                    sb.push('>');
                 }
-                match return_type {
-                    Some(x) => {
-                        sb.push_str(&x.to_csharp_string(options, alias_map));
-                    }
-                    None => {
-                        sb.push_str("void");
-                    }
-                };
-                sb.push('>');
             }
             TypeKind::Option(inner) => {
                 // function pointer can not annotate ? so emit inner only
-                sb.push_str(inner.to_csharp_string(options, alias_map).as_str());
+                sb.push_str(
+                    inner
+                        .to_csharp_string(options, alias_map, emit_from_struct)
+                        .as_str(),
+                );
             }
             _ => {
-                sb.push_str(convert_type_name(use_type.type_name.as_str(), options).as_str());
+                sb.push_str(convert_type_name(use_type.type_name.as_str()));
 
                 if use_alias {
                     if let TypeKind::Pointer(p) = &use_type.type_kind {

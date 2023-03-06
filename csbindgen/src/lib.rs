@@ -75,18 +75,18 @@ pub(crate) fn generate(
     Ok((rust, csharp))
 }
 
-#[test]
-fn test() {
-    let path = std::env::current_dir().unwrap();
-    println!("starting dir: {}", path.display()); // csbindgen/csbindgen
+// #[test]
+// fn test() {
+//     let path = std::env::current_dir().unwrap();
+//     println!("starting dir: {}", path.display()); // csbindgen/csbindgen
 
-    Builder::new()
-        .input_bindgen_file("csbindgen-tests/src/lz4.rs")
-        .csharp_class_name("LibLz4")
-        .csharp_dll_name("csbindgen_tests")
-        .generate_to_file(
-            "csbindgen-tests/src/lz4_ffi.rs",
-            "dotnet-sandbox/lz4_bindgen.cs",
-        )
-        .unwrap();
-}
+//     Builder::new()
+//         .input_bindgen_file("csbindgen-tests/src/lz4.rs")
+//         .csharp_class_name("LibLz4")
+//         .csharp_dll_name("csbindgen_tests")
+//         .generate_to_file(
+//             "csbindgen-tests/src/lz4_ffi.rs",
+//             "dotnet-sandbox/lz4_bindgen.cs",
+//         )
+//         .unwrap();
+// }

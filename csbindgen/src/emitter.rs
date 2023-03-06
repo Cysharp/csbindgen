@@ -113,7 +113,7 @@ pub fn emit_csharp(
             x => format!("{x}{method_name}"),
         };
         let return_type = match &item.return_type {
-            Some(x) => x.to_csharp_string(options, aliases),
+            Some(x) => x.to_csharp_string(options, aliases, false),
             None => "void".to_string(),
         };
 
@@ -121,7 +121,7 @@ pub fn emit_csharp(
             .parameters
             .iter()
             .map(|p| {
-                let mut type_name = p.rust_type.to_csharp_string(options, aliases);
+                let mut type_name = p.rust_type.to_csharp_string(options, aliases, false);
                 if type_name == "bool" {
                     type_name = "[MarshalAs(UnmanagedType.U1)] bool".to_string();
                 }
@@ -132,7 +132,8 @@ pub fn emit_csharp(
             .join(", ");
 
         if let Some(x) = item.escape_doc_comment() {
-            method_list_string.push_str_ln(format!("        /// <summary>{}</summary>", x).as_str());
+            method_list_string
+                .push_str_ln(format!("        /// <summary>{}</summary>", x).as_str());
         }
 
         method_list_string.push_str_ln(
@@ -166,7 +167,7 @@ pub fn emit_csharp(
                 structs_string.push_str_ln("        [FieldOffset(0)]");
             }
 
-            let type_name = field.rust_type.to_csharp_string(options, aliases);
+            let type_name = field.rust_type.to_csharp_string(options, aliases, true);
             let attr = if type_name == "bool" {
                 "[MarshalAs(UnmanagedType.U1)] ".to_string()
             } else {
@@ -236,16 +237,16 @@ namespace {namespace}
     result
 }
 
-fn convert_token_enum_repr(repr: &String) -> String {
-    match repr.as_str() {
-        "(u8)" => "byte".to_string(),
-        "(u16)" => "ushort".to_string(),
-        "(u32)" => "uint".to_string(),
-        "(u64)" => "ulong".to_string(),
-        "(i8)" => "sbyte".to_string(),
-        "(i16)" => "short".to_string(),
-        "(i32)" => "int".to_string(),
-        "(i64)" => "long".to_string(),
-        x => x.to_string(),
+fn convert_token_enum_repr(repr: &str) -> &str {
+    match repr {
+        "(u8)" => "byte",
+        "(u16)" => "ushort",
+        "(u32)" => "uint",
+        "(u64)" => "ulong",
+        "(i8)" => "sbyte",
+        "(i16)" => "short",
+        "(i32)" => "int",
+        "(i64)" => "long",
+        x => x,
     }
 }

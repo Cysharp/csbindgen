@@ -20,31 +20,54 @@ unsafe
     //LibRust.call_bindgen_lz4();
 
 
+    // C# -> Rust, pass static UnmanagedCallersOnly method with `&`
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
-    static int Method(int x) => x * x;
+    static int Sum(int x, int y) => x + y;
 
-    var tako = LibRust.callback_test(&Method);
+    LibRust.csharp_to_rust(&Sum);
 
+    // Rust -> C#, get typed delegate*
+    var f = LibRust.rust_to_csharp();
 
-    var n = LibRust.nullable_callback_test(null);
-
-
-
-    var cc = LibRust.enum_test(IntEnumTest.C);
-    Console.WriteLine(cc);
-
-    Console.WriteLine(n);
+    var v = f(20, 30);
+    Console.WriteLine(v); // 50
 
 
-    //var ctx = LibRust.create_counter_context();
-    //LibRust.insert_counter_context(ctx, 10);
-    //LibRust.insert_counter_context(ctx, 20);
+
+
+
+
+    // var tako = LibRust.callback_test(&Method);
+
+    //var tako = LibRust.callback_test(&Method);
+
+
+    //Console.WriteLine(tako);
+
+
+    //var cc = LibRust.enum_test(IntEnumTest.C);
+    //Console.WriteLine(cc);
+
+
+        var context = LibRust.create_context();
+
+        // do anything...
+
+        LibRust.delete_context(context);
+
+    var ctx = LibRust.create_counter_context(); // ctx = void*
+    
+    LibRust.insert_counter_context(ctx, 10);
+    LibRust.insert_counter_context(ctx, 20);
+
+    LibRust.delete_counter_context(ctx);
+
     //LibRust.insert_counter_context(ctx, 20);
     //LibRust.insert_counter_context(ctx, 30);
     //LibRust.insert_counter_context(ctx, 99);
     //LibRust.delete_counter_context(ctx);
 
-    //var cString = LibRust.alloc_c_string();
+    // var cString = LibRust.alloc_c_string();
     //var u8String = LibRust.alloc_u8_string();
     //var u8Buffer = LibRust.alloc_u8_buffer();
     //var i32Buffer = LibRust.alloc_i32_buffer();
@@ -89,7 +112,7 @@ unsafe
 
     //    var span = buf->AsSpan();
 
-    
+
 
 
 
@@ -123,10 +146,17 @@ public static unsafe partial class LibraryImportNativeMethods
 
 
 
-    [LibraryImport(__DllName)]
-    public static partial void foo(Foo f);
+    //[LibraryImport(__DllName)]
+    //public static partial void foo(Foo f);
 
 
+
+
+    [LibraryImport(__DllName, EntryPoint = "nullable_callback_test")]
+    public static partial int nullable_callback_test([MarshalAs(UnmanagedType.FunctionPtr)] Func<int, int> cb);
+
+    [LibraryImport(__DllName, EntryPoint = "nullable_callback_test")]
+    public static partial int nullable_callback_test2(delegate* unmanaged[Cdecl]<int, int> cb);
 
 }
 
