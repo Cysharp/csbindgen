@@ -1,6 +1,7 @@
 mod alias_map;
 mod builder;
 mod emitter;
+mod field_map;
 mod parser;
 mod type_meta;
 mod util;
@@ -9,6 +10,7 @@ pub use builder::Builder;
 
 use builder::BindgenOptions;
 use emitter::*;
+use field_map::FieldMap;
 use parser::*;
 use std::{collections::HashSet, error::Error};
 
@@ -37,26 +39,31 @@ pub(crate) fn generate(
     let structs = collect_struct(&file_ast);
     let enums = collect_enum(&file_ast);
 
+    // collect using_types
     let mut using_types = HashSet::new();
     for method in &methods {
+        // add to using_types with normalize
         if let Some(x) = &method.return_type {
-            using_types.insert(x.type_name.clone());
+            let normalized = aliases.get_mapped_name_or_self(&x.type_name);
+            using_types.insert(normalized.clone());
         }
         for p in &method.parameters {
-            using_types.insert(p.rust_type.type_name.clone());
+            let normalized = aliases.get_mapped_name_or_self(&p.rust_type.type_name);
+            using_types.insert(normalized);
         }
     }
 
-    for item in &structs {
-        if using_types.contains(&item.struct_name) {
-            for item in &item.fields {
-                using_types.insert(item.rust_type.type_name.clone());
-            }
+    let mut field_map = FieldMap::new();
+    for struct_type in &structs {
+        for field in &struct_type.fields {
+            let struct_type_normalized = aliases.get_mapped_name_or_self(&struct_type.struct_name);
+            let field_type_normalized = aliases.get_mapped_name_or_self(&field.rust_type.type_name);
+            field_map.insert(&struct_type_normalized, &field_type_normalized);
         }
     }
 
-    let structs = reduce_struct(&structs, &using_types);
-    let enums = reduce_enum(&enums, &using_types);
+    let structs = reduce_struct(&structs, &field_map, &using_types);
+    let enums = reduce_enum(&enums, &field_map, &using_types);
 
     let rust = if generate_rust {
         Some(emit_rust_method(&methods, options))
@@ -68,16 +75,18 @@ pub(crate) fn generate(
     Ok((rust, csharp))
 }
 
-// #[test]
-// fn test() {
-//     let path = std::env::current_dir().unwrap();
-//     println!("starting dir: {}", path.display()); // csbindgen/csbindgen
+#[test]
+fn test() {
+    let path = std::env::current_dir().unwrap();
+    println!("starting dir: {}", path.display()); // csbindgen/csbindgen
 
-//     Builder::new()
-//         .input_bindgen_file("../csbindgen-tests/src/quiche.rs")
-//         .rust_method_prefix("csbindgen_quiche_")
-//         .csharp_class_name("LibQuiche")
-//         .csharp_dll_name("libquiche")
-//         .generate_to_file("../csbindgen-tests/src/quiche_ffi.rs", "../csbindgen-tests/../dotnet-sandbox/quiche_bindgen.cs")
-//         .unwrap();
-// }
+    Builder::new()
+        .input_bindgen_file("csbindgen-tests/src/lz4.rs")
+        .csharp_class_name("LibLz4")
+        .csharp_dll_name("csbindgen_tests")
+        .generate_to_file(
+            "csbindgen-tests/src/lz4_ffi.rs",
+            "dotnet-sandbox/lz4_bindgen.cs",
+        )
+        .unwrap();
+}

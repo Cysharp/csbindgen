@@ -1,4 +1,4 @@
-use crate::{alias_map::AliasMap, builder::BindgenOptions, type_meta::*};
+use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
 use std::collections::HashSet;
 use syn::{ForeignItem, Item, Pat, ReturnType};
 
@@ -227,10 +227,14 @@ pub fn collect_enum(ast: &syn::File) -> Vec<RustEnum> {
     result
 }
 
-pub fn reduce_struct(structs: &Vec<RustStruct>, using_types: &HashSet<String>) -> Vec<RustStruct> {
+pub fn reduce_struct(
+    structs: &Vec<RustStruct>,
+    field_map: &FieldMap,
+    using_types: &HashSet<String>,
+) -> Vec<RustStruct> {
     let mut result = Vec::new();
     for item in structs {
-        if using_types.contains(&item.struct_name) {
+        if field_map.exists_in_using_types(&item.struct_name, using_types, 0) {
             result.push(item.clone());
         }
     }
@@ -238,10 +242,14 @@ pub fn reduce_struct(structs: &Vec<RustStruct>, using_types: &HashSet<String>) -
     result
 }
 
-pub fn reduce_enum(enums: &Vec<RustEnum>, using_types: &HashSet<String>) -> Vec<RustEnum> {
+pub fn reduce_enum(
+    enums: &Vec<RustEnum>,
+    field_map: &FieldMap,
+    using_types: &HashSet<String>,
+) -> Vec<RustEnum> {
     let mut result = Vec::new();
     for item in enums {
-        if using_types.contains(&item.enum_name) {
+        if field_map.exists_in_using_types(&item.enum_name, using_types, 0) {
             result.push(item.clone());
         }
     }

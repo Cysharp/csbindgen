@@ -84,6 +84,13 @@ impl AliasMap {
             None => None,
         }
     }
+
+    pub fn get_mapped_name_or_self(&self, name: &String) -> String {
+        match self.get_mapped_value(name) {
+            Some(x) => x.type_name.to_owned(),
+            None => name.to_owned(),
+        }
+    }
 }
 
 #[cfg(test)]

@@ -188,6 +188,19 @@ pub extern "C" fn call_bindgen() {
         .unwrap();
 }
 
+#[no_mangle]
+pub extern "C" fn call_bindgen_lz4() {
+    let path = std::env::current_dir().unwrap();
+    println!("starting dir: {}", path.display()); // csbindgen/csbindgen-tests
+
+    csbindgen::Builder::default()
+        .input_extern_file("../../../../csbindgen-tests/src/lz4.rs")
+        .csharp_class_name("LibLz4")
+        .csharp_dll_name("csbindgen_tests")
+        .generate_to_file("../../../../csbindgen-tests/src/lz4_ffi.cs", "../../../../dotnet-sandbox/lz4_bindgen.cs")
+        .unwrap();
+}
+
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct Context {
@@ -288,4 +301,9 @@ impl ByteBuffer {
     pub fn destroy(self) {
         drop(self.destroy_into_vec());
     }
+}
+
+trait Ex {}
+
+impl Ex for i32{
 }

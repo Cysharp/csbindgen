@@ -13,6 +13,10 @@ using System.Text;
 
 unsafe
 {
+
+    LibRust.call_bindgen_lz4();
+
+
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
     static int Method(int x) => x * x;
 
