@@ -6,7 +6,7 @@ authors = [
   "Yoshifumi Kawai <ils@neue.cc>",
   "Cysharp, Inc."
 ]
-description = "Generate C# FFI from Rust for brings C native library to .NET and Unity easily."
+description = "Generate C# FFI from Rust for automatically brings native code and C native library to .NET and Unity."
 keywords = ["bindings", "ffi", "code-generation", "csharp"]
 categories = ["external-ffi-bindings", "development-tools::ffi"]
 license = "MIT"
