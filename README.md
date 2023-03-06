@@ -558,11 +558,11 @@ pub struct Context {
 ```
 
 ```csharp
-var context = LibRust.create_context();
+var context = NativeMethods.create_context();
 
 // do anything...
 
-LibRust.delete_context(context);
+NativeMethods.delete_context(context);
 ```
 
 You can also pass memory allocated by C# to Rust (use `fixed` or `GCHandle.Alloc(Pinned)`). The important thing is that memory allocated in Rust must release in Rust and memory allocated in C# must release in C#.
@@ -601,12 +601,12 @@ pub struct CounterContext {
 
 ```csharp
 // in C#, ctx = void*
-var ctx = LibRust.create_counter_context();
+var ctx = NativeMethods.create_counter_context();
     
-LibRust.insert_counter_context(ctx, 10);
-LibRust.insert_counter_context(ctx, 20);
+NativeMethods.insert_counter_context(ctx, 10);
+NativeMethods.insert_counter_context(ctx, 20);
 
-LibRust.delete_counter_context(ctx);
+NativeMethods.delete_counter_context(ctx);
 ```
 
 ### String and Array(Span)
