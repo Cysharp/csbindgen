@@ -81,7 +81,7 @@ cc::Build::new().file("lz4.c").compile("lz4");
 csbindgen::Builder::default()
     .input_bindgen_file("lz4.rs") // read from bindgen generated code
     .rust_file_header("use super::lz4;")
-    .csharp_entry_point_prefix("cs_bindgen")
+    .csharp_entry_point_prefix("csbindgen_")
     .csharp_dll_name("liblz4")
     .generate_to_file("lz4_ffi.rs", "../dotnet/NativeMethods.lz4.g.cs")
     .unwrap();
