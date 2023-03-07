@@ -80,8 +80,7 @@ cc::Build::new().file("lz4.c").compile("lz4");
 // csbindgen code, generate both rust ffi and C# dll import
 csbindgen::Builder::default()
     .input_bindgen_file("lz4.rs")            // read from bindgen generated code
-    .rust_file_header("use super::lz4;")     // import bindgen struct
-    .rust_method_type_path("lz4")            // invoke bindgen method
+    .rust_file_header("use super::lz4::*;")     // import bindgen generated modules(struct/method)
     .csharp_entry_point_prefix("csbindgen_") // adjust same signature of rust method and C# EntryPoint
     .csharp_dll_name("liblz4")
     .generate_to_file("lz4_ffi.rs", "../dotnet/NativeMethods.lz4.g.cs")
@@ -96,12 +95,12 @@ It will generates like these code.
 #[allow(unused)]
 use ::std::os::raw::*;
 
-use super::lz4;
+use super::lz4::*;
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_compress_default(src: *const c_char, dst: *mut c_char, srcSize:  c_int, dstCapacity:  c_int) ->  c_int
 {
-    lz4::LZ4_compress_default(src, dst, srcSize, dstCapacity)
+    LZ4_compress_default(src, dst, srcSize, dstCapacity)
 }
 ```
 
