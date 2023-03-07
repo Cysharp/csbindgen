@@ -79,9 +79,10 @@ cc::Build::new().file("lz4.c").compile("lz4");
 
 // csbindgen code, generate both rust ffi and C# dll import
 csbindgen::Builder::default()
-    .input_bindgen_file("lz4.rs") // read from bindgen generated code
-    .rust_file_header("use super::lz4;")
-    .csharp_entry_point_prefix("csbindgen_")
+    .input_bindgen_file("lz4.rs")            // read from bindgen generated code
+    .rust_file_header("use super::lz4;")     // import bindgen struct
+    .rust_method_type_path("lz4")            // invoke bindgen method
+    .csharp_entry_point_prefix("csbindgen_") // adjust same signature of rust method and C# EntryPoint
     .csharp_dll_name("liblz4")
     .generate_to_file("lz4_ffi.rs", "../dotnet/NativeMethods.lz4.g.cs")
     .unwrap();
