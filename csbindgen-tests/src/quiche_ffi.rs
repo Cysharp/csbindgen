@@ -3,7 +3,7 @@
 #[allow(unused)]
 use ::std::os::raw::*;
 
-
+use super::quiche::*;
 
 
 #[no_mangle]
@@ -18,7 +18,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_version(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_quiche_enable_debug_logging(
-    cb: Option<extern "C" fn(line: *const c_char, argp: *mut c_void)>,
+    cb: Option<unsafe extern "C" fn(line: *const c_char, argp: *mut c_void)>,
     argp: *mut c_void    
 ) -> c_int
 {
@@ -899,7 +899,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_close(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_trace_id(
     conn: *const quiche_conn,
-    out: *mut *mut u8,
+    out: *mut *const u8,
     out_len: *mut usize    
 )
 {
@@ -913,7 +913,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_trace_id(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_source_id(
     conn: *const quiche_conn,
-    out: *mut *mut u8,
+    out: *mut *const u8,
     out_len: *mut usize    
 )
 {
@@ -927,7 +927,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_source_id(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_destination_id(
     conn: *const quiche_conn,
-    out: *mut *mut u8,
+    out: *mut *const u8,
     out_len: *mut usize    
 )
 {
@@ -941,7 +941,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_destination_id(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_application_proto(
     conn: *const quiche_conn,
-    out: *mut *mut u8,
+    out: *mut *const u8,
     out_len: *mut usize    
 )
 {
@@ -955,7 +955,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_application_proto(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_peer_cert(
     conn: *const quiche_conn,
-    out: *mut *mut u8,
+    out: *mut *const u8,
     out_len: *mut usize    
 )
 {
@@ -969,7 +969,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_peer_cert(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_session(
     conn: *const quiche_conn,
-    out: *mut *mut u8,
+    out: *mut *const u8,
     out_len: *mut usize    
 )
 {
@@ -1065,7 +1065,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_peer_error(
     conn: *const quiche_conn,
     is_app: *mut bool,
     error_code: *mut u64,
-    reason: *mut *mut u8,
+    reason: *mut *const u8,
     reason_len: *mut usize    
 ) -> bool
 {
@@ -1083,7 +1083,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_local_error(
     conn: *const quiche_conn,
     is_app: *mut bool,
     error_code: *mut u64,
-    reason: *mut *mut u8,
+    reason: *mut *const u8,
     reason_len: *mut usize    
 ) -> bool
 {
@@ -1261,7 +1261,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_dgram_send(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_quiche_conn_dgram_purge_outgoing(
     conn: *mut quiche_conn,
-    f: Option<extern "C" fn(arg1: *mut u8, arg2: usize) -> bool>    
+    f: Option<unsafe extern "C" fn(arg1: *mut u8, arg2: usize) -> bool>    
 )
 {
     quiche_conn_dgram_purge_outgoing(
@@ -1427,7 +1427,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_h3_event_type(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_quiche_h3_event_for_each_header(
     ev: *mut quiche_h3_event,
-    cb: Option<extern "C" fn(name: *mut u8, name_len: usize, value: *mut u8, value_len: usize, argp: *mut c_void) -> c_int>,
+    cb: Option<unsafe extern "C" fn(name: *mut u8, name_len: usize, value: *mut u8, value_len: usize, argp: *mut c_void) -> c_int>,
     argp: *mut c_void    
 ) -> c_int
 {
@@ -1441,7 +1441,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_h3_event_for_each_header(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_quiche_h3_for_each_setting(
     conn: *mut quiche_h3_conn,
-    cb: Option<extern "C" fn(identifier: u64, value: u64, argp: *mut c_void) -> c_int>,
+    cb: Option<unsafe extern "C" fn(identifier: u64, value: u64, argp: *mut c_void) -> c_int>,
     argp: *mut c_void    
 ) -> c_int
 {
@@ -1614,7 +1614,7 @@ pub unsafe extern "C" fn csbindgen_quiche_quiche_h3_send_priority_update_for_req
 pub unsafe extern "C" fn csbindgen_quiche_quiche_h3_take_last_priority_update(
     conn: *mut quiche_h3_conn,
     prioritized_element_id: u64,
-    cb: Option<extern "C" fn(priority_field_value: *mut u8, priority_field_value_len: u64, argp: *mut c_void) -> c_int>,
+    cb: Option<unsafe extern "C" fn(priority_field_value: *mut u8, priority_field_value_len: u64, argp: *mut c_void) -> c_int>,
     argp: *mut c_void    
 ) -> c_int
 {

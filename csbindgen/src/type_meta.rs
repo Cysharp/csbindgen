@@ -106,7 +106,7 @@ impl RustType {
                 ConstPointerPointer => sb.push_str("*const *const"),
                 MutPointerPointer => sb.push_str("*mut *mut"),
                 ConstMutPointerPointer =>sb.push_str("*const *mut"),
-                MutConstPointerPointer =>sb.push_str("*mut *mut"),
+                MutConstPointerPointer =>sb.push_str("*mut *const"),
             };
         }
 

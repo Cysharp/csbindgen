@@ -3,7 +3,7 @@
 #[allow(unused)]
 use ::std::os::raw::*;
 
-
+use super::bullet3::*;
 
 
 #[no_mangle]
@@ -246,10 +246,10 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusActualState(
     bodyUniqueId: *mut c_int,
     numDegreeOfFreedomQ: *mut c_int,
     numDegreeOfFreedomU: *mut c_int,
-    rootLocalInertialFrame: *mut *mut f64,
-    actualStateQ: *mut *mut f64,
-    actualStateQdot: *mut *mut f64,
-    jointReactionForces: *mut *mut f64    
+    rootLocalInertialFrame: *mut *const f64,
+    actualStateQ: *mut *const f64,
+    actualStateQdot: *mut *const f64,
+    jointReactionForces: *mut *const f64    
 ) -> c_int
 {
     b3GetStatusActualState(
@@ -271,14 +271,14 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusActualState2(
     numLinks: *mut c_int,
     numDegreeOfFreedomQ: *mut c_int,
     numDegreeOfFreedomU: *mut c_int,
-    rootLocalInertialFrame: *mut *mut f64,
-    actualStateQ: *mut *mut f64,
-    actualStateQdot: *mut *mut f64,
-    jointReactionForces: *mut *mut f64,
-    linkLocalInertialFrames: *mut *mut f64,
-    jointMotorForces: *mut *mut f64,
-    linkStates: *mut *mut f64,
-    linkWorldVelocities: *mut *mut f64    
+    rootLocalInertialFrame: *mut *const f64,
+    actualStateQ: *mut *const f64,
+    actualStateQdot: *mut *const f64,
+    jointReactionForces: *mut *const f64,
+    linkLocalInertialFrames: *mut *const f64,
+    jointMotorForces: *mut *const f64,
+    linkStates: *mut *const f64,
+    linkWorldVelocities: *mut *const f64    
 ) -> c_int
 {
     b3GetStatusActualState2(
@@ -565,7 +565,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserDataInfo(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     userDataIndex: c_int,
-    keyOut: *mut *mut c_char,
+    keyOut: *mut *const c_char,
     userDataIdOut: *mut c_int,
     linkIndexOut: *mut c_int,
     visualShapeIndexOut: *mut c_int    

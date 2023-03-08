@@ -3,7 +3,7 @@
 #[allow(unused)]
 use ::std::os::raw::*;
 
-
+use super::zstd::*;
 
 
 #[no_mangle]

@@ -349,7 +349,7 @@ fn parse_type(t: &syn::Type) -> RustType {
             };
 
             return RustType {
-                type_name: "extern \"C\" fn".to_string(),
+                type_name: "unsafe extern \"C\" fn".to_string(),
                 type_kind: TypeKind::Function(parameters, ret),
             };
         }

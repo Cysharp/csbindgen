@@ -14,6 +14,45 @@ mod lz4;
 #[allow(non_camel_case_types)]
 mod lz4_ffi;
 
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// #[allow(non_upper_case_globals)]
+// mod bullet3;
+
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// mod bullet3_ffi;
+
+
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// #[allow(non_upper_case_globals)]
+// mod quiche;
+
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// mod quiche_ffi;
+
+
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// #[allow(non_upper_case_globals)]
+// mod zstd;
+
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// mod zstd_ffi;
+
+
+
+
+
 #[allow(non_camel_case_types)]
 pub type LONG_PTR = ::std::os::raw::c_longlong;
 #[allow(non_camel_case_types)]
