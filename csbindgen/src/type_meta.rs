@@ -77,6 +77,8 @@ pub enum PointerType {
     MutPointer,
     ConstPointerPointer,
     MutPointerPointer,
+    ConstMutPointerPointer,
+    MutConstPointerPointer
 }
 
 #[derive(Clone, Debug)]
@@ -103,6 +105,8 @@ impl RustType {
                 MutPointer => sb.push_str("*mut"),
                 ConstPointerPointer => sb.push_str("*const *const"),
                 MutPointerPointer => sb.push_str("*mut *mut"),
+                ConstMutPointerPointer =>sb.push_str("*const *mut"),
+                MutConstPointerPointer =>sb.push_str("*mut *const"),
             };
         }
 
@@ -305,12 +309,13 @@ impl RustType {
                 sb.push_str(convert_type_name(use_type.type_name.as_str()));
 
                 if use_alias {
+                    use PointerType::*;
                     if let TypeKind::Pointer(p) = &use_type.type_kind {
                         match p {
-                            PointerType::MutPointer | PointerType::ConstPointer => {
+                            MutPointer | ConstPointer => {
                                 sb.push('*');
                             }
-                            PointerType::MutPointerPointer | PointerType::ConstPointerPointer => {
+                            MutPointerPointer | ConstPointerPointer | MutConstPointerPointer | ConstMutPointerPointer  => {
                                 sb.push_str("**");
                             }
                         }
@@ -318,11 +323,12 @@ impl RustType {
                 }
 
                 if let TypeKind::Pointer(p) = &self.type_kind {
+                    use PointerType::*;
                     match p {
-                        PointerType::MutPointer | PointerType::ConstPointer => {
+                        MutPointer | ConstPointer => {
                             sb.push('*');
                         }
-                        PointerType::MutPointerPointer | PointerType::ConstPointerPointer => {
+                        MutPointerPointer | ConstPointerPointer | MutConstPointerPointer | ConstMutPointerPointer => {
                             sb.push_str("**");
                         }
                     }

@@ -15,19 +15,44 @@ unsafe
 {
 
 
-    LibRust.alias_test1(null);
 
-    //LibRust.call_bindgen_lz4();
+    //NativeMethods.call_bindgen_lz4();
+
+
+    var str = "foobarbaz:あいうえお"; // JPN(Unicode)
+    fixed (char* p = str)
+    {
+        NativeMethods.csharp_to_rust_string((ushort*)p, str.Length);
+    }
+
+    var str2 = Encoding.UTF8.GetBytes("あいうえお:foobarbaz");
+    fixed (byte* p = str2)
+    {
+        NativeMethods.csharp_to_rust_utf8(p, str2.Length);
+    }
+
+    var bytes = new byte[] { 1, 10, 100, 255 };
+    fixed (byte* p = bytes)
+    {
+        NativeMethods.csharp_to_rust_bytes(p, bytes.Length);
+    }
+
+
+
+    //NativeMethods.csharp_to_rust_utf8
+    //NativeMethods.alias_test1(null);
+
+
 
 
     // C# -> Rust, pass static UnmanagedCallersOnly method with `&`
     [UnmanagedCallersOnly(CallConvs = new[] { typeof(CallConvCdecl) })]
     static int Sum(int x, int y) => x + y;
 
-    LibRust.csharp_to_rust(&Sum);
+    NativeMethods.csharp_to_rust(&Sum);
 
     // Rust -> C#, get typed delegate*
-    var f = LibRust.rust_to_csharp();
+    var f = NativeMethods.rust_to_csharp();
 
     var v = f(20, 30);
     Console.WriteLine(v); // 50
@@ -49,18 +74,18 @@ unsafe
     //Console.WriteLine(cc);
 
 
-        var context = LibRust.create_context();
+    //    var context = LibRust.create_context();
 
-        // do anything...
+    //    // do anything...
 
-        LibRust.delete_context(context);
+    //    LibRust.delete_context(context);
 
-    var ctx = LibRust.create_counter_context(); // ctx = void*
-    
-    LibRust.insert_counter_context(ctx, 10);
-    LibRust.insert_counter_context(ctx, 20);
+    //var ctx = LibRust.create_counter_context(); // ctx = void*
 
-    LibRust.delete_counter_context(ctx);
+    //LibRust.insert_counter_context(ctx, 10);
+    //LibRust.insert_counter_context(ctx, 20);
+
+    //LibRust.delete_counter_context(ctx);
 
     //LibRust.insert_counter_context(ctx, 20);
     //LibRust.insert_counter_context(ctx, 30);

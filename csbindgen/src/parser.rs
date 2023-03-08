@@ -258,8 +258,7 @@ pub fn reduce_enum(
 fn parse_type(t: &syn::Type) -> RustType {
     match t {
         syn::Type::Ptr(t) => {
-            let has_const = t.const_token.is_some();
-            // let has_mut = t.mutability.is_some();
+            let has_const = t.const_token.is_some(); // not is has_mut
 
             if let syn::Type::Path(path) = &*t.elem {
                 return RustType {
@@ -272,13 +271,18 @@ fn parse_type(t: &syn::Type) -> RustType {
                 };
             } else if let syn::Type::Ptr(t) = &*t.elem {
                 if let syn::Type::Path(path) = &*t.elem {
+                    let has_const2 = t.const_token.is_some();
+
+                    let pointer_type = match (has_const, has_const2) {
+                        (true, true) => PointerType::ConstPointerPointer,
+                        (true, false) => PointerType::ConstMutPointerPointer,
+                        (false, true) => PointerType::MutConstPointerPointer,
+                        (false, false) => PointerType::MutPointerPointer,
+                    };
+
                     return RustType {
                         type_name: path.path.segments.last().unwrap().ident.to_string(),
-                        type_kind: TypeKind::Pointer(if has_const {
-                            PointerType::ConstPointerPointer
-                        } else {
-                            PointerType::MutPointerPointer
-                        }),
+                        type_kind: TypeKind::Pointer(pointer_type),
                     };
                 }
             }
@@ -345,7 +349,7 @@ fn parse_type(t: &syn::Type) -> RustType {
             };
 
             return RustType {
-                type_name: "extern \"C\" fn".to_string(),
+                type_name: "unsafe extern \"C\" fn".to_string(),
                 type_kind: TypeKind::Function(parameters, ret),
             };
         }

@@ -61,16 +61,17 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     csbindgen::Builder::default()
         .input_extern_file("src/lib.rs")
-        .csharp_class_name("LibRust")
+        .csharp_class_name("NativeMethods")
         .csharp_dll_name("csbindgen_tests")
         .csharp_use_function_pointer(true)
-        .generate_csharp_file("../dotnet-sandbox/method_call.cs")
+        .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs")
         .unwrap();
 
     // csbindgen::Builder::new()
     //     .input_bindgen_file("src/zstd.rs")
     //     .method_filter(|x| x.starts_with("ZSTD_"))
     //     .rust_method_prefix("csbindgen_zstd_")
+    //     .rust_file_header("use super::zstd::*;")
     //     .csharp_class_name("LibZstd")
     //     .csharp_dll_name("libzsd")
     //     .generate_to_file("src/zstd_ffi.rs", "../dotnet-sandbox/zstd_bindgen.cs")?;
@@ -78,6 +79,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // csbindgen::Builder::new()
     //     .input_bindgen_file("src/quiche.rs")
     //     .method_filter(|x| x.starts_with("quiche_"))
+    //     .rust_file_header("use super::quiche::*;")
     //     .rust_method_prefix("csbindgen_quiche_")
     //     .csharp_class_name("LibQuiche")
     //     .csharp_dll_name("libquiche")
@@ -86,7 +88,9 @@ fn main() -> Result<(), Box<dyn Error>> {
     // csbindgen::Builder::new()
     //     .input_bindgen_file("src/bullet3.rs")
     //     .method_filter(|x| x.starts_with("b3"))
+    //     .rust_file_header("use super::bullet3::*;")
     //     .rust_method_prefix("csbindgen_bullet3_")
+    //     .csharp_entry_point_prefix("csbindgen_bullet3_")
     //     .csharp_class_name("LibBullet3")
     //     .csharp_dll_name("libbullet3")
     //     .generate_to_file("src/bullet3_ffi.rs", "../dotnet-sandbox/bullet3_bindgen.cs")?;

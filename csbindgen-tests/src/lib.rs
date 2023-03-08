@@ -14,6 +14,39 @@ mod lz4;
 #[allow(non_camel_case_types)]
 mod lz4_ffi;
 
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// #[allow(non_upper_case_globals)]
+// mod bullet3;
+
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// mod bullet3_ffi;
+
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// #[allow(non_upper_case_globals)]
+// mod quiche;
+
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// mod quiche_ffi;
+
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// #[allow(non_upper_case_globals)]
+// mod zstd;
+
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// mod zstd_ffi;
+
 #[allow(non_camel_case_types)]
 pub type LONG_PTR = ::std::os::raw::c_longlong;
 #[allow(non_camel_case_types)]
@@ -35,6 +68,33 @@ pub unsafe extern "C" fn nullpointer_test(p: *const u8) {
 }
 
 #[no_mangle]
+pub unsafe extern "C" fn csharp_to_rust_string(utf16_str: *const u16, utf16_len: i32) {
+    let slice = std::slice::from_raw_parts(utf16_str, utf16_len as usize);
+
+    let str = String::from_utf16(slice).unwrap();
+
+    println!("{}", str);
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn csharp_to_rust_utf8(utf8_str: *const u8, utf8_len: i32) {
+    let slice = std::slice::from_raw_parts(utf8_str, utf8_len as usize);
+    let str = String::from_utf8_unchecked(slice.to_vec());
+    println!("{}", str);
+}
+
+
+#[no_mangle]
+pub unsafe extern "C" fn csharp_to_rust_bytes(bytes: *const u8, len: i32) {
+    let slice = std::slice::from_raw_parts(bytes, len as usize);
+    let vec = slice.to_vec();
+    println!("{:?}", vec);
+}
+
+
+
+
+#[no_mangle]
 pub extern "C" fn callback_test(cb: extern "C" fn(a: i32) -> i32) -> i32 {
     cb(100)
 }
@@ -46,11 +106,11 @@ pub extern "C" fn csharp_to_rust(cb: extern "C" fn(x: i32, y: i32) -> i32) {
 }
 
 #[no_mangle]
-pub extern "C" fn rust_to_csharp() -> extern fn(x: i32, y: i32) -> i32 {
+pub extern "C" fn rust_to_csharp() -> extern "C" fn(x: i32, y: i32) -> i32 {
     sum // return rust method
 }
 
-extern "C" fn sum(x:i32, y:i32) -> i32 {
+extern "C" fn sum(x: i32, y: i32) -> i32 {
     x + y
 }
 
