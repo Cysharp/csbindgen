@@ -224,7 +224,7 @@ csbindgen::Builder::default()
     .input_bindgen_file("src/lz4.rs")             // required
     .method_filter(|x| { x.starts_with("LZ4") } ) // optional, default: |x| !x.starts_with('_')
     .rust_method_prefix("csbindgen_")             // optional, default: "csbindgen_"
-    .rust_file_header("use super::lz4;")          // optional, default: ""
+    .rust_file_header("use super::lz4::*;")       // optional, default: ""
     .rust_method_type_path("lz4")                 // optional, default: ""
     .csharp_dll_name("lz4")                       // required
     .csharp_class_name("NativeMethods")           // optional, default: NativeMethods
@@ -369,6 +369,8 @@ Rust types will map these C# types.
 | `*const T` | `T*` |
 | `*mut *mut T` | `T**` |
 | `*const *const T` | `T**` |
+| `*mut *const T` | `T**` |
+| `*const *mut T` | `T**` |
 
 csbindgen is designed to return primitives that do not cause marshalling. It is better to convert from pointers to Span yourself than to do the conversion implicitly and in a black box. This is a recent trend, such as the addition of [DisableRuntimeMarshalling](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.disableruntimemarshallingattribute) from .NET 7.
 
@@ -814,7 +816,53 @@ finally
 }
 ```
 
-C# to Rust would be a bit simpler to send, just pass byte* and length. In Rust, use `std::slice::from_raw_parts` to create slice. Again, the important thing is that memory allocated in Rust must release in Rust and memory allocated in C# must release in C#.
+C# to Rust would be a bit simpler to send, just pass byte* and length. In Rust, use `std::slice::from_raw_parts` to create slice. 
+
+```rust
+#[no_mangle]
+pub unsafe extern "C" fn csharp_to_rust_string(utf16_str: *const u16, utf16_len: i32) {
+    let slice = std::slice::from_raw_parts(utf16_str, utf16_len as usize);
+    let str = String::from_utf16(slice).unwrap();
+    println!("{}", str);
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn csharp_to_rust_utf8(utf8_str: *const u8, utf8_len: i32) {
+    let slice = std::slice::from_raw_parts(utf8_str, utf8_len as usize);
+    let str = String::from_utf8_unchecked(slice.to_vec());
+    println!("{}", str);
+}
+
+
+#[no_mangle]
+pub unsafe extern "C" fn csharp_to_rust_bytes(bytes: *const u8, len: i32) {
+    let slice = std::slice::from_raw_parts(bytes, len as usize);
+    let vec = slice.to_vec();
+    println!("{:?}", vec);
+}
+```
+
+```csharp
+var str = "foobarbaz:あいうえお"; // JPN(Unicode)
+fixed (char* p = str)
+{
+    NativeMethods.csharp_to_rust_string((ushort*)p, str.Length);
+}
+
+var str2 = Encoding.UTF8.GetBytes("あいうえお:foobarbaz");
+fixed (byte* p = str2)
+{
+    NativeMethods.csharp_to_rust_utf8(p, str2.Length);
+}
+
+var bytes = new byte[] { 1, 10, 100, 255 };
+fixed (byte* p = bytes)
+{
+    NativeMethods.csharp_to_rust_bytes(p, bytes.Length);
+}
+```
+
+Again, the important thing is that memory allocated in Rust must release in Rust and memory allocated in C# must release in C#.
 
 Build Tracing
 ---

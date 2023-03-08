@@ -8,7 +8,7 @@ using System.Runtime.InteropServices;
 
 namespace CsBindgen
 {
-    internal static unsafe partial class LibRust
+    internal static unsafe partial class NativeMethods
     {
         const string __DllName = "csbindgen_tests";
 
@@ -20,6 +20,15 @@ namespace CsBindgen
 
         [DllImport(__DllName, EntryPoint = "nullpointer_test", CallingConvention = CallingConvention.Cdecl)]
         public static extern void nullpointer_test(byte* p);
+
+        [DllImport(__DllName, EntryPoint = "csharp_to_rust_string", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void csharp_to_rust_string(ushort* utf16_str, int utf16_len);
+
+        [DllImport(__DllName, EntryPoint = "csharp_to_rust_utf8", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void csharp_to_rust_utf8(byte* utf8_str, int utf8_len);
+
+        [DllImport(__DllName, EntryPoint = "csharp_to_rust_bytes", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void csharp_to_rust_bytes(byte* bytes, int len);
 
         [DllImport(__DllName, EntryPoint = "callback_test", CallingConvention = CallingConvention.Cdecl)]
         public static extern int callback_test(delegate* unmanaged[Cdecl]<int, int> cb);

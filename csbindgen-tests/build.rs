@@ -61,10 +61,10 @@ fn main() -> Result<(), Box<dyn Error>> {
 
     csbindgen::Builder::default()
         .input_extern_file("src/lib.rs")
-        .csharp_class_name("LibRust")
+        .csharp_class_name("NativeMethods")
         .csharp_dll_name("csbindgen_tests")
         .csharp_use_function_pointer(true)
-        .generate_csharp_file("../dotnet-sandbox/method_call.cs")
+        .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs")
         .unwrap();
 
     // csbindgen::Builder::new()
