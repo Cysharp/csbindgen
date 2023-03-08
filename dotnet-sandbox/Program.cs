@@ -137,7 +137,7 @@ unsafe
 
     //    var span = buf->AsSpan();
 
-
+    // ExactSpelling = true
 
 
 
@@ -165,6 +165,7 @@ public static unsafe partial class LibraryImportNativeMethods
     const string __DllName = "csbindgen_tests";
 
 
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     [LibraryImport(__DllName, EntryPoint = "my_bool")]
     [return: MarshalAs(UnmanagedType.U1)]
     public static partial bool my_bool([MarshalAs(UnmanagedType.U1)] bool x, [MarshalAs(UnmanagedType.U1)] bool y, [MarshalAs(UnmanagedType.U1)] bool z, bool* xr, bool* yr, bool* zr);
@@ -181,6 +182,7 @@ public static unsafe partial class LibraryImportNativeMethods
     public static partial int nullable_callback_test([MarshalAs(UnmanagedType.FunctionPtr)] Func<int, int> cb);
 
     [LibraryImport(__DllName, EntryPoint = "nullable_callback_test")]
+    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
     public static partial int nullable_callback_test2(delegate* unmanaged[Cdecl]<int, int> cb);
 
 }

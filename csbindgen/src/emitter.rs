@@ -108,12 +108,49 @@ pub fn emit_csharp(
     let mut method_list_string = String::new();
     for item in methods {
         let method_name = &item.method_name;
+
+        if let Some(x) = &item.return_type {
+            if let Some(delegate_method) = build_method_delegate_if_required(
+                x,
+                options,
+                aliases,
+                method_name,
+                &"return".to_string(),
+            ) {
+                method_list_string.push_str(
+                    format!("        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n")
+                        .as_str(),
+                );
+                method_list_string
+                    .push_str(format!("        public {delegate_method};\n\n").as_str());
+            }
+        }
+
+        for p in item.parameters.iter() {
+            if let Some(delegate_method) = build_method_delegate_if_required(
+                &p.rust_type,
+                options,
+                aliases,
+                method_name,
+                &p.name,
+            ) {
+                method_list_string.push_str(
+                    format!("        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n")
+                        .as_str(),
+                );
+                method_list_string
+                    .push_str(format!("        public {delegate_method};\n\n").as_str());
+            }
+        }
+
         let entry_point = match options.csharp_entry_point_prefix.as_str() {
             "" => format!("{method_prefix}{method_name}"),
             x => format!("{x}{method_name}"),
         };
         let return_type = match &item.return_type {
-            Some(x) => x.to_csharp_string(options, aliases, false),
+            Some(x) => {
+                x.to_csharp_string(options, aliases, false, method_name, &"return".to_string())
+            }
             None => "void".to_string(),
         };
 
@@ -121,7 +158,9 @@ pub fn emit_csharp(
             .parameters
             .iter()
             .map(|p| {
-                let mut type_name = p.rust_type.to_csharp_string(options, aliases, false);
+                let mut type_name =
+                    p.rust_type
+                        .to_csharp_string(options, aliases, false, method_name, &p.name);
                 if type_name == "bool" {
                     type_name = "[MarshalAs(UnmanagedType.U1)] bool".to_string();
                 }
@@ -137,7 +176,7 @@ pub fn emit_csharp(
         }
 
         method_list_string.push_str_ln(
-            format!("        [DllImport(__DllName, EntryPoint = \"{entry_point}\", CallingConvention = CallingConvention.Cdecl)]").as_str(),
+            format!("        [DllImport(__DllName, EntryPoint = \"{entry_point}\", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]").as_str(),
         );
         if return_type == "bool" {
             method_list_string.push_str_ln("        [return: MarshalAs(UnmanagedType.U1)]");
@@ -167,7 +206,13 @@ pub fn emit_csharp(
                 structs_string.push_str_ln("        [FieldOffset(0)]");
             }
 
-            let type_name = field.rust_type.to_csharp_string(options, aliases, true);
+            let type_name = field.rust_type.to_csharp_string(
+                options,
+                aliases,
+                true,
+                &"".to_string(),
+                &"".to_string(),
+            );
             let attr = if type_name == "bool" {
                 "[MarshalAs(UnmanagedType.U1)] ".to_string()
             } else {

@@ -78,7 +78,7 @@ pub enum PointerType {
     ConstPointerPointer,
     MutPointerPointer,
     ConstMutPointerPointer,
-    MutConstPointerPointer
+    MutConstPointerPointer,
 }
 
 #[derive(Clone, Debug)]
@@ -105,8 +105,8 @@ impl RustType {
                 MutPointer => sb.push_str("*mut"),
                 ConstPointerPointer => sb.push_str("*const *const"),
                 MutPointerPointer => sb.push_str("*mut *mut"),
-                ConstMutPointerPointer =>sb.push_str("*const *mut"),
-                MutConstPointerPointer =>sb.push_str("*mut *const"),
+                ConstMutPointerPointer => sb.push_str("*const *mut"),
+                MutConstPointerPointer => sb.push_str("*mut *const"),
             };
         }
 
@@ -181,6 +181,8 @@ impl RustType {
         options: &BindgenOptions,
         alias_map: &AliasMap,
         emit_from_struct: bool,
+        method_name: &String,
+        parameter_name: &String,
     ) -> String {
         fn convert_type_name(type_name: &str) -> &str {
             let name = match type_name {
@@ -256,12 +258,20 @@ impl RustType {
                             options,
                             alias_map,
                             emit_from_struct,
+                            method_name,
+                            parameter_name,
                         ));
                         sb.push_str(", ");
                     }
                     match return_type {
                         Some(x) => {
-                            sb.push_str(&x.to_csharp_string(options, alias_map, emit_from_struct));
+                            sb.push_str(&x.to_csharp_string(
+                                options,
+                                alias_map,
+                                emit_from_struct,
+                                method_name,
+                                parameter_name,
+                            ));
                         }
                         None => {
                             sb.push_str("void");
@@ -269,39 +279,20 @@ impl RustType {
                     };
                     sb.push('>');
                 } else {
-                    if return_type.is_some() {
-                        sb.push_str("Func<")
-                    } else {
-                        sb.push_str("Action<")
-                    }
-
-                    let joined_param = parameters
-                        .iter()
-                        .map(|p| {
-                            p.rust_type
-                                .to_csharp_string(options, alias_map, emit_from_struct)
-                        })
-                        .collect::<Vec<_>>()
-                        .join(", ");
-
-                    sb.push_str(joined_param.as_str());
-                    match return_type {
-                        Some(x) => {
-                            if !parameters.is_empty() {
-                                sb.push_str(", ");
-                            }
-                            sb.push_str(&x.to_csharp_string(options, alias_map, emit_from_struct));
-                        }
-                        None => {}
-                    };
-                    sb.push('>');
+                    sb.push_str(build_method_delegate_name(method_name, parameter_name).as_str());
                 }
             }
             TypeKind::Option(inner) => {
                 // function pointer can not annotate ? so emit inner only
                 sb.push_str(
                     inner
-                        .to_csharp_string(options, alias_map, emit_from_struct)
+                        .to_csharp_string(
+                            options,
+                            alias_map,
+                            emit_from_struct,
+                            method_name,
+                            parameter_name,
+                        )
                         .as_str(),
                 );
             }
@@ -315,7 +306,10 @@ impl RustType {
                             MutPointer | ConstPointer => {
                                 sb.push('*');
                             }
-                            MutPointerPointer | ConstPointerPointer | MutConstPointerPointer | ConstMutPointerPointer  => {
+                            MutPointerPointer
+                            | ConstPointerPointer
+                            | MutConstPointerPointer
+                            | ConstMutPointerPointer => {
                                 sb.push_str("**");
                             }
                         }
@@ -328,7 +322,10 @@ impl RustType {
                         MutPointer | ConstPointer => {
                             sb.push('*');
                         }
-                        MutPointerPointer | ConstPointerPointer | MutConstPointerPointer | ConstMutPointerPointer => {
+                        MutPointerPointer
+                        | ConstPointerPointer
+                        | MutConstPointerPointer
+                        | ConstMutPointerPointer => {
                             sb.push_str("**");
                         }
                     }
@@ -338,6 +335,69 @@ impl RustType {
 
         sb
     }
+}
+
+pub fn build_method_delegate_if_required(
+    me: &RustType,
+    options: &BindgenOptions,
+    alias_map: &AliasMap,
+    method_name: &String,
+    parameter_name: &String,
+) -> Option<String> {
+    let emit_from_struct = false;
+
+    match &me.type_kind {
+        TypeKind::Function(parameters, return_type) => {
+            if emit_from_struct && !options.csharp_use_function_pointer {
+                None
+            } else if options.csharp_use_function_pointer {
+                None
+            } else {
+                let return_type_name = match return_type {
+                    Some(x) => x.to_csharp_string(
+                        options,
+                        alias_map,
+                        emit_from_struct,
+                        method_name,
+                        parameter_name,
+                    ),
+                    None => "void".to_string(),
+                };
+
+                let joined_param = parameters
+                    .iter()
+                    .map(|p| {
+                        let cs = p.rust_type.to_csharp_string(
+                            options,
+                            alias_map,
+                            emit_from_struct,
+                            method_name,
+                            parameter_name,
+                        );
+                        format!("{} {}", cs, p.escape_name())
+                    })
+                    .collect::<Vec<_>>()
+                    .join(", ");
+
+                let delegate_name = build_method_delegate_name(method_name, parameter_name);
+                let delegate_code =
+                    format!("delegate {return_type_name} {delegate_name}({joined_param})");
+                Some(delegate_code)
+            }
+        }
+        TypeKind::Option(inner) => build_method_delegate_if_required(
+            inner,
+            options,
+            alias_map,
+            method_name,
+            parameter_name,
+        ),
+        _ => None,
+    }
+}
+
+pub fn build_method_delegate_name(method_name: &String, parameter_name: &String) -> String {
+    format!("{method_name}_{parameter_name}_delegate")
 }
 
 impl std::fmt::Display for RustType {

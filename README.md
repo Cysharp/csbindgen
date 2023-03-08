@@ -19,7 +19,7 @@ Install on `Cargo.toml` as `build-dependencies` and set up `bindgen::Builder` on
 
 ```toml
 [build-dependencies]
-csbindgen = "1.1.0"
+csbindgen = "1.2.0"
 ```
 
 ### Rust to C#.
@@ -57,7 +57,7 @@ namespace CsBindgen
     {
         const string __DllName = "nativelib";
 
-        [DllImport(__DllName, EntryPoint = "my_add", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "my_add", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int my_add(int x, int y);
     }
 }
@@ -116,7 +116,7 @@ namespace CsBindgen
     {
         const string __DllName = "liblz4";
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_default", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_compress_default", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int LZ4_compress_default(byte* src, byte* dst, int srcSize, int dstCapacity);
     }
 }
@@ -178,7 +178,7 @@ namespace {csharp_namespace}
 #endif
     }
 
-    [DllImport(__DllName, EntryPoint = "{csharp_entry_point_prefix}LZ4_versionNumber", CallingConvention = CallingConvention.Cdecl)]
+    [DllImport(__DllName, EntryPoint = "{csharp_entry_point_prefix}LZ4_versionNumber", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern int {csharp_method_prefix}LZ4_versionNumber();
 }
 ```
@@ -191,7 +191,7 @@ namespace {csharp_namespace}
 
 ```csharp
 // true(default) generates delegate*
-[DllImport(__DllName, EntryPoint = "callback_test", CallingConvention = CallingConvention.Cdecl)]
+[DllImport(__DllName, EntryPoint = "callback_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
 public static extern int callback_test(delegate* unmanaged[Cdecl]<int, int> cb);
 
 // You can define like this callback method.
@@ -203,12 +203,15 @@ callback_test(&Method);
 
 // ---
 
-// false will generates Action/Func, it is useful for Unity
-[DllImport(__DllName, EntryPoint = "callback_test", CallingConvention = CallingConvention.Cdecl)]
-public static extern int callback_test(Func<int, int> cb);
+// false will generates {method_name}_{parameter_name}_delegate, it is useful for Unity
+[UnmanagedFunctionPointer(CallingConvention.Cdecl)]
+public delegate int callback_test_cb_delegate(int a);
+
+[DllImport(__DllName, EntryPoint = "callback_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+public static extern int callback_test(callback_test_cb_delegate cb);
 
 // Unity can define callback method as MonoPInvokeCallback
-[MonoPInvokeCallback(typeof(Func<int, int>))]
+[MonoPInvokeCallback(typeof(NativeMethods.callback_test_cb_delegate))]
 static int Method(int x) => x * x;
 
 // And use it.
@@ -496,10 +499,10 @@ extern "C" fn sum(x:i32, y:i32) -> i32 {
 In default, csbindgen generates `extern "C" fn` as `delegate* unmanaged[Cdecl]<>`.
 
 ```csharp
-[DllImport(__DllName, EntryPoint = "csharp_to_rust", CallingConvention = CallingConvention.Cdecl)]
+[DllImport(__DllName, EntryPoint = "csharp_to_rust", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
 public static extern void csharp_to_rust(delegate* unmanaged[Cdecl]<int, int, int> cb);
 
-[DllImport(__DllName, EntryPoint = "rust_to_csharp", CallingConvention = CallingConvention.Cdecl)]
+[DllImport(__DllName, EntryPoint = "rust_to_csharp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
 public static extern delegate* unmanaged[Cdecl]<int, int, int> rust_to_csharp();
 ```
 
@@ -611,6 +614,24 @@ NativeMethods.insert_counter_context(ctx, 10);
 NativeMethods.insert_counter_context(ctx, 20);
 
 NativeMethods.delete_counter_context(ctx);
+```
+
+If you want to pass null-pointer, in rust side, convert to Option by `as_ref()`.
+
+```rust
+#[no_mangle]
+pub unsafe extern "C" fn null_pointer_test(p: *const u8) {
+    let ptr = unsafe { p.as_ref() };
+    match ptr {
+        Some(p2) => print!("pointer address: {}", *p2),
+        None => println!("null pointer!"),
+    };
+}
+```
+
+```csharp
+// in C#, invoke by null.
+NativeMethods.null_pointer_test(null);
 ```
 
 ### String and Array(Span)
@@ -843,7 +864,7 @@ pub unsafe extern "C" fn csharp_to_rust_bytes(bytes: *const u8, len: i32) {
 ```
 
 ```csharp
-var str = "foobarbaz:あいうえお"; // JPN(Unicode)
+var str = "foobarbaz:あいうえお"; // ENG:JPN(Unicode, testing for UTF16)
 fixed (char* p = str)
 {
     NativeMethods.csharp_to_rust_string((ushort*)p, str.Length);
