@@ -13,6 +13,12 @@ There are usually many pains involved in using the C Library with C#. Not only i
 
 csbindgen can easily bring native C libraries into C# through Rust. csbindgen generates Rust extern code and C# DllImport code to work with C# from code generated from C by bindgen. With cc crate or cmake crate, C code is linked to the single rust native library.
 
+showcase:
+* [lz4_bindgen.cs](https://github.com/Cysharp/csbindgen/blob/5b5469d9c99ab2c61369fbd941eb88c89e227845/dotnet-sandbox/lz4_bindgen.cs) : [LZ4](https://github.com/lz4/lz4) compression library C# binding
+* [zstd_bindgen.cs](https://github.com/Cysharp/csbindgen/blob/5b5469d9c99ab2c61369fbd941eb88c89e227845/dotnet-sandbox/zstd_bindgen.cs) : [Zstandard](https://github.com/facebook/zstd) compression library C# binding
+* [quiche_bindgen.cs](https://github.com/Cysharp/csbindgen/blob/5b5469d9c99ab2c61369fbd941eb88c89e227845/dotnet-sandbox/quiche_bindgen.cs) : [cloudflare/quiche](https://github.com/cloudflare/quiche) QUIC and HTTP/3 library C# binding
+* [bullet3_bindgen.cs](https://github.com/Cysharp/csbindgen/blob/5b5469d9c99ab2c61369fbd941eb88c89e227845/dotnet-sandbox/bullet3_bindgen.cs) : [Bullet Physics SDK](https://github.com/bulletphysics/bullet3) C# binding
+
 Getting Started
 ---
 Install on `Cargo.toml` as `build-dependencies` and set up `bindgen::Builder` on `build.rs`.
