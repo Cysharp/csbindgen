@@ -12,1370 +12,1370 @@ namespace CsBindgen
     {
         const string __DllName = "libbullet3";
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ConnectSharedMemory", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ConnectSharedMemory", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3PhysicsClientHandle__* b3ConnectSharedMemory(int key);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ConnectSharedMemory2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ConnectSharedMemory2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3PhysicsClientHandle__* b3ConnectSharedMemory2(int key);
 
         /// <summary>think more about naming. Directly execute commands without transport (no shared memory, UDP, socket, grpc etc)</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ConnectPhysicsDirect", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ConnectPhysicsDirect", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3PhysicsClientHandle__* b3ConnectPhysicsDirect();
 
         /// <summary>b3DisconnectSharedMemory will disconnect the client from the server and cleanup memory.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3DisconnectSharedMemory", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3DisconnectSharedMemory", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3DisconnectSharedMemory(b3PhysicsClientHandle__* physClient);
 
         /// <summary>There can only be 1 outstanding command. Check if a command can be send.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CanSubmitCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CanSubmitCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CanSubmitCommand(b3PhysicsClientHandle__* physClient);
 
         /// <summary>blocking submit command and wait for status</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SubmitClientCommandAndWaitStatus", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SubmitClientCommandAndWaitStatus", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryStatusHandle__* b3SubmitClientCommandAndWaitStatus(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle);
 
         /// <summary>In general it is better to use b3SubmitClientCommandAndWaitStatus. b3SubmitClientCommand is a non-blocking submitcommand, which requires checking for the status manually, using b3ProcessServerStatus. Also, before sending thenext command, make sure to check if you can send a command using 'b3CanSubmitCommand'.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SubmitClientCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SubmitClientCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3SubmitClientCommand(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle);
 
         /// <summary>non-blocking check status</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ProcessServerStatus", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ProcessServerStatus", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryStatusHandle__* b3ProcessServerStatus(b3PhysicsClientHandle__* physClient);
 
         /// <summary>Get the physics server return status type. See EnumSharedMemoryServerStatus in SharedMemoryPublic.h for error codes.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusType", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusType(b3SharedMemoryStatusHandle__* statusHandle);
 
         /// <summary>Plugin system, load and unload a plugin, execute a command</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCustomCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCustomCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateCustomCommand(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CustomCommandLoadPlugin", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CustomCommandLoadPlugin", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CustomCommandLoadPlugin(b3SharedMemoryCommandHandle__* commandHandle, byte* pluginPath);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CustomCommandLoadPluginSetPostFix", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CustomCommandLoadPluginSetPostFix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CustomCommandLoadPluginSetPostFix(b3SharedMemoryCommandHandle__* commandHandle, byte* postFix);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusPluginUniqueId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusPluginUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusPluginUniqueId(b3SharedMemoryStatusHandle__* statusHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusPluginCommandResult", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusPluginCommandResult", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusPluginCommandResult(b3SharedMemoryStatusHandle__* statusHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusPluginCommandReturnData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusPluginCommandReturnData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusPluginCommandReturnData(b3PhysicsClientHandle__* physClient, b3UserDataValue* valueOut);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CustomCommandUnloadPlugin", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CustomCommandUnloadPlugin", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CustomCommandUnloadPlugin(b3SharedMemoryCommandHandle__* commandHandle, int pluginUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CustomCommandExecutePluginCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CustomCommandExecutePluginCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CustomCommandExecutePluginCommand(b3SharedMemoryCommandHandle__* commandHandle, int pluginUniqueId, byte* textArguments);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CustomCommandExecuteAddIntArgument", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CustomCommandExecuteAddIntArgument", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CustomCommandExecuteAddIntArgument(b3SharedMemoryCommandHandle__* commandHandle, int intVal);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CustomCommandExecuteAddFloatArgument", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CustomCommandExecuteAddFloatArgument", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CustomCommandExecuteAddFloatArgument(b3SharedMemoryCommandHandle__* commandHandle, float floatVal);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusBodyIndices", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusBodyIndices", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusBodyIndices(b3SharedMemoryStatusHandle__* statusHandle, int* bodyIndicesOut, int bodyIndicesCapacity);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusBodyIndex", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusBodyIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusBodyIndex(b3SharedMemoryStatusHandle__* statusHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusActualState", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusActualState", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusActualState(b3SharedMemoryStatusHandle__* statusHandle, int* bodyUniqueId, int* numDegreeOfFreedomQ, int* numDegreeOfFreedomU, double** rootLocalInertialFrame, double** actualStateQ, double** actualStateQdot, double** jointReactionForces);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusActualState2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusActualState2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusActualState2(b3SharedMemoryStatusHandle__* statusHandle, int* bodyUniqueId, int* numLinks, int* numDegreeOfFreedomQ, int* numDegreeOfFreedomU, double** rootLocalInertialFrame, double** actualStateQ, double** actualStateQdot, double** jointReactionForces, double** linkLocalInertialFrames, double** jointMotorForces, double** linkStates, double** linkWorldVelocities);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCollisionInfoCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCollisionInfoCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3RequestCollisionInfoCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusAABB", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusAABB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusAABB(b3SharedMemoryStatusHandle__* statusHandle, int linkIndex, double* aabbMin, double* aabbMax);
 
         /// <summary>If you re-connected to an existing server, or server changed otherwise, sync the body info and user constraints etc.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitSyncBodyInfoCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitSyncBodyInfoCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitSyncBodyInfoCommand(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRequestBodyInfoCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRequestBodyInfoCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRequestBodyInfoCommand(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRemoveBodyCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRemoveBodyCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRemoveBodyCommand(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
         /// <summary>return the total number of bodies in the simulation</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetNumBodies", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetNumBodies", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetNumBodies(b3PhysicsClientHandle__* physClient);
 
         /// <summary>return the body unique id, given the index in range [0 , b3GetNumBodies() )</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetBodyUniqueId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetBodyUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetBodyUniqueId(b3PhysicsClientHandle__* physClient, int serialIndex);
 
         /// <summary>given a body unique id, return the body information. See b3BodyInfo in SharedMemoryPublic.h</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetBodyInfo", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetBodyInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetBodyInfo(b3PhysicsClientHandle__* physClient, int bodyUniqueId, b3BodyInfo* info);
 
         /// <summary>give a unique body index (after loading the body) return the number of joints.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetNumJoints", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetNumJoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetNumJoints(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
         /// <summary>give a unique body index (after loading the body) return the number of degrees of freedom (DoF).</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetNumDofs", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetNumDofs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetNumDofs(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
         /// <summary>compute the number of degrees of freedom for this body.Return -1 for unsupported spherical joint, -2 for unsupported planar joint.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ComputeDofCount", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ComputeDofCount", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ComputeDofCount(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
         /// <summary>given a body and joint index, return the joint information. See b3JointInfo in SharedMemoryPublic.h</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetJointInfo", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetJointInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetJointInfo(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int jointIndex, b3JointInfo* info);
 
         /// <summary>user data handling</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitSyncUserDataCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitSyncUserDataCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitSyncUserDataCommand(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3AddBodyToSyncUserDataRequest", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3AddBodyToSyncUserDataRequest", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3AddBodyToSyncUserDataRequest(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitAddUserDataCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitAddUserDataCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitAddUserDataCommand(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int linkIndex, int visualShapeIndex, byte* key, int valueType, int valueLength, void* valueData);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRemoveUserDataCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRemoveUserDataCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRemoveUserDataCommand(b3PhysicsClientHandle__* physClient, int userDataId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetUserData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetUserData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetUserData(b3PhysicsClientHandle__* physClient, int userDataId, b3UserDataValue* valueOut);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetUserDataId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetUserDataId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetUserDataId(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int linkIndex, int visualShapeIndex, byte* key);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetUserDataIdFromStatus", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetUserDataIdFromStatus", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetUserDataIdFromStatus(b3SharedMemoryStatusHandle__* statusHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetNumUserData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetNumUserData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetNumUserData(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetUserDataInfo", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetUserDataInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetUserDataInfo(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int userDataIndex, byte** keyOut, int* userDataIdOut, int* linkIndexOut, int* visualShapeIndexOut);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetDynamicsInfoCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetDynamicsInfoCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3GetDynamicsInfoCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int linkIndex);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetDynamicsInfoCommandInit2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetDynamicsInfoCommandInit2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3GetDynamicsInfoCommandInit2(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex);
 
         /// <summary>given a body unique id and link index, return the dynamics information. See b3DynamicsInfo in SharedMemoryPublic.h</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetDynamicsInfo", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetDynamicsInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetDynamicsInfo(b3SharedMemoryStatusHandle__* statusHandle, b3DynamicsInfo* info);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitChangeDynamicsInfo", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitChangeDynamicsInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitChangeDynamicsInfo(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitChangeDynamicsInfo2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitChangeDynamicsInfo2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitChangeDynamicsInfo2(b3SharedMemoryCommandHandle__* commandHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetMass", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetMass", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetMass(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double mass);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetLocalInertiaDiagonal", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetLocalInertiaDiagonal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetLocalInertiaDiagonal(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double* localInertiaDiagonal);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetAnisotropicFriction", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetAnisotropicFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetAnisotropicFriction(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double* anisotropicFriction);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetJointLimit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetJointLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetJointLimit(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double jointLowerLimit, double jointUpperLimit);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetJointLimitForce", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetJointLimitForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetJointLimitForce(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double jointLimitForce);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetDynamicType", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetDynamicType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetDynamicType(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, int dynamicType);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetSleepThreshold", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetSleepThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetSleepThreshold(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, double sleepThreshold);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetLateralFriction", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetLateralFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetLateralFriction(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double lateralFriction);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetSpinningFriction", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetSpinningFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetSpinningFriction(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double friction);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetRollingFriction", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetRollingFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetRollingFriction(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double friction);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetRestitution", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetRestitution", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetRestitution(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double restitution);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetLinearDamping", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetLinearDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetLinearDamping(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, double linearDamping);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetAngularDamping", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetAngularDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetAngularDamping(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, double angularDamping);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetJointDamping", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetJointDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetJointDamping(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double jointDamping);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetContactStiffnessAndDamping", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetContactStiffnessAndDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetContactStiffnessAndDamping(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double contactStiffness, double contactDamping);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetFrictionAnchor", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetFrictionAnchor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetFrictionAnchor(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, int frictionAnchor);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetCcdSweptSphereRadius", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetCcdSweptSphereRadius", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetCcdSweptSphereRadius(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double ccdSweptSphereRadius);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetContactProcessingThreshold", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetContactProcessingThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetContactProcessingThreshold(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex, double contactProcessingThreshold);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetActivationState", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetActivationState", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetActivationState(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int activationState);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetMaxJointVelocity", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetMaxJointVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetMaxJointVelocity(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, double maxJointVelocity);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ChangeDynamicsInfoSetCollisionMargin", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ChangeDynamicsInfoSetCollisionMargin", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ChangeDynamicsInfoSetCollisionMargin(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, double collisionMargin);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitCreateUserConstraintCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitCreateUserConstraintCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitCreateUserConstraintCommand(b3PhysicsClientHandle__* physClient, int parentBodyUniqueId, int parentJointIndex, int childBodyUniqueId, int childJointIndex, b3JointInfo* info);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitCreateUserConstraintCommand2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitCreateUserConstraintCommand2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitCreateUserConstraintCommand2(b3SharedMemoryCommandHandle__* commandHandle, int parentBodyUniqueId, int parentJointIndex, int childBodyUniqueId, int childJointIndex, b3JointInfo* info);
 
         /// <summary>return a unique id for the user constraint, after successful creation, or -1 for an invalid constraint id</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusUserConstraintUniqueId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusUserConstraintUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusUserConstraintUniqueId(b3SharedMemoryStatusHandle__* statusHandle);
 
         /// <summary>change parameters of an existing user constraint</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitChangeUserConstraintCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitChangeUserConstraintCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitChangeUserConstraintCommand(b3PhysicsClientHandle__* physClient, int userConstraintUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitChangeUserConstraintSetPivotInB", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitChangeUserConstraintSetPivotInB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3InitChangeUserConstraintSetPivotInB(b3SharedMemoryCommandHandle__* commandHandle, double* jointChildPivot);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitChangeUserConstraintSetFrameInB", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitChangeUserConstraintSetFrameInB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3InitChangeUserConstraintSetFrameInB(b3SharedMemoryCommandHandle__* commandHandle, double* jointChildFrameOrn);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitChangeUserConstraintSetMaxForce", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitChangeUserConstraintSetMaxForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3InitChangeUserConstraintSetMaxForce(b3SharedMemoryCommandHandle__* commandHandle, double maxAppliedForce);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitChangeUserConstraintSetGearRatio", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitChangeUserConstraintSetGearRatio", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3InitChangeUserConstraintSetGearRatio(b3SharedMemoryCommandHandle__* commandHandle, double gearRatio);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitChangeUserConstraintSetGearAuxLink", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitChangeUserConstraintSetGearAuxLink", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3InitChangeUserConstraintSetGearAuxLink(b3SharedMemoryCommandHandle__* commandHandle, int gearAuxLink);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitChangeUserConstraintSetRelativePositionTarget", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitChangeUserConstraintSetRelativePositionTarget", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3InitChangeUserConstraintSetRelativePositionTarget(b3SharedMemoryCommandHandle__* commandHandle, double relativePositionTarget);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitChangeUserConstraintSetERP", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitChangeUserConstraintSetERP", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3InitChangeUserConstraintSetERP(b3SharedMemoryCommandHandle__* commandHandle, double erp);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRemoveUserConstraintCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRemoveUserConstraintCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRemoveUserConstraintCommand(b3PhysicsClientHandle__* physClient, int userConstraintUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetNumUserConstraints", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetNumUserConstraints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetNumUserConstraints(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitGetUserConstraintStateCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitGetUserConstraintStateCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitGetUserConstraintStateCommand(b3PhysicsClientHandle__* physClient, int constraintUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusUserConstraintState", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusUserConstraintState", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusUserConstraintState(b3SharedMemoryStatusHandle__* statusHandle, b3UserConstraintState* constraintState);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetUserConstraintInfo", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetUserConstraintInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetUserConstraintInfo(b3PhysicsClientHandle__* physClient, int constraintUniqueId, b3UserConstraint* info);
 
         /// <summary>return the user constraint id, given the index in range [0 , b3GetNumUserConstraints() )</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetUserConstraintId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetUserConstraintId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetUserConstraintId(b3PhysicsClientHandle__* physClient, int serialIndex);
 
         /// <summary>Request physics debug lines for debug visualization. The flags in debugMode are the same as used in BulletSee btIDebugDraw::DebugDrawModes in Bullet/src/LinearMath/btIDebugDraw.h</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRequestDebugLinesCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRequestDebugLinesCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRequestDebugLinesCommand(b3PhysicsClientHandle__* physClient, int debugMode);
 
         /// <summary>Get the pointers to the physics debug line information, after b3InitRequestDebugLinesCommand returnsstatus CMD_DEBUG_LINES_COMPLETED</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetDebugLines", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetDebugLines", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetDebugLines(b3PhysicsClientHandle__* physClient, b3DebugLines* lines);
 
         /// <summary>configure the 3D OpenGL debug visualizer (enable/disable GUI widgets, shadows, position camera etc)</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitConfigureOpenGLVisualizer", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitConfigureOpenGLVisualizer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitConfigureOpenGLVisualizer(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitConfigureOpenGLVisualizer2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitConfigureOpenGLVisualizer2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitConfigureOpenGLVisualizer2(b3SharedMemoryCommandHandle__* commandHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetVisualizationFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ConfigureOpenGLVisualizerSetVisualizationFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ConfigureOpenGLVisualizerSetVisualizationFlags(b3SharedMemoryCommandHandle__* commandHandle, int flag, int enabled);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetLightPosition", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ConfigureOpenGLVisualizerSetLightPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ConfigureOpenGLVisualizerSetLightPosition(b3SharedMemoryCommandHandle__* commandHandle, float* lightPosition);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetShadowMapResolution", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ConfigureOpenGLVisualizerSetShadowMapResolution", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ConfigureOpenGLVisualizerSetShadowMapResolution(b3SharedMemoryCommandHandle__* commandHandle, int shadowMapResolution);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetShadowMapIntensity", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ConfigureOpenGLVisualizerSetShadowMapIntensity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ConfigureOpenGLVisualizerSetShadowMapIntensity(b3SharedMemoryCommandHandle__* commandHandle, double shadowMapIntensity);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetLightRgbBackground", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ConfigureOpenGLVisualizerSetLightRgbBackground", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ConfigureOpenGLVisualizerSetLightRgbBackground(b3SharedMemoryCommandHandle__* commandHandle, float* rgbBackground);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetShadowMapWorldSize", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ConfigureOpenGLVisualizerSetShadowMapWorldSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ConfigureOpenGLVisualizerSetShadowMapWorldSize(b3SharedMemoryCommandHandle__* commandHandle, int shadowMapWorldSize);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetRemoteSyncTransformInterval", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ConfigureOpenGLVisualizerSetRemoteSyncTransformInterval", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ConfigureOpenGLVisualizerSetRemoteSyncTransformInterval(b3SharedMemoryCommandHandle__* commandHandle, double remoteSyncTransformInterval);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetViewMatrix", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ConfigureOpenGLVisualizerSetViewMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ConfigureOpenGLVisualizerSetViewMatrix(b3SharedMemoryCommandHandle__* commandHandle, float cameraDistance, float cameraPitch, float cameraYaw, float* cameraTargetPosition);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRequestOpenGLVisualizerCameraCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRequestOpenGLVisualizerCameraCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRequestOpenGLVisualizerCameraCommand(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusOpenGLVisualizerCamera", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusOpenGLVisualizerCamera", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusOpenGLVisualizerCamera(b3SharedMemoryStatusHandle__* statusHandle, b3OpenGLVisualizerCameraInfo* camera);
 
         /// <summary>Add/remove user-specific debug lines and debug text messages</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitUserDebugDrawAddLine3D", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitUserDebugDrawAddLine3D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitUserDebugDrawAddLine3D(b3PhysicsClientHandle__* physClient, double* fromXYZ, double* toXYZ, double* colorRGB, double lineWidth, double lifeTime);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitUserDebugDrawAddPoints3D", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitUserDebugDrawAddPoints3D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitUserDebugDrawAddPoints3D(b3PhysicsClientHandle__* physClient, double* positionsXYZ, double* colorsRGB, double pointSize, double lifeTime, int pointNum);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitUserDebugDrawAddText3D", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitUserDebugDrawAddText3D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitUserDebugDrawAddText3D(b3PhysicsClientHandle__* physClient, byte* txt, double* positionXYZ, double* colorRGB, double textSize, double lifeTime);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3UserDebugTextSetOptionFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3UserDebugTextSetOptionFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3UserDebugTextSetOptionFlags(b3SharedMemoryCommandHandle__* commandHandle, int optionFlags);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3UserDebugTextSetOrientation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3UserDebugTextSetOrientation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3UserDebugTextSetOrientation(b3SharedMemoryCommandHandle__* commandHandle, double* orientation);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3UserDebugItemSetReplaceItemUniqueId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3UserDebugItemSetReplaceItemUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3UserDebugItemSetReplaceItemUniqueId(b3SharedMemoryCommandHandle__* commandHandle, int replaceItem);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3UserDebugItemSetParentObject", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3UserDebugItemSetParentObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3UserDebugItemSetParentObject(b3SharedMemoryCommandHandle__* commandHandle, int objectUniqueId, int linkIndex);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitUserDebugAddParameter", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitUserDebugAddParameter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitUserDebugAddParameter(b3PhysicsClientHandle__* physClient, byte* txt, double rangeMin, double rangeMax, double startValue);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitUserDebugReadParameter", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitUserDebugReadParameter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitUserDebugReadParameter(b3PhysicsClientHandle__* physClient, int debugItemUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusDebugParameterValue", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusDebugParameterValue", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusDebugParameterValue(b3SharedMemoryStatusHandle__* statusHandle, double* paramValue);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitUserDebugDrawRemove", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitUserDebugDrawRemove", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitUserDebugDrawRemove(b3PhysicsClientHandle__* physClient, int debugItemUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitUserDebugDrawRemoveAll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitUserDebugDrawRemoveAll", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitUserDebugDrawRemoveAll(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitUserRemoveAllParameters", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitUserRemoveAllParameters", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitUserRemoveAllParameters(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitDebugDrawingCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitDebugDrawingCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitDebugDrawingCommand(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetDebugObjectColor", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetDebugObjectColor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetDebugObjectColor(b3SharedMemoryCommandHandle__* commandHandle, int objectUniqueId, int linkIndex, double* objectColorRGB);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RemoveDebugObjectColor", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RemoveDebugObjectColor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RemoveDebugObjectColor(b3SharedMemoryCommandHandle__* commandHandle, int objectUniqueId, int linkIndex);
 
         /// <summary>All debug items unique Ids are positive: a negative unique Id means failure.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetDebugItemUniqueId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetDebugItemUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetDebugItemUniqueId(b3SharedMemoryStatusHandle__* statusHandle);
 
         /// <summary>request an image from a simulated camera, using a software renderer.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRequestCameraImage", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRequestCameraImage", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRequestCameraImage(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRequestCameraImage2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRequestCameraImage2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRequestCameraImage2(b3SharedMemoryCommandHandle__* commandHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetCameraMatrices", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetCameraMatrices", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetCameraMatrices(b3SharedMemoryCommandHandle__* commandHandle, float* viewMatrix, float* projectionMatrix);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetPixelResolution", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetPixelResolution", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetPixelResolution(b3SharedMemoryCommandHandle__* commandHandle, int width, int height);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetLightDirection", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetLightDirection", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetLightDirection(b3SharedMemoryCommandHandle__* commandHandle, float* lightDirection);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetLightColor", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetLightColor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetLightColor(b3SharedMemoryCommandHandle__* commandHandle, float* lightColor);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetLightDistance", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetLightDistance", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetLightDistance(b3SharedMemoryCommandHandle__* commandHandle, float lightDistance);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetLightAmbientCoeff", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetLightAmbientCoeff", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetLightAmbientCoeff(b3SharedMemoryCommandHandle__* commandHandle, float lightAmbientCoeff);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetLightDiffuseCoeff", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetLightDiffuseCoeff", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetLightDiffuseCoeff(b3SharedMemoryCommandHandle__* commandHandle, float lightDiffuseCoeff);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetLightSpecularCoeff", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetLightSpecularCoeff", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetLightSpecularCoeff(b3SharedMemoryCommandHandle__* commandHandle, float lightSpecularCoeff);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetShadow", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetShadow", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetShadow(b3SharedMemoryCommandHandle__* commandHandle, int hasShadow);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSelectRenderer", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSelectRenderer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSelectRenderer(b3SharedMemoryCommandHandle__* commandHandle, int renderer);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetCameraImageData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetCameraImageData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetCameraImageData(b3PhysicsClientHandle__* physClient, b3CameraImageData* imageData);
 
         /// <summary>set projective texture camera matrices.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetProjectiveTextureMatrices", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetProjectiveTextureMatrices", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetProjectiveTextureMatrices(b3SharedMemoryCommandHandle__* commandHandle, float* viewMatrix, float* projectionMatrix);
 
         /// <summary>compute a view matrix, helper function for b3RequestCameraImageSetCameraMatrices</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ComputeViewMatrixFromPositions", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ComputeViewMatrixFromPositions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ComputeViewMatrixFromPositions(float* cameraPosition, float* cameraTargetPosition, float* cameraUp, float* viewMatrix);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ComputeViewMatrixFromYawPitchRoll", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ComputeViewMatrixFromYawPitchRoll", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ComputeViewMatrixFromYawPitchRoll(float* cameraTargetPosition, float distance, float yaw, float pitch, float roll, int upAxis, float* viewMatrix);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ComputePositionFromViewMatrix", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ComputePositionFromViewMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ComputePositionFromViewMatrix(float* viewMatrix, float* cameraPosition, float* cameraTargetPosition, float* cameraUp);
 
         /// <summary>compute a projection matrix, helper function for b3RequestCameraImageSetCameraMatrices</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ComputeProjectionMatrix", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ComputeProjectionMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ComputeProjectionMatrix(float left, float right, float bottom, float top, float nearVal, float farVal, float* projectionMatrix);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ComputeProjectionMatrixFOV", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ComputeProjectionMatrixFOV", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ComputeProjectionMatrixFOV(float fov, float aspect, float nearVal, float farVal, float* projectionMatrix);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetViewMatrix", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetViewMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetViewMatrix(b3SharedMemoryCommandHandle__* commandHandle, float* cameraPosition, float* cameraTargetPosition, float* cameraUp);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetViewMatrix2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetViewMatrix2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetViewMatrix2(b3SharedMemoryCommandHandle__* commandHandle, float* cameraTargetPosition, float distance, float yaw, float pitch, float roll, int upAxis);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetProjectionMatrix", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetProjectionMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetProjectionMatrix(b3SharedMemoryCommandHandle__* commandHandle, float left, float right, float bottom, float top, float nearVal, float farVal);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestCameraImageSetFOVProjectionMatrix", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetFOVProjectionMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetFOVProjectionMatrix(b3SharedMemoryCommandHandle__* commandHandle, float fov, float aspect, float nearVal, float farVal);
 
         /// <summary>request an contact point information</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRequestContactPointInformation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRequestContactPointInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRequestContactPointInformation(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetContactFilterBodyA", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetContactFilterBodyA", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetContactFilterBodyA(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueIdA);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetContactFilterBodyB", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetContactFilterBodyB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetContactFilterBodyB(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueIdB);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetContactFilterLinkA", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetContactFilterLinkA", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetContactFilterLinkA(b3SharedMemoryCommandHandle__* commandHandle, int linkIndexA);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetContactFilterLinkB", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetContactFilterLinkB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetContactFilterLinkB(b3SharedMemoryCommandHandle__* commandHandle, int linkIndexB);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetContactPointInformation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetContactPointInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetContactPointInformation(b3PhysicsClientHandle__* physClient, b3ContactInformation* contactPointData);
 
         /// <summary>compute the closest points between two bodies</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitClosestDistanceQuery", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitClosestDistanceQuery", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitClosestDistanceQuery(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetClosestDistanceFilterBodyA", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetClosestDistanceFilterBodyA", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetClosestDistanceFilterBodyA(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueIdA);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetClosestDistanceFilterLinkA", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetClosestDistanceFilterLinkA", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetClosestDistanceFilterLinkA(b3SharedMemoryCommandHandle__* commandHandle, int linkIndexA);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetClosestDistanceFilterBodyB", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetClosestDistanceFilterBodyB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetClosestDistanceFilterBodyB(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueIdB);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetClosestDistanceFilterLinkB", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetClosestDistanceFilterLinkB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetClosestDistanceFilterLinkB(b3SharedMemoryCommandHandle__* commandHandle, int linkIndexB);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetClosestDistanceThreshold", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetClosestDistanceThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetClosestDistanceThreshold(b3SharedMemoryCommandHandle__* commandHandle, double distance);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetClosestDistanceFilterCollisionShapeA", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetClosestDistanceFilterCollisionShapeA", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetClosestDistanceFilterCollisionShapeA(b3SharedMemoryCommandHandle__* commandHandle, int collisionShapeA);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetClosestDistanceFilterCollisionShapeB", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetClosestDistanceFilterCollisionShapeB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetClosestDistanceFilterCollisionShapeB(b3SharedMemoryCommandHandle__* commandHandle, int collisionShapeB);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetClosestDistanceFilterCollisionShapePositionA", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetClosestDistanceFilterCollisionShapePositionA", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetClosestDistanceFilterCollisionShapePositionA(b3SharedMemoryCommandHandle__* commandHandle, double* collisionShapePositionA);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetClosestDistanceFilterCollisionShapePositionB", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetClosestDistanceFilterCollisionShapePositionB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetClosestDistanceFilterCollisionShapePositionB(b3SharedMemoryCommandHandle__* commandHandle, double* collisionShapePositionB);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetClosestDistanceFilterCollisionShapeOrientationA", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetClosestDistanceFilterCollisionShapeOrientationA", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetClosestDistanceFilterCollisionShapeOrientationA(b3SharedMemoryCommandHandle__* commandHandle, double* collisionShapeOrientationA);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetClosestDistanceFilterCollisionShapeOrientationB", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetClosestDistanceFilterCollisionShapeOrientationB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetClosestDistanceFilterCollisionShapeOrientationB(b3SharedMemoryCommandHandle__* commandHandle, double* collisionShapeOrientationB);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetClosestPointInformation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetClosestPointInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetClosestPointInformation(b3PhysicsClientHandle__* physClient, b3ContactInformation* contactPointInfo);
 
         /// <summary>get all the bodies that touch a given axis aligned bounding box specified in world space (min and max coordinates)</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitAABBOverlapQuery", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitAABBOverlapQuery", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitAABBOverlapQuery(b3PhysicsClientHandle__* physClient, double* aabbMin, double* aabbMax);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetAABBOverlapResults", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetAABBOverlapResults", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetAABBOverlapResults(b3PhysicsClientHandle__* physClient, b3AABBOverlapData* data);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRequestVisualShapeInformation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRequestVisualShapeInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRequestVisualShapeInformation(b3PhysicsClientHandle__* physClient, int bodyUniqueIdA);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetVisualShapeInformation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetVisualShapeInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetVisualShapeInformation(b3PhysicsClientHandle__* physClient, b3VisualShapeInformation* visualShapeInfo);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRequestCollisionShapeInformation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRequestCollisionShapeInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRequestCollisionShapeInformation(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int linkIndex);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetCollisionShapeInformation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetCollisionShapeInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetCollisionShapeInformation(b3PhysicsClientHandle__* physClient, b3CollisionShapeInformation* collisionShapeInfo);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitLoadTexture", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitLoadTexture", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitLoadTexture(b3PhysicsClientHandle__* physClient, byte* filename);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusTextureUniqueId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusTextureUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusTextureUniqueId(b3SharedMemoryStatusHandle__* statusHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateChangeTextureCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateChangeTextureCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateChangeTextureCommandInit(b3PhysicsClientHandle__* physClient, int textureUniqueId, int width, int height, byte* rgbPixels);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitUpdateVisualShape", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitUpdateVisualShape", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitUpdateVisualShape(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int jointIndex, int shapeIndex, int textureUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitUpdateVisualShape2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitUpdateVisualShape2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitUpdateVisualShape2(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int jointIndex, int shapeIndex);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3UpdateVisualShapeTexture", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3UpdateVisualShapeTexture", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3UpdateVisualShapeTexture(b3SharedMemoryCommandHandle__* commandHandle, int textureUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3UpdateVisualShapeRGBAColor", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3UpdateVisualShapeRGBAColor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3UpdateVisualShapeRGBAColor(b3SharedMemoryCommandHandle__* commandHandle, double* rgbaColor);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3UpdateVisualShapeFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3UpdateVisualShapeFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3UpdateVisualShapeFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3UpdateVisualShapeSpecularColor", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3UpdateVisualShapeSpecularColor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3UpdateVisualShapeSpecularColor(b3SharedMemoryCommandHandle__* commandHandle, double* specularColor);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitPhysicsParamCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitPhysicsParamCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitPhysicsParamCommand(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitPhysicsParamCommand2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitPhysicsParamCommand2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitPhysicsParamCommand2(b3SharedMemoryCommandHandle__* commandHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetGravity", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetGravity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetGravity(b3SharedMemoryCommandHandle__* commandHandle, double gravx, double gravy, double gravz);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetTimeStep", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetTimeStep", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetTimeStep(b3SharedMemoryCommandHandle__* commandHandle, double timeStep);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetDefaultContactERP", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetDefaultContactERP", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetDefaultContactERP(b3SharedMemoryCommandHandle__* commandHandle, double defaultContactERP);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetDefaultNonContactERP", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetDefaultNonContactERP", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetDefaultNonContactERP(b3SharedMemoryCommandHandle__* commandHandle, double defaultNonContactERP);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetDefaultFrictionERP", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetDefaultFrictionERP", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetDefaultFrictionERP(b3SharedMemoryCommandHandle__* commandHandle, double frictionERP);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetDefaultGlobalCFM", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetDefaultGlobalCFM", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetDefaultGlobalCFM(b3SharedMemoryCommandHandle__* commandHandle, double defaultGlobalCFM);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetDefaultFrictionCFM", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetDefaultFrictionCFM", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetDefaultFrictionCFM(b3SharedMemoryCommandHandle__* commandHandle, double frictionCFM);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetNumSubSteps", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetNumSubSteps", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetNumSubSteps(b3SharedMemoryCommandHandle__* commandHandle, int numSubSteps);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetRealTimeSimulation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetRealTimeSimulation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetRealTimeSimulation(b3SharedMemoryCommandHandle__* commandHandle, int enableRealTimeSimulation);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetNumSolverIterations", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetNumSolverIterations", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetNumSolverIterations(b3SharedMemoryCommandHandle__* commandHandle, int numSolverIterations);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetNumNonContactInnerIterations", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetNumNonContactInnerIterations", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetNumNonContactInnerIterations(b3SharedMemoryCommandHandle__* commandHandle, int numMotorIterations);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetWarmStartingFactor", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetWarmStartingFactor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetWarmStartingFactor(b3SharedMemoryCommandHandle__* commandHandle, double warmStartingFactor);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetArticulatedWarmStartingFactor", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetArticulatedWarmStartingFactor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetArticulatedWarmStartingFactor(b3SharedMemoryCommandHandle__* commandHandle, double warmStartingFactor);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetCollisionFilterMode", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetCollisionFilterMode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetCollisionFilterMode(b3SharedMemoryCommandHandle__* commandHandle, int filterMode);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetUseSplitImpulse", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetUseSplitImpulse", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetUseSplitImpulse(b3SharedMemoryCommandHandle__* commandHandle, int useSplitImpulse);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetSplitImpulsePenetrationThreshold", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetSplitImpulsePenetrationThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetSplitImpulsePenetrationThreshold(b3SharedMemoryCommandHandle__* commandHandle, double splitImpulsePenetrationThreshold);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetContactBreakingThreshold", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetContactBreakingThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetContactBreakingThreshold(b3SharedMemoryCommandHandle__* commandHandle, double contactBreakingThreshold);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetMaxNumCommandsPer1ms", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetMaxNumCommandsPer1ms", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetMaxNumCommandsPer1ms(b3SharedMemoryCommandHandle__* commandHandle, int maxNumCmdPer1ms);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetEnableFileCaching", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetEnableFileCaching", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetEnableFileCaching(b3SharedMemoryCommandHandle__* commandHandle, int enableFileCaching);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetRestitutionVelocityThreshold", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetRestitutionVelocityThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetRestitutionVelocityThreshold(b3SharedMemoryCommandHandle__* commandHandle, double restitutionVelocityThreshold);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetEnableConeFriction", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetEnableConeFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetEnableConeFriction(b3SharedMemoryCommandHandle__* commandHandle, int enableConeFriction);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParameterSetDeterministicOverlappingPairs", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParameterSetDeterministicOverlappingPairs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParameterSetDeterministicOverlappingPairs(b3SharedMemoryCommandHandle__* commandHandle, int deterministicOverlappingPairs);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParameterSetAllowedCcdPenetration", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParameterSetAllowedCcdPenetration", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParameterSetAllowedCcdPenetration(b3SharedMemoryCommandHandle__* commandHandle, double allowedCcdPenetration);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParameterSetJointFeedbackMode", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParameterSetJointFeedbackMode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParameterSetJointFeedbackMode(b3SharedMemoryCommandHandle__* commandHandle, int jointFeedbackMode);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetSolverResidualThreshold", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetSolverResidualThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetSolverResidualThreshold(b3SharedMemoryCommandHandle__* commandHandle, double solverResidualThreshold);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetContactSlop", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetContactSlop", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetContactSlop(b3SharedMemoryCommandHandle__* commandHandle, double contactSlop);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParameterSetEnableSAT", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParameterSetEnableSAT", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParameterSetEnableSAT(b3SharedMemoryCommandHandle__* commandHandle, int enableSAT);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParameterSetConstraintSolverType", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParameterSetConstraintSolverType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParameterSetConstraintSolverType(b3SharedMemoryCommandHandle__* commandHandle, int constraintSolverType);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParameterSetMinimumSolverIslandSize", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParameterSetMinimumSolverIslandSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParameterSetMinimumSolverIslandSize(b3SharedMemoryCommandHandle__* commandHandle, int minimumSolverIslandSize);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetSolverAnalytics", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetSolverAnalytics", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetSolverAnalytics(b3SharedMemoryCommandHandle__* commandHandle, int reportSolverAnalytics);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParameterSetSparseSdfVoxelSize", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParameterSetSparseSdfVoxelSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParameterSetSparseSdfVoxelSize(b3SharedMemoryCommandHandle__* commandHandle, double sparseSdfVoxelSize);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRequestPhysicsParamCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRequestPhysicsParamCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRequestPhysicsParamCommand(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusPhysicsSimulationParameters", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusPhysicsSimulationParameters", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusPhysicsSimulationParameters(b3SharedMemoryStatusHandle__* statusHandle, b3PhysicsSimulationParameters* @params);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PhysicsParamSetInternalSimFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PhysicsParamSetInternalSimFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3PhysicsParamSetInternalSimFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitStepSimulationCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitStepSimulationCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitStepSimulationCommand(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitStepSimulationCommand2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitStepSimulationCommand2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitStepSimulationCommand2(b3SharedMemoryCommandHandle__* commandHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitPerformCollisionDetectionCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitPerformCollisionDetectionCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitPerformCollisionDetectionCommand(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusForwardDynamicsAnalyticsData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusForwardDynamicsAnalyticsData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusForwardDynamicsAnalyticsData(b3SharedMemoryStatusHandle__* statusHandle, b3ForwardDynamicsAnalyticsArgs* analyticsData);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitResetSimulationCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitResetSimulationCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitResetSimulationCommand(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitResetSimulationCommand2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitResetSimulationCommand2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitResetSimulationCommand2(b3SharedMemoryCommandHandle__* commandHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitResetSimulationSetFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitResetSimulationSetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3InitResetSimulationSetFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
         /// <summary>Load a robot from a URDF file. Status type will CMD_URDF_LOADING_COMPLETED.Access the robot from the unique body index, through b3GetStatusBodyIndex(statusHandle);</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadUrdfCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadUrdfCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3LoadUrdfCommandInit(b3PhysicsClientHandle__* physClient, byte* urdfFileName);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadUrdfCommandInit2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadUrdfCommandInit2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3LoadUrdfCommandInit2(b3SharedMemoryCommandHandle__* commandHandle, byte* urdfFileName);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadUrdfCommandSetStartPosition", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadUrdfCommandSetStartPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadUrdfCommandSetStartPosition(b3SharedMemoryCommandHandle__* commandHandle, double startPosX, double startPosY, double startPosZ);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadUrdfCommandSetStartOrientation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadUrdfCommandSetStartOrientation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadUrdfCommandSetStartOrientation(b3SharedMemoryCommandHandle__* commandHandle, double startOrnX, double startOrnY, double startOrnZ, double startOrnW);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadUrdfCommandSetUseMultiBody", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadUrdfCommandSetUseMultiBody", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadUrdfCommandSetUseMultiBody(b3SharedMemoryCommandHandle__* commandHandle, int useMultiBody);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadUrdfCommandSetUseFixedBase", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadUrdfCommandSetUseFixedBase", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadUrdfCommandSetUseFixedBase(b3SharedMemoryCommandHandle__* commandHandle, int useFixedBase);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadUrdfCommandSetFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadUrdfCommandSetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadUrdfCommandSetFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadUrdfCommandSetGlobalScaling", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadUrdfCommandSetGlobalScaling", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadUrdfCommandSetGlobalScaling(b3SharedMemoryCommandHandle__* commandHandle, double globalScaling);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SaveStateCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SaveStateCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3SaveStateCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRemoveStateCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRemoveStateCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRemoveStateCommand(b3PhysicsClientHandle__* physClient, int stateId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusGetStateId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusGetStateId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusGetStateId(b3SharedMemoryStatusHandle__* statusHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadStateCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadStateCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3LoadStateCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadStateSetStateId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadStateSetStateId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadStateSetStateId(b3SharedMemoryCommandHandle__* commandHandle, int stateId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadStateSetFileName", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadStateSetFileName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadStateSetFileName(b3SharedMemoryCommandHandle__* commandHandle, byte* fileName);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadBulletCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadBulletCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3LoadBulletCommandInit(b3PhysicsClientHandle__* physClient, byte* fileName);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SaveBulletCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SaveBulletCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3SaveBulletCommandInit(b3PhysicsClientHandle__* physClient, byte* fileName);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadMJCFCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadMJCFCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3LoadMJCFCommandInit(b3PhysicsClientHandle__* physClient, byte* fileName);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadMJCFCommandInit2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadMJCFCommandInit2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3LoadMJCFCommandInit2(b3SharedMemoryCommandHandle__* commandHandle, byte* fileName);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadMJCFCommandSetFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadMJCFCommandSetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3LoadMJCFCommandSetFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadMJCFCommandSetUseMultiBody", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadMJCFCommandSetUseMultiBody", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3LoadMJCFCommandSetUseMultiBody(b3SharedMemoryCommandHandle__* commandHandle, int useMultiBody);
 
         /// <summary>compute the forces to achieve an acceleration, given a state q and qdot using inverse dynamics</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseDynamicsCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseDynamicsCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CalculateInverseDynamicsCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId, double* jointPositionsQ, double* jointVelocitiesQdot, double* jointAccelerations);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseDynamicsCommandInit2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseDynamicsCommandInit2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CalculateInverseDynamicsCommandInit2(b3PhysicsClientHandle__* physClient, int bodyUniqueId, double* jointPositionsQ, int dofCountQ, double* jointVelocitiesQdot, double* jointAccelerations, int dofCountQdot);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseDynamicsSetFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseDynamicsSetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateInverseDynamicsSetFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusInverseDynamicsJointForces", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusInverseDynamicsJointForces", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusInverseDynamicsJointForces(b3SharedMemoryStatusHandle__* statusHandle, int* bodyUniqueId, int* dofCount, double* jointForces);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateJacobianCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateJacobianCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CalculateJacobianCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int linkIndex, double* localPosition, double* jointPositionsQ, double* jointVelocitiesQdot, double* jointAccelerations);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusJacobian", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusJacobian", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusJacobian(b3SharedMemoryStatusHandle__* statusHandle, int* dofCount, double* linearJacobian, double* angularJacobian);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateMassMatrixCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateMassMatrixCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CalculateMassMatrixCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId, double* jointPositionsQ, int dofCountQ);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateMassMatrixSetFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateMassMatrixSetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateMassMatrixSetFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
         /// <summary>the mass matrix is stored in column-major layout of size dofCount*dofCount</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusMassMatrix", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusMassMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusMassMatrix(b3PhysicsClientHandle__* physClient, b3SharedMemoryStatusHandle__* statusHandle, int* dofCount, double* massMatrix);
 
         /// <summary>compute the joint positions to move the end effector to a desired target using inverse kinematics</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseKinematicsCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseKinematicsCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CalculateInverseKinematicsCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseKinematicsAddTargetPurePosition", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseKinematicsAddTargetPurePosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateInverseKinematicsAddTargetPurePosition(b3SharedMemoryCommandHandle__* commandHandle, int endEffectorLinkIndex, double* targetPosition);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseKinematicsAddTargetsPurePosition", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseKinematicsAddTargetsPurePosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateInverseKinematicsAddTargetsPurePosition(b3SharedMemoryCommandHandle__* commandHandle, int numEndEffectorLinkIndices, int* endEffectorIndices, double* targetPositions);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseKinematicsAddTargetPositionWithOrientation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseKinematicsAddTargetPositionWithOrientation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateInverseKinematicsAddTargetPositionWithOrientation(b3SharedMemoryCommandHandle__* commandHandle, int endEffectorLinkIndex, double* targetPosition, double* targetOrientation);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseKinematicsPosWithNullSpaceVel", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseKinematicsPosWithNullSpaceVel", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateInverseKinematicsPosWithNullSpaceVel(b3SharedMemoryCommandHandle__* commandHandle, int numDof, int endEffectorLinkIndex, double* targetPosition, double* lowerLimit, double* upperLimit, double* jointRange, double* restPose);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseKinematicsPosOrnWithNullSpaceVel", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseKinematicsPosOrnWithNullSpaceVel", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateInverseKinematicsPosOrnWithNullSpaceVel(b3SharedMemoryCommandHandle__* commandHandle, int numDof, int endEffectorLinkIndex, double* targetPosition, double* targetOrientation, double* lowerLimit, double* upperLimit, double* jointRange, double* restPose);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseKinematicsSetJointDamping", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseKinematicsSetJointDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateInverseKinematicsSetJointDamping(b3SharedMemoryCommandHandle__* commandHandle, int numDof, double* jointDampingCoeff);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseKinematicsSelectSolver", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseKinematicsSelectSolver", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateInverseKinematicsSelectSolver(b3SharedMemoryCommandHandle__* commandHandle, int solver);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusInverseKinematicsJointPositions", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusInverseKinematicsJointPositions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusInverseKinematicsJointPositions(b3SharedMemoryStatusHandle__* statusHandle, int* bodyUniqueId, int* dofCount, double* jointPositions);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseKinematicsSetCurrentPositions", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseKinematicsSetCurrentPositions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateInverseKinematicsSetCurrentPositions(b3SharedMemoryCommandHandle__* commandHandle, int numDof, double* currentJointPositions);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseKinematicsSetMaxNumIterations", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseKinematicsSetMaxNumIterations", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateInverseKinematicsSetMaxNumIterations(b3SharedMemoryCommandHandle__* commandHandle, int maxNumIterations);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateInverseKinematicsSetResidualThreshold", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateInverseKinematicsSetResidualThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateInverseKinematicsSetResidualThreshold(b3SharedMemoryCommandHandle__* commandHandle, double residualThreshold);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CollisionFilterCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CollisionFilterCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CollisionFilterCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetCollisionFilterPair", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetCollisionFilterPair", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetCollisionFilterPair(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueIdA, int bodyUniqueIdB, int linkIndexA, int linkIndexB, int enableCollision);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetCollisionFilterGroupMask", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetCollisionFilterGroupMask", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetCollisionFilterGroupMask(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueIdA, int linkIndexA, int collisionFilterGroup, int collisionFilterMask);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSdfCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSdfCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3LoadSdfCommandInit(b3PhysicsClientHandle__* physClient, byte* sdfFileName);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSdfCommandInit2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSdfCommandInit2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3LoadSdfCommandInit2(b3SharedMemoryCommandHandle__* commandHandle, byte* sdfFileName);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSdfCommandSetUseMultiBody", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSdfCommandSetUseMultiBody", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSdfCommandSetUseMultiBody(b3SharedMemoryCommandHandle__* commandHandle, int useMultiBody);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSdfCommandSetUseGlobalScaling", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSdfCommandSetUseGlobalScaling", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSdfCommandSetUseGlobalScaling(b3SharedMemoryCommandHandle__* commandHandle, double globalScaling);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SaveWorldCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SaveWorldCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3SaveWorldCommandInit(b3PhysicsClientHandle__* physClient, byte* sdfFileName);
 
         /// <summary>The b3JointControlCommandInit method is obsolete, use b3JointControlCommandInit2 instead</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3JointControlCommandInit(b3PhysicsClientHandle__* physClient, int controlMode);
 
         /// <summary>Set joint motor control variables such as desired position/angle, desired velocity,applied joint forces, dependent on the control mode (CONTROL_MODE_VELOCITY or CONTROL_MODE_TORQUE)</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlCommandInit2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlCommandInit2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3JointControlCommandInit2(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int controlMode);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlCommandInit2Internal", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlCommandInit2Internal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3JointControlCommandInit2Internal(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int controlMode);
 
         /// <summary>Only use when controlMode is CONTROL_MODE_POSITION_VELOCITY_PD</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetDesiredPosition", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetDesiredPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDesiredPosition(b3SharedMemoryCommandHandle__* commandHandle, int qIndex, double value);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetDesiredPositionMultiDof", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetDesiredPositionMultiDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDesiredPositionMultiDof(b3SharedMemoryCommandHandle__* commandHandle, int qIndex, double* position, int dofCount);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetKp", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetKp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetKp(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double value);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetKpMultiDof", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetKpMultiDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetKpMultiDof(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double* kps, int dofCount);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetKd", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetKd", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetKd(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double value);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetKdMultiDof", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetKdMultiDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetKdMultiDof(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double* kds, int dofCount);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetMaximumVelocity", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetMaximumVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetMaximumVelocity(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double maximumVelocity);
 
         /// <summary>Only use when controlMode is CONTROL_MODE_VELOCITY</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetDesiredVelocity", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetDesiredVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDesiredVelocity(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double value);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetDesiredVelocityMultiDof", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetDesiredVelocityMultiDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDesiredVelocityMultiDof(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double* velocity, int dofCount);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetDesiredVelocityMultiDof2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetDesiredVelocityMultiDof2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDesiredVelocityMultiDof2(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double* velocity, int dofCount);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetMaximumForce", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetMaximumForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetMaximumForce(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double value);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetDesiredForceTorqueMultiDof", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetDesiredForceTorqueMultiDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDesiredForceTorqueMultiDof(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double* forces, int dofCount);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetDamping", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDamping(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double value);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetDampingMultiDof", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetDampingMultiDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDampingMultiDof(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double* damping, int dofCount);
 
         /// <summary>Only use if when controlMode is CONTROL_MODE_TORQUE,</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3JointControlSetDesiredForceTorque", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3JointControlSetDesiredForceTorque", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDesiredForceTorque(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double value);
 
         /// <summary>the creation of collision shapes and rigid bodies etc is likely going to change,but good to have a b3CreateBoxShapeCommandInit for now</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionShapeCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateCollisionShapeCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionShapeAddSphere", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeAddSphere", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateCollisionShapeAddSphere(b3SharedMemoryCommandHandle__* commandHandle, double radius);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionShapeAddBox", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeAddBox", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateCollisionShapeAddBox(b3SharedMemoryCommandHandle__* commandHandle, double* halfExtents);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionShapeAddCapsule", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeAddCapsule", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateCollisionShapeAddCapsule(b3SharedMemoryCommandHandle__* commandHandle, double radius, double height);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionShapeAddCylinder", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeAddCylinder", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateCollisionShapeAddCylinder(b3SharedMemoryCommandHandle__* commandHandle, double radius, double height);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionShapeAddHeightfield", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeAddHeightfield", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateCollisionShapeAddHeightfield(b3SharedMemoryCommandHandle__* commandHandle, byte* fileName, double* meshScale, double textureScaling);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionShapeAddHeightfield2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeAddHeightfield2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateCollisionShapeAddHeightfield2(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle, double* meshScale, double textureScaling, float* heightfieldData, int numHeightfieldRows, int numHeightfieldColumns, int replaceHeightfieldIndex);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionShapeAddPlane", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeAddPlane", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateCollisionShapeAddPlane(b3SharedMemoryCommandHandle__* commandHandle, double* planeNormal, double planeConstant);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionShapeAddMesh", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeAddMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateCollisionShapeAddMesh(b3SharedMemoryCommandHandle__* commandHandle, byte* fileName, double* meshScale);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionShapeAddConvexMesh", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeAddConvexMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateCollisionShapeAddConvexMesh(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle, double* meshScale, double* vertices, int numVertices);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionShapeAddConcaveMesh", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeAddConcaveMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateCollisionShapeAddConcaveMesh(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle, double* meshScale, double* vertices, int numVertices, int* indices, int numIndices);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionSetFlag", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionSetFlag", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CreateCollisionSetFlag(b3SharedMemoryCommandHandle__* commandHandle, int shapeIndex, int flags);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateCollisionShapeSetChildTransform", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeSetChildTransform", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CreateCollisionShapeSetChildTransform(b3SharedMemoryCommandHandle__* commandHandle, int shapeIndex, double* childPosition, double* childOrientation);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusCollisionShapeUniqueId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusCollisionShapeUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusCollisionShapeUniqueId(b3SharedMemoryStatusHandle__* statusHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitRemoveCollisionShapeCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitRemoveCollisionShapeCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRemoveCollisionShapeCommand(b3PhysicsClientHandle__* physClient, int collisionShapeId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetMeshDataCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetMeshDataCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3GetMeshDataCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int linkIndex);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetTetraMeshDataCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetTetraMeshDataCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3GetTetraMeshDataCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetMeshDataSimulationMesh", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetMeshDataSimulationMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetMeshDataSimulationMesh(b3SharedMemoryCommandHandle__* commandHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3MeshDataSimulationMeshVelocity", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3MeshDataSimulationMeshVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3MeshDataSimulationMeshVelocity(b3SharedMemoryCommandHandle__* commandHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetMeshDataSetCollisionShapeIndex", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetMeshDataSetCollisionShapeIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetMeshDataSetCollisionShapeIndex(b3SharedMemoryCommandHandle__* commandHandle, int shapeIndex);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetMeshDataSetFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetMeshDataSetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetMeshDataSetFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetTetraMeshDataSetFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetTetraMeshDataSetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetTetraMeshDataSetFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetMeshData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetMeshData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetMeshData(b3PhysicsClientHandle__* physClient, b3MeshData* meshData);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetTetraMeshData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetTetraMeshData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetTetraMeshData(b3PhysicsClientHandle__* physClient, b3TetraMeshData* meshData);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ResetMeshDataCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ResetMeshDataCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3ResetMeshDataCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int num_vertices, double* vertices);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateVisualShapeCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateVisualShapeCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateVisualShapeCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateVisualShapeAddSphere", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateVisualShapeAddSphere", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateVisualShapeAddSphere(b3SharedMemoryCommandHandle__* commandHandle, double radius);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateVisualShapeAddBox", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateVisualShapeAddBox", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateVisualShapeAddBox(b3SharedMemoryCommandHandle__* commandHandle, double* halfExtents);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateVisualShapeAddCapsule", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateVisualShapeAddCapsule", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateVisualShapeAddCapsule(b3SharedMemoryCommandHandle__* commandHandle, double radius, double height);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateVisualShapeAddCylinder", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateVisualShapeAddCylinder", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateVisualShapeAddCylinder(b3SharedMemoryCommandHandle__* commandHandle, double radius, double height);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateVisualShapeAddPlane", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateVisualShapeAddPlane", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateVisualShapeAddPlane(b3SharedMemoryCommandHandle__* commandHandle, double* planeNormal, double planeConstant);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateVisualShapeAddMesh", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateVisualShapeAddMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateVisualShapeAddMesh(b3SharedMemoryCommandHandle__* commandHandle, byte* fileName, double* meshScale);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateVisualShapeAddMesh2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateVisualShapeAddMesh2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateVisualShapeAddMesh2(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle, double* meshScale, double* vertices, int numVertices, int* indices, int numIndices, double* normals, int numNormals, double* uvs, int numUVs);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateVisualSetFlag", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateVisualSetFlag", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CreateVisualSetFlag(b3SharedMemoryCommandHandle__* commandHandle, int shapeIndex, int flags);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateVisualShapeSetChildTransform", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateVisualShapeSetChildTransform", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CreateVisualShapeSetChildTransform(b3SharedMemoryCommandHandle__* commandHandle, int shapeIndex, double* childPosition, double* childOrientation);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateVisualShapeSetSpecularColor", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateVisualShapeSetSpecularColor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CreateVisualShapeSetSpecularColor(b3SharedMemoryCommandHandle__* commandHandle, int shapeIndex, double* specularColor);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateVisualShapeSetRGBAColor", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateVisualShapeSetRGBAColor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CreateVisualShapeSetRGBAColor(b3SharedMemoryCommandHandle__* commandHandle, int shapeIndex, double* rgbaColor);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusVisualShapeUniqueId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusVisualShapeUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusVisualShapeUniqueId(b3SharedMemoryStatusHandle__* statusHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateMultiBodyCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateMultiBodyCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateMultiBodyCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateMultiBodyBase", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateMultiBodyBase", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateMultiBodyBase(b3SharedMemoryCommandHandle__* commandHandle, double mass, int collisionShapeUnique, int visualShapeUniqueId, double* basePosition, double* baseOrientation, double* baseInertialFramePosition, double* baseInertialFrameOrientation);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateMultiBodyLink", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateMultiBodyLink", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateMultiBodyLink(b3SharedMemoryCommandHandle__* commandHandle, double linkMass, double linkCollisionShapeIndex, double linkVisualShapeIndex, double* linkPosition, double* linkOrientation, double* linkInertialFramePosition, double* linkInertialFrameOrientation, int linkParentIndex, int linkJointType, double* linkJointAxis);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateMultiBodySetBatchPositions", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateMultiBodySetBatchPositions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateMultiBodySetBatchPositions(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle, double* batchPositions, int numBatchObjects);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateMultiBodyUseMaximalCoordinates", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateMultiBodyUseMaximalCoordinates", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CreateMultiBodyUseMaximalCoordinates(b3SharedMemoryCommandHandle__* commandHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateMultiBodySetFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateMultiBodySetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CreateMultiBodySetFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
         /// <summary>create a box of size (1,1,1) at world origin (0,0,0) at orientation quat (0,0,0,1)after that, you can optionally adjust the initial position, orientation and size</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateBoxShapeCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateBoxShapeCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateBoxShapeCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateBoxCommandSetStartPosition", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateBoxCommandSetStartPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateBoxCommandSetStartPosition(b3SharedMemoryCommandHandle__* commandHandle, double startPosX, double startPosY, double startPosZ);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateBoxCommandSetStartOrientation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateBoxCommandSetStartOrientation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateBoxCommandSetStartOrientation(b3SharedMemoryCommandHandle__* commandHandle, double startOrnX, double startOrnY, double startOrnZ, double startOrnW);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateBoxCommandSetHalfExtents", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateBoxCommandSetHalfExtents", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateBoxCommandSetHalfExtents(b3SharedMemoryCommandHandle__* commandHandle, double halfExtentsX, double halfExtentsY, double halfExtentsZ);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateBoxCommandSetMass", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateBoxCommandSetMass", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateBoxCommandSetMass(b3SharedMemoryCommandHandle__* commandHandle, double mass);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateBoxCommandSetCollisionShapeType", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateBoxCommandSetCollisionShapeType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateBoxCommandSetCollisionShapeType(b3SharedMemoryCommandHandle__* commandHandle, int collisionShapeType);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateBoxCommandSetColorRGBA", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateBoxCommandSetColorRGBA", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateBoxCommandSetColorRGBA(b3SharedMemoryCommandHandle__* commandHandle, double red, double green, double blue, double alpha);
 
         /// <summary>b3CreatePoseCommandInit will initialize (teleport) the pose of a body/robot. You can individually set the base position,base orientation and joint angles. This will set all velocities of base and joints to zero.This is not a robot control command using actuators/joint motors, but manual repositioning the robot.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreatePoseCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandInit2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandInit2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreatePoseCommandInit2(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetBasePosition", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetBasePosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetBasePosition(b3SharedMemoryCommandHandle__* commandHandle, double startPosX, double startPosY, double startPosZ);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetBaseOrientation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetBaseOrientation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetBaseOrientation(b3SharedMemoryCommandHandle__* commandHandle, double startOrnX, double startOrnY, double startOrnZ, double startOrnW);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetBaseLinearVelocity", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetBaseLinearVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetBaseLinearVelocity(b3SharedMemoryCommandHandle__* commandHandle, double* linVel);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetBaseAngularVelocity", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetBaseAngularVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetBaseAngularVelocity(b3SharedMemoryCommandHandle__* commandHandle, double* angVel);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetBaseScaling", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetBaseScaling", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetBaseScaling(b3SharedMemoryCommandHandle__* commandHandle, double* scaling);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetJointPositions", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetJointPositions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetJointPositions(b3SharedMemoryCommandHandle__* commandHandle, int numJointPositions, double* jointPositions);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetJointPosition", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetJointPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetJointPosition(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle, int jointIndex, double jointPosition);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetJointPositionMultiDof", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetJointPositionMultiDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetJointPositionMultiDof(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle, int jointIndex, double* jointPosition, int posSize);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetQ", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetQ", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetQ(b3SharedMemoryCommandHandle__* commandHandle, int numJointPositions, double* q, int* hasQ);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetQdots", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetQdots", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetQdots(b3SharedMemoryCommandHandle__* commandHandle, int numJointVelocities, double* qDots, int* hasQdots);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetJointVelocities", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetJointVelocities", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetJointVelocities(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle, int numJointVelocities, double* jointVelocities);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetJointVelocity", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetJointVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetJointVelocity(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle, int jointIndex, double jointVelocity);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreatePoseCommandSetJointVelocityMultiDof", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetJointVelocityMultiDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetJointVelocityMultiDof(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle, int jointIndex, double* jointVelocity, int velSize);
 
         /// <summary>We are currently not reading the sensor information from the URDF file, and programmatically assign sensors.This is rather inconsistent, to mix programmatical creation with loading from file.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateSensorCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateSensorCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateSensorCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateSensorEnable6DofJointForceTorqueSensor", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateSensorEnable6DofJointForceTorqueSensor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateSensorEnable6DofJointForceTorqueSensor(b3SharedMemoryCommandHandle__* commandHandle, int jointIndex, int enable);
 
         /// <summary>b3CreateSensorEnableIMUForLink is not implemented yet.For now, if the IMU is located in the root link, use the root world transform to mimic an IMU.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateSensorEnableIMUForLink", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateSensorEnableIMUForLink", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateSensorEnableIMUForLink(b3SharedMemoryCommandHandle__* commandHandle, int linkIndex, int enable);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestActualStateCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestActualStateCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3RequestActualStateCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestActualStateCommandInit2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestActualStateCommandInit2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3RequestActualStateCommandInit2(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestActualStateCommandComputeLinkVelocity", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestActualStateCommandComputeLinkVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3RequestActualStateCommandComputeLinkVelocity(b3SharedMemoryCommandHandle__* commandHandle, int computeLinkVelocity);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestActualStateCommandComputeForwardKinematics", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestActualStateCommandComputeForwardKinematics", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3RequestActualStateCommandComputeForwardKinematics(b3SharedMemoryCommandHandle__* commandHandle, int computeForwardKinematics);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetJointState", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetJointState", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetJointState(b3PhysicsClientHandle__* physClient, b3SharedMemoryStatusHandle__* statusHandle, int jointIndex, b3JointSensorState* state);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetJointStateMultiDof", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetJointStateMultiDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetJointStateMultiDof(b3PhysicsClientHandle__* physClient, b3SharedMemoryStatusHandle__* statusHandle, int jointIndex, b3JointSensorState2* state);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetLinkState", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetLinkState", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetLinkState(b3PhysicsClientHandle__* physClient, b3SharedMemoryStatusHandle__* statusHandle, int linkIndex, b3LinkState* state);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PickBody", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PickBody", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3PickBody(b3PhysicsClientHandle__* physClient, double rayFromWorldX, double rayFromWorldY, double rayFromWorldZ, double rayToWorldX, double rayToWorldY, double rayToWorldZ);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3MovePickedBody", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3MovePickedBody", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3MovePickedBody(b3PhysicsClientHandle__* physClient, double rayFromWorldX, double rayFromWorldY, double rayFromWorldZ, double rayToWorldX, double rayToWorldY, double rayToWorldZ);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RemovePickingConstraint", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RemovePickingConstraint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3RemovePickingConstraint(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateRaycastCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateRaycastCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateRaycastCommandInit(b3PhysicsClientHandle__* physClient, double rayFromWorldX, double rayFromWorldY, double rayFromWorldZ, double rayToWorldX, double rayToWorldY, double rayToWorldZ);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CreateRaycastBatchCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CreateRaycastBatchCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateRaycastBatchCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RaycastBatchSetNumThreads", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RaycastBatchSetNumThreads", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RaycastBatchSetNumThreads(b3SharedMemoryCommandHandle__* commandHandle, int numThreads);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RaycastBatchAddRay", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RaycastBatchAddRay", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RaycastBatchAddRay(b3SharedMemoryCommandHandle__* commandHandle, double* rayFromWorld, double* rayToWorld);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RaycastBatchAddRays", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RaycastBatchAddRays", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RaycastBatchAddRays(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle, double* rayFromWorld, double* rayToWorld, int numRays);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RaycastBatchSetParentObject", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RaycastBatchSetParentObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RaycastBatchSetParentObject(b3SharedMemoryCommandHandle__* commandHandle, int parentObjectUniqueId, int parentLinkIndex);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RaycastBatchSetReportHitNumber", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RaycastBatchSetReportHitNumber", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RaycastBatchSetReportHitNumber(b3SharedMemoryCommandHandle__* commandHandle, int reportHitNumber);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RaycastBatchSetCollisionFilterMask", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RaycastBatchSetCollisionFilterMask", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RaycastBatchSetCollisionFilterMask(b3SharedMemoryCommandHandle__* commandHandle, int collisionFilterMask);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RaycastBatchSetFractionEpsilon", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RaycastBatchSetFractionEpsilon", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RaycastBatchSetFractionEpsilon(b3SharedMemoryCommandHandle__* commandHandle, double fractionEpsilon);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetRaycastInformation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetRaycastInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetRaycastInformation(b3PhysicsClientHandle__* physClient, b3RaycastInformation* raycastInfo);
 
         /// <summary>Apply external force at the body (or link) center of mass, in world space/Cartesian coordinates.</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ApplyExternalForceCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ApplyExternalForceCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3ApplyExternalForceCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ApplyExternalForce", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ApplyExternalForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ApplyExternalForce(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkId, double* force, double* position, int flag);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ApplyExternalTorque", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ApplyExternalTorque", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ApplyExternalTorque(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkId, double* torque, int flag);
 
         /// <summary>experiments of robots interacting with non-rigid objects (such as btSoftBody)</summary>
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodyCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodyCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3LoadSoftBodyCommandInit(b3PhysicsClientHandle__* physClient, byte* fileName);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodySetScale", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodySetScale", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodySetScale(b3SharedMemoryCommandHandle__* commandHandle, double scale);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodySetMass", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodySetMass", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodySetMass(b3SharedMemoryCommandHandle__* commandHandle, double mass);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodySetCollisionMargin", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodySetCollisionMargin", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodySetCollisionMargin(b3SharedMemoryCommandHandle__* commandHandle, double collisionMargin);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodySetStartPosition", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodySetStartPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodySetStartPosition(b3SharedMemoryCommandHandle__* commandHandle, double startPosX, double startPosY, double startPosZ);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodySetStartOrientation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodySetStartOrientation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodySetStartOrientation(b3SharedMemoryCommandHandle__* commandHandle, double startOrnX, double startOrnY, double startOrnZ, double startOrnW);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodyUpdateSimMesh", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodyUpdateSimMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodyUpdateSimMesh(b3SharedMemoryCommandHandle__* commandHandle, byte* filename);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodyAddCorotatedForce", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodyAddCorotatedForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodyAddCorotatedForce(b3SharedMemoryCommandHandle__* commandHandle, double corotatedMu, double corotatedLambda);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodyAddNeoHookeanForce", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodyAddNeoHookeanForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodyAddNeoHookeanForce(b3SharedMemoryCommandHandle__* commandHandle, double NeoHookeanMu, double NeoHookeanLambda, double NeoHookeanDamping);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodyAddMassSpringForce", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodyAddMassSpringForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodyAddMassSpringForce(b3SharedMemoryCommandHandle__* commandHandle, double springElasticStiffness, double springDampingStiffness);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodyAddGravityForce", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodyAddGravityForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodyAddGravityForce(b3SharedMemoryCommandHandle__* commandHandle, double gravityX, double gravityY, double gravityZ);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodySetCollisionHardness", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodySetCollisionHardness", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodySetCollisionHardness(b3SharedMemoryCommandHandle__* commandHandle, double collisionHardness);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodySetSelfCollision", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodySetSelfCollision", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodySetSelfCollision(b3SharedMemoryCommandHandle__* commandHandle, int useSelfCollision);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodySetRepulsionStiffness", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodySetRepulsionStiffness", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodySetRepulsionStiffness(b3SharedMemoryCommandHandle__* commandHandle, double stiffness);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodyUseFaceContact", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodyUseFaceContact", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodyUseFaceContact(b3SharedMemoryCommandHandle__* commandHandle, int useFaceContact);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodySetFrictionCoefficient", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodySetFrictionCoefficient", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodySetFrictionCoefficient(b3SharedMemoryCommandHandle__* commandHandle, double frictionCoefficient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodyUseBendingSprings", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodyUseBendingSprings", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodyUseBendingSprings(b3SharedMemoryCommandHandle__* commandHandle, int useBendingSprings, double bendingStiffness);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3LoadSoftBodyUseAllDirectionDampingSprings", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3LoadSoftBodyUseAllDirectionDampingSprings", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3LoadSoftBodyUseAllDirectionDampingSprings(b3SharedMemoryCommandHandle__* commandHandle, int useAllDirectionDamping);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InitCreateSoftBodyAnchorConstraintCommand", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InitCreateSoftBodyAnchorConstraintCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitCreateSoftBodyAnchorConstraintCommand(b3PhysicsClientHandle__* physClient, int softBodyUniqueId, int nodeIndex, int bodyUniqueId, int linkIndex, double* bodyFramePosition);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestVREventsCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestVREventsCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3RequestVREventsCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3VREventsSetDeviceTypeFilter", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3VREventsSetDeviceTypeFilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3VREventsSetDeviceTypeFilter(b3SharedMemoryCommandHandle__* commandHandle, int deviceTypeFilter);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetVREventsData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetVREventsData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetVREventsData(b3PhysicsClientHandle__* physClient, b3VREventsData* vrEventsData);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetVRCameraStateCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetVRCameraStateCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3SetVRCameraStateCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetVRCameraRootPosition", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetVRCameraRootPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3SetVRCameraRootPosition(b3SharedMemoryCommandHandle__* commandHandle, double* rootPos);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetVRCameraRootOrientation", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetVRCameraRootOrientation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3SetVRCameraRootOrientation(b3SharedMemoryCommandHandle__* commandHandle, double* rootOrn);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetVRCameraTrackingObject", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetVRCameraTrackingObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3SetVRCameraTrackingObject(b3SharedMemoryCommandHandle__* commandHandle, int objectUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetVRCameraTrackingObjectFlag", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetVRCameraTrackingObjectFlag", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3SetVRCameraTrackingObjectFlag(b3SharedMemoryCommandHandle__* commandHandle, int flag);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestKeyboardEventsCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestKeyboardEventsCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3RequestKeyboardEventsCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestKeyboardEventsCommandInit2", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestKeyboardEventsCommandInit2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3RequestKeyboardEventsCommandInit2(b3SharedMemoryCommandHandle__* commandHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetKeyboardEventsData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetKeyboardEventsData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetKeyboardEventsData(b3PhysicsClientHandle__* physClient, b3KeyboardEventsData* keyboardEventsData);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RequestMouseEventsCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RequestMouseEventsCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3RequestMouseEventsCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetMouseEventsData", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetMouseEventsData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetMouseEventsData(b3PhysicsClientHandle__* physClient, b3MouseEventsData* mouseEventsData);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3StateLoggingCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3StateLoggingCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3StateLoggingCommandInit(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3StateLoggingStart", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3StateLoggingStart", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3StateLoggingStart(b3SharedMemoryCommandHandle__* commandHandle, int loggingType, byte* fileName);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3StateLoggingAddLoggingObjectUniqueId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3StateLoggingAddLoggingObjectUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3StateLoggingAddLoggingObjectUniqueId(b3SharedMemoryCommandHandle__* commandHandle, int objectUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3StateLoggingSetMaxLogDof", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3StateLoggingSetMaxLogDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3StateLoggingSetMaxLogDof(b3SharedMemoryCommandHandle__* commandHandle, int maxLogDof);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3StateLoggingSetLinkIndexA", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3StateLoggingSetLinkIndexA", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3StateLoggingSetLinkIndexA(b3SharedMemoryCommandHandle__* commandHandle, int linkIndexA);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3StateLoggingSetLinkIndexB", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3StateLoggingSetLinkIndexB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3StateLoggingSetLinkIndexB(b3SharedMemoryCommandHandle__* commandHandle, int linkIndexB);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3StateLoggingSetBodyAUniqueId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3StateLoggingSetBodyAUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3StateLoggingSetBodyAUniqueId(b3SharedMemoryCommandHandle__* commandHandle, int bodyAUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3StateLoggingSetBodyBUniqueId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3StateLoggingSetBodyBUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3StateLoggingSetBodyBUniqueId(b3SharedMemoryCommandHandle__* commandHandle, int bodyBUniqueId);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3StateLoggingSetDeviceTypeFilter", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3StateLoggingSetDeviceTypeFilter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3StateLoggingSetDeviceTypeFilter(b3SharedMemoryCommandHandle__* commandHandle, int deviceTypeFilter);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3StateLoggingSetLogFlags", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3StateLoggingSetLogFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3StateLoggingSetLogFlags(b3SharedMemoryCommandHandle__* commandHandle, int logFlags);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetStatusLoggingUniqueId", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetStatusLoggingUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusLoggingUniqueId(b3SharedMemoryStatusHandle__* statusHandle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3StateLoggingStop", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3StateLoggingStop", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3StateLoggingStop(b3SharedMemoryCommandHandle__* commandHandle, int loggingUid);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3ProfileTimingCommandInit", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3ProfileTimingCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3ProfileTimingCommandInit(b3PhysicsClientHandle__* physClient, byte* name);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetProfileTimingDuractionInMicroSeconds", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetProfileTimingDuractionInMicroSeconds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetProfileTimingDuractionInMicroSeconds(b3SharedMemoryCommandHandle__* commandHandle, int duration);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetProfileTimingType", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetProfileTimingType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetProfileTimingType(b3SharedMemoryCommandHandle__* commandHandle, int type_);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PushProfileTiming", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PushProfileTiming", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3PushProfileTiming(b3PhysicsClientHandle__* physClient, byte* timingName);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3PopProfileTiming", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3PopProfileTiming", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3PopProfileTiming(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetTimeOut", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetTimeOut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3SetTimeOut(b3PhysicsClientHandle__* physClient, double timeOutInSeconds);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetTimeOut", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetTimeOut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern double b3GetTimeOut(b3PhysicsClientHandle__* physClient);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3SetAdditionalSearchPath", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3SetAdditionalSearchPath", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3SetAdditionalSearchPath(b3PhysicsClientHandle__* physClient, byte* path);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3MultiplyTransforms", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3MultiplyTransforms", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3MultiplyTransforms(double* posA, double* ornA, double* posB, double* ornB, double* outPos, double* outOrn);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3InvertTransform", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3InvertTransform", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3InvertTransform(double* pos, double* orn, double* outPos, double* outOrn);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3QuaternionSlerp", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3QuaternionSlerp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3QuaternionSlerp(double* startQuat, double* endQuat, double interpolationFraction, double* outOrn);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetQuaternionFromAxisAngle", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetQuaternionFromAxisAngle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetQuaternionFromAxisAngle(double* axis, double angle, double* outQuat);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetAxisAngleFromQuaternion", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetAxisAngleFromQuaternion", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetAxisAngleFromQuaternion(double* quat, double* axis, double* angle);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetQuaternionDifference", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetQuaternionDifference", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetQuaternionDifference(double* startQuat, double* endQuat, double* outOrn);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3GetAxisDifferenceQuaternion", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3GetAxisDifferenceQuaternion", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetAxisDifferenceQuaternion(double* startQuat, double* endQuat, double* axisOut);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3CalculateVelocityQuaternion", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3CalculateVelocityQuaternion", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateVelocityQuaternion(double* startQuat, double* endQuat, double deltaTime, double* angVelOut);
 
-        [DllImport(__DllName, EntryPoint = "csbindgen_bullet3_b3RotateVector", CallingConvention = CallingConvention.Cdecl)]
+        [DllImport(__DllName, EntryPoint = "b3RotateVector", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RotateVector(double* quat, double* vec, double* vecOut);
 
 

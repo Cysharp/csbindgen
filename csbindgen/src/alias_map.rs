@@ -24,7 +24,7 @@ impl AliasMap {
             Some(x) => {
                 if let Some(x2) = self.get_mapped_value(&x.type_name) {
                     // currently multiple pointer alias not supported, only one layer.
-                    if let TypeKind::Pointer(_) = &x.type_kind {
+                    if let TypeKind::Pointer(_, _) = &x.type_kind {
                         return Some(RustType {
                             type_name: x2.type_name,
                             type_kind: x.type_kind.clone(),

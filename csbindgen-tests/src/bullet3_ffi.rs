@@ -7,7 +7,7 @@ use super::bullet3::*;
 
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ConnectSharedMemory(
+pub unsafe extern "C" fn csbindgen_b3ConnectSharedMemory(
     key: c_int    
 ) -> b3PhysicsClientHandle
 {
@@ -17,7 +17,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ConnectSharedMemory(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ConnectSharedMemory2(
+pub unsafe extern "C" fn csbindgen_b3ConnectSharedMemory2(
     key: c_int    
 ) -> b3PhysicsClientHandle
 {
@@ -27,7 +27,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ConnectSharedMemory2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ConnectPhysicsDirect(
+pub unsafe extern "C" fn csbindgen_b3ConnectPhysicsDirect(
     
 ) -> b3PhysicsClientHandle
 {
@@ -37,7 +37,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ConnectPhysicsDirect(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3DisconnectSharedMemory(
+pub unsafe extern "C" fn csbindgen_b3DisconnectSharedMemory(
     physClient: b3PhysicsClientHandle    
 )
 {
@@ -47,7 +47,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3DisconnectSharedMemory(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CanSubmitCommand(
+pub unsafe extern "C" fn csbindgen_b3CanSubmitCommand(
     physClient: b3PhysicsClientHandle    
 ) -> c_int
 {
@@ -57,7 +57,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CanSubmitCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SubmitClientCommandAndWaitStatus(
+pub unsafe extern "C" fn csbindgen_b3SubmitClientCommandAndWaitStatus(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle    
 ) -> b3SharedMemoryStatusHandle
@@ -69,7 +69,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SubmitClientCommandAndWaitStatus(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SubmitClientCommand(
+pub unsafe extern "C" fn csbindgen_b3SubmitClientCommand(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle    
 ) -> c_int
@@ -81,7 +81,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SubmitClientCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ProcessServerStatus(
+pub unsafe extern "C" fn csbindgen_b3ProcessServerStatus(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryStatusHandle
 {
@@ -91,7 +91,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ProcessServerStatus(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusType(
+pub unsafe extern "C" fn csbindgen_b3GetStatusType(
     statusHandle: b3SharedMemoryStatusHandle    
 ) -> c_int
 {
@@ -101,7 +101,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusType(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCustomCommand(
+pub unsafe extern "C" fn csbindgen_b3CreateCustomCommand(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -111,7 +111,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCustomCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CustomCommandLoadPlugin(
+pub unsafe extern "C" fn csbindgen_b3CustomCommandLoadPlugin(
     commandHandle: b3SharedMemoryCommandHandle,
     pluginPath: *const c_char    
 )
@@ -123,7 +123,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CustomCommandLoadPlugin(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CustomCommandLoadPluginSetPostFix(
+pub unsafe extern "C" fn csbindgen_b3CustomCommandLoadPluginSetPostFix(
     commandHandle: b3SharedMemoryCommandHandle,
     postFix: *const c_char    
 )
@@ -135,7 +135,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CustomCommandLoadPluginSetPostFix(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusPluginUniqueId(
+pub unsafe extern "C" fn csbindgen_b3GetStatusPluginUniqueId(
     statusHandle: b3SharedMemoryStatusHandle    
 ) -> c_int
 {
@@ -145,7 +145,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusPluginUniqueId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusPluginCommandResult(
+pub unsafe extern "C" fn csbindgen_b3GetStatusPluginCommandResult(
     statusHandle: b3SharedMemoryStatusHandle    
 ) -> c_int
 {
@@ -155,7 +155,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusPluginCommandResult(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusPluginCommandReturnData(
+pub unsafe extern "C" fn csbindgen_b3GetStatusPluginCommandReturnData(
     physClient: b3PhysicsClientHandle,
     valueOut: *mut b3UserDataValue    
 ) -> c_int
@@ -167,7 +167,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusPluginCommandReturnData(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CustomCommandUnloadPlugin(
+pub unsafe extern "C" fn csbindgen_b3CustomCommandUnloadPlugin(
     commandHandle: b3SharedMemoryCommandHandle,
     pluginUniqueId: c_int    
 )
@@ -179,7 +179,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CustomCommandUnloadPlugin(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CustomCommandExecutePluginCommand(
+pub unsafe extern "C" fn csbindgen_b3CustomCommandExecutePluginCommand(
     commandHandle: b3SharedMemoryCommandHandle,
     pluginUniqueId: c_int,
     textArguments: *const c_char    
@@ -193,7 +193,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CustomCommandExecutePluginCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CustomCommandExecuteAddIntArgument(
+pub unsafe extern "C" fn csbindgen_b3CustomCommandExecuteAddIntArgument(
     commandHandle: b3SharedMemoryCommandHandle,
     intVal: c_int    
 )
@@ -205,7 +205,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CustomCommandExecuteAddIntArgument(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CustomCommandExecuteAddFloatArgument(
+pub unsafe extern "C" fn csbindgen_b3CustomCommandExecuteAddFloatArgument(
     commandHandle: b3SharedMemoryCommandHandle,
     floatVal: f32    
 )
@@ -217,7 +217,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CustomCommandExecuteAddFloatArgumen
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusBodyIndices(
+pub unsafe extern "C" fn csbindgen_b3GetStatusBodyIndices(
     statusHandle: b3SharedMemoryStatusHandle,
     bodyIndicesOut: *mut c_int,
     bodyIndicesCapacity: c_int    
@@ -231,7 +231,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusBodyIndices(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusBodyIndex(
+pub unsafe extern "C" fn csbindgen_b3GetStatusBodyIndex(
     statusHandle: b3SharedMemoryStatusHandle    
 ) -> c_int
 {
@@ -241,7 +241,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusBodyIndex(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusActualState(
+pub unsafe extern "C" fn csbindgen_b3GetStatusActualState(
     statusHandle: b3SharedMemoryStatusHandle,
     bodyUniqueId: *mut c_int,
     numDegreeOfFreedomQ: *mut c_int,
@@ -265,7 +265,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusActualState(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusActualState2(
+pub unsafe extern "C" fn csbindgen_b3GetStatusActualState2(
     statusHandle: b3SharedMemoryStatusHandle,
     bodyUniqueId: *mut c_int,
     numLinks: *mut c_int,
@@ -299,7 +299,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusActualState2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCollisionInfoCommandInit(
+pub unsafe extern "C" fn csbindgen_b3RequestCollisionInfoCommandInit(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -311,7 +311,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCollisionInfoCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusAABB(
+pub unsafe extern "C" fn csbindgen_b3GetStatusAABB(
     statusHandle: b3SharedMemoryStatusHandle,
     linkIndex: c_int,
     aabbMin: *mut f64,
@@ -327,7 +327,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusAABB(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitSyncBodyInfoCommand(
+pub unsafe extern "C" fn csbindgen_b3InitSyncBodyInfoCommand(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -337,7 +337,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitSyncBodyInfoCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestBodyInfoCommand(
+pub unsafe extern "C" fn csbindgen_b3InitRequestBodyInfoCommand(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -349,7 +349,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestBodyInfoCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRemoveBodyCommand(
+pub unsafe extern "C" fn csbindgen_b3InitRemoveBodyCommand(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -361,7 +361,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRemoveBodyCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetNumBodies(
+pub unsafe extern "C" fn csbindgen_b3GetNumBodies(
     physClient: b3PhysicsClientHandle    
 ) -> c_int
 {
@@ -371,7 +371,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetNumBodies(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetBodyUniqueId(
+pub unsafe extern "C" fn csbindgen_b3GetBodyUniqueId(
     physClient: b3PhysicsClientHandle,
     serialIndex: c_int    
 ) -> c_int
@@ -383,7 +383,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetBodyUniqueId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetBodyInfo(
+pub unsafe extern "C" fn csbindgen_b3GetBodyInfo(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     info: *mut b3BodyInfo    
@@ -397,7 +397,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetBodyInfo(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetNumJoints(
+pub unsafe extern "C" fn csbindgen_b3GetNumJoints(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int    
 ) -> c_int
@@ -409,7 +409,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetNumJoints(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetNumDofs(
+pub unsafe extern "C" fn csbindgen_b3GetNumDofs(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int    
 ) -> c_int
@@ -421,7 +421,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetNumDofs(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ComputeDofCount(
+pub unsafe extern "C" fn csbindgen_b3ComputeDofCount(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int    
 ) -> c_int
@@ -433,7 +433,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ComputeDofCount(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetJointInfo(
+pub unsafe extern "C" fn csbindgen_b3GetJointInfo(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     jointIndex: c_int,
@@ -449,7 +449,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetJointInfo(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitSyncUserDataCommand(
+pub unsafe extern "C" fn csbindgen_b3InitSyncUserDataCommand(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -459,7 +459,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitSyncUserDataCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3AddBodyToSyncUserDataRequest(
+pub unsafe extern "C" fn csbindgen_b3AddBodyToSyncUserDataRequest(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int    
 )
@@ -471,7 +471,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3AddBodyToSyncUserDataRequest(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitAddUserDataCommand(
+pub unsafe extern "C" fn csbindgen_b3InitAddUserDataCommand(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -495,7 +495,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitAddUserDataCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRemoveUserDataCommand(
+pub unsafe extern "C" fn csbindgen_b3InitRemoveUserDataCommand(
     physClient: b3PhysicsClientHandle,
     userDataId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -507,7 +507,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRemoveUserDataCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserData(
+pub unsafe extern "C" fn csbindgen_b3GetUserData(
     physClient: b3PhysicsClientHandle,
     userDataId: c_int,
     valueOut: *mut b3UserDataValue    
@@ -521,7 +521,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserData(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserDataId(
+pub unsafe extern "C" fn csbindgen_b3GetUserDataId(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -539,7 +539,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserDataId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserDataIdFromStatus(
+pub unsafe extern "C" fn csbindgen_b3GetUserDataIdFromStatus(
     statusHandle: b3SharedMemoryStatusHandle    
 ) -> c_int
 {
@@ -549,7 +549,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserDataIdFromStatus(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetNumUserData(
+pub unsafe extern "C" fn csbindgen_b3GetNumUserData(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int    
 ) -> c_int
@@ -561,7 +561,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetNumUserData(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserDataInfo(
+pub unsafe extern "C" fn csbindgen_b3GetUserDataInfo(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     userDataIndex: c_int,
@@ -583,7 +583,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserDataInfo(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetDynamicsInfoCommandInit(
+pub unsafe extern "C" fn csbindgen_b3GetDynamicsInfoCommandInit(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int    
@@ -597,7 +597,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetDynamicsInfoCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetDynamicsInfoCommandInit2(
+pub unsafe extern "C" fn csbindgen_b3GetDynamicsInfoCommandInit2(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int    
@@ -611,7 +611,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetDynamicsInfoCommandInit2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetDynamicsInfo(
+pub unsafe extern "C" fn csbindgen_b3GetDynamicsInfo(
     statusHandle: b3SharedMemoryStatusHandle,
     info: *mut b3DynamicsInfo    
 ) -> c_int
@@ -623,7 +623,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetDynamicsInfo(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeDynamicsInfo(
+pub unsafe extern "C" fn csbindgen_b3InitChangeDynamicsInfo(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -633,7 +633,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeDynamicsInfo(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeDynamicsInfo2(
+pub unsafe extern "C" fn csbindgen_b3InitChangeDynamicsInfo2(
     commandHandle: b3SharedMemoryCommandHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -643,7 +643,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeDynamicsInfo2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetMass(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetMass(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -659,7 +659,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetMass(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetLocalInertiaDiagonal(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetLocalInertiaDiagonal(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -675,7 +675,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetLocalInertiaDi
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetAnisotropicFriction(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetAnisotropicFriction(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -691,7 +691,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetAnisotropicFri
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetJointLimit(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetJointLimit(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -709,7 +709,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetJointLimit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetJointLimitForce(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetJointLimitForce(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -725,7 +725,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetJointLimitForc
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetDynamicType(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetDynamicType(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -741,7 +741,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetDynamicType(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetSleepThreshold(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetSleepThreshold(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     sleepThreshold: f64    
@@ -755,7 +755,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetSleepThreshold
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetLateralFriction(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetLateralFriction(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -771,7 +771,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetLateralFrictio
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetSpinningFriction(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetSpinningFriction(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -787,7 +787,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetSpinningFricti
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetRollingFriction(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetRollingFriction(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -803,7 +803,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetRollingFrictio
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetRestitution(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetRestitution(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -819,7 +819,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetRestitution(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetLinearDamping(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetLinearDamping(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linearDamping: f64    
@@ -833,7 +833,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetLinearDamping(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetAngularDamping(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetAngularDamping(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     angularDamping: f64    
@@ -847,7 +847,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetAngularDamping
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetJointDamping(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetJointDamping(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -863,7 +863,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetJointDamping(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetContactStiffnessAndDamping(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetContactStiffnessAndDamping(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -881,7 +881,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetContactStiffne
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetFrictionAnchor(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetFrictionAnchor(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -897,7 +897,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetFrictionAnchor
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetCcdSweptSphereRadius(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetCcdSweptSphereRadius(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -913,7 +913,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetCcdSweptSphere
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetContactProcessingThreshold(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetContactProcessingThreshold(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -929,7 +929,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetContactProcess
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetActivationState(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetActivationState(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     activationState: c_int    
@@ -943,7 +943,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetActivationStat
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetMaxJointVelocity(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetMaxJointVelocity(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     maxJointVelocity: f64    
@@ -957,7 +957,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetMaxJointVeloci
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetCollisionMargin(
+pub unsafe extern "C" fn csbindgen_b3ChangeDynamicsInfoSetCollisionMargin(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     collisionMargin: f64    
@@ -971,7 +971,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ChangeDynamicsInfoSetCollisionMargi
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitCreateUserConstraintCommand(
+pub unsafe extern "C" fn csbindgen_b3InitCreateUserConstraintCommand(
     physClient: b3PhysicsClientHandle,
     parentBodyUniqueId: c_int,
     parentJointIndex: c_int,
@@ -991,7 +991,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitCreateUserConstraintCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitCreateUserConstraintCommand2(
+pub unsafe extern "C" fn csbindgen_b3InitCreateUserConstraintCommand2(
     commandHandle: b3SharedMemoryCommandHandle,
     parentBodyUniqueId: c_int,
     parentJointIndex: c_int,
@@ -1011,7 +1011,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitCreateUserConstraintCommand2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusUserConstraintUniqueId(
+pub unsafe extern "C" fn csbindgen_b3GetStatusUserConstraintUniqueId(
     statusHandle: b3SharedMemoryStatusHandle    
 ) -> c_int
 {
@@ -1021,7 +1021,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusUserConstraintUniqueId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintCommand(
+pub unsafe extern "C" fn csbindgen_b3InitChangeUserConstraintCommand(
     physClient: b3PhysicsClientHandle,
     userConstraintUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -1033,7 +1033,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetPivotInB(
+pub unsafe extern "C" fn csbindgen_b3InitChangeUserConstraintSetPivotInB(
     commandHandle: b3SharedMemoryCommandHandle,
     jointChildPivot: *const f64    
 ) -> c_int
@@ -1045,7 +1045,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetPivotInB
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetFrameInB(
+pub unsafe extern "C" fn csbindgen_b3InitChangeUserConstraintSetFrameInB(
     commandHandle: b3SharedMemoryCommandHandle,
     jointChildFrameOrn: *const f64    
 ) -> c_int
@@ -1057,7 +1057,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetFrameInB
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetMaxForce(
+pub unsafe extern "C" fn csbindgen_b3InitChangeUserConstraintSetMaxForce(
     commandHandle: b3SharedMemoryCommandHandle,
     maxAppliedForce: f64    
 ) -> c_int
@@ -1069,7 +1069,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetMaxForce
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetGearRatio(
+pub unsafe extern "C" fn csbindgen_b3InitChangeUserConstraintSetGearRatio(
     commandHandle: b3SharedMemoryCommandHandle,
     gearRatio: f64    
 ) -> c_int
@@ -1081,7 +1081,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetGearRati
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetGearAuxLink(
+pub unsafe extern "C" fn csbindgen_b3InitChangeUserConstraintSetGearAuxLink(
     commandHandle: b3SharedMemoryCommandHandle,
     gearAuxLink: c_int    
 ) -> c_int
@@ -1093,7 +1093,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetGearAuxL
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetRelativePositionTarget(
+pub unsafe extern "C" fn csbindgen_b3InitChangeUserConstraintSetRelativePositionTarget(
     commandHandle: b3SharedMemoryCommandHandle,
     relativePositionTarget: f64    
 ) -> c_int
@@ -1105,7 +1105,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetRelative
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetERP(
+pub unsafe extern "C" fn csbindgen_b3InitChangeUserConstraintSetERP(
     commandHandle: b3SharedMemoryCommandHandle,
     erp: f64    
 ) -> c_int
@@ -1117,7 +1117,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitChangeUserConstraintSetERP(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRemoveUserConstraintCommand(
+pub unsafe extern "C" fn csbindgen_b3InitRemoveUserConstraintCommand(
     physClient: b3PhysicsClientHandle,
     userConstraintUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -1129,7 +1129,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRemoveUserConstraintCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetNumUserConstraints(
+pub unsafe extern "C" fn csbindgen_b3GetNumUserConstraints(
     physClient: b3PhysicsClientHandle    
 ) -> c_int
 {
@@ -1139,7 +1139,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetNumUserConstraints(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitGetUserConstraintStateCommand(
+pub unsafe extern "C" fn csbindgen_b3InitGetUserConstraintStateCommand(
     physClient: b3PhysicsClientHandle,
     constraintUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -1151,7 +1151,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitGetUserConstraintStateCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusUserConstraintState(
+pub unsafe extern "C" fn csbindgen_b3GetStatusUserConstraintState(
     statusHandle: b3SharedMemoryStatusHandle,
     constraintState: *mut b3UserConstraintState    
 ) -> c_int
@@ -1163,7 +1163,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusUserConstraintState(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserConstraintInfo(
+pub unsafe extern "C" fn csbindgen_b3GetUserConstraintInfo(
     physClient: b3PhysicsClientHandle,
     constraintUniqueId: c_int,
     info: *mut b3UserConstraint    
@@ -1177,7 +1177,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserConstraintInfo(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserConstraintId(
+pub unsafe extern "C" fn csbindgen_b3GetUserConstraintId(
     physClient: b3PhysicsClientHandle,
     serialIndex: c_int    
 ) -> c_int
@@ -1189,7 +1189,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetUserConstraintId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestDebugLinesCommand(
+pub unsafe extern "C" fn csbindgen_b3InitRequestDebugLinesCommand(
     physClient: b3PhysicsClientHandle,
     debugMode: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -1201,7 +1201,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestDebugLinesCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetDebugLines(
+pub unsafe extern "C" fn csbindgen_b3GetDebugLines(
     physClient: b3PhysicsClientHandle,
     lines: *mut b3DebugLines    
 )
@@ -1213,7 +1213,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetDebugLines(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitConfigureOpenGLVisualizer(
+pub unsafe extern "C" fn csbindgen_b3InitConfigureOpenGLVisualizer(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -1223,7 +1223,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitConfigureOpenGLVisualizer(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitConfigureOpenGLVisualizer2(
+pub unsafe extern "C" fn csbindgen_b3InitConfigureOpenGLVisualizer2(
     commandHandle: b3SharedMemoryCommandHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -1233,7 +1233,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitConfigureOpenGLVisualizer2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetVisualizationFlags(
+pub unsafe extern "C" fn csbindgen_b3ConfigureOpenGLVisualizerSetVisualizationFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     flag: c_int,
     enabled: c_int    
@@ -1247,7 +1247,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetVisuali
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetLightPosition(
+pub unsafe extern "C" fn csbindgen_b3ConfigureOpenGLVisualizerSetLightPosition(
     commandHandle: b3SharedMemoryCommandHandle,
     lightPosition: *const f32    
 )
@@ -1259,7 +1259,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetLightPo
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetShadowMapResolution(
+pub unsafe extern "C" fn csbindgen_b3ConfigureOpenGLVisualizerSetShadowMapResolution(
     commandHandle: b3SharedMemoryCommandHandle,
     shadowMapResolution: c_int    
 )
@@ -1271,7 +1271,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetShadowM
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetShadowMapIntensity(
+pub unsafe extern "C" fn csbindgen_b3ConfigureOpenGLVisualizerSetShadowMapIntensity(
     commandHandle: b3SharedMemoryCommandHandle,
     shadowMapIntensity: f64    
 )
@@ -1283,7 +1283,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetShadowM
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetLightRgbBackground(
+pub unsafe extern "C" fn csbindgen_b3ConfigureOpenGLVisualizerSetLightRgbBackground(
     commandHandle: b3SharedMemoryCommandHandle,
     rgbBackground: *const f32    
 )
@@ -1295,7 +1295,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetLightRg
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetShadowMapWorldSize(
+pub unsafe extern "C" fn csbindgen_b3ConfigureOpenGLVisualizerSetShadowMapWorldSize(
     commandHandle: b3SharedMemoryCommandHandle,
     shadowMapWorldSize: c_int    
 )
@@ -1307,7 +1307,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetShadowM
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetRemoteSyncTransformInterval(
+pub unsafe extern "C" fn csbindgen_b3ConfigureOpenGLVisualizerSetRemoteSyncTransformInterval(
     commandHandle: b3SharedMemoryCommandHandle,
     remoteSyncTransformInterval: f64    
 )
@@ -1319,7 +1319,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetRemoteS
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetViewMatrix(
+pub unsafe extern "C" fn csbindgen_b3ConfigureOpenGLVisualizerSetViewMatrix(
     commandHandle: b3SharedMemoryCommandHandle,
     cameraDistance: f32,
     cameraPitch: f32,
@@ -1337,7 +1337,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ConfigureOpenGLVisualizerSetViewMat
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestOpenGLVisualizerCameraCommand(
+pub unsafe extern "C" fn csbindgen_b3InitRequestOpenGLVisualizerCameraCommand(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -1347,7 +1347,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestOpenGLVisualizerCameraCo
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusOpenGLVisualizerCamera(
+pub unsafe extern "C" fn csbindgen_b3GetStatusOpenGLVisualizerCamera(
     statusHandle: b3SharedMemoryStatusHandle,
     camera: *mut b3OpenGLVisualizerCameraInfo    
 ) -> c_int
@@ -1359,7 +1359,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusOpenGLVisualizerCamera(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugDrawAddLine3D(
+pub unsafe extern "C" fn csbindgen_b3InitUserDebugDrawAddLine3D(
     physClient: b3PhysicsClientHandle,
     fromXYZ: *const f64,
     toXYZ: *const f64,
@@ -1379,7 +1379,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugDrawAddLine3D(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugDrawAddPoints3D(
+pub unsafe extern "C" fn csbindgen_b3InitUserDebugDrawAddPoints3D(
     physClient: b3PhysicsClientHandle,
     positionsXYZ: *const f64,
     colorsRGB: *const f64,
@@ -1399,7 +1399,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugDrawAddPoints3D(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugDrawAddText3D(
+pub unsafe extern "C" fn csbindgen_b3InitUserDebugDrawAddText3D(
     physClient: b3PhysicsClientHandle,
     txt: *const c_char,
     positionXYZ: *const f64,
@@ -1419,7 +1419,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugDrawAddText3D(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3UserDebugTextSetOptionFlags(
+pub unsafe extern "C" fn csbindgen_b3UserDebugTextSetOptionFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     optionFlags: c_int    
 )
@@ -1431,7 +1431,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3UserDebugTextSetOptionFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3UserDebugTextSetOrientation(
+pub unsafe extern "C" fn csbindgen_b3UserDebugTextSetOrientation(
     commandHandle: b3SharedMemoryCommandHandle,
     orientation: *const f64    
 )
@@ -1443,7 +1443,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3UserDebugTextSetOrientation(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3UserDebugItemSetReplaceItemUniqueId(
+pub unsafe extern "C" fn csbindgen_b3UserDebugItemSetReplaceItemUniqueId(
     commandHandle: b3SharedMemoryCommandHandle,
     replaceItem: c_int    
 )
@@ -1455,7 +1455,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3UserDebugItemSetReplaceItemUniqueId
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3UserDebugItemSetParentObject(
+pub unsafe extern "C" fn csbindgen_b3UserDebugItemSetParentObject(
     commandHandle: b3SharedMemoryCommandHandle,
     objectUniqueId: c_int,
     linkIndex: c_int    
@@ -1469,7 +1469,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3UserDebugItemSetParentObject(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugAddParameter(
+pub unsafe extern "C" fn csbindgen_b3InitUserDebugAddParameter(
     physClient: b3PhysicsClientHandle,
     txt: *const c_char,
     rangeMin: f64,
@@ -1487,7 +1487,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugAddParameter(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugReadParameter(
+pub unsafe extern "C" fn csbindgen_b3InitUserDebugReadParameter(
     physClient: b3PhysicsClientHandle,
     debugItemUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -1499,7 +1499,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugReadParameter(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusDebugParameterValue(
+pub unsafe extern "C" fn csbindgen_b3GetStatusDebugParameterValue(
     statusHandle: b3SharedMemoryStatusHandle,
     paramValue: *mut f64    
 ) -> c_int
@@ -1511,7 +1511,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusDebugParameterValue(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugDrawRemove(
+pub unsafe extern "C" fn csbindgen_b3InitUserDebugDrawRemove(
     physClient: b3PhysicsClientHandle,
     debugItemUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -1523,7 +1523,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugDrawRemove(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugDrawRemoveAll(
+pub unsafe extern "C" fn csbindgen_b3InitUserDebugDrawRemoveAll(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -1533,7 +1533,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserDebugDrawRemoveAll(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserRemoveAllParameters(
+pub unsafe extern "C" fn csbindgen_b3InitUserRemoveAllParameters(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -1543,7 +1543,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitUserRemoveAllParameters(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitDebugDrawingCommand(
+pub unsafe extern "C" fn csbindgen_b3InitDebugDrawingCommand(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -1553,7 +1553,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitDebugDrawingCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetDebugObjectColor(
+pub unsafe extern "C" fn csbindgen_b3SetDebugObjectColor(
     commandHandle: b3SharedMemoryCommandHandle,
     objectUniqueId: c_int,
     linkIndex: c_int,
@@ -1569,7 +1569,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetDebugObjectColor(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RemoveDebugObjectColor(
+pub unsafe extern "C" fn csbindgen_b3RemoveDebugObjectColor(
     commandHandle: b3SharedMemoryCommandHandle,
     objectUniqueId: c_int,
     linkIndex: c_int    
@@ -1583,7 +1583,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RemoveDebugObjectColor(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetDebugItemUniqueId(
+pub unsafe extern "C" fn csbindgen_b3GetDebugItemUniqueId(
     statusHandle: b3SharedMemoryStatusHandle    
 ) -> c_int
 {
@@ -1593,7 +1593,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetDebugItemUniqueId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestCameraImage(
+pub unsafe extern "C" fn csbindgen_b3InitRequestCameraImage(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -1603,7 +1603,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestCameraImage(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestCameraImage2(
+pub unsafe extern "C" fn csbindgen_b3InitRequestCameraImage2(
     commandHandle: b3SharedMemoryCommandHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -1613,7 +1613,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestCameraImage2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetCameraMatrices(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetCameraMatrices(
     commandHandle: b3SharedMemoryCommandHandle,
     viewMatrix: *mut f32,
     projectionMatrix: *mut f32    
@@ -1627,7 +1627,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetCameraMatrices
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetPixelResolution(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetPixelResolution(
     commandHandle: b3SharedMemoryCommandHandle,
     width: c_int,
     height: c_int    
@@ -1641,7 +1641,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetPixelResolutio
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetLightDirection(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetLightDirection(
     commandHandle: b3SharedMemoryCommandHandle,
     lightDirection: *const f32    
 )
@@ -1653,7 +1653,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetLightDirection
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetLightColor(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetLightColor(
     commandHandle: b3SharedMemoryCommandHandle,
     lightColor: *const f32    
 )
@@ -1665,7 +1665,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetLightColor(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetLightDistance(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetLightDistance(
     commandHandle: b3SharedMemoryCommandHandle,
     lightDistance: f32    
 )
@@ -1677,7 +1677,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetLightDistance(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetLightAmbientCoeff(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetLightAmbientCoeff(
     commandHandle: b3SharedMemoryCommandHandle,
     lightAmbientCoeff: f32    
 )
@@ -1689,7 +1689,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetLightAmbientCo
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetLightDiffuseCoeff(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetLightDiffuseCoeff(
     commandHandle: b3SharedMemoryCommandHandle,
     lightDiffuseCoeff: f32    
 )
@@ -1701,7 +1701,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetLightDiffuseCo
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetLightSpecularCoeff(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetLightSpecularCoeff(
     commandHandle: b3SharedMemoryCommandHandle,
     lightSpecularCoeff: f32    
 )
@@ -1713,7 +1713,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetLightSpecularC
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetShadow(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetShadow(
     commandHandle: b3SharedMemoryCommandHandle,
     hasShadow: c_int    
 )
@@ -1725,7 +1725,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetShadow(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSelectRenderer(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSelectRenderer(
     commandHandle: b3SharedMemoryCommandHandle,
     renderer: c_int    
 )
@@ -1737,7 +1737,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSelectRenderer(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetFlags(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     flags: c_int    
 )
@@ -1749,7 +1749,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetCameraImageData(
+pub unsafe extern "C" fn csbindgen_b3GetCameraImageData(
     physClient: b3PhysicsClientHandle,
     imageData: *mut b3CameraImageData    
 )
@@ -1761,7 +1761,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetCameraImageData(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetProjectiveTextureMatrices(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetProjectiveTextureMatrices(
     commandHandle: b3SharedMemoryCommandHandle,
     viewMatrix: *mut f32,
     projectionMatrix: *mut f32    
@@ -1775,7 +1775,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetProjectiveText
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ComputeViewMatrixFromPositions(
+pub unsafe extern "C" fn csbindgen_b3ComputeViewMatrixFromPositions(
     cameraPosition: *const f32,
     cameraTargetPosition: *const f32,
     cameraUp: *const f32,
@@ -1791,7 +1791,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ComputeViewMatrixFromPositions(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ComputeViewMatrixFromYawPitchRoll(
+pub unsafe extern "C" fn csbindgen_b3ComputeViewMatrixFromYawPitchRoll(
     cameraTargetPosition: *const f32,
     distance: f32,
     yaw: f32,
@@ -1813,7 +1813,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ComputeViewMatrixFromYawPitchRoll(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ComputePositionFromViewMatrix(
+pub unsafe extern "C" fn csbindgen_b3ComputePositionFromViewMatrix(
     viewMatrix: *const f32,
     cameraPosition: *mut f32,
     cameraTargetPosition: *mut f32,
@@ -1829,7 +1829,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ComputePositionFromViewMatrix(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ComputeProjectionMatrix(
+pub unsafe extern "C" fn csbindgen_b3ComputeProjectionMatrix(
     left: f32,
     right: f32,
     bottom: f32,
@@ -1851,7 +1851,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ComputeProjectionMatrix(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ComputeProjectionMatrixFOV(
+pub unsafe extern "C" fn csbindgen_b3ComputeProjectionMatrixFOV(
     fov: f32,
     aspect: f32,
     nearVal: f32,
@@ -1869,7 +1869,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ComputeProjectionMatrixFOV(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetViewMatrix(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetViewMatrix(
     commandHandle: b3SharedMemoryCommandHandle,
     cameraPosition: *const f32,
     cameraTargetPosition: *const f32,
@@ -1885,7 +1885,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetViewMatrix(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetViewMatrix2(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetViewMatrix2(
     commandHandle: b3SharedMemoryCommandHandle,
     cameraTargetPosition: *const f32,
     distance: f32,
@@ -1907,7 +1907,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetViewMatrix2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetProjectionMatrix(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetProjectionMatrix(
     commandHandle: b3SharedMemoryCommandHandle,
     left: f32,
     right: f32,
@@ -1929,7 +1929,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetProjectionMatr
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetFOVProjectionMatrix(
+pub unsafe extern "C" fn csbindgen_b3RequestCameraImageSetFOVProjectionMatrix(
     commandHandle: b3SharedMemoryCommandHandle,
     fov: f32,
     aspect: f32,
@@ -1947,7 +1947,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestCameraImageSetFOVProjectionM
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestContactPointInformation(
+pub unsafe extern "C" fn csbindgen_b3InitRequestContactPointInformation(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -1957,7 +1957,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestContactPointInformation(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetContactFilterBodyA(
+pub unsafe extern "C" fn csbindgen_b3SetContactFilterBodyA(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueIdA: c_int    
 )
@@ -1969,7 +1969,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetContactFilterBodyA(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetContactFilterBodyB(
+pub unsafe extern "C" fn csbindgen_b3SetContactFilterBodyB(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueIdB: c_int    
 )
@@ -1981,7 +1981,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetContactFilterBodyB(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetContactFilterLinkA(
+pub unsafe extern "C" fn csbindgen_b3SetContactFilterLinkA(
     commandHandle: b3SharedMemoryCommandHandle,
     linkIndexA: c_int    
 )
@@ -1993,7 +1993,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetContactFilterLinkA(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetContactFilterLinkB(
+pub unsafe extern "C" fn csbindgen_b3SetContactFilterLinkB(
     commandHandle: b3SharedMemoryCommandHandle,
     linkIndexB: c_int    
 )
@@ -2005,7 +2005,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetContactFilterLinkB(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetContactPointInformation(
+pub unsafe extern "C" fn csbindgen_b3GetContactPointInformation(
     physClient: b3PhysicsClientHandle,
     contactPointData: *mut b3ContactInformation    
 )
@@ -2017,7 +2017,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetContactPointInformation(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitClosestDistanceQuery(
+pub unsafe extern "C" fn csbindgen_b3InitClosestDistanceQuery(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -2027,7 +2027,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitClosestDistanceQuery(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterBodyA(
+pub unsafe extern "C" fn csbindgen_b3SetClosestDistanceFilterBodyA(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueIdA: c_int    
 )
@@ -2039,7 +2039,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterBodyA(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterLinkA(
+pub unsafe extern "C" fn csbindgen_b3SetClosestDistanceFilterLinkA(
     commandHandle: b3SharedMemoryCommandHandle,
     linkIndexA: c_int    
 )
@@ -2051,7 +2051,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterLinkA(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterBodyB(
+pub unsafe extern "C" fn csbindgen_b3SetClosestDistanceFilterBodyB(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueIdB: c_int    
 )
@@ -2063,7 +2063,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterBodyB(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterLinkB(
+pub unsafe extern "C" fn csbindgen_b3SetClosestDistanceFilterLinkB(
     commandHandle: b3SharedMemoryCommandHandle,
     linkIndexB: c_int    
 )
@@ -2075,7 +2075,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterLinkB(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceThreshold(
+pub unsafe extern "C" fn csbindgen_b3SetClosestDistanceThreshold(
     commandHandle: b3SharedMemoryCommandHandle,
     distance: f64    
 )
@@ -2087,7 +2087,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceThreshold(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterCollisionShapeA(
+pub unsafe extern "C" fn csbindgen_b3SetClosestDistanceFilterCollisionShapeA(
     commandHandle: b3SharedMemoryCommandHandle,
     collisionShapeA: c_int    
 )
@@ -2099,7 +2099,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterCollisionSh
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterCollisionShapeB(
+pub unsafe extern "C" fn csbindgen_b3SetClosestDistanceFilterCollisionShapeB(
     commandHandle: b3SharedMemoryCommandHandle,
     collisionShapeB: c_int    
 )
@@ -2111,7 +2111,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterCollisionSh
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterCollisionShapePositionA(
+pub unsafe extern "C" fn csbindgen_b3SetClosestDistanceFilterCollisionShapePositionA(
     commandHandle: b3SharedMemoryCommandHandle,
     collisionShapePositionA: *const f64    
 )
@@ -2123,7 +2123,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterCollisionSh
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterCollisionShapePositionB(
+pub unsafe extern "C" fn csbindgen_b3SetClosestDistanceFilterCollisionShapePositionB(
     commandHandle: b3SharedMemoryCommandHandle,
     collisionShapePositionB: *const f64    
 )
@@ -2135,7 +2135,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterCollisionSh
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterCollisionShapeOrientationA(
+pub unsafe extern "C" fn csbindgen_b3SetClosestDistanceFilterCollisionShapeOrientationA(
     commandHandle: b3SharedMemoryCommandHandle,
     collisionShapeOrientationA: *const f64    
 )
@@ -2147,7 +2147,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterCollisionSh
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterCollisionShapeOrientationB(
+pub unsafe extern "C" fn csbindgen_b3SetClosestDistanceFilterCollisionShapeOrientationB(
     commandHandle: b3SharedMemoryCommandHandle,
     collisionShapeOrientationB: *const f64    
 )
@@ -2159,7 +2159,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetClosestDistanceFilterCollisionSh
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetClosestPointInformation(
+pub unsafe extern "C" fn csbindgen_b3GetClosestPointInformation(
     physClient: b3PhysicsClientHandle,
     contactPointInfo: *mut b3ContactInformation    
 )
@@ -2171,7 +2171,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetClosestPointInformation(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitAABBOverlapQuery(
+pub unsafe extern "C" fn csbindgen_b3InitAABBOverlapQuery(
     physClient: b3PhysicsClientHandle,
     aabbMin: *const f64,
     aabbMax: *const f64    
@@ -2185,7 +2185,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitAABBOverlapQuery(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetAABBOverlapResults(
+pub unsafe extern "C" fn csbindgen_b3GetAABBOverlapResults(
     physClient: b3PhysicsClientHandle,
     data: *mut b3AABBOverlapData    
 )
@@ -2197,7 +2197,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetAABBOverlapResults(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestVisualShapeInformation(
+pub unsafe extern "C" fn csbindgen_b3InitRequestVisualShapeInformation(
     physClient: b3PhysicsClientHandle,
     bodyUniqueIdA: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -2209,7 +2209,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestVisualShapeInformation(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetVisualShapeInformation(
+pub unsafe extern "C" fn csbindgen_b3GetVisualShapeInformation(
     physClient: b3PhysicsClientHandle,
     visualShapeInfo: *mut b3VisualShapeInformation    
 )
@@ -2221,7 +2221,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetVisualShapeInformation(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestCollisionShapeInformation(
+pub unsafe extern "C" fn csbindgen_b3InitRequestCollisionShapeInformation(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int    
@@ -2235,7 +2235,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestCollisionShapeInformatio
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetCollisionShapeInformation(
+pub unsafe extern "C" fn csbindgen_b3GetCollisionShapeInformation(
     physClient: b3PhysicsClientHandle,
     collisionShapeInfo: *mut b3CollisionShapeInformation    
 )
@@ -2247,7 +2247,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetCollisionShapeInformation(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitLoadTexture(
+pub unsafe extern "C" fn csbindgen_b3InitLoadTexture(
     physClient: b3PhysicsClientHandle,
     filename: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -2259,7 +2259,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitLoadTexture(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusTextureUniqueId(
+pub unsafe extern "C" fn csbindgen_b3GetStatusTextureUniqueId(
     statusHandle: b3SharedMemoryStatusHandle    
 ) -> c_int
 {
@@ -2269,7 +2269,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusTextureUniqueId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateChangeTextureCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CreateChangeTextureCommandInit(
     physClient: b3PhysicsClientHandle,
     textureUniqueId: c_int,
     width: c_int,
@@ -2287,7 +2287,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateChangeTextureCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitUpdateVisualShape(
+pub unsafe extern "C" fn csbindgen_b3InitUpdateVisualShape(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     jointIndex: c_int,
@@ -2305,7 +2305,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitUpdateVisualShape(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitUpdateVisualShape2(
+pub unsafe extern "C" fn csbindgen_b3InitUpdateVisualShape2(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     jointIndex: c_int,
@@ -2321,7 +2321,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitUpdateVisualShape2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3UpdateVisualShapeTexture(
+pub unsafe extern "C" fn csbindgen_b3UpdateVisualShapeTexture(
     commandHandle: b3SharedMemoryCommandHandle,
     textureUniqueId: c_int    
 )
@@ -2333,7 +2333,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3UpdateVisualShapeTexture(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3UpdateVisualShapeRGBAColor(
+pub unsafe extern "C" fn csbindgen_b3UpdateVisualShapeRGBAColor(
     commandHandle: b3SharedMemoryCommandHandle,
     rgbaColor: *const f64    
 )
@@ -2345,7 +2345,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3UpdateVisualShapeRGBAColor(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3UpdateVisualShapeFlags(
+pub unsafe extern "C" fn csbindgen_b3UpdateVisualShapeFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     flags: c_int    
 )
@@ -2357,7 +2357,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3UpdateVisualShapeFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3UpdateVisualShapeSpecularColor(
+pub unsafe extern "C" fn csbindgen_b3UpdateVisualShapeSpecularColor(
     commandHandle: b3SharedMemoryCommandHandle,
     specularColor: *const f64    
 )
@@ -2369,7 +2369,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3UpdateVisualShapeSpecularColor(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitPhysicsParamCommand(
+pub unsafe extern "C" fn csbindgen_b3InitPhysicsParamCommand(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -2379,7 +2379,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitPhysicsParamCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitPhysicsParamCommand2(
+pub unsafe extern "C" fn csbindgen_b3InitPhysicsParamCommand2(
     commandHandle: b3SharedMemoryCommandHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -2389,7 +2389,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitPhysicsParamCommand2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetGravity(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetGravity(
     commandHandle: b3SharedMemoryCommandHandle,
     gravx: f64,
     gravy: f64,
@@ -2405,7 +2405,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetGravity(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetTimeStep(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetTimeStep(
     commandHandle: b3SharedMemoryCommandHandle,
     timeStep: f64    
 ) -> c_int
@@ -2417,7 +2417,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetTimeStep(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetDefaultContactERP(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetDefaultContactERP(
     commandHandle: b3SharedMemoryCommandHandle,
     defaultContactERP: f64    
 ) -> c_int
@@ -2429,7 +2429,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetDefaultContactERP(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetDefaultNonContactERP(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetDefaultNonContactERP(
     commandHandle: b3SharedMemoryCommandHandle,
     defaultNonContactERP: f64    
 ) -> c_int
@@ -2441,7 +2441,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetDefaultNonContactERP
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetDefaultFrictionERP(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetDefaultFrictionERP(
     commandHandle: b3SharedMemoryCommandHandle,
     frictionERP: f64    
 ) -> c_int
@@ -2453,7 +2453,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetDefaultFrictionERP(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetDefaultGlobalCFM(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetDefaultGlobalCFM(
     commandHandle: b3SharedMemoryCommandHandle,
     defaultGlobalCFM: f64    
 ) -> c_int
@@ -2465,7 +2465,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetDefaultGlobalCFM(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetDefaultFrictionCFM(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetDefaultFrictionCFM(
     commandHandle: b3SharedMemoryCommandHandle,
     frictionCFM: f64    
 ) -> c_int
@@ -2477,7 +2477,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetDefaultFrictionCFM(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetNumSubSteps(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetNumSubSteps(
     commandHandle: b3SharedMemoryCommandHandle,
     numSubSteps: c_int    
 ) -> c_int
@@ -2489,7 +2489,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetNumSubSteps(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetRealTimeSimulation(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetRealTimeSimulation(
     commandHandle: b3SharedMemoryCommandHandle,
     enableRealTimeSimulation: c_int    
 ) -> c_int
@@ -2501,7 +2501,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetRealTimeSimulation(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetNumSolverIterations(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetNumSolverIterations(
     commandHandle: b3SharedMemoryCommandHandle,
     numSolverIterations: c_int    
 ) -> c_int
@@ -2513,7 +2513,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetNumSolverIterations(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetNumNonContactInnerIterations(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetNumNonContactInnerIterations(
     commandHandle: b3SharedMemoryCommandHandle,
     numMotorIterations: c_int    
 ) -> c_int
@@ -2525,7 +2525,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetNumNonContactInnerIt
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetWarmStartingFactor(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetWarmStartingFactor(
     commandHandle: b3SharedMemoryCommandHandle,
     warmStartingFactor: f64    
 ) -> c_int
@@ -2537,7 +2537,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetWarmStartingFactor(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetArticulatedWarmStartingFactor(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetArticulatedWarmStartingFactor(
     commandHandle: b3SharedMemoryCommandHandle,
     warmStartingFactor: f64    
 ) -> c_int
@@ -2549,7 +2549,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetArticulatedWarmStart
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetCollisionFilterMode(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetCollisionFilterMode(
     commandHandle: b3SharedMemoryCommandHandle,
     filterMode: c_int    
 ) -> c_int
@@ -2561,7 +2561,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetCollisionFilterMode(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetUseSplitImpulse(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetUseSplitImpulse(
     commandHandle: b3SharedMemoryCommandHandle,
     useSplitImpulse: c_int    
 ) -> c_int
@@ -2573,7 +2573,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetUseSplitImpulse(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetSplitImpulsePenetrationThreshold(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetSplitImpulsePenetrationThreshold(
     commandHandle: b3SharedMemoryCommandHandle,
     splitImpulsePenetrationThreshold: f64    
 ) -> c_int
@@ -2585,7 +2585,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetSplitImpulsePenetrat
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetContactBreakingThreshold(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetContactBreakingThreshold(
     commandHandle: b3SharedMemoryCommandHandle,
     contactBreakingThreshold: f64    
 ) -> c_int
@@ -2597,7 +2597,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetContactBreakingThres
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetMaxNumCommandsPer1ms(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetMaxNumCommandsPer1ms(
     commandHandle: b3SharedMemoryCommandHandle,
     maxNumCmdPer1ms: c_int    
 ) -> c_int
@@ -2609,7 +2609,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetMaxNumCommandsPer1ms
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetEnableFileCaching(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetEnableFileCaching(
     commandHandle: b3SharedMemoryCommandHandle,
     enableFileCaching: c_int    
 ) -> c_int
@@ -2621,7 +2621,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetEnableFileCaching(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetRestitutionVelocityThreshold(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetRestitutionVelocityThreshold(
     commandHandle: b3SharedMemoryCommandHandle,
     restitutionVelocityThreshold: f64    
 ) -> c_int
@@ -2633,7 +2633,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetRestitutionVelocityT
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetEnableConeFriction(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetEnableConeFriction(
     commandHandle: b3SharedMemoryCommandHandle,
     enableConeFriction: c_int    
 ) -> c_int
@@ -2645,7 +2645,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetEnableConeFriction(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetDeterministicOverlappingPairs(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParameterSetDeterministicOverlappingPairs(
     commandHandle: b3SharedMemoryCommandHandle,
     deterministicOverlappingPairs: c_int    
 ) -> c_int
@@ -2657,7 +2657,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetDeterministicOve
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetAllowedCcdPenetration(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParameterSetAllowedCcdPenetration(
     commandHandle: b3SharedMemoryCommandHandle,
     allowedCcdPenetration: f64    
 ) -> c_int
@@ -2669,7 +2669,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetAllowedCcdPenetr
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetJointFeedbackMode(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParameterSetJointFeedbackMode(
     commandHandle: b3SharedMemoryCommandHandle,
     jointFeedbackMode: c_int    
 ) -> c_int
@@ -2681,7 +2681,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetJointFeedbackMod
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetSolverResidualThreshold(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetSolverResidualThreshold(
     commandHandle: b3SharedMemoryCommandHandle,
     solverResidualThreshold: f64    
 ) -> c_int
@@ -2693,7 +2693,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetSolverResidualThresh
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetContactSlop(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetContactSlop(
     commandHandle: b3SharedMemoryCommandHandle,
     contactSlop: f64    
 ) -> c_int
@@ -2705,7 +2705,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetContactSlop(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetEnableSAT(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParameterSetEnableSAT(
     commandHandle: b3SharedMemoryCommandHandle,
     enableSAT: c_int    
 ) -> c_int
@@ -2717,7 +2717,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetEnableSAT(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetConstraintSolverType(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParameterSetConstraintSolverType(
     commandHandle: b3SharedMemoryCommandHandle,
     constraintSolverType: c_int    
 ) -> c_int
@@ -2729,7 +2729,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetConstraintSolver
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetMinimumSolverIslandSize(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParameterSetMinimumSolverIslandSize(
     commandHandle: b3SharedMemoryCommandHandle,
     minimumSolverIslandSize: c_int    
 ) -> c_int
@@ -2741,7 +2741,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetMinimumSolverIsl
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetSolverAnalytics(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetSolverAnalytics(
     commandHandle: b3SharedMemoryCommandHandle,
     reportSolverAnalytics: c_int    
 ) -> c_int
@@ -2753,7 +2753,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetSolverAnalytics(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetSparseSdfVoxelSize(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParameterSetSparseSdfVoxelSize(
     commandHandle: b3SharedMemoryCommandHandle,
     sparseSdfVoxelSize: f64    
 ) -> c_int
@@ -2765,7 +2765,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParameterSetSparseSdfVoxelSi
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestPhysicsParamCommand(
+pub unsafe extern "C" fn csbindgen_b3InitRequestPhysicsParamCommand(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -2775,7 +2775,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRequestPhysicsParamCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusPhysicsSimulationParameters(
+pub unsafe extern "C" fn csbindgen_b3GetStatusPhysicsSimulationParameters(
     statusHandle: b3SharedMemoryStatusHandle,
     params: *mut b3PhysicsSimulationParameters    
 ) -> c_int
@@ -2787,7 +2787,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusPhysicsSimulationParameter
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetInternalSimFlags(
+pub unsafe extern "C" fn csbindgen_b3PhysicsParamSetInternalSimFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     flags: c_int    
 ) -> c_int
@@ -2799,7 +2799,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PhysicsParamSetInternalSimFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitStepSimulationCommand(
+pub unsafe extern "C" fn csbindgen_b3InitStepSimulationCommand(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -2809,7 +2809,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitStepSimulationCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitStepSimulationCommand2(
+pub unsafe extern "C" fn csbindgen_b3InitStepSimulationCommand2(
     commandHandle: b3SharedMemoryCommandHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -2819,7 +2819,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitStepSimulationCommand2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitPerformCollisionDetectionCommand(
+pub unsafe extern "C" fn csbindgen_b3InitPerformCollisionDetectionCommand(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -2829,7 +2829,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitPerformCollisionDetectionComman
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusForwardDynamicsAnalyticsData(
+pub unsafe extern "C" fn csbindgen_b3GetStatusForwardDynamicsAnalyticsData(
     statusHandle: b3SharedMemoryStatusHandle,
     analyticsData: *mut b3ForwardDynamicsAnalyticsArgs    
 ) -> c_int
@@ -2841,7 +2841,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusForwardDynamicsAnalyticsDa
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitResetSimulationCommand(
+pub unsafe extern "C" fn csbindgen_b3InitResetSimulationCommand(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -2851,7 +2851,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitResetSimulationCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitResetSimulationCommand2(
+pub unsafe extern "C" fn csbindgen_b3InitResetSimulationCommand2(
     commandHandle: b3SharedMemoryCommandHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -2861,7 +2861,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitResetSimulationCommand2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitResetSimulationSetFlags(
+pub unsafe extern "C" fn csbindgen_b3InitResetSimulationSetFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     flags: c_int    
 ) -> c_int
@@ -2873,7 +2873,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitResetSimulationSetFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandInit(
+pub unsafe extern "C" fn csbindgen_b3LoadUrdfCommandInit(
     physClient: b3PhysicsClientHandle,
     urdfFileName: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -2885,7 +2885,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandInit2(
+pub unsafe extern "C" fn csbindgen_b3LoadUrdfCommandInit2(
     commandHandle: b3SharedMemoryCommandHandle,
     urdfFileName: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -2897,7 +2897,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandInit2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandSetStartPosition(
+pub unsafe extern "C" fn csbindgen_b3LoadUrdfCommandSetStartPosition(
     commandHandle: b3SharedMemoryCommandHandle,
     startPosX: f64,
     startPosY: f64,
@@ -2913,7 +2913,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandSetStartPosition(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandSetStartOrientation(
+pub unsafe extern "C" fn csbindgen_b3LoadUrdfCommandSetStartOrientation(
     commandHandle: b3SharedMemoryCommandHandle,
     startOrnX: f64,
     startOrnY: f64,
@@ -2931,7 +2931,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandSetStartOrientation(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandSetUseMultiBody(
+pub unsafe extern "C" fn csbindgen_b3LoadUrdfCommandSetUseMultiBody(
     commandHandle: b3SharedMemoryCommandHandle,
     useMultiBody: c_int    
 ) -> c_int
@@ -2943,7 +2943,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandSetUseMultiBody(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandSetUseFixedBase(
+pub unsafe extern "C" fn csbindgen_b3LoadUrdfCommandSetUseFixedBase(
     commandHandle: b3SharedMemoryCommandHandle,
     useFixedBase: c_int    
 ) -> c_int
@@ -2955,7 +2955,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandSetUseFixedBase(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandSetFlags(
+pub unsafe extern "C" fn csbindgen_b3LoadUrdfCommandSetFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     flags: c_int    
 ) -> c_int
@@ -2967,7 +2967,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandSetFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandSetGlobalScaling(
+pub unsafe extern "C" fn csbindgen_b3LoadUrdfCommandSetGlobalScaling(
     commandHandle: b3SharedMemoryCommandHandle,
     globalScaling: f64    
 ) -> c_int
@@ -2979,7 +2979,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadUrdfCommandSetGlobalScaling(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SaveStateCommandInit(
+pub unsafe extern "C" fn csbindgen_b3SaveStateCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -2989,7 +2989,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SaveStateCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRemoveStateCommand(
+pub unsafe extern "C" fn csbindgen_b3InitRemoveStateCommand(
     physClient: b3PhysicsClientHandle,
     stateId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -3001,7 +3001,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRemoveStateCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusGetStateId(
+pub unsafe extern "C" fn csbindgen_b3GetStatusGetStateId(
     statusHandle: b3SharedMemoryStatusHandle    
 ) -> c_int
 {
@@ -3011,7 +3011,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusGetStateId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadStateCommandInit(
+pub unsafe extern "C" fn csbindgen_b3LoadStateCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -3021,7 +3021,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadStateCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadStateSetStateId(
+pub unsafe extern "C" fn csbindgen_b3LoadStateSetStateId(
     commandHandle: b3SharedMemoryCommandHandle,
     stateId: c_int    
 ) -> c_int
@@ -3033,7 +3033,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadStateSetStateId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadStateSetFileName(
+pub unsafe extern "C" fn csbindgen_b3LoadStateSetFileName(
     commandHandle: b3SharedMemoryCommandHandle,
     fileName: *const c_char    
 ) -> c_int
@@ -3045,7 +3045,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadStateSetFileName(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadBulletCommandInit(
+pub unsafe extern "C" fn csbindgen_b3LoadBulletCommandInit(
     physClient: b3PhysicsClientHandle,
     fileName: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -3057,7 +3057,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadBulletCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SaveBulletCommandInit(
+pub unsafe extern "C" fn csbindgen_b3SaveBulletCommandInit(
     physClient: b3PhysicsClientHandle,
     fileName: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -3069,7 +3069,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SaveBulletCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadMJCFCommandInit(
+pub unsafe extern "C" fn csbindgen_b3LoadMJCFCommandInit(
     physClient: b3PhysicsClientHandle,
     fileName: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -3081,7 +3081,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadMJCFCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadMJCFCommandInit2(
+pub unsafe extern "C" fn csbindgen_b3LoadMJCFCommandInit2(
     commandHandle: b3SharedMemoryCommandHandle,
     fileName: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -3093,7 +3093,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadMJCFCommandInit2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadMJCFCommandSetFlags(
+pub unsafe extern "C" fn csbindgen_b3LoadMJCFCommandSetFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     flags: c_int    
 )
@@ -3105,7 +3105,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadMJCFCommandSetFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadMJCFCommandSetUseMultiBody(
+pub unsafe extern "C" fn csbindgen_b3LoadMJCFCommandSetUseMultiBody(
     commandHandle: b3SharedMemoryCommandHandle,
     useMultiBody: c_int    
 )
@@ -3117,7 +3117,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadMJCFCommandSetUseMultiBody(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseDynamicsCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseDynamicsCommandInit(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     jointPositionsQ: *const f64,
@@ -3135,7 +3135,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseDynamicsCommandInit
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseDynamicsCommandInit2(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseDynamicsCommandInit2(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     jointPositionsQ: *const f64,
@@ -3157,7 +3157,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseDynamicsCommandInit
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseDynamicsSetFlags(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseDynamicsSetFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     flags: c_int    
 )
@@ -3169,7 +3169,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseDynamicsSetFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusInverseDynamicsJointForces(
+pub unsafe extern "C" fn csbindgen_b3GetStatusInverseDynamicsJointForces(
     statusHandle: b3SharedMemoryStatusHandle,
     bodyUniqueId: *mut c_int,
     dofCount: *mut c_int,
@@ -3185,7 +3185,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusInverseDynamicsJointForces
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateJacobianCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CalculateJacobianCommandInit(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int,
@@ -3207,7 +3207,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateJacobianCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusJacobian(
+pub unsafe extern "C" fn csbindgen_b3GetStatusJacobian(
     statusHandle: b3SharedMemoryStatusHandle,
     dofCount: *mut c_int,
     linearJacobian: *mut f64,
@@ -3223,7 +3223,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusJacobian(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateMassMatrixCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CalculateMassMatrixCommandInit(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     jointPositionsQ: *const f64,
@@ -3239,7 +3239,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateMassMatrixCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateMassMatrixSetFlags(
+pub unsafe extern "C" fn csbindgen_b3CalculateMassMatrixSetFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     flags: c_int    
 )
@@ -3251,7 +3251,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateMassMatrixSetFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusMassMatrix(
+pub unsafe extern "C" fn csbindgen_b3GetStatusMassMatrix(
     physClient: b3PhysicsClientHandle,
     statusHandle: b3SharedMemoryStatusHandle,
     dofCount: *mut c_int,
@@ -3267,7 +3267,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusMassMatrix(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseKinematicsCommandInit(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -3279,7 +3279,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsCommandIn
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsAddTargetPurePosition(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseKinematicsAddTargetPurePosition(
     commandHandle: b3SharedMemoryCommandHandle,
     endEffectorLinkIndex: c_int,
     targetPosition: *const f64    
@@ -3293,7 +3293,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsAddTarget
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsAddTargetsPurePosition(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseKinematicsAddTargetsPurePosition(
     commandHandle: b3SharedMemoryCommandHandle,
     numEndEffectorLinkIndices: c_int,
     endEffectorIndices: *const c_int,
@@ -3309,7 +3309,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsAddTarget
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsAddTargetPositionWithOrientation(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseKinematicsAddTargetPositionWithOrientation(
     commandHandle: b3SharedMemoryCommandHandle,
     endEffectorLinkIndex: c_int,
     targetPosition: *const f64,
@@ -3325,7 +3325,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsAddTarget
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsPosWithNullSpaceVel(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseKinematicsPosWithNullSpaceVel(
     commandHandle: b3SharedMemoryCommandHandle,
     numDof: c_int,
     endEffectorLinkIndex: c_int,
@@ -3349,7 +3349,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsPosWithNu
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsPosOrnWithNullSpaceVel(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseKinematicsPosOrnWithNullSpaceVel(
     commandHandle: b3SharedMemoryCommandHandle,
     numDof: c_int,
     endEffectorLinkIndex: c_int,
@@ -3375,7 +3375,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsPosOrnWit
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsSetJointDamping(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseKinematicsSetJointDamping(
     commandHandle: b3SharedMemoryCommandHandle,
     numDof: c_int,
     jointDampingCoeff: *const f64    
@@ -3389,7 +3389,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsSetJointD
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsSelectSolver(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseKinematicsSelectSolver(
     commandHandle: b3SharedMemoryCommandHandle,
     solver: c_int    
 )
@@ -3401,7 +3401,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsSelectSol
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusInverseKinematicsJointPositions(
+pub unsafe extern "C" fn csbindgen_b3GetStatusInverseKinematicsJointPositions(
     statusHandle: b3SharedMemoryStatusHandle,
     bodyUniqueId: *mut c_int,
     dofCount: *mut c_int,
@@ -3417,7 +3417,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusInverseKinematicsJointPosi
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsSetCurrentPositions(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseKinematicsSetCurrentPositions(
     commandHandle: b3SharedMemoryCommandHandle,
     numDof: c_int,
     currentJointPositions: *const f64    
@@ -3431,7 +3431,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsSetCurren
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsSetMaxNumIterations(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseKinematicsSetMaxNumIterations(
     commandHandle: b3SharedMemoryCommandHandle,
     maxNumIterations: c_int    
 )
@@ -3443,7 +3443,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsSetMaxNum
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsSetResidualThreshold(
+pub unsafe extern "C" fn csbindgen_b3CalculateInverseKinematicsSetResidualThreshold(
     commandHandle: b3SharedMemoryCommandHandle,
     residualThreshold: f64    
 )
@@ -3455,7 +3455,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateInverseKinematicsSetResidu
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CollisionFilterCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CollisionFilterCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -3465,7 +3465,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CollisionFilterCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetCollisionFilterPair(
+pub unsafe extern "C" fn csbindgen_b3SetCollisionFilterPair(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueIdA: c_int,
     bodyUniqueIdB: c_int,
@@ -3485,7 +3485,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetCollisionFilterPair(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetCollisionFilterGroupMask(
+pub unsafe extern "C" fn csbindgen_b3SetCollisionFilterGroupMask(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueIdA: c_int,
     linkIndexA: c_int,
@@ -3503,7 +3503,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetCollisionFilterGroupMask(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSdfCommandInit(
+pub unsafe extern "C" fn csbindgen_b3LoadSdfCommandInit(
     physClient: b3PhysicsClientHandle,
     sdfFileName: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -3515,7 +3515,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSdfCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSdfCommandInit2(
+pub unsafe extern "C" fn csbindgen_b3LoadSdfCommandInit2(
     commandHandle: b3SharedMemoryCommandHandle,
     sdfFileName: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -3527,7 +3527,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSdfCommandInit2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSdfCommandSetUseMultiBody(
+pub unsafe extern "C" fn csbindgen_b3LoadSdfCommandSetUseMultiBody(
     commandHandle: b3SharedMemoryCommandHandle,
     useMultiBody: c_int    
 ) -> c_int
@@ -3539,7 +3539,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSdfCommandSetUseMultiBody(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSdfCommandSetUseGlobalScaling(
+pub unsafe extern "C" fn csbindgen_b3LoadSdfCommandSetUseGlobalScaling(
     commandHandle: b3SharedMemoryCommandHandle,
     globalScaling: f64    
 ) -> c_int
@@ -3551,7 +3551,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSdfCommandSetUseGlobalScaling(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SaveWorldCommandInit(
+pub unsafe extern "C" fn csbindgen_b3SaveWorldCommandInit(
     physClient: b3PhysicsClientHandle,
     sdfFileName: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -3563,7 +3563,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SaveWorldCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlCommandInit(
+pub unsafe extern "C" fn csbindgen_b3JointControlCommandInit(
     physClient: b3PhysicsClientHandle,
     controlMode: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -3575,7 +3575,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlCommandInit2(
+pub unsafe extern "C" fn csbindgen_b3JointControlCommandInit2(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     controlMode: c_int    
@@ -3589,7 +3589,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlCommandInit2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlCommandInit2Internal(
+pub unsafe extern "C" fn csbindgen_b3JointControlCommandInit2Internal(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     controlMode: c_int    
@@ -3603,7 +3603,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlCommandInit2Internal(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredPosition(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetDesiredPosition(
     commandHandle: b3SharedMemoryCommandHandle,
     qIndex: c_int,
     value: f64    
@@ -3617,7 +3617,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredPosition(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredPositionMultiDof(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetDesiredPositionMultiDof(
     commandHandle: b3SharedMemoryCommandHandle,
     qIndex: c_int,
     position: *const f64,
@@ -3633,7 +3633,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredPositionMulti
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetKp(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetKp(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     value: f64    
@@ -3647,7 +3647,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetKp(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetKpMultiDof(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetKpMultiDof(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     kps: *mut f64,
@@ -3663,7 +3663,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetKpMultiDof(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetKd(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetKd(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     value: f64    
@@ -3677,7 +3677,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetKd(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetKdMultiDof(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetKdMultiDof(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     kds: *mut f64,
@@ -3693,7 +3693,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetKdMultiDof(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetMaximumVelocity(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetMaximumVelocity(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     maximumVelocity: f64    
@@ -3707,7 +3707,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetMaximumVelocity(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredVelocity(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetDesiredVelocity(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     value: f64    
@@ -3721,7 +3721,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredVelocity(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredVelocityMultiDof(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetDesiredVelocityMultiDof(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     velocity: *const f64,
@@ -3737,7 +3737,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredVelocityMulti
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredVelocityMultiDof2(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetDesiredVelocityMultiDof2(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     velocity: *const f64,
@@ -3753,7 +3753,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredVelocityMulti
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetMaximumForce(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetMaximumForce(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     value: f64    
@@ -3767,7 +3767,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetMaximumForce(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredForceTorqueMultiDof(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetDesiredForceTorqueMultiDof(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     forces: *mut f64,
@@ -3783,7 +3783,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredForceTorqueMu
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDamping(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetDamping(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     value: f64    
@@ -3797,7 +3797,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDamping(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDampingMultiDof(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetDampingMultiDof(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     damping: *mut f64,
@@ -3813,7 +3813,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDampingMultiDof(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredForceTorque(
+pub unsafe extern "C" fn csbindgen_b3JointControlSetDesiredForceTorque(
     commandHandle: b3SharedMemoryCommandHandle,
     dofIndex: c_int,
     value: f64    
@@ -3827,7 +3827,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3JointControlSetDesiredForceTorque(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionShapeCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -3837,7 +3837,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddSphere(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionShapeAddSphere(
     commandHandle: b3SharedMemoryCommandHandle,
     radius: f64    
 ) -> c_int
@@ -3849,7 +3849,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddSphere(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddBox(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionShapeAddBox(
     commandHandle: b3SharedMemoryCommandHandle,
     halfExtents: *const f64    
 ) -> c_int
@@ -3861,7 +3861,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddBox(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddCapsule(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionShapeAddCapsule(
     commandHandle: b3SharedMemoryCommandHandle,
     radius: f64,
     height: f64    
@@ -3875,7 +3875,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddCapsule(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddCylinder(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionShapeAddCylinder(
     commandHandle: b3SharedMemoryCommandHandle,
     radius: f64,
     height: f64    
@@ -3889,7 +3889,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddCylinder(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddHeightfield(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionShapeAddHeightfield(
     commandHandle: b3SharedMemoryCommandHandle,
     fileName: *const c_char,
     meshScale: *const f64,
@@ -3905,7 +3905,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddHeightfield(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddHeightfield2(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionShapeAddHeightfield2(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle,
     meshScale: *const f64,
@@ -3929,7 +3929,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddHeightfield2
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddPlane(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionShapeAddPlane(
     commandHandle: b3SharedMemoryCommandHandle,
     planeNormal: *const f64,
     planeConstant: f64    
@@ -3943,7 +3943,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddPlane(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddMesh(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionShapeAddMesh(
     commandHandle: b3SharedMemoryCommandHandle,
     fileName: *const c_char,
     meshScale: *const f64    
@@ -3957,7 +3957,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddMesh(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddConvexMesh(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionShapeAddConvexMesh(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle,
     meshScale: *const f64,
@@ -3975,7 +3975,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddConvexMesh(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddConcaveMesh(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionShapeAddConcaveMesh(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle,
     meshScale: *const f64,
@@ -3997,7 +3997,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeAddConcaveMesh(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionSetFlag(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionSetFlag(
     commandHandle: b3SharedMemoryCommandHandle,
     shapeIndex: c_int,
     flags: c_int    
@@ -4011,7 +4011,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionSetFlag(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeSetChildTransform(
+pub unsafe extern "C" fn csbindgen_b3CreateCollisionShapeSetChildTransform(
     commandHandle: b3SharedMemoryCommandHandle,
     shapeIndex: c_int,
     childPosition: *const f64,
@@ -4027,7 +4027,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateCollisionShapeSetChildTransfo
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusCollisionShapeUniqueId(
+pub unsafe extern "C" fn csbindgen_b3GetStatusCollisionShapeUniqueId(
     statusHandle: b3SharedMemoryStatusHandle    
 ) -> c_int
 {
@@ -4037,7 +4037,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusCollisionShapeUniqueId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitRemoveCollisionShapeCommand(
+pub unsafe extern "C" fn csbindgen_b3InitRemoveCollisionShapeCommand(
     physClient: b3PhysicsClientHandle,
     collisionShapeId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -4049,7 +4049,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitRemoveCollisionShapeCommand(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetMeshDataCommandInit(
+pub unsafe extern "C" fn csbindgen_b3GetMeshDataCommandInit(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     linkIndex: c_int    
@@ -4063,7 +4063,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetMeshDataCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetTetraMeshDataCommandInit(
+pub unsafe extern "C" fn csbindgen_b3GetTetraMeshDataCommandInit(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -4075,7 +4075,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetTetraMeshDataCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetMeshDataSimulationMesh(
+pub unsafe extern "C" fn csbindgen_b3GetMeshDataSimulationMesh(
     commandHandle: b3SharedMemoryCommandHandle    
 )
 {
@@ -4085,7 +4085,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetMeshDataSimulationMesh(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3MeshDataSimulationMeshVelocity(
+pub unsafe extern "C" fn csbindgen_b3MeshDataSimulationMeshVelocity(
     commandHandle: b3SharedMemoryCommandHandle    
 )
 {
@@ -4095,7 +4095,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3MeshDataSimulationMeshVelocity(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetMeshDataSetCollisionShapeIndex(
+pub unsafe extern "C" fn csbindgen_b3GetMeshDataSetCollisionShapeIndex(
     commandHandle: b3SharedMemoryCommandHandle,
     shapeIndex: c_int    
 )
@@ -4107,7 +4107,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetMeshDataSetCollisionShapeIndex(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetMeshDataSetFlags(
+pub unsafe extern "C" fn csbindgen_b3GetMeshDataSetFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     flags: c_int    
 )
@@ -4119,7 +4119,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetMeshDataSetFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetTetraMeshDataSetFlags(
+pub unsafe extern "C" fn csbindgen_b3GetTetraMeshDataSetFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     flags: c_int    
 )
@@ -4131,7 +4131,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetTetraMeshDataSetFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetMeshData(
+pub unsafe extern "C" fn csbindgen_b3GetMeshData(
     physClient: b3PhysicsClientHandle,
     meshData: *mut b3MeshData    
 )
@@ -4143,7 +4143,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetMeshData(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetTetraMeshData(
+pub unsafe extern "C" fn csbindgen_b3GetTetraMeshData(
     physClient: b3PhysicsClientHandle,
     meshData: *mut b3TetraMeshData    
 )
@@ -4155,7 +4155,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetTetraMeshData(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ResetMeshDataCommandInit(
+pub unsafe extern "C" fn csbindgen_b3ResetMeshDataCommandInit(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int,
     num_vertices: c_int,
@@ -4171,7 +4171,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ResetMeshDataCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CreateVisualShapeCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -4181,7 +4181,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddSphere(
+pub unsafe extern "C" fn csbindgen_b3CreateVisualShapeAddSphere(
     commandHandle: b3SharedMemoryCommandHandle,
     radius: f64    
 ) -> c_int
@@ -4193,7 +4193,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddSphere(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddBox(
+pub unsafe extern "C" fn csbindgen_b3CreateVisualShapeAddBox(
     commandHandle: b3SharedMemoryCommandHandle,
     halfExtents: *const f64    
 ) -> c_int
@@ -4205,7 +4205,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddBox(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddCapsule(
+pub unsafe extern "C" fn csbindgen_b3CreateVisualShapeAddCapsule(
     commandHandle: b3SharedMemoryCommandHandle,
     radius: f64,
     height: f64    
@@ -4219,7 +4219,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddCapsule(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddCylinder(
+pub unsafe extern "C" fn csbindgen_b3CreateVisualShapeAddCylinder(
     commandHandle: b3SharedMemoryCommandHandle,
     radius: f64,
     height: f64    
@@ -4233,7 +4233,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddCylinder(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddPlane(
+pub unsafe extern "C" fn csbindgen_b3CreateVisualShapeAddPlane(
     commandHandle: b3SharedMemoryCommandHandle,
     planeNormal: *const f64,
     planeConstant: f64    
@@ -4247,7 +4247,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddPlane(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddMesh(
+pub unsafe extern "C" fn csbindgen_b3CreateVisualShapeAddMesh(
     commandHandle: b3SharedMemoryCommandHandle,
     fileName: *const c_char,
     meshScale: *const f64    
@@ -4261,7 +4261,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddMesh(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddMesh2(
+pub unsafe extern "C" fn csbindgen_b3CreateVisualShapeAddMesh2(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle,
     meshScale: *const f64,
@@ -4291,7 +4291,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeAddMesh2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualSetFlag(
+pub unsafe extern "C" fn csbindgen_b3CreateVisualSetFlag(
     commandHandle: b3SharedMemoryCommandHandle,
     shapeIndex: c_int,
     flags: c_int    
@@ -4305,7 +4305,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualSetFlag(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeSetChildTransform(
+pub unsafe extern "C" fn csbindgen_b3CreateVisualShapeSetChildTransform(
     commandHandle: b3SharedMemoryCommandHandle,
     shapeIndex: c_int,
     childPosition: *const f64,
@@ -4321,7 +4321,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeSetChildTransform(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeSetSpecularColor(
+pub unsafe extern "C" fn csbindgen_b3CreateVisualShapeSetSpecularColor(
     commandHandle: b3SharedMemoryCommandHandle,
     shapeIndex: c_int,
     specularColor: *const f64    
@@ -4335,7 +4335,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeSetSpecularColor(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeSetRGBAColor(
+pub unsafe extern "C" fn csbindgen_b3CreateVisualShapeSetRGBAColor(
     commandHandle: b3SharedMemoryCommandHandle,
     shapeIndex: c_int,
     rgbaColor: *const f64    
@@ -4349,7 +4349,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateVisualShapeSetRGBAColor(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusVisualShapeUniqueId(
+pub unsafe extern "C" fn csbindgen_b3GetStatusVisualShapeUniqueId(
     statusHandle: b3SharedMemoryStatusHandle    
 ) -> c_int
 {
@@ -4359,7 +4359,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusVisualShapeUniqueId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateMultiBodyCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CreateMultiBodyCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -4369,7 +4369,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateMultiBodyCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateMultiBodyBase(
+pub unsafe extern "C" fn csbindgen_b3CreateMultiBodyBase(
     commandHandle: b3SharedMemoryCommandHandle,
     mass: f64,
     collisionShapeUnique: c_int,
@@ -4393,7 +4393,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateMultiBodyBase(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateMultiBodyLink(
+pub unsafe extern "C" fn csbindgen_b3CreateMultiBodyLink(
     commandHandle: b3SharedMemoryCommandHandle,
     linkMass: f64,
     linkCollisionShapeIndex: f64,
@@ -4423,7 +4423,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateMultiBodyLink(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateMultiBodySetBatchPositions(
+pub unsafe extern "C" fn csbindgen_b3CreateMultiBodySetBatchPositions(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle,
     batchPositions: *mut f64,
@@ -4439,7 +4439,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateMultiBodySetBatchPositions(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateMultiBodyUseMaximalCoordinates(
+pub unsafe extern "C" fn csbindgen_b3CreateMultiBodyUseMaximalCoordinates(
     commandHandle: b3SharedMemoryCommandHandle    
 )
 {
@@ -4449,7 +4449,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateMultiBodyUseMaximalCoordinate
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateMultiBodySetFlags(
+pub unsafe extern "C" fn csbindgen_b3CreateMultiBodySetFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     flags: c_int    
 )
@@ -4461,7 +4461,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateMultiBodySetFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxShapeCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CreateBoxShapeCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -4471,7 +4471,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxShapeCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxCommandSetStartPosition(
+pub unsafe extern "C" fn csbindgen_b3CreateBoxCommandSetStartPosition(
     commandHandle: b3SharedMemoryCommandHandle,
     startPosX: f64,
     startPosY: f64,
@@ -4487,7 +4487,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxCommandSetStartPosition(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxCommandSetStartOrientation(
+pub unsafe extern "C" fn csbindgen_b3CreateBoxCommandSetStartOrientation(
     commandHandle: b3SharedMemoryCommandHandle,
     startOrnX: f64,
     startOrnY: f64,
@@ -4505,7 +4505,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxCommandSetStartOrientation
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxCommandSetHalfExtents(
+pub unsafe extern "C" fn csbindgen_b3CreateBoxCommandSetHalfExtents(
     commandHandle: b3SharedMemoryCommandHandle,
     halfExtentsX: f64,
     halfExtentsY: f64,
@@ -4521,7 +4521,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxCommandSetHalfExtents(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxCommandSetMass(
+pub unsafe extern "C" fn csbindgen_b3CreateBoxCommandSetMass(
     commandHandle: b3SharedMemoryCommandHandle,
     mass: f64    
 ) -> c_int
@@ -4533,7 +4533,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxCommandSetMass(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxCommandSetCollisionShapeType(
+pub unsafe extern "C" fn csbindgen_b3CreateBoxCommandSetCollisionShapeType(
     commandHandle: b3SharedMemoryCommandHandle,
     collisionShapeType: c_int    
 ) -> c_int
@@ -4545,7 +4545,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxCommandSetCollisionShapeTy
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxCommandSetColorRGBA(
+pub unsafe extern "C" fn csbindgen_b3CreateBoxCommandSetColorRGBA(
     commandHandle: b3SharedMemoryCommandHandle,
     red: f64,
     green: f64,
@@ -4563,7 +4563,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateBoxCommandSetColorRGBA(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandInit(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -4575,7 +4575,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandInit2(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandInit2(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -4587,7 +4587,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandInit2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetBasePosition(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetBasePosition(
     commandHandle: b3SharedMemoryCommandHandle,
     startPosX: f64,
     startPosY: f64,
@@ -4603,7 +4603,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetBasePosition(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetBaseOrientation(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetBaseOrientation(
     commandHandle: b3SharedMemoryCommandHandle,
     startOrnX: f64,
     startOrnY: f64,
@@ -4621,7 +4621,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetBaseOrientation
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetBaseLinearVelocity(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetBaseLinearVelocity(
     commandHandle: b3SharedMemoryCommandHandle,
     linVel: *const f64    
 ) -> c_int
@@ -4633,7 +4633,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetBaseLinearVeloc
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetBaseAngularVelocity(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetBaseAngularVelocity(
     commandHandle: b3SharedMemoryCommandHandle,
     angVel: *const f64    
 ) -> c_int
@@ -4645,7 +4645,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetBaseAngularVelo
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetBaseScaling(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetBaseScaling(
     commandHandle: b3SharedMemoryCommandHandle,
     scaling: *mut f64    
 ) -> c_int
@@ -4657,7 +4657,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetBaseScaling(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetJointPositions(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetJointPositions(
     commandHandle: b3SharedMemoryCommandHandle,
     numJointPositions: c_int,
     jointPositions: *const f64    
@@ -4671,7 +4671,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetJointPositions(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetJointPosition(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetJointPosition(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle,
     jointIndex: c_int,
@@ -4687,7 +4687,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetJointPosition(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetJointPositionMultiDof(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetJointPositionMultiDof(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle,
     jointIndex: c_int,
@@ -4705,7 +4705,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetJointPositionMu
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetQ(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetQ(
     commandHandle: b3SharedMemoryCommandHandle,
     numJointPositions: c_int,
     q: *const f64,
@@ -4721,7 +4721,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetQ(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetQdots(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetQdots(
     commandHandle: b3SharedMemoryCommandHandle,
     numJointVelocities: c_int,
     qDots: *const f64,
@@ -4737,7 +4737,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetQdots(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetJointVelocities(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetJointVelocities(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle,
     numJointVelocities: c_int,
@@ -4753,7 +4753,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetJointVelocities
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetJointVelocity(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetJointVelocity(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle,
     jointIndex: c_int,
@@ -4769,7 +4769,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetJointVelocity(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetJointVelocityMultiDof(
+pub unsafe extern "C" fn csbindgen_b3CreatePoseCommandSetJointVelocityMultiDof(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle,
     jointIndex: c_int,
@@ -4787,7 +4787,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreatePoseCommandSetJointVelocityMu
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateSensorCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CreateSensorCommandInit(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -4799,7 +4799,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateSensorCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateSensorEnable6DofJointForceTorqueSensor(
+pub unsafe extern "C" fn csbindgen_b3CreateSensorEnable6DofJointForceTorqueSensor(
     commandHandle: b3SharedMemoryCommandHandle,
     jointIndex: c_int,
     enable: c_int    
@@ -4813,7 +4813,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateSensorEnable6DofJointForceTor
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateSensorEnableIMUForLink(
+pub unsafe extern "C" fn csbindgen_b3CreateSensorEnableIMUForLink(
     commandHandle: b3SharedMemoryCommandHandle,
     linkIndex: c_int,
     enable: c_int    
@@ -4827,7 +4827,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateSensorEnableIMUForLink(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestActualStateCommandInit(
+pub unsafe extern "C" fn csbindgen_b3RequestActualStateCommandInit(
     physClient: b3PhysicsClientHandle,
     bodyUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -4839,7 +4839,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestActualStateCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestActualStateCommandInit2(
+pub unsafe extern "C" fn csbindgen_b3RequestActualStateCommandInit2(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int    
 ) -> b3SharedMemoryCommandHandle
@@ -4851,7 +4851,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestActualStateCommandInit2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestActualStateCommandComputeLinkVelocity(
+pub unsafe extern "C" fn csbindgen_b3RequestActualStateCommandComputeLinkVelocity(
     commandHandle: b3SharedMemoryCommandHandle,
     computeLinkVelocity: c_int    
 ) -> c_int
@@ -4863,7 +4863,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestActualStateCommandComputeLin
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestActualStateCommandComputeForwardKinematics(
+pub unsafe extern "C" fn csbindgen_b3RequestActualStateCommandComputeForwardKinematics(
     commandHandle: b3SharedMemoryCommandHandle,
     computeForwardKinematics: c_int    
 ) -> c_int
@@ -4875,7 +4875,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestActualStateCommandComputeFor
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetJointState(
+pub unsafe extern "C" fn csbindgen_b3GetJointState(
     physClient: b3PhysicsClientHandle,
     statusHandle: b3SharedMemoryStatusHandle,
     jointIndex: c_int,
@@ -4891,7 +4891,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetJointState(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetJointStateMultiDof(
+pub unsafe extern "C" fn csbindgen_b3GetJointStateMultiDof(
     physClient: b3PhysicsClientHandle,
     statusHandle: b3SharedMemoryStatusHandle,
     jointIndex: c_int,
@@ -4907,7 +4907,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetJointStateMultiDof(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetLinkState(
+pub unsafe extern "C" fn csbindgen_b3GetLinkState(
     physClient: b3PhysicsClientHandle,
     statusHandle: b3SharedMemoryStatusHandle,
     linkIndex: c_int,
@@ -4923,7 +4923,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetLinkState(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PickBody(
+pub unsafe extern "C" fn csbindgen_b3PickBody(
     physClient: b3PhysicsClientHandle,
     rayFromWorldX: f64,
     rayFromWorldY: f64,
@@ -4945,7 +4945,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PickBody(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3MovePickedBody(
+pub unsafe extern "C" fn csbindgen_b3MovePickedBody(
     physClient: b3PhysicsClientHandle,
     rayFromWorldX: f64,
     rayFromWorldY: f64,
@@ -4967,7 +4967,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3MovePickedBody(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RemovePickingConstraint(
+pub unsafe extern "C" fn csbindgen_b3RemovePickingConstraint(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -4977,7 +4977,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RemovePickingConstraint(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateRaycastCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CreateRaycastCommandInit(
     physClient: b3PhysicsClientHandle,
     rayFromWorldX: f64,
     rayFromWorldY: f64,
@@ -4999,7 +4999,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateRaycastCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CreateRaycastBatchCommandInit(
+pub unsafe extern "C" fn csbindgen_b3CreateRaycastBatchCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -5009,7 +5009,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CreateRaycastBatchCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchSetNumThreads(
+pub unsafe extern "C" fn csbindgen_b3RaycastBatchSetNumThreads(
     commandHandle: b3SharedMemoryCommandHandle,
     numThreads: c_int    
 )
@@ -5021,7 +5021,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchSetNumThreads(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchAddRay(
+pub unsafe extern "C" fn csbindgen_b3RaycastBatchAddRay(
     commandHandle: b3SharedMemoryCommandHandle,
     rayFromWorld: *const f64,
     rayToWorld: *const f64    
@@ -5035,7 +5035,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchAddRay(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchAddRays(
+pub unsafe extern "C" fn csbindgen_b3RaycastBatchAddRays(
     physClient: b3PhysicsClientHandle,
     commandHandle: b3SharedMemoryCommandHandle,
     rayFromWorld: *const f64,
@@ -5053,7 +5053,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchAddRays(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchSetParentObject(
+pub unsafe extern "C" fn csbindgen_b3RaycastBatchSetParentObject(
     commandHandle: b3SharedMemoryCommandHandle,
     parentObjectUniqueId: c_int,
     parentLinkIndex: c_int    
@@ -5067,7 +5067,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchSetParentObject(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchSetReportHitNumber(
+pub unsafe extern "C" fn csbindgen_b3RaycastBatchSetReportHitNumber(
     commandHandle: b3SharedMemoryCommandHandle,
     reportHitNumber: c_int    
 )
@@ -5079,7 +5079,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchSetReportHitNumber(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchSetCollisionFilterMask(
+pub unsafe extern "C" fn csbindgen_b3RaycastBatchSetCollisionFilterMask(
     commandHandle: b3SharedMemoryCommandHandle,
     collisionFilterMask: c_int    
 )
@@ -5091,7 +5091,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchSetCollisionFilterMask(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchSetFractionEpsilon(
+pub unsafe extern "C" fn csbindgen_b3RaycastBatchSetFractionEpsilon(
     commandHandle: b3SharedMemoryCommandHandle,
     fractionEpsilon: f64    
 )
@@ -5103,7 +5103,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RaycastBatchSetFractionEpsilon(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetRaycastInformation(
+pub unsafe extern "C" fn csbindgen_b3GetRaycastInformation(
     physClient: b3PhysicsClientHandle,
     raycastInfo: *mut b3RaycastInformation    
 )
@@ -5115,7 +5115,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetRaycastInformation(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ApplyExternalForceCommandInit(
+pub unsafe extern "C" fn csbindgen_b3ApplyExternalForceCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -5125,7 +5125,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ApplyExternalForceCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ApplyExternalForce(
+pub unsafe extern "C" fn csbindgen_b3ApplyExternalForce(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkId: c_int,
@@ -5145,7 +5145,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ApplyExternalForce(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ApplyExternalTorque(
+pub unsafe extern "C" fn csbindgen_b3ApplyExternalTorque(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyUniqueId: c_int,
     linkId: c_int,
@@ -5163,7 +5163,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ApplyExternalTorque(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyCommandInit(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodyCommandInit(
     physClient: b3PhysicsClientHandle,
     fileName: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -5175,7 +5175,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetScale(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodySetScale(
     commandHandle: b3SharedMemoryCommandHandle,
     scale: f64    
 ) -> c_int
@@ -5187,7 +5187,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetScale(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetMass(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodySetMass(
     commandHandle: b3SharedMemoryCommandHandle,
     mass: f64    
 ) -> c_int
@@ -5199,7 +5199,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetMass(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetCollisionMargin(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodySetCollisionMargin(
     commandHandle: b3SharedMemoryCommandHandle,
     collisionMargin: f64    
 ) -> c_int
@@ -5211,7 +5211,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetCollisionMargin(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetStartPosition(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodySetStartPosition(
     commandHandle: b3SharedMemoryCommandHandle,
     startPosX: f64,
     startPosY: f64,
@@ -5227,7 +5227,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetStartPosition(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetStartOrientation(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodySetStartOrientation(
     commandHandle: b3SharedMemoryCommandHandle,
     startOrnX: f64,
     startOrnY: f64,
@@ -5245,7 +5245,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetStartOrientation(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyUpdateSimMesh(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodyUpdateSimMesh(
     commandHandle: b3SharedMemoryCommandHandle,
     filename: *const c_char    
 ) -> c_int
@@ -5257,7 +5257,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyUpdateSimMesh(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyAddCorotatedForce(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodyAddCorotatedForce(
     commandHandle: b3SharedMemoryCommandHandle,
     corotatedMu: f64,
     corotatedLambda: f64    
@@ -5271,7 +5271,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyAddCorotatedForce(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyAddNeoHookeanForce(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodyAddNeoHookeanForce(
     commandHandle: b3SharedMemoryCommandHandle,
     NeoHookeanMu: f64,
     NeoHookeanLambda: f64,
@@ -5287,7 +5287,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyAddNeoHookeanForce(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyAddMassSpringForce(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodyAddMassSpringForce(
     commandHandle: b3SharedMemoryCommandHandle,
     springElasticStiffness: f64,
     springDampingStiffness: f64    
@@ -5301,7 +5301,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyAddMassSpringForce(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyAddGravityForce(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodyAddGravityForce(
     commandHandle: b3SharedMemoryCommandHandle,
     gravityX: f64,
     gravityY: f64,
@@ -5317,7 +5317,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyAddGravityForce(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetCollisionHardness(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodySetCollisionHardness(
     commandHandle: b3SharedMemoryCommandHandle,
     collisionHardness: f64    
 ) -> c_int
@@ -5329,7 +5329,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetCollisionHardness(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetSelfCollision(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodySetSelfCollision(
     commandHandle: b3SharedMemoryCommandHandle,
     useSelfCollision: c_int    
 ) -> c_int
@@ -5341,7 +5341,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetSelfCollision(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetRepulsionStiffness(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodySetRepulsionStiffness(
     commandHandle: b3SharedMemoryCommandHandle,
     stiffness: f64    
 ) -> c_int
@@ -5353,7 +5353,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetRepulsionStiffness(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyUseFaceContact(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodyUseFaceContact(
     commandHandle: b3SharedMemoryCommandHandle,
     useFaceContact: c_int    
 ) -> c_int
@@ -5365,7 +5365,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyUseFaceContact(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetFrictionCoefficient(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodySetFrictionCoefficient(
     commandHandle: b3SharedMemoryCommandHandle,
     frictionCoefficient: f64    
 ) -> c_int
@@ -5377,7 +5377,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodySetFrictionCoefficient(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyUseBendingSprings(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodyUseBendingSprings(
     commandHandle: b3SharedMemoryCommandHandle,
     useBendingSprings: c_int,
     bendingStiffness: f64    
@@ -5391,7 +5391,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyUseBendingSprings(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyUseAllDirectionDampingSprings(
+pub unsafe extern "C" fn csbindgen_b3LoadSoftBodyUseAllDirectionDampingSprings(
     commandHandle: b3SharedMemoryCommandHandle,
     useAllDirectionDamping: c_int    
 ) -> c_int
@@ -5403,7 +5403,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3LoadSoftBodyUseAllDirectionDampingS
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InitCreateSoftBodyAnchorConstraintCommand(
+pub unsafe extern "C" fn csbindgen_b3InitCreateSoftBodyAnchorConstraintCommand(
     physClient: b3PhysicsClientHandle,
     softBodyUniqueId: c_int,
     nodeIndex: c_int,
@@ -5423,7 +5423,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InitCreateSoftBodyAnchorConstraintC
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestVREventsCommandInit(
+pub unsafe extern "C" fn csbindgen_b3RequestVREventsCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -5433,7 +5433,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestVREventsCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3VREventsSetDeviceTypeFilter(
+pub unsafe extern "C" fn csbindgen_b3VREventsSetDeviceTypeFilter(
     commandHandle: b3SharedMemoryCommandHandle,
     deviceTypeFilter: c_int    
 )
@@ -5445,7 +5445,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3VREventsSetDeviceTypeFilter(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetVREventsData(
+pub unsafe extern "C" fn csbindgen_b3GetVREventsData(
     physClient: b3PhysicsClientHandle,
     vrEventsData: *mut b3VREventsData    
 )
@@ -5457,7 +5457,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetVREventsData(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetVRCameraStateCommandInit(
+pub unsafe extern "C" fn csbindgen_b3SetVRCameraStateCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -5467,7 +5467,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetVRCameraStateCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetVRCameraRootPosition(
+pub unsafe extern "C" fn csbindgen_b3SetVRCameraRootPosition(
     commandHandle: b3SharedMemoryCommandHandle,
     rootPos: *const f64    
 ) -> c_int
@@ -5479,7 +5479,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetVRCameraRootPosition(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetVRCameraRootOrientation(
+pub unsafe extern "C" fn csbindgen_b3SetVRCameraRootOrientation(
     commandHandle: b3SharedMemoryCommandHandle,
     rootOrn: *const f64    
 ) -> c_int
@@ -5491,7 +5491,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetVRCameraRootOrientation(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetVRCameraTrackingObject(
+pub unsafe extern "C" fn csbindgen_b3SetVRCameraTrackingObject(
     commandHandle: b3SharedMemoryCommandHandle,
     objectUniqueId: c_int    
 ) -> c_int
@@ -5503,7 +5503,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetVRCameraTrackingObject(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetVRCameraTrackingObjectFlag(
+pub unsafe extern "C" fn csbindgen_b3SetVRCameraTrackingObjectFlag(
     commandHandle: b3SharedMemoryCommandHandle,
     flag: c_int    
 ) -> c_int
@@ -5515,7 +5515,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetVRCameraTrackingObjectFlag(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestKeyboardEventsCommandInit(
+pub unsafe extern "C" fn csbindgen_b3RequestKeyboardEventsCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -5525,7 +5525,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestKeyboardEventsCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestKeyboardEventsCommandInit2(
+pub unsafe extern "C" fn csbindgen_b3RequestKeyboardEventsCommandInit2(
     commandHandle: b3SharedMemoryCommandHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -5535,7 +5535,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestKeyboardEventsCommandInit2(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetKeyboardEventsData(
+pub unsafe extern "C" fn csbindgen_b3GetKeyboardEventsData(
     physClient: b3PhysicsClientHandle,
     keyboardEventsData: *mut b3KeyboardEventsData    
 )
@@ -5547,7 +5547,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetKeyboardEventsData(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RequestMouseEventsCommandInit(
+pub unsafe extern "C" fn csbindgen_b3RequestMouseEventsCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -5557,7 +5557,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3RequestMouseEventsCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetMouseEventsData(
+pub unsafe extern "C" fn csbindgen_b3GetMouseEventsData(
     physClient: b3PhysicsClientHandle,
     mouseEventsData: *mut b3MouseEventsData    
 )
@@ -5569,7 +5569,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetMouseEventsData(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingCommandInit(
+pub unsafe extern "C" fn csbindgen_b3StateLoggingCommandInit(
     physClient: b3PhysicsClientHandle    
 ) -> b3SharedMemoryCommandHandle
 {
@@ -5579,7 +5579,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingStart(
+pub unsafe extern "C" fn csbindgen_b3StateLoggingStart(
     commandHandle: b3SharedMemoryCommandHandle,
     loggingType: c_int,
     fileName: *const c_char    
@@ -5593,7 +5593,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingStart(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingAddLoggingObjectUniqueId(
+pub unsafe extern "C" fn csbindgen_b3StateLoggingAddLoggingObjectUniqueId(
     commandHandle: b3SharedMemoryCommandHandle,
     objectUniqueId: c_int    
 ) -> c_int
@@ -5605,7 +5605,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingAddLoggingObjectUniqueI
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetMaxLogDof(
+pub unsafe extern "C" fn csbindgen_b3StateLoggingSetMaxLogDof(
     commandHandle: b3SharedMemoryCommandHandle,
     maxLogDof: c_int    
 ) -> c_int
@@ -5617,7 +5617,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetMaxLogDof(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetLinkIndexA(
+pub unsafe extern "C" fn csbindgen_b3StateLoggingSetLinkIndexA(
     commandHandle: b3SharedMemoryCommandHandle,
     linkIndexA: c_int    
 ) -> c_int
@@ -5629,7 +5629,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetLinkIndexA(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetLinkIndexB(
+pub unsafe extern "C" fn csbindgen_b3StateLoggingSetLinkIndexB(
     commandHandle: b3SharedMemoryCommandHandle,
     linkIndexB: c_int    
 ) -> c_int
@@ -5641,7 +5641,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetLinkIndexB(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetBodyAUniqueId(
+pub unsafe extern "C" fn csbindgen_b3StateLoggingSetBodyAUniqueId(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyAUniqueId: c_int    
 ) -> c_int
@@ -5653,7 +5653,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetBodyAUniqueId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetBodyBUniqueId(
+pub unsafe extern "C" fn csbindgen_b3StateLoggingSetBodyBUniqueId(
     commandHandle: b3SharedMemoryCommandHandle,
     bodyBUniqueId: c_int    
 ) -> c_int
@@ -5665,7 +5665,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetBodyBUniqueId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetDeviceTypeFilter(
+pub unsafe extern "C" fn csbindgen_b3StateLoggingSetDeviceTypeFilter(
     commandHandle: b3SharedMemoryCommandHandle,
     deviceTypeFilter: c_int    
 ) -> c_int
@@ -5677,7 +5677,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetDeviceTypeFilter(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetLogFlags(
+pub unsafe extern "C" fn csbindgen_b3StateLoggingSetLogFlags(
     commandHandle: b3SharedMemoryCommandHandle,
     logFlags: c_int    
 ) -> c_int
@@ -5689,7 +5689,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingSetLogFlags(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusLoggingUniqueId(
+pub unsafe extern "C" fn csbindgen_b3GetStatusLoggingUniqueId(
     statusHandle: b3SharedMemoryStatusHandle    
 ) -> c_int
 {
@@ -5699,7 +5699,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetStatusLoggingUniqueId(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingStop(
+pub unsafe extern "C" fn csbindgen_b3StateLoggingStop(
     commandHandle: b3SharedMemoryCommandHandle,
     loggingUid: c_int    
 ) -> c_int
@@ -5711,7 +5711,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3StateLoggingStop(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3ProfileTimingCommandInit(
+pub unsafe extern "C" fn csbindgen_b3ProfileTimingCommandInit(
     physClient: b3PhysicsClientHandle,
     name: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -5723,7 +5723,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3ProfileTimingCommandInit(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetProfileTimingDuractionInMicroSeconds(
+pub unsafe extern "C" fn csbindgen_b3SetProfileTimingDuractionInMicroSeconds(
     commandHandle: b3SharedMemoryCommandHandle,
     duration: c_int    
 )
@@ -5735,7 +5735,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetProfileTimingDuractionInMicroSec
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetProfileTimingType(
+pub unsafe extern "C" fn csbindgen_b3SetProfileTimingType(
     commandHandle: b3SharedMemoryCommandHandle,
     type_: c_int    
 )
@@ -5747,7 +5747,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetProfileTimingType(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PushProfileTiming(
+pub unsafe extern "C" fn csbindgen_b3PushProfileTiming(
     physClient: b3PhysicsClientHandle,
     timingName: *const c_char    
 )
@@ -5759,7 +5759,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PushProfileTiming(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3PopProfileTiming(
+pub unsafe extern "C" fn csbindgen_b3PopProfileTiming(
     physClient: b3PhysicsClientHandle    
 )
 {
@@ -5769,7 +5769,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3PopProfileTiming(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetTimeOut(
+pub unsafe extern "C" fn csbindgen_b3SetTimeOut(
     physClient: b3PhysicsClientHandle,
     timeOutInSeconds: f64    
 )
@@ -5781,7 +5781,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetTimeOut(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetTimeOut(
+pub unsafe extern "C" fn csbindgen_b3GetTimeOut(
     physClient: b3PhysicsClientHandle    
 ) -> f64
 {
@@ -5791,7 +5791,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetTimeOut(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3SetAdditionalSearchPath(
+pub unsafe extern "C" fn csbindgen_b3SetAdditionalSearchPath(
     physClient: b3PhysicsClientHandle,
     path: *const c_char    
 ) -> b3SharedMemoryCommandHandle
@@ -5803,7 +5803,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3SetAdditionalSearchPath(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3MultiplyTransforms(
+pub unsafe extern "C" fn csbindgen_b3MultiplyTransforms(
     posA: *const f64,
     ornA: *const f64,
     posB: *const f64,
@@ -5823,7 +5823,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3MultiplyTransforms(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3InvertTransform(
+pub unsafe extern "C" fn csbindgen_b3InvertTransform(
     pos: *const f64,
     orn: *const f64,
     outPos: *mut f64,
@@ -5839,7 +5839,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3InvertTransform(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3QuaternionSlerp(
+pub unsafe extern "C" fn csbindgen_b3QuaternionSlerp(
     startQuat: *const f64,
     endQuat: *const f64,
     interpolationFraction: f64,
@@ -5855,7 +5855,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3QuaternionSlerp(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetQuaternionFromAxisAngle(
+pub unsafe extern "C" fn csbindgen_b3GetQuaternionFromAxisAngle(
     axis: *const f64,
     angle: f64,
     outQuat: *mut f64    
@@ -5869,7 +5869,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetQuaternionFromAxisAngle(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetAxisAngleFromQuaternion(
+pub unsafe extern "C" fn csbindgen_b3GetAxisAngleFromQuaternion(
     quat: *const f64,
     axis: *mut f64,
     angle: *mut f64    
@@ -5883,7 +5883,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetAxisAngleFromQuaternion(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetQuaternionDifference(
+pub unsafe extern "C" fn csbindgen_b3GetQuaternionDifference(
     startQuat: *const f64,
     endQuat: *const f64,
     outOrn: *mut f64    
@@ -5897,7 +5897,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetQuaternionDifference(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3GetAxisDifferenceQuaternion(
+pub unsafe extern "C" fn csbindgen_b3GetAxisDifferenceQuaternion(
     startQuat: *const f64,
     endQuat: *const f64,
     axisOut: *mut f64    
@@ -5911,7 +5911,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3GetAxisDifferenceQuaternion(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateVelocityQuaternion(
+pub unsafe extern "C" fn csbindgen_b3CalculateVelocityQuaternion(
     startQuat: *const f64,
     endQuat: *const f64,
     deltaTime: f64,
@@ -5927,7 +5927,7 @@ pub unsafe extern "C" fn csbindgen_bullet3_b3CalculateVelocityQuaternion(
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn csbindgen_bullet3_b3RotateVector(
+pub unsafe extern "C" fn csbindgen_b3RotateVector(
     quat: *const f64,
     vec: *const f64,
     vecOut: *mut f64    

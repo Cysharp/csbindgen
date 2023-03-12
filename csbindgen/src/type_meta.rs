@@ -65,7 +65,7 @@ pub struct RustType {
 #[derive(Clone, Debug)]
 pub enum TypeKind {
     Normal,
-    Pointer(PointerType),
+    Pointer(PointerType, Box<RustType>),
     FixedArray(String, Option<PointerType>),         // digits
     Function(Vec<Parameter>, Option<Box<RustType>>), // parameter, return
     Option(Box<RustType>),
@@ -128,10 +128,10 @@ impl RustType {
             Normal => {
                 emit_type_name(&mut sb);
             }
-            Pointer(p) => {
+            Pointer(p, inner) => {
                 emit_pointer(&mut sb, p);
                 sb.push(' ');
-                emit_type_name(&mut sb);
+                sb.push_str(inner.to_rust_string(type_path).as_str());
             }
             FixedArray(digits, pointer) => {
                 if let Some(p) = pointer {
@@ -231,13 +231,20 @@ impl RustType {
             None => (self.clone(), false),
         };
 
+        // if alias if Option, unwrap.
+        let type_csharp_string = if use_alias {
+            use_type.to_csharp_string(options, alias_map, emit_from_struct, method_name, parameter_name)
+        } else {
+            convert_type_name(use_type.type_name.as_str()).to_string()
+        };
+
         let mut sb = String::new();
 
         match &self.type_kind {
             TypeKind::FixedArray(_, _) => {
                 sb.push_str("fixed ");
 
-                let type_name = convert_type_name(use_type.type_name.as_str());
+                let type_name = type_csharp_string.as_str();
                 let type_name = match type_name {
                     // C# fixed allow types
                     "bool" | "byte" | "short" | "int" | "long" | "char" | "sbyte" | "ushort"
@@ -297,11 +304,31 @@ impl RustType {
                 );
             }
             _ => {
-                sb.push_str(convert_type_name(use_type.type_name.as_str()));
-
-                if use_alias {
+                fn emit_pointer(
+                    sb: &mut String,
+                    rust_type: &RustType,
+                    options: &BindgenOptions,
+                    alias_map: &AliasMap,
+                    emit_from_struct: bool,
+                    method_name: &String,
+                    parameter_name: &String,
+                    emit_inner: bool,
+                ) -> bool {
                     use PointerType::*;
-                    if let TypeKind::Pointer(p) = &use_type.type_kind {
+                    if let TypeKind::Pointer(p, inner) = &rust_type.type_kind {
+                        if emit_inner {
+                            sb.push_str(
+                                &inner
+                                    .to_csharp_string(
+                                        options,
+                                        alias_map,
+                                        emit_from_struct,
+                                        method_name,
+                                        parameter_name,
+                                    )
+                                    .as_str(),
+                            );
+                        }
                         match p {
                             MutPointer | ConstPointer => {
                                 sb.push('*');
@@ -313,21 +340,41 @@ impl RustType {
                                 sb.push_str("**");
                             }
                         }
+                        return true;
                     }
+                    false
                 }
 
-                if let TypeKind::Pointer(p) = &self.type_kind {
-                    use PointerType::*;
-                    match p {
-                        MutPointer | ConstPointer => {
-                            sb.push('*');
-                        }
-                        MutPointerPointer
-                        | ConstPointerPointer
-                        | MutConstPointerPointer
-                        | ConstMutPointerPointer => {
-                            sb.push_str("**");
-                        }
+                let mut emit_inner = true;
+                if use_alias {
+                    if !emit_pointer(
+                        &mut sb,
+                        &use_type,
+                        options,
+                        alias_map,
+                        emit_from_struct,
+                        method_name,
+                        parameter_name,
+                        emit_inner,
+                    ) {
+                        sb.push_str(type_csharp_string.as_str());
+                    }
+
+                    emit_inner = false;
+                }
+
+                if !emit_pointer(
+                    &mut sb,
+                    &self,
+                    options,
+                    alias_map,
+                    emit_from_struct,
+                    method_name,
+                    parameter_name,
+                    emit_inner,
+                ) {
+                    if emit_inner {
+                        sb.push_str(type_csharp_string.as_str());
                     }
                 }
             }

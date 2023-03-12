@@ -263,11 +263,14 @@ fn parse_type(t: &syn::Type) -> RustType {
             if let syn::Type::Path(path) = &*t.elem {
                 return RustType {
                     type_name: path.path.segments.last().unwrap().ident.to_string(),
-                    type_kind: TypeKind::Pointer(if has_const {
-                        PointerType::ConstPointer
-                    } else {
-                        PointerType::MutPointer
-                    }),
+                    type_kind: TypeKind::Pointer(
+                        if has_const {
+                            PointerType::ConstPointer
+                        } else {
+                            PointerType::MutPointer
+                        },
+                        Box::new(parse_type_path(path)),
+                    ),
                 };
             } else if let syn::Type::Ptr(t) = &*t.elem {
                 if let syn::Type::Path(path) = &*t.elem {
@@ -282,30 +285,13 @@ fn parse_type(t: &syn::Type) -> RustType {
 
                     return RustType {
                         type_name: path.path.segments.last().unwrap().ident.to_string(),
-                        type_kind: TypeKind::Pointer(pointer_type),
+                        type_kind: TypeKind::Pointer(pointer_type, Box::new(parse_type_path(path))),
                     };
                 }
             }
         }
         syn::Type::Path(t) => {
-            let last_segment = t.path.segments.last().unwrap();
-            if let syn::PathArguments::AngleBracketed(x) = &last_segment.arguments {
-                // generics, only supports Option<> for null function pointer
-                if last_segment.ident == "Option" {
-                    if let Some(syn::GenericArgument::Type(t)) = x.args.first() {
-                        let rust_type = parse_type(t);
-                        return RustType {
-                            type_name: "Option".to_string(),
-                            type_kind: TypeKind::Option(Box::new(rust_type)),
-                        };
-                    }
-                }
-            } else {
-                return RustType {
-                    type_name: last_segment.ident.to_string(),
-                    type_kind: TypeKind::Normal,
-                };
-            }
+            return parse_type_path(t);
         }
         syn::Type::Array(t) => {
             let mut digits = "".to_string();
@@ -361,4 +347,25 @@ fn parse_type(t: &syn::Type) -> RustType {
         type_name: "".to_string(),
         type_kind: TypeKind::Normal,
     }
+}
+
+fn parse_type_path(t: &syn::TypePath) -> RustType {
+    let last_segment = t.path.segments.last().unwrap();
+    if let syn::PathArguments::AngleBracketed(x) = &last_segment.arguments {
+        // generics, only supports Option<> for null function pointer
+        if last_segment.ident == "Option" {
+            if let Some(syn::GenericArgument::Type(t)) = x.args.first() {
+                let rust_type = parse_type(t);
+                return RustType {
+                    type_name: "Option".to_string(),
+                    type_kind: TypeKind::Option(Box::new(rust_type)),
+                };
+            }
+        }
+    }
+
+    return RustType {
+        type_name: last_segment.ident.to_string(),
+        type_kind: TypeKind::Normal,
+    };
 }

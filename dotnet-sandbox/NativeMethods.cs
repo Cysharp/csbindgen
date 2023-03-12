@@ -12,6 +12,9 @@ namespace CsBindgen
     {
         const string __DllName = "csbindgen_tests";
 
+        [DllImport(__DllName, EntryPoint = "nest_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void nest_test(delegate* unmanaged[Cdecl]<delegate* unmanaged[Cdecl]<int, void>*, int> _f);
+
         [DllImport(__DllName, EntryPoint = "alias_test1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void alias_test1(long* _a);
 

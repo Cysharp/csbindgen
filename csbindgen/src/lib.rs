@@ -6,6 +6,7 @@ mod parser;
 mod type_meta;
 mod util;
 
+use alias_map::AliasMap;
 pub use builder::Builder;
 
 use builder::BindgenOptions;
@@ -13,6 +14,7 @@ use emitter::*;
 use field_map::FieldMap;
 use parser::*;
 use std::{collections::HashSet, error::Error};
+use type_meta::RustType;
 
 enum GenerateKind {
     InputBindgen,
@@ -44,12 +46,10 @@ pub(crate) fn generate(
     for method in &methods {
         // add to using_types with normalize
         if let Some(x) = &method.return_type {
-            let normalized = aliases.normalize(&x.type_name);
-            using_types.insert(normalized.clone());
+            collect_using_types(&mut using_types, &aliases, x);
         }
         for p in &method.parameters {
-            let normalized = aliases.normalize(&p.rust_type.type_name);
-            using_types.insert(normalized);
+            collect_using_types(&mut using_types, &aliases, &p.rust_type);
         }
     }
 
@@ -57,8 +57,12 @@ pub(crate) fn generate(
     for struct_type in &structs {
         for field in &struct_type.fields {
             let struct_type_normalized = aliases.normalize(&struct_type.struct_name);
-            let field_type_normalized = aliases.normalize(&field.rust_type.type_name);
-            field_map.insert(&struct_type_normalized, &field_type_normalized);
+            collect_field_types(
+                &mut field_map,
+                &aliases,
+                &struct_type_normalized,
+                &field.rust_type,
+            );
         }
     }
 
@@ -73,6 +77,47 @@ pub(crate) fn generate(
     let csharp = emit_csharp(&methods, &aliases, &structs, &enums, options);
 
     Ok((rust, csharp))
+}
+
+fn collect_using_types(
+    using_types: &mut HashSet<String>,
+    aliases: &AliasMap,
+    rust_type: &RustType,
+) {
+    if let type_meta::TypeKind::Option(o) = &rust_type.type_kind {
+        collect_using_types(using_types, aliases, o);
+    } else if let type_meta::TypeKind::Function(parameters, return_type) = &rust_type.type_kind {
+        if let Some(x) = &return_type {
+            collect_using_types(using_types, aliases, x);
+        }
+        for p in parameters {
+            collect_using_types(using_types, aliases, &p.rust_type);
+        }
+    } else {
+        let normalized = aliases.normalize(&rust_type.type_name);
+        using_types.insert(normalized.clone());
+    }
+}
+
+fn collect_field_types(
+    field_map: &mut FieldMap,
+    aliases: &AliasMap,
+    struct_type_normalized: &String,
+    rust_type: &RustType,
+) {
+    if let type_meta::TypeKind::Option(o) = &rust_type.type_kind {
+        collect_field_types(field_map, aliases, struct_type_normalized, o);
+    } else if let type_meta::TypeKind::Function(parameters, return_type) = &rust_type.type_kind {
+        if let Some(x) = &return_type {
+            collect_field_types(field_map, aliases, struct_type_normalized, x);
+        }
+        for p in parameters {
+            collect_field_types(field_map, aliases, struct_type_normalized, &p.rust_type);
+        }
+    } else {
+        let normalized = aliases.normalize(&rust_type.type_name);
+        field_map.insert(struct_type_normalized, &normalized);
+    }
 }
 
 // #[test]

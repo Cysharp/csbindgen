@@ -18,6 +18,17 @@ mod lz4_ffi;
 // #[allow(non_snake_case)]
 // #[allow(non_camel_case_types)]
 // #[allow(non_upper_case_globals)]
+// mod sqlite3;
+
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// mod sqlite3_ffi;
+
+// #[allow(dead_code)]
+// #[allow(non_snake_case)]
+// #[allow(non_camel_case_types)]
+// #[allow(non_upper_case_globals)]
 // mod bullet3;
 
 // #[allow(dead_code)]
@@ -46,6 +57,22 @@ mod lz4_ffi;
 // #[allow(non_snake_case)]
 // #[allow(non_camel_case_types)]
 // mod zstd_ffi;
+
+#[no_mangle]
+pub extern "C" fn nest_test(
+    _f: ::std::option::Option<
+        unsafe extern "C" fn(
+            pxFunc: *mut ::std::option::Option<
+                unsafe extern "C" fn(
+                    arg2: ::std::os::raw::c_int,
+                ),
+            >,
+        ) -> ::std::os::raw::c_int,
+    >
+) {
+}
+
+
 
 #[allow(non_camel_case_types)]
 pub type LONG_PTR = ::std::os::raw::c_longlong;
@@ -83,16 +110,12 @@ pub unsafe extern "C" fn csharp_to_rust_utf8(utf8_str: *const u8, utf8_len: i32)
     println!("{}", str);
 }
 
-
 #[no_mangle]
 pub unsafe extern "C" fn csharp_to_rust_bytes(bytes: *const u8, len: i32) {
     let slice = std::slice::from_raw_parts(bytes, len as usize);
     let vec = slice.to_vec();
     println!("{:?}", vec);
 }
-
-
-
 
 #[no_mangle]
 pub extern "C" fn callback_test(cb: extern "C" fn(a: i32) -> i32) -> i32 {
@@ -350,9 +373,9 @@ fn build_test() {
 
     csbindgen::Builder::default()
         .input_extern_file("csbindgen-tests/src/lib.rs")
-        .csharp_class_name("LibRust")
+        .csharp_class_name("NativeMethods")
         .csharp_dll_name("csbindgen_tests")
-        .generate_csharp_file("dotnet-sandbox/method_call.cs")
+        .generate_csharp_file("dotnet-sandbox/NativeMethods.cs")
         .unwrap();
 }
 
