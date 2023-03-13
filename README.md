@@ -899,6 +899,51 @@ csbindgen silently skips over any method with a non-generatable type. If you bui
 * `csbindgen can't handle this parameter type so ignore generate, method_name: {} parameter_name: {}`
 * `csbindgen can't handle this return type so ignore generate, method_name: {}`
 
+
+Non-Generatable method: C variadic/variable arguments method
+---
+csbindgen ignores C's variadic arguments because this feature is not stable both in C# and Rust.
+There is a `__arglist` keyword for C's variadic arguments in C#. [`__arglist` has many problems except Windows environment.](https://github.com/dotnet/runtime/issues/48796)
+[There is an issue about C's variadic arguments in Rust.](https://github.com/rust-lang/rust/issues/44930)
+
+```rust
+extern "C"
+{
+    pub fn use_varargs(a: VariableArgContainer);
+    pub fn add(left: usize, right: usize) -> usize;
+    pub fn add_varargs(left: usize, right: usize, ...) -> usize;
+}
+
+#[repr(C)]
+pub struct VariableArgContainer {
+    pub add_varargs: extern "C" fn(left: usize, right: usize, ...) -> usize,
+    pub y: usize
+}
+```
+
+```csharp
+public static unsafe partial class NativeMethods
+{
+    const string __DllName = "lib";
+
+    [DllImport(__DllName, EntryPoint = "use_varargs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern void use_varargs(VariableArgContainer a);
+
+    [DllImport(__DllName, EntryPoint = "add", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern nuint add(nuint left, nuint right);
+
+    [DllImport(__DllName, EntryPoint = "add_varargs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+    public static extern nuint add_varargs(nuint left, nuint right);
+}
+
+[StructLayout(LayoutKind.Sequential)]
+public unsafe partial struct VariableArgContainer
+{
+    public delegate* unmanaged[Cdecl]<nuint, nuint, nuint> add_varargs;
+    public nuint y;
+}
+```
+
 License
 ---
 This library is licensed under the MIT License.
