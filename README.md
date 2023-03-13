@@ -899,6 +899,13 @@ csbindgen silently skips over any method with a non-generatable type. If you bui
 * `csbindgen can't handle this parameter type so ignore generate, method_name: {} parameter_name: {}`
 * `csbindgen can't handle this return type so ignore generate, method_name: {}`
 
+
+Non-Generatable method: C variadic/variable arguments method
+---
+csbindgen doesn't handle C's variadic arguments, which causes undefined behaviors, because this feature is not stable both in C# and Rust.
+There is a `__arglist` keyword for C's variadic arguments in C#. [`__arglist` has many problems except Windows environment.](https://github.com/dotnet/runtime/issues/48796)
+[There is an issue about C's variadic arguments in Rust.](https://github.com/rust-lang/rust/issues/44930)
+
 License
 ---
 This library is licensed under the MIT License.
