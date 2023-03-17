@@ -1,29 +1,28 @@
 use crate::{alias_map::AliasMap, builder::BindgenOptions};
 
+pub fn escape_name(str: &str) -> String {
+    match str {
+        // C# keywords: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/
+        "abstract" | "as" | "base" | "bool" | "break" | "byte" | "case" | "catch" | "char"
+        | "checked" | "class" | "const" | "continue" | "decimal" | "default" | "delegate"
+        | "do" | "double" | "else" | "enum" | "event" | "explicit" | "extern" | "false"
+        | "finally" | "fixed" | "float" | "for" | "foreach" | "goto" | "if" | "implicit" | "in"
+        | "int" | "interface" | "internal" | "is" | "lock" | "long" | "namespace" | "new"
+        | "null" | "object" | "operator" | "out" | "override" | "params" | "private"
+        | "protected" | "public" | "readonly" | "ref" | "return" | "sbyte" | "sealed" | "short"
+        | "sizeof" | "stackalloc" | "static" | "string" | "struct" | "switch" | "this"
+        | "throw" | "true" | "try" | "typeof" | "uint" | "ulong" | "unchecked" | "unsafe"
+        | "ushort" | "using" | "virtual" | "void" | "volatile" | "while" => {
+            "@".to_string() + str
+        }
+        x => x.to_string(),
+    }
+}
+
 #[derive(Clone, Debug)]
 pub struct Parameter {
     pub name: String,
     pub rust_type: RustType,
-}
-
-impl Parameter {
-    pub fn escape_name(&self) -> String {
-        match self.name.as_str() {
-            // C# keywords: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/
-            "abstract" | "as" | "base" | "bool" | "break" | "byte" | "case" | "catch" | "char"
-            | "checked" | "class" | "const" | "continue" | "decimal" | "default" | "delegate"
-            | "do" | "double" | "else" | "enum" | "event" | "explicit" | "extern" | "false"
-            | "finally" | "fixed" | "float" | "for" | "foreach" | "goto" | "if" | "implicit"
-            | "in" | "int" | "interface" | "internal" | "is" | "lock" | "long" | "namespace"
-            | "new" | "null" | "object" | "operator" | "out" | "override" | "params"
-            | "private" | "protected" | "public" | "readonly" | "ref" | "return" | "sbyte"
-            | "sealed" | "short" | "sizeof" | "stackalloc" | "static" | "string" | "struct"
-            | "switch" | "this" | "throw" | "true" | "try" | "typeof" | "uint" | "ulong"
-            | "unchecked" | "unsafe" | "ushort" | "using" | "virtual" | "void" | "volatile"
-            | "while" => "@".to_string() + self.name.as_str(),
-            x => x.to_string(),
-        }
-    }
 }
 
 #[derive(Clone, Debug)]
@@ -153,7 +152,7 @@ impl RustType {
                     .map(|x| {
                         format!(
                             "{}: {}",
-                            x.escape_name(),
+                            escape_name(x.name.as_str()),
                             x.rust_type.to_rust_string(type_path)
                         )
                     })
@@ -184,7 +183,8 @@ impl RustType {
         method_name: &String,
         parameter_name: &String,
     ) -> String {
-        fn convert_type_name(type_name: &str) -> &str {
+        fn convert_type_name(type_name: &str) -> String {
+            let temp_string: String;
             let name = match type_name {
                 // std::os::raw https://doc.rust-lang.org/std/os/raw/index.html
                 // std::ffi::raw https://doc.rust-lang.org/core/ffi/index.html
@@ -220,9 +220,12 @@ impl RustType {
                 "bool" => "bool",
                 "usize" => "nuint", // C# 9.0
                 "()" => "void",
-                _ => type_name, // as is
+                _ => {
+                    temp_string = escape_name(type_name);
+                    temp_string.as_str()
+                }
             };
-            name
+            name.to_string()
         }
 
         // resolve alias
@@ -233,7 +236,13 @@ impl RustType {
 
         // if alias if Option, unwrap.
         let type_csharp_string = if use_alias {
-            use_type.to_csharp_string(options, alias_map, emit_from_struct, method_name, parameter_name)
+            use_type.to_csharp_string(
+                options,
+                alias_map,
+                emit_from_struct,
+                method_name,
+                parameter_name,
+            )
         } else {
             convert_type_name(use_type.type_name.as_str()).to_string()
         };
@@ -421,7 +430,7 @@ pub fn build_method_delegate_if_required(
                             method_name,
                             parameter_name,
                         );
-                        format!("{} {}", cs, p.escape_name())
+                        format!("{} {}", cs, escape_name(p.name.as_str()))
                     })
                     .collect::<Vec<_>>()
                     .join(", ");

@@ -26,7 +26,7 @@ Install on `Cargo.toml` as `build-dependencies` and set up `bindgen::Builder` on
 
 ```toml
 [build-dependencies]
-csbindgen = "1.3.0"
+csbindgen = "1.4.0"
 ```
 
 ### Rust to C#.
@@ -191,6 +191,15 @@ namespace {csharp_namespace}
 ```
 
 `csharp_dll_name_if` is optional. If specified, `#if` allows two DllName to be specified, which is useful if the name must be `__Internal` at iOS build.
+
+`input_extern_file` allows mulitple call, if you need to add dependent struct, use this.
+
+```rust
+csbindgen::Builder::default()
+    .input_extern_file("src/lib.rs")
+    .input_extern_file("src/struct_modules.rs")
+    .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs");
+```
 
 ### Unity Callback
 

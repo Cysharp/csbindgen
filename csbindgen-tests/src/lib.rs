@@ -3,8 +3,6 @@ use std::{
     ffi::{c_char, c_long, c_ulong, c_void, CString},
 };
 
-
-
 #[allow(dead_code)]
 #[allow(non_snake_case)]
 #[allow(non_camel_case_types)]
@@ -60,30 +58,47 @@ mod lz4_ffi;
 // #[allow(non_camel_case_types)]
 // mod zstd_ffi;
 
-mod others;
-pub use others::HogeMoge;
+// mod others;
+// pub use others::HogeMoge;
+
+// #[no_mangle]
+// pub extern "C" fn other_1(hoge: HogeMoge) {
+//     println!("{:?}", hoge);
+// }
+
+#[repr(C)]
+pub struct NfcCard {
+    pub delegate: unsafe extern "C" fn(ByteArray) -> ByteArray
+}
 
 #[no_mangle]
-pub extern "C" fn other_1(hoge: HogeMoge){
-    println!("{}", hoge);
+pub extern "C" fn other_2(_hoge: NfcCard) {}
+
+#[repr(C)]
+pub struct ByteArray {
+    pub i: i32,
+}
+
+#[repr(C)]
+#[derive(Debug, Copy, Clone)]
+pub struct event {
+    pub a: i32
+} 
+
+#[no_mangle]
+pub extern "C" fn event(event: event ) {
+    println!("{:?}", event);
 }
 
 #[no_mangle]
 pub extern "C" fn nest_test(
     _f: ::std::option::Option<
         unsafe extern "C" fn(
-            pxFunc: *mut ::std::option::Option<
-                unsafe extern "C" fn(
-                    arg2: ::std::os::raw::c_int,
-                ),
-            >,
+            pxFunc: *mut ::std::option::Option<unsafe extern "C" fn(arg2: ::std::os::raw::c_int)>,
         ) -> ::std::os::raw::c_int,
-    >
+    >,
 ) {
 }
-
-
-
 
 #[allow(non_camel_case_types)]
 pub type LONG_PTR = ::std::os::raw::c_longlong;

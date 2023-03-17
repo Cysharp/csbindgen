@@ -6,4 +6,5 @@
 pub enum HogeMoge{
     X = 0,
     Y = 1,
+    event = 2
 }

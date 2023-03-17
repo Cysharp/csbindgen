@@ -12,8 +12,11 @@ namespace CsBindgen
     {
         const string __DllName = "csbindgen_tests";
 
-        [DllImport(__DllName, EntryPoint = "other_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void other_1(HogeMoge hoge);
+        [DllImport(__DllName, EntryPoint = "other_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void other_2(NfcCard _hoge);
+
+        [DllImport(__DllName, EntryPoint = "@event", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void @event(@event @event);
 
         [DllImport(__DllName, EntryPoint = "nest_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void nest_test(delegate* unmanaged[Cdecl]<delegate* unmanaged[Cdecl]<int, void>*, int> _f);
@@ -130,6 +133,24 @@ namespace CsBindgen
 
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct NfcCard
+    {
+        public delegate* unmanaged[Cdecl]<ByteArray, ByteArray> @delegate;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct ByteArray
+    {
+        public int i;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct @event
+    {
+        public int a;
+    }
+
     [StructLayout(LayoutKind.Explicit)]
     internal unsafe partial struct MyUnion
     {
@@ -174,12 +195,6 @@ namespace CsBindgen
         A = 1,
         B = 2,
         C = 10,
-    }
-
-    internal enum HogeMoge : int
-    {
-        X = 0,
-        Y = 1,
     }
 
 
