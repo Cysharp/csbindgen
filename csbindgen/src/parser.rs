@@ -7,9 +7,11 @@ enum FnItem {
     Item(syn::ItemFn),
 }
 
-pub fn collect_foreign_method(ast: &syn::File, options: &BindgenOptions) -> Vec<ExternMethod> {
-    let mut list: Vec<ExternMethod> = Vec::new();
-
+pub fn collect_foreign_method(
+    ast: &syn::File,
+    options: &BindgenOptions,
+    list: &mut Vec<ExternMethod>,
+) {
     for item in ast.items.iter() {
         if let Item::ForeignMod(m) = item {
             for item in m.items.iter() {
@@ -22,13 +24,13 @@ pub fn collect_foreign_method(ast: &syn::File, options: &BindgenOptions) -> Vec<
             }
         }
     }
-
-    list
 }
 
-pub fn collect_extern_method(ast: &syn::File, options: &BindgenOptions) -> Vec<ExternMethod> {
-    let mut list: Vec<ExternMethod> = Vec::new();
-
+pub fn collect_extern_method(
+    ast: &syn::File,
+    options: &BindgenOptions,
+    list: &mut Vec<ExternMethod>,
+) {
     for item in ast.items.iter() {
         if let Item::Fn(m) = item {
             if m.sig.abi.is_some() {
@@ -40,8 +42,6 @@ pub fn collect_extern_method(ast: &syn::File, options: &BindgenOptions) -> Vec<E
             }
         }
     }
-
-    list
 }
 
 fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> {
@@ -112,8 +112,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     None
 }
 
-pub fn collect_type_alias(ast: &syn::File) -> AliasMap {
-    let mut result = AliasMap::new();
+pub fn collect_type_alias(ast: &syn::File, result: &mut AliasMap) {
     for item in ast.items.iter() {
         if let Item::Type(t) = item {
             let name = t.ident.to_string();
@@ -135,14 +134,10 @@ pub fn collect_type_alias(ast: &syn::File) -> AliasMap {
             }
         }
     }
-
-    result
 }
 
-pub fn collect_struct(ast: &syn::File) -> Vec<RustStruct> {
+pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
     // collect union or struct
-    let mut result = Vec::new();
-
     for item in ast.items.iter() {
         if let Item::Union(t) = item {
             let struct_name = t.ident.to_string();
@@ -165,8 +160,6 @@ pub fn collect_struct(ast: &syn::File) -> Vec<RustStruct> {
             };
         }
     }
-
-    result
 }
 
 fn collect_fields(fields: &syn::FieldsNamed) -> Vec<FieldMember> {
@@ -185,9 +178,7 @@ fn collect_fields(fields: &syn::FieldsNamed) -> Vec<FieldMember> {
     result
 }
 
-pub fn collect_enum(ast: &syn::File) -> Vec<RustEnum> {
-    let mut result = Vec::new();
-
+pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
     for item in ast.items.iter() {
         if let Item::Enum(t) = item {
             let mut repr = None;
@@ -221,8 +212,6 @@ pub fn collect_enum(ast: &syn::File) -> Vec<RustEnum> {
             });
         }
     }
-
-    result
 }
 
 pub fn reduce_struct(

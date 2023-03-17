@@ -13,7 +13,7 @@ pub struct Builder {
 
 pub struct BindgenOptions {
     pub input_bindgen_file: String,
-    pub input_extern_file: String,
+    pub input_extern_files: Vec<String>,
     pub method_filter: fn(method_name: String) -> bool,
     pub rust_method_type_path: String,
     pub rust_method_prefix: String,
@@ -34,7 +34,7 @@ impl Default for Builder {
         Self {
             options: BindgenOptions {
                 input_bindgen_file: "".to_string(),
-                input_extern_file: "".to_string(),
+                input_extern_files: vec![],
                 method_filter: |x| !x.starts_with('_'),
                 rust_method_type_path: "".to_string(),
                 rust_method_prefix: "csbindgen_".to_string(),
@@ -47,7 +47,7 @@ impl Default for Builder {
                 csharp_class_accessibility: "internal".to_string(),
                 csharp_if_symbol: "".to_string(),
                 csharp_if_dll_name: "".to_string(),
-                csharp_use_function_pointer: true
+                csharp_use_function_pointer: true,
             },
         }
     }
@@ -64,9 +64,11 @@ impl Builder {
         self
     }
 
-    /// Change an input .rs file for collect extern methods to C# binding.
+    /// Add an input .rs file for collect extern methods to C# binding.
     pub fn input_extern_file<T: Into<String>>(mut self, input_extern_file: T) -> Builder {
-        self.options.input_extern_file = input_extern_file.into();
+        self.options
+            .input_extern_files
+            .push(input_extern_file.into());
         self
     }
 
@@ -137,7 +139,10 @@ impl Builder {
 
     /// configure C# class accessibility, default is internal
     /// `{csharp_class_accessibility} static unsafe partial class NativeMethods`
-    pub fn csharp_class_accessibility<T: Into<String>>(mut self, csharp_class_accessibility: T) -> Builder {
+    pub fn csharp_class_accessibility<T: Into<String>>(
+        mut self,
+        csharp_class_accessibility: T,
+    ) -> Builder {
         self.options.csharp_class_accessibility = csharp_class_accessibility.into();
         self
     }
@@ -168,7 +173,7 @@ impl Builder {
             csharp_file.flush()?;
         }
 
-        if !self.options.input_extern_file.is_empty() {
+        if !self.options.input_extern_files.is_empty() {
             let (_, csharp) = generate(GenerateKind::InputExtern, &self.options)?;
 
             let mut csharp_file = make_file(csharp_output_path.as_ref())?;
@@ -199,7 +204,7 @@ impl Builder {
             csharp_file.flush()?;
         }
 
-        if !self.options.input_extern_file.is_empty() {
+        if !self.options.input_extern_files.is_empty() {
             let (rust, csharp) = generate(GenerateKind::InputExtern, &self.options)?;
 
             if let Some(rust) = rust {

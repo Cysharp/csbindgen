@@ -12,6 +12,9 @@ namespace CsBindgen
     {
         const string __DllName = "csbindgen_tests";
 
+        [DllImport(__DllName, EntryPoint = "other_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void other_1(HogeMoge hoge);
+
         [DllImport(__DllName, EntryPoint = "nest_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void nest_test(delegate* unmanaged[Cdecl]<delegate* unmanaged[Cdecl]<int, void>*, int> _f);
 
@@ -171,6 +174,12 @@ namespace CsBindgen
         A = 1,
         B = 2,
         C = 10,
+    }
+
+    internal enum HogeMoge : int
+    {
+        X = 0,
+        Y = 1,
     }
 
 

@@ -14,7 +14,7 @@ use emitter::*;
 use field_map::FieldMap;
 use parser::*;
 use std::{collections::HashSet, error::Error};
-use type_meta::RustType;
+use type_meta::{ExternMethod, RustEnum, RustStruct, RustType};
 
 enum GenerateKind {
     InputBindgen,
@@ -25,21 +25,30 @@ pub(crate) fn generate(
     generate_kind: GenerateKind,
     options: &BindgenOptions,
 ) -> Result<(Option<String>, String), Box<dyn Error>> {
-    let path = match generate_kind {
-        GenerateKind::InputBindgen => &options.input_bindgen_file,
-        GenerateKind::InputExtern => &options.input_extern_file,
+    let temp_input = [options.input_bindgen_file.clone()];
+    let (paths, generate_rust) = match generate_kind {
+        GenerateKind::InputBindgen => (temp_input.as_slice(), true),
+        GenerateKind::InputExtern => (options.input_extern_files.as_slice(), false),
     };
-    let file_content = std::fs::read_to_string(path)
-        .expect(("input file not found, path:".to_string() + path).as_str());
-    let file_ast = syn::parse_file(file_content.as_str())?;
 
-    let (methods, generate_rust) = match generate_kind {
-        GenerateKind::InputBindgen => (collect_foreign_method(&file_ast, options), true),
-        GenerateKind::InputExtern => (collect_extern_method(&file_ast, options), false),
-    };
-    let aliases = collect_type_alias(&file_ast);
-    let structs = collect_struct(&file_ast);
-    let enums = collect_enum(&file_ast);
+    let mut methods: Vec<ExternMethod> = vec![];
+    let mut aliases = AliasMap::new();
+    let mut structs: Vec<RustStruct> = vec![];
+    let mut enums: Vec<RustEnum> = vec![];
+
+    for path in paths {
+        let file_content = std::fs::read_to_string(path)
+            .expect(("input file not found, path:".to_string() + path).as_str());
+        let file_ast = syn::parse_file(file_content.as_str())?;
+
+        match generate_kind {
+            GenerateKind::InputBindgen => collect_foreign_method(&file_ast, options, &mut methods),
+            GenerateKind::InputExtern => collect_extern_method(&file_ast, options, &mut methods),
+        };
+        collect_type_alias(&file_ast, &mut aliases);
+        collect_struct(&file_ast, &mut structs);
+        collect_enum(&file_ast, &mut enums);
+    }
 
     // collect using_types
     let mut using_types = HashSet::new();
