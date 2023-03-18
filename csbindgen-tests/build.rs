@@ -116,5 +116,14 @@ fn main() -> Result<(), Box<dyn Error>> {
     //     .csharp_dll_name("libbullet3")
     //     .generate_to_file("src/bullet3_ffi.rs", "../dotnet-sandbox/bullet3_bindgen.cs")?;
 
+
+    csbindgen::Builder::new()
+        .input_bindgen_file("src/libpng16.rs")
+        //.method_filter(|x| x.starts_with("png_"))
+        .csharp_namespace("PixivApi.ImageFile")
+        .csharp_class_name("LibPng16")
+        .csharp_dll_name("libpng16")
+        .generate_csharp_file("../dotnet-sandbox/libpng16_csbindgen.cs")?;
+
     Ok(())
 }

@@ -66,6 +66,13 @@ mod lz4_ffi;
 //     println!("{:?}", hoge);
 // }
 
+
+
+// #[no_mangle]
+// pub extern "C" fn string_char(str: char) {
+//     println!("{}", str);
+// }
+
 #[repr(C)]
 pub struct NfcCard {
     pub delegate: unsafe extern "C" fn(ByteArray) -> ByteArray

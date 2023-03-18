@@ -65,7 +65,7 @@ pub(crate) fn generate(
     let mut field_map = FieldMap::new();
     for struct_type in &structs {
         for field in &struct_type.fields {
-            let struct_type_normalized = aliases.normalize(&struct_type.struct_name);
+            let (struct_type_normalized, _) = aliases.normalize(&struct_type.struct_name);
             collect_field_types(
                 &mut field_map,
                 &aliases,
@@ -103,8 +103,12 @@ fn collect_using_types(
             collect_using_types(using_types, aliases, &p.rust_type);
         }
     } else {
-        let normalized = aliases.normalize(&rust_type.type_name);
-        using_types.insert(normalized.clone());
+        let (normalized, normalized_rust_type) = aliases.normalize(&rust_type.type_name);
+        if let Some(x) = normalized_rust_type {
+            collect_using_types(using_types, aliases, &x);
+        } else {
+            using_types.insert(normalized.clone());
+        }
     }
 }
 
@@ -124,23 +128,27 @@ fn collect_field_types(
             collect_field_types(field_map, aliases, struct_type_normalized, &p.rust_type);
         }
     } else {
-        let normalized = aliases.normalize(&rust_type.type_name);
-        field_map.insert(struct_type_normalized, &normalized);
+        let (normalized, normalized_rust_type) = aliases.normalize(&rust_type.type_name);
+        if let Some(x) = normalized_rust_type {
+            collect_field_types(field_map, aliases, struct_type_normalized, &x);
+        } else {
+            field_map.insert(struct_type_normalized, &normalized);
+        }
     }
 }
 
-// #[test]
-// fn test() {
-//     let path = std::env::current_dir().unwrap();
-//     println!("starting dir: {}", path.display()); // csbindgen/csbindgen
+#[test]
+fn test() {
+    let path = std::env::current_dir().unwrap();
+    println!("starting dir: {}", path.display()); // csbindgen/csbindgen
 
-//     Builder::new()
-//         .input_bindgen_file("csbindgen-tests/src/lz4.rs")
-//         .csharp_class_name("LibLz4")
-//         .csharp_dll_name("csbindgen_tests")
-//         .generate_to_file(
-//             "csbindgen-tests/src/lz4_ffi.rs",
-//             "dotnet-sandbox/lz4_bindgen.cs",
-//         )
-//         .unwrap();
-// }
+    Builder::new()
+        .input_bindgen_file("csbindgen-tests/src/liblz4.rs")
+        .csharp_class_name("LibLz4")
+        .csharp_dll_name("csbindgen_tests")
+        .generate_to_file(
+            "csbindgen-tests/src/lz4_ffi.rs",
+            "dotnet-sandbox/lz4_bindgen.cs",
+        )
+        .unwrap();
+}

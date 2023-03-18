@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::{collections::HashMap};
 
 use crate::type_meta::{RustType, TypeKind};
 
@@ -38,11 +38,25 @@ impl AliasMap {
         }
     }
 
-    pub fn normalize(&self, name: &String) -> String {
+    pub fn normalize(&self, name: &String) -> (String, Option<RustType>) {
         match self.type_aliases.get(name) {
-            Some(x) => self.normalize(&x.type_name),
-            None => name.to_owned(),
+            Some(x) => {
+                let d = self.normalize_deep(x);
+                 (d.type_name.clone(), Some(d))
+            }
+            None => (name.to_owned(), None)
         }
+    }
+
+    fn normalize_deep(&self, name: &RustType) -> RustType {
+        match self.type_aliases.get(&name.type_name) {
+            Some(x) => self.normalize_deep(x),
+            None => name.clone(),
+        }
+    }
+
+    pub fn iter(&self) -> std::collections::hash_map::Iter<String, RustType> {
+        self.type_aliases.iter()
     }
 }
 
@@ -80,10 +94,10 @@ mod test {
             },
         );
 
-        assert_eq!(map.normalize(&"SSIZE_T".to_string()), "c_longlong");
-        assert_eq!(map.normalize(&"SSIZE_T2".to_string()), "c_longlong");
-        assert_eq!(map.normalize(&"c_longlong".to_string()), "c_longlong");
-        assert_eq!(map.normalize(&"c_longlong".to_string()), "c_longlong");
+        assert_eq!(map.normalize(&"SSIZE_T".to_string()).0, "c_longlong");
+        assert_eq!(map.normalize(&"SSIZE_T2".to_string()).0, "c_longlong");
+        assert_eq!(map.normalize(&"c_longlong".to_string()).0, "c_longlong");
+        assert_eq!(map.normalize(&"c_longlong".to_string()).0, "c_longlong");
 
         assert_eq!(
             map.get_mapped_value(&"SSIZE_T".to_string())
