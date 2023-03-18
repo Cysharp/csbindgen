@@ -26,7 +26,7 @@ Install on `Cargo.toml` as `build-dependencies` and set up `bindgen::Builder` on
 
 ```toml
 [build-dependencies]
-csbindgen = "1.4.0"
+csbindgen = "1.5.0"
 ```
 
 ### Rust to C#.
