@@ -218,6 +218,7 @@ impl RustType {
                 "f32" => "float",
                 "f64" => "double",
                 "bool" => "bool",
+                "char" => "uint",
                 "usize" => "nuint", // C# 9.0
                 "()" => "void",
                 _ => {

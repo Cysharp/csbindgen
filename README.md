@@ -374,10 +374,11 @@ Rust types will map these C# types.
 | `u32` | `uint` |
 | `u64` | `ulong` |
 | `u128` | `UInt128` |
+| `usize` | `nuint` |
 | `f32` | `float` |
 | `f64` | `double` |
 | `bool` | `[MarshalAs(UnmanagedType.U1)]bool` |
-| `usize` | `nuint` |
+| `char` | `uint` |
 | `()` | `void` |
 | `#[repr(C)]Struct` | `[StructLayout(LayoutKind.Sequential)]Struct` |
 | `#[repr(C)]Union` | `[StructLayout(LayoutKind.Explicit)]Struct` |
