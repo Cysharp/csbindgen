@@ -12,6 +12,14 @@ namespace CsBindgen
     {
         const string __DllName = "csbindgen_tests";
 
+        /// <summary>my comment!</summary>
+        [DllImport(__DllName, EntryPoint = "comment_one", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void comment_one();
+
+        /// <summary>Multiline Comments # GOTO Here Foo Bar  TO  ZZZ</summary>
+        [DllImport(__DllName, EntryPoint = "long_jpn_comment", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void long_jpn_comment();
+
         [DllImport(__DllName, EntryPoint = "other_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void other_2(NfcCard _hoge);
 

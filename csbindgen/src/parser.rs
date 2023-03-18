@@ -92,13 +92,11 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     }
 
     // doc
-    let mut doc_comment = None;
-    for attr in attrs {
-        let last_segment = attr.path.segments.last().unwrap();
-        if last_segment.ident == "doc" {
-            doc_comment = Some(attr.tokens.to_string());
-        }
-    }
+    let doc_comment = attrs
+        .iter()
+        .filter(|x| x.path.segments.last().unwrap().ident == "doc")
+        .map(|x| x.tokens.to_string())
+        .collect::<Vec<_>>();
 
     if !method_name.is_empty() && (options.method_filter)(method_name.clone()) {
         return Some(ExternMethod {

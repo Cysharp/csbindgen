@@ -73,6 +73,26 @@ mod lz4_ffi;
 //     println!("{}", str);
 // }
 
+
+
+/// my comment!
+#[no_mangle]
+pub extern "C" fn comment_one() {
+}
+
+
+/// Multiline Comments
+/// # GOTO
+/// Here
+/// Foo
+/// Bar
+/// 
+/// TO
+/// 
+/// ZZZ
+pub extern "C" fn long_jpn_comment() {
+}
+
 #[repr(C)]
 pub struct NfcCard {
     pub delegate: unsafe extern "C" fn(ByteArray) -> ByteArray

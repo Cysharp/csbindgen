@@ -12,9 +12,7 @@ pub fn escape_name(str: &str) -> String {
         | "protected" | "public" | "readonly" | "ref" | "return" | "sbyte" | "sealed" | "short"
         | "sizeof" | "stackalloc" | "static" | "string" | "struct" | "switch" | "this"
         | "throw" | "true" | "try" | "typeof" | "uint" | "ulong" | "unchecked" | "unsafe"
-        | "ushort" | "using" | "virtual" | "void" | "volatile" | "while" => {
-            "@".to_string() + str
-        }
+        | "ushort" | "using" | "virtual" | "void" | "volatile" | "while" => "@".to_string() + str,
         x => x.to_string(),
     }
 }
@@ -34,24 +32,31 @@ pub struct FieldMember {
 #[derive(Clone, Debug)]
 pub struct ExternMethod {
     pub method_name: String,
-    pub doc_comment: Option<String>,
+    pub doc_comment: Vec<String>,
     pub parameters: Vec<Parameter>,
     pub return_type: Option<RustType>,
 }
 
 impl ExternMethod {
     pub fn escape_doc_comment(&self) -> Option<String> {
-        match &self.doc_comment {
-            Some(x) => {
-                let s = x
-                    .trim_matches(&['=', ' ', '\"'] as &[_])
-                    .replace("\\n", "")
-                    .replace("<", "&lt;")
-                    .replace(">", "&gt;");
-                Some(s)
-            }
-            None => None,
+        if self.doc_comment.is_empty() {
+            return None;
         }
+
+        let mut s = String::new();
+        for (i, x) in self.doc_comment.iter().enumerate() {
+            if i != 0 {
+                s.push(' ');
+            }
+            let ss = x
+                .trim_matches(&['=', ' ', '\"'] as &[_])
+                .replace("\\n", "")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;");
+            s.push_str(ss.as_str());
+        }
+
+        Some(s)
     }
 }
 
