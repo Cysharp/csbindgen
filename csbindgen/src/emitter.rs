@@ -224,8 +224,16 @@ pub fn emit_csharp(
                 "".to_string()
             };
 
-            structs_string
-                .push_str(format!("        {}public {} {}", attr, type_name, escape_name(field.name.as_str())).as_str());
+            structs_string.push_str(
+                format!(
+                    "        {}public {} {}",
+                    attr,
+                    type_name,
+                    escape_name(field.name.as_str())
+                )
+                .as_str(),
+            );
+
             if let TypeKind::FixedArray(digits, _) = &field.rust_type.type_kind {
                 let mut digits = digits.clone();
                 if digits == "0" {
@@ -233,7 +241,23 @@ pub fn emit_csharp(
                 };
 
                 structs_string.push_str(format!("[{}]", digits).as_str());
+            } else {
+                let alias_resolved_field =
+                    match aliases.get_mapped_value(&field.rust_type.type_name) {
+                        Some(x) => x,
+                        None => field.rust_type.clone(),
+                    };
+
+                if let TypeKind::FixedArray(digits, _) = &alias_resolved_field.type_kind {
+                    let mut digits = digits.clone();
+                    if digits == "0" {
+                        digits = "1".to_string(); // 0 fixed array is not allowed in C#
+                    };
+
+                    structs_string.push_str(format!("[{}]", digits).as_str());
+                }
             }
+
             structs_string.push_str_ln(";");
         }
         structs_string.push_str_ln("    }");

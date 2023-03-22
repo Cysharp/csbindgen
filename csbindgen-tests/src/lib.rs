@@ -73,6 +73,37 @@ mod lz4_ffi;
 //     println!("{}", str);
 // }
 
+#[allow(non_camel_case_types)]
+pub type png_byte = ::std::os::raw::c_uchar;
+
+#[allow(non_camel_case_types)]
+pub type JPH_ContactPoints = [u128; 65usize];
+#[allow(non_camel_case_types)]
+pub type JPH_ContactPoints2 = [u128; 65];
+
+#[repr(C)]
+#[allow(unused)]
+#[allow(non_snake_case)]
+pub struct JPH_ContactManifold {
+    pub mPenetrationDepth: f32,
+    pub mWorldSpaceContactPointsOn1: JPH_ContactPoints,
+    pub mWorldSpaceContactPointsOn2: JPH_ContactPoints,
+    pub mWorldSpaceContactPointsOn3: JPH_ContactPoints2,
+    pub mWorldSpaceContactPointsOn4: [u128; 65],
+    pub mWorldSpaceContactPointsOn5: [u32; 65],
+    pub png_name: [png_byte; 5usize],
+}
+
+#[no_mangle]
+#[allow(unused)]
+#[allow(non_snake_case)]
+pub extern "C" fn JPH_PruneContactPoints(
+    ioContactPointsOn1: *mut JPH_ContactPoints,
+    ioContactPointsOn2: *mut JPH_ContactManifold,
+)
+{
+    todo!();
+}
 
 
 /// my comment!

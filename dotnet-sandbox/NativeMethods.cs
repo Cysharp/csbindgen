@@ -12,6 +12,9 @@ namespace CsBindgen
     {
         const string __DllName = "csbindgen_tests";
 
+        [DllImport(__DllName, EntryPoint = "JPH_PruneContactPoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void JPH_PruneContactPoints(void/* UInt128[] */* ioContactPointsOn1, JPH_ContactManifold* ioContactPointsOn2);
+
         /// <summary>my comment!</summary>
         [DllImport(__DllName, EntryPoint = "comment_one", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void comment_one();
@@ -139,6 +142,18 @@ namespace CsBindgen
         public static extern void call_bindgen_lz4();
 
 
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct JPH_ContactManifold
+    {
+        public float mPenetrationDepth;
+        public fixed byte/* UInt128, this length is invalid so must keep pointer and can't edit from C# */ mWorldSpaceContactPointsOn1[65];
+        public fixed byte/* UInt128, this length is invalid so must keep pointer and can't edit from C# */ mWorldSpaceContactPointsOn2[65];
+        public fixed byte/* UInt128, this length is invalid so must keep pointer and can't edit from C# */ mWorldSpaceContactPointsOn3[65];
+        public fixed byte/* UInt128, this length is invalid so must keep pointer and can't edit from C# */ mWorldSpaceContactPointsOn4[65];
+        public fixed uint mWorldSpaceContactPointsOn5[65];
+        public fixed byte png_name[5];
     }
 
     [StructLayout(LayoutKind.Sequential)]

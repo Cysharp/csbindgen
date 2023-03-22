@@ -257,17 +257,28 @@ impl RustType {
 
         match &self.type_kind {
             TypeKind::FixedArray(_, _) => {
-                sb.push_str("fixed ");
+                if emit_from_struct {
+                    sb.push_str("fixed ");
 
-                let type_name = type_csharp_string.as_str();
-                let type_name = match type_name {
+                    let type_name = type_csharp_string.as_str();
+                    let type_name = match type_name {
                     // C# fixed allow types
                     "bool" | "byte" | "short" | "int" | "long" | "char" | "sbyte" | "ushort"
                     | "uint" | "ulong" | "float" | "double" => type_name.to_owned(),
                     _ => format!("byte/* {}, this length is invalid so must keep pointer and can't edit from C# */", type_name)
                 };
 
-                sb.push_str(type_name.as_str());
+                    sb.push_str(type_name.as_str());
+                } else {
+                    let type_name = type_csharp_string.as_str();
+                    sb.push_str(
+                        format!(
+                            "void/* {}[] */",
+                            type_name
+                        )
+                        .as_str(),
+                    );
+                }
             }
             TypeKind::Function(parameters, return_type) => {
                 if emit_from_struct && !options.csharp_use_function_pointer {

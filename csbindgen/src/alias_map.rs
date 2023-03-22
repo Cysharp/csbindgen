@@ -54,10 +54,6 @@ impl AliasMap {
             None => name.clone(),
         }
     }
-
-    pub fn iter(&self) -> std::collections::hash_map::Iter<String, RustType> {
-        self.type_aliases.iter()
-    }
 }
 
 #[cfg(test)]
