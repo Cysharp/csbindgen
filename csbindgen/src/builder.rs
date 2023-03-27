@@ -232,6 +232,10 @@ impl Builder {
 }
 
 fn make_file<P: AsRef<Path>>(path: P) -> io::Result<File> {
+    let path = path.as_ref();
+    if let Some(parent) = path.parent() {
+        std::fs::create_dir_all(parent)?;
+    }
     let file = OpenOptions::new()
         .write(true)
         .truncate(true)
