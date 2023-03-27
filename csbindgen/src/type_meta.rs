@@ -271,13 +271,7 @@ impl RustType {
                     sb.push_str(type_name.as_str());
                 } else {
                     let type_name = type_csharp_string.as_str();
-                    sb.push_str(
-                        format!(
-                            "void/* {}[] */",
-                            type_name
-                        )
-                        .as_str(),
-                    );
+                    sb.push_str(format!("void/* {}[] */", type_name).as_str());
                 }
             }
             TypeKind::Function(parameters, return_type) => {
