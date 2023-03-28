@@ -1,6 +1,8 @@
 /target
 /Cargo.lock
 
+# IDE
+.idea/
 .vs/
 dotnet-sandbox/obj/
 dotnet-sandbox/bin/

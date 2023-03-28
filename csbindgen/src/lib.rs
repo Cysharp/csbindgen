@@ -38,7 +38,7 @@ pub(crate) fn generate(
 
     for path in paths {
         let file_content = std::fs::read_to_string(path)
-            .expect(("input file not found, path:".to_string() + path).as_str());
+            .expect(&format!("input file not found, path: {}", path.display()));
         let file_ast = syn::parse_file(file_content.as_str())?;
 
         match generate_kind {

@@ -1,4 +1,4 @@
-use std::{collections::HashMap};
+use std::collections::HashMap;
 
 use crate::type_meta::{RustType, TypeKind};
 
@@ -42,9 +42,9 @@ impl AliasMap {
         match self.type_aliases.get(name) {
             Some(x) => {
                 let d = self.normalize_deep(x);
-                 (d.type_name.clone(), Some(d))
+                (d.type_name.clone(), Some(d))
             }
-            None => (name.to_owned(), None)
+            None => (name.to_owned(), None),
         }
     }
 
