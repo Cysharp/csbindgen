@@ -331,7 +331,7 @@ internal static unsafe partial class NativeMethods
 
             path += "/native/" + __DllName;
 
-            return NativeLibrary.Load(path, assembly, searchPath);
+            return NativeLibrary.Load(Path.Combine(AppContext.BaseDirectory, path), assembly, searchPath);
         }
 
         return IntPtr.Zero;
