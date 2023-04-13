@@ -125,5 +125,14 @@ fn main() -> Result<(), Box<dyn Error>> {
         .csharp_dll_name("libpng16")
         .generate_csharp_file("../dotnet-sandbox/libpng16_csbindgen.cs")?;
 
+
+    csbindgen::Builder::new()
+        .input_bindgen_file("src/physx/physx_generated.rs")
+        .input_bindgen_file("src/physx/x86_64-pc-windows-msvc/structgen.rs")
+        .csharp_namespace("Physx")
+        .csharp_class_name("LibPhysxd")
+        .csharp_dll_name("libphysx")
+        .generate_csharp_file("../dotnet-sandbox/libphysx_csbindgen.cs")?;
+
     Ok(())
 }
