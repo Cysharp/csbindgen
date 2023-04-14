@@ -271,6 +271,9 @@ pub fn emit_csharp(
             None => "".to_string(),
         };
         let name = &item.enum_name;
+        if item.is_flags {
+            enum_string.push_str_ln("    [Flags]");
+        }
         enum_string.push_str_ln(format!("    {accessibility} enum {name}{repr}").as_str());
         enum_string.push_str_ln("    {");
         for (name, value) in &item.fields {
@@ -321,6 +324,14 @@ fn convert_token_enum_repr(repr: &str) -> &str {
         "(i16)" => "short",
         "(i32)" => "int",
         "(i64)" => "long",
+        "u8" => "byte",
+        "u16" => "ushort",
+        "u32" => "uint",
+        "u64" => "ulong",
+        "i8" => "sbyte",
+        "i16" => "short",
+        "i32" => "int",
+        "i64" => "long",
         x => x,
     }
 }

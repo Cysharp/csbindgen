@@ -10171,6 +10171,13 @@ namespace Physx
         IsReleasable = 2,
     }
 
+    [Flags]
+    internal enum PxBaseFlags : ushort
+    {
+        OwnsMemory = 1 << 0,
+        IsReleasable = 1 << 1,
+    }
+
     internal enum PxTaskType : int
     {
         Cpu = 0,
@@ -10195,12 +10202,31 @@ namespace Physx
         Invalid,
     }
 
+    [Flags]
+    internal enum PxGeometryQueryFlags : uint
+    {
+        SimdGuard = 1 << 0,
+    }
+
     internal enum PxBVHBuildStrategy : int
     {
         Fast = 0,
         Default = 1,
         Sah = 2,
         Last = 3,
+    }
+
+    [Flags]
+    internal enum PxConvexMeshGeometryFlags : byte
+    {
+        TightBounds = 1 << 0,
+    }
+
+    [Flags]
+    internal enum PxMeshGeometryFlags : byte
+    {
+        TightBounds = 1 << 0,
+        DoubleSided = 1 << 1,
     }
 
     internal enum PxParticleSolverType : int
@@ -10211,9 +10237,39 @@ namespace Physx
         Custom = 8,
     }
 
+    [Flags]
+    internal enum PxHitFlags : ushort
+    {
+        Position = 1 << 0,
+        Normal = 1 << 1,
+        Uv = 1 << 3,
+        AssumeNoInitialOverlap = 1 << 4,
+        AnyHit = 1 << 5,
+        MeshMultiple = 1 << 6,
+        MeshBothSides = 1 << 7,
+        PreciseSweep = 1 << 8,
+        Mtd = 1 << 9,
+        FaceIndex = 1 << 10,
+        Default = Position | Normal | FaceIndex,
+        ModifiableFlags = AssumeNoInitialOverlap | MeshMultiple | MeshBothSides | PreciseSweep,
+    }
+
     internal enum PxHeightFieldFormat : int
     {
         S16Tm = 1,
+    }
+
+    [Flags]
+    internal enum PxHeightFieldFlags : ushort
+    {
+        NoBoundaryEdges = 1 << 0,
+    }
+
+    [Flags]
+    internal enum PxMeshFlags : ushort
+    {
+        Flipnormals = 1 << 0,
+        E16BitIndices = 1 << 1,
     }
 
     internal enum PxMeshMidPhase : int
@@ -10223,12 +10279,35 @@ namespace Physx
         Last = 2,
     }
 
+    [Flags]
+    internal enum PxTriangleMeshFlags : byte
+    {
+        E16BitIndices = 1 << 1,
+        AdjacencyInfo = 1 << 2,
+        PreferNoSdfProj = 1 << 3,
+    }
+
+    [Flags]
+    internal enum PxTetrahedronMeshFlags : byte
+    {
+        E16BitIndices = 1 << 1,
+    }
+
     internal enum PxActorFlag : int
     {
         Visualization = 1,
         DisableGravity = 2,
         SendSleepNotifies = 4,
         DisableSimulation = 8,
+    }
+
+    [Flags]
+    internal enum PxActorFlags : byte
+    {
+        Visualization = 1 << 0,
+        DisableGravity = 1 << 1,
+        SendSleepNotifies = 1 << 2,
+        DisableSimulation = 1 << 3,
     }
 
     internal enum PxActorType : int
@@ -10289,6 +10368,15 @@ namespace Physx
         ComputeJointForces = 8,
     }
 
+    [Flags]
+    internal enum PxArticulationFlags : byte
+    {
+        FixBase = 1 << 0,
+        DriveLimitsAreForces = 1 << 1,
+        DisableSelfCollision = 1 << 2,
+        ComputeJointForces = 1 << 3,
+    }
+
     internal enum PxArticulationDriveType : int
     {
         Force = 0,
@@ -10320,11 +10408,42 @@ namespace Physx
         SpatialTendonAttachment = 17,
     }
 
+    [Flags]
+    internal enum PxArticulationCacheFlags : uint
+    {
+        Velocity = 1 << 0,
+        Acceleration = 1 << 1,
+        Position = 1 << 2,
+        Force = 1 << 3,
+        LinkVelocity = 1 << 4,
+        LinkAcceleration = 1 << 5,
+        RootTransform = 1 << 6,
+        RootVelocities = 1 << 7,
+        SensorForces = 1 << 8,
+        JointSolverForces = 1 << 9,
+        All = Velocity | Acceleration | Position | LinkVelocity | LinkAcceleration | RootTransform | RootVelocities,
+    }
+
     internal enum PxArticulationSensorFlag : int
     {
         ForwardDynamicsForces = 1,
         ConstraintSolverForces = 2,
         WorldFrame = 4,
+    }
+
+    [Flags]
+    internal enum PxArticulationSensorFlags : byte
+    {
+        ForwardDynamicsForces = 1 << 0,
+        ConstraintSolverForces = 1 << 1,
+        WorldFrame = 1 << 2,
+    }
+
+    [Flags]
+    internal enum PxArticulationKinematicFlags : byte
+    {
+        Position = 1 << 0,
+        Velocity = 1 << 1,
     }
 
     internal enum PxShapeFlag : int
@@ -10333,6 +10452,15 @@ namespace Physx
         SceneQueryShape = 2,
         TriggerShape = 4,
         Visualization = 8,
+    }
+
+    [Flags]
+    internal enum PxShapeFlags : byte
+    {
+        SimulationShape = 1 << 0,
+        SceneQueryShape = 1 << 1,
+        TriggerShape = 1 << 2,
+        Visualization = 1 << 3,
     }
 
     internal enum PxForceMode : int
@@ -10358,6 +10486,22 @@ namespace Physx
         EnableGyroscopicForces = 1024,
     }
 
+    [Flags]
+    internal enum PxRigidBodyFlags : ushort
+    {
+        Kinematic = 1 << 0,
+        UseKinematicTargetForSceneQueries = 1 << 1,
+        EnableCcd = 1 << 2,
+        EnableCcdFriction = 1 << 3,
+        EnableSpeculativeCcd = 1 << 4,
+        EnablePoseIntegrationPreview = 1 << 5,
+        EnableCcdMaxContactImpulse = 1 << 6,
+        RetainAccelerations = 1 << 7,
+        ForceKineKineNotifications = 1 << 8,
+        ForceStaticKineNotifications = 1 << 9,
+        EnableGyroscopicForces = 1 << 10,
+    }
+
     internal enum PxConstraintFlag : int
     {
         Broken = 1,
@@ -10375,6 +10519,24 @@ namespace Physx
         DisableConstraint = 4096,
     }
 
+    [Flags]
+    internal enum PxConstraintFlags : ushort
+    {
+        Broken = 1 << 0,
+        ProjectToActor0 = 1 << 1,
+        ProjectToActor1 = 1 << 2,
+        Projection = ProjectToActor0 | ProjectToActor1,
+        CollisionEnabled = 1 << 3,
+        Visualization = 1 << 4,
+        DriveLimitsAreForces = 1 << 5,
+        ImprovedSlerp = 1 << 7,
+        DisablePreprocessing = 1 << 8,
+        EnableExtendedLimits = 1 << 9,
+        GpuCompatible = 1 << 10,
+        AlwaysUpdate = 1 << 11,
+        DisableConstraint = 1 << 12,
+    }
+
     internal enum StreamFormat : int
     {
         SimpleStream = 0,
@@ -10386,6 +10548,13 @@ namespace Physx
     {
         UserRelease = 1,
         MemoryRelease = 2,
+    }
+
+    [Flags]
+    internal enum PxDeletionEventFlags : byte
+    {
+        UserRelease = 1 << 0,
+        MemoryRelease = 1 << 1,
     }
 
     internal enum PxPairFlag : int
@@ -10410,6 +10579,38 @@ namespace Physx
         TriggerDefault = 1044,
     }
 
+    [Flags]
+    internal enum PxPairFlags : ushort
+    {
+        SolveContact = 1 << 0,
+        ModifyContacts = 1 << 1,
+        NotifyTouchFound = 1 << 2,
+        NotifyTouchPersists = 1 << 3,
+        NotifyTouchLost = 1 << 4,
+        NotifyTouchCcd = 1 << 5,
+        NotifyThresholdForceFound = 1 << 6,
+        NotifyThresholdForcePersists = 1 << 7,
+        NotifyThresholdForceLost = 1 << 8,
+        NotifyContactPoints = 1 << 9,
+        DetectDiscreteContact = 1 << 10,
+        DetectCcdContact = 1 << 11,
+        PreSolverVelocity = 1 << 12,
+        PostSolverVelocity = 1 << 13,
+        ContactEventPose = 1 << 14,
+        NextFree = 1 << 15,
+        ContactDefault = SolveContact | DetectDiscreteContact,
+        TriggerDefault = NotifyTouchFound | NotifyTouchLost | DetectDiscreteContact,
+    }
+
+    [Flags]
+    internal enum PxFilterFlags : ushort
+    {
+        Kill = 1 << 0,
+        Suppress = 1 << 1,
+        Callback = 1 << 2,
+        Notify = Callback,
+    }
+
     internal enum PxFilterObjectType : int
     {
         RigidStatic = 0,
@@ -10430,12 +10631,29 @@ namespace Physx
         Kill = 2,
     }
 
+    [Flags]
+    internal enum PxDataAccessFlags : byte
+    {
+        Readable = 1 << 0,
+        Writable = 1 << 1,
+        Device = 1 << 2,
+    }
+
     internal enum PxMaterialFlag : int
     {
         DisableFriction = 1,
         DisableStrongFriction = 2,
         ImprovedPatchFriction = 4,
         CompliantContact = 8,
+    }
+
+    [Flags]
+    internal enum PxMaterialFlags : ushort
+    {
+        DisableFriction = 1 << 0,
+        DisableStrongFriction = 1 << 1,
+        ImprovedPatchFriction = 1 << 2,
+        CompliantContact = 1 << 3,
     }
 
     internal enum PxCombineMode : int
@@ -10446,6 +10664,33 @@ namespace Physx
         Max = 3,
         NValues = 4,
         Pad32 = 2147483647,
+    }
+
+    [Flags]
+    internal enum PxParticleBufferFlags : uint
+    {
+        UpdatePosition = 1 << 0,
+        UpdateVelocity = 1 << 1,
+        UpdatePhase = 1 << 2,
+        UpdateRestposition = 1 << 3,
+        UpdateCloth = 1 << 5,
+        UpdateRigid = 1 << 6,
+        UpdateDiffuseParam = 1 << 7,
+        UpdateAttachments = 1 << 8,
+        All = UpdatePosition | UpdateVelocity | UpdatePhase | UpdateRestposition | UpdateCloth | UpdateRigid | UpdateDiffuseParam | UpdateAttachments,
+    }
+
+    [Flags]
+    internal enum PxQueryFlags : ushort
+    {
+        Static = 1 << 0,
+        Dynamic = 1 << 1,
+        Prefilter = 1 << 2,
+        Postfilter = 1 << 3,
+        AnyHit = 1 << 4,
+        NoBlock = 1 << 5,
+        DisableHardcodedFilter = 1 << 6,
+        Reserved = 1 << 15,
     }
 
     internal enum PxQueryHitType : int
@@ -10463,6 +10708,17 @@ namespace Physx
         LockAngularX = 8,
         LockAngularY = 16,
         LockAngularZ = 32,
+    }
+
+    [Flags]
+    internal enum PxRigidDynamicLockFlags : byte
+    {
+        LockLinearX = 1 << 0,
+        LockLinearY = 1 << 1,
+        LockLinearZ = 1 << 2,
+        LockAngularX = 1 << 3,
+        LockAngularY = 1 << 4,
+        LockAngularZ = 1 << 5,
     }
 
     internal enum PxPruningStructureType : int
@@ -10533,6 +10789,27 @@ namespace Physx
         MutableFlags = 69633,
     }
 
+    [Flags]
+    internal enum PxSceneFlags : uint
+    {
+        EnableActiveActors = 1 << 0,
+        EnableCcd = 1 << 1,
+        DisableCcdResweep = 1 << 2,
+        EnablePcm = 1 << 6,
+        DisableContactReportBufferResize = 1 << 7,
+        DisableContactCache = 1 << 8,
+        RequireRwLock = 1 << 9,
+        EnableStabilization = 1 << 10,
+        EnableAveragePoint = 1 << 11,
+        ExcludeKinematicsFromActiveActors = 1 << 12,
+        EnableGpuDynamics = 1 << 13,
+        EnableEnhancedDeterminism = 1 << 14,
+        EnableFrictionEveryIteration = 1 << 15,
+        SuppressReadback = 1 << 16,
+        ForceReadback = 1 << 17,
+        MutableFlags = EnableActiveActors | ExcludeKinematicsFromActiveActors | SuppressReadback,
+    }
+
     internal enum PxVisualizationParameter : int
     {
         Scale = 0,
@@ -10600,6 +10877,47 @@ namespace Physx
         TransmitConstraints = 4,
     }
 
+    [Flags]
+    internal enum PxPvdSceneFlags : byte
+    {
+        TransmitContacts = 1 << 0,
+        TransmitScenequeries = 1 << 1,
+        TransmitConstraints = 1 << 2,
+    }
+
+    [Flags]
+    internal enum PxActorTypeFlags : ushort
+    {
+        RigidStatic = 1 << 0,
+        RigidDynamic = 1 << 1,
+    }
+
+    [Flags]
+    internal enum PxContactPairHeaderFlags : ushort
+    {
+        RemovedActor0 = 1 << 0,
+        RemovedActor1 = 1 << 1,
+    }
+
+    [Flags]
+    internal enum PxContactPairFlags : ushort
+    {
+        RemovedShape0 = 1 << 0,
+        RemovedShape1 = 1 << 1,
+        ActorPairHasFirstTouch = 1 << 2,
+        ActorPairLostTouch = 1 << 3,
+        InternalHasImpulses = 1 << 4,
+        InternalContactsAreFlipped = 1 << 5,
+    }
+
+    [Flags]
+    internal enum PxTriggerPairFlags : byte
+    {
+        RemovedShapeTrigger = 1 << 0,
+        RemovedShapeOther = 1 << 1,
+        NextFree = 1 << 2,
+    }
+
     internal enum PxControllerShapeType : int
     {
         Box = 0,
@@ -10613,6 +10931,14 @@ namespace Physx
         PreventClimbingAndForceSliding = 1,
     }
 
+    [Flags]
+    internal enum PxControllerCollisionFlags : byte
+    {
+        CollisionSides = 1 << 0,
+        CollisionUp = 1 << 1,
+        CollisionDown = 1 << 2,
+    }
+
     internal enum PxCapsuleClimbingMode : int
     {
         Easy = 0,
@@ -10620,11 +10946,42 @@ namespace Physx
         Last = 2,
     }
 
+    [Flags]
+    internal enum PxControllerBehaviorFlags : byte
+    {
+        CctCanRideOnObject = 1 << 0,
+        CctSlide = 1 << 1,
+        CctUserDefinedRide = 1 << 2,
+    }
+
+    [Flags]
+    internal enum PxControllerDebugRenderFlags : uint
+    {
+        TemporalBv = 1 << 0,
+        CachedBv = 1 << 1,
+        Obstacles = 1 << 2,
+        All = TemporalBv | CachedBv | Obstacles,
+    }
+
     internal enum PxSdfBitsPerSubgridPixel : int
     {
         E8BitPerPixel = 1,
         E16BitPerPixel = 2,
         E32BitPerPixel = 4,
+    }
+
+    [Flags]
+    internal enum PxConvexFlags : ushort
+    {
+        E16BitIndices = 1 << 0,
+        ComputeConvex = 1 << 1,
+        CheckZeroAreaTriangles = 1 << 2,
+        QuantizeInput = 1 << 3,
+        DisableMeshValidation = 1 << 4,
+        PlaneShifting = 1 << 5,
+        FastInertiaComputation = 1 << 6,
+        GpuCompatible = 1 << 7,
+        ShiftVertices = 1 << 8,
     }
 
     internal enum PxBVH34BuildStrategy : int
@@ -10655,6 +11012,17 @@ namespace Physx
         Failure = 2,
     }
 
+    [Flags]
+    internal enum PxMeshPreprocessingFlags : uint
+    {
+        WeldVertices = 1 << 0,
+        DisableCleanMesh = 1 << 1,
+        DisableActiveEdgesPrecompute = 1 << 2,
+        Force32bitIndices = 1 << 3,
+        EnableVertMapping = 1 << 4,
+        EnableInertia = 1 << 5,
+    }
+
     internal enum PxJointActorIndex : int
     {
         Actor0 = 0,
@@ -10669,9 +11037,23 @@ namespace Physx
         SpringEnabled = 8,
     }
 
+    [Flags]
+    internal enum PxDistanceJointFlags : ushort
+    {
+        MaxDistanceEnabled = 1 << 1,
+        MinDistanceEnabled = 1 << 2,
+        SpringEnabled = 1 << 3,
+    }
+
     internal enum PxPrismaticJointFlag : int
     {
         LimitEnabled = 2,
+    }
+
+    [Flags]
+    internal enum PxPrismaticJointFlags : ushort
+    {
+        LimitEnabled = 1 << 1,
     }
 
     internal enum PxRevoluteJointFlag : int
@@ -10681,9 +11063,23 @@ namespace Physx
         DriveFreespin = 4,
     }
 
+    [Flags]
+    internal enum PxRevoluteJointFlags : ushort
+    {
+        LimitEnabled = 1 << 0,
+        DriveEnabled = 1 << 1,
+        DriveFreespin = 1 << 2,
+    }
+
     internal enum PxSphericalJointFlag : int
     {
         LimitEnabled = 2,
+    }
+
+    [Flags]
+    internal enum PxSphericalJointFlags : ushort
+    {
+        LimitEnabled = 1 << 1,
     }
 
     internal enum PxD6Axis : int
@@ -10715,6 +11111,12 @@ namespace Physx
         Count = 6,
     }
 
+    [Flags]
+    internal enum PxD6JointDriveFlags : uint
+    {
+        Acceleration = 1 << 0,
+    }
+
     internal enum PxFilterOp : int
     {
         PxFilteropAnd = 0,
@@ -10731,6 +11133,15 @@ namespace Physx
         WaitForWork = 0,
         YieldThread = 1,
         YieldProcessor = 2,
+    }
+
+    [Flags]
+    internal enum PxPvdInstrumentationFlags : byte
+    {
+        Debug = 1 << 0,
+        Profile = 1 << 1,
+        Memory = 1 << 2,
+        All = Debug | Profile | Memory,
     }
 
 

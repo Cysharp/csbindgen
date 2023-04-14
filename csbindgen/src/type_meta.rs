@@ -97,6 +97,7 @@ pub struct RustEnum {
     pub enum_name: String,
     pub fields: Vec<(String, Option<String>)>, // name, value
     pub repr: Option<String>,
+    pub is_flags: bool,
 }
 
 impl RustType {

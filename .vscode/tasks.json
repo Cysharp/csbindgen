@@ -11,6 +11,7 @@
 				"kind": "build",
 				"isDefault": true
 			},
+			"args": ["-vv"],
 			"label": "rust: cargo build"
 		}
 	]

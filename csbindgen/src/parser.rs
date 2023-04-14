@@ -1,6 +1,7 @@
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
-use std::collections::HashSet;
-use syn::{ForeignItem, Item, Pat, ReturnType, __private::ToTokens};
+use regex::Regex;
+use std::{collections::HashSet, fmt::format};
+use syn::{ForeignItem, Item, Pat, ReturnType};
 
 enum FnItem {
     ForeignItem(syn::ForeignItemFn),
@@ -207,23 +208,47 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                 enum_name,
                 fields,
                 repr,
+                is_flags: false
             });
-        }
-        else if let Item::Macro(t) = item  {
+        } else if let Item::Macro(t) = item {
             let last_segment = t.mac.path.segments.last().unwrap();
             if last_segment.ident == "bitflags" {
-                // t.mac.tokens
-                //let inner_ast = syn::parse(t.mac.tokens);
-                //let ttt = t.mac.to_token_stream();
+                // bitflags parsing template:
+                // $(#[$outer:meta])*
+                // $vis:vis struct $BitFlags:ident: $T:ty {
+                //     $(
+                //         $(#[$inner:ident $($args:tt)*])*
+                //         const $Flag:ident = $value:expr;
+                //     )*
+                // }
 
-// https://docs.rs/syn/latest/syn/struct.Macro.html
-//let foo = t.mac.parse_body().unwrap();
+                let token_string = t.mac.tokens.to_string();
 
+                let match1 = Regex::new("pub struct ([^ ]+) : ([^ ]+)")
+                    .unwrap()
+                    .captures(token_string.as_str())
+                    .unwrap();
 
+                let enum_name = match1.get(1).unwrap().as_str().to_string();
+                let repr = Some(match1.get(2).unwrap().as_str().to_string());
 
+                let fields = Regex::new("const ([^ ]+) = ([^;]+)[ ]*;")
+                    .unwrap()
+                    .captures_iter(token_string.as_str())
+                    .map(|x| {
+                        (
+                            x.get(1).unwrap().as_str().to_string(),
+                            Some(x.get(2).unwrap().as_str().to_string().replace("Self :: ", "").replace(" . bits", "").trim().to_string()),
+                        )
+                    })
+                    .collect::<Vec<_>>();
 
-
-                //let file_ast = syn::parse_file(t.mac.to_tokens(tokens)
+                result.push(RustEnum {
+                    enum_name,
+                    fields,
+                    repr,
+                    is_flags: true
+                });
             }
         }
     }
