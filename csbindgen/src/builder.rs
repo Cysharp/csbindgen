@@ -13,7 +13,7 @@ pub struct Builder {
 }
 
 pub struct BindgenOptions {
-    pub input_bindgen_file: PathBuf,
+    pub input_bindgen_files: Vec<PathBuf>,
     pub input_extern_files: Vec<PathBuf>,
     pub method_filter: fn(method_name: String) -> bool,
     pub rust_method_type_path: String,
@@ -34,7 +34,7 @@ impl Default for Builder {
     fn default() -> Self {
         Self {
             options: BindgenOptions {
-                input_bindgen_file: PathBuf::new(),
+                input_bindgen_files: vec![],
                 input_extern_files: vec![],
                 method_filter: |x| !x.starts_with('_'),
                 rust_method_type_path: "".to_string(),
@@ -59,9 +59,9 @@ impl Builder {
         Self::default()
     }
 
-    /// Change an input .rs file(such as generated from bindgen) to generate binding.
+    /// Add an input .rs file(such as generated from bindgen) to generate binding.
     pub fn input_bindgen_file<T: AsRef<Path>>(mut self, input_bindgen_file: T) -> Builder {
-        self.options.input_bindgen_file = input_bindgen_file.as_ref().to_path_buf();
+        self.options.input_bindgen_files.push(input_bindgen_file.as_ref().to_path_buf());
         self
     }
 
@@ -166,7 +166,7 @@ impl Builder {
         &self,
         csharp_output_path: P,
     ) -> Result<(), Box<dyn Error>> {
-        if self.has_input_file() {
+        if !self.options.input_bindgen_files.is_empty() {
             let (_, csharp) = generate(GenerateKind::InputBindgen, &self.options)?;
 
             let mut csharp_file = make_file(csharp_output_path.as_ref())?;
@@ -197,7 +197,7 @@ impl Builder {
         rust_output_path: P,
         csharp_output_path: P,
     ) -> Result<(), Box<dyn Error>> {
-        if self.has_input_file() {
+        if !self.options.input_bindgen_files.is_empty() {
             let (rust, csharp) = generate(GenerateKind::InputBindgen, &self.options)?;
 
             if let Some(rust) = rust {

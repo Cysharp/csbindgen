@@ -1,7 +1,9 @@
 use std::{
     collections::HashSet,
-    ffi::{c_char, c_long, c_ulong, c_void, CString},
+    ffi::{c_char, c_long, c_ulong, c_void, CString}, ptr::null_mut,
 };
+
+use physx_sys::*;
 
 #[allow(dead_code)]
 #[allow(non_snake_case)]
@@ -545,4 +547,34 @@ impl ByteBuffer {
 pub struct CallbackTable {
     pub foo: extern "C" fn(),
     pub foobar: extern "C" fn(i: i32) -> i32,
+}
+
+
+fn run_physix(){
+    unsafe {
+        let foundation = physx_create_foundation();
+        let physics = physx_create_physics(foundation);
+    
+        let mut scene_desc = PxSceneDesc_new(PxPhysics_getTolerancesScale(physics));
+        scene_desc.gravity = PxVec3 {
+            x: 0.0,
+            y: -9.81,
+            z: 0.0,
+        };
+
+
+    
+        let dispatcher = phys_PxDefaultCpuDispatcherCreate(
+            1,
+            null_mut(),
+            PxDefaultCpuDispatcherWaitForWorkMode::WaitForWork,
+            0,
+        );
+        scene_desc.cpuDispatcher = dispatcher.cast();
+        scene_desc.filterShader = get_default_simulation_filter_shader();
+    
+        let scene = PxPhysics_createScene_mut(physics, &scene_desc);
+    
+        // Your physics simulation goes here
+    }
 }
