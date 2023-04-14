@@ -215,14 +215,13 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                 // t.mac.tokens
                 //let inner_ast = syn::parse(t.mac.tokens);
                 //let ttt = t.mac.to_token_stream();
-                
-                let input = t.mac.to_tokens(tokens);
-                //let foo = syn::parse(tokens);
-                //let tako = syn::parse2(tokens);
 
-                //t.mac.tokens.to_string()
+// https://docs.rs/syn/latest/syn/struct.Macro.html
+//let foo = t.mac.parse_body().unwrap();
 
-                let ast: syn::DeriveInput = syn::parse_file(content)
+
+
+
 
                 //let file_ast = syn::parse_file(t.mac.to_tokens(tokens)
             }
