@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "P1": {
+      "commandName": "DebugRoslynComponent",
+      "targetProject": "..\\dotnet-sandbox\\CsbindgenDotnetConsoleApp.csproj"
+    }
+  }
+}

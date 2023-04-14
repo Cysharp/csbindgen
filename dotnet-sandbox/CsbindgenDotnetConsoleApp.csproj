@@ -9,19 +9,19 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <!--<Compile Remove="bullet3_bindgen.cs" />
-	  <Compile Remove="lz4_bindgen.cs" />
-	  <Compile Remove="quiche_bindgen.cs" />
-	  <Compile Remove="zstd_bindgen.cs" />-->
-	</ItemGroup>
-
-	<ItemGroup>
 		<None Include="../target/debug/csbindgen_tests.dll">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 		<None Include="../target/debug/csbindgen_tests.pdb">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\GroupedNativeMethodsGenerator\GroupedNativeMethodsGenerator.csproj">
+			<OutputItemType>Analyzer</OutputItemType>
+			<ReferenceOutputAssembly>false</ReferenceOutputAssembly>
+		</ProjectReference>
 	</ItemGroup>
 
 </Project>
