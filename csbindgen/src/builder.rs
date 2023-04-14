@@ -185,8 +185,8 @@ impl Builder {
         Ok(())
     }
 
-    fn has_input_file(&self) -> bool {
-        !self.options.input_bindgen_file.to_string_lossy().is_empty()
+    fn has_input_files(&self) -> bool {
+        !self.options.input_bindgen_files.is_empty()
     }
     fn has_input_externals(&self) -> bool {
         !self.options.input_extern_files.is_empty()
@@ -197,7 +197,7 @@ impl Builder {
         rust_output_path: P,
         csharp_output_path: P,
     ) -> Result<(), Box<dyn Error>> {
-        if !self.options.input_bindgen_files.is_empty() {
+        if self.has_input_files() {
             let (rust, csharp) = generate(GenerateKind::InputBindgen, &self.options)?;
 
             if let Some(rust) = rust {

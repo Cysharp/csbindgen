@@ -1,6 +1,6 @@
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
 use std::collections::HashSet;
-use syn::{ForeignItem, Item, Pat, ReturnType};
+use syn::{ForeignItem, Item, Pat, ReturnType, __private::ToTokens};
 
 enum FnItem {
     ForeignItem(syn::ForeignItemFn),
@@ -208,6 +208,24 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                 fields,
                 repr,
             });
+        }
+        else if let Item::Macro(t) = item  {
+            let last_segment = t.mac.path.segments.last().unwrap();
+            if last_segment.ident == "bitflags" {
+                // t.mac.tokens
+                //let inner_ast = syn::parse(t.mac.tokens);
+                //let ttt = t.mac.to_token_stream();
+                
+                let input = t.mac.to_tokens(tokens);
+                //let foo = syn::parse(tokens);
+                //let tako = syn::parse2(tokens);
+
+                //t.mac.tokens.to_string()
+
+                let ast: syn::DeriveInput = syn::parse_file(content)
+
+                //let file_ast = syn::parse_file(t.mac.to_tokens(tokens)
+            }
         }
     }
 }
