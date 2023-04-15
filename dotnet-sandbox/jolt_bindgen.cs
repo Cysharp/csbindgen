@@ -3,6 +3,7 @@
 // DON'T CHANGE THIS DIRECTLY.
 // </auto-generated>
 #pragma warning disable CS8981
+#pragma warning disable CS8500
 using System;
 using System.Runtime.InteropServices;
 

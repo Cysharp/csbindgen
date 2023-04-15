@@ -13,6 +13,100 @@ namespace Physx
     {
         const string __DllName = "libphys";
 
+        [DllImport(__DllName, EntryPoint = "physx_create_foundation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxFoundation* physx_create_foundation();
+
+        [DllImport(__DllName, EntryPoint = "physx_create_foundation_with_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxFoundation* physx_create_foundation_with_alloc(PxDefaultAllocator* allocator);
+
+        [DllImport(__DllName, EntryPoint = "physx_create_physics", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxPhysics* physx_create_physics(PxFoundation* foundation);
+
+        [DllImport(__DllName, EntryPoint = "get_default_allocator", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxDefaultAllocator* get_default_allocator();
+
+        [DllImport(__DllName, EntryPoint = "get_default_error_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxDefaultErrorCallback* get_default_error_callback();
+
+        /// <summary>Destroy the returned callback object using PxQueryFilterCallback_delete.</summary>
+        [DllImport(__DllName, EntryPoint = "create_raycast_filter_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxQueryFilterCallback* create_raycast_filter_callback(PxRigidActor* actor_to_ignore);
+
+        /// <summary>Destroy the returned callback object using PxQueryFilterCallback_delete.</summary>
+        [DllImport(__DllName, EntryPoint = "create_raycast_filter_callback_func", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxQueryFilterCallback* create_raycast_filter_callback_func(delegate* unmanaged[Cdecl]<PxRigidActor*, PxFilterData*, PxShape*, uint, void*, PxQueryHitType> callback, void* userdata);
+
+        [DllImport(__DllName, EntryPoint = "create_raycast_buffer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxRaycastCallback* create_raycast_buffer();
+
+        [DllImport(__DllName, EntryPoint = "create_sweep_buffer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxSweepCallback* create_sweep_buffer();
+
+        [DllImport(__DllName, EntryPoint = "create_overlap_buffer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxOverlapCallback* create_overlap_buffer();
+
+        [DllImport(__DllName, EntryPoint = "create_raycast_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxRaycastCallback* create_raycast_callback(delegate* unmanaged[Cdecl]<PxRaycastHit*, uint, void*, bool> process_touches_callback, delegate* unmanaged[Cdecl]<void*, void> finalize_query_callback, PxRaycastHit* touches_buffer, uint num_touches, void* userdata);
+
+        [DllImport(__DllName, EntryPoint = "create_sweep_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxSweepCallback* create_sweep_callback(delegate* unmanaged[Cdecl]<PxSweepHit*, uint, void*, bool> process_touches_callback, delegate* unmanaged[Cdecl]<void*, void> finalize_query_callback, PxSweepHit* touches_buffer, uint num_touches, void* userdata);
+
+        [DllImport(__DllName, EntryPoint = "create_overlap_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxOverlapCallback* create_overlap_callback(delegate* unmanaged[Cdecl]<PxOverlapHit*, uint, void*, bool> process_touches_callback, delegate* unmanaged[Cdecl]<void*, void> finalize_query_callback, PxOverlapHit* touches_buffer, uint num_touches, void* userdata);
+
+        [DllImport(__DllName, EntryPoint = "delete_raycast_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void delete_raycast_callback(PxRaycastCallback* callback);
+
+        [DllImport(__DllName, EntryPoint = "delete_sweep_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void delete_sweep_callback(PxSweepCallback* callback);
+
+        [DllImport(__DllName, EntryPoint = "delete_overlap_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void delete_overlap_callback(PxOverlapCallback* callback);
+
+        [DllImport(__DllName, EntryPoint = "create_alloc_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxAllocatorCallback* create_alloc_callback(delegate* unmanaged[Cdecl]<ulong, void*, void*, uint, void*, void*> alloc_callback, delegate* unmanaged[Cdecl]<void*, void*, void> dealloc_callback, void* userdata);
+
+        [DllImport(__DllName, EntryPoint = "create_profiler_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxProfilerCallback* create_profiler_callback(delegate* unmanaged[Cdecl]<sbyte*, bool, ulong, void*, void*> zone_start_callback, delegate* unmanaged[Cdecl]<void*, sbyte*, bool, ulong, void*, void> zone_end_callback, void* userdata);
+
+        [DllImport(__DllName, EntryPoint = "get_alloc_callback_user_data", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* get_alloc_callback_user_data(PxAllocatorCallback* alloc_callback);
+
+        [DllImport(__DllName, EntryPoint = "create_error_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxErrorCallback* create_error_callback(delegate* unmanaged[Cdecl]<PxErrorCode, sbyte*, sbyte*, uint, void*, void> error_callback, void* userdata);
+
+        [DllImport(__DllName, EntryPoint = "create_assert_handler", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxAssertHandler* create_assert_handler(delegate* unmanaged[Cdecl]<sbyte*, sbyte*, uint, bool*, void*, void> error_callback, void* userdata);
+
+        [DllImport(__DllName, EntryPoint = "get_default_simulation_filter_shader", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void* get_default_simulation_filter_shader();
+
+        /// <summary>Create a C++ proxy callback which will forward contact events to `Callback`. The returned pointer must be freed by calling `destroy_contact_callback` when done using.</summary>
+        [DllImport(__DllName, EntryPoint = "create_contact_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxSimulationEventCallback* create_contact_callback(delegate* unmanaged[Cdecl]<void*, PxContactPairHeader*, PxContactPair*, uint, void> callback, void* userdata);
+
+        /// <summary>Deallocates the PxSimulationEventCallback that has previously been created</summary>
+        [DllImport(__DllName, EntryPoint = "destroy_contact_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void destroy_contact_callback(PxSimulationEventCallback* callback);
+
+        /// <summary>New interface to handle simulation events, replacing create_contact_callback.</summary>
+        [DllImport(__DllName, EntryPoint = "create_simulation_event_callbacks", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern PxSimulationEventCallback* create_simulation_event_callbacks(SimulationEventCallbackInfo* callbacks);
+
+        [DllImport(__DllName, EntryPoint = "get_simulation_event_info", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern SimulationEventCallbackInfo* get_simulation_event_info(PxSimulationEventCallback* callback);
+
+        [DllImport(__DllName, EntryPoint = "destroy_simulation_event_callbacks", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void destroy_simulation_event_callbacks(PxSimulationEventCallback* callback);
+
+        /// <summary>Override the default filter shader in the scene with a custom function. If call_default_filter_shader_first is set to true, this will first call the built-in PhysX filter (that matches Physx 2.8 behavior) before your callback.</summary>
+        [DllImport(__DllName, EntryPoint = "enable_custom_filter_shader", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void enable_custom_filter_shader(PxSceneDesc* scene_desc, delegate* unmanaged[Cdecl]<FilterShaderCallbackInfo*, PxFilterFlags> shader, uint call_default_filter_shader_first);
+
+        /// <summary>(hidden) Should only be used in testing etc! This isn't generated as we don't generate op functions.</summary>
+        [DllImport(__DllName, EntryPoint = "PxAssertHandler_opCall_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void PxAssertHandler_opCall_mut(PxAssertHandler* self_, sbyte* expr, sbyte* file, int line, bool* ignore);
+
         [DllImport(__DllName, EntryPoint = "PxAllocatorCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void PxAllocatorCallback_delete(PxAllocatorCallback* self_);
 
@@ -7429,6 +7523,33 @@ namespace Physx
         public static extern PxPvdTransport* phys_PxDefaultPvdFileTransportCreate(byte* name);
 
 
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct SimulationEventCallbackInfo
+    {
+        public delegate* unmanaged[Cdecl]<void*, PxContactPairHeader*, PxContactPair*, uint, void> collision_callback;
+        public void* collision_user_data;
+        public delegate* unmanaged[Cdecl]<void*, PxTriggerPair*, uint, void> trigger_callback;
+        public void* trigger_user_data;
+        public delegate* unmanaged[Cdecl]<void*, PxConstraintInfo*, uint, void> constraint_break_callback;
+        public void* constraint_break_user_data;
+        public delegate* unmanaged[Cdecl]<void*, PxActor**, uint, bool, void> wake_sleep_callback;
+        public void* wake_sleep_user_data;
+        public delegate* unmanaged[Cdecl]<void*, PxRigidBody**, PxTransform*, uint, void> advance_callback;
+        public void* advance_user_data;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct FilterShaderCallbackInfo
+    {
+        public uint attributes0;
+        public uint attributes1;
+        public PxFilterData filterData0;
+        public PxFilterData filterData1;
+        public PxPairFlags* pairFlags;
+        public void* constantBlock;
+        public uint constantBlockSize;
     }
 
     [StructLayout(LayoutKind.Sequential)]
