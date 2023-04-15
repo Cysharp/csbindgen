@@ -9,10 +9,10 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-		<None Include="../target/debug/csbindgen_tests.dll">
+		<None Include="../target/debug/csbindgen_tests.dll" Condition="Exists('../target/debug/csbindgen_tests.dll')">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
-		<None Include="../target/debug/csbindgen_tests.pdb">
+		<None Include="../target/debug/csbindgen_tests.pdb" Condition="Exists('../target/debug/csbindgen_tests.pdb')">
 			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
 		</None>
 	</ItemGroup>
