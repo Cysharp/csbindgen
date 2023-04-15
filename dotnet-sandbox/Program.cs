@@ -3,6 +3,7 @@
 // See https://aka.ms/new-console-template for more information
 //using Csbindgen;
 using CsBindgen;
+using Physx;
 using System.Buffers.Text;
 using System.Reflection;
 using System.Runtime.CompilerServices;
@@ -12,27 +13,18 @@ using System.Text.RegularExpressions;
 
 unsafe
 {
-    // $vis:vis struct $BitFlags:ident: $T:ty {
-    //     $(
-    //         $(#[$inner:ident $($args:tt)*])*
-    //         const $Flag:ident = $value:expr;
-    //     )*
-    // }
+    //var foundation = LibPhysx.physx_create_foundation();
 
-    var foo = """
-[doc = " Flags for [`PxRigidBodyFlag`]"] # [derive (Default)] # [repr (transparent)] pub struct PxRigidBodyFlags : u16 { const Kinematic = 1 << 0 ; const UseKinematicTargetForSceneQueries = 1 << 1; const EnableCcd = 1 << 2 ; const EnableCcdFriction = 1 << 3 ; const EnableSpeculativeCcd = 1 << 4 ; const EnablePoseIntegrationPreview = 1 << 5 ; const EnableCcdMaxContactImpulse = 1 << 6 ; const RetainAccelerations = 1 << 7 ; const ForceKineKineNotifications = 1 << 8 ; const ForceStaticKineNotifications = 1 << 9 ; const EnableGyroscopicForces = 1 << 10 ; }
-"""
-;
+    //foundation->ReleaseMut();
 
 
-    var match1 = Regex.Match(foo, "pub struct ([^ ]+) : ([^ ]+) {");
-
-    var enum_name = match1.Groups[1].Value;
-    var enum_type = match1.Groups[2].Value;
-
-    var match2 = Regex.Matches(foo, "const ([^ ]+) = ([^;]+)[ ]*;");
+    //var vec3 = new PxVec3() { x = 10.0f };
 
 
+
+
+    var ctx = NativeMethods.create_context();
+    ctx->DeleteContext2();
 
 
 

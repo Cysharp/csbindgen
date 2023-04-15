@@ -1,5 +1,8 @@
 ﻿
 
+using System.Diagnostics;
+using System.Runtime.CompilerServices;
+
 namespace Physx
 {
     [GroupedNativeMethodsGenerator.GroupedNativeMethods(removePrefix: "Px")]
@@ -24,6 +27,11 @@ namespace CsBindgen
     public static unsafe partial class LibSqlite3
     {
     }
+
+    [GroupedNativeMethodsGenerator.GroupedNativeMethods()]
+    internal static unsafe partial class NativeMethods
+    {
+    }
 }
 
 
@@ -40,5 +48,18 @@ namespace Jolt
     [GroupedNativeMethodsGenerator.GroupedNativeMethods(removePrefix: "JPH_")]
     internal static unsafe partial class NativeMethods
     {
+    }
+}
+
+namespace CsBindgen
+{
+
+    internal static unsafe class NativeMethodsGroupingExtensions2
+    {
+        [DebuggerStepThrough]
+        public static void DeleteContext2(this ref global::CsBindgen.Context @context)
+        {
+            NativeMethods.delete_context((global::CsBindgen.Context*)Unsafe.AsPointer(ref @context));
+        }
     }
 }

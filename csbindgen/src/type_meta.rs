@@ -51,6 +51,7 @@ impl ExternMethod {
             let ss = x
                 .trim_matches(&['=', ' ', '\"'] as &[_])
                 .replace("\\n", "")
+                .replace("&", "&amp;")
                 .replace("<", "&lt;")
                 .replace(">", "&gt;");
             s.push_str(ss.as_str());

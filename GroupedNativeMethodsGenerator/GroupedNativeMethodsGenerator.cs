@@ -2,6 +2,7 @@
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Xml.Linq;
 
 namespace GroupedNativeMethodsGenerator;
 
@@ -102,11 +103,23 @@ using System.Runtime.InteropServices;
                 var ret = item.ReturnType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
                 var requireRet = ret == "void" ? "" : "return ";
 
+                string? summaryComment = null;
+                var docComment = item.GetDocumentationCommentXml();
+                if (!string.IsNullOrEmpty(docComment))
+                {
+                    var xElem = XElement.Parse(docComment);
+                    summaryComment = "/// " + xElem.Element("summary").ToString();
+                }
+
                 var convertedMethodName = ConvertMethodName(((IPointerTypeSymbol)firstArgument.Type).PointedAtType.Name, item.Name, removePrefix, removeSuffix, removeUntilTypeName, fixMethodName);
                 var pointedType = ((IPointerTypeSymbol)firstArgument.Type).PointedAtType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
                 var parameterPairs = string.Join("", item.Parameters.Skip(1).Select(x => $", {x.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} @{x.Name}"));
                 var parameterNames = string.Join("", item.Parameters.Skip(1).Select(x => $", @{x.Name}"));
 
+                if (summaryComment != null)
+                {
+                    code.AppendLine("        " + summaryComment);
+                }
                 code.AppendLine($"        public static {ret} {convertedMethodName}(this ref {pointedType} @{firstArgument.Name}{parameterPairs})");
                 code.AppendLine("        {");
                 code.AppendLine($"            {requireRet}{libTypeName}.{item.Name}(({pointedType}*)Unsafe.AsPointer(ref @{firstArgument.Name}){parameterNames});");

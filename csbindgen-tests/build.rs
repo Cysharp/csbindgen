@@ -92,29 +92,29 @@ fn main() -> Result<(), Box<dyn Error>> {
         .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs")
         .unwrap();
 
-    // csbindgen::Builder::new()
-    //     .input_bindgen_file("src/zstd.rs")
-    //     .method_filter(|x| x.starts_with("ZSTD_"))
-    //     .rust_file_header("use super::zstd::*;")
-    //     .csharp_class_name("LibZstd")
-    //     .csharp_dll_name("libzsd")
-    //     .generate_to_file("src/zstd_ffi.rs", "../dotnet-sandbox/zstd_bindgen.cs")?;
+    csbindgen::Builder::new()
+        .input_bindgen_file("src/zstd.rs")
+        .method_filter(|x| x.starts_with("ZSTD_"))
+        .rust_file_header("use super::zstd::*;")
+        .csharp_class_name("LibZstd")
+        .csharp_dll_name("libzsd")
+        .generate_to_file("src/zstd_ffi.rs", "../dotnet-sandbox/zstd_bindgen.cs")?;
 
-    // csbindgen::Builder::new()
-    //     .input_bindgen_file("src/quiche.rs")
-    //     .method_filter(|x| x.starts_with("quiche_"))
-    //     .rust_file_header("use super::quiche::*;")
-    //     .csharp_class_name("LibQuiche")
-    //     .csharp_dll_name("libquiche")
-    //     .generate_to_file("src/quiche_ffi.rs", "../dotnet-sandbox/quiche_bindgen.cs")?;
+    csbindgen::Builder::new()
+        .input_bindgen_file("src/quiche.rs")
+        .method_filter(|x| x.starts_with("quiche_"))
+        .rust_file_header("use super::quiche::*;")
+        .csharp_class_name("LibQuiche")
+        .csharp_dll_name("libquiche")
+        .generate_to_file("src/quiche_ffi.rs", "../dotnet-sandbox/quiche_bindgen.cs")?;
 
-    // csbindgen::Builder::new()
-    //     .input_bindgen_file("src/bullet3.rs")
-    //     .method_filter(|x| x.starts_with("b3"))
-    //     .rust_file_header("use super::bullet3::*;")
-    //     .csharp_class_name("LibBullet3")
-    //     .csharp_dll_name("libbullet3")
-    //     .generate_to_file("src/bullet3_ffi.rs", "../dotnet-sandbox/bullet3_bindgen.cs")?;
+    csbindgen::Builder::new()
+        .input_bindgen_file("src/bullet3.rs")
+        .method_filter(|x| x.starts_with("b3"))
+        .rust_file_header("use super::bullet3::*;")
+        .csharp_class_name("LibBullet3")
+        .csharp_dll_name("libbullet3")
+        .generate_to_file("src/bullet3_ffi.rs", "../dotnet-sandbox/bullet3_bindgen.cs")?;
 
 
     csbindgen::Builder::new()

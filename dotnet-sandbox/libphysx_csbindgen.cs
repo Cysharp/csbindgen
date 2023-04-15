@@ -5225,7 +5225,7 @@ namespace Physx
         [return: MarshalAs(UnmanagedType.U1)]
         public static extern bool PxScene_resetFiltering_mut(PxScene* self_, PxActor* actor);
 
-        /// <summary>Marks the object to reset interactions and re-run collision filters for specified shapes in the next simulation step.  This is a specialization of the resetFiltering(PxActor & actor) method and allows to reset interactions for specific shapes of a PxRigidActor.  Do not use this method while the simulation is running.  Sleeping: Does wake up the actor.</summary>
+        /// <summary>Marks the object to reset interactions and re-run collision filters for specified shapes in the next simulation step.  This is a specialization of the resetFiltering(PxActor &amp; actor) method and allows to reset interactions for specific shapes of a PxRigidActor.  Do not use this method while the simulation is running.  Sleeping: Does wake up the actor.</summary>
         [DllImport(__DllName, EntryPoint = "PxScene_resetFiltering_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
         public static extern bool PxScene_resetFiltering_mut_1(PxScene* self_, PxRigidActor* actor, PxShape** shapes, uint shapeCount);
@@ -6382,7 +6382,7 @@ namespace Physx
         [DllImport(__DllName, EntryPoint = "PxSpring_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern PxSpring PxSpring_new(float stiffness_, float damping_);
 
-        /// <summary>Helper function to setup a joint's global frame  This replaces the following functions from previous SDK versions:  void NxJointDesc::setGlobalAnchor(const NxVec3 & wsAnchor); void NxJointDesc::setGlobalAxis(const NxVec3 & wsAxis);  The function sets the joint's localPose using world-space input parameters.</summary>
+        /// <summary>Helper function to setup a joint's global frame  This replaces the following functions from previous SDK versions:  void NxJointDesc::setGlobalAnchor(const NxVec3 &amp; wsAnchor); void NxJointDesc::setGlobalAxis(const NxVec3 &amp; wsAxis);  The function sets the joint's localPose using world-space input parameters.</summary>
         [DllImport(__DllName, EntryPoint = "phys_PxSetJointGlobalFrame", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void phys_PxSetJointGlobalFrame(PxJoint* joint, PxVec3* wsAnchor, PxVec3* wsAxis);
 
@@ -6434,7 +6434,7 @@ namespace Physx
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_getDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern float PxDistanceJoint_getDamping(PxDistanceJoint* self_);
 
-        /// <summary>Set the contact distance for the min & max distance limits.  This is similar to the PxJointLimitParameters::contactDistance parameter for regular limits.  The two most common values are 0 and infinite. Infinite means the internal constraints are always created, resulting in the best simulation quality but slower performance. Zero means the internal constraints are only created when the limits are violated, resulting in best performance but worse simulation quality.  Default 0.0f Range [0, PX_MAX_F32)</summary>
+        /// <summary>Set the contact distance for the min &amp; max distance limits.  This is similar to the PxJointLimitParameters::contactDistance parameter for regular limits.  The two most common values are 0 and infinite. Infinite means the internal constraints are always created, resulting in the best simulation quality but slower performance. Zero means the internal constraints are only created when the limits are violated, resulting in best performance but worse simulation quality.  Default 0.0f Range [0, PX_MAX_F32)</summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_setContactDistance_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void PxDistanceJoint_setContactDistance_mut(PxDistanceJoint* self_, float contactDistance);
 
@@ -6887,11 +6887,11 @@ namespace Physx
         [DllImport(__DllName, EntryPoint = "PxGearJoint_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern byte* PxGearJoint_getConcreteTypeName(PxGearJoint* self_);
 
-        /// <summary>Create a rack & pinion Joint.</summary>
+        /// <summary>Create a rack &amp; pinion Joint.</summary>
         [DllImport(__DllName, EntryPoint = "phys_PxRackAndPinionJointCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern PxRackAndPinionJoint* phys_PxRackAndPinionJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
 
-        /// <summary>Set the hinge & prismatic joints connected by the rack & pinion joint.  The passed hinge joint can be either PxRevoluteJoint, PxD6Joint or PxArticulationJointReducedCoordinate. It cannot be null. The passed prismatic joint can be either PxPrismaticJoint or PxD6Joint. It cannot be null.  Note that these joints are only used to compute the positional error correction term, used to adjust potential drift between jointed actors. The rack & pinion joint can run without calling this function, but in that case some visible overlap may develop over time between the teeth of the rack & pinion meshes.  Calling this function resets the internal positional error correction term.  true if success</summary>
+        /// <summary>Set the hinge &amp; prismatic joints connected by the rack &amp; pinion joint.  The passed hinge joint can be either PxRevoluteJoint, PxD6Joint or PxArticulationJointReducedCoordinate. It cannot be null. The passed prismatic joint can be either PxPrismaticJoint or PxD6Joint. It cannot be null.  Note that these joints are only used to compute the positional error correction term, used to adjust potential drift between jointed actors. The rack &amp; pinion joint can run without calling this function, but in that case some visible overlap may develop over time between the teeth of the rack &amp; pinion meshes.  Calling this function resets the internal positional error correction term.  true if success</summary>
         [DllImport(__DllName, EntryPoint = "PxRackAndPinionJoint_setJoints_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
         public static extern bool PxRackAndPinionJoint_setJoints_mut(PxRackAndPinionJoint* self_, PxBase* hinge, PxBase* prismatic);
@@ -6993,7 +6993,7 @@ namespace Physx
         [DllImport(__DllName, EntryPoint = "PxRigidActorExt_getRigidActorShapeLocalBoundsList", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern PxBounds3* PxRigidActorExt_getRigidActorShapeLocalBoundsList(PxRigidActor* actor, uint* numBounds);
 
-        /// <summary>Convenience function to create a PxBVH object from a PxRigidActor.  The computed PxBVH can then be used in PxScene::addActor() or PxAggregate::addActor(). After adding the actor & BVH to the scene/aggregate, release the PxBVH object by calling PxBVH::release().  The PxBVH for this actor.</summary>
+        /// <summary>Convenience function to create a PxBVH object from a PxRigidActor.  The computed PxBVH can then be used in PxScene::addActor() or PxAggregate::addActor(). After adding the actor &amp; BVH to the scene/aggregate, release the PxBVH object by calling PxBVH::release().  The PxBVH for this actor.</summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActorExt_createBVHFromActor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern PxBVH* PxRigidActorExt_createBVHFromActor(PxPhysics* physics, PxRigidActor* actor);
 
@@ -7345,7 +7345,7 @@ namespace Physx
         [DllImport(__DllName, EntryPoint = "PxCustomSceneQuerySystem_addPruner_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern uint PxCustomSceneQuerySystem_addPruner_mut(PxCustomSceneQuerySystem* self_, PxPruningStructureType primaryType, PxDynamicTreeSecondaryPruner secondaryType, uint preallocated);
 
-        /// <summary>Start custom build-steps for all pruners  This function is used in combination with customBuildstep() and finishCustomBuildstep() to let users take control of the pruners' build-step & commit calls - basically the pruners' update functions. These functions should be used with the PxSceneQueryUpdateMode::eBUILD_DISABLED_COMMIT_DISABLED update mode, otherwise the build-steps will happen automatically in fetchResults. For N pruners it can be more efficient to use these custom build-step functions to perform the updates in parallel:  - call startCustomBuildstep() first (one synchronous call) - for each pruner, call customBuildstep() (asynchronous calls from multiple threads) - once it is done, call finishCustomBuildstep() to finish the update (synchronous call)  The multi-threaded update is more efficient here than what it is in PxScene, because the \"flushShapes()\" call is also multi-threaded (while it is not in PxScene).  Note that users are responsible for locks here, and these calls should not overlap with other SQ calls. In particular one should not add new objects to the SQ system or perform queries while these calls are happening.  The number of pruners in the system.</summary>
+        /// <summary>Start custom build-steps for all pruners  This function is used in combination with customBuildstep() and finishCustomBuildstep() to let users take control of the pruners' build-step &amp; commit calls - basically the pruners' update functions. These functions should be used with the PxSceneQueryUpdateMode::eBUILD_DISABLED_COMMIT_DISABLED update mode, otherwise the build-steps will happen automatically in fetchResults. For N pruners it can be more efficient to use these custom build-step functions to perform the updates in parallel:  - call startCustomBuildstep() first (one synchronous call) - for each pruner, call customBuildstep() (asynchronous calls from multiple threads) - once it is done, call finishCustomBuildstep() to finish the update (synchronous call)  The multi-threaded update is more efficient here than what it is in PxScene, because the \"flushShapes()\" call is also multi-threaded (while it is not in PxScene).  Note that users are responsible for locks here, and these calls should not overlap with other SQ calls. In particular one should not add new objects to the SQ system or perform queries while these calls are happening.  The number of pruners in the system.</summary>
         [DllImport(__DllName, EntryPoint = "PxCustomSceneQuerySystem_startCustomBuildstep_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern uint PxCustomSceneQuerySystem_startCustomBuildstep_mut(PxCustomSceneQuerySystem* self_);
 
