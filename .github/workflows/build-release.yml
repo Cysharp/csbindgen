@@ -12,79 +12,48 @@ on:
         default: false
         type: boolean
 
-jobs:
-  update-packagejson:
-    uses: Cysharp/Actions/.github/workflows/update-packagejson.yaml@main
-    with:
-      file-path: ./src/MemoryPack.Unity/Assets/Plugins/MemoryPack/package.json
-      tag: ${{ inputs.tag }}
-      dry-run: ${{ inputs.dry-run }}
-      push-tag: false
+env:
+  GIT_TAG: ${{ github.event.inputs.tag }}
+  DRY_RUN: ${{ github.event.inputs.dry-run }}
 
-  build-dotnet:
-    needs: [update-packagejson]
+jobs:
+  build-and-push-rust:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
-      - run: echo ${{ needs.update-packagejson.outputs.sha }}
       - uses: actions/checkout@v3
+      - run: cargo build --verbose
+      - run: cargo test update_package_version -- {{ inputs.tag }} --nocapture
+      - name: Push changes
+        uses: ad-m/github-push-action@master
         with:
-          ref: ${{ needs.update-packagejson.outputs.sha }}
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: ${{ github.ref }}
+          tags: false
+      - run: cargo publish --manifest-path csbindgen/Cargo.toml
+        env:
+          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+
+  build-dotnet:
+    needs: [build-and-push-rust]
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v3
       - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
         with:
-          dotnet-version: |
-            6.0.x
-            7.0.x
+          dotnet-version: 7.0.x
       # pack nuget
       - run: dotnet build -c Release -p:Version=${{ inputs.tag }}
-      - run: dotnet test -c Release --no-build
       - run: dotnet pack -c Release --no-build -p:Version=${{ inputs.tag }} -o ./publish
       - uses: actions/upload-artifact@v3
         with:
           name: nuget
           path: ./publish
 
-  build-unity:
-    needs: [update-packagejson]
-    strategy:
-      matrix:
-        unity: ["2021.3.11f1"]
-        include:
-          - unity: 2021.3.11f1
-            license: UNITY_LICENSE_2021
-    runs-on: ubuntu-latest
-    timeout-minutes: 15
-    steps:
-      - run: echo ${{ needs.update-packagejson.outputs.sha }}
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ needs.update-packagejson.outputs.sha }}
-      # Execute scripts: Export Package
-      # /opt/Unity/Editor/Unity -quit -batchmode -nographics -silent-crashes -logFile -projectPath . -executeMethod PackageExporter.Export
-      - name: Export unitypackage
-        uses: game-ci/unity-builder@v2
-        env:
-          UNITY_LICENSE: ${{ secrets[matrix.license] }}
-        with:
-          projectPath: src/MemoryPack.Unity
-          unityVersion: ${{ matrix.unity }}
-          targetPlatform: StandaloneLinux64
-          buildMethod: PackageExporter.Export
-          versioning: None
-      # check meta files
-      - uses: Cysharp/Actions/.github/actions/check-metas@main
-        with:
-          directory: src/MemoryPack.Unity
-      # Store artifacts.
-      - uses: actions/upload-artifact@v3
-        with:
-          name: MemoryPack.${{ inputs.tag }}.unitypackage
-          path: ./src/MemoryPack.Unity/MemoryPack.${{ inputs.tag }}.unitypackage
-          if-no-files-found: error
-
   # release
   create-release:
-    needs: [update-packagejson, build-dotnet, build-unity]
+    needs: [build-and-push-rust, build-dotnet]
     uses: Cysharp/Actions/.github/workflows/create-release.yaml@main
     with:
       dry-run: ${{ inputs.dry-run }}
@@ -92,9 +61,6 @@ jobs:
       tag: ${{ inputs.tag }}
       push-tag: true
       nuget-push: true
-      unitypackage-upload: true
-      unitypackage-name: MemoryPack.${{ inputs.tag }}.unitypackage
-      unitypackage-path: ./MemoryPack.${{ inputs.tag }}.unitypackage/MemoryPack.${{ inputs.tag }}.unitypackage
     secrets: inherit
 
   cleanup:

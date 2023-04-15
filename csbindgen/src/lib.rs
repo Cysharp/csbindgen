@@ -141,7 +141,10 @@ mod tests {
     use std::{
         env,
         fs::{self},
+        io::Write,
     };
+
+    use regex::Regex;
 
     use super::*;
 
@@ -179,9 +182,15 @@ mod tests {
         println!("current_dir: {}", path.display());
 
         path.push("Cargo.toml");
+        let toml = fs::read_to_string(path.clone()).unwrap();
 
-        let toml = fs::read_to_string(path).unwrap();
+        // replace only first-match
+        let regex = Regex::new("version = \".+\"").unwrap();
 
-        println!("current toml: {}", toml);
+        let new_toml = regex.replace(toml.as_str(), format!("version = \"{}\"", args[2]));
+
+        let mut file = fs::File::create(path.clone()).unwrap();
+        file.write_all(new_toml.as_bytes()).unwrap();
+        file.flush().unwrap();
     }
 }
