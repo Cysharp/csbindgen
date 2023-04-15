@@ -8,11 +8,32 @@ using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 using System.Text;
-
-
+using System.Text.RegularExpressions;
 
 unsafe
 {
+    // $vis:vis struct $BitFlags:ident: $T:ty {
+    //     $(
+    //         $(#[$inner:ident $($args:tt)*])*
+    //         const $Flag:ident = $value:expr;
+    //     )*
+    // }
+
+    var foo = """
+[doc = " Flags for [`PxRigidBodyFlag`]"] # [derive (Default)] # [repr (transparent)] pub struct PxRigidBodyFlags : u16 { const Kinematic = 1 << 0 ; const UseKinematicTargetForSceneQueries = 1 << 1; const EnableCcd = 1 << 2 ; const EnableCcdFriction = 1 << 3 ; const EnableSpeculativeCcd = 1 << 4 ; const EnablePoseIntegrationPreview = 1 << 5 ; const EnableCcdMaxContactImpulse = 1 << 6 ; const RetainAccelerations = 1 << 7 ; const ForceKineKineNotifications = 1 << 8 ; const ForceStaticKineNotifications = 1 << 9 ; const EnableGyroscopicForces = 1 << 10 ; }
+"""
+;
+
+
+    var match1 = Regex.Match(foo, "pub struct ([^ ]+) : ([^ ]+) {");
+
+    var enum_name = match1.Groups[1].Value;
+    var enum_type = match1.Groups[2].Value;
+
+    var match2 = Regex.Matches(foo, "const ([^ ]+) = ([^;]+)[ ]*;");
+
+
+
 
 
 
@@ -165,25 +186,25 @@ public static unsafe partial class LibraryImportNativeMethods
     const string __DllName = "csbindgen_tests";
 
 
-    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    [LibraryImport(__DllName, EntryPoint = "my_bool")]
-    [return: MarshalAs(UnmanagedType.U1)]
-    public static partial bool my_bool([MarshalAs(UnmanagedType.U1)] bool x, [MarshalAs(UnmanagedType.U1)] bool y, [MarshalAs(UnmanagedType.U1)] bool z, bool* xr, bool* yr, bool* zr);
+    //[UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    //[LibraryImport(__DllName, EntryPoint = "my_bool")]
+    //[return: MarshalAs(UnmanagedType.U1)]
+    //public static partial bool my_bool([MarshalAs(UnmanagedType.U1)] bool x, [MarshalAs(UnmanagedType.U1)] bool y, [MarshalAs(UnmanagedType.U1)] bool z, bool* xr, bool* yr, bool* zr);
 
 
 
-    //[LibraryImport(__DllName)]
-    //public static partial void foo(Foo f);
+    ////[LibraryImport(__DllName)]
+    ////public static partial void foo(Foo f);
 
 
 
 
-    [LibraryImport(__DllName, EntryPoint = "nullable_callback_test")]
-    public static partial int nullable_callback_test([MarshalAs(UnmanagedType.FunctionPtr)] Func<int, int> cb);
+    //[LibraryImport(__DllName, EntryPoint = "nullable_callback_test")]
+    //public static partial int nullable_callback_test([MarshalAs(UnmanagedType.FunctionPtr)] Func<int, int> cb);
 
-    [LibraryImport(__DllName, EntryPoint = "nullable_callback_test")]
-    [UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
-    public static partial int nullable_callback_test2(delegate* unmanaged[Cdecl]<int, int> cb);
+    //[LibraryImport(__DllName, EntryPoint = "nullable_callback_test")]
+    //[UnmanagedCallConv(CallConvs = new[] { typeof(CallConvCdecl) })]
+    //public static partial int nullable_callback_test2(delegate* unmanaged[Cdecl]<int, int> cb);
 
 }
 

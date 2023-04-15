@@ -1,5 +1,6 @@
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
-use std::collections::HashSet;
+use regex::Regex;
+use std::{collections::HashSet};
 use syn::{ForeignItem, Item, Pat, ReturnType};
 
 enum FnItem {
@@ -155,7 +156,15 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                     fields,
                     is_union: false,
                 });
-            };
+            } else if let syn::Fields::Unnamed(f) = &t.fields {
+                let struct_name = t.ident.to_string();
+                let fields = collect_fields_unnamed(f);
+                result.push(RustStruct {
+                    struct_name,
+                    fields,
+                    is_union: false,
+                });
+            }
         }
     }
 }
@@ -171,6 +180,23 @@ fn collect_fields(fields: &syn::FieldsNamed) -> Vec<FieldMember> {
                 rust_type: t,
             });
         }
+    }
+
+    result
+}
+
+fn collect_fields_unnamed(fields: &syn::FieldsUnnamed) -> Vec<FieldMember> {
+    let mut result = Vec::new();
+
+    let mut i = 0;
+    for field in &fields.unnamed {
+        i += 1;
+        let name = format!("Item{i}");
+        let t = parse_type(&field.ty);
+        result.push(FieldMember {
+            name: name,
+            rust_type: t,
+        });
     }
 
     result
@@ -207,7 +233,57 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                 enum_name,
                 fields,
                 repr,
+                is_flags: false,
             });
+        } else if let Item::Macro(t) = item {
+            let last_segment = t.mac.path.segments.last().unwrap();
+            if last_segment.ident == "bitflags" {
+                // bitflags parsing template:
+                // $(#[$outer:meta])*
+                // $vis:vis struct $BitFlags:ident: $T:ty {
+                //     $(
+                //         $(#[$inner:ident $($args:tt)*])*
+                //         const $Flag:ident = $value:expr;
+                //     )*
+                // }
+
+                let token_string = t.mac.tokens.to_string();
+
+                let match1 = Regex::new("pub struct ([^ ]+) : ([^ ]+)")
+                    .unwrap()
+                    .captures(token_string.as_str())
+                    .unwrap();
+
+                let enum_name = match1.get(1).unwrap().as_str().to_string();
+                let repr = Some(match1.get(2).unwrap().as_str().to_string());
+
+                let fields = Regex::new("const ([^ ]+) = ([^;]+)[ ]*;")
+                    .unwrap()
+                    .captures_iter(token_string.as_str())
+                    .map(|x| {
+                        (
+                            x.get(1).unwrap().as_str().to_string(),
+                            Some(
+                                x.get(2)
+                                    .unwrap()
+                                    .as_str()
+                                    .to_string()
+                                    .replace("Self :: ", "")
+                                    .replace(" . bits", "")
+                                    .trim()
+                                    .to_string(),
+                            ),
+                        )
+                    })
+                    .collect::<Vec<_>>();
+
+                result.push(RustEnum {
+                    enum_name,
+                    fields,
+                    repr,
+                    is_flags: true,
+                });
+            }
         }
     }
 }

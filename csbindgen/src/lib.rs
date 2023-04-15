@@ -25,9 +25,8 @@ pub(crate) fn generate(
     generate_kind: GenerateKind,
     options: &BindgenOptions,
 ) -> Result<(Option<String>, String), Box<dyn Error>> {
-    let temp_input = [options.input_bindgen_file.clone()];
     let (paths, generate_rust) = match generate_kind {
-        GenerateKind::InputBindgen => (temp_input.as_slice(), true),
+        GenerateKind::InputBindgen => (options.input_bindgen_files.as_slice(), true),
         GenerateKind::InputExtern => (options.input_extern_files.as_slice(), false),
     };
 

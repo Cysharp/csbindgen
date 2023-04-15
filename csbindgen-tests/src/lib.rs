@@ -124,6 +124,16 @@ pub extern "C" fn comment_one() {
 pub extern "C" fn long_jpn_comment() {
 }
 
+
+
+#[repr(C)]
+pub struct my_int_vec3(i32,i32,i32);
+
+pub extern "C" fn use_vec3(_v3: my_int_vec3) {
+
+}
+
+
 #[repr(C)]
 pub struct NfcCard {
     pub delegate: unsafe extern "C" fn(ByteArray) -> ByteArray
@@ -455,11 +465,21 @@ fn build_test() {
     // //     println!("lz4 num: {}", num);
     // // }
 
-    csbindgen::Builder::default()
-        .input_extern_file("csbindgen-tests/src/lib.rs")
-        .csharp_class_name("NativeMethods")
-        .csharp_dll_name("csbindgen_tests")
-        .generate_csharp_file("dotnet-sandbox/NativeMethods.cs")
+    // csbindgen::Builder::default()
+    //     .input_extern_file("csbindgen-tests/src/lib.rs")
+    //     .csharp_class_name("NativeMethods")
+    //     .csharp_dll_name("csbindgen_tests")
+    //     .generate_csharp_file("dotnet-sandbox/NativeMethods.cs")
+    //     .unwrap();
+
+    
+    csbindgen::Builder::new()
+        .input_bindgen_file("csbindgen-tests/src/physx/physx_generated.rs")
+        .input_bindgen_file("csbindgen-tests/src/physx/x86_64-pc-windows-msvc/structgen.rs")
+        .csharp_namespace("Physx")
+        .csharp_class_name("LibPhysxd")
+        .csharp_dll_name("libphysx")
+        .generate_csharp_file("dotnet-sandbox/libphysx_csbindgen.cs")
         .unwrap();
 }
 
@@ -546,3 +566,33 @@ pub struct CallbackTable {
     pub foo: extern "C" fn(),
     pub foobar: extern "C" fn(i: i32) -> i32,
 }
+
+
+// fn run_physix(){
+//     unsafe {
+//         let foundation = physx_create_foundation();
+//         let physics = physx_create_physics(foundation);
+    
+//         let mut scene_desc = PxSceneDesc_new(PxPhysics_getTolerancesScale(physics));
+//         scene_desc.gravity = PxVec3 {
+//             x: 0.0,
+//             y: -9.81,
+//             z: 0.0,
+//         };
+
+
+    
+//         let dispatcher = phys_PxDefaultCpuDispatcherCreate(
+//             1,
+//             null_mut(),
+//             PxDefaultCpuDispatcherWaitForWorkMode::WaitForWork,
+//             0,
+//         );
+//         scene_desc.cpuDispatcher = dispatcher.cast();
+//         scene_desc.filterShader = get_default_simulation_filter_shader();
+    
+//         let scene = PxPhysics_createScene_mut(physics, &scene_desc);
+    
+//         // Your physics simulation goes here
+//     }
+// }

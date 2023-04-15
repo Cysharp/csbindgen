@@ -13,7 +13,7 @@ pub struct Builder {
 }
 
 pub struct BindgenOptions {
-    pub input_bindgen_file: PathBuf,
+    pub input_bindgen_files: Vec<PathBuf>,
     pub input_extern_files: Vec<PathBuf>,
     pub method_filter: fn(method_name: String) -> bool,
     pub rust_method_type_path: String,
@@ -22,6 +22,7 @@ pub struct BindgenOptions {
     pub csharp_namespace: String,
     pub csharp_class_name: String,
     pub csharp_dll_name: String,
+    pub csharp_disable_emit_dll_name: bool,
     pub csharp_class_accessibility: String,
     pub csharp_entry_point_prefix: String,
     pub csharp_method_prefix: String,
@@ -34,7 +35,7 @@ impl Default for Builder {
     fn default() -> Self {
         Self {
             options: BindgenOptions {
-                input_bindgen_file: PathBuf::new(),
+                input_bindgen_files: vec![],
                 input_extern_files: vec![],
                 method_filter: |x| !x.starts_with('_'),
                 rust_method_type_path: "".to_string(),
@@ -43,6 +44,7 @@ impl Default for Builder {
                 csharp_namespace: "CsBindgen".to_string(),
                 csharp_class_name: "NativeMethods".to_string(),
                 csharp_dll_name: "".to_string(),
+                csharp_disable_emit_dll_name: false,
                 csharp_entry_point_prefix: "".to_string(),
                 csharp_method_prefix: "".to_string(),
                 csharp_class_accessibility: "internal".to_string(),
@@ -59,9 +61,9 @@ impl Builder {
         Self::default()
     }
 
-    /// Change an input .rs file(such as generated from bindgen) to generate binding.
+    /// Add an input .rs file(such as generated from bindgen) to generate binding.
     pub fn input_bindgen_file<T: AsRef<Path>>(mut self, input_bindgen_file: T) -> Builder {
-        self.options.input_bindgen_file = input_bindgen_file.as_ref().to_path_buf();
+        self.options.input_bindgen_files.push(input_bindgen_file.as_ref().to_path_buf());
         self
     }
 
@@ -121,6 +123,12 @@ impl Builder {
         self
     }
 
+    /// configure don't emit __DllName
+    pub fn csharp_disable_emit_dll_name(mut self, csharp_disable_emit_dll_name: bool) -> Builder {
+        self.options.csharp_disable_emit_dll_name = csharp_disable_emit_dll_name;
+        self
+    }
+
     /// configure C# DllImport EntryPoint prefix,
     /// `[DllImport(, EntryPoint ="{csharp_entry_point_prefix}foo")]`
     pub fn csharp_entry_point_prefix<T: Into<String>>(
@@ -166,7 +174,7 @@ impl Builder {
         &self,
         csharp_output_path: P,
     ) -> Result<(), Box<dyn Error>> {
-        if self.has_input_file() {
+        if !self.options.input_bindgen_files.is_empty() {
             let (_, csharp) = generate(GenerateKind::InputBindgen, &self.options)?;
 
             let mut csharp_file = make_file(csharp_output_path.as_ref())?;
@@ -185,8 +193,8 @@ impl Builder {
         Ok(())
     }
 
-    fn has_input_file(&self) -> bool {
-        !self.options.input_bindgen_file.to_string_lossy().is_empty()
+    fn has_input_files(&self) -> bool {
+        !self.options.input_bindgen_files.is_empty()
     }
     fn has_input_externals(&self) -> bool {
         !self.options.input_extern_files.is_empty()
@@ -197,7 +205,7 @@ impl Builder {
         rust_output_path: P,
         csharp_output_path: P,
     ) -> Result<(), Box<dyn Error>> {
-        if self.has_input_file() {
+        if self.has_input_files() {
             let (rust, csharp) = generate(GenerateKind::InputBindgen, &self.options)?;
 
             if let Some(rust) = rust {

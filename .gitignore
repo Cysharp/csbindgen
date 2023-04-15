@@ -6,6 +6,8 @@
 .vs/
 dotnet-sandbox/obj/
 dotnet-sandbox/bin/
+GroupedNativeMethodsGenerator/obj/
+GroupedNativeMethodsGenerator/bin/
 unity-sandbox/obj/
 unity-sandbox/bin/
 unity-sandbox/Temp/
@@ -13,6 +15,4 @@ unity-sandbox/*.csproj
 unity-sandbox/*.csproj.user
 unity-sandbox/*.sln
 unity-sandbox/Library
-
-
 unity-sandbox/Logs/
