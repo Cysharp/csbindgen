@@ -136,18 +136,52 @@ fn collect_field_types(
     }
 }
 
-#[test]
-fn test() {
-    let path = std::env::current_dir().unwrap();
-    println!("starting dir: {}", path.display()); // csbindgen/csbindgen
+#[cfg(test)]
+mod tests {
+    use std::{
+        env,
+        fs::{self},
+    };
 
-    Builder::new()
-        .input_bindgen_file("csbindgen-tests/src/liblz4.rs")
-        .csharp_class_name("LibLz4")
-        .csharp_dll_name("csbindgen_tests")
-        .generate_to_file(
-            "csbindgen-tests/src/lz4_ffi.rs",
-            "dotnet-sandbox/lz4_bindgen.cs",
-        )
-        .unwrap();
+    use super::*;
+
+    #[test]
+    fn test() {
+        let path = std::env::current_dir().unwrap();
+        println!("starting dir: {}", path.display()); // csbindgen/csbindgen
+
+        Builder::new()
+            .input_bindgen_file("csbindgen-tests/src/liblz4.rs")
+            .csharp_class_name("LibLz4")
+            .csharp_dll_name("csbindgen_tests")
+            .generate_to_file(
+                "csbindgen-tests/src/lz4_ffi.rs",
+                "dotnet-sandbox/lz4_bindgen.cs",
+            )
+            .unwrap();
+    }
+
+    // cargo test update_package_version -- 1.0.0 --nocapture
+    #[test]
+    fn update_package_version() {
+        let args: Vec<String> = env::args().collect();
+        // 0: exe path
+        // 1: update_package_version
+        // 2: 1.0.0
+        // 3: --nocapture
+
+        if args[1] != "update_package_version" {
+            return;
+        }
+
+        println!("version: {}", args[2]);
+        let mut path = std::env::current_dir().unwrap();
+        println!("current_dir: {}", path.display());
+
+        path.push("Cargo.toml");
+
+        let toml = fs::read_to_string(path).unwrap();
+
+        println!("current toml: {}", toml);
+    }
 }
