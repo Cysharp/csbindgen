@@ -129,9 +129,10 @@ fn main() -> Result<(), Box<dyn Error>> {
     csbindgen::Builder::new()
         .input_bindgen_file("src/physx/physx_generated.rs")
         .input_bindgen_file("src/physx/x86_64-pc-windows-msvc/structgen.rs")
+        // .csharp_disable_emit_dll_name(true)
         .csharp_namespace("Physx")
-        .csharp_class_name("LibPhysxd")
-        .csharp_dll_name("libphysx")
+        .csharp_class_name("LibPhysx")
+        .csharp_dll_name("libphys")
         .generate_csharp_file("../dotnet-sandbox/libphysx_csbindgen.cs")?;
 
     Ok(())

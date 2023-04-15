@@ -9,9 +9,9 @@ using System.Runtime.InteropServices;
 
 namespace Physx
 {
-    internal static unsafe partial class LibPhysxd
+    internal static unsafe partial class LibPhysx
     {
-        const string __DllName = "libphysx";
+        const string __DllName = "libphys";
 
         [DllImport(__DllName, EntryPoint = "PxAllocatorCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void PxAllocatorCallback_delete(PxAllocatorCallback* self_);

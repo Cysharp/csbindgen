@@ -3,7 +3,7 @@
 namespace Physx
 {
     [GroupedNativeMethodsGenerator.GroupedNativeMethods(removePrefix: "Px")]
-    internal static unsafe partial class LibPhysxd
+    internal static unsafe partial class LibPhysx
     {
     }
 }

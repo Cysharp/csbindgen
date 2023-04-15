@@ -87,7 +87,7 @@ pub fn emit_csharp(
     let method_prefix = &options.csharp_method_prefix;
     let accessibility = &options.csharp_class_accessibility;
 
-    let dll_name = match options.csharp_if_symbol.as_str() {
+    let mut dll_name = match options.csharp_if_symbol.as_str() {
         "" => format!(
             "        const string __DllName = \"{}\";",
             options.csharp_dll_name
@@ -104,6 +104,9 @@ pub fn emit_csharp(
             )
         }
     };
+    if options.csharp_disable_emit_dll_name {
+        dll_name = "".to_string();
+    }
 
     let mut method_list_string = String::new();
     for item in methods {

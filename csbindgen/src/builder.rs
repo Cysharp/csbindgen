@@ -22,6 +22,7 @@ pub struct BindgenOptions {
     pub csharp_namespace: String,
     pub csharp_class_name: String,
     pub csharp_dll_name: String,
+    pub csharp_disable_emit_dll_name: bool,
     pub csharp_class_accessibility: String,
     pub csharp_entry_point_prefix: String,
     pub csharp_method_prefix: String,
@@ -43,6 +44,7 @@ impl Default for Builder {
                 csharp_namespace: "CsBindgen".to_string(),
                 csharp_class_name: "NativeMethods".to_string(),
                 csharp_dll_name: "".to_string(),
+                csharp_disable_emit_dll_name: false,
                 csharp_entry_point_prefix: "".to_string(),
                 csharp_method_prefix: "".to_string(),
                 csharp_class_accessibility: "internal".to_string(),
@@ -118,6 +120,12 @@ impl Builder {
     /// `[DllImport({csharp_dll_name})]`
     pub fn csharp_dll_name<T: Into<String>>(mut self, csharp_dll_name: T) -> Builder {
         self.options.csharp_dll_name = csharp_dll_name.into();
+        self
+    }
+
+    /// configure don't emit __DllName
+    pub fn csharp_disable_emit_dll_name(mut self, csharp_disable_emit_dll_name: bool) -> Builder {
+        self.options.csharp_disable_emit_dll_name = csharp_disable_emit_dll_name;
         self
     }
 
