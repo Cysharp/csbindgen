@@ -124,6 +124,16 @@ pub extern "C" fn comment_one() {
 pub extern "C" fn long_jpn_comment() {
 }
 
+
+
+#[repr(C)]
+pub struct my_int_vec3(i32,i32,i32);
+
+pub extern "C" fn use_vec3(_v3: my_int_vec3) {
+
+}
+
+
 #[repr(C)]
 pub struct NfcCard {
     pub delegate: unsafe extern "C" fn(ByteArray) -> ByteArray

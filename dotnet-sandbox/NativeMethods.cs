@@ -24,6 +24,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "long_jpn_comment", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void long_jpn_comment();
 
+        [DllImport(__DllName, EntryPoint = "use_vec3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void use_vec3(my_int_vec3 _v3);
+
         [DllImport(__DllName, EntryPoint = "other_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void other_2(NfcCard _hoge);
 
@@ -155,6 +158,14 @@ namespace CsBindgen
         public fixed byte/* UInt128, this length is invalid so must keep pointer and can't edit from C# */ mWorldSpaceContactPointsOn4[65];
         public fixed uint mWorldSpaceContactPointsOn5[65];
         public fixed byte png_name[5];
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct my_int_vec3
+    {
+        public int Item1;
+        public int Item2;
+        public int Item3;
     }
 
     [StructLayout(LayoutKind.Sequential)]

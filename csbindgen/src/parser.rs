@@ -1,6 +1,6 @@
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
 use regex::Regex;
-use std::{collections::HashSet, fmt::format};
+use std::{collections::HashSet};
 use syn::{ForeignItem, Item, Pat, ReturnType};
 
 enum FnItem {
@@ -156,7 +156,15 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                     fields,
                     is_union: false,
                 });
-            };
+            } else if let syn::Fields::Unnamed(f) = &t.fields {
+                let struct_name = t.ident.to_string();
+                let fields = collect_fields_unnamed(f);
+                result.push(RustStruct {
+                    struct_name,
+                    fields,
+                    is_union: false,
+                });
+            }
         }
     }
 }
@@ -172,6 +180,23 @@ fn collect_fields(fields: &syn::FieldsNamed) -> Vec<FieldMember> {
                 rust_type: t,
             });
         }
+    }
+
+    result
+}
+
+fn collect_fields_unnamed(fields: &syn::FieldsUnnamed) -> Vec<FieldMember> {
+    let mut result = Vec::new();
+
+    let mut i = 0;
+    for field in &fields.unnamed {
+        i += 1;
+        let name = format!("Item{i}");
+        let t = parse_type(&field.ty);
+        result.push(FieldMember {
+            name: name,
+            rust_type: t,
+        });
     }
 
     result
@@ -208,7 +233,7 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                 enum_name,
                 fields,
                 repr,
-                is_flags: false
+                is_flags: false,
             });
         } else if let Item::Macro(t) = item {
             let last_segment = t.mac.path.segments.last().unwrap();
@@ -238,7 +263,16 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                     .map(|x| {
                         (
                             x.get(1).unwrap().as_str().to_string(),
-                            Some(x.get(2).unwrap().as_str().to_string().replace("Self :: ", "").replace(" . bits", "").trim().to_string()),
+                            Some(
+                                x.get(2)
+                                    .unwrap()
+                                    .as_str()
+                                    .to_string()
+                                    .replace("Self :: ", "")
+                                    .replace(" . bits", "")
+                                    .trim()
+                                    .to_string(),
+                            ),
                         )
                     })
                     .collect::<Vec<_>>();
@@ -247,7 +281,7 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                     enum_name,
                     fields,
                     repr,
-                    is_flags: true
+                    is_flags: true,
                 });
             }
         }
