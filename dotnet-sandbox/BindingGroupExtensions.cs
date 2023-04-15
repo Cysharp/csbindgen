@@ -1,50 +1,44 @@
-﻿using CsBindgen;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace CsbindgenDotnetConsoleApp
+namespace Physx
 {
-    // Concept for grouping extension
-
-    internal static unsafe class BindingGroupExtensions
+    [GroupedNativeMethodsGenerator.GroupedNativeMethods(removePrefix: "Px")]
+    internal static unsafe partial class LibPhysxd
     {
-        // public static extern bool quiche_conn_set_keylog_path(quiche_conn* conn, byte* path);
-        // public static extern nuint quiche_conn_max_send_udp_payload_size(quiche_conn* conn);
-        // public static extern int quiche_conn_close(quiche_conn* conn, [MarshalAs(UnmanagedType.U1)] bool app, ulong err, byte* reason, nuint reason_len);
+    }
+}
 
-        public static bool SetKeylogPath(this ref quiche_conn conn, byte* path)
-        {
-            return LibQuiche.quiche_conn_set_keylog_path((quiche_conn*)Unsafe.AsPointer(ref conn), path);
-        }
+namespace CsBindgen
+{
+    [GroupedNativeMethodsGenerator.GroupedNativeMethods(removePrefix: "b3")]
+    internal static unsafe partial class LibBullet3
+    {
+    }
 
-        public static nuint MaxSendUdpPayloadSize(this ref quiche_conn conn)
-        {
-            return LibQuiche.quiche_conn_max_send_udp_payload_size((quiche_conn*)Unsafe.AsPointer(ref conn));
-        }
+    [GroupedNativeMethodsGenerator.GroupedNativeMethods(removePrefix: "quiche_")]
+    internal static unsafe partial class LibQuiche
+    {
+    }
 
-        public static int MaxSendUdpPayloadSize(this ref quiche_conn conn, bool app, ulong err, byte* reason, nuint reason_len)
-        {
-            return LibQuiche.quiche_conn_close((quiche_conn*)Unsafe.AsPointer(ref conn), app, err, reason, reason_len);
-        }
-
-        public static bool Hoge(quiche_conn* conn, byte* path)
-        {
-            return conn->SetKeylogPath(path);
-        }
-
+    [GroupedNativeMethodsGenerator.GroupedNativeMethods(removePrefix: "sqlite3_")]
+    public static unsafe partial class LibSqlite3
+    {
     }
 }
 
 
-namespace Physx
+namespace PixivApi.ImageFile
 {
-    [GroupedNativeMethodsGenerator.GroupedNativeMethods]
-    internal static unsafe partial class LibPhysxd
+    [GroupedNativeMethodsGenerator.GroupedNativeMethods(removePrefix: "png_")]
+    internal static unsafe partial class LibPng16
+    {
+    }
+}
+
+namespace Jolt
+{
+    [GroupedNativeMethodsGenerator.GroupedNativeMethods(removePrefix: "JPH_")]
+    internal static unsafe partial class NativeMethods
     {
     }
 }
