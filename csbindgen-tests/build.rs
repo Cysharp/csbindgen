@@ -64,7 +64,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         // .csharp_use_function_pointer(true)
         .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs")
         .unwrap();
-
     
     // csbindgen::Builder::default()
     //     .input_bindgen_file("src/sqlite3.rs")

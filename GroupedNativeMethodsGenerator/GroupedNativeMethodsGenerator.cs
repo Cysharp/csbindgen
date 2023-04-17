@@ -141,13 +141,19 @@ using System.Runtime.InteropServices;
 
     static string ConvertMethodName(string typeName, string methodName, string removePrefix, string removeSuffix, bool removeUntilTypeName, bool fixMethodName)
     {
+        if (!fixMethodName) return methodName;
+
         if (removeUntilTypeName)
         {
             var match = methodName.IndexOf(typeName);
             if (match != -1)
             {
-                methodName = methodName.Substring(match + typeName.Length);
-                goto FINAL;
+                var substringMethodName = methodName.Substring(match + typeName.Length);
+                if (substringMethodName.Trim(' ', '_') != "")
+                {
+                    methodName = substringMethodName;
+                    goto FINAL;
+                }
             }
         }
 
@@ -163,18 +169,15 @@ using System.Runtime.InteropServices;
             methodName = Regex.Replace(methodName, $"{Regex.Escape(removeSuffix)}$", "");
         }
 
-        methodName = methodName.Trim('_');
+        methodName = methodName.Trim('_', ' ');
 
-        if (fixMethodName)
+        var split = methodName.Split('_');
+        methodName = string.Concat(split.Select(x =>
         {
-            var split = methodName.Split('_');
-            methodName = string.Concat(split.Select(x =>
-            {
-                if (x.Length == 0) return x;
-                if (x.Length == 1) return char.ToUpper(x[0]).ToString();
-                return char.ToUpper(x[0]) + x.Substring(1);
-            }));
-        }
+            if (x.Length == 0) return x;
+            if (x.Length == 1) return char.ToUpper(x[0]).ToString();
+            return char.ToUpper(x[0]) + x.Substring(1);
+        }));
 
         return methodName;
     }

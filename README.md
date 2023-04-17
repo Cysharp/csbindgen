@@ -26,7 +26,7 @@ Install on `Cargo.toml` as `build-dependencies` and set up `bindgen::Builder` on
 
 ```toml
 [build-dependencies]
-csbindgen = "1.6.0"
+csbindgen = "1.7.0"
 ```
 
 ### Rust to C#.
@@ -163,6 +163,7 @@ csbindgen::Builder::default()
     .csharp_entry_point_prefix("")          // optional, default: ""
     .csharp_method_prefix("")               // optional, default: ""
     .csharp_use_function_pointer(true)      // optional, default: true
+    .csharp_disable_emit_dll_name(false)    // optional, default: false
     .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal") // optional, default: ""
     .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs")     // required
     .unwrap();
@@ -192,7 +193,9 @@ namespace {csharp_namespace}
 
 `csharp_dll_name_if` is optional. If specified, `#if` allows two DllName to be specified, which is useful if the name must be `__Internal` at iOS build.
 
-`input_extern_file` allows mulitple call, if you need to add dependent struct, use this.
+`csharp_disable_emit_dll_name` is optional, if set to true then don't emit `const string __DllName`. It is useful for generate same class-name from different builder.
+
+`input_extern_file` and `input_bindgen_file` allow mulitple call, if you need to add dependent struct, use this.
 
 ```rust
 csbindgen::Builder::default()
@@ -341,6 +344,56 @@ internal static unsafe partial class NativeMethods
 
 If Unity, configure Platform settings in each native library's inspector.
 
+Grouping Extension Methods
+---
+In an object-oriented style, it is common to create methods that take a pointer to a state (this) as their first argument. With csbindgen, you can group these methods using extension methods by specifying a Source Generator on the C# side.
+
+Install csbindgen from NuGet, and specify [GroupedNativeMethods] for the partial class of the generated extension methods.
+
+> PM> Install-Package [csbindgen](https://www.nuget.org/packages/csbindgen)
+
+```csharp
+// create new file and write same type-name with same namespace
+namespace CsBindgen
+{
+    // append `GroupedNativeMethods` attribute
+    [GroupedNativeMethods()]
+    internal static unsafe partial class NativeMethods
+    {
+    }
+}
+```
+
+```csharp
+// original methods
+[DllImport(__DllName, EntryPoint = "counter_context_insert", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+public static extern void counter_context_insert(counter_context* context, int value);
+
+// generated methods
+public static void Insert(this ref global::CsBindgen.counter_context @context, int @value)
+
+// ----
+
+counter_context* context = NativeMethods.create_counter_context();
+
+// standard style
+NativeMethods.counter_context_insert(context, 10);
+
+// generated style
+context->Insert(10);
+```
+
+`GroupedNativeMethods` has four configuration parameters.
+
+```csharp
+public GroupedNativeMethodsAttribute(
+    string removePrefix = "",
+    string removeSuffix = "",
+    bool removeUntilTypeName = true,
+    bool fixMethodName = true)
+```
+
+`removeUntilTypeName` will remove until find type-name in method-name. For example `foo_counter_context_insert(countext_context* foo)` -> `Insert`. As a result, it is recommended to use a naming convention where the same type name is placed immediately before the verb.
 
 Type Marshalling
 ---
@@ -383,6 +436,7 @@ Rust types will map these C# types.
 | `#[repr(C)]Struct` | `[StructLayout(LayoutKind.Sequential)]Struct` |
 | `#[repr(C)]Union` | `[StructLayout(LayoutKind.Explicit)]Struct` |
 | `#[repr(u*/i*)]Enum` | `Enum` |
+| [bitflags!](https://crates.io/crates/bitflags) | `[Flags]Enum` |
 | `extern "C" fn` | `delegate* unmanaged[Cdecl]<>` or `Func<>/Action<>` |
 | `Option<extern "C" fn>` | `delegate* unmanaged[Cdecl]<>` or `Func<>/Action<>` |
 | `*mut T` | `T*` |
@@ -442,6 +496,62 @@ internal unsafe partial struct MyVector3
 }
 ```
 
+Also supports tuple struct, it will generate `Item*` fields in C#.
+
+```
+#[repr(C)]
+pub struct MyIntVec3(i32, i32, i32);
+```
+
+```csharp
+[StructLayout(LayoutKind.Sequential)]
+internal unsafe partial struct MyIntVec3
+{
+    public int Item1;
+    public int Item2;
+    public int Item3;
+}
+```
+
+It also supports unit struct, but there is no C# struct that is synonymous with Rust's unit struct (0 byte), so it cannot be materialized. Instead of using void*, it is recommended to use typed pointers.
+
+```
+// 0-byte
+#[repr(C)]
+pub struct CounterContext;
+```
+
+```csharp
+// 1-byte
+[StructLayout(LayoutKind.Sequential)]
+internal unsafe partial struct CounterContext
+{
+}
+```
+
+```rust
+// recommend to use as pointer, in C#, holds CounterContext*
+#[no_mangle]
+pub extern "C" fn create_counter_context() -> *mut CounterContext {
+    let ctx = Box::new(InternalCounterContext {
+        set: HashSet::new(),
+    });
+    Box::into_raw(ctx) as *mut CounterContext
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn counter_context_insert(context: *mut CounterContext, value: i32) {
+    let mut counter = Box::from_raw(context as *mut InternalCounterContext);
+    counter.set.insert(value);
+    Box::into_raw(counter);
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn destroy_counter_context(context: *mut CounterContext) {
+    _ = Box::from_raw(context as *mut InternalCounterContext);
+}
+```
+
 ### Union
 
 `Union` will generate `[FieldOffset(0)]` struct.
@@ -489,6 +599,34 @@ internal enum ByteTest : byte
     A = 1,
     B = 2,
     C = 10,
+}
+```
+
+### bitflags Enum
+
+csbindgen supports [bitflags](https://crates.io/crates/bitflags) crate.
+
+```rust
+bitflags! {
+    #[repr(C)]
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+    struct EnumFlags: u32 {
+        const A = 0b00000001;
+        const B = 0b00000010;
+        const C = 0b00000100;
+        const ABC = Self::A.bits() | Self::B.bits() | Self::C.bits();
+    }
+}
+```
+
+```csharp
+[Flags]
+internal enum EnumFlags : uint
+{
+    A = 0b00000001,
+    B = 0b00000010,
+    C = 0b00000100,
+    ABC = A | B | C,
 }
 ```
 
@@ -591,40 +729,42 @@ NativeMethods.delete_context(context);
 
 You can also pass memory allocated by C# to Rust (use `fixed` or `GCHandle.Alloc(Pinned)`). The important thing is that memory allocated in Rust must release in Rust and memory allocated in C# must release in C#.
 
-If you want to pass a non FFI Safe struct, cast it to `*mut c_void`. Then C# will treat it as a `void*`. csbindgen does not support Opaque Type.
+If you want to pass a non FFI Safe struct, cast it to `*mut c_void`. Then C# will treat it as a `void*`. csbindgen does not support Opaque Type. Additionally, by returning a unit struct instead of `c_void`, you can create a typed handler.
 
 ```rust
 #[no_mangle]
-pub extern "C" fn create_counter_context() -> *mut c_void {
-    let ctx = Box::new(CounterContext {
+pub extern "C" fn create_counter_context() -> *mut CounterContext {
+    let ctx = Box::new(InternalCounterContext {
         set: HashSet::new(),
     });
     Box::into_raw(ctx) as *mut c_void
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn insert_counter_context(context: *mut c_void, value: i32) {
-    let mut counter = Box::from_raw(context as *mut CounterContext);
+pub unsafe extern "C" fn insert_counter_context(context: *mut CounterContext, value: i32) {
+    let mut counter = Box::from_raw(context as *mut InternalCounterContext);
     counter.set.insert(value);
     Box::into_raw(counter);
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn delete_counter_context(context: *mut c_void) {
-    let counter = Box::from_raw(context as *mut CounterContext);
+pub unsafe extern "C" fn delete_counter_context(context: *mut CounterContext) {
+    let counter = Box::from_raw(context as *mut InternalCounterContext);
     for value in counter.set.iter() {
         println!("counter value: {}", value)
     }
 }
 
 #[repr(C)]
-pub struct CounterContext {
+pub struct CounterContext;
+
+// no repr(C)
+pub struct InternalCounterContext {
     pub set: HashSet<i32>,
 }
 ```
 
 ```csharp
-// in C#, ctx = void*
 var ctx = NativeMethods.create_counter_context();
     
 NativeMethods.insert_counter_context(ctx, 10);
@@ -632,6 +772,8 @@ NativeMethods.insert_counter_context(ctx, 20);
 
 NativeMethods.delete_counter_context(ctx);
 ```
+
+In this case, recommed to use with [Grouping Extension Methods](#grouping-extension-methods).
 
 If you want to pass null-pointer, in rust side, convert to Option by `as_ref()`.
 

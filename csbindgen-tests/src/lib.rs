@@ -1,6 +1,6 @@
 use std::{
     collections::HashSet,
-    ffi::{c_char, c_long, c_ulong, c_void, CString},
+    ffi::{c_char, c_long, c_ulong, CString},
 };
 
 #[allow(dead_code)]
@@ -66,8 +66,6 @@ mod lz4_ffi;
 //     println!("{:?}", hoge);
 // }
 
-
-
 // #[no_mangle]
 // pub extern "C" fn string_char(str: char) {
 //     println!("{}", str);
@@ -100,43 +98,46 @@ pub struct JPH_ContactManifold {
 pub extern "C" fn JPH_PruneContactPoints(
     ioContactPointsOn1: *mut JPH_ContactPoints,
     ioContactPointsOn2: *mut JPH_ContactManifold,
-)
-{
+) {
     todo!();
 }
 
+use bitflags::bitflags;
+
+bitflags! {
+    #[repr(C)]
+    #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
+    struct EnumFlags: u32 {
+        const A = 0b00000001;
+        const B = 0b00000010;
+        const C = 0b00000100;
+        const ABC = Self::A.bits() | Self::B.bits() | Self::C.bits();
+    }
+}
 
 /// my comment!
 #[no_mangle]
-pub extern "C" fn comment_one() {
-}
-
+extern "C" fn comment_one(_flags: EnumFlags) {}
 
 /// Multiline Comments
 /// # GOTO
 /// Here
 /// Foo
 /// Bar
-/// 
+///
 /// TO
-/// 
+///
 /// ZZZ
-pub extern "C" fn long_jpn_comment() {
-}
-
-
+pub extern "C" fn long_jpn_comment() {}
 
 #[repr(C)]
-pub struct my_int_vec3(i32,i32,i32);
+pub struct my_int_vec3(i32, i32, i32);
 
-pub extern "C" fn use_vec3(_v3: my_int_vec3) {
-
-}
-
+pub extern "C" fn use_vec3(_v3: my_int_vec3) {}
 
 #[repr(C)]
 pub struct NfcCard {
-    pub delegate: unsafe extern "C" fn(ByteArray) -> ByteArray
+    pub delegate: unsafe extern "C" fn(ByteArray) -> ByteArray,
 }
 
 #[no_mangle]
@@ -150,11 +151,11 @@ pub struct ByteArray {
 #[repr(C)]
 #[derive(Debug, Copy, Clone)]
 pub struct event {
-    pub a: i32
-} 
+    pub a: i32,
+}
 
 #[no_mangle]
-pub extern "C" fn event(event: event ) {
+pub extern "C" fn event(event: event) {
     println!("{:?}", event);
 }
 
@@ -283,27 +284,30 @@ pub extern "C" fn my_add(x: i32, y: i32) -> i32 {
     x + y
 }
 
+#[repr(C)]
+pub struct CounterContext;
+
 #[no_mangle]
-pub extern "C" fn create_counter_context() -> *mut c_void {
-    let ctx = Box::new(CounterContext {
+pub extern "C" fn create_counter_context() -> *mut CounterContext {
+    let ctx = Box::new(InternalCounterContext {
         set: HashSet::new(),
     });
-    Box::into_raw(ctx) as *mut c_void
+    Box::into_raw(ctx) as *mut CounterContext
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn insert_counter_context(context: *mut c_void, value: i32) {
-    let mut counter = Box::from_raw(context as *mut CounterContext);
+pub unsafe extern "C" fn counter_context_insert(context: *mut CounterContext, value: i32) {
+    let mut counter = Box::from_raw(context as *mut InternalCounterContext);
     counter.set.insert(value);
     Box::into_raw(counter);
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn delete_counter_context(context: *mut c_void) {
-    let counter = Box::from_raw(context as *mut CounterContext);
-    for value in counter.set.iter() {
-        println!("counter value: {}", value)
-    }
+pub unsafe extern "C" fn destroy_counter_context(context: *mut CounterContext) {
+    _ = Box::from_raw(context as *mut InternalCounterContext);
+    // for value in counter.set.iter() {
+    //     println!("counter value: {}", value)
+    // }
 }
 
 #[no_mangle]
@@ -329,8 +333,8 @@ pub struct MyVector3 {
     pub z: f32,
 }
 
-#[repr(C)]
-pub struct CounterContext {
+ // not repr(C)
+pub struct InternalCounterContext {
     pub set: HashSet<i32>,
 }
 
@@ -472,7 +476,6 @@ fn build_test() {
     //     .generate_csharp_file("dotnet-sandbox/NativeMethods.cs")
     //     .unwrap();
 
-    
     csbindgen::Builder::new()
         .input_bindgen_file("csbindgen-tests/src/physx/physx_generated.rs")
         .input_bindgen_file("csbindgen-tests/src/physx/x86_64-pc-windows-msvc/structgen.rs")
@@ -567,12 +570,11 @@ pub struct CallbackTable {
     pub foobar: extern "C" fn(i: i32) -> i32,
 }
 
-
 // fn run_physix(){
 //     unsafe {
 //         let foundation = physx_create_foundation();
 //         let physics = physx_create_physics(foundation);
-    
+
 //         let mut scene_desc = PxSceneDesc_new(PxPhysics_getTolerancesScale(physics));
 //         scene_desc.gravity = PxVec3 {
 //             x: 0.0,
@@ -580,8 +582,6 @@ pub struct CallbackTable {
 //             z: 0.0,
 //         };
 
-
-    
 //         let dispatcher = phys_PxDefaultCpuDispatcherCreate(
 //             1,
 //             null_mut(),
@@ -590,9 +590,9 @@ pub struct CallbackTable {
 //         );
 //         scene_desc.cpuDispatcher = dispatcher.cast();
 //         scene_desc.filterShader = get_default_simulation_filter_shader();
-    
+
 //         let scene = PxPhysics_createScene_mut(physics, &scene_desc);
-    
+
 //         // Your physics simulation goes here
 //     }
 // }

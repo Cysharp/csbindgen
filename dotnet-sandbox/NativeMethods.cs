@@ -18,7 +18,7 @@ namespace CsBindgen
 
         /// <summary>my comment!</summary>
         [DllImport(__DllName, EntryPoint = "comment_one", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void comment_one();
+        public static extern void comment_one(EnumFlags _flags);
 
         /// <summary>Multiline Comments # GOTO Here Foo Bar  TO  ZZZ</summary>
         [DllImport(__DllName, EntryPoint = "long_jpn_comment", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -91,13 +91,13 @@ namespace CsBindgen
         public static extern int my_add(int x, int y);
 
         [DllImport(__DllName, EntryPoint = "create_counter_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* create_counter_context();
+        public static extern counter_context* create_counter_context();
 
-        [DllImport(__DllName, EntryPoint = "insert_counter_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void insert_counter_context(void* context, int value);
+        [DllImport(__DllName, EntryPoint = "counter_context_insert", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void counter_context_insert(counter_context* context, int value);
 
-        [DllImport(__DllName, EntryPoint = "delete_counter_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void delete_counter_context(void* context);
+        [DllImport(__DllName, EntryPoint = "destroy_counter_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void destroy_counter_context(counter_context* context);
 
         [DllImport(__DllName, EntryPoint = "pass_vector3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void pass_vector3(MyVector3 v3);
@@ -186,6 +186,11 @@ namespace CsBindgen
         public int a;
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct counter_context
+    {
+    }
+
     [StructLayout(LayoutKind.Explicit)]
     internal unsafe partial struct MyUnion
     {
@@ -224,6 +229,15 @@ namespace CsBindgen
         public delegate* unmanaged[Cdecl]<int, int> foobar;
     }
 
+
+    [Flags]
+    internal enum EnumFlags : uint
+    {
+        A = 0b00000001,
+        B = 0b00000010,
+        C = 0b00000100,
+        ABC = A | B | C,
+    }
 
     internal enum IntEnumTest : sbyte
     {

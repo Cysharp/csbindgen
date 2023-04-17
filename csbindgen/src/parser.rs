@@ -1,6 +1,6 @@
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
 use regex::Regex;
-use std::{collections::HashSet};
+use std::collections::HashSet;
 use syn::{ForeignItem, Item, Pat, ReturnType};
 
 enum FnItem {
@@ -164,6 +164,14 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                     fields,
                     is_union: false,
                 });
+            } else if let syn::Fields::Unit = &t.fields {
+                let struct_name = t.ident.to_string();
+                let fields: Vec<FieldMember> = Vec::new();
+                result.push(RustStruct {
+                    struct_name,
+                    fields,
+                    is_union: false,
+                });
             }
         }
     }
@@ -249,7 +257,7 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
 
                 let token_string = t.mac.tokens.to_string();
 
-                let match1 = Regex::new("pub struct ([^ ]+) : ([^ ]+)")
+                let match1 = Regex::new("struct ([^ ]+) : ([^ ]+)")
                     .unwrap()
                     .captures(token_string.as_str())
                     .unwrap();
@@ -269,6 +277,7 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                                     .as_str()
                                     .to_string()
                                     .replace("Self :: ", "")
+                                    .replace(" . bits ()", "")
                                     .replace(" . bits", "")
                                     .trim()
                                     .to_string(),
