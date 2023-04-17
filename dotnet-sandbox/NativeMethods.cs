@@ -91,13 +91,13 @@ namespace CsBindgen
         public static extern int my_add(int x, int y);
 
         [DllImport(__DllName, EntryPoint = "create_counter_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern counter_context* create_counter_context();
+        public static extern CounterContext* create_counter_context();
 
         [DllImport(__DllName, EntryPoint = "counter_context_insert", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void counter_context_insert(counter_context* context, int value);
+        public static extern void counter_context_insert(CounterContext* context, int value);
 
         [DllImport(__DllName, EntryPoint = "destroy_counter_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void destroy_counter_context(counter_context* context);
+        public static extern void destroy_counter_context(CounterContext* context);
 
         [DllImport(__DllName, EntryPoint = "pass_vector3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void pass_vector3(MyVector3 v3);
@@ -187,7 +187,7 @@ namespace CsBindgen
     }
 
     [StructLayout(LayoutKind.Sequential)]
-    internal unsafe partial struct counter_context
+    internal unsafe partial struct CounterContext
     {
     }
 
