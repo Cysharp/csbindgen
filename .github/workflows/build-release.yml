@@ -17,13 +17,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: cargo build --verbose
-      - run: cargo test update_package_version -- {{ inputs.tag }} --nocapture
+      - run: cargo test update_package_version -- ${{ inputs.tag }} --nocapture
+      - run: git commit -m "feat: Update cargo.toml version to ${{ env.GIT_TAG }}" -a
+      - run: git tag ${{ env.GIT_TAG }}
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
-          tags: false
+          tags: true
       - run: cargo publish --manifest-path csbindgen/Cargo.toml
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
