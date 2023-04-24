@@ -23,13 +23,13 @@ unsafe
 
 
 
-    var handler = NativeMethods.create_counter_context();
+    //var handler = NativeMethods.create_counter_context();
 
-    handler->Insert(10);
-    handler->Insert(20);
-    handler->Insert(30);
+    ////handler->Insert(10);
+    ////handler->Insert(20);
+    ////handler->Insert(30);
     
-    NativeMethods.destroy_counter_context(handler);
+    //NativeMethods.destroy_counter_context(handler);
 
     
 
