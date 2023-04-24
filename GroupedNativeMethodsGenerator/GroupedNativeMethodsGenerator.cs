@@ -14,6 +14,8 @@ public partial class GroupedNativeMethodsGenerator : IIncrementalGenerator
         context.RegisterPostInitializationOutput(ctx =>
         {
             ctx.AddSource("GroupedNativeMethodsGenerator.Attribute.cs", """
+using System;
+
 namespace GroupedNativeMethodsGenerator
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = false, Inherited = false)]
