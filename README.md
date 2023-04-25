@@ -25,6 +25,9 @@ Getting Started
 Install on `Cargo.toml` as `build-dependencies` and set up `bindgen::Builder` on `build.rs`.
 
 ```toml
+[lib]
+crate-type = ["cdylib"]
+
 [build-dependencies]
 csbindgen = "1.7.0"
 ```
