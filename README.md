@@ -47,11 +47,13 @@ pub extern "C" fn my_add(x: i32, y: i32) -> i32 {
 Setup csbindgen code to `build.rs`.
 
 ```rust
-csbindgen::Builder::default()
-    .input_extern_file("lib.rs")
-    .csharp_dll_name("nativelib")
-    .generate_csharp_file("../dotnet/NativeMethods.g.cs")
-    .unwrap();
+fn main() {
+    csbindgen::Builder::default()
+        .input_extern_file("lib.rs")
+        .csharp_dll_name("nativelib")
+        .generate_csharp_file("../dotnet/NativeMethods.g.cs")
+        .unwrap();
+}
 ```
 
 It will generate this C# code.
