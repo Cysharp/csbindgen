@@ -8,12 +8,33 @@ enum FnItem {
     Item(syn::ItemFn),
 }
 
+/// build a Vec of all Items, unless the Item is a Item::Mod, then append the Item contents of the vect
+/// Do this recursively
+fn depth_first_module_walk<'a>(ast: &'a Vec<Item>) -> Vec<&'a syn::Item>{
+    let mut unwrapped_items : Vec<&syn::Item> = vec![];
+    for item in ast {
+        match item {
+            Item::Mod(m) => match &m.content {
+                Some((_, items)) => {
+                    unwrapped_items.extend(depth_first_module_walk(items));
+                }
+                _ => {}
+            },
+            _ => {
+                unwrapped_items.push(item);
+            }
+        }
+    }
+    
+    unwrapped_items
+}
+
 pub fn collect_foreign_method(
     ast: &syn::File,
     options: &BindgenOptions,
     list: &mut Vec<ExternMethod>,
 ) {
-    for item in ast.items.iter() {
+    for item in depth_first_module_walk(&ast.items) {
         if let Item::ForeignMod(m) = item {
             for item in m.items.iter() {
                 if let ForeignItem::Fn(m) = item {
@@ -32,7 +53,7 @@ pub fn collect_extern_method(
     options: &BindgenOptions,
     list: &mut Vec<ExternMethod>,
 ) {
-    for item in ast.items.iter() {
+    for item in depth_first_module_walk(&ast.items) {
         if let Item::Fn(m) = item {
             if m.sig.abi.is_some() {
                 // has extern
@@ -112,7 +133,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
 }
 
 pub fn collect_type_alias(ast: &syn::File, result: &mut AliasMap) {
-    for item in ast.items.iter() {
+    for item in depth_first_module_walk(&ast.items) {
         if let Item::Type(t) = item {
             let name = t.ident.to_string();
             let alias = parse_type(&t.ty);
@@ -137,7 +158,7 @@ pub fn collect_type_alias(ast: &syn::File, result: &mut AliasMap) {
 
 pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
     // collect union or struct
-    for item in ast.items.iter() {
+    for item in depth_first_module_walk(&ast.items) {
         if let Item::Union(t) = item {
             let struct_name = t.ident.to_string();
             let fields = collect_fields(&t.fields);
@@ -211,7 +232,7 @@ fn collect_fields_unnamed(fields: &syn::FieldsUnnamed) -> Vec<FieldMember> {
 }
 
 pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
-    for item in ast.items.iter() {
+    for item in depth_first_module_walk(&ast.items) {
         if let Item::Enum(t) = item {
             let mut repr = None;
             for attr in &t.attrs {
