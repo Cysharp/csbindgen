@@ -9,7 +9,8 @@ enum FnItem {
 }
 
 /// build a Vec of all Items, unless the Item is a Item::Mod, then append the Item contents of the vect
-/// Do this recursively
+/// Do this recursively.
+/// This is not memory-efficient, would work better with an iterator, but does not seem performance critical. 
 fn depth_first_module_walk<'a>(ast: &'a Vec<Item>) -> Vec<&'a syn::Item>{
     let mut unwrapped_items : Vec<&syn::Item> = vec![];
     for item in ast {
