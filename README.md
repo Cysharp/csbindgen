@@ -19,6 +19,7 @@ showcase:
 * [quiche_bindgen.cs](https://github.com/Cysharp/csbindgen/blob/47fd97eb379beeb278d7546c6d0b9a404b28fbd1/dotnet-sandbox/quiche_bindgen.cs) : [cloudflare/quiche](https://github.com/cloudflare/quiche) QUIC and HTTP/3 library C# binding
 * [bullet3_bindgen.cs](https://github.com/Cysharp/csbindgen/blob/47fd97eb379beeb278d7546c6d0b9a404b28fbd1/dotnet-sandbox/bullet3_bindgen.cs) : [Bullet Physics SDK](https://github.com/bulletphysics/bullet3) C# binding
 * [sqlite3_bindgen.cs](https://github.com/Cysharp/csbindgen/blob/47fd97eb379beeb278d7546c6d0b9a404b28fbd1/dotnet-sandbox/sqlite3_bindgen.cs) : [SQLite](https://www.sqlite.org/index.html) C# binding
+* [Cysharp/MagicPhysX](https://github.com/Cysharp/MagicPhysX) : .NET PhysX 5 binding to all platforms(win, osx, linux)
 
 Getting Started
 ---
