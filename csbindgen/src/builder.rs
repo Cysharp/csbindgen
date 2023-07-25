@@ -29,6 +29,7 @@ pub struct BindgenOptions {
     pub csharp_if_symbol: String,
     pub csharp_if_dll_name: String,
     pub csharp_use_function_pointer: bool,
+    pub csharp_imported_namespaces: Vec<String>,
 }
 
 impl Default for Builder {
@@ -51,6 +52,7 @@ impl Default for Builder {
                 csharp_if_symbol: "".to_string(),
                 csharp_if_dll_name: "".to_string(),
                 csharp_use_function_pointer: true,
+                csharp_imported_namespaces: vec![],
             },
         }
     }
@@ -63,7 +65,9 @@ impl Builder {
 
     /// Add an input .rs file(such as generated from bindgen) to generate binding.
     pub fn input_bindgen_file<T: AsRef<Path>>(mut self, input_bindgen_file: T) -> Builder {
-        self.options.input_bindgen_files.push(input_bindgen_file.as_ref().to_path_buf());
+        self.options
+            .input_bindgen_files
+            .push(input_bindgen_file.as_ref().to_path_buf());
         self
     }
 
@@ -106,6 +110,15 @@ impl Builder {
     /// "namespace {csharp_namespace}"
     pub fn csharp_namespace<T: Into<String>>(mut self, csharp_namespace: T) -> Builder {
         self.options.csharp_namespace = csharp_namespace.into();
+        self
+    }
+
+    /// configure C# extra import namespace,
+    /// "using {csharp_namespace};"
+    pub fn csharp_import_namespace<T: Into<String>>(mut self, csharp_namespace: T) -> Builder {
+        self.options
+            .csharp_imported_namespaces
+            .push(csharp_namespace.into());
         self
     }
 
