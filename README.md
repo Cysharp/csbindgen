@@ -171,6 +171,7 @@ csbindgen::Builder::default()
     .csharp_method_prefix("")               // optional, default: ""
     .csharp_use_function_pointer(true)      // optional, default: true
     .csharp_disable_emit_dll_name(false)    // optional, default: false
+    .csharp_imported_namespaces("MyLib")     // optional, default: empty
     .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal") // optional, default: ""
     .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs")     // required
     .unwrap();
@@ -181,6 +182,7 @@ csbindgen::Builder::default()
 ```csharp
 using System;
 using System.Runtime.InteropServices;
+using {csharp_imported_namespaces};
 
 namespace {csharp_namespace}
 {
@@ -210,6 +212,8 @@ csbindgen::Builder::default()
     .input_extern_file("src/struct_modules.rs")
     .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs");
 ```
+
+also `csharp_imported_namespaces` can call multiple times.
 
 ### Unity Callback
 
@@ -262,6 +266,7 @@ csbindgen::Builder::default()
     .csharp_entry_point_prefix("csbindgen_")      // required, you must set same as rust_method_prefix
     .csharp_method_prefix("")                     // optional, default: ""
     .csharp_use_function_pointer(true)            // optional, default: true
+    .csharp_imported_namespaces("MyLib")     // optional, default: empty
     .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal") // optional, default: ""
     .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs") // required
     .unwrap();
