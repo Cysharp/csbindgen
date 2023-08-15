@@ -31,7 +31,7 @@ Install on `Cargo.toml` as `build-dependencies` and set up `bindgen::Builder` on
 crate-type = ["cdylib"]
 
 [build-dependencies]
-csbindgen = "1.7.0"
+csbindgen = "1.7.4"
 ```
 
 ### Rust to C#.
