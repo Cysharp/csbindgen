@@ -171,7 +171,8 @@ csbindgen::Builder::default()
     .csharp_method_prefix("")               // optional, default: ""
     .csharp_use_function_pointer(true)      // optional, default: true
     .csharp_disable_emit_dll_name(false)    // optional, default: false
-    .csharp_imported_namespaces("MyLib")     // optional, default: empty
+    .csharp_imported_namespaces("MyLib")    // optional, default: empty
+    .csharp_generate_const (false)          // optional, default: false
     .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal") // optional, default: ""
     .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs")     // required
     .unwrap();
@@ -195,6 +196,8 @@ namespace {csharp_namespace}
 #endif
     }
 
+    {csharp_generate_const}
+
     [DllImport(__DllName, EntryPoint = "{csharp_entry_point_prefix}LZ4_versionNumber", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
     public static extern int {csharp_method_prefix}LZ4_versionNumber();
 }
@@ -203,6 +206,8 @@ namespace {csharp_namespace}
 `csharp_dll_name_if` is optional. If specified, `#if` allows two DllName to be specified, which is useful if the name must be `__Internal` at iOS build.
 
 `csharp_disable_emit_dll_name` is optional, if set to true then don't emit `const string __DllName`. It is useful for generate same class-name from different builder.
+
+`csharp_generate_const` is optional, if set to true then generate C# `const` field from Rust `const`.
 
 `input_extern_file` and `input_bindgen_file` allow mulitple call, if you need to add dependent struct, use this.
 
@@ -266,7 +271,8 @@ csbindgen::Builder::default()
     .csharp_entry_point_prefix("csbindgen_")      // required, you must set same as rust_method_prefix
     .csharp_method_prefix("")                     // optional, default: ""
     .csharp_use_function_pointer(true)            // optional, default: true
-    .csharp_imported_namespaces("MyLib")     // optional, default: empty
+    .csharp_imported_namespaces("MyLib")          // optional, default: empty
+    .csharp_generate_const (false)                // optional, default: false
     .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal") // optional, default: ""
     .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs") // required
     .unwrap();

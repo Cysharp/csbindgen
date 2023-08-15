@@ -14,6 +14,8 @@ namespace CsBindgen
     {
         const string __DllName = "csbindgen_tests_nested_module";
 
+
+
         [DllImport(__DllName, EntryPoint = "triple_input", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int triple_input(NumberStruct input);
 
@@ -39,7 +41,6 @@ namespace CsBindgen
         Two,
         Three,
     }
-
 
 
 }

@@ -14,6 +14,8 @@ namespace Physx
     {
         const string __DllName = "libphys";
 
+
+
         [DllImport(__DllName, EntryPoint = "physx_create_foundation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern PxFoundation* physx_create_foundation();
 
@@ -11266,7 +11268,6 @@ namespace Physx
         Memory = 1 << 2,
         All = Debug | Profile | Memory,
     }
-
 
 
 }

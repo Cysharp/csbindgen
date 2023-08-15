@@ -293,7 +293,7 @@ pub fn emit_csharp(
 
     let mut const_string = String::new();
     for item in consts {
-        let type_name = item.rust_type.to_csharp_string(
+        let mut type_name = item.rust_type.to_csharp_string(
             options,
             aliases,
             false,
@@ -301,15 +301,41 @@ pub fn emit_csharp(
             &"".to_string(),
         );
 
-        const_string.push_str(  
-            format!(
-                "        public {} {} = {};",
-                type_name,
-                escape_name(item.const_name.as_str()),
-                item.value
-            )
-            .as_str(),
-        );
+        // special case for string, char, ByteStr
+        if item.value.starts_with("\"") {
+            type_name = "string".to_string();
+        } else if item.value.starts_with("\'") {
+            type_name = "char".to_string();
+        }
+
+        if item.value.starts_with("[") {
+            const_string.push_str(
+                format!(
+                    "        {} static ReadOnlySpan<byte> {} => new byte[] {};\n",
+                    accessibility,
+                    escape_name(item.const_name.as_str()),
+                    item.value.replace("[", "{ ").replace("]", " }")
+                )
+                .as_str(),
+            );
+        } else {
+            let value = if type_name == "float" {
+                format!("{}f", item.value)
+            }else {
+                item.value.to_string()
+            };
+
+            const_string.push_str(
+                format!(
+                    "        {} const {} {} = {};\n",
+                    accessibility,
+                    type_name,
+                    escape_name(item.const_name.as_str()),
+                    value
+                )
+                .as_str(),
+            );
+        }
     }
 
     let mut imported_namespaces = String::new();
@@ -334,12 +360,13 @@ namespace {namespace}
     {{
 {dll_name}
 
+{const_string}
+
 {method_list_string}
     }}
 
 {structs_string}
 {enum_string}
-{const_string}
 }}
     "
     );

@@ -242,13 +242,13 @@ pub fn collect_const(ast: &syn::File, result: &mut Vec<RustConst>) {
             if let syn::Expr::Lit(lit_expr) = &*ct.expr {
                 let value = match &lit_expr.lit {
                     syn::Lit::Str(s) => {
-                        format!("{}", s.value())
+                        format!("\"{}\"", s.value())
                     }
                     syn::Lit::ByteStr(bs) => {
                         format!("{:?}", bs.value())
                     }
                     syn::Lit::Byte(b) => {
-                        format!("{:?}", b.value())
+                        format!("{}", b.value())
                     }
                     syn::Lit::Char(c) => {
                         format!("'{}'", c.value())
@@ -257,7 +257,7 @@ pub fn collect_const(ast: &syn::File, result: &mut Vec<RustConst>) {
                         format!("{}", i.base10_parse::<i64>().unwrap())
                     }
                     syn::Lit::Float(f) => {
-                        format!("{}", f.base10_parse::<f64>().unwrap())
+                       format!("{}", f.base10_parse::<f64>().unwrap())
                     }
                     syn::Lit::Bool(b) => {
                         format!("{}", b.value)

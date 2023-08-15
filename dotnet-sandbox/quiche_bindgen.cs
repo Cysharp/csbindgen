@@ -14,6 +14,8 @@ namespace CsBindgen
     {
         const string __DllName = "libquiche";
 
+
+
         [DllImport(__DllName, EntryPoint = "quiche_version", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern byte* quiche_version();
 
@@ -556,7 +558,6 @@ namespace CsBindgen
         public byte urgency;
         [MarshalAs(UnmanagedType.U1)] public bool incremental;
     }
-
 
 
 

@@ -14,6 +14,18 @@ namespace CsBindgen
     {
         const string __DllName = "csbindgen_tests";
 
+        internal const int FOO = 10;
+        internal const float BAR = 120.432f;
+        internal const float BAR32 = 120.431f;
+        internal const double BAR64 = 120.432;
+        internal const string STR = "aiueo3";
+        internal static ReadOnlySpan<byte> BSTR => new byte[] { 107, 97, 107, 105, 107, 117, 107, 101, 107, 111 };
+        internal const byte CBYTE = 65;
+        internal const char CCHAR = 'あ';
+        internal const bool BOOLCONST_T = true;
+        internal const bool BOOLCONST_F = false;
+
+
         [DllImport(__DllName, EntryPoint = "JPH_PruneContactPoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void JPH_PruneContactPoints(void/* UInt128[] */* ioContactPointsOn1, JPH_ContactManifold* ioContactPointsOn2);
 
@@ -246,7 +258,6 @@ namespace CsBindgen
         B = 2,
         C = 10,
     }
-
 
 
 }

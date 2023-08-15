@@ -14,6 +14,8 @@ namespace PixivApi.ImageFile
     {
         const string __DllName = "libpng16";
 
+
+
         [DllImport(__DllName, EntryPoint = "fgetwc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern ushort fgetwc(_iobuf* _Stream);
 
@@ -1085,7 +1087,6 @@ namespace PixivApi.ImageFile
         public uint warning_or_error;
         public fixed byte message[64];
     }
-
 
 
 

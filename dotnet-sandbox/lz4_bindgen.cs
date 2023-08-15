@@ -19,6 +19,79 @@ namespace CsBindgen
 #endif
         
 
+        public const uint LZ4_FREESTANDING = 0;
+        public const uint LZ4_VERSION_MAJOR = 1;
+        public const uint LZ4_VERSION_MINOR = 9;
+        public const uint LZ4_VERSION_RELEASE = 4;
+        public const uint LZ4_VERSION_NUMBER = 10904;
+        public const uint LZ4_MEMORY_USAGE_MIN = 10;
+        public const uint LZ4_MEMORY_USAGE_DEFAULT = 14;
+        public const uint LZ4_MEMORY_USAGE_MAX = 20;
+        public const uint LZ4_MEMORY_USAGE = 14;
+        public const uint LZ4_MAX_INPUT_SIZE = 2113929216;
+        public const uint LZ4_HASHLOG = 12;
+        public const uint LZ4_HASHTABLESIZE = 16384;
+        public const uint LZ4_HASH_SIZE_U32 = 4096;
+        public const uint _VCRT_COMPILER_PREPROCESSOR = 1;
+        public const uint _SAL_VERSION = 20;
+        public const uint __SAL_H_VERSION = 180000000;
+        public const uint _USE_DECLSPECS_FOR_SAL = 0;
+        public const uint _USE_ATTRIBUTES_FOR_SAL = 0;
+        public const uint _CRT_PACKING = 8;
+        public const uint _HAS_EXCEPTIONS = 1;
+        public const uint _STL_LANG = 0;
+        public const uint _HAS_CXX17 = 0;
+        public const uint _HAS_CXX20 = 0;
+        public const uint _HAS_CXX23 = 0;
+        public const uint _HAS_NODISCARD = 0;
+        public const uint WCHAR_MIN = 0;
+        public const uint WCHAR_MAX = 65535;
+        public const uint WINT_MIN = 0;
+        public const uint WINT_MAX = 65535;
+        public const uint LZ4_STREAM_MINSIZE = 16416;
+        public const uint LZ4_STREAMDECODE_MINSIZE = 32;
+        public const uint LZ4HC_CLEVEL_MIN = 3;
+        public const uint LZ4HC_CLEVEL_DEFAULT = 9;
+        public const uint LZ4HC_CLEVEL_OPT_MIN = 10;
+        public const uint LZ4HC_CLEVEL_MAX = 12;
+        public const uint LZ4HC_DICTIONARY_LOGSIZE = 16;
+        public const uint LZ4HC_MAXD = 65536;
+        public const uint LZ4HC_MAXD_MASK = 65535;
+        public const uint LZ4HC_HASH_LOG = 15;
+        public const uint LZ4HC_HASHTABLESIZE = 32768;
+        public const uint LZ4HC_HASH_MASK = 32767;
+        public const uint LZ4_STREAMHC_MINSIZE = 262200;
+        public const uint LZ4F_VERSION = 100;
+        public const uint LZ4F_HEADER_SIZE_MIN = 7;
+        public const uint LZ4F_HEADER_SIZE_MAX = 19;
+        public const uint LZ4F_BLOCK_HEADER_SIZE = 4;
+        public const uint LZ4F_BLOCK_CHECKSUM_SIZE = 4;
+        public const uint LZ4F_CONTENT_CHECKSUM_SIZE = 4;
+        public const uint LZ4F_MAGICNUMBER = 407708164;
+        public const uint LZ4F_MAGIC_SKIPPABLE_START = 407710288;
+        public const uint LZ4F_MIN_SIZE_TO_KNOW_HEADER_LENGTH = 5;
+        public const uint XXHASH_H_5627135585666179 = 1;
+        public const uint XXH_VERSION_MAJOR = 0;
+        public const uint XXH_VERSION_MINOR = 6;
+        public const uint XXH_VERSION_RELEASE = 5;
+        public const uint XXH_VERSION_NUMBER = 605;
+        public const int LZ4F_blockSizeID_t_LZ4F_default = 0;
+        public const int LZ4F_blockSizeID_t_LZ4F_max64KB = 4;
+        public const int LZ4F_blockSizeID_t_LZ4F_max256KB = 5;
+        public const int LZ4F_blockSizeID_t_LZ4F_max1MB = 6;
+        public const int LZ4F_blockSizeID_t_LZ4F_max4MB = 7;
+        public const int LZ4F_blockMode_t_LZ4F_blockLinked = 0;
+        public const int LZ4F_blockMode_t_LZ4F_blockIndependent = 1;
+        public const int LZ4F_contentChecksum_t_LZ4F_noContentChecksum = 0;
+        public const int LZ4F_contentChecksum_t_LZ4F_contentChecksumEnabled = 1;
+        public const int LZ4F_blockChecksum_t_LZ4F_noBlockChecksum = 0;
+        public const int LZ4F_blockChecksum_t_LZ4F_blockChecksumEnabled = 1;
+        public const int LZ4F_frameType_t_LZ4F_frame = 0;
+        public const int LZ4F_frameType_t_LZ4F_skippableFrame = 1;
+        public const int XXH_errorcode_XXH_OK = 0;
+        public const int XXH_errorcode_XXH_ERROR = 1;
+
+
         [DllImport(__DllName, EntryPoint = "csbindgen_LZ4_versionNumber", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int LZ4_versionNumber();
 
@@ -448,7 +521,6 @@ namespace CsBindgen
         public uint reserved1;
         public uint reserved0;
     }
-
 
 
 

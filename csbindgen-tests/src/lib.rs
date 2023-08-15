@@ -115,6 +115,18 @@ bitflags! {
     }
 }
 
+pub const FOO: i32 = 10;
+pub const BAR: f32 = 120.432;
+pub const BAR32: f32 = 120.431;
+pub const BAR64: f64 = 120.432;
+pub const STR: &str = "aiueo3";
+pub const BSTR: &[u8] = b"kakikukeko"; // currently not supported.
+pub const CBYTE: u8 = b'A';
+pub const CCHAR: char = 'あ';
+pub const BOOLCONST_T: bool = true;
+pub const BOOLCONST_F: bool = false;
+
+
 /// my comment!
 #[no_mangle]
 extern "C" fn comment_one(_flags: EnumFlags) {}
