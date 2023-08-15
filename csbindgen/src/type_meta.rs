@@ -101,6 +101,13 @@ pub struct RustEnum {
     pub is_flags: bool,
 }
 
+#[derive(Clone, Debug)]
+pub struct RustConst {
+    pub const_name: String,
+    pub rust_type: RustType,
+    pub value: String,
+}
+
 impl RustType {
     pub fn to_rust_string(&self, type_path: &str) -> String {
         let mut sb = String::new();

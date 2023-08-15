@@ -10,9 +10,9 @@ enum FnItem {
 
 /// build a Vec of all Items, unless the Item is a Item::Mod, then append the Item contents of the vect
 /// Do this recursively.
-/// This is not memory-efficient, would work better with an iterator, but does not seem performance critical. 
-fn depth_first_module_walk<'a>(ast: &'a Vec<Item>) -> Vec<&'a syn::Item>{
-    let mut unwrapped_items : Vec<&syn::Item> = vec![];
+/// This is not memory-efficient, would work better with an iterator, but does not seem performance critical.
+fn depth_first_module_walk<'a>(ast: &'a Vec<Item>) -> Vec<&'a syn::Item> {
+    let mut unwrapped_items: Vec<&syn::Item> = vec![];
     for item in ast {
         match item {
             Item::Mod(m) => match &m.content {
@@ -26,7 +26,7 @@ fn depth_first_module_walk<'a>(ast: &'a Vec<Item>) -> Vec<&'a syn::Item>{
             }
         }
     }
-    
+
     unwrapped_items
 }
 
@@ -230,6 +230,49 @@ fn collect_fields_unnamed(fields: &syn::FieldsUnnamed) -> Vec<FieldMember> {
     }
 
     result
+}
+
+pub fn collect_const(ast: &syn::File, result: &mut Vec<RustConst>) {
+    for item in depth_first_module_walk(&ast.items) {
+        if let Item::Const(ct) = item {
+            // pub const Ident: ty = expr
+            let const_name = ct.ident.to_string();
+            let t = parse_type(&ct.ty);
+
+            if let syn::Expr::Lit(lit_expr) = &*ct.expr {
+                let value = match &lit_expr.lit {
+                    syn::Lit::Str(s) => {
+                        format!("{}", s.value())
+                    }
+                    syn::Lit::ByteStr(bs) => {
+                        format!("{:?}", bs.value())
+                    }
+                    syn::Lit::Byte(b) => {
+                        format!("{:?}", b.value())
+                    }
+                    syn::Lit::Char(c) => {
+                        format!("'{}'", c.value())
+                    }
+                    syn::Lit::Int(i) => {
+                        format!("{}", i.base10_parse::<i64>().unwrap())
+                    }
+                    syn::Lit::Float(f) => {
+                        format!("{}", f.base10_parse::<f64>().unwrap())
+                    }
+                    syn::Lit::Bool(b) => {
+                        format!("{}", b.value)
+                    }
+                    _ => format!(""),
+                };
+
+                result.push(RustConst {
+                    const_name: const_name,
+                    rust_type: t,
+                    value: value,
+                });
+            }
+        }
+    }
 }
 
 pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {

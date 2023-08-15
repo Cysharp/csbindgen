@@ -14,7 +14,7 @@ use emitter::*;
 use field_map::FieldMap;
 use parser::*;
 use std::{collections::HashSet, error::Error};
-use type_meta::{ExternMethod, RustEnum, RustStruct, RustType};
+use type_meta::{ExternMethod, RustEnum, RustStruct, RustType, RustConst};
 
 enum GenerateKind {
     InputBindgen,
@@ -34,6 +34,7 @@ pub(crate) fn generate(
     let mut aliases = AliasMap::new();
     let mut structs: Vec<RustStruct> = vec![];
     let mut enums: Vec<RustEnum> = vec![];
+    let mut consts: Vec<RustConst> = vec![];
 
     for path in paths {
         let file_content = std::fs::read_to_string(path)
@@ -47,6 +48,10 @@ pub(crate) fn generate(
         collect_type_alias(&file_ast, &mut aliases);
         collect_struct(&file_ast, &mut structs);
         collect_enum(&file_ast, &mut enums);
+
+        if options.csharp_generate_const {
+            collect_const(&file_ast, &mut consts);
+        }
     }
 
     // collect using_types
@@ -82,7 +87,7 @@ pub(crate) fn generate(
     } else {
         None
     };
-    let csharp = emit_csharp(&methods, &aliases, &structs, &enums, options);
+    let csharp = emit_csharp(&methods, &aliases, &structs, &enums, &consts, options);
 
     Ok((rust, csharp))
 }

@@ -8,7 +8,7 @@ use super::quiche::*;
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_version(
-    
+
 ) -> *const c_char
 {
     quiche_version(
@@ -19,7 +19,7 @@ pub unsafe extern "C" fn csbindgen_quiche_version(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_enable_debug_logging(
     cb: Option<unsafe extern "C" fn(line: *const c_char, argp: *mut c_void)>,
-    argp: *mut c_void    
+    argp: *mut c_void
 ) -> c_int
 {
     quiche_enable_debug_logging(
@@ -30,7 +30,7 @@ pub unsafe extern "C" fn csbindgen_quiche_enable_debug_logging(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_new(
-    version: u32    
+    version: u32
 ) -> *mut quiche_config
 {
     quiche_config_new(
@@ -41,7 +41,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_new(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_load_cert_chain_from_pem_file(
     config: *mut quiche_config,
-    path: *const c_char    
+    path: *const c_char
 ) -> c_int
 {
     quiche_config_load_cert_chain_from_pem_file(
@@ -53,7 +53,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_load_cert_chain_from_pem_file(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_load_priv_key_from_pem_file(
     config: *mut quiche_config,
-    path: *const c_char    
+    path: *const c_char
 ) -> c_int
 {
     quiche_config_load_priv_key_from_pem_file(
@@ -65,7 +65,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_load_priv_key_from_pem_file(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_load_verify_locations_from_file(
     config: *mut quiche_config,
-    path: *const c_char    
+    path: *const c_char
 ) -> c_int
 {
     quiche_config_load_verify_locations_from_file(
@@ -77,7 +77,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_load_verify_locations_from_file
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_load_verify_locations_from_directory(
     config: *mut quiche_config,
-    path: *const c_char    
+    path: *const c_char
 ) -> c_int
 {
     quiche_config_load_verify_locations_from_directory(
@@ -89,7 +89,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_load_verify_locations_from_dire
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_verify_peer(
     config: *mut quiche_config,
-    v: bool    
+    v: bool
 )
 {
     quiche_config_verify_peer(
@@ -101,7 +101,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_verify_peer(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_grease(
     config: *mut quiche_config,
-    v: bool    
+    v: bool
 )
 {
     quiche_config_grease(
@@ -112,7 +112,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_grease(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_log_keys(
-    config: *mut quiche_config    
+    config: *mut quiche_config
 )
 {
     quiche_config_log_keys(
@@ -122,7 +122,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_log_keys(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_enable_early_data(
-    config: *mut quiche_config    
+    config: *mut quiche_config
 )
 {
     quiche_config_enable_early_data(
@@ -134,7 +134,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_enable_early_data(
 pub unsafe extern "C" fn csbindgen_quiche_config_set_application_protos(
     config: *mut quiche_config,
     protos: *const u8,
-    protos_len: usize    
+    protos_len: usize
 ) -> c_int
 {
     quiche_config_set_application_protos(
@@ -147,7 +147,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_application_protos(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_max_idle_timeout(
     config: *mut quiche_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_config_set_max_idle_timeout(
@@ -159,7 +159,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_max_idle_timeout(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_max_recv_udp_payload_size(
     config: *mut quiche_config,
-    v: usize    
+    v: usize
 )
 {
     quiche_config_set_max_recv_udp_payload_size(
@@ -171,7 +171,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_max_recv_udp_payload_size(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_max_send_udp_payload_size(
     config: *mut quiche_config,
-    v: usize    
+    v: usize
 )
 {
     quiche_config_set_max_send_udp_payload_size(
@@ -183,7 +183,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_max_send_udp_payload_size(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_initial_max_data(
     config: *mut quiche_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_config_set_initial_max_data(
@@ -195,7 +195,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_initial_max_data(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_initial_max_stream_data_bidi_local(
     config: *mut quiche_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_config_set_initial_max_stream_data_bidi_local(
@@ -207,7 +207,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_initial_max_stream_data_bid
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_initial_max_stream_data_bidi_remote(
     config: *mut quiche_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_config_set_initial_max_stream_data_bidi_remote(
@@ -219,7 +219,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_initial_max_stream_data_bid
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_initial_max_stream_data_uni(
     config: *mut quiche_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_config_set_initial_max_stream_data_uni(
@@ -231,7 +231,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_initial_max_stream_data_uni
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_initial_max_streams_bidi(
     config: *mut quiche_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_config_set_initial_max_streams_bidi(
@@ -243,7 +243,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_initial_max_streams_bidi(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_initial_max_streams_uni(
     config: *mut quiche_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_config_set_initial_max_streams_uni(
@@ -255,7 +255,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_initial_max_streams_uni(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_ack_delay_exponent(
     config: *mut quiche_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_config_set_ack_delay_exponent(
@@ -267,7 +267,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_ack_delay_exponent(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_max_ack_delay(
     config: *mut quiche_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_config_set_max_ack_delay(
@@ -279,7 +279,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_max_ack_delay(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_disable_active_migration(
     config: *mut quiche_config,
-    v: bool    
+    v: bool
 )
 {
     quiche_config_set_disable_active_migration(
@@ -291,7 +291,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_disable_active_migration(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_cc_algorithm(
     config: *mut quiche_config,
-    algo: quiche_cc_algorithm    
+    algo: quiche_cc_algorithm
 )
 {
     quiche_config_set_cc_algorithm(
@@ -303,7 +303,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_cc_algorithm(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_enable_hystart(
     config: *mut quiche_config,
-    v: bool    
+    v: bool
 )
 {
     quiche_config_enable_hystart(
@@ -315,7 +315,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_enable_hystart(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_enable_pacing(
     config: *mut quiche_config,
-    v: bool    
+    v: bool
 )
 {
     quiche_config_enable_pacing(
@@ -329,7 +329,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_enable_dgram(
     config: *mut quiche_config,
     enabled: bool,
     recv_queue_len: usize,
-    send_queue_len: usize    
+    send_queue_len: usize
 )
 {
     quiche_config_enable_dgram(
@@ -343,7 +343,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_enable_dgram(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_max_connection_window(
     config: *mut quiche_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_config_set_max_connection_window(
@@ -355,7 +355,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_max_connection_window(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_max_stream_window(
     config: *mut quiche_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_config_set_max_stream_window(
@@ -367,7 +367,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_max_stream_window(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_active_connection_id_limit(
     config: *mut quiche_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_config_set_active_connection_id_limit(
@@ -379,7 +379,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_active_connection_id_limit(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_set_stateless_reset_token(
     config: *mut quiche_config,
-    v: *const u8    
+    v: *const u8
 )
 {
     quiche_config_set_stateless_reset_token(
@@ -390,7 +390,7 @@ pub unsafe extern "C" fn csbindgen_quiche_config_set_stateless_reset_token(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_config_free(
-    config: *mut quiche_config    
+    config: *mut quiche_config
 )
 {
     quiche_config_free(
@@ -410,7 +410,7 @@ pub unsafe extern "C" fn csbindgen_quiche_header_info(
     dcid: *mut u8,
     dcid_len: *mut usize,
     token: *mut u8,
-    token_len: *mut usize    
+    token_len: *mut usize
 ) -> c_int
 {
     quiche_header_info(
@@ -438,7 +438,7 @@ pub unsafe extern "C" fn csbindgen_quiche_accept(
     local_len: usize,
     peer: *const sockaddr,
     peer_len: usize,
-    config: *mut quiche_config    
+    config: *mut quiche_config
 ) -> *mut quiche_conn
 {
     quiche_accept(
@@ -463,7 +463,7 @@ pub unsafe extern "C" fn csbindgen_quiche_connect(
     local_len: usize,
     peer: *const sockaddr,
     peer_len: usize,
-    config: *mut quiche_config    
+    config: *mut quiche_config
 ) -> *mut quiche_conn
 {
     quiche_connect(
@@ -485,7 +485,7 @@ pub unsafe extern "C" fn csbindgen_quiche_negotiate_version(
     dcid: *const u8,
     dcid_len: usize,
     out: *mut u8,
-    out_len: usize    
+    out_len: usize
 ) -> SSIZE_T
 {
     quiche_negotiate_version(
@@ -510,7 +510,7 @@ pub unsafe extern "C" fn csbindgen_quiche_retry(
     token_len: usize,
     version: u32,
     out: *mut u8,
-    out_len: usize    
+    out_len: usize
 ) -> SSIZE_T
 {
     quiche_retry(
@@ -530,7 +530,7 @@ pub unsafe extern "C" fn csbindgen_quiche_retry(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_version_is_supported(
-    version: u32    
+    version: u32
 ) -> bool
 {
     quiche_version_is_supported(
@@ -550,7 +550,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_new_with_tls(
     peer_len: usize,
     config: *mut quiche_config,
     ssl: *mut c_void,
-    is_server: bool    
+    is_server: bool
 ) -> *mut quiche_conn
 {
     quiche_conn_new_with_tls(
@@ -571,7 +571,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_new_with_tls(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_set_keylog_path(
     conn: *mut quiche_conn,
-    path: *const c_char    
+    path: *const c_char
 ) -> bool
 {
     quiche_conn_set_keylog_path(
@@ -583,7 +583,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_set_keylog_path(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_set_keylog_fd(
     conn: *mut quiche_conn,
-    fd: c_int    
+    fd: c_int
 )
 {
     quiche_conn_set_keylog_fd(
@@ -597,7 +597,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_set_qlog_path(
     conn: *mut quiche_conn,
     path: *const c_char,
     log_title: *const c_char,
-    log_desc: *const c_char    
+    log_desc: *const c_char
 ) -> bool
 {
     quiche_conn_set_qlog_path(
@@ -613,7 +613,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_set_qlog_fd(
     conn: *mut quiche_conn,
     fd: c_int,
     log_title: *const c_char,
-    log_desc: *const c_char    
+    log_desc: *const c_char
 )
 {
     quiche_conn_set_qlog_fd(
@@ -628,7 +628,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_set_qlog_fd(
 pub unsafe extern "C" fn csbindgen_quiche_conn_set_session(
     conn: *mut quiche_conn,
     buf: *const u8,
-    buf_len: usize    
+    buf_len: usize
 ) -> c_int
 {
     quiche_conn_set_session(
@@ -643,7 +643,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_recv(
     conn: *mut quiche_conn,
     buf: *mut u8,
     buf_len: usize,
-    info: *const quiche_recv_info    
+    info: *const quiche_recv_info
 ) -> SSIZE_T
 {
     quiche_conn_recv(
@@ -659,7 +659,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_send(
     conn: *mut quiche_conn,
     out: *mut u8,
     out_len: usize,
-    out_info: *mut quiche_send_info    
+    out_info: *mut quiche_send_info
 ) -> SSIZE_T
 {
     quiche_conn_send(
@@ -672,7 +672,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_send(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_send_quantum(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> usize
 {
     quiche_conn_send_quantum(
@@ -686,7 +686,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_recv(
     stream_id: u64,
     out: *mut u8,
     buf_len: usize,
-    fin: *mut bool    
+    fin: *mut bool
 ) -> SSIZE_T
 {
     quiche_conn_stream_recv(
@@ -704,7 +704,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_send(
     stream_id: u64,
     buf: *const u8,
     buf_len: usize,
-    fin: bool    
+    fin: bool
 ) -> SSIZE_T
 {
     quiche_conn_stream_send(
@@ -721,7 +721,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_priority(
     conn: *mut quiche_conn,
     stream_id: u64,
     urgency: u8,
-    incremental: bool    
+    incremental: bool
 ) -> c_int
 {
     quiche_conn_stream_priority(
@@ -737,7 +737,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_shutdown(
     conn: *mut quiche_conn,
     stream_id: u64,
     direction: quiche_shutdown,
-    err: u64    
+    err: u64
 ) -> c_int
 {
     quiche_conn_stream_shutdown(
@@ -751,7 +751,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_shutdown(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_stream_capacity(
     conn: *const quiche_conn,
-    stream_id: u64    
+    stream_id: u64
 ) -> SSIZE_T
 {
     quiche_conn_stream_capacity(
@@ -763,7 +763,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_capacity(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_stream_readable(
     conn: *const quiche_conn,
-    stream_id: u64    
+    stream_id: u64
 ) -> bool
 {
     quiche_conn_stream_readable(
@@ -774,7 +774,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_readable(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_stream_readable_next(
-    conn: *mut quiche_conn    
+    conn: *mut quiche_conn
 ) -> i64
 {
     quiche_conn_stream_readable_next(
@@ -786,7 +786,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_readable_next(
 pub unsafe extern "C" fn csbindgen_quiche_conn_stream_writable(
     conn: *mut quiche_conn,
     stream_id: u64,
-    len: usize    
+    len: usize
 ) -> c_int
 {
     quiche_conn_stream_writable(
@@ -798,7 +798,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_writable(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_stream_writable_next(
-    conn: *mut quiche_conn    
+    conn: *mut quiche_conn
 ) -> i64
 {
     quiche_conn_stream_writable_next(
@@ -809,7 +809,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_writable_next(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_stream_finished(
     conn: *const quiche_conn,
-    stream_id: u64    
+    stream_id: u64
 ) -> bool
 {
     quiche_conn_stream_finished(
@@ -820,7 +820,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_finished(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_readable(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> *mut quiche_stream_iter
 {
     quiche_conn_readable(
@@ -830,7 +830,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_readable(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_writable(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> *mut quiche_stream_iter
 {
     quiche_conn_writable(
@@ -840,7 +840,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_writable(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_max_send_udp_payload_size(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> usize
 {
     quiche_conn_max_send_udp_payload_size(
@@ -850,7 +850,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_max_send_udp_payload_size(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_timeout_as_nanos(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> u64
 {
     quiche_conn_timeout_as_nanos(
@@ -860,7 +860,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_timeout_as_nanos(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_timeout_as_millis(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> u64
 {
     quiche_conn_timeout_as_millis(
@@ -870,7 +870,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_timeout_as_millis(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_on_timeout(
-    conn: *mut quiche_conn    
+    conn: *mut quiche_conn
 )
 {
     quiche_conn_on_timeout(
@@ -884,7 +884,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_close(
     app: bool,
     err: u64,
     reason: *const u8,
-    reason_len: usize    
+    reason_len: usize
 ) -> c_int
 {
     quiche_conn_close(
@@ -900,7 +900,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_close(
 pub unsafe extern "C" fn csbindgen_quiche_conn_trace_id(
     conn: *const quiche_conn,
     out: *mut *const u8,
-    out_len: *mut usize    
+    out_len: *mut usize
 )
 {
     quiche_conn_trace_id(
@@ -914,7 +914,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_trace_id(
 pub unsafe extern "C" fn csbindgen_quiche_conn_source_id(
     conn: *const quiche_conn,
     out: *mut *const u8,
-    out_len: *mut usize    
+    out_len: *mut usize
 )
 {
     quiche_conn_source_id(
@@ -928,7 +928,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_source_id(
 pub unsafe extern "C" fn csbindgen_quiche_conn_destination_id(
     conn: *const quiche_conn,
     out: *mut *const u8,
-    out_len: *mut usize    
+    out_len: *mut usize
 )
 {
     quiche_conn_destination_id(
@@ -942,7 +942,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_destination_id(
 pub unsafe extern "C" fn csbindgen_quiche_conn_application_proto(
     conn: *const quiche_conn,
     out: *mut *const u8,
-    out_len: *mut usize    
+    out_len: *mut usize
 )
 {
     quiche_conn_application_proto(
@@ -956,7 +956,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_application_proto(
 pub unsafe extern "C" fn csbindgen_quiche_conn_peer_cert(
     conn: *const quiche_conn,
     out: *mut *const u8,
-    out_len: *mut usize    
+    out_len: *mut usize
 )
 {
     quiche_conn_peer_cert(
@@ -970,7 +970,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_peer_cert(
 pub unsafe extern "C" fn csbindgen_quiche_conn_session(
     conn: *const quiche_conn,
     out: *mut *const u8,
-    out_len: *mut usize    
+    out_len: *mut usize
 )
 {
     quiche_conn_session(
@@ -982,7 +982,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_session(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_is_established(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> bool
 {
     quiche_conn_is_established(
@@ -992,7 +992,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_is_established(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_is_in_early_data(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> bool
 {
     quiche_conn_is_in_early_data(
@@ -1002,7 +1002,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_is_in_early_data(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_is_readable(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> bool
 {
     quiche_conn_is_readable(
@@ -1012,7 +1012,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_is_readable(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_is_draining(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> bool
 {
     quiche_conn_is_draining(
@@ -1022,7 +1022,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_is_draining(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_peer_streams_left_bidi(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> u64
 {
     quiche_conn_peer_streams_left_bidi(
@@ -1032,7 +1032,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_peer_streams_left_bidi(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_peer_streams_left_uni(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> u64
 {
     quiche_conn_peer_streams_left_uni(
@@ -1042,7 +1042,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_peer_streams_left_uni(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_is_closed(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> bool
 {
     quiche_conn_is_closed(
@@ -1052,7 +1052,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_is_closed(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_is_timed_out(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> bool
 {
     quiche_conn_is_timed_out(
@@ -1066,7 +1066,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_peer_error(
     is_app: *mut bool,
     error_code: *mut u64,
     reason: *mut *const u8,
-    reason_len: *mut usize    
+    reason_len: *mut usize
 ) -> bool
 {
     quiche_conn_peer_error(
@@ -1084,7 +1084,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_local_error(
     is_app: *mut bool,
     error_code: *mut u64,
     reason: *mut *const u8,
-    reason_len: *mut usize    
+    reason_len: *mut usize
 ) -> bool
 {
     quiche_conn_local_error(
@@ -1100,7 +1100,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_local_error(
 pub unsafe extern "C" fn csbindgen_quiche_conn_stream_init_application_data(
     conn: *mut quiche_conn,
     stream_id: u64,
-    data: *mut c_void    
+    data: *mut c_void
 ) -> c_int
 {
     quiche_conn_stream_init_application_data(
@@ -1113,7 +1113,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_init_application_data(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_stream_application_data(
     conn: *mut quiche_conn,
-    stream_id: u64    
+    stream_id: u64
 ) -> *mut c_void
 {
     quiche_conn_stream_application_data(
@@ -1125,7 +1125,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stream_application_data(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_stream_iter_next(
     iter: *mut quiche_stream_iter,
-    stream_id: *mut u64    
+    stream_id: *mut u64
 ) -> bool
 {
     quiche_stream_iter_next(
@@ -1136,7 +1136,7 @@ pub unsafe extern "C" fn csbindgen_quiche_stream_iter_next(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_stream_iter_free(
-    iter: *mut quiche_stream_iter    
+    iter: *mut quiche_stream_iter
 )
 {
     quiche_stream_iter_free(
@@ -1147,7 +1147,7 @@ pub unsafe extern "C" fn csbindgen_quiche_stream_iter_free(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_stats(
     conn: *const quiche_conn,
-    out: *mut quiche_stats    
+    out: *mut quiche_stats
 )
 {
     quiche_conn_stats(
@@ -1160,7 +1160,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_stats(
 pub unsafe extern "C" fn csbindgen_quiche_conn_path_stats(
     conn: *const quiche_conn,
     idx: usize,
-    out: *mut quiche_path_stats    
+    out: *mut quiche_path_stats
 ) -> c_int
 {
     quiche_conn_path_stats(
@@ -1172,7 +1172,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_path_stats(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_max_writable_len(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> SSIZE_T
 {
     quiche_conn_dgram_max_writable_len(
@@ -1182,7 +1182,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_max_writable_len(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_recv_front_len(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> SSIZE_T
 {
     quiche_conn_dgram_recv_front_len(
@@ -1192,7 +1192,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_recv_front_len(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_recv_queue_len(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> SSIZE_T
 {
     quiche_conn_dgram_recv_queue_len(
@@ -1202,7 +1202,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_recv_queue_len(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_recv_queue_byte_size(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> SSIZE_T
 {
     quiche_conn_dgram_recv_queue_byte_size(
@@ -1212,7 +1212,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_recv_queue_byte_size(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_send_queue_len(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> SSIZE_T
 {
     quiche_conn_dgram_send_queue_len(
@@ -1222,7 +1222,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_send_queue_len(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_send_queue_byte_size(
-    conn: *const quiche_conn    
+    conn: *const quiche_conn
 ) -> SSIZE_T
 {
     quiche_conn_dgram_send_queue_byte_size(
@@ -1234,7 +1234,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_send_queue_byte_size(
 pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_recv(
     conn: *mut quiche_conn,
     buf: *mut u8,
-    buf_len: usize    
+    buf_len: usize
 ) -> SSIZE_T
 {
     quiche_conn_dgram_recv(
@@ -1248,7 +1248,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_recv(
 pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_send(
     conn: *mut quiche_conn,
     buf: *const u8,
-    buf_len: usize    
+    buf_len: usize
 ) -> SSIZE_T
 {
     quiche_conn_dgram_send(
@@ -1261,7 +1261,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_send(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_purge_outgoing(
     conn: *mut quiche_conn,
-    f: Option<unsafe extern "C" fn(arg1: *mut u8, arg2: usize) -> bool>    
+    f: Option<unsafe extern "C" fn(arg1: *mut u8, arg2: usize) -> bool>
 )
 {
     quiche_conn_dgram_purge_outgoing(
@@ -1272,7 +1272,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_dgram_purge_outgoing(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_send_ack_eliciting(
-    conn: *mut quiche_conn    
+    conn: *mut quiche_conn
 ) -> SSIZE_T
 {
     quiche_conn_send_ack_eliciting(
@@ -1286,7 +1286,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_send_ack_eliciting_on_path(
     local: *const sockaddr,
     local_len: usize,
     peer: *const sockaddr,
-    peer_len: usize    
+    peer_len: usize
 ) -> SSIZE_T
 {
     quiche_conn_send_ack_eliciting_on_path(
@@ -1300,7 +1300,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_send_ack_eliciting_on_path(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_conn_free(
-    conn: *mut quiche_conn    
+    conn: *mut quiche_conn
 )
 {
     quiche_conn_free(
@@ -1310,7 +1310,7 @@ pub unsafe extern "C" fn csbindgen_quiche_conn_free(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_config_new(
-    
+
 ) -> *mut quiche_h3_config
 {
     quiche_h3_config_new(
@@ -1321,7 +1321,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_config_new(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_config_set_max_field_section_size(
     config: *mut quiche_h3_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_h3_config_set_max_field_section_size(
@@ -1333,7 +1333,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_config_set_max_field_section_size(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_config_set_qpack_max_table_capacity(
     config: *mut quiche_h3_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_h3_config_set_qpack_max_table_capacity(
@@ -1345,7 +1345,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_config_set_qpack_max_table_capacity
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_config_set_qpack_blocked_streams(
     config: *mut quiche_h3_config,
-    v: u64    
+    v: u64
 )
 {
     quiche_h3_config_set_qpack_blocked_streams(
@@ -1357,7 +1357,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_config_set_qpack_blocked_streams(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_config_enable_extended_connect(
     config: *mut quiche_h3_config,
-    enabled: bool    
+    enabled: bool
 )
 {
     quiche_h3_config_enable_extended_connect(
@@ -1368,7 +1368,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_config_enable_extended_connect(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_config_free(
-    config: *mut quiche_h3_config    
+    config: *mut quiche_h3_config
 )
 {
     quiche_h3_config_free(
@@ -1379,7 +1379,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_config_free(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_accept(
     quiche_conn: *mut quiche_conn,
-    config: *mut quiche_h3_config    
+    config: *mut quiche_h3_config
 ) -> *mut quiche_h3_conn
 {
     quiche_h3_accept(
@@ -1391,7 +1391,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_accept(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_conn_new_with_transport(
     quiche_conn: *mut quiche_conn,
-    config: *mut quiche_h3_config    
+    config: *mut quiche_h3_config
 ) -> *mut quiche_h3_conn
 {
     quiche_h3_conn_new_with_transport(
@@ -1404,7 +1404,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_conn_new_with_transport(
 pub unsafe extern "C" fn csbindgen_quiche_h3_conn_poll(
     conn: *mut quiche_h3_conn,
     quic_conn: *mut quiche_conn,
-    ev: *mut *mut quiche_h3_event    
+    ev: *mut *mut quiche_h3_event
 ) -> i64
 {
     quiche_h3_conn_poll(
@@ -1416,7 +1416,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_conn_poll(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_event_type(
-    ev: *mut quiche_h3_event    
+    ev: *mut quiche_h3_event
 ) -> quiche_h3_event_type
 {
     quiche_h3_event_type(
@@ -1428,7 +1428,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_event_type(
 pub unsafe extern "C" fn csbindgen_quiche_h3_event_for_each_header(
     ev: *mut quiche_h3_event,
     cb: Option<unsafe extern "C" fn(name: *mut u8, name_len: usize, value: *mut u8, value_len: usize, argp: *mut c_void) -> c_int>,
-    argp: *mut c_void    
+    argp: *mut c_void
 ) -> c_int
 {
     quiche_h3_event_for_each_header(
@@ -1442,7 +1442,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_event_for_each_header(
 pub unsafe extern "C" fn csbindgen_quiche_h3_for_each_setting(
     conn: *mut quiche_h3_conn,
     cb: Option<unsafe extern "C" fn(identifier: u64, value: u64, argp: *mut c_void) -> c_int>,
-    argp: *mut c_void    
+    argp: *mut c_void
 ) -> c_int
 {
     quiche_h3_for_each_setting(
@@ -1454,7 +1454,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_for_each_setting(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_event_headers_has_body(
-    ev: *mut quiche_h3_event    
+    ev: *mut quiche_h3_event
 ) -> bool
 {
     quiche_h3_event_headers_has_body(
@@ -1464,7 +1464,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_event_headers_has_body(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_extended_connect_enabled_by_peer(
-    conn: *mut quiche_h3_conn    
+    conn: *mut quiche_h3_conn
 ) -> bool
 {
     quiche_h3_extended_connect_enabled_by_peer(
@@ -1474,7 +1474,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_extended_connect_enabled_by_peer(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_event_free(
-    ev: *mut quiche_h3_event    
+    ev: *mut quiche_h3_event
 )
 {
     quiche_h3_event_free(
@@ -1488,7 +1488,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_send_request(
     quic_conn: *mut quiche_conn,
     headers: *mut quiche_h3_header,
     headers_len: usize,
-    fin: bool    
+    fin: bool
 ) -> i64
 {
     quiche_h3_send_request(
@@ -1507,7 +1507,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_send_response(
     stream_id: u64,
     headers: *mut quiche_h3_header,
     headers_len: usize,
-    fin: bool    
+    fin: bool
 ) -> c_int
 {
     quiche_h3_send_response(
@@ -1528,7 +1528,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_send_response_with_priority(
     headers: *mut quiche_h3_header,
     headers_len: usize,
     priority: *mut quiche_h3_priority,
-    fin: bool    
+    fin: bool
 ) -> c_int
 {
     quiche_h3_send_response_with_priority(
@@ -1549,7 +1549,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_send_body(
     stream_id: u64,
     body: *mut u8,
     body_len: usize,
-    fin: bool    
+    fin: bool
 ) -> SSIZE_T
 {
     quiche_h3_send_body(
@@ -1568,7 +1568,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_recv_body(
     quic_conn: *mut quiche_conn,
     stream_id: u64,
     out: *mut u8,
-    out_len: usize    
+    out_len: usize
 ) -> SSIZE_T
 {
     quiche_h3_recv_body(
@@ -1584,7 +1584,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_recv_body(
 pub unsafe extern "C" fn csbindgen_quiche_h3_parse_extensible_priority(
     priority: *mut u8,
     priority_len: usize,
-    parsed: *mut quiche_h3_priority    
+    parsed: *mut quiche_h3_priority
 ) -> c_int
 {
     quiche_h3_parse_extensible_priority(
@@ -1599,7 +1599,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_send_priority_update_for_request(
     conn: *mut quiche_h3_conn,
     quic_conn: *mut quiche_conn,
     stream_id: u64,
-    priority: *mut quiche_h3_priority    
+    priority: *mut quiche_h3_priority
 ) -> c_int
 {
     quiche_h3_send_priority_update_for_request(
@@ -1615,7 +1615,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_take_last_priority_update(
     conn: *mut quiche_h3_conn,
     prioritized_element_id: u64,
     cb: Option<unsafe extern "C" fn(priority_field_value: *mut u8, priority_field_value_len: u64, argp: *mut c_void) -> c_int>,
-    argp: *mut c_void    
+    argp: *mut c_void
 ) -> c_int
 {
     quiche_h3_take_last_priority_update(
@@ -1629,7 +1629,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_take_last_priority_update(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_dgram_enabled_by_peer(
     conn: *mut quiche_h3_conn,
-    quic_conn: *mut quiche_conn    
+    quic_conn: *mut quiche_conn
 ) -> bool
 {
     quiche_h3_dgram_enabled_by_peer(
@@ -1644,7 +1644,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_send_dgram(
     quic_conn: *mut quiche_conn,
     flow_id: u64,
     data: *mut u8,
-    data_len: usize    
+    data_len: usize
 ) -> SSIZE_T
 {
     quiche_h3_send_dgram(
@@ -1663,7 +1663,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_recv_dgram(
     flow_id: *mut u64,
     flow_id_len: *mut usize,
     out: *mut u8,
-    out_len: usize    
+    out_len: usize
 ) -> SSIZE_T
 {
     quiche_h3_recv_dgram(
@@ -1678,7 +1678,7 @@ pub unsafe extern "C" fn csbindgen_quiche_h3_recv_dgram(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_quiche_h3_conn_free(
-    conn: *mut quiche_h3_conn    
+    conn: *mut quiche_h3_conn
 )
 {
     quiche_h3_conn_free(

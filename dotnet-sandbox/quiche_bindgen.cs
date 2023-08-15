@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.InteropServices;
 
+
 namespace CsBindgen
 {
     internal static unsafe partial class LibQuiche
@@ -555,6 +556,7 @@ namespace CsBindgen
         public byte urgency;
         [MarshalAs(UnmanagedType.U1)] public bool incremental;
     }
+
 
 
 

@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.InteropServices;
 
+
 namespace CsBindgen
 {
     internal static unsafe partial class NativeMethods
@@ -245,6 +246,7 @@ namespace CsBindgen
         B = 2,
         C = 10,
     }
+
 
 
 }

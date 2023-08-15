@@ -79,6 +79,7 @@ pub fn emit_csharp(
     aliases: &AliasMap,
     structs: &Vec<RustStruct>,
     enums: &Vec<RustEnum>,
+    consts: &Vec<RustConst>,
     options: &BindgenOptions,
 ) -> String {
     // configure
@@ -290,6 +291,27 @@ pub fn emit_csharp(
         enum_string.push('\n');
     }
 
+    let mut const_string = String::new();
+    for item in consts {
+        let type_name = item.rust_type.to_csharp_string(
+            options,
+            aliases,
+            false,
+            &"".to_string(),
+            &"".to_string(),
+        );
+
+        const_string.push_str(  
+            format!(
+                "        public {} {} = {};",
+                type_name,
+                escape_name(item.const_name.as_str()),
+                item.value
+            )
+            .as_str(),
+        );
+    }
+
     let mut imported_namespaces = String::new();
     for name in &options.csharp_imported_namespaces {
         imported_namespaces.push_str_ln(format!("using {name};").as_str());
@@ -317,6 +339,7 @@ namespace {namespace}
 
 {structs_string}
 {enum_string}
+{const_string}
 }}
     "
     );

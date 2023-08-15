@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.InteropServices;
 
+
 namespace CsBindgen
 {
     internal static unsafe partial class LibZstd
@@ -303,6 +304,7 @@ namespace CsBindgen
     {
         public fixed byte _unused[1];
     }
+
 
 
 

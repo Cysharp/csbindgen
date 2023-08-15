@@ -8,7 +8,7 @@ use super::zstd::*;
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_versionNumber(
-    
+
 ) -> c_uint
 {
     ZSTD_versionNumber(
@@ -18,7 +18,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_versionNumber(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_versionString(
-    
+
 ) -> *const c_char
 {
     ZSTD_versionString(
@@ -32,7 +32,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_compress(
     dstCapacity: usize,
     src: *const c_void,
     srcSize: usize,
-    compressionLevel: c_int    
+    compressionLevel: c_int
 ) -> usize
 {
     ZSTD_compress(
@@ -49,7 +49,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_decompress(
     dst: *mut c_void,
     dstCapacity: usize,
     src: *const c_void,
-    compressedSize: usize    
+    compressedSize: usize
 ) -> usize
 {
     ZSTD_decompress(
@@ -63,7 +63,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_decompress(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_getFrameContentSize(
     src: *const c_void,
-    srcSize: usize    
+    srcSize: usize
 ) -> c_ulonglong
 {
     ZSTD_getFrameContentSize(
@@ -75,7 +75,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_getFrameContentSize(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_getDecompressedSize(
     src: *const c_void,
-    srcSize: usize    
+    srcSize: usize
 ) -> c_ulonglong
 {
     ZSTD_getDecompressedSize(
@@ -87,7 +87,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_getDecompressedSize(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_findFrameCompressedSize(
     src: *const c_void,
-    srcSize: usize    
+    srcSize: usize
 ) -> usize
 {
     ZSTD_findFrameCompressedSize(
@@ -98,7 +98,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_findFrameCompressedSize(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_compressBound(
-    srcSize: usize    
+    srcSize: usize
 ) -> usize
 {
     ZSTD_compressBound(
@@ -108,7 +108,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_compressBound(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_isError(
-    code: usize    
+    code: usize
 ) -> c_uint
 {
     ZSTD_isError(
@@ -118,7 +118,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_isError(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_getErrorName(
-    code: usize    
+    code: usize
 ) -> *const c_char
 {
     ZSTD_getErrorName(
@@ -128,7 +128,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_getErrorName(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_minCLevel(
-    
+
 ) -> c_int
 {
     ZSTD_minCLevel(
@@ -138,7 +138,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_minCLevel(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_maxCLevel(
-    
+
 ) -> c_int
 {
     ZSTD_maxCLevel(
@@ -148,7 +148,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_maxCLevel(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_defaultCLevel(
-    
+
 ) -> c_int
 {
     ZSTD_defaultCLevel(
@@ -158,7 +158,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_defaultCLevel(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_createCCtx(
-    
+
 ) -> *mut ZSTD_CCtx
 {
     ZSTD_createCCtx(
@@ -168,7 +168,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_createCCtx(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_freeCCtx(
-    cctx: *mut ZSTD_CCtx    
+    cctx: *mut ZSTD_CCtx
 ) -> usize
 {
     ZSTD_freeCCtx(
@@ -183,7 +183,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_compressCCtx(
     dstCapacity: usize,
     src: *const c_void,
     srcSize: usize,
-    compressionLevel: c_int    
+    compressionLevel: c_int
 ) -> usize
 {
     ZSTD_compressCCtx(
@@ -198,7 +198,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_compressCCtx(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_createDCtx(
-    
+
 ) -> *mut ZSTD_DCtx
 {
     ZSTD_createDCtx(
@@ -208,7 +208,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_createDCtx(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_freeDCtx(
-    dctx: *mut ZSTD_DCtx    
+    dctx: *mut ZSTD_DCtx
 ) -> usize
 {
     ZSTD_freeDCtx(
@@ -222,7 +222,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_decompressDCtx(
     dst: *mut c_void,
     dstCapacity: usize,
     src: *const c_void,
-    srcSize: usize    
+    srcSize: usize
 ) -> usize
 {
     ZSTD_decompressDCtx(
@@ -236,7 +236,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_decompressDCtx(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_cParam_getBounds(
-    cParam: ZSTD_cParameter    
+    cParam: ZSTD_cParameter
 ) -> ZSTD_bounds
 {
     ZSTD_cParam_getBounds(
@@ -248,7 +248,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_cParam_getBounds(
 pub unsafe extern "C" fn csbindgen_ZSTD_CCtx_setParameter(
     cctx: *mut ZSTD_CCtx,
     param: ZSTD_cParameter,
-    value: c_int    
+    value: c_int
 ) -> usize
 {
     ZSTD_CCtx_setParameter(
@@ -261,7 +261,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_CCtx_setParameter(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_CCtx_setPledgedSrcSize(
     cctx: *mut ZSTD_CCtx,
-    pledgedSrcSize: c_ulonglong    
+    pledgedSrcSize: c_ulonglong
 ) -> usize
 {
     ZSTD_CCtx_setPledgedSrcSize(
@@ -273,7 +273,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_CCtx_setPledgedSrcSize(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_CCtx_reset(
     cctx: *mut ZSTD_CCtx,
-    reset: ZSTD_ResetDirective    
+    reset: ZSTD_ResetDirective
 ) -> usize
 {
     ZSTD_CCtx_reset(
@@ -288,7 +288,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_compress2(
     dst: *mut c_void,
     dstCapacity: usize,
     src: *const c_void,
-    srcSize: usize    
+    srcSize: usize
 ) -> usize
 {
     ZSTD_compress2(
@@ -302,7 +302,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_compress2(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_dParam_getBounds(
-    dParam: ZSTD_dParameter    
+    dParam: ZSTD_dParameter
 ) -> ZSTD_bounds
 {
     ZSTD_dParam_getBounds(
@@ -314,7 +314,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_dParam_getBounds(
 pub unsafe extern "C" fn csbindgen_ZSTD_DCtx_setParameter(
     dctx: *mut ZSTD_DCtx,
     param: ZSTD_dParameter,
-    value: c_int    
+    value: c_int
 ) -> usize
 {
     ZSTD_DCtx_setParameter(
@@ -327,7 +327,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_DCtx_setParameter(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_DCtx_reset(
     dctx: *mut ZSTD_DCtx,
-    reset: ZSTD_ResetDirective    
+    reset: ZSTD_ResetDirective
 ) -> usize
 {
     ZSTD_DCtx_reset(
@@ -338,7 +338,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_DCtx_reset(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_createCStream(
-    
+
 ) -> *mut ZSTD_CStream
 {
     ZSTD_createCStream(
@@ -348,7 +348,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_createCStream(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_freeCStream(
-    zcs: *mut ZSTD_CStream    
+    zcs: *mut ZSTD_CStream
 ) -> usize
 {
     ZSTD_freeCStream(
@@ -361,7 +361,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_compressStream2(
     cctx: *mut ZSTD_CCtx,
     output: *mut ZSTD_outBuffer,
     input: *mut ZSTD_inBuffer,
-    endOp: ZSTD_EndDirective    
+    endOp: ZSTD_EndDirective
 ) -> usize
 {
     ZSTD_compressStream2(
@@ -374,7 +374,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_compressStream2(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_CStreamInSize(
-    
+
 ) -> usize
 {
     ZSTD_CStreamInSize(
@@ -384,7 +384,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_CStreamInSize(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_CStreamOutSize(
-    
+
 ) -> usize
 {
     ZSTD_CStreamOutSize(
@@ -395,7 +395,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_CStreamOutSize(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_initCStream(
     zcs: *mut ZSTD_CStream,
-    compressionLevel: c_int    
+    compressionLevel: c_int
 ) -> usize
 {
     ZSTD_initCStream(
@@ -408,7 +408,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_initCStream(
 pub unsafe extern "C" fn csbindgen_ZSTD_compressStream(
     zcs: *mut ZSTD_CStream,
     output: *mut ZSTD_outBuffer,
-    input: *mut ZSTD_inBuffer    
+    input: *mut ZSTD_inBuffer
 ) -> usize
 {
     ZSTD_compressStream(
@@ -421,7 +421,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_compressStream(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_flushStream(
     zcs: *mut ZSTD_CStream,
-    output: *mut ZSTD_outBuffer    
+    output: *mut ZSTD_outBuffer
 ) -> usize
 {
     ZSTD_flushStream(
@@ -433,7 +433,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_flushStream(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_endStream(
     zcs: *mut ZSTD_CStream,
-    output: *mut ZSTD_outBuffer    
+    output: *mut ZSTD_outBuffer
 ) -> usize
 {
     ZSTD_endStream(
@@ -444,7 +444,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_endStream(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_createDStream(
-    
+
 ) -> *mut ZSTD_DStream
 {
     ZSTD_createDStream(
@@ -454,7 +454,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_createDStream(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_freeDStream(
-    zds: *mut ZSTD_DStream    
+    zds: *mut ZSTD_DStream
 ) -> usize
 {
     ZSTD_freeDStream(
@@ -464,7 +464,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_freeDStream(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_initDStream(
-    zds: *mut ZSTD_DStream    
+    zds: *mut ZSTD_DStream
 ) -> usize
 {
     ZSTD_initDStream(
@@ -476,7 +476,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_initDStream(
 pub unsafe extern "C" fn csbindgen_ZSTD_decompressStream(
     zds: *mut ZSTD_DStream,
     output: *mut ZSTD_outBuffer,
-    input: *mut ZSTD_inBuffer    
+    input: *mut ZSTD_inBuffer
 ) -> usize
 {
     ZSTD_decompressStream(
@@ -488,7 +488,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_decompressStream(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_DStreamInSize(
-    
+
 ) -> usize
 {
     ZSTD_DStreamInSize(
@@ -498,7 +498,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_DStreamInSize(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_DStreamOutSize(
-    
+
 ) -> usize
 {
     ZSTD_DStreamOutSize(
@@ -515,7 +515,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_compress_usingDict(
     srcSize: usize,
     dict: *const c_void,
     dictSize: usize,
-    compressionLevel: c_int    
+    compressionLevel: c_int
 ) -> usize
 {
     ZSTD_compress_usingDict(
@@ -538,7 +538,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_decompress_usingDict(
     src: *const c_void,
     srcSize: usize,
     dict: *const c_void,
-    dictSize: usize    
+    dictSize: usize
 ) -> usize
 {
     ZSTD_decompress_usingDict(
@@ -556,7 +556,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_decompress_usingDict(
 pub unsafe extern "C" fn csbindgen_ZSTD_createCDict(
     dictBuffer: *const c_void,
     dictSize: usize,
-    compressionLevel: c_int    
+    compressionLevel: c_int
 ) -> *mut ZSTD_CDict
 {
     ZSTD_createCDict(
@@ -568,7 +568,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_createCDict(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_freeCDict(
-    CDict: *mut ZSTD_CDict    
+    CDict: *mut ZSTD_CDict
 ) -> usize
 {
     ZSTD_freeCDict(
@@ -583,7 +583,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_compress_usingCDict(
     dstCapacity: usize,
     src: *const c_void,
     srcSize: usize,
-    cdict: *const ZSTD_CDict    
+    cdict: *const ZSTD_CDict
 ) -> usize
 {
     ZSTD_compress_usingCDict(
@@ -599,7 +599,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_compress_usingCDict(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_createDDict(
     dictBuffer: *const c_void,
-    dictSize: usize    
+    dictSize: usize
 ) -> *mut ZSTD_DDict
 {
     ZSTD_createDDict(
@@ -610,7 +610,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_createDDict(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_freeDDict(
-    ddict: *mut ZSTD_DDict    
+    ddict: *mut ZSTD_DDict
 ) -> usize
 {
     ZSTD_freeDDict(
@@ -625,7 +625,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_decompress_usingDDict(
     dstCapacity: usize,
     src: *const c_void,
     srcSize: usize,
-    ddict: *const ZSTD_DDict    
+    ddict: *const ZSTD_DDict
 ) -> usize
 {
     ZSTD_decompress_usingDDict(
@@ -641,7 +641,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_decompress_usingDDict(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_getDictID_fromDict(
     dict: *const c_void,
-    dictSize: usize    
+    dictSize: usize
 ) -> c_uint
 {
     ZSTD_getDictID_fromDict(
@@ -652,7 +652,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_getDictID_fromDict(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_getDictID_fromCDict(
-    cdict: *const ZSTD_CDict    
+    cdict: *const ZSTD_CDict
 ) -> c_uint
 {
     ZSTD_getDictID_fromCDict(
@@ -662,7 +662,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_getDictID_fromCDict(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_getDictID_fromDDict(
-    ddict: *const ZSTD_DDict    
+    ddict: *const ZSTD_DDict
 ) -> c_uint
 {
     ZSTD_getDictID_fromDDict(
@@ -673,7 +673,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_getDictID_fromDDict(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_getDictID_fromFrame(
     src: *const c_void,
-    srcSize: usize    
+    srcSize: usize
 ) -> c_uint
 {
     ZSTD_getDictID_fromFrame(
@@ -686,7 +686,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_getDictID_fromFrame(
 pub unsafe extern "C" fn csbindgen_ZSTD_CCtx_loadDictionary(
     cctx: *mut ZSTD_CCtx,
     dict: *const c_void,
-    dictSize: usize    
+    dictSize: usize
 ) -> usize
 {
     ZSTD_CCtx_loadDictionary(
@@ -699,7 +699,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_CCtx_loadDictionary(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_CCtx_refCDict(
     cctx: *mut ZSTD_CCtx,
-    cdict: *const ZSTD_CDict    
+    cdict: *const ZSTD_CDict
 ) -> usize
 {
     ZSTD_CCtx_refCDict(
@@ -712,7 +712,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_CCtx_refCDict(
 pub unsafe extern "C" fn csbindgen_ZSTD_CCtx_refPrefix(
     cctx: *mut ZSTD_CCtx,
     prefix: *const c_void,
-    prefixSize: usize    
+    prefixSize: usize
 ) -> usize
 {
     ZSTD_CCtx_refPrefix(
@@ -726,7 +726,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_CCtx_refPrefix(
 pub unsafe extern "C" fn csbindgen_ZSTD_DCtx_loadDictionary(
     dctx: *mut ZSTD_DCtx,
     dict: *const c_void,
-    dictSize: usize    
+    dictSize: usize
 ) -> usize
 {
     ZSTD_DCtx_loadDictionary(
@@ -739,7 +739,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_DCtx_loadDictionary(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_DCtx_refDDict(
     dctx: *mut ZSTD_DCtx,
-    ddict: *const ZSTD_DDict    
+    ddict: *const ZSTD_DDict
 ) -> usize
 {
     ZSTD_DCtx_refDDict(
@@ -752,7 +752,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_DCtx_refDDict(
 pub unsafe extern "C" fn csbindgen_ZSTD_DCtx_refPrefix(
     dctx: *mut ZSTD_DCtx,
     prefix: *const c_void,
-    prefixSize: usize    
+    prefixSize: usize
 ) -> usize
 {
     ZSTD_DCtx_refPrefix(
@@ -764,7 +764,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_DCtx_refPrefix(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_sizeof_CCtx(
-    cctx: *const ZSTD_CCtx    
+    cctx: *const ZSTD_CCtx
 ) -> usize
 {
     ZSTD_sizeof_CCtx(
@@ -774,7 +774,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_sizeof_CCtx(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_sizeof_DCtx(
-    dctx: *const ZSTD_DCtx    
+    dctx: *const ZSTD_DCtx
 ) -> usize
 {
     ZSTD_sizeof_DCtx(
@@ -784,7 +784,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_sizeof_DCtx(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_sizeof_CStream(
-    zcs: *const ZSTD_CStream    
+    zcs: *const ZSTD_CStream
 ) -> usize
 {
     ZSTD_sizeof_CStream(
@@ -794,7 +794,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_sizeof_CStream(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_sizeof_DStream(
-    zds: *const ZSTD_DStream    
+    zds: *const ZSTD_DStream
 ) -> usize
 {
     ZSTD_sizeof_DStream(
@@ -804,7 +804,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_sizeof_DStream(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_sizeof_CDict(
-    cdict: *const ZSTD_CDict    
+    cdict: *const ZSTD_CDict
 ) -> usize
 {
     ZSTD_sizeof_CDict(
@@ -814,7 +814,7 @@ pub unsafe extern "C" fn csbindgen_ZSTD_sizeof_CDict(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_ZSTD_sizeof_DDict(
-    ddict: *const ZSTD_DDict    
+    ddict: *const ZSTD_DDict
 ) -> usize
 {
     ZSTD_sizeof_DDict(

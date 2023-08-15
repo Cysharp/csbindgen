@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.InteropServices;
 
+
 namespace CsBindgen
 {
     internal static unsafe partial class NestedModuleTests
@@ -38,6 +39,7 @@ namespace CsBindgen
         Two,
         Three,
     }
+
 
 
 }

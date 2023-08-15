@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.InteropServices;
 
+
 namespace CsBindgen
 {
     internal static unsafe partial class LibBullet3
@@ -1786,6 +1787,7 @@ namespace CsBindgen
     {
         public int unused;
     }
+
 
 
 

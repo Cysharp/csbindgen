@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.InteropServices;
 
+
 namespace CsBindgen
 {
     public static unsafe partial class LibLz4
@@ -447,6 +448,7 @@ namespace CsBindgen
         public uint reserved1;
         public uint reserved0;
     }
+
 
 
 

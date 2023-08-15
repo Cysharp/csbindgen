@@ -7,6 +7,7 @@
 using System;
 using System.Runtime.InteropServices;
 
+
 namespace PixivApi.ImageFile
 {
     internal static unsafe partial class LibPng16
@@ -1084,6 +1085,7 @@ namespace PixivApi.ImageFile
         public uint warning_or_error;
         public fixed byte message[64];
     }
+
 
 
 
