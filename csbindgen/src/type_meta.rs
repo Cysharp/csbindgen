@@ -442,7 +442,8 @@ pub fn build_method_delegate_if_required(
 
                 let joined_param = parameters
                     .iter()
-                    .map(|p| {
+                    .enumerate()
+                    .map(|(index, p)| {
                         let cs = p.rust_type.to_csharp_string(
                             options,
                             alias_map,
@@ -450,7 +451,11 @@ pub fn build_method_delegate_if_required(
                             method_name,
                             parameter_name,
                         );
-                        format!("{} {}", cs, escape_name(p.name.as_str()))
+                        // a is ascii for 97
+                        let parameter_name = char::from_u32(index as u32 + 97)
+                            .unwrap_or('?')
+                            .to_string();
+                        format!("{} {}", cs, escape_name(parameter_name.as_str()))
                     })
                     .collect::<Vec<_>>()
                     .join(", ");
