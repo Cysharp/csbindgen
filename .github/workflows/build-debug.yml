@@ -17,6 +17,7 @@ jobs:
       - uses: actions/checkout@v3
       - run: cargo build --verbose
       - run: cargo test update_package_version -- 1.0.0 --nocapture
+      - run: cargo test
   build-dotnet:
     runs-on: ubuntu-latest
     timeout-minutes: 10
