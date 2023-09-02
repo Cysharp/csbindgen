@@ -31,6 +31,7 @@ pub struct BindgenOptions {
     pub csharp_use_function_pointer: bool,
     pub csharp_imported_namespaces: Vec<String>,
     pub csharp_generate_const: bool,
+    pub csharp_marshal_byte_point_as_string:String,
 }
 
 impl Default for Builder {
@@ -55,6 +56,7 @@ impl Default for Builder {
                 csharp_use_function_pointer: true,
                 csharp_imported_namespaces: vec![],
                 csharp_generate_const: false,
+                csharp_marshal_byte_point_as_string:"".to_string(),
             },
         }
     }
@@ -186,6 +188,12 @@ impl Builder {
     /// conifure C# generate const, default is false
     pub fn csharp_generate_const(mut self, csharp_generate_const: bool) -> Builder {
         self.options.csharp_generate_const = csharp_generate_const;
+        self
+    }
+
+     /// configure C# byte* to string marshal (default is ``),can set`LPWStr|LPUTF8Str`
+    pub fn csharp_marshal_byte_point_as_string<T: Into<String>>(mut self,  marshal_string_type:T) -> Builder {
+        self.options.csharp_marshal_byte_point_as_string = marshal_string_type.into();
         self
     }
 

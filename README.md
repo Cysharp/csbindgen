@@ -174,6 +174,7 @@ csbindgen::Builder::default()
     .csharp_imported_namespaces("MyLib")    // optional, default: empty
     .csharp_generate_const (false)          // optional, default: false
     .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal") // optional, default: ""
+    .csharp_marshal_byte_point_as_string("") // optional, default: ""
     .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs")     // required
     .unwrap();
 ```
@@ -208,6 +209,8 @@ namespace {csharp_namespace}
 `csharp_disable_emit_dll_name` is optional, if set to true then don't emit `const string __DllName`. It is useful for generate same class-name from different builder.
 
 `csharp_generate_const` is optional, if set to true then generate C# `const` field from Rust `const`.
+
+`csharp_marshal_byte_point_as_string` is optional,default is emputy,it will not work. if set to `LPUTF8Str` or `LPTStr` string,the `byte*` point parameter will be marshal to string like `([MarshalAs(UnmanagedType.LPTStr)]String msg)`. detail marshal type please vist:[UnmanagedType](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.unmanagedtype)
 
 `input_extern_file` and `input_bindgen_file` allow mulitple call, if you need to add dependent struct, use this.
 
@@ -273,6 +276,7 @@ csbindgen::Builder::default()
     .csharp_use_function_pointer(true)            // optional, default: true
     .csharp_imported_namespaces("MyLib")          // optional, default: empty
     .csharp_generate_const (false)                // optional, default: false
+    .csharp_marshal_byte_point_as_string("")      // optional, default: empty
     .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal") // optional, default: ""
     .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs") // required
     .unwrap();

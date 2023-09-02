@@ -87,6 +87,7 @@ pub fn emit_csharp(
     let class_name = &options.csharp_class_name;
     let method_prefix = &options.csharp_method_prefix;
     let accessibility = &options.csharp_class_accessibility;
+    let string_marshal=&options.csharp_marshal_byte_point_as_string;
 
     let mut dll_name = match options.csharp_if_symbol.as_str() {
         "" => format!(
@@ -172,6 +173,9 @@ pub fn emit_csharp(
                         .to_csharp_string(options, aliases, false, method_name, &p.name);
                 if type_name == "bool" {
                     type_name = "[MarshalAs(UnmanagedType.U1)] bool".to_string();
+                }
+                if type_name=="byte*"&& !string_marshal.is_empty() {
+                    type_name= format!("[MarshalAs(UnmanagedType.{string_marshal})] string").to_string();
                 }
 
                 format!("{} {}", type_name, escape_name(p.name.as_str()))
