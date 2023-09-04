@@ -2,15 +2,15 @@ use std::error::Error;
 
 fn main() -> Result<(), Box<dyn Error>> {
     //fn main() {
-    // bindgen::Builder::default()
-    //     .header("c/lz4/lz4.h")
-    //     .header("c/lz4/lz4hc.h")
-    //     .header("c/lz4/lz4frame.h")
-    //     .header("c/lz4/xxhash.h")
-    //     .generate()
-    //     .unwrap()
-    //     .write_to_file("src/lz4.rs")
-    //     .unwrap();
+    bindgen::Builder::default()
+        .header("c/lz4/lz4.h")
+        .header("c/lz4/lz4hc.h")
+        .header("c/lz4/lz4frame.h")
+        .header("c/lz4/xxhash.h")
+        .generate()
+        .unwrap()
+        .write_to_file("src/lz4.rs")
+        .unwrap();
 
     cc::Build::new()
         .files([
@@ -31,7 +31,6 @@ fn main() -> Result<(), Box<dyn Error>> {
     //     .generate()?
     //     .write_to_file("src/quiche.rs")?;
 
-    
     //  bindgen::Builder::default()
     //      .header("c/sqlite3/sqlite3.h")
     //      .generate()?
@@ -65,7 +64,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .csharp_generate_const(true)
         .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs")
         .unwrap();
-    
+
     // csbindgen::Builder::default()
     //     .input_bindgen_file("src/sqlite3.rs")
     //     .method_filter(|x| x.starts_with("sqlite3_"))
@@ -100,7 +99,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .csharp_use_function_pointer(true)
         .generate_csharp_file("../dotnet-sandbox/NestedModuleTests.cs")
         .unwrap();
-    
+
     csbindgen::Builder::new()
         .input_bindgen_file("src/zstd.rs")
         .method_filter(|x| x.starts_with("ZSTD_"))
@@ -126,7 +125,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         .csharp_generate_const(true)
         .generate_to_file("src/bullet3_ffi.rs", "../dotnet-sandbox/bullet3_bindgen.cs")?;
 
-
     csbindgen::Builder::new()
         .input_bindgen_file("src/libpng16.rs")
         //.method_filter(|x| x.starts_with("png_"))
@@ -134,7 +132,6 @@ fn main() -> Result<(), Box<dyn Error>> {
         .csharp_class_name("LibPng16")
         .csharp_dll_name("libpng16")
         .generate_csharp_file("../dotnet-sandbox/libpng16_csbindgen.cs")?;
-
 
     csbindgen::Builder::new()
         .input_bindgen_file("src/physx/lib.rs")

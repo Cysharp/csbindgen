@@ -16,3 +16,5 @@ unity-sandbox/*.csproj.user
 unity-sandbox/*.sln
 unity-sandbox/Library
 unity-sandbox/Logs/
+
+csbindgen-tests/src/lz4.rs

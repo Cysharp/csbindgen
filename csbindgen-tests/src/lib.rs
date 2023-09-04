@@ -126,7 +126,6 @@ pub const CCHAR: char = 'あ';
 pub const BOOLCONST_T: bool = true;
 pub const BOOLCONST_F: bool = false;
 
-
 /// my comment!
 #[no_mangle]
 extern "C" fn comment_one(_flags: EnumFlags) {}
@@ -345,7 +344,7 @@ pub struct MyVector3 {
     pub z: f32,
 }
 
- // not repr(C)
+// not repr(C)
 pub struct InternalCounterContext {
     pub set: HashSet<i32>,
 }
@@ -475,6 +474,7 @@ pub struct Context {
 fn build_test() {
     let path = std::env::current_dir().unwrap();
     println!("starting dir: {}", path.display()); // csbindgen/csbindgen-tests
+    std::env::set_current_dir(path.parent().unwrap()).unwrap();
 
     // // unsafe {
     // //     let num = lz4::LZ4_versionNumber();

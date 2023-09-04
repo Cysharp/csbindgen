@@ -38,7 +38,7 @@ pub(crate) fn generate(
 
     for path in paths {
         let file_content = std::fs::read_to_string(path)
-            .expect(&format!("input file not found, path: {}", path.display()));
+            .unwrap_or_else(|_| panic!("input file not found, path: {}", path.display()));
         let file_ast = syn::parse_file(file_content.as_str())?;
 
         match generate_kind {
@@ -158,8 +158,10 @@ mod tests {
         let path = std::env::current_dir().unwrap();
         println!("starting dir: {}", path.display()); // csbindgen/csbindgen
 
+        std::env::set_current_dir(path.parent().unwrap()).unwrap();
+
         Builder::new()
-            .input_bindgen_file("csbindgen-tests/src/liblz4.rs")
+            .input_bindgen_file("csbindgen-tests/src/lz4.rs")
             .csharp_class_name("LibLz4")
             .csharp_dll_name("csbindgen_tests")
             .generate_to_file(
@@ -178,7 +180,7 @@ mod tests {
         // 2: 1.0.0
         // 3: --nocapture
 
-        if args[1] != "update_package_version" {
+        if args.len() < 2 || args[1] != "update_package_version" {
             return;
         }
 
