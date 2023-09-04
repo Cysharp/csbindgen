@@ -1,6 +1,6 @@
 use std::{
     collections::HashSet,
-    ffi::{c_char, c_long, c_ulong, CString},
+    ffi::{c_char, c_long, c_ulong, CString}, ptr::NonNull,
 };
 
 #[allow(dead_code)]
@@ -171,11 +171,23 @@ pub extern "C" fn event(event: event) {
 }
 
 #[no_mangle]
-pub extern "C" fn test_func_issue_39(f: extern "C" fn(i32)){
+pub extern "C" fn test_func_issue_39(_f: extern "C" fn(i32)){
 }
 
 #[no_mangle]
-pub extern "C" fn test_func_issue_39_variation1(f: extern "C" fn(i32, i32, i32)){
+pub extern "C" fn test_func_issue_39_variation1(_f: extern "C" fn(i32, i32, i32)){
+}
+
+#[no_mangle]
+pub extern "C" fn nonnull_parameter(_output_word_uuid: NonNull<[u8; 16]>){
+}
+
+#[no_mangle]
+pub extern "C" fn non_nonnull_parameter(_output_word_uuid: [u8; 16]){
+}
+
+#[no_mangle]
+pub extern "C" fn ge(_f: extern "C" fn(i32, i32, i32)){
 }
 
 #[no_mangle]
