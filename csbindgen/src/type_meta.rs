@@ -451,10 +451,12 @@ pub fn build_method_delegate_if_required(
                             method_name,
                             parameter_name,
                         );
-                        // a is ascii for 97
-                        let parameter_name = char::from_u32(index as u32 + 97)
-                            .unwrap_or('?')
-                            .to_string();
+                        let parameter_name = if p.name == "" {
+                            format!("arg{}", index + 1)
+                        } else {
+                            p.name.clone()
+                        };
+
                         format!("{} {}", cs, escape_name(parameter_name.as_str()))
                     })
                     .collect::<Vec<_>>()

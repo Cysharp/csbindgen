@@ -87,7 +87,8 @@ fn main() -> Result<(), Box<dyn Error>> {
         //.input_extern_files(&["src/lib.rs"])
         .csharp_class_name("NativeMethods")
         .csharp_dll_name("csbindgen_tests")
-        .csharp_use_function_pointer(true)
+        // .csharp_use_function_pointer(true)
+        .csharp_use_function_pointer(false)
         .csharp_generate_const(true)
         .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs")
         .unwrap();

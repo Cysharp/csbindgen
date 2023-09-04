@@ -171,6 +171,14 @@ pub extern "C" fn event(event: event) {
 }
 
 #[no_mangle]
+pub extern "C" fn test_func_issue_39(f: extern "C" fn(i32)){
+}
+
+#[no_mangle]
+pub extern "C" fn test_func_issue_39_variation1(f: extern "C" fn(i32, i32, i32)){
+}
+
+#[no_mangle]
 pub extern "C" fn nest_test(
     _f: ::std::option::Option<
         unsafe extern "C" fn(
