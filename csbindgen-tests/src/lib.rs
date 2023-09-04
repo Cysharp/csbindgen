@@ -178,13 +178,17 @@ pub extern "C" fn test_func_issue_39(_f: extern "C" fn(i32)){
 pub extern "C" fn test_func_issue_39_variation1(_f: extern "C" fn(i32, i32, i32)){
 }
 
-#[no_mangle]
-pub extern "C" fn nonnull_parameter(_output_word_uuid: NonNull<[u8; 16]>){
-}
+// #[no_mangle]
+// pub extern "C" fn nonnull_parameter(_output_word_uuid: NonNull<[u8; 16]>){
+// }
 
-#[no_mangle]
-pub extern "C" fn non_nonnull_parameter(_output_word_uuid: [u8; 16]){
-}
+// #[no_mangle]
+// pub extern "C" fn non_nonnull_parameter(_output_word_uuid: [u8; 16]){
+// }
+
+// #[no_mangle]
+// pub extern "C" fn non_nonnull_parameter2(_output_word_uuid: NonNull<u8>){
+// }
 
 #[no_mangle]
 pub extern "C" fn ge(_f: extern "C" fn(i32, i32, i32)){
