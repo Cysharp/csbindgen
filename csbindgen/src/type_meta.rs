@@ -84,6 +84,8 @@ pub enum PointerType {
     MutPointerPointer,
     ConstMutPointerPointer,
     MutConstPointerPointer,
+    Box,
+    NonNull,
 }
 
 #[derive(Clone, Debug)]
@@ -112,7 +114,7 @@ impl RustType {
     pub fn to_rust_string(&self, type_path: &str) -> String {
         let mut sb = String::new();
 
-        fn emit_pointer(sb: &mut String, p: &PointerType) {
+        fn emit_pointer(sb: &mut String, p: &PointerType) -> bool {
             match p {
                 ConstPointer => sb.push_str("*const"),
                 MutPointer => sb.push_str("*mut"),
@@ -120,7 +122,15 @@ impl RustType {
                 MutPointerPointer => sb.push_str("*mut *mut"),
                 ConstMutPointerPointer => sb.push_str("*const *mut"),
                 MutConstPointerPointer => sb.push_str("*mut *const"),
+                NonNull => sb.push_str("NonNull<"),
+                Box => sb.push_str("Box<"),
             };
+
+            // return NonNull or Box requires close angle
+            match p {
+                NonNull | Box => true,
+                _ => false,
+            }
         }
 
         let emit_type_name = |sb: &mut String| {
@@ -142,13 +152,17 @@ impl RustType {
                 emit_type_name(&mut sb);
             }
             Pointer(p, inner) => {
-                emit_pointer(&mut sb, p);
+                let need_close = emit_pointer(&mut sb, p);
                 sb.push(' ');
                 sb.push_str(inner.to_rust_string(type_path).as_str());
+                if need_close {
+                    sb.push('>');
+                }
             }
             FixedArray(digits, pointer) => {
+                let mut need_close = false;
                 if let Some(p) = pointer {
-                    emit_pointer(&mut sb, p);
+                    need_close = emit_pointer(&mut sb, p);
                     sb.push(' ');
                 }
 
@@ -157,6 +171,9 @@ impl RustType {
                 sb.push_str("; ");
                 sb.push_str(digits.as_str());
                 sb.push(']');
+                if need_close {
+                    sb.push('>');
+                }
             }
             Function(parameters, return_type) => {
                 emit_type_name(&mut sb); // extern fn
@@ -359,7 +376,7 @@ impl RustType {
                             );
                         }
                         match p {
-                            MutPointer | ConstPointer => {
+                            MutPointer | ConstPointer | NonNull | Box => {
                                 sb.push('*');
                             }
                             MutPointerPointer

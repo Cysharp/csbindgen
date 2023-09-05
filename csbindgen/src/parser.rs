@@ -257,7 +257,7 @@ pub fn collect_const(ast: &syn::File, result: &mut Vec<RustConst>) {
                         format!("{}", i.base10_parse::<i64>().unwrap())
                     }
                     syn::Lit::Float(f) => {
-                       format!("{}", f.base10_parse::<f64>().unwrap())
+                        format!("{}", f.base10_parse::<f64>().unwrap())
                     }
                     syn::Lit::Bool(b) => {
                         format!("{}", b.value)
@@ -489,13 +489,23 @@ fn parse_type(t: &syn::Type) -> RustType {
 fn parse_type_path(t: &syn::TypePath) -> RustType {
     let last_segment = t.path.segments.last().unwrap();
     if let syn::PathArguments::AngleBracketed(x) = &last_segment.arguments {
-        // generics, only supports Option<> for null function pointer
-        if last_segment.ident == "Option" {
-            if let Some(syn::GenericArgument::Type(t)) = x.args.first() {
-                let rust_type = parse_type(t);
+        // generics
+        if let Some(syn::GenericArgument::Type(t)) = x.args.first() {
+            let rust_type = parse_type(t);
+            if last_segment.ident == "Option" {
                 return RustType {
                     type_name: "Option".to_string(),
                     type_kind: TypeKind::Option(Box::new(rust_type)),
+                };
+            } else if last_segment.ident == "NonNull" {
+                return RustType {
+                    type_name: "NonNull".to_string(),
+                    type_kind: TypeKind::Pointer(PointerType::NonNull, Box::new(rust_type)),
+                };
+            } else if last_segment.ident == "Box" {
+                return RustType {
+                    type_name: "Box".to_string(),
+                    type_kind: TypeKind::Pointer(PointerType::Box, Box::new(rust_type)),
                 };
             }
         }

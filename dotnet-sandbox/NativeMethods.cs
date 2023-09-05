@@ -53,13 +53,13 @@ namespace CsBindgen
         public static extern void test_func_issue_39_variation1(delegate* unmanaged[Cdecl]<int, int, int, void> _f);
 
         [DllImport(__DllName, EntryPoint = "nonnull_parameter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void nonnull_parameter(NonNull _output_word_uuid);
-
-        [DllImport(__DllName, EntryPoint = "non_nonnull_parameter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void non_nonnull_parameter(void/* byte[] */ _output_word_uuid);
+        public static extern void nonnull_parameter(void/* byte[] */* _output_word_uuid);
 
         [DllImport(__DllName, EntryPoint = "non_nonnull_parameter2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void non_nonnull_parameter2(byte _output_word_uuid);
+        public static extern void non_nonnull_parameter2(byte* _output_word_uuid);
+
+        [DllImport(__DllName, EntryPoint = "nonzero_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void nonzero_test(NonZeroI8 _a, U32Transparent _b);
 
         [DllImport(__DllName, EntryPoint = "ge", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void ge(delegate* unmanaged[Cdecl]<int, int, int, void> _f);
