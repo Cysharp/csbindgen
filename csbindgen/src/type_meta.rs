@@ -217,23 +217,6 @@ impl RustType {
         fn convert_type_name(type_name: &str) -> String {
             let temp_string: String;
             let name = match type_name {
-                // std::os::raw https://doc.rust-lang.org/std/os/raw/index.html
-                // std::ffi::raw https://doc.rust-lang.org/core/ffi/index.html
-                "c_char" => "byte",
-                "c_schar" => "sbyte",
-                "c_uchar" => "byte",
-                "c_short" => "short",
-                "c_ushort" => "ushort",
-                "c_int" => "int",
-                "c_uint" => "uint",
-                "c_long" => "CLong",   // .NET 6
-                "c_ulong" => "CULong", // .NET 6
-                "c_longlong" => "long",
-                "c_ulonglong" => "ulong",
-                "c_float" => "float",
-                "c_double" => "double",
-                "c_void" => "void",
-                "CString" => "sbyte",
                 // rust primitives
                 "i8" => "sbyte",
                 "i16" => "short",
@@ -252,6 +235,36 @@ impl RustType {
                 "char" => "uint",
                 "usize" => "nuint", // C# 9.0
                 "()" => "void",
+                // std::os::raw https://doc.rust-lang.org/std/os/raw/index.html
+                // std::ffi::raw https://doc.rust-lang.org/core/ffi/index.html
+                "c_char" => "byte",
+                "c_schar" => "sbyte",
+                "c_uchar" => "byte",
+                "c_short" => "short",
+                "c_ushort" => "ushort",
+                "c_int" => "int",
+                "c_uint" => "uint",
+                "c_long" => "CLong",   // .NET 6
+                "c_ulong" => "CULong", // .NET 6
+                "c_longlong" => "long",
+                "c_ulonglong" => "ulong",
+                "c_float" => "float",
+                "c_double" => "double",
+                "c_void" => "void",
+                "CString" => "sbyte",
+                // std::num https://doc.rust-lang.org/std/num/index.html
+                "NonZeroI8" => "sbyte",
+                "NonZeroI16" => "short",
+                "NonZeroI32" => "int",
+                "NonZeroI64" => "long",
+                "NonZeroI128" => "Int128",
+                "NonZeroIsize" => "nint",
+                "NonZeroU8" => "byte",
+                "NonZeroU16" => "ushort",
+                "NonZeroU32" => "uint",
+                "NonZeroU64" => "ulong",
+                "NonZeroU128" => "UInt128",
+                "NonZeroUsize" => "nuint",                
                 _ => {
                     temp_string = escape_name(type_name);
                     temp_string.as_str()

@@ -59,7 +59,7 @@ namespace CsBindgen
         public static extern void non_nonnull_parameter2(byte* _output_word_uuid);
 
         [DllImport(__DllName, EntryPoint = "nonzero_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void nonzero_test(NonZeroI8 _a, U32Transparent _b);
+        public static extern void nonzero_test(sbyte _a, byte _b, uint _c);
 
         [DllImport(__DllName, EntryPoint = "ge", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void ge(delegate* unmanaged[Cdecl]<int, int, int, void> _f);

@@ -1,6 +1,8 @@
 use std::{
     collections::HashSet,
-    ffi::{c_char, c_long, c_ulong, CString}, ptr::NonNull, num::NonZeroI8,
+    ffi::{c_char, c_long, c_ulong, CString},
+    num::*,
+    ptr::NonNull,
 };
 
 #[allow(dead_code)]
@@ -171,33 +173,26 @@ pub extern "C" fn event(event: event) {
 }
 
 #[no_mangle]
-pub extern "C" fn test_func_issue_39(_f: extern "C" fn(i32)){
-}
+pub extern "C" fn test_func_issue_39(_f: extern "C" fn(i32)) {}
 
 #[no_mangle]
-pub extern "C" fn test_func_issue_39_variation1(_f: extern "C" fn(i32, i32, i32)){
-}
+pub extern "C" fn test_func_issue_39_variation1(_f: extern "C" fn(i32, i32, i32)) {}
 
 #[no_mangle]
-pub extern "C" fn nonnull_parameter(_output_word_uuid: NonNull<[u8; 16]>){
-}
+pub extern "C" fn nonnull_parameter(_output_word_uuid: NonNull<[u8; 16]>) {}
 
 // #[no_mangle]
 // pub extern "C" fn non_nonnull_parameter(_output_word_uuid: [u8; 16]){
 // }
 
 #[no_mangle]
-pub extern "C" fn non_nonnull_parameter2(_output_word_uuid: NonNull<u8>){
-}
-
+pub extern "C" fn non_nonnull_parameter2(_output_word_uuid: NonNull<u8>) {}
 
 #[no_mangle]
-pub extern "C" fn nonzero_test(_a: NonZeroI8){
-}
+pub extern "C" fn nonzero_test(_a: NonZeroI8, _b: NonZeroU8, _c: NonZeroU32) {}
 
 #[no_mangle]
-pub extern "C" fn ge(_f: extern "C" fn(i32, i32, i32)){
-}
+pub extern "C" fn ge(_f: extern "C" fn(i32, i32, i32)) {}
 
 #[no_mangle]
 pub extern "C" fn nest_test(

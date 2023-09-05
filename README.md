@@ -31,7 +31,7 @@ Install on `Cargo.toml` as `build-dependencies` and set up `bindgen::Builder` on
 crate-type = ["cdylib"]
 
 [build-dependencies]
-csbindgen = "1.7.4"
+csbindgen = "1.7.5"
 ```
 
 ### Rust to C#.
@@ -423,21 +423,6 @@ Rust types will map these C# types.
 
 | Rust | C# |
 | ---- | -- |
-| `c_char` | `byte` |
-| `c_schar` | `sbyte` |
-| `c_uchar` | `byte` |
-| `c_short` | `short` |
-| `c_ushort` | `ushort` |
-| `c_int` | `int` |
-| `c_uint` | `uint` |
-| `c_long` | `CLong` |
-| `c_ulong` | `CULong` |
-| `c_longlong` | `long` |
-| `c_ulonglong` | `ulong` |
-| `c_float` | `float` |
-| `c_double` | `double` |
-| `c_void` | `void` |
-| `CString` | `sbyte` |
 | `i8` | `sbyte` |
 | `i16` | `short` |
 | `i32` | `int` |
@@ -455,6 +440,33 @@ Rust types will map these C# types.
 | `bool` | `[MarshalAs(UnmanagedType.U1)]bool` |
 | `char` | `uint` |
 | `()` | `void` |
+| `c_char` | `byte` |
+| `c_schar` | `sbyte` |
+| `c_uchar` | `byte` |
+| `c_short` | `short` |
+| `c_ushort` | `ushort` |
+| `c_int` | `int` |
+| `c_uint` | `uint` |
+| `c_long` | `CLong` |
+| `c_ulong` | `CULong` |
+| `c_longlong` | `long` |
+| `c_ulonglong` | `ulong` |
+| `c_float` | `float` |
+| `c_double` | `double` |
+| `c_void` | `void` |
+| `CString` | `sbyte` |
+| `NonZeroI8` | `sbyte` |
+| `NonZeroI16` | `short` |
+| `NonZeroI32` | `int` |
+| `NonZeroI64` | `long` |
+| `NonZeroI128` | `Int128` |
+| `NonZeroIsize` | `nint` |
+| `NonZeroU8` | `byte` |
+| `NonZeroU16` | `ushort` |
+| `NonZeroU32` | `uint` |
+| `NonZeroU64` | `ulong` |
+| `NonZeroU128` | `UInt128` |
+| `NonZeroUsize` | `nuint` |
 | `#[repr(C)]Struct` | `[StructLayout(LayoutKind.Sequential)]Struct` |
 | `#[repr(C)]Union` | `[StructLayout(LayoutKind.Explicit)]Struct` |
 | `#[repr(u*/i*)]Enum` | `Enum` |
@@ -467,6 +479,8 @@ Rust types will map these C# types.
 | `*const *const T` | `T**` |
 | `*mut *const T` | `T**` |
 | `*const *mut T` | `T**` |
+| `NonNull<T>` | `T*` |
+| `Box<T>` | `T*` |
 
 csbindgen is designed to return primitives that do not cause marshalling. It is better to convert from pointers to Span yourself than to do the conversion implicitly and in a black box. This is a recent trend, such as the addition of [DisableRuntimeMarshalling](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.disableruntimemarshallingattribute) from .NET 7.
 
