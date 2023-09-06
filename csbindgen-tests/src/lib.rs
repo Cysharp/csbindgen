@@ -606,6 +606,8 @@ pub struct CallbackTable {
     pub foobar: extern "C" fn(i: i32) -> i32,
 }
 
+pub extern "C" fn reference_type(_a: &i32, _b: &*mut i32, _c: &[u8; 16], _d: &Context) {}
+
 // fn run_physix(){
 //     unsafe {
 //         let foundation = physx_create_foundation();

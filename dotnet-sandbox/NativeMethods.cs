@@ -176,6 +176,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "call_bindgen_lz4", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void call_bindgen_lz4();
 
+        [DllImport(__DllName, EntryPoint = "reference_type", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void reference_type(int* _a, int** _b, void/* byte[] */* _c, Context* _d);
+
 
     }
 
