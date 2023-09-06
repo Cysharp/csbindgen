@@ -476,6 +476,68 @@ fn parse_type(t: &syn::Type) -> RustType {
                 type_kind: TypeKind::Function(parameters, ret),
             };
         }
+        syn::Type::Reference(t) => {
+            let result = parse_type(&*t.elem);
+            let is_mut = t.mutability.is_some();
+
+            match result {
+                RustType {
+                    type_kind: TypeKind::Pointer(pt, _),
+                    ..
+                } => match pt {
+                    PointerType::ConstPointer | PointerType::MutPointer => {
+                        return RustType {
+                            type_name: result.type_name,
+                            type_kind: TypeKind::Pointer(
+                                if is_mut {
+                                    PointerType::MutPointer
+                                } else {
+                                    PointerType::ConstPointer
+                                },
+                                Box::new(parse_type(&*t.elem)),
+                            ),
+                        };
+                    }
+                    PointerType::ConstPointerPointer | PointerType::MutConstPointerPointer => {
+                        return RustType {
+                            type_name: result.type_name,
+                            type_kind: TypeKind::Pointer(
+                                if is_mut {
+                                    PointerType::MutConstPointerPointer
+                                } else {
+                                    PointerType::ConstPointerPointer
+                                },
+                                Box::new(parse_type(&*t.elem)),
+                            ),
+                        };
+                    }
+                    PointerType::ConstMutPointerPointer | PointerType::MutPointerPointer => {
+                        return RustType {
+                            type_name: result.type_name,
+                            type_kind: TypeKind::Pointer(
+                                if is_mut {
+                                    PointerType::MutPointerPointer
+                                } else {
+                                    PointerType::ConstMutPointerPointer
+                                },
+                                Box::new(parse_type(&*t.elem)),
+                            ),
+                        };
+                    }
+                    _ => {}
+                },
+                _ => {
+                    // &*t.elem is not pointer
+                    return RustType {
+                        type_name: result.type_name,
+                        type_kind: TypeKind::Pointer(
+                            PointerType::ConstPointer,
+                            Box::new(parse_type(&*t.elem)),
+                        ),
+                    };
+                }
+            }
+        }
         _ => {}
     };
 
