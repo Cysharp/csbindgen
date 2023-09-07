@@ -176,11 +176,16 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "call_bindgen_lz4", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void call_bindgen_lz4();
 
+
+        [DllImport(__DllName, EntryPoint = "reference_type", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void reference_type(int* _a, int** _b, void/* byte[] */* _c, Context* _d);
+
         [DllImport(__DllName, EntryPoint = "init_treat_as_empty_struct_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void init_treat_as_empty_struct_context(TreatAsEmptyStruct** _out);
 
         [DllImport(__DllName, EntryPoint = "free_treat_as_empty_struct_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void free_treat_as_empty_struct_context(TreatAsEmptyStruct* _src);
+
 
 
     }

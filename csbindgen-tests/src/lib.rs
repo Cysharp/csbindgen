@@ -606,6 +606,9 @@ pub struct CallbackTable {
     pub foobar: extern "C" fn(i: i32) -> i32,
 }
 
+
+pub extern "C" fn reference_type(_a: &i32, _b: &*mut i32, _c: &[u8; 16], _d: &Context) {}
+
 pub struct InternalHiddenContext {
     pub a: i32
 }
@@ -619,6 +622,7 @@ pub unsafe extern "C" fn init_treat_as_empty_struct_context(_out: NonNull<Box<Tr
 
 #[no_mangle]
 pub unsafe extern "C" fn free_treat_as_empty_struct_context(_src: *mut TreatAsEmptyStruct) {}
+
 
 // fn run_physix(){
 //     unsafe {
