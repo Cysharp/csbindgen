@@ -176,6 +176,12 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "call_bindgen_lz4", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void call_bindgen_lz4();
 
+        [DllImport(__DllName, EntryPoint = "init_treat_as_empty_struct_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void init_treat_as_empty_struct_context(TreatAsEmptyStruct** _out);
+
+        [DllImport(__DllName, EntryPoint = "free_treat_as_empty_struct_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void free_treat_as_empty_struct_context(TreatAsEmptyStruct* _src);
+
 
     }
 
@@ -258,6 +264,11 @@ namespace CsBindgen
     {
         public delegate* unmanaged[Cdecl]<void> foo;
         public delegate* unmanaged[Cdecl]<int, int> foobar;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct TreatAsEmptyStruct
+    {
     }
 
 

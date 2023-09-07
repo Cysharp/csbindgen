@@ -606,6 +606,20 @@ pub struct CallbackTable {
     pub foobar: extern "C" fn(i: i32) -> i32,
 }
 
+pub struct InternalHiddenContext {
+    pub a: i32
+}
+
+pub struct TreatAsEmptyStruct {
+    internal: std::sync::Arc<InternalHiddenContext>
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn init_treat_as_empty_struct_context(_out: NonNull<Box<TreatAsEmptyStruct>>) {}
+
+#[no_mangle]
+pub unsafe extern "C" fn free_treat_as_empty_struct_context(_src: *mut TreatAsEmptyStruct) {}
+
 // fn run_physix(){
 //     unsafe {
 //         let foundation = physx_create_foundation();
