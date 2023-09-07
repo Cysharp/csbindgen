@@ -170,23 +170,42 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                 is_union: true,
             });
         } else if let Item::Struct(t) = item {
-            if let syn::Fields::Named(f) = &t.fields {
-                let struct_name = t.ident.to_string();
-                let fields = collect_fields(f);
-                result.push(RustStruct {
-                    struct_name,
-                    fields,
-                    is_union: false,
-                });
-            } else if let syn::Fields::Unnamed(f) = &t.fields {
-                let struct_name = t.ident.to_string();
-                let fields = collect_fields_unnamed(f);
-                result.push(RustStruct {
-                    struct_name,
-                    fields,
-                    is_union: false,
-                });
-            } else if let syn::Fields::Unit = &t.fields {
+            let mut repr = None;
+            for attr in &t.attrs {
+                let last_segment = attr.path.segments.last().unwrap();
+                if last_segment.ident == "repr" {
+                    repr = Some(attr.tokens.to_string());
+                }
+            }
+
+            if let Some(_) = repr {
+                if let syn::Fields::Named(f) = &t.fields {
+                    let struct_name = t.ident.to_string();
+                    let fields = collect_fields(f);
+                    result.push(RustStruct {
+                        struct_name,
+                        fields,
+                        is_union: false,
+                    });
+                } else if let syn::Fields::Unnamed(f) = &t.fields {
+                    let struct_name = t.ident.to_string();
+                    let fields = collect_fields_unnamed(f);
+                    result.push(RustStruct {
+                        struct_name,
+                        fields,
+                        is_union: false,
+                    });
+                } else if let syn::Fields::Unit = &t.fields {
+                    let struct_name = t.ident.to_string();
+                    let fields: Vec<FieldMember> = Vec::new();
+                    result.push(RustStruct {
+                        struct_name,
+                        fields,
+                        is_union: false,
+                    });
+                }
+            } else {
+                // non #[repr(?)] struct, treat as Unit struct
                 let struct_name = t.ident.to_string();
                 let fields: Vec<FieldMember> = Vec::new();
                 result.push(RustStruct {
