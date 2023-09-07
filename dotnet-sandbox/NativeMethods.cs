@@ -176,16 +176,29 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "call_bindgen_lz4", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void call_bindgen_lz4();
 
-
         [DllImport(__DllName, EntryPoint = "reference_type", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void reference_type(int* _a, int** _b, void/* byte[] */* _c, Context* _d);
+
+        [DllImport(__DllName, EntryPoint = "reference_hogemoge1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void reference_hogemoge1(int* _a, int** _b);
+
+        [DllImport(__DllName, EntryPoint = "reference_hogemoge2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void reference_hogemoge2(int* _a, int** _b);
+
+        [DllImport(__DllName, EntryPoint = "create_counter_context2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern CounterContext2* create_counter_context2();
+
+        [DllImport(__DllName, EntryPoint = "insert_counter_context2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void insert_counter_context2(CounterContext2* context, int value);
+
+        [DllImport(__DllName, EntryPoint = "delete_counter_context2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        public static extern void delete_counter_context2(CounterContext2* context);
 
         [DllImport(__DllName, EntryPoint = "init_treat_as_empty_struct_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void init_treat_as_empty_struct_context(TreatAsEmptyStruct** _out);
 
         [DllImport(__DllName, EntryPoint = "free_treat_as_empty_struct_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void free_treat_as_empty_struct_context(TreatAsEmptyStruct* _src);
-
 
 
     }
@@ -269,6 +282,11 @@ namespace CsBindgen
     {
         public delegate* unmanaged[Cdecl]<void> foo;
         public delegate* unmanaged[Cdecl]<int, int> foobar;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct CounterContext2
+    {
     }
 
     [StructLayout(LayoutKind.Sequential)]

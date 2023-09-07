@@ -31,7 +31,7 @@ Install on `Cargo.toml` as `build-dependencies` and set up `bindgen::Builder` on
 crate-type = ["cdylib"]
 
 [build-dependencies]
-csbindgen = "1.7.5"
+csbindgen = "1.8.0"
 ```
 
 ### Rust to C#.
@@ -479,6 +479,10 @@ Rust types will map these C# types.
 | `*const *const T` | `T**` |
 | `*mut *const T` | `T**` |
 | `*const *mut T` | `T**` |
+| `&T` | `T*` |
+| `&mut T` | `T*` |
+| `&&T` | `T**` |
+| `&*mut T` | `T**` |
 | `NonNull<T>` | `T*` |
 | `Box<T>` | `T*` |
 
@@ -552,39 +556,16 @@ internal unsafe partial struct MyIntVec3
 It also supports unit struct, but there is no C# struct that is synonymous with Rust's unit struct (0 byte), so it cannot be materialized. Instead of using void*, it is recommended to use typed pointers.
 
 ```
-// 0-byte
+// 0-byte in Rust
 #[repr(C)]
-pub struct CounterContext;
+pub struct MyContext;
 ```
 
 ```csharp
-// 1-byte
+// 1-byte in C#
 [StructLayout(LayoutKind.Sequential)]
-internal unsafe partial struct CounterContext
+internal unsafe partial struct MyContext
 {
-}
-```
-
-```rust
-// recommend to use as pointer, in C#, holds CounterContext*
-#[no_mangle]
-pub extern "C" fn create_counter_context() -> *mut CounterContext {
-    let ctx = Box::new(InternalCounterContext {
-        set: HashSet::new(),
-    });
-    Box::into_raw(ctx) as *mut CounterContext
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn counter_context_insert(context: *mut CounterContext, value: i32) {
-    let mut counter = Box::from_raw(context as *mut InternalCounterContext);
-    counter.set.insert(value);
-    Box::into_raw(counter);
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn destroy_counter_context(context: *mut CounterContext) {
-    _ = Box::from_raw(context as *mut InternalCounterContext);
 }
 ```
 
@@ -765,43 +746,47 @@ NativeMethods.delete_context(context);
 
 You can also pass memory allocated by C# to Rust (use `fixed` or `GCHandle.Alloc(Pinned)`). The important thing is that memory allocated in Rust must release in Rust and memory allocated in C# must release in C#.
 
-If you want to pass a non FFI Safe struct, cast it to `*mut c_void`. Then C# will treat it as a `void*`. csbindgen does not support Opaque Type. Additionally, by returning a unit struct instead of `c_void`, you can create a typed handler.
+If you want to pass a non FFI Safe struct reference, csbindgen generates empty C# struct.
 
 ```rust
 #[no_mangle]
 pub extern "C" fn create_counter_context() -> *mut CounterContext {
-    let ctx = Box::new(InternalCounterContext {
+    let ctx = Box::new(CounterContext {
         set: HashSet::new(),
     });
-    Box::into_raw(ctx) as *mut c_void
+    Box::into_raw(ctx)
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn insert_counter_context(context: *mut CounterContext, value: i32) {
-    let mut counter = Box::from_raw(context as *mut InternalCounterContext);
+    let mut counter = Box::from_raw(context);
     counter.set.insert(value);
     Box::into_raw(counter);
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn delete_counter_context(context: *mut CounterContext) {
-    let counter = Box::from_raw(context as *mut InternalCounterContext);
+    let counter = Box::from_raw(context);
     for value in counter.set.iter() {
         println!("counter value: {}", value)
     }
 }
 
-#[repr(C)]
-pub struct CounterContext;
-
 // no repr(C)
-pub struct InternalCounterContext {
+pub struct CounterContext {
     pub set: HashSet<i32>,
 }
 ```
 
 ```csharp
-var ctx = NativeMethods.create_counter_context();
+// csbindgen generates this handler type
+[StructLayout(LayoutKind.Sequential)]
+internal unsafe partial struct CounterContext
+{
+}
+
+// You can hold pointer instance
+CounterContext* ctx = NativeMethods.create_counter_context();
     
 NativeMethods.insert_counter_context(ctx, 10);
 NativeMethods.insert_counter_context(ctx, 20);

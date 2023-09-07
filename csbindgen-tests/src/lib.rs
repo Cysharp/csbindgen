@@ -609,6 +609,38 @@ pub struct CallbackTable {
 
 pub extern "C" fn reference_type(_a: &i32, _b: &*mut i32, _c: &[u8; 16], _d: &Context) {}
 
+pub extern "C" fn reference_hogemoge1(_a : &mut i32, _b: &&i32){}
+pub extern "C" fn reference_hogemoge2(_a : &mut i32, _b: &*mut i32){}
+
+
+#[no_mangle]
+pub extern "C" fn create_counter_context2() -> *mut CounterContext2 {
+    let ctx = Box::new(CounterContext2 {
+        set: HashSet::new(),
+    });
+    Box::into_raw(ctx)
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn insert_counter_context2(context: *mut CounterContext2, value: i32) {
+    let mut counter = Box::from_raw(context);
+    counter.set.insert(value);
+    Box::into_raw(counter);
+}
+
+#[no_mangle]
+pub unsafe extern "C" fn delete_counter_context2(context: *mut CounterContext2) {
+    let counter = Box::from_raw(context);
+    for value in counter.set.iter() {
+        println!("counter value: {}", value)
+    }
+}
+
+// no repr(C)
+pub struct CounterContext2 {
+    pub set: HashSet<i32>,
+}
+
 pub struct InternalHiddenContext {
     pub a: i32
 }
