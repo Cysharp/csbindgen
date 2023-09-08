@@ -251,11 +251,13 @@ fn collect_fields_unnamed(fields: &syn::FieldsUnnamed) -> Vec<FieldMember> {
     result
 }
 
-pub fn collect_const(ast: &syn::File, result: &mut Vec<RustConst>) {
+pub fn collect_const(ast: &syn::File, result: &mut Vec<RustConst>,filter:fn(const_name: &str) -> bool) {
     for item in depth_first_module_walk(&ast.items) {
         if let Item::Const(ct) = item {
             // pub const Ident: ty = expr
             let const_name = ct.ident.to_string();
+            if filter(const_name.as_str()) {
+                
             let t = parse_type(&ct.ty);
 
             if let syn::Expr::Lit(lit_expr) = &*ct.expr {
@@ -290,6 +292,7 @@ pub fn collect_const(ast: &syn::File, result: &mut Vec<RustConst>) {
                     value: value,
                 });
             }
+        }
         }
     }
 }

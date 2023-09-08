@@ -30,7 +30,7 @@ pub struct BindgenOptions {
     pub csharp_if_dll_name: String,
     pub csharp_use_function_pointer: bool,
     pub csharp_imported_namespaces: Vec<String>,
-    pub csharp_generate_const: bool,
+    pub csharp_generate_const_filter: fn(const_name: &str) -> bool,
 }
 
 impl Default for Builder {
@@ -54,7 +54,7 @@ impl Default for Builder {
                 csharp_if_dll_name: "".to_string(),
                 csharp_use_function_pointer: true,
                 csharp_imported_namespaces: vec![],
-                csharp_generate_const: false,
+                csharp_generate_const_filter: |_| false,
             },
         }
     }
@@ -84,6 +84,8 @@ impl Builder {
         self.options.method_filter = method_filter;
         self
     }
+
+    
 
     /// add original extern call type prefix to rust wrapper,
     /// `return {rust_method_type_path}::foo()`
@@ -177,15 +179,15 @@ impl Builder {
         self
     }
 
-    /// conifure C# generate function pointer as delegate* or Func/Action, default is true(generate delegate*)
+    /// configure C# generate function pointer as delegate* or Func/Action, default is true(generate delegate*)
     pub fn csharp_use_function_pointer(mut self, csharp_use_function_pointer: bool) -> Builder {
         self.options.csharp_use_function_pointer = csharp_use_function_pointer;
         self
     }
 
-    /// conifure C# generate const, default is false
-    pub fn csharp_generate_const(mut self, csharp_generate_const: bool) -> Builder {
-        self.options.csharp_generate_const = csharp_generate_const;
+    /// configure C# generate const filter, default `|_| false`
+    pub fn csharp_generate_const_filter(mut self, csharp_generate_const_filter: fn(const_name: &str) -> bool) -> Builder {
+        self.options.csharp_generate_const_filter = csharp_generate_const_filter;
         self
     }
 

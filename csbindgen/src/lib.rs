@@ -49,9 +49,8 @@ pub(crate) fn generate(
         collect_struct(&file_ast, &mut structs);
         collect_enum(&file_ast, &mut enums);
 
-        if options.csharp_generate_const {
-            collect_const(&file_ast, &mut consts);
-        }
+        collect_const(&file_ast, &mut consts,options.csharp_generate_const_filter);
+       
     }
 
     // collect using_types

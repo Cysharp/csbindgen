@@ -61,7 +61,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         //.csharp_c_long_convert("int")
         //.csharp_c_ulong_convert("uint")
         // .csharp_use_function_pointer(true)
-        .csharp_generate_const(true)
+        .csharp_generate_const_filter(|_|true)
         .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs")
         .unwrap();
 
@@ -89,7 +89,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .csharp_dll_name("csbindgen_tests")
         .csharp_use_function_pointer(true)
         //.csharp_use_function_pointer(false)
-        .csharp_generate_const(true)
+        .csharp_generate_const_filter(|_|true)
         .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs")
         .unwrap();
 
@@ -123,7 +123,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .rust_file_header("use super::bullet3::*;")
         .csharp_class_name("LibBullet3")
         .csharp_dll_name("libbullet3")
-        .csharp_generate_const(true)
+        .csharp_generate_const_filter(|_|true)
         .generate_to_file("src/bullet3_ffi.rs", "../dotnet-sandbox/bullet3_bindgen.cs")?;
 
     csbindgen::Builder::new()
