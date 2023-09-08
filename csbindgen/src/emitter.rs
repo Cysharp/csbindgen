@@ -291,7 +291,7 @@ pub fn emit_csharp(
         enum_string.push('\n');
     }
 
-    let mut const_string = String::new();
+    let mut const_string: String = String::new();
     for item in consts {
         let mut type_name = item.rust_type.to_csharp_string(
             options,
