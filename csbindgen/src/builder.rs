@@ -185,6 +185,13 @@ impl Builder {
         self
     }
 
+    /// configure C# generate const, default is false
+    /// equivalent to csharp_generate_const_filter(|_| csharp_generate_const)
+    #[deprecated(note = "User csharp_generate_const_filter instead")]
+    pub fn csharp_generate_const(mut self, csharp_generate_const: bool) -> Builder {
+        self.csharp_generate_const_filter(if csharp_generate_const { |_| true } else { |_| false })
+    }
+    
     /// configure C# generate const filter, default `|_| false`
     pub fn csharp_generate_const_filter(mut self, csharp_generate_const_filter: fn(const_name: &str) -> bool) -> Builder {
         self.options.csharp_generate_const_filter = csharp_generate_const_filter;
