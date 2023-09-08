@@ -207,7 +207,7 @@ namespace {csharp_namespace}
 
 `csharp_disable_emit_dll_name` is optional, if set to true then don't emit `const string __DllName`. It is useful for generate same class-name from different builder.
 
-`csharp_generate_const_filter` is optional, if set a fliter fun, then generate filter C# `const` field from Rust `const`.
+`csharp_generate_const_filter` is optional, if set a filter fun, then generate filter C# `const` field from Rust `const`.
 
 `input_extern_file` and `input_bindgen_file` allow mulitple call, if you need to add dependent struct, use this.
 
