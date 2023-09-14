@@ -376,6 +376,7 @@ namespace {namespace}
 
 fn convert_token_enum_repr(repr: &str) -> &str {
     match repr {
+        "(C)" => "uint",
         "(u8)" => "byte",
         "(u16)" => "ushort",
         "(u32)" => "uint",
