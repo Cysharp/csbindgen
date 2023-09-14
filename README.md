@@ -488,7 +488,20 @@ Rust types will map these C# types.
 
 csbindgen is designed to return primitives that do not cause marshalling. It is better to convert from pointers to Span yourself than to do the conversion implicitly and in a black box. This is a recent trend, such as the addition of [DisableRuntimeMarshalling](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.compilerservices.disableruntimemarshallingattribute) from .NET 7.
 
+Older C# version do not support `nint` and `nuint`. You can use `csharp_use_nint_types` to use `IntPtr` and `UIntPtr` in their place:
+
+```rust
+    csbindgen::Builder::default()
+        .input_extern_file("lib.rs")
+        .csharp_dll_name("nativelib")
+        .generate_csharp_file("../dotnet/NativeMethods.g.cs")
+        .csharp_use_nint_types(false)
+        .unwrap();
+```
+
 `c_long` and `c_ulong` will convert to [CLong](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.clong), [CULong](https://learn.microsoft.com/en-us/dotnet/api/system.runtime.interopservices.culong) struct after .NET 6. If you want to convert in Unity, you will need Shim.
+
+
 
 ```csharp
 // Currently Unity is .NET Standard 2.1 so does not exist CLong and CULong
