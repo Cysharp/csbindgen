@@ -314,11 +314,20 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
             for v in &t.variants {
                 let name = v.ident.to_string();
                 let mut value = None;
-                if let Some((_, syn::Expr::Lit(x))) = &v.discriminant {
-                    if let syn::Lit::Int(x) = &x.lit {
+
+                match &v.discriminant {
+                    Some((_, syn::Expr::Lit(x))) => if let syn::Lit::Int(x) = &x.lit {
                         let digits = x.base10_digits().to_string();
                         value = Some(digits);
                     }
+                    Some((_, syn::Expr::Unary(u))) if matches!(u.op, syn::UnOp::Neg(_)) => {
+                        if let syn::Expr::Lit(x) = &*u.expr {
+                            if let syn::Lit::Int(x) = &x.lit {
+                                value = Some(format!("-{}", x.base10_digits()));
+                            }
+                        }
+                    }
+                    _ => (),
                 }
 
                 fields.push((name, value));
