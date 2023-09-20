@@ -29,6 +29,7 @@ pub struct BindgenOptions {
     pub csharp_if_symbol: String,
     pub csharp_if_dll_name: String,
     pub csharp_use_function_pointer: bool,
+    pub csharp_use_nint_types: bool,
     pub csharp_imported_namespaces: Vec<String>,
     pub csharp_generate_const_filter: fn(const_name: &str) -> bool,
 }
@@ -53,6 +54,7 @@ impl Default for Builder {
                 csharp_if_symbol: "".to_string(),
                 csharp_if_dll_name: "".to_string(),
                 csharp_use_function_pointer: true,
+                csharp_use_nint_types: true,
                 csharp_imported_namespaces: vec![],
                 csharp_generate_const_filter: |_| false,
             },
@@ -85,7 +87,7 @@ impl Builder {
         self
     }
 
-    
+
 
     /// add original extern call type prefix to rust wrapper,
     /// `return {rust_method_type_path}::foo()`
@@ -185,13 +187,20 @@ impl Builder {
         self
     }
 
+    /// configure C# usage of `nint`/`nuint` in place of `System.IntPtr`/`System.UIntPtr`, default is true
+    /// (use `nint`/`nuint`)
+    pub fn csharp_use_nint_types(mut self, csharp_use_nint_types: bool) -> Builder {
+        self.options.csharp_use_nint_types = csharp_use_nint_types;
+        self
+    }
+
     /// configure C# generate const, default is false
     /// equivalent to csharp_generate_const_filter(|_| csharp_generate_const)
     #[deprecated(note = "User csharp_generate_const_filter instead")]
     pub fn csharp_generate_const(mut self, csharp_generate_const: bool) -> Builder {
         self.csharp_generate_const_filter(if csharp_generate_const { |_| true } else { |_| false })
     }
-    
+
     /// configure C# generate const filter, default `|_| false`
     pub fn csharp_generate_const_filter(mut self, csharp_generate_const_filter: fn(const_name: &str) -> bool) -> Builder {
         self.options.csharp_generate_const_filter = csharp_generate_const_filter;
