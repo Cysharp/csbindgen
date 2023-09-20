@@ -10238,7 +10238,7 @@ namespace Physx
         InternalError = 32,
         Abort = 64,
         PerfWarning = 128,
-        MaskAll,
+        MaskAll = -1,
     }
 
     internal enum PxConcreteType : int
@@ -10324,7 +10324,7 @@ namespace Physx
         Hairsystem = 9,
         Custom = 10,
         GeometryCount = 11,
-        Invalid,
+        Invalid = -1,
     }
 
     [Flags]
