@@ -1,7 +1,7 @@
 use crate::{alias_map::AliasMap, builder::BindgenOptions};
 
-pub fn escape_name(str: &str) -> String {
-    match str {
+pub fn escape_name_csharp(name: &str) -> String {
+    match name {
         // C# keywords: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/
         "abstract" | "as" | "base" | "bool" | "break" | "byte" | "case" | "catch" | "char"
         | "checked" | "class" | "const" | "continue" | "decimal" | "default" | "delegate"
@@ -12,8 +12,21 @@ pub fn escape_name(str: &str) -> String {
         | "protected" | "public" | "readonly" | "ref" | "return" | "sbyte" | "sealed" | "short"
         | "sizeof" | "stackalloc" | "static" | "string" | "struct" | "switch" | "this"
         | "throw" | "true" | "try" | "typeof" | "uint" | "ulong" | "unchecked" | "unsafe"
-        | "ushort" | "using" | "virtual" | "void" | "volatile" | "while" => "@".to_string() + str,
-        x => x.to_string(),
+        | "ushort" | "using" | "virtual" | "void" | "volatile" | "while" => format!("@{name}"),
+        _ => name.to_string(),
+    }
+}
+
+pub fn escape_name_rust(name: &str) -> String {
+    match name {
+        // Rust keywords: https://doc.rust-lang.org/reference/keywords.html
+        "'static" | "abstract" | "as" | "async" | "await" | "become" | "box" | "break" | "const"
+        | "continue" | "crate" | "do" | "dyn" | "else" | "enum" | "extern" | "false" | "final"
+        | "fn" | "for" | "if" | "impl" | "in" | "let" | "loop" | "macro" | "macro_rules" | "match"
+        | "mod" | "move" | "mut" | "override" | "priv" | "pub" | "ref" | "return" | "self" | "Self"
+        | "static" | "struct" | "super" | "trait" | "true" | "try" | "type" | "typeof" | "union"
+        | "unsafe" | "unsized" | "use" | "virtual" | "where" | "while" | "yield" => format!("r#{name}"),
+        _ => name.to_string(),
     }
 }
 
@@ -183,7 +196,7 @@ impl RustType {
                     .map(|x| {
                         format!(
                             "{}: {}",
-                            escape_name(x.name.as_str()),
+                            escape_name_rust(x.name.as_str()),
                             x.rust_type.to_rust_string(type_path)
                         )
                     })
@@ -272,7 +285,7 @@ impl RustType {
                 "NonZeroUsize" if use_nint_types => "nuint",
                 "NonZeroUsize" => "System.UIntPtr",
                 _ => {
-                    temp_string = escape_name(type_name);
+                    temp_string = escape_name_csharp(type_name);
                     temp_string.as_str()
                 }
             };
@@ -493,7 +506,7 @@ pub fn build_method_delegate_if_required(
                             p.name.clone()
                         };
 
-                        format!("{} {}", cs, escape_name(parameter_name.as_str()))
+                        format!("{} {}", cs, escape_name_csharp(parameter_name.as_str()))
                     })
                     .collect::<Vec<_>>()
                     .join(", ");

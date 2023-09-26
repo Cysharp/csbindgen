@@ -114,7 +114,7 @@ pub fn emit_csharp(
         let mut method_name = &item.method_name;
         let method_name_temp: String;
         if method_prefix.is_empty() {
-            method_name_temp = escape_name(method_name);
+            method_name_temp = escape_name_csharp(method_name);
             method_name = &method_name_temp;
         }
 
@@ -174,7 +174,7 @@ pub fn emit_csharp(
                     type_name = "[MarshalAs(UnmanagedType.U1)] bool".to_string();
                 }
 
-                format!("{} {}", type_name, escape_name(p.name.as_str()))
+                format!("{} {}", type_name, escape_name_csharp(p.name.as_str()))
             })
             .collect::<Vec<_>>()
             .join(", ");
@@ -198,7 +198,7 @@ pub fn emit_csharp(
 
     let mut structs_string = String::new();
     for item in structs {
-        let name = escape_name(&item.struct_name);
+        let name = escape_name_csharp(&item.struct_name);
         let layout_kind = if item.is_union {
             "Explicit"
         } else {
@@ -233,7 +233,7 @@ pub fn emit_csharp(
                     "        {}public {} {}",
                     attr,
                     type_name,
-                    escape_name(field.name.as_str())
+                    escape_name_csharp(field.name.as_str())
                 )
                 .as_str(),
             );
@@ -313,7 +313,7 @@ pub fn emit_csharp(
                 format!(
                     "        {} static ReadOnlySpan<byte> {} => new byte[] {};\n",
                     accessibility,
-                    escape_name(item.const_name.as_str()),
+                    escape_name_csharp(item.const_name.as_str()),
                     item.value.replace("[", "{ ").replace("]", " }")
                 )
                 .as_str(),
@@ -330,7 +330,7 @@ pub fn emit_csharp(
                     "        {} const {} {} = {};\n",
                     accessibility,
                     type_name,
-                    escape_name(item.const_name.as_str()),
+                    escape_name_csharp(item.const_name.as_str()),
                     value
                 )
                 .as_str(),
