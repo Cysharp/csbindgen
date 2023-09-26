@@ -78,6 +78,8 @@ pub(crate) fn generate(
         }
     }
 
+    using_types.extend(options.always_included_types.iter().cloned());
+
     let structs = reduce_struct(&structs, &field_map, &using_types);
     let enums = reduce_enum(&enums, &field_map, &using_types);
 
