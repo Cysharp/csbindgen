@@ -19,6 +19,7 @@ pub struct BindgenOptions {
     pub rust_method_type_path: String,
     pub rust_method_prefix: String,
     pub rust_file_header: String,
+    pub rust_disable_mangle: bool,
     pub csharp_namespace: String,
     pub csharp_class_name: String,
     pub csharp_dll_name: String,
@@ -44,6 +45,7 @@ impl Default for Builder {
                 rust_method_type_path: "".to_string(),
                 rust_method_prefix: "csbindgen_".to_string(),
                 rust_file_header: "".to_string(),
+                rust_disable_mangle: true,
                 csharp_namespace: "CsBindgen".to_string(),
                 csharp_class_name: "NativeMethods".to_string(),
                 csharp_dll_name: "".to_string(),
@@ -107,6 +109,12 @@ impl Builder {
     /// `mod lz4;`, `use super::lz4;`
     pub fn rust_file_header<T: Into<String>>(mut self, rust_file_header: T) -> Builder {
         self.options.rust_file_header = rust_file_header.into();
+        self
+    }
+
+    /// disable generating of bindings for functions without `#[no_mangle]` attribute
+    pub fn rust_disable_mangle(mut self, rust_disable_mangle: bool) -> Builder {
+        self.options.rust_disable_mangle = rust_disable_mangle;
         self
     }
 

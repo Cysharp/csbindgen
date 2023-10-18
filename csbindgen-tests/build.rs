@@ -51,6 +51,7 @@ fn main() -> Result<(), Box<dyn Error>> {
         .rust_method_prefix("csbindgen_")
         .rust_file_header("use super::lz4;")
         .rust_method_type_path("lz4")
+        .rust_disable_mangle(true)
         .csharp_class_name("LibLz4")
         .csharp_namespace("CsBindgen")
         .csharp_dll_name("csbindgen_tests")
