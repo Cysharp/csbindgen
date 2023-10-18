@@ -264,6 +264,7 @@ csbindgen::Builder::default()
     .rust_method_prefix("csbindgen_")             // optional, default: "csbindgen_"
     .rust_file_header("use super::lz4::*;")       // optional, default: ""
     .rust_method_type_path("lz4")                 // optional, default: ""
+    .rust_disable_mangle(true)                    // optional, default: true
     .csharp_dll_name("lz4")                       // required
     .csharp_class_name("NativeMethods")           // optional, default: NativeMethods
     .csharp_namespace("CsBindgen")                // optional, default: CsBindgen
