@@ -683,7 +683,7 @@ pub unsafe extern "C" fn free_treat_as_empty_struct_context(_src: *mut TreatAsEm
 //     }
 // }
 
-#[export_name = custom_name]
+#[export_name = "custom_name"]
 pub fn does_this_export() {
     //pass
 }
