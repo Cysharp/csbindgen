@@ -112,7 +112,8 @@ impl Builder {
         self
     }
 
-    /// disable generating of bindings for functions without `#[no_mangle]` attribute
+    /// disable generating of bindings for functions without `#[no_mangle]` or
+    /// `#[export_name = name]` attribute
     pub fn rust_disable_mangle(mut self, rust_disable_mangle: bool) -> Builder {
         self.options.rust_disable_mangle = rust_disable_mangle;
         self

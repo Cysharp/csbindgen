@@ -682,3 +682,8 @@ pub unsafe extern "C" fn free_treat_as_empty_struct_context(_src: *mut TreatAsEm
 //         // Your physics simulation goes here
 //     }
 // }
+
+#[export_name = custom_name]
+pub fn does_this_export() {
+    //pass
+}

@@ -40,12 +40,9 @@ pub fn collect_foreign_method(
         if let Item::ForeignMod(m) = item {
             for item in m.items.iter() {
                 if let ForeignItem::Fn(m) = item {
-                    // has pub and so it exports in Rust
-                    if let Visibility::Public(_) = m.vis {
-                        let method = parse_method(FnItem::ForeignItem(m.clone()), options);
-                        if let Some(x) = method {
-                            list.push(x);
-                        }
+                    let method = parse_method(FnItem::ForeignItem(m.clone()), options);
+                    if let Some(x) = method {
+                        list.push(x);
                     }
                 }
             }
@@ -61,13 +58,10 @@ pub fn collect_extern_method(
     for item in depth_first_module_walk(&ast.items) {
         if let Item::Fn(m) = item {
             if m.sig.abi.is_some() {
-                // has pub and so it exports in Rust
-                if let Visibility::Public(_) = m.vis {
-                    // has extern
-                    let method = parse_method(FnItem::Item(m.clone()), options);
-                    if let Some(x) = method {
-                        list.push(x);
-                    }
+                // has extern
+                let method = parse_method(FnItem::Item(m.clone()), options);
+                if let Some(x) = method {
+                    list.push(x);
                 }
             }
         }
@@ -83,7 +77,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     let mut has_no_mangle = false;
     for attr in &attrs {
         let attr_name = attr.path.to_token_stream().to_string();
-        if attr_name == "no_mangle" {
+        if attr_name == "no_mangle" || attr_name == "export_name" {
             has_no_mangle = true;
         }
         else if attr_name == "test" {
