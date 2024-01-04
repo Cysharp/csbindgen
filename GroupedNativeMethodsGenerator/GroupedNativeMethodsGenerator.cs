@@ -147,15 +147,15 @@ using System.Runtime.InteropServices;
 
         if (removeUntilTypeName)
         {
-            var match = methodName.IndexOf(typeName);
-            if (match != -1)
+            if (TryTrimPrefix(methodName, typeName, out var trimmed))
             {
-                var substringMethodName = methodName.Substring(match + typeName.Length);
-                if (substringMethodName.Trim(' ', '_') != "")
-                {
-                    methodName = substringMethodName;
-                    goto FINAL;
-                }
+                methodName = trimmed;
+                goto FINAL;
+            }
+            if (TryTrimPrefix(methodName, ToSankeCase(typeName), out trimmed))
+            {
+                methodName = trimmed;
+                goto FINAL;
             }
         }
 
@@ -173,14 +173,54 @@ using System.Runtime.InteropServices;
 
         methodName = methodName.Trim('_', ' ');
 
-        var split = methodName.Split('_');
-        methodName = string.Concat(split.Select(x =>
-        {
-            if (x.Length == 0) return x;
-            if (x.Length == 1) return char.ToUpper(x[0]).ToString();
-            return char.ToUpper(x[0]) + x.Substring(1);
-        }));
+        return ToCamelCase(methodName);
+    }
 
-        return methodName;
+    static bool TryTrimPrefix(string value, string prefix, out string result)
+    {
+        var match = value.IndexOf(prefix, StringComparison.Ordinal);
+        if (match > -1)
+        {
+            result = value.Substring(match + prefix.Length).Trim(' ', '_');
+            return result.Length > 0;
+        }
+        result = default!;
+        return false;
+    }
+
+    static string ToCamelCase(string snakeCase)
+    {
+        var split = snakeCase.Split('_');
+        return string.Concat(split.Select(x =>
+        {
+            return x.Length switch
+            {
+                0 => x,
+                1 => char.ToUpper(x[0]).ToString(),
+                _ => char.ToUpper(x[0]) + x.Substring(1)
+            };
+        }));
+    }
+
+    static string ToSankeCase(string camelCase)
+    {
+        Span<char> buffer = stackalloc char[camelCase.Length * 2];
+        var written = 0;
+        buffer[written++] = char.ToLowerInvariant(camelCase[0]);
+
+        for (var i = 1; i < camelCase.Length; ++i)
+        {
+            var ch = camelCase[i];
+            if(char.IsUpper(ch))
+            {
+                buffer[written++] = '_';
+                buffer[written++] = char.ToLowerInvariant(ch);
+            }
+            else
+            {
+                buffer[written++] = ch;
+            }
+        }
+        return buffer.Slice(0, written).ToString();
     }
 }
