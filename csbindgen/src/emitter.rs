@@ -1,6 +1,7 @@
 use crate::alias_map::AliasMap;
 use crate::builder::BindgenOptions;
 use crate::type_meta::*;
+use crate::type_meta::ExportSymbolNaming::{ExportName, NoMangle};
 use crate::util::*;
 
 pub fn emit_rust_method(list: &Vec<ExternMethod>, options: &BindgenOptions) -> String {
@@ -152,9 +153,14 @@ pub fn emit_csharp(
             }
         }
 
+        let entry_point = match &item.export_naming  {
+            NoMangle => &item.method_name,
+            ExportName(export_name) => export_name
+        };
+
         let entry_point = match options.csharp_entry_point_prefix.as_str() {
-            "" => format!("{method_prefix}{method_name}"),
-            x => format!("{x}{method_name}"),
+            "" => format!("{method_prefix}{entry_point}"),
+            x => format!("{x}{entry_point}"),
         };
         let return_type = match &item.return_type {
             Some(x) => {
