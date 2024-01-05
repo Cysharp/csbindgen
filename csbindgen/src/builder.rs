@@ -219,7 +219,7 @@ impl Builder {
         self
     }
 
-    /// configure the mappings that C# type name from rust original type name, default `|x| x.to_string()`
+    /// configure the mappings that C# type name from rust original type name, default `|x| x`
     pub fn csharp_type_rename(mut self, csharp_type_rename: fn(rust_type_name: String) -> String) -> Builder {
         self.options.csharp_type_rename = csharp_type_rename;
         self
