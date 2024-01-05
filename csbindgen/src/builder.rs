@@ -5,6 +5,7 @@ use std::{
     io::{self, Write},
     path::Path,
 };
+use std::convert::identity;
 
 use crate::{generate, GenerateKind};
 
@@ -32,6 +33,7 @@ pub struct BindgenOptions {
     pub csharp_use_nint_types: bool,
     pub csharp_imported_namespaces: Vec<String>,
     pub csharp_generate_const_filter: fn(const_name: &str) -> bool,
+    pub csharp_type_rename: fn(type_name: String) -> String,
     pub always_included_types: Vec<String>,
 }
 
@@ -58,6 +60,7 @@ impl Default for Builder {
                 csharp_use_nint_types: true,
                 csharp_imported_namespaces: vec![],
                 csharp_generate_const_filter: |_| false,
+                csharp_type_rename: identity,
                 always_included_types: vec![],
             },
         }
@@ -92,7 +95,7 @@ impl Builder {
     /// Adds a list of types that will always be considered to be included in the
     /// generated bindings, even if not part of any function signature
     pub fn always_included_types<I, S>(mut self, always_included_types: I) -> Builder
-    where I: IntoIterator<Item = S>, S: ToString
+        where I: IntoIterator<Item = S>, S: ToString
     {
         self.options.always_included_types.extend(always_included_types.into_iter().map(|v| v.to_string()));
         self
@@ -213,6 +216,12 @@ impl Builder {
     /// configure C# generate const filter, default `|_| false`
     pub fn csharp_generate_const_filter(mut self, csharp_generate_const_filter: fn(const_name: &str) -> bool) -> Builder {
         self.options.csharp_generate_const_filter = csharp_generate_const_filter;
+        self
+    }
+
+    /// configure the mappings that C# type name from rust original type name, default `|x| x.to_string()`
+    pub fn csharp_type_rename(mut self, csharp_type_rename: fn(rust_type_name: String) -> String) -> Builder {
+        self.options.csharp_type_rename = csharp_type_rename;
         self
     }
 

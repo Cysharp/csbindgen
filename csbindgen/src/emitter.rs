@@ -204,7 +204,7 @@ pub fn emit_csharp(
 
     let mut structs_string = String::new();
     for item in structs {
-        let name = escape_csharp_name(&item.struct_name);
+        let name = (options.csharp_type_rename)(escape_csharp_name(&item.struct_name));
         let layout_kind = if item.is_union {
             "Explicit"
         } else {
