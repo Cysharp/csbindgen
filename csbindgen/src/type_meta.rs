@@ -1,6 +1,6 @@
 use crate::{alias_map::AliasMap, builder::BindgenOptions};
 
-pub fn escape_name(str: &str) -> String {
+pub fn escape_csharp_name(str: &str) -> String {
     match str {
         // C# keywords: https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/keywords/
         "abstract" | "as" | "base" | "bool" | "break" | "byte" | "case" | "catch" | "char"
@@ -183,7 +183,7 @@ impl RustType {
                     .map(|x| {
                         format!(
                             "{}: {}",
-                            escape_name(x.name.as_str()),
+                            x.name.as_str(),
                             x.rust_type.to_rust_string(type_path)
                         )
                     })
@@ -272,7 +272,7 @@ impl RustType {
                 "NonZeroUsize" if use_nint_types => "nuint",
                 "NonZeroUsize" => "System.UIntPtr",
                 _ => {
-                    temp_string = escape_name(type_name);
+                    temp_string = escape_csharp_name(type_name);
                     temp_string.as_str()
                 }
             };
@@ -493,7 +493,7 @@ pub fn build_method_delegate_if_required(
                             p.name.clone()
                         };
 
-                        format!("{} {}", cs, escape_name(parameter_name.as_str()))
+                        format!("{} {}", cs, escape_csharp_name(parameter_name.as_str()))
                     })
                     .collect::<Vec<_>>()
                     .join(", ");
