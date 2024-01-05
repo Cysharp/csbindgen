@@ -1,7 +1,7 @@
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
 use regex::Regex;
 use std::collections::HashSet;
-use syn::{ForeignItem, Ident, Item, Meta, MetaNameValue, Pat, ReturnType};
+use syn::{Abi, ForeignItem, Ident, Item, Meta, MetaNameValue, Pat, ReturnType};
 use crate::type_meta::ExportSymbolNaming::{ExportName, NoMangle};
 
 enum FnItem {
@@ -58,10 +58,12 @@ pub fn collect_extern_method(
     for item in depth_first_module_walk(&ast.items) {
         if let Item::Fn(m) = item {
             // has extern "C"
-            if m.sig.abi.as_ref().and_then(|x| x.name.as_ref()).filter(|x| x.value() == "C").is_some() {
-                let method = parse_method(FnItem::Item(m.clone()), options);
-                if let Some(x) = method {
-                    list.push(x);
+            if let Some(abi_name) =  m.sig.abi.as_ref().and_then(|x| x.name.as_ref()) {
+                if abi_name.value() == "C" {
+                    let method = parse_method(FnItem::Item(m.clone()), options);
+                    if let Some(x) = method {
+                        list.push(x);
+                    }
                 }
             }
         }
