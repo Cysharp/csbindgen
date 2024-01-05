@@ -27,6 +27,10 @@ Getting Started
 Install on `Cargo.toml` as `build-dependencies` and set up `bindgen::Builder` on `build.rs`.
 
 ```toml
+[package]
+name = "example"
+version = "0.1.0"
+
 [lib]
 crate-type = ["cdylib"]
 
@@ -52,13 +56,26 @@ Setup csbindgen code to `build.rs`.
 fn main() {
     csbindgen::Builder::default()
         .input_extern_file("lib.rs")
-        .csharp_dll_name("nativelib")
+        .csharp_dll_name("example")
         .generate_csharp_file("../dotnet/NativeMethods.g.cs")
         .unwrap();
 }
 ```
 
-It will generate this C# code.
+`csharp_dll_name` is for specifying `[DllImport({DLL_NAME}, ...)]` on the C# side, which should match the name of the dll binary.
+See [#library-loading](#library-loading) section for how to resolve the dll file path.
+
+> [!NOTE]
+> In this example, the value of `csharp_dll_name` is output by the Rust project you set up. 
+> In the above, `package.name` in the Cargo.toml is set to "example". By default, the following binaries should be output to the `target/` folder of the Rust project.
+>  - Windows: example.dll
+>  - Linux: libexample.so
+>  - macOS: libexample.dylib
+>
+> The filename without the extension should be specified to DllImport. Be careful that by default, rust compiler prefixes filenames with "lib" in some environments.
+> So if you want to try this example as is on macOS, `csharp_dll_name` would be "libexample".
+
+Then, let's run `cargo build` it will generate this C# code.
 
 ```csharp
 // NativeMethods.g.cs
@@ -69,7 +86,7 @@ namespace CsBindgen
 {
     internal static unsafe partial class NativeMethods
     {
-        const string __DllName = "nativelib";
+        const string __DllName = "example";
 
         [DllImport(__DllName, EntryPoint = "my_add", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int my_add(int x, int y);
@@ -379,7 +396,7 @@ Install csbindgen from NuGet, and specify [GroupedNativeMethods] for the partial
 namespace CsBindgen
 {
     // append `GroupedNativeMethods` attribute
-    [GroupedNativeMethods()]
+    [GroupedNativeMethods]
     internal static unsafe partial class NativeMethods
     {
     }
@@ -415,7 +432,11 @@ public GroupedNativeMethodsAttribute(
     bool fixMethodName = true)
 ```
 
-`removeUntilTypeName` will remove until find type-name in method-name. For example `foo_counter_context_insert(countext_context* foo)` -> `Insert`. As a result, it is recommended to use a naming convention where the same type name is placed immediately before the verb.
+The convention for function names when using this feature is as follows:
+- The first argument must be a pointer type.
+- `removeUntilTypeName` will remove until find type-name in method-name. 
+  - For example `foo_counter_context_insert(countext_context* foo)` -> `Insert`. 
+  - As a result, it is recommended to use a naming convention where the same type name is placed immediately before the verb. 
 
 Type Marshalling
 ---
