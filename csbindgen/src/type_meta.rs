@@ -30,11 +30,18 @@ pub struct FieldMember {
 }
 
 #[derive(Clone, Debug)]
+pub enum ExportSymbolNaming {
+    NoMangle,
+    ExportName(String),
+}
+
+#[derive(Clone, Debug)]
 pub struct ExternMethod {
     pub method_name: String,
     pub doc_comment: Vec<String>,
     pub parameters: Vec<Parameter>,
     pub return_type: Option<RustType>,
+    pub export_naming: ExportSymbolNaming,
 }
 
 impl ExternMethod {

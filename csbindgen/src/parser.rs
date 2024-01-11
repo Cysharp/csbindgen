@@ -1,7 +1,8 @@
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
 use regex::Regex;
 use std::collections::HashSet;
-use syn::{ForeignItem, Item, Pat, ReturnType};
+use syn::{Abi, ForeignItem, Ident, Item, Meta, MetaNameValue, Pat, ReturnType};
+use crate::type_meta::ExportSymbolNaming::{ExportName, NoMangle};
 
 enum FnItem {
     ForeignItem(syn::ForeignItemFn),
@@ -56,8 +57,8 @@ pub fn collect_extern_method(
 ) {
     for item in depth_first_module_walk(&ast.items) {
         if let Item::Fn(m) = item {
+            // has extern
             if m.sig.abi.is_some() {
-                // has extern
                 let method = parse_method(FnItem::Item(m.clone()), options);
                 if let Some(x) = method {
                     list.push(x);
@@ -68,9 +69,9 @@ pub fn collect_extern_method(
 }
 
 fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> {
-    let (sig, attrs) = match item {
-        FnItem::ForeignItem(x) => (x.sig, x.attrs),
-        FnItem::Item(x) => (x.sig, x.attrs),
+    let (sig, attrs, is_foreign_item) = match item {
+        FnItem::ForeignItem(x) => (x.sig, x.attrs, true),
+        FnItem::Item(x) => (x.sig, x.attrs, false),
     };
 
     let method_name = sig.ident.to_string();
@@ -114,6 +115,35 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
         return_type = Some(rust_type);
     }
 
+    // check attrs
+    let mut export_naming = NoMangle;
+    if (!is_foreign_item) {
+        let found = attrs.iter()
+            .map(|attr| {
+                let name = &attr.path.segments.last().unwrap().ident;
+                if (name == "no_mangle") {
+                    return Some(NoMangle)
+                } else if (name == "export_name") {
+                    if let Ok(Meta::NameValue(MetaNameValue { lit: syn::Lit::Str(x), .. })) = attr.parse_meta() {
+                        return Some(ExportName(x.value()));
+                    }
+                }
+                None
+            })
+            .flatten()
+            .next();
+
+        if let Some(x) = found {
+            export_naming = x;
+        } else {
+            println!(
+                "csbindgen can't handle this function because there is neither #[no_mangle] nor #[export_name] so ignore generate, method_name: {}",
+                method_name
+            );
+            return None;
+        }
+    }
+
     // doc
     let doc_comment = attrs
         .iter()
@@ -124,6 +154,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     if !method_name.is_empty() && (options.method_filter)(method_name.clone()) {
         return Some(ExternMethod {
             method_name,
+            export_naming,
             parameters,
             return_type,
             doc_comment,
