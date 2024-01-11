@@ -191,6 +191,10 @@ csbindgen::Builder::default()
     .csharp_imported_namespaces("MyLib")    // optional, default: empty
     .csharp_generate_const_filter (|_|false) // optional, default: `|_|false`
     .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal") // optional, default: ""
+    .csharp_type_rename(|rust_type_name| match rust_type_name {     // optional, default: `|x| x`
+        "FfiConfiguration" => "Configuration".into(),
+        _ => x,
+    })
     .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs")     // required
     .unwrap();
 ```
@@ -290,7 +294,11 @@ csbindgen::Builder::default()
     .csharp_use_function_pointer(true)            // optional, default: true
     .csharp_imported_namespaces("MyLib")          // optional, default: empty
     .csharp_generate_const_filter(|_|false)       // optional, default:|_|false
-    .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal") // optional, default: ""
+    .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal")         // optional, default: ""
+    .csharp_type_rename(|rust_type_name| match rust_type_name.as_str() {    // optional, default: `|x| x`
+        "FfiConfiguration" => "Configuration".into(),
+        _ => x,
+    })
     .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs") // required
     .unwrap();
 ```

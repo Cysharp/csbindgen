@@ -279,7 +279,7 @@ impl RustType {
                 "NonZeroUsize" if use_nint_types => "nuint",
                 "NonZeroUsize" => "System.UIntPtr",
                 _ => {
-                    temp_string = escape_csharp_name(type_name);
+                    temp_string = (options.csharp_type_rename)(escape_csharp_name(type_name));
                     temp_string.as_str()
                 }
             };
