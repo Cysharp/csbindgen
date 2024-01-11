@@ -33,17 +33,10 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "comment_one", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void comment_one(EnumFlags _flags);
 
-        /// <summary>Multiline Comments # GOTO Here Foo Bar  TO  ZZZ</summary>
-        [DllImport(__DllName, EntryPoint = "long_jpn_comment", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void long_jpn_comment();
-
-        [DllImport(__DllName, EntryPoint = "use_vec3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void use_vec3(my_int_vec3 _v3);
-
         [DllImport(__DllName, EntryPoint = "other_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void other_2(NfcCard _hoge);
 
-        [DllImport(__DllName, EntryPoint = "@event", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        [DllImport(__DllName, EntryPoint = "event", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void @event(@event @event);
 
         [DllImport(__DllName, EntryPoint = "test_func_issue_39", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
@@ -94,9 +87,6 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "rust_to_csharp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern delegate* unmanaged[Cdecl]<int, int, int> rust_to_csharp();
 
-        [DllImport(__DllName, EntryPoint = "sum", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int sum(int x, int y);
-
         [DllImport(__DllName, EntryPoint = "cbt", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void cbt(CallbackTable _cb);
 
@@ -108,9 +98,6 @@ namespace CsBindgen
 
         [DllImport(__DllName, EntryPoint = "callback_test2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern delegate* unmanaged[Cdecl]<int, int> callback_test2();
-
-        [DllImport(__DllName, EntryPoint = "callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int callback(int a);
 
         [DllImport(__DllName, EntryPoint = "enum_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int enum_test(IntEnumTest i);
@@ -176,15 +163,6 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "call_bindgen_lz4", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void call_bindgen_lz4();
 
-        [DllImport(__DllName, EntryPoint = "reference_type", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void reference_type(int* _a, int** _b, void/* byte[] */* _c, Context* _d);
-
-        [DllImport(__DllName, EntryPoint = "reference_hogemoge1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void reference_hogemoge1(int* _a, int** _b);
-
-        [DllImport(__DllName, EntryPoint = "reference_hogemoge2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void reference_hogemoge2(int* _a, int** _b);
-
         [DllImport(__DllName, EntryPoint = "create_counter_context2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern CounterContext2* create_counter_context2();
 
@@ -213,14 +191,6 @@ namespace CsBindgen
         public fixed byte/* UInt128, this length is invalid so must keep pointer and can't edit from C# */ mWorldSpaceContactPointsOn4[65];
         public fixed uint mWorldSpaceContactPointsOn5[65];
         public fixed byte png_name[5];
-    }
-
-    [StructLayout(LayoutKind.Sequential)]
-    internal unsafe partial struct my_int_vec3
-    {
-        public int Item1;
-        public int Item2;
-        public int Item3;
     }
 
     [StructLayout(LayoutKind.Sequential)]
