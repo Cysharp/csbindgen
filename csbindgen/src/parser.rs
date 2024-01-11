@@ -57,13 +57,11 @@ pub fn collect_extern_method(
 ) {
     for item in depth_first_module_walk(&ast.items) {
         if let Item::Fn(m) = item {
-            // has extern "C"
-            if let Some(abi_name) =  m.sig.abi.as_ref().and_then(|x| x.name.as_ref()) {
-                if abi_name.value() == "C" {
-                    let method = parse_method(FnItem::Item(m.clone()), options);
-                    if let Some(x) = method {
-                        list.push(x);
-                    }
+            // has extern
+            if m.sig.abi.is_some() {
+                let method = parse_method(FnItem::Item(m.clone()), options);
+                if let Some(x) = method {
+                    list.push(x);
                 }
             }
         }
