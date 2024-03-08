@@ -299,6 +299,8 @@ csbindgen::Builder::default()
         "FfiConfiguration" => "Configuration".into(),
         _ => x,
     })
+    .csharp_file_header("#if !UNITY_WEBGL")       // optional, default: ""
+    .csharp_file_footer("#endif")                 // optional, default: ""
     .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs") // required
     .unwrap();
 ```
