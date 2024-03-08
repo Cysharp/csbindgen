@@ -34,6 +34,8 @@ pub struct BindgenOptions {
     pub csharp_imported_namespaces: Vec<String>,
     pub csharp_generate_const_filter: fn(const_name: &str) -> bool,
     pub csharp_type_rename: fn(type_name: String) -> String,
+    pub csharp_file_header: String,
+    pub csharp_file_footer: String,
     pub always_included_types: Vec<String>,
 }
 
@@ -61,6 +63,8 @@ impl Default for Builder {
                 csharp_imported_namespaces: vec![],
                 csharp_generate_const_filter: |_| false,
                 csharp_type_rename: identity,
+                csharp_file_header: "".to_string(),
+                csharp_file_footer: "".to_string(),
                 always_included_types: vec![],
             },
         }
@@ -222,6 +226,18 @@ impl Builder {
     /// configure the mappings that C# type name from rust original type name, default `|x| x`
     pub fn csharp_type_rename(mut self, csharp_type_rename: fn(rust_type_name: String) -> String) -> Builder {
         self.options.csharp_type_rename = csharp_type_rename;
+        self
+    }
+
+    /// configure the additional header for the generated C# code.
+    pub fn csharp_file_header<T: Into<String>>(mut self, csharp_file_header: T) -> Builder {
+        self.options.csharp_file_header = csharp_file_header.into();
+        self
+    }
+
+    /// configure the additional footer for the generated C# code.
+    pub fn csharp_file_footer<T: Into<String>>(mut self, csharp_file_footer: T) -> Builder {
+        self.options.csharp_file_footer = csharp_file_footer.into();
         self
     }
 

@@ -143,6 +143,8 @@ fn main() -> Result<(), Box<dyn Error>> {
         .csharp_namespace("Physx")
         .csharp_class_name("LibPhysx")
         .csharp_dll_name("libphys")
+        .csharp_file_header("#if !FALSE")
+        .csharp_file_footer("#endif")
         .generate_csharp_file("../dotnet-sandbox/libphysx_csbindgen.cs")?;
 
     Ok(())
