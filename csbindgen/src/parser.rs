@@ -1,7 +1,7 @@
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
 use regex::Regex;
 use std::collections::HashSet;
-use syn::{Abi, ForeignItem, Ident, Item, Meta, MetaNameValue, Pat, ReturnType};
+use syn::{ForeignItem, Item, Meta, MetaNameValue, Pat, ReturnType};
 use crate::type_meta::ExportSymbolNaming::{ExportName, NoMangle};
 
 enum FnItem {
@@ -117,13 +117,13 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
 
     // check attrs
     let mut export_naming = NoMangle;
-    if (!is_foreign_item) {
+    if !is_foreign_item {
         let found = attrs.iter()
             .map(|attr| {
                 let name = &attr.path.segments.last().unwrap().ident;
-                if (name == "no_mangle") {
+                if name == "no_mangle" {
                     return Some(NoMangle)
-                } else if (name == "export_name") {
+                } else if name == "export_name" {
                     if let Ok(Meta::NameValue(MetaNameValue { lit: syn::Lit::Str(x), .. })) = attr.parse_meta() {
                         return Some(ExportName(x.value()));
                     }
@@ -341,6 +341,11 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
 
             let enum_name = t.ident.to_string();
             let mut fields = Vec::new(); // Vec<(String, Option<String>)>
+
+            if t.variants.iter().any(|x| !matches!(x.fields, syn::Fields::Unit)) {
+                println!("csbindgen can't handle Enum containing any variable with field, so ignore generate, enum_name: {enum_name}");
+                continue;
+            }
 
             for v in &t.variants {
                 let name = v.ident.to_string();

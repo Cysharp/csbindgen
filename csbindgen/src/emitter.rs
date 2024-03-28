@@ -280,7 +280,7 @@ pub fn emit_csharp(
             Some(x) => format!(" : {}", convert_token_enum_repr(x)),
             None => "".to_string(),
         };
-        let name = &item.enum_name;
+        let name = (options.csharp_type_rename)(escape_csharp_name(&item.enum_name));
         if item.is_flags {
             enum_string.push_str_ln("    [Flags]");
         }
