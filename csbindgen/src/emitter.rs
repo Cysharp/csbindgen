@@ -344,6 +344,22 @@ pub fn emit_csharp(
         }
     }
 
+    // use empty string if the generated class is empty.
+    let class_string = if method_list_string.is_empty() && const_string.is_empty() {
+        String::new()
+    } else {
+        format!(
+            "{accessibility} static unsafe partial class {class_name}
+    {{
+{dll_name}
+
+{const_string}
+
+{method_list_string}
+    }}"
+        )
+    };
+
     let file_header = if options.csharp_file_header.len() > 0 {
         options.csharp_file_header.to_string() + "\n"
      } else {
@@ -369,14 +385,7 @@ using System.Runtime.InteropServices;
 
 namespace {namespace}
 {{
-    {accessibility} static unsafe partial class {class_name}
-    {{
-{dll_name}
-
-{const_string}
-
-{method_list_string}
-    }}
+    {class_string}
 
 {structs_string}
 {enum_string}
