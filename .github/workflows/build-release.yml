@@ -15,6 +15,15 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Load secrets
+        id: op-load-secret
+        uses: 1password/load-secrets-action@v2
+        with:
+          export-env: false
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN_PUBLIC }}
+          CARGO_REGISTRY_TOKEN: "op://GitHubActionsPublic/CARGO_REGISTRY_TOKEN/credential"
+
       - uses: actions/checkout@v3
       - run: cargo build --verbose
       - run: cargo test update_package_version -- ${{ inputs.tag }} --nocapture
@@ -24,7 +33,7 @@ jobs:
           git commit -m "Update cargo.toml version to ${{ env.GIT_TAG }}" -a
       - run: cargo publish --manifest-path csbindgen/Cargo.toml
         env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+          CARGO_REGISTRY_TOKEN: ${{ steps.op-load-secret.outputs.CARGO_REGISTRY_TOKEN }}
       - run: git tag ${{ env.GIT_TAG }}
       - name: Push changes
         uses: ad-m/github-push-action@master
@@ -38,12 +47,21 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:
+      - name: Load secrets
+        id: op-load-secret
+        uses: 1password/load-secrets-action@v2
+        with:
+          export-env: false
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN_PUBLIC }}
+          NUGET_KEY: "op://GitHubActionsPublic/NUGET_KEY/credential"
+
       - uses: actions/checkout@v3
       - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
       # pack nuget
       - run: dotnet build -c Release -p:Version=${{ inputs.tag }}
       - run: dotnet pack -c Release --no-build -p:Version=${{ inputs.tag }} -o ./publish
-      - run: dotnet nuget push "./publish/*.nupkg" -s https://www.nuget.org/api/v2/package -k ${{ secrets.NUGET_KEY }}
+      - run: dotnet nuget push "./publish/*.nupkg" -s https://www.nuget.org/api/v2/package -k ${{ steps.op-load-secret.outputs.NUGET_KEY }}
 
   create-release:
     needs: [build-dotnet, build-and-push-rust]
