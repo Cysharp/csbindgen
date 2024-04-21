@@ -128,7 +128,7 @@ using System.Runtime.InteropServices;
                 code.AppendLine("        }");
                 code.AppendLine("");
             }
-            code.AppendLine($"#endregion");
+            code.AppendLine("#endregion");
             code.AppendLine();
         }
 
@@ -152,7 +152,7 @@ using System.Runtime.InteropServices;
                 methodName = trimmed;
                 goto FINAL;
             }
-            if (TryTrimPrefix(methodName, ToSankeCase(typeName), out trimmed))
+            if (TryTrimPrefix(methodName, ToSnakeCase(typeName), out trimmed))
             {
                 methodName = trimmed;
                 goto FINAL;
@@ -202,7 +202,7 @@ using System.Runtime.InteropServices;
         }));
     }
 
-    static string ToSankeCase(string camelCase)
+    static string ToSnakeCase(string camelCase)
     {
         Span<char> buffer = stackalloc char[camelCase.Length * 2];
         var written = 0;
