@@ -1,4 +1,5 @@
 ﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -117,10 +118,15 @@ using System.Runtime.InteropServices;
                 var pointedType = ((IPointerTypeSymbol)firstArgument.Type).PointedAtType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat);
                 var parameterPairs = string.Join("", item.Parameters.Skip(1).Select(x => $", {x.Type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} @{x.Name}"));
                 var parameterNames = string.Join("", item.Parameters.Skip(1).Select(x => $", @{x.Name}"));
+                var obsoleteAttribute = item.GetAttributes().SingleOrDefault(x => x.AttributeClass?.Name == nameof(ObsoleteAttribute));
 
                 if (summaryComment != null)
                 {
                     code.AppendLine("        " + summaryComment);
+                }
+                if (obsoleteAttribute != null)
+                {
+                    code.AppendLine("        " + ObsoleteAttributeToString(obsoleteAttribute));
                 }
                 code.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
                 code.AppendLine($"        public static {ret} {convertedMethodName}(this ref {pointedType} @{firstArgument.Name}{parameterPairs})");
@@ -175,6 +181,19 @@ using System.Runtime.InteropServices;
         methodName = methodName.Trim('_', ' ');
 
         return ToCamelCase(methodName);
+    }
+
+    static string ObsoleteAttributeToString(AttributeData obsoleteAttribute)
+    {
+        if (obsoleteAttribute.ConstructorArguments.IsEmpty && obsoleteAttribute.NamedArguments.IsEmpty)
+        {
+            return "[Obsolete]";
+        }
+
+        var ctorArgs = obsoleteAttribute.ConstructorArguments.Select(x => x.ToCSharpString());
+        var namedArgs = obsoleteAttribute.NamedArguments.Select(x => $"{x.Key} = {x.Value.ToCSharpString()}");
+
+        return $"[Obsolete({string.Join(", ", ctorArgs.Concat(namedArgs))})]";
     }
 
     static bool TryTrimPrefix(string value, string prefix, out string result)
