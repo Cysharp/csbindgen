@@ -1,5 +1,6 @@
 ﻿using Microsoft.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
+using System.Reflection;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -9,6 +10,8 @@ namespace GroupedNativeMethodsGenerator;
 [Generator(LanguageNames.CSharp)]
 public partial class GroupedNativeMethodsGenerator : IIncrementalGenerator
 {
+    static readonly AssemblyName ThisAssemblyName = typeof(GroupedNativeMethodsGenerator).Assembly.GetName();
+
     public void Initialize(IncrementalGeneratorInitializationContext context)
     {
         context.RegisterPostInitializationOutput(ctx =>
@@ -87,11 +90,13 @@ namespace GroupedNativeMethodsGenerator
 #pragma warning disable CS8604
 
 using System;
+using System.CodeDom.Compiler;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
 
 {{ns}}
 
+    [GeneratedCode("{{ThisAssemblyName.Name}}", "{{ThisAssemblyName.Version}}")]
     {{accessibility}} static unsafe class {{typeSymbol.Name}}GroupingExtensions
     {
 """);
