@@ -122,6 +122,7 @@ using System.Runtime.InteropServices;
                 {
                     code.AppendLine("        " + summaryComment);
                 }
+                code.AppendLine("        [MethodImpl(MethodImplOptions.AggressiveInlining)]");
                 code.AppendLine($"        public static {ret} {convertedMethodName}(this ref {pointedType} @{firstArgument.Name}{parameterPairs})");
                 code.AppendLine("        {");
                 code.AppendLine($"            {requireRet}{libTypeName}.{item.Name}(({pointedType}*)Unsafe.AsPointer(ref @{firstArgument.Name}){parameterNames});");
