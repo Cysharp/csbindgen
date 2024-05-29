@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use crate::{alias_map::AliasMap, builder::BindgenOptions};
 
 pub fn escape_csharp_name(str: &str) -> String {
@@ -228,6 +230,7 @@ impl RustType {
         emit_from_struct: bool,
         method_name: &String,
         parameter_name: &String,
+        forward_decls: &mut HashSet<String>,
     ) -> String {
         fn convert_type_name(type_name: &str, options: &BindgenOptions) -> String {
             let temp_string: String;
@@ -308,6 +311,7 @@ impl RustType {
                 emit_from_struct,
                 method_name,
                 parameter_name,
+                forward_decls,
             )
         } else {
             convert_type_name(use_type.type_name.as_str(), options).to_string()
@@ -347,6 +351,7 @@ impl RustType {
                             emit_from_struct,
                             method_name,
                             parameter_name,
+                            forward_decls,
                         ));
                         sb.push_str(", ");
                     }
@@ -358,6 +363,7 @@ impl RustType {
                                 emit_from_struct,
                                 method_name,
                                 parameter_name,
+                                forward_decls,
                             ));
                         }
                         None => {
@@ -366,7 +372,15 @@ impl RustType {
                     };
                     sb.push('>');
                 } else {
-                    sb.push_str(build_method_delegate_name(method_name, parameter_name).as_str());
+                    let delegate_name = build_method_delegate_name(method_name, parameter_name);
+
+                    sb.push_str(&delegate_name);
+
+                    let decl = build_method_delegate_if_required(self, options, alias_map, method_name, parameter_name, forward_decls);
+
+                    if let Some(decl) = decl {
+                        forward_decls.insert(format!("        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n        public {decl};"));
+                    }
                 }
             }
             TypeKind::Option(inner) => {
@@ -379,6 +393,7 @@ impl RustType {
                             emit_from_struct,
                             method_name,
                             parameter_name,
+                            forward_decls,
                         )
                         .as_str(),
                 );
@@ -393,6 +408,7 @@ impl RustType {
                     method_name: &String,
                     parameter_name: &String,
                     emit_inner: bool,
+                    forward_decls: &mut HashSet<String>,
                 ) -> bool {
                     use PointerType::*;
                     if let TypeKind::Pointer(p, inner) = &rust_type.type_kind {
@@ -405,6 +421,7 @@ impl RustType {
                                         emit_from_struct,
                                         method_name,
                                         parameter_name,
+                                        forward_decls,
                                     )
                                     .as_str(),
                             );
@@ -436,6 +453,7 @@ impl RustType {
                         method_name,
                         parameter_name,
                         emit_inner,
+                        forward_decls,
                     ) {
                         sb.push_str(type_csharp_string.as_str());
                     }
@@ -452,6 +470,7 @@ impl RustType {
                     method_name,
                     parameter_name,
                     emit_inner,
+                    forward_decls,
                 ) {
                     if emit_inner {
                         sb.push_str(type_csharp_string.as_str());
@@ -470,6 +489,7 @@ pub fn build_method_delegate_if_required(
     alias_map: &AliasMap,
     method_name: &String,
     parameter_name: &String,
+    forward_decls: &mut HashSet<String>,
 ) -> Option<String> {
     let emit_from_struct = false;
 
@@ -487,6 +507,7 @@ pub fn build_method_delegate_if_required(
                         emit_from_struct,
                         method_name,
                         parameter_name,
+                        forward_decls,
                     ),
                     None => "void".to_string(),
                 };
@@ -501,6 +522,7 @@ pub fn build_method_delegate_if_required(
                             emit_from_struct,
                             method_name,
                             parameter_name,
+                            forward_decls,
                         );
                         let parameter_name = if p.name == "" {
                             format!("arg{}", index + 1)
@@ -525,6 +547,7 @@ pub fn build_method_delegate_if_required(
             alias_map,
             method_name,
             parameter_name,
+            forward_decls,
         ),
         _ => None,
     }

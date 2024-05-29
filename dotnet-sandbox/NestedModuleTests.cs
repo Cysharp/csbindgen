@@ -26,6 +26,8 @@ namespace CsBindgen
         internal static extern int number_map(NumberEnum input);
 
 
+
+
     }
 
     [StructLayout(LayoutKind.Sequential)]

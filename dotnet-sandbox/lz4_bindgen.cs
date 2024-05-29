@@ -997,6 +997,8 @@ namespace CsBindgen
         public static extern void LZ4F_resetDecompressionContext(LZ4F_dctx_s* dctx);
 
 
+
+
     }
 
     [StructLayout(LayoutKind.Sequential)]
