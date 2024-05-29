@@ -62,9 +62,9 @@ impl ExternMethod {
                     lines.push(format!(
                         "{}/// {}",
                         indent,
-                        line.replace("&", "&amp;")
-                            .replace("<", "&lt;")
-                            .replace(">", "&gt;"),
+                        line.replace('&', "&amp;")
+                            .replace('<', "&lt;")
+                            .replace('>', "&gt;"),
                     ));
                 }
             }
@@ -142,10 +142,7 @@ impl RustType {
             };
 
             // return NonNull or Box requires close angle
-            match p {
-                NonNull | Box => true,
-                _ => false,
-            }
+            matches!(p, NonNull | Box)
         }
 
         let emit_type_name = |sb: &mut String| {
@@ -384,6 +381,7 @@ impl RustType {
                 );
             }
             _ => {
+                #[allow(clippy::too_many_arguments)]
                 fn emit_pointer(
                     sb: &mut String,
                     rust_type: &RustType,
@@ -398,7 +396,7 @@ impl RustType {
                     if let TypeKind::Pointer(p, inner) = &rust_type.type_kind {
                         if emit_inner {
                             sb.push_str(
-                                &inner
+                                inner
                                     .to_csharp_string(
                                         options,
                                         alias_map,
@@ -445,17 +443,15 @@ impl RustType {
 
                 if !emit_pointer(
                     &mut sb,
-                    &self,
+                    self,
                     options,
                     alias_map,
                     emit_from_struct,
                     method_name,
                     parameter_name,
                     emit_inner,
-                ) {
-                    if emit_inner {
-                        sb.push_str(type_csharp_string.as_str());
-                    }
+                ) && emit_inner {
+                    sb.push_str(type_csharp_string.as_str());
                 }
             }
         };
@@ -471,20 +467,16 @@ pub fn build_method_delegate_if_required(
     method_name: &String,
     parameter_name: &String,
 ) -> Option<String> {
-    let emit_from_struct = false;
-
     match &me.type_kind {
         TypeKind::Function(parameters, return_type) => {
-            if emit_from_struct && !options.csharp_use_function_pointer {
-                None
-            } else if options.csharp_use_function_pointer {
+            if options.csharp_use_function_pointer {
                 None
             } else {
                 let return_type_name = match return_type {
                     Some(x) => x.to_csharp_string(
                         options,
                         alias_map,
-                        emit_from_struct,
+                        false,
                         method_name,
                         parameter_name,
                     ),
@@ -498,11 +490,11 @@ pub fn build_method_delegate_if_required(
                         let cs = p.rust_type.to_csharp_string(
                             options,
                             alias_map,
-                            emit_from_struct,
+                            false,
                             method_name,
                             parameter_name,
                         );
-                        let parameter_name = if p.name == "" {
+                        let parameter_name = if p.name.is_empty() {
                             format!("arg{}", index + 1)
                         } else {
                             p.name.clone()

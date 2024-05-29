@@ -13,19 +13,15 @@ enum FnItem {
 /// build a Vec of all Items, unless the Item is a Item::Mod, then append the Item contents of the vect
 /// Do this recursively.
 /// This is not memory-efficient, would work better with an iterator, but does not seem performance critical.
-fn depth_first_module_walk<'a>(ast: &'a Vec<Item>) -> Vec<&'a syn::Item> {
+fn depth_first_module_walk(ast: &Vec<Item>) -> Vec<&syn::Item> {
     let mut unwrapped_items: Vec<&syn::Item> = vec![];
     for item in ast {
-        match item {
-            Item::Mod(m) => match &m.content {
-                Some((_, items)) => {
-                    unwrapped_items.extend(depth_first_module_walk(items));
-                }
-                _ => {}
-            },
-            _ => {
-                unwrapped_items.push(item);
+        if let Item::Mod(m) = item {
+            if let Some((_, items)) = &m.content {
+                unwrapped_items.extend(depth_first_module_walk(items));
             }
+        } else {
+            unwrapped_items.push(item);
         }
     }
 
@@ -132,10 +128,9 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
                 }
                 None
             })
-            .flatten()
             .next();
 
-        if let Some(x) = found {
+        if let Some(x) = found.flatten() {
             export_naming = x;
         } else {
             println!(
@@ -276,7 +271,7 @@ fn collect_fields_unnamed(fields: &syn::FieldsUnnamed) -> Vec<FieldMember> {
         let name = format!("Item{i}");
         let t = parse_type(&field.ty);
         result.push(FieldMember {
-            name: name,
+            name,
             rust_type: t,
         });
     }
@@ -319,13 +314,13 @@ pub fn collect_const(
                         syn::Lit::Bool(b) => {
                             format!("{}", b.value)
                         }
-                        _ => format!(""),
+                        _ => String::new(),
                     };
 
                     result.push(RustConst {
-                        const_name: const_name,
+                        const_name,
                         rust_type: t,
-                        value: value,
+                        value,
                     });
                 }
             }
@@ -526,7 +521,7 @@ fn parse_type(t: &syn::Type) -> RustType {
             };
         }
         syn::Type::Tuple(t) => {
-            if t.elems.len() == 0 {
+            if t.elems.is_empty() {
                 return RustType {
                     type_name: "()".to_string(),
                     type_kind: TypeKind::Normal,
@@ -549,7 +544,7 @@ fn parse_type(t: &syn::Type) -> RustType {
 
             let ret = match &t.output {
                 syn::ReturnType::Default => None,
-                syn::ReturnType::Type(_, t) => Some(Box::new(parse_type(&t))),
+                syn::ReturnType::Type(_, t) => Some(Box::new(parse_type(t))),
             };
 
             return RustType {
@@ -558,7 +553,7 @@ fn parse_type(t: &syn::Type) -> RustType {
             };
         }
         syn::Type::Reference(t) => {
-            let result = parse_type(&*t.elem);
+            let result = parse_type(&t.elem);
             let is_mut = t.mutability.is_some();
 
             match result {
@@ -575,7 +570,7 @@ fn parse_type(t: &syn::Type) -> RustType {
                                 } else {
                                     PointerType::ConstPointer
                                 },
-                                Box::new(parse_type(&*t.elem)),
+                                Box::new(parse_type(&t.elem)),
                             ),
                         };
                     }
@@ -588,7 +583,7 @@ fn parse_type(t: &syn::Type) -> RustType {
                                 } else {
                                     PointerType::ConstPointerPointer
                                 },
-                                Box::new(parse_type(&*t.elem)),
+                                Box::new(parse_type(&t.elem)),
                             ),
                         };
                     }
@@ -601,7 +596,7 @@ fn parse_type(t: &syn::Type) -> RustType {
                                 } else {
                                     PointerType::ConstMutPointerPointer
                                 },
-                                Box::new(parse_type(&*t.elem)),
+                                Box::new(parse_type(&t.elem)),
                             ),
                         };
                     }
@@ -613,7 +608,7 @@ fn parse_type(t: &syn::Type) -> RustType {
                         type_name: result.type_name,
                         type_kind: TypeKind::Pointer(
                             PointerType::ConstPointer,
-                            Box::new(parse_type(&*t.elem)),
+                            Box::new(parse_type(&t.elem)),
                         ),
                     };
                 }
@@ -654,8 +649,8 @@ fn parse_type_path(t: &syn::TypePath) -> RustType {
         }
     }
 
-    return RustType {
+    RustType {
         type_name: last_segment.ident.to_string(),
         type_kind: TypeKind::Normal,
-    };
+    }
 }

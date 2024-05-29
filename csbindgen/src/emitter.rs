@@ -128,8 +128,7 @@ pub fn emit_csharp(
                 &"return".to_string(),
             ) {
                 method_list_string.push_str(
-                    format!("        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n")
-                        .as_str(),
+                    "        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n"
                 );
                 method_list_string
                     .push_str(format!("        {accessibility} {delegate_method};\n\n").as_str());
@@ -145,8 +144,7 @@ pub fn emit_csharp(
                 &p.name,
             ) {
                 method_list_string.push_str(
-                    format!("        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n")
-                        .as_str(),
+                    "        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n"
                 );
                 method_list_string
                     .push_str(format!("        {accessibility} {delegate_method};\n\n").as_str());
@@ -307,19 +305,19 @@ pub fn emit_csharp(
         );
 
         // special case for string, char, ByteStr
-        if item.value.starts_with("\"") {
+        if item.value.starts_with('\"') {
             type_name = "string".to_string();
-        } else if item.value.starts_with("\'") {
+        } else if item.value.starts_with('\'') {
             type_name = "char".to_string();
         }
 
-        if item.value.starts_with("[") {
+        if item.value.starts_with('[') {
             const_string.push_str(
                 format!(
                     "        {} static ReadOnlySpan<byte> {} => new byte[] {};\n",
                     accessibility,
                     escape_csharp_name(item.const_name.as_str()),
-                    item.value.replace("[", "{ ").replace("]", " }")
+                    item.value.replace('[', "{ ").replace(']', " }")
                 )
                 .as_str(),
             );
@@ -359,7 +357,7 @@ pub fn emit_csharp(
         )
     };
 
-    let file_header = if options.csharp_file_header.len() > 0 {
+    let file_header = if !options.csharp_file_header.is_empty() {
         options.csharp_file_header.to_string() + "\n"
     } else {
         "".to_string()

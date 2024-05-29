@@ -202,17 +202,17 @@ mod tests {
         file.flush().unwrap();
     }
 
-    fn compare_and_delete_files(original_file_path: &str, generated_file_path: &str) {
-                let original = fs::read_to_string(original_file_path)
-            .expect("Should have been able to read original file");
-
-        let generated = fs::read_to_string(generated_file_path)
-            .expect("Should have been able to read generated file");
-
-        assert_eq!(original, generated);
-
-        fs::remove_file(generated_file_path).unwrap();
-    }
+    //fn compare_and_delete_files(original_file_path: &str, generated_file_path: &str) {
+    //            let original = fs::read_to_string(original_file_path)
+    //        .expect("Should have been able to read original file");
+    //
+    //    let generated = fs::read_to_string(generated_file_path)
+    //        .expect("Should have been able to read generated file");
+    //
+    //    assert_eq!(original, generated);
+    //
+    //    fs::remove_file(generated_file_path).unwrap();
+    //}
 
     // #[test]
     // fn test_emit_without_class() {
