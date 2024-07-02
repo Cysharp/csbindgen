@@ -482,7 +482,7 @@ namespace CsBindgen
         public static extern b3SharedMemoryStatusHandle__* b3ProcessServerStatus(b3PhysicsClientHandle__* physClient);
 
         /// <summary>
-        /// Get the physics server return status type. See EnumSharedMemoryServerStatus in SharedMemoryPublic.h for error codes.
+        ///  Get the physics server return status type. See EnumSharedMemoryServerStatus in SharedMemoryPublic.h for error codes.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetStatusType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusType(b3SharedMemoryStatusHandle__* statusHandle);
@@ -557,7 +557,7 @@ namespace CsBindgen
         public static extern int b3GetNumBodies(b3PhysicsClientHandle__* physClient);
 
         /// <summary>
-        /// return the body unique id, given the index in range [0 , b3GetNumBodies() )
+        ///  return the body unique id, given the index in range [0 , b3GetNumBodies() )
         /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetBodyUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetBodyUniqueId(b3PhysicsClientHandle__* physClient, int serialIndex);
@@ -759,7 +759,7 @@ namespace CsBindgen
         public static extern int b3GetUserConstraintInfo(b3PhysicsClientHandle__* physClient, int constraintUniqueId, b3UserConstraint* info);
 
         /// <summary>
-        /// return the user constraint id, given the index in range [0 , b3GetNumUserConstraints() )
+        ///  return the user constraint id, given the index in range [0 , b3GetNumUserConstraints() )
         /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetUserConstraintId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetUserConstraintId(b3PhysicsClientHandle__* physClient, int serialIndex);
@@ -818,7 +818,7 @@ namespace CsBindgen
         public static extern int b3GetStatusOpenGLVisualizerCamera(b3SharedMemoryStatusHandle__* statusHandle, b3OpenGLVisualizerCameraInfo* camera);
 
         /// <summary>
-        /// Add/remove user-specific debug lines and debug text messages
+        ///  Add/remove user-specific debug lines and debug text messages
         /// </summary>
         [DllImport(__DllName, EntryPoint = "b3InitUserDebugDrawAddLine3D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitUserDebugDrawAddLine3D(b3PhysicsClientHandle__* physClient, double* fromXYZ, double* toXYZ, double* colorRGB, double lineWidth, double lifeTime);
@@ -1717,7 +1717,7 @@ namespace CsBindgen
         public static extern void b3GetRaycastInformation(b3PhysicsClientHandle__* physClient, b3RaycastInformation* raycastInfo);
 
         /// <summary>
-        /// Apply external force at the body (or link) center of mass, in world space/Cartesian coordinates.
+        ///  Apply external force at the body (or link) center of mass, in world space/Cartesian coordinates.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "b3ApplyExternalForceCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3ApplyExternalForceCommandInit(b3PhysicsClientHandle__* physClient);

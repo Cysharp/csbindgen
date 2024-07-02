@@ -57,16 +57,18 @@ impl ExternMethod {
         lines.push(format!("{}/// <summary>", indent));
 
         for comment in self.doc_comment.iter() {
-            for line in comment.lines() {
-                lines.push(format!(
-                    "{}/// {}",
-                    indent,
-                    line.trim_matches(&['=', ' ', '\"'] as &[_])
-                        .replace("\n", "\n///")
-                        .replace("&", "&amp;")
-                        .replace("<", "&lt;")
-                        .replace(">", "&gt;"),
-                ));
+            if comment.trim().is_empty() {
+                lines.push(format!("{}///", indent));
+            } else {
+                for line in comment.lines() {
+                    lines.push(format!(
+                        "{}/// {}",
+                        indent,
+                        line.replace("&", "&amp;")
+                            .replace("<", "&lt;")
+                            .replace(">", "&gt;"),
+                    ));
+                }
             }
         }
 
