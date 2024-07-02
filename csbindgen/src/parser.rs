@@ -153,8 +153,6 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
         .filter_map(|x| get_str_from_meta(&x.meta))
         .collect::<Vec<_>>();
 
-    println!("Parsed doc comment:\n{:?}", doc_comment);
-
     if !method_name.is_empty() && (options.method_filter)(method_name.clone()) {
         return Some(ExternMethod {
             method_name,
