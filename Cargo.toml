@@ -1,5 +1,3 @@
 [workspace]
-members = [
-    "csbindgen",
-    "csbindgen-tests",
-]
+members = ["csbindgen", "csbindgen-tests"]
+resolver = "2"

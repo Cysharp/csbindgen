@@ -19,5 +19,5 @@ bitflags = "2.1.0"
 
 [build-dependencies]
 cc = "1.0.79"
-bindgen = "0.64.0"
+bindgen = "0.69.4"
 csbindgen = { path = "../csbindgen" }

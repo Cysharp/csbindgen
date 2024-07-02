@@ -1,8 +1,9 @@
+use crate::type_meta::ExportSymbolNaming::{ExportName, NoMangle};
+use crate::util::get_str_from_meta;
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
 use regex::Regex;
 use std::collections::HashSet;
 use syn::{ForeignItem, Item, Meta, MetaNameValue, Pat, ReturnType};
-use crate::type_meta::ExportSymbolNaming::{ExportName, NoMangle};
 
 enum FnItem {
     ForeignItem(syn::ForeignItemFn),
@@ -118,14 +119,15 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     // check attrs
     let mut export_naming = NoMangle;
     if !is_foreign_item {
-        let found = attrs.iter()
+        let found = attrs
+            .iter()
             .map(|attr| {
-                let name = &attr.path.segments.last().unwrap().ident;
+                let name = &attr.path().segments.last().unwrap().ident;
                 if name == "no_mangle" {
-                    return Some(NoMangle)
+                    return Some(NoMangle);
                 } else if name == "export_name" {
-                    if let Ok(Meta::NameValue(MetaNameValue { lit: syn::Lit::Str(x), .. })) = attr.parse_meta() {
-                        return Some(ExportName(x.value()));
+                    if let Some(x) = get_str_from_meta(&attr.meta) {
+                        return Some(ExportName(x));
                     }
                 }
                 None
@@ -147,8 +149,8 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     // doc
     let doc_comment = attrs
         .iter()
-        .filter(|x| x.path.segments.last().unwrap().ident == "doc")
-        .map(|x| x.tokens.to_string())
+        .filter(|x| x.path().is_ident("doc"))
+        .filter_map(|x| get_str_from_meta(&x.meta))
         .collect::<Vec<_>>();
 
     if !method_name.is_empty() && (options.method_filter)(method_name.clone()) {
@@ -201,15 +203,15 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                 is_union: true,
             });
         } else if let Item::Struct(t) = item {
-            let mut repr = None;
+            let mut repr = false;
             for attr in &t.attrs {
-                let last_segment = attr.path.segments.last().unwrap();
+                let last_segment = attr.path().segments.last().unwrap();
                 if last_segment.ident == "repr" {
-                    repr = Some(attr.tokens.to_string());
+                    repr = true;
                 }
             }
 
-            if let Some(_) = repr {
+            if repr {
                 if let syn::Fields::Named(f) = &t.fields {
                     let struct_name = t.ident.to_string();
                     let fields = collect_fields(f);
@@ -282,48 +284,51 @@ fn collect_fields_unnamed(fields: &syn::FieldsUnnamed) -> Vec<FieldMember> {
     result
 }
 
-pub fn collect_const(ast: &syn::File, result: &mut Vec<RustConst>,filter:fn(const_name: &str) -> bool) {
+pub fn collect_const(
+    ast: &syn::File,
+    result: &mut Vec<RustConst>,
+    filter: fn(const_name: &str) -> bool,
+) {
     for item in depth_first_module_walk(&ast.items) {
         if let Item::Const(ct) = item {
             // pub const Ident: ty = expr
             let const_name = ct.ident.to_string();
             if filter(const_name.as_str()) {
-                
-            let t = parse_type(&ct.ty);
+                let t = parse_type(&ct.ty);
 
-            if let syn::Expr::Lit(lit_expr) = &*ct.expr {
-                let value = match &lit_expr.lit {
-                    syn::Lit::Str(s) => {
-                        format!("\"{}\"", s.value())
-                    }
-                    syn::Lit::ByteStr(bs) => {
-                        format!("{:?}", bs.value())
-                    }
-                    syn::Lit::Byte(b) => {
-                        format!("{}", b.value())
-                    }
-                    syn::Lit::Char(c) => {
-                        format!("'{}'", c.value())
-                    }
-                    syn::Lit::Int(i) => {
-                        format!("{}", i.base10_parse::<i64>().unwrap())
-                    }
-                    syn::Lit::Float(f) => {
-                        format!("{}", f.base10_parse::<f64>().unwrap())
-                    }
-                    syn::Lit::Bool(b) => {
-                        format!("{}", b.value)
-                    }
-                    _ => format!(""),
-                };
+                if let syn::Expr::Lit(lit_expr) = &*ct.expr {
+                    let value = match &lit_expr.lit {
+                        syn::Lit::Str(s) => {
+                            format!("\"{}\"", s.value())
+                        }
+                        syn::Lit::ByteStr(bs) => {
+                            format!("{:?}", bs.value())
+                        }
+                        syn::Lit::Byte(b) => {
+                            format!("{}", b.value())
+                        }
+                        syn::Lit::Char(c) => {
+                            format!("'{}'", c.value())
+                        }
+                        syn::Lit::Int(i) => {
+                            format!("{}", i.base10_parse::<i64>().unwrap())
+                        }
+                        syn::Lit::Float(f) => {
+                            format!("{}", f.base10_parse::<f64>().unwrap())
+                        }
+                        syn::Lit::Bool(b) => {
+                            format!("{}", b.value)
+                        }
+                        _ => format!(""),
+                    };
 
-                result.push(RustConst {
-                    const_name: const_name,
-                    rust_type: t,
-                    value: value,
-                });
+                    result.push(RustConst {
+                        const_name: const_name,
+                        rust_type: t,
+                        value: value,
+                    });
+                }
             }
-        }
         }
     }
 }
@@ -333,16 +338,23 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
         if let Item::Enum(t) = item {
             let mut repr = None;
             for attr in &t.attrs {
-                let last_segment = attr.path.segments.last().unwrap();
+                let last_segment = attr.path().segments.last().unwrap();
                 if last_segment.ident == "repr" {
-                    repr = Some(attr.tokens.to_string());
+                    attr.parse_nested_meta(|meta| {
+                        repr = meta.path.get_ident().map(|ident| ident.to_string());
+                        Ok(())
+                    })
+                    .unwrap();
                 }
             }
 
             let enum_name = t.ident.to_string();
             let mut fields = Vec::new(); // Vec<(String, Option<String>)>
 
-            if t.variants.iter().any(|x| !matches!(x.fields, syn::Fields::Unit)) {
+            if t.variants
+                .iter()
+                .any(|x| !matches!(x.fields, syn::Fields::Unit))
+            {
                 println!("csbindgen can't handle Enum containing any variable with field, so ignore generate, enum_name: {enum_name}");
                 continue;
             }
@@ -352,9 +364,11 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                 let mut value = None;
 
                 match &v.discriminant {
-                    Some((_, syn::Expr::Lit(x))) => if let syn::Lit::Int(x) = &x.lit {
-                        let digits = x.base10_digits().to_string();
-                        value = Some(digits);
+                    Some((_, syn::Expr::Lit(x))) => {
+                        if let syn::Lit::Int(x) = &x.lit {
+                            let digits = x.base10_digits().to_string();
+                            value = Some(digits);
+                        }
                     }
                     Some((_, syn::Expr::Unary(u))) if matches!(u.op, syn::UnOp::Neg(_)) => {
                         if let syn::Expr::Lit(x) = &*u.expr {
