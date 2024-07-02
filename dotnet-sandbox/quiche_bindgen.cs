@@ -392,7 +392,10 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "quiche_h3_parse_extensible_priority", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int quiche_h3_parse_extensible_priority(byte* priority, nuint priority_len, quiche_h3_priority* parsed);
 
-        /// <summary>Sends a PRIORITY_UPDATE frame on the control stream with specified request stream ID and priority.</summary>
+        /// <summary>
+        /// Sends a PRIORITY_UPDATE frame on the control stream with specified
+        /// request stream ID and priority.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "quiche_h3_send_priority_update_for_request", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int quiche_h3_send_priority_update_for_request(quiche_h3_conn* conn, quiche_conn* quic_conn, ulong stream_id, quiche_h3_priority* priority);
 

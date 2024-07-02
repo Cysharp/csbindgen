@@ -443,35 +443,53 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3ConnectSharedMemory2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3PhysicsClientHandle__* b3ConnectSharedMemory2(int key);
 
-        /// <summary>think more about naming. Directly execute commands without transport (no shared memory, UDP, socket, grpc etc)</summary>
+        /// <summary>
+        /// think more about naming. Directly execute commands without transport (no shared memory, UDP, socket, grpc etc)
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3ConnectPhysicsDirect", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3PhysicsClientHandle__* b3ConnectPhysicsDirect();
 
-        /// <summary>b3DisconnectSharedMemory will disconnect the client from the server and cleanup memory.</summary>
+        /// <summary>
+        /// b3DisconnectSharedMemory will disconnect the client from the server and cleanup memory.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3DisconnectSharedMemory", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3DisconnectSharedMemory(b3PhysicsClientHandle__* physClient);
 
-        /// <summary>There can only be 1 outstanding command. Check if a command can be send.</summary>
+        /// <summary>
+        /// There can only be 1 outstanding command. Check if a command can be send.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3CanSubmitCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CanSubmitCommand(b3PhysicsClientHandle__* physClient);
 
-        /// <summary>blocking submit command and wait for status</summary>
+        /// <summary>
+        /// blocking submit command and wait for status
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3SubmitClientCommandAndWaitStatus", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryStatusHandle__* b3SubmitClientCommandAndWaitStatus(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle);
 
-        /// <summary>In general it is better to use b3SubmitClientCommandAndWaitStatus. b3SubmitClientCommand is a non-blocking submitcommand, which requires checking for the status manually, using b3ProcessServerStatus. Also, before sending thenext command, make sure to check if you can send a command using 'b3CanSubmitCommand'.</summary>
+        /// <summary>
+        /// In general it is better to use b3SubmitClientCommandAndWaitStatus. b3SubmitClientCommand is a non-blocking submit
+        /// command, which requires checking for the status manually, using b3ProcessServerStatus. Also, before sending the
+        /// next command, make sure to check if you can send a command using 'b3CanSubmitCommand'.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3SubmitClientCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3SubmitClientCommand(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle);
 
-        /// <summary>non-blocking check status</summary>
+        /// <summary>
+        /// non-blocking check status
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3ProcessServerStatus", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryStatusHandle__* b3ProcessServerStatus(b3PhysicsClientHandle__* physClient);
 
-        /// <summary>Get the physics server return status type. See EnumSharedMemoryServerStatus in SharedMemoryPublic.h for error codes.</summary>
+        /// <summary>
+        /// Get the physics server return status type. See EnumSharedMemoryServerStatus in SharedMemoryPublic.h for error codes.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetStatusType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusType(b3SharedMemoryStatusHandle__* statusHandle);
 
-        /// <summary>Plugin system, load and unload a plugin, execute a command</summary>
+        /// <summary>
+        /// Plugin system, load and unload a plugin, execute a command
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3CreateCustomCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateCustomCommand(b3PhysicsClientHandle__* physClient);
 
@@ -520,7 +538,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3GetStatusAABB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusAABB(b3SharedMemoryStatusHandle__* statusHandle, int linkIndex, double* aabbMin, double* aabbMax);
 
-        /// <summary>If you re-connected to an existing server, or server changed otherwise, sync the body info and user constraints etc.</summary>
+        /// <summary>
+        /// If you re-connected to an existing server, or server changed otherwise, sync the body info and user constraints etc.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3InitSyncBodyInfoCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitSyncBodyInfoCommand(b3PhysicsClientHandle__* physClient);
 
@@ -530,35 +550,52 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3InitRemoveBodyCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRemoveBodyCommand(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
-        /// <summary>return the total number of bodies in the simulation</summary>
+        /// <summary>
+        /// return the total number of bodies in the simulation
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetNumBodies", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetNumBodies(b3PhysicsClientHandle__* physClient);
 
-        /// <summary>return the body unique id, given the index in range [0 , b3GetNumBodies() )</summary>
+        /// <summary>
+        /// return the body unique id, given the index in range [0 , b3GetNumBodies() )
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetBodyUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetBodyUniqueId(b3PhysicsClientHandle__* physClient, int serialIndex);
 
-        /// <summary>given a body unique id, return the body information. See b3BodyInfo in SharedMemoryPublic.h</summary>
+        /// <summary>
+        /// given a body unique id, return the body information. See b3BodyInfo in SharedMemoryPublic.h
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetBodyInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetBodyInfo(b3PhysicsClientHandle__* physClient, int bodyUniqueId, b3BodyInfo* info);
 
-        /// <summary>give a unique body index (after loading the body) return the number of joints.</summary>
+        /// <summary>
+        /// give a unique body index (after loading the body) return the number of joints.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetNumJoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetNumJoints(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
-        /// <summary>give a unique body index (after loading the body) return the number of degrees of freedom (DoF).</summary>
+        /// <summary>
+        /// give a unique body index (after loading the body) return the number of degrees of freedom (DoF).
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetNumDofs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetNumDofs(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
-        /// <summary>compute the number of degrees of freedom for this body.Return -1 for unsupported spherical joint, -2 for unsupported planar joint.</summary>
+        /// <summary>
+        /// compute the number of degrees of freedom for this body.
+        /// Return -1 for unsupported spherical joint, -2 for unsupported planar joint.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3ComputeDofCount", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3ComputeDofCount(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
-        /// <summary>given a body and joint index, return the joint information. See b3JointInfo in SharedMemoryPublic.h</summary>
+        /// <summary>
+        /// given a body and joint index, return the joint information. See b3JointInfo in SharedMemoryPublic.h
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetJointInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetJointInfo(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int jointIndex, b3JointInfo* info);
 
-        /// <summary>user data handling</summary>
+        /// <summary>
+        /// user data handling
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3InitSyncUserDataCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitSyncUserDataCommand(b3PhysicsClientHandle__* physClient);
 
@@ -592,7 +629,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3GetDynamicsInfoCommandInit2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3GetDynamicsInfoCommandInit2(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkIndex);
 
-        /// <summary>given a body unique id and link index, return the dynamics information. See b3DynamicsInfo in SharedMemoryPublic.h</summary>
+        /// <summary>
+        /// given a body unique id and link index, return the dynamics information. See b3DynamicsInfo in SharedMemoryPublic.h
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetDynamicsInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetDynamicsInfo(b3SharedMemoryStatusHandle__* statusHandle, b3DynamicsInfo* info);
 
@@ -671,11 +710,15 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3InitCreateUserConstraintCommand2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitCreateUserConstraintCommand2(b3SharedMemoryCommandHandle__* commandHandle, int parentBodyUniqueId, int parentJointIndex, int childBodyUniqueId, int childJointIndex, b3JointInfo* info);
 
-        /// <summary>return a unique id for the user constraint, after successful creation, or -1 for an invalid constraint id</summary>
+        /// <summary>
+        /// return a unique id for the user constraint, after successful creation, or -1 for an invalid constraint id
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetStatusUserConstraintUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusUserConstraintUniqueId(b3SharedMemoryStatusHandle__* statusHandle);
 
-        /// <summary>change parameters of an existing user constraint</summary>
+        /// <summary>
+        /// change parameters of an existing user constraint
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3InitChangeUserConstraintCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitChangeUserConstraintCommand(b3PhysicsClientHandle__* physClient, int userConstraintUniqueId);
 
@@ -715,19 +758,29 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3GetUserConstraintInfo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetUserConstraintInfo(b3PhysicsClientHandle__* physClient, int constraintUniqueId, b3UserConstraint* info);
 
-        /// <summary>return the user constraint id, given the index in range [0 , b3GetNumUserConstraints() )</summary>
+        /// <summary>
+        /// return the user constraint id, given the index in range [0 , b3GetNumUserConstraints() )
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetUserConstraintId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetUserConstraintId(b3PhysicsClientHandle__* physClient, int serialIndex);
 
-        /// <summary>Request physics debug lines for debug visualization. The flags in debugMode are the same as used in BulletSee btIDebugDraw::DebugDrawModes in Bullet/src/LinearMath/btIDebugDraw.h</summary>
+        /// <summary>
+        /// Request physics debug lines for debug visualization. The flags in debugMode are the same as used in Bullet
+        /// See btIDebugDraw::DebugDrawModes in Bullet/src/LinearMath/btIDebugDraw.h
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3InitRequestDebugLinesCommand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRequestDebugLinesCommand(b3PhysicsClientHandle__* physClient, int debugMode);
 
-        /// <summary>Get the pointers to the physics debug line information, after b3InitRequestDebugLinesCommand returnsstatus CMD_DEBUG_LINES_COMPLETED</summary>
+        /// <summary>
+        /// Get the pointers to the physics debug line information, after b3InitRequestDebugLinesCommand returns
+        /// status CMD_DEBUG_LINES_COMPLETED
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetDebugLines", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetDebugLines(b3PhysicsClientHandle__* physClient, b3DebugLines* lines);
 
-        /// <summary>configure the 3D OpenGL debug visualizer (enable/disable GUI widgets, shadows, position camera etc)</summary>
+        /// <summary>
+        /// configure the 3D OpenGL debug visualizer (enable/disable GUI widgets, shadows, position camera etc)
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3InitConfigureOpenGLVisualizer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitConfigureOpenGLVisualizer(b3PhysicsClientHandle__* physClient);
 
@@ -764,7 +817,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3GetStatusOpenGLVisualizerCamera", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusOpenGLVisualizerCamera(b3SharedMemoryStatusHandle__* statusHandle, b3OpenGLVisualizerCameraInfo* camera);
 
-        /// <summary>Add/remove user-specific debug lines and debug text messages</summary>
+        /// <summary>
+        /// Add/remove user-specific debug lines and debug text messages
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3InitUserDebugDrawAddLine3D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitUserDebugDrawAddLine3D(b3PhysicsClientHandle__* physClient, double* fromXYZ, double* toXYZ, double* colorRGB, double lineWidth, double lifeTime);
 
@@ -813,11 +868,15 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3RemoveDebugObjectColor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RemoveDebugObjectColor(b3SharedMemoryCommandHandle__* commandHandle, int objectUniqueId, int linkIndex);
 
-        /// <summary>All debug items unique Ids are positive: a negative unique Id means failure.</summary>
+        /// <summary>
+        /// All debug items unique Ids are positive: a negative unique Id means failure.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetDebugItemUniqueId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetDebugItemUniqueId(b3SharedMemoryStatusHandle__* statusHandle);
 
-        /// <summary>request an image from a simulated camera, using a software renderer.</summary>
+        /// <summary>
+        /// request an image from a simulated camera, using a software renderer.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3InitRequestCameraImage", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRequestCameraImage(b3PhysicsClientHandle__* physClient);
 
@@ -860,11 +919,15 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3GetCameraImageData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetCameraImageData(b3PhysicsClientHandle__* physClient, b3CameraImageData* imageData);
 
-        /// <summary>set projective texture camera matrices.</summary>
+        /// <summary>
+        /// set projective texture camera matrices.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetProjectiveTextureMatrices", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetProjectiveTextureMatrices(b3SharedMemoryCommandHandle__* commandHandle, float* viewMatrix, float* projectionMatrix);
 
-        /// <summary>compute a view matrix, helper function for b3RequestCameraImageSetCameraMatrices</summary>
+        /// <summary>
+        /// compute a view matrix, helper function for b3RequestCameraImageSetCameraMatrices
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3ComputeViewMatrixFromPositions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ComputeViewMatrixFromPositions(float* cameraPosition, float* cameraTargetPosition, float* cameraUp, float* viewMatrix);
 
@@ -874,7 +937,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3ComputePositionFromViewMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ComputePositionFromViewMatrix(float* viewMatrix, float* cameraPosition, float* cameraTargetPosition, float* cameraUp);
 
-        /// <summary>compute a projection matrix, helper function for b3RequestCameraImageSetCameraMatrices</summary>
+        /// <summary>
+        /// compute a projection matrix, helper function for b3RequestCameraImageSetCameraMatrices
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3ComputeProjectionMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ComputeProjectionMatrix(float left, float right, float bottom, float top, float nearVal, float farVal, float* projectionMatrix);
 
@@ -893,7 +958,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3RequestCameraImageSetFOVProjectionMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3RequestCameraImageSetFOVProjectionMatrix(b3SharedMemoryCommandHandle__* commandHandle, float fov, float aspect, float nearVal, float farVal);
 
-        /// <summary>request an contact point information</summary>
+        /// <summary>
+        /// request an contact point information
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3InitRequestContactPointInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitRequestContactPointInformation(b3PhysicsClientHandle__* physClient);
 
@@ -912,7 +979,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3GetContactPointInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetContactPointInformation(b3PhysicsClientHandle__* physClient, b3ContactInformation* contactPointData);
 
-        /// <summary>compute the closest points between two bodies</summary>
+        /// <summary>
+        /// compute the closest points between two bodies
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3InitClosestDistanceQuery", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitClosestDistanceQuery(b3PhysicsClientHandle__* physClient);
 
@@ -952,7 +1021,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3GetClosestPointInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetClosestPointInformation(b3PhysicsClientHandle__* physClient, b3ContactInformation* contactPointInfo);
 
-        /// <summary>get all the bodies that touch a given axis aligned bounding box specified in world space (min and max coordinates)</summary>
+        /// <summary>
+        /// get all the bodies that touch a given axis aligned bounding box specified in world space (min and max coordinates)
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3InitAABBOverlapQuery", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3InitAABBOverlapQuery(b3PhysicsClientHandle__* physClient, double* aabbMin, double* aabbMax);
 
@@ -1127,7 +1198,10 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3InitResetSimulationSetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3InitResetSimulationSetFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
-        /// <summary>Load a robot from a URDF file. Status type will CMD_URDF_LOADING_COMPLETED.Access the robot from the unique body index, through b3GetStatusBodyIndex(statusHandle);</summary>
+        /// <summary>
+        /// Load a robot from a URDF file. Status type will CMD_URDF_LOADING_COMPLETED.
+        /// Access the robot from the unique body index, through b3GetStatusBodyIndex(statusHandle);
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3LoadUrdfCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3LoadUrdfCommandInit(b3PhysicsClientHandle__* physClient, byte* urdfFileName);
 
@@ -1188,7 +1262,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3LoadMJCFCommandSetUseMultiBody", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3LoadMJCFCommandSetUseMultiBody(b3SharedMemoryCommandHandle__* commandHandle, int useMultiBody);
 
-        /// <summary>compute the forces to achieve an acceleration, given a state q and qdot using inverse dynamics</summary>
+        /// <summary>
+        /// compute the forces to achieve an acceleration, given a state q and qdot using inverse dynamics
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3CalculateInverseDynamicsCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CalculateInverseDynamicsCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId, double* jointPositionsQ, double* jointVelocitiesQdot, double* jointAccelerations);
 
@@ -1213,11 +1289,15 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3CalculateMassMatrixSetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CalculateMassMatrixSetFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
-        /// <summary>the mass matrix is stored in column-major layout of size dofCount*dofCount</summary>
+        /// <summary>
+        /// the mass matrix is stored in column-major layout of size dofCount*dofCount
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3GetStatusMassMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3GetStatusMassMatrix(b3PhysicsClientHandle__* physClient, b3SharedMemoryStatusHandle__* statusHandle, int* dofCount, double* massMatrix);
 
-        /// <summary>compute the joint positions to move the end effector to a desired target using inverse kinematics</summary>
+        /// <summary>
+        /// compute the joint positions to move the end effector to a desired target using inverse kinematics
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3CalculateInverseKinematicsCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CalculateInverseKinematicsCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
@@ -1278,18 +1358,25 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3SaveWorldCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3SaveWorldCommandInit(b3PhysicsClientHandle__* physClient, byte* sdfFileName);
 
-        /// <summary>The b3JointControlCommandInit method is obsolete, use b3JointControlCommandInit2 instead</summary>
+        /// <summary>
+        /// The b3JointControlCommandInit method is obsolete, use b3JointControlCommandInit2 instead
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3JointControlCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3JointControlCommandInit(b3PhysicsClientHandle__* physClient, int controlMode);
 
-        /// <summary>Set joint motor control variables such as desired position/angle, desired velocity,applied joint forces, dependent on the control mode (CONTROL_MODE_VELOCITY or CONTROL_MODE_TORQUE)</summary>
+        /// <summary>
+        /// Set joint motor control variables such as desired position/angle, desired velocity,
+        /// applied joint forces, dependent on the control mode (CONTROL_MODE_VELOCITY or CONTROL_MODE_TORQUE)
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3JointControlCommandInit2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3JointControlCommandInit2(b3PhysicsClientHandle__* physClient, int bodyUniqueId, int controlMode);
 
         [DllImport(__DllName, EntryPoint = "b3JointControlCommandInit2Internal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3JointControlCommandInit2Internal(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int controlMode);
 
-        /// <summary>Only use when controlMode is CONTROL_MODE_POSITION_VELOCITY_PD</summary>
+        /// <summary>
+        /// Only use when controlMode is CONTROL_MODE_POSITION_VELOCITY_PD
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3JointControlSetDesiredPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDesiredPosition(b3SharedMemoryCommandHandle__* commandHandle, int qIndex, double value);
 
@@ -1311,7 +1398,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3JointControlSetMaximumVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetMaximumVelocity(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double maximumVelocity);
 
-        /// <summary>Only use when controlMode is CONTROL_MODE_VELOCITY</summary>
+        /// <summary>
+        /// Only use when controlMode is CONTROL_MODE_VELOCITY
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3JointControlSetDesiredVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDesiredVelocity(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double value);
 
@@ -1333,11 +1422,16 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3JointControlSetDampingMultiDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDampingMultiDof(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double* damping, int dofCount);
 
-        /// <summary>Only use if when controlMode is CONTROL_MODE_TORQUE,</summary>
+        /// <summary>
+        /// Only use if when controlMode is CONTROL_MODE_TORQUE,
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3JointControlSetDesiredForceTorque", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3JointControlSetDesiredForceTorque(b3SharedMemoryCommandHandle__* commandHandle, int dofIndex, double value);
 
-        /// <summary>the creation of collision shapes and rigid bodies etc is likely going to change,but good to have a b3CreateBoxShapeCommandInit for now</summary>
+        /// <summary>
+        /// the creation of collision shapes and rigid bodies etc is likely going to change,
+        /// but good to have a b3CreateBoxShapeCommandInit for now
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3CreateCollisionShapeCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateCollisionShapeCommandInit(b3PhysicsClientHandle__* physClient);
 
@@ -1470,7 +1564,10 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3CreateMultiBodySetFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3CreateMultiBodySetFlags(b3SharedMemoryCommandHandle__* commandHandle, int flags);
 
-        /// <summary>create a box of size (1,1,1) at world origin (0,0,0) at orientation quat (0,0,0,1)after that, you can optionally adjust the initial position, orientation and size</summary>
+        /// <summary>
+        /// create a box of size (1,1,1) at world origin (0,0,0) at orientation quat (0,0,0,1)
+        /// after that, you can optionally adjust the initial position, orientation and size
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3CreateBoxShapeCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateBoxShapeCommandInit(b3PhysicsClientHandle__* physClient);
 
@@ -1492,7 +1589,11 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3CreateBoxCommandSetColorRGBA", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateBoxCommandSetColorRGBA(b3SharedMemoryCommandHandle__* commandHandle, double red, double green, double blue, double alpha);
 
-        /// <summary>b3CreatePoseCommandInit will initialize (teleport) the pose of a body/robot. You can individually set the base position,base orientation and joint angles. This will set all velocities of base and joints to zero.This is not a robot control command using actuators/joint motors, but manual repositioning the robot.</summary>
+        /// <summary>
+        /// b3CreatePoseCommandInit will initialize (teleport) the pose of a body/robot. You can individually set the base position,
+        /// base orientation and joint angles. This will set all velocities of base and joints to zero.
+        /// This is not a robot control command using actuators/joint motors, but manual repositioning the robot.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreatePoseCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
@@ -1538,14 +1639,20 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3CreatePoseCommandSetJointVelocityMultiDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreatePoseCommandSetJointVelocityMultiDof(b3PhysicsClientHandle__* physClient, b3SharedMemoryCommandHandle__* commandHandle, int jointIndex, double* jointVelocity, int velSize);
 
-        /// <summary>We are currently not reading the sensor information from the URDF file, and programmatically assign sensors.This is rather inconsistent, to mix programmatical creation with loading from file.</summary>
+        /// <summary>
+        /// We are currently not reading the sensor information from the URDF file, and programmatically assign sensors.
+        /// This is rather inconsistent, to mix programmatical creation with loading from file.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3CreateSensorCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3CreateSensorCommandInit(b3PhysicsClientHandle__* physClient, int bodyUniqueId);
 
         [DllImport(__DllName, EntryPoint = "b3CreateSensorEnable6DofJointForceTorqueSensor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateSensorEnable6DofJointForceTorqueSensor(b3SharedMemoryCommandHandle__* commandHandle, int jointIndex, int enable);
 
-        /// <summary>b3CreateSensorEnableIMUForLink is not implemented yet.For now, if the IMU is located in the root link, use the root world transform to mimic an IMU.</summary>
+        /// <summary>
+        /// b3CreateSensorEnableIMUForLink is not implemented yet.
+        /// For now, if the IMU is located in the root link, use the root world transform to mimic an IMU.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3CreateSensorEnableIMUForLink", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern int b3CreateSensorEnableIMUForLink(b3SharedMemoryCommandHandle__* commandHandle, int linkIndex, int enable);
 
@@ -1609,7 +1716,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3GetRaycastInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3GetRaycastInformation(b3PhysicsClientHandle__* physClient, b3RaycastInformation* raycastInfo);
 
-        /// <summary>Apply external force at the body (or link) center of mass, in world space/Cartesian coordinates.</summary>
+        /// <summary>
+        /// Apply external force at the body (or link) center of mass, in world space/Cartesian coordinates.
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3ApplyExternalForceCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3ApplyExternalForceCommandInit(b3PhysicsClientHandle__* physClient);
 
@@ -1619,7 +1728,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "b3ApplyExternalTorque", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void b3ApplyExternalTorque(b3SharedMemoryCommandHandle__* commandHandle, int bodyUniqueId, int linkId, double* torque, int flag);
 
-        /// <summary>experiments of robots interacting with non-rigid objects (such as btSoftBody)</summary>
+        /// <summary>
+        /// experiments of robots interacting with non-rigid objects (such as btSoftBody)
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "b3LoadSoftBodyCommandInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern b3SharedMemoryCommandHandle__* b3LoadSoftBodyCommandInit(b3PhysicsClientHandle__* physClient, byte* fileName);
 
