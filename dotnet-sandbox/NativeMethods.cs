@@ -29,7 +29,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "JPH_PruneContactPoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void JPH_PruneContactPoints(void/* UInt128[] */* ioContactPointsOn1, JPH_ContactManifold* ioContactPointsOn2);
 
-        /// <summary>my comment!</summary>
+        /// <summary>
+        ///  my comment!
+        /// </summary>
         [DllImport(__DllName, EntryPoint = "comment_one", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         public static extern void comment_one(EnumFlags _flags);
 

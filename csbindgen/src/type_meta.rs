@@ -1,3 +1,5 @@
+use core::mem::forget;
+
 use crate::{alias_map::AliasMap, builder::BindgenOptions};
 
 pub fn escape_csharp_name(str: &str) -> String {
@@ -45,26 +47,34 @@ pub struct ExternMethod {
 }
 
 impl ExternMethod {
-    pub fn escape_doc_comment(&self) -> Option<String> {
+    pub fn escape_doc_comment(&self, indent: &str) -> Option<String> {
         if self.doc_comment.is_empty() {
             return None;
         }
 
-        let mut s = String::new();
-        for (i, x) in self.doc_comment.iter().enumerate() {
-            if i != 0 {
-                s.push(' ');
+        let mut lines = Vec::with_capacity(self.doc_comment.len() + 2);
+
+        lines.push(format!("{}/// <summary>", indent));
+
+        for comment in self.doc_comment.iter() {
+            if comment.trim().is_empty() {
+                lines.push(format!("{}///", indent));
+            } else {
+                for line in comment.lines() {
+                    lines.push(format!(
+                        "{}/// {}",
+                        indent,
+                        line.replace("&", "&amp;")
+                            .replace("<", "&lt;")
+                            .replace(">", "&gt;"),
+                    ));
+                }
             }
-            let ss = x
-                .trim_matches(&['=', ' ', '\"'] as &[_])
-                .replace("\\n", "")
-                .replace("&", "&amp;")
-                .replace("<", "&lt;")
-                .replace(">", "&gt;");
-            s.push_str(ss.as_str());
         }
 
-        Some(s)
+        lines.push(format!("{}/// </summary>", indent));
+
+        Some(lines.join("\n"))
     }
 }
 
@@ -231,9 +241,9 @@ impl RustType {
                 "i16" => "short",
                 "i32" => "int",
                 "i64" => "long",
-                "i128" => "Int128", // .NET 7
-                "isize" if use_nint_types => "nint",  // C# 9.0
-                "isize" => "System.IntPtr",  // C# 9.0
+                "i128" => "Int128",                  // .NET 7
+                "isize" if use_nint_types => "nint", // C# 9.0
+                "isize" => "System.IntPtr",          // C# 9.0
                 "u8" => "byte",
                 "u16" => "ushort",
                 "u32" => "uint",

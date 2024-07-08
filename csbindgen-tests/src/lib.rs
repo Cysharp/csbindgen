@@ -374,7 +374,7 @@ pub struct InternalCounterContext {
 }
 
 #[no_mangle]
-pub extern "C" fn my_bool(
+pub unsafe extern "C" fn my_bool(
     x: bool,
     y: bool,
     z: bool,
@@ -451,7 +451,7 @@ pub extern "C" fn create_context() -> *mut Context {
 }
 
 #[no_mangle]
-pub extern "C" fn delete_context(context: *mut Context) {
+pub unsafe extern "C" fn delete_context(context: *mut Context) {
     unsafe { Box::from_raw(context) };
 }
 
@@ -606,12 +606,10 @@ pub struct CallbackTable {
     pub foobar: extern "C" fn(i: i32) -> i32,
 }
 
-
 pub extern "C" fn reference_type(_a: &i32, _b: &*mut i32, _c: &[u8; 16], _d: &Context) {}
 
-pub extern "C" fn reference_hogemoge1(_a : &mut i32, _b: &&i32){}
-pub extern "C" fn reference_hogemoge2(_a : &mut i32, _b: &*mut i32){}
-
+pub extern "C" fn reference_hogemoge1(_a: &mut i32, _b: &&i32) {}
+pub extern "C" fn reference_hogemoge2(_a: &mut i32, _b: &*mut i32) {}
 
 #[no_mangle]
 pub extern "C" fn create_counter_context2() -> *mut CounterContext2 {
@@ -642,19 +640,21 @@ pub struct CounterContext2 {
 }
 
 pub struct InternalHiddenContext {
-    pub a: i32
+    pub a: i32,
 }
 
 pub struct TreatAsEmptyStruct {
-    internal: std::sync::Arc<InternalHiddenContext>
+    internal: std::sync::Arc<InternalHiddenContext>,
 }
 
 #[no_mangle]
-pub unsafe extern "C" fn init_treat_as_empty_struct_context(_out: NonNull<Box<TreatAsEmptyStruct>>) {}
+pub unsafe extern "C" fn init_treat_as_empty_struct_context(
+    _out: NonNull<Box<TreatAsEmptyStruct>>,
+) {
+}
 
 #[no_mangle]
 pub unsafe extern "C" fn free_treat_as_empty_struct_context(_src: *mut TreatAsEmptyStruct) {}
-
 
 // fn run_physix(){
 //     unsafe {
