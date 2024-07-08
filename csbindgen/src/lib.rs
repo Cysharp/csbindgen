@@ -201,4 +201,31 @@ mod tests {
         file.write_all(new_toml.as_bytes()).unwrap();
         file.flush().unwrap();
     }
+
+    fn compare_and_delete_files(original_file_path: &str, generated_file_path: &str) {
+                let original = fs::read_to_string(original_file_path)
+            .expect("Should have been able to read original file");
+
+        let generated = fs::read_to_string(generated_file_path)
+            .expect("Should have been able to read generated file");
+
+        assert_eq!(original, generated);
+
+        fs::remove_file(generated_file_path).unwrap();
+    }
+
+    #[test]
+    fn test_emit_without_class() {
+        let generated_file_path = "dotnet-sandbox/only_enums_and_structs_bindgen.cs";
+        Builder::new()
+            .always_included_types(["Vec3", "Foo"])
+            .input_bindgen_file("csbindgen-tests/src/only_enums_and_structs.rs")
+            .generate_csharp_file(generated_file_path)
+            .unwrap();
+
+        compare_and_delete_files(
+            "dotnet-sandbox/only_enums_and_structs_original.cs",
+            generated_file_path,
+        );
+    }
 }
