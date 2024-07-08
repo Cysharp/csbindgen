@@ -132,7 +132,7 @@ pub fn emit_csharp(
                         .as_str(),
                 );
                 method_list_string
-                    .push_str(format!("        public {delegate_method};\n\n").as_str());
+                    .push_str(format!("        {accessibility} {delegate_method};\n\n").as_str());
             }
         }
 
@@ -149,7 +149,7 @@ pub fn emit_csharp(
                         .as_str(),
                 );
                 method_list_string
-                    .push_str(format!("        public {delegate_method};\n\n").as_str());
+                    .push_str(format!("        {accessibility} {delegate_method};\n\n").as_str());
             }
         }
 
@@ -196,7 +196,7 @@ pub fn emit_csharp(
             method_list_string.push_str_ln("        [return: MarshalAs(UnmanagedType.U1)]");
         }
         method_list_string.push_str_ln(
-            format!("        public static extern {return_type} {method_prefix}{method_name}({parameters});").as_str(),
+            format!("        {accessibility} static extern {return_type} {method_prefix}{method_name}({parameters});").as_str(),
         );
         method_list_string.push('\n');
     }
