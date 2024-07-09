@@ -1,5 +1,3 @@
-use core::mem::forget;
-
 use crate::{alias_map::AliasMap, builder::BindgenOptions};
 
 pub fn escape_csharp_name(str: &str) -> String {

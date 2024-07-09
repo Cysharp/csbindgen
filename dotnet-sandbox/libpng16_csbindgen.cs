@@ -17,925 +17,925 @@ namespace PixivApi.ImageFile
 
 
         [DllImport(__DllName, EntryPoint = "fgetwc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort fgetwc(_iobuf* _Stream);
+        internal static extern ushort fgetwc(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "fputwc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort fputwc(ushort _Character, _iobuf* _Stream);
+        internal static extern ushort fputwc(ushort _Character, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "getwc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort getwc(_iobuf* _Stream);
+        internal static extern ushort getwc(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "getwchar", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort getwchar();
+        internal static extern ushort getwchar();
 
         [DllImport(__DllName, EntryPoint = "fgetws", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort* fgetws(ushort* _Buffer, int _BufferCount, _iobuf* _Stream);
+        internal static extern ushort* fgetws(ushort* _Buffer, int _BufferCount, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "fputws", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fputws(ushort* _Buffer, _iobuf* _Stream);
+        internal static extern int fputws(ushort* _Buffer, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "putwc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort putwc(ushort _Character, _iobuf* _Stream);
+        internal static extern ushort putwc(ushort _Character, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "putwchar", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort putwchar(ushort _Character);
+        internal static extern ushort putwchar(ushort _Character);
 
         [DllImport(__DllName, EntryPoint = "ungetwc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort ungetwc(ushort _Character, _iobuf* _Stream);
+        internal static extern ushort ungetwc(ushort _Character, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "clearerr_s", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int clearerr_s(_iobuf* _Stream);
+        internal static extern int clearerr_s(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "fopen_s", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fopen_s(_iobuf** _Stream, byte* _FileName, byte* _Mode);
+        internal static extern int fopen_s(_iobuf** _Stream, byte* _FileName, byte* _Mode);
 
         [DllImport(__DllName, EntryPoint = "fread_s", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern nuint fread_s(void* _Buffer, nuint _BufferSize, nuint _ElementSize, nuint _ElementCount, _iobuf* _Stream);
+        internal static extern nuint fread_s(void* _Buffer, nuint _BufferSize, nuint _ElementSize, nuint _ElementCount, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "freopen_s", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int freopen_s(_iobuf** _Stream, byte* _FileName, byte* _Mode, _iobuf* _OldStream);
+        internal static extern int freopen_s(_iobuf** _Stream, byte* _FileName, byte* _Mode, _iobuf* _OldStream);
 
         [DllImport(__DllName, EntryPoint = "gets_s", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* gets_s(byte* _Buffer, nuint _Size);
+        internal static extern byte* gets_s(byte* _Buffer, nuint _Size);
 
         [DllImport(__DllName, EntryPoint = "tmpfile_s", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int tmpfile_s(_iobuf** _Stream);
+        internal static extern int tmpfile_s(_iobuf** _Stream);
 
         [DllImport(__DllName, EntryPoint = "tmpnam_s", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int tmpnam_s(byte* _Buffer, nuint _Size);
+        internal static extern int tmpnam_s(byte* _Buffer, nuint _Size);
 
         [DllImport(__DllName, EntryPoint = "clearerr", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void clearerr(_iobuf* _Stream);
+        internal static extern void clearerr(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "fclose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fclose(_iobuf* _Stream);
+        internal static extern int fclose(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "feof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int feof(_iobuf* _Stream);
+        internal static extern int feof(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "ferror", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int ferror(_iobuf* _Stream);
+        internal static extern int ferror(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "fflush", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fflush(_iobuf* _Stream);
+        internal static extern int fflush(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "fgetc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fgetc(_iobuf* _Stream);
+        internal static extern int fgetc(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "fgetpos", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fgetpos(_iobuf* _Stream, long* _Position);
+        internal static extern int fgetpos(_iobuf* _Stream, long* _Position);
 
         [DllImport(__DllName, EntryPoint = "fgets", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* fgets(byte* _Buffer, int _MaxCount, _iobuf* _Stream);
+        internal static extern byte* fgets(byte* _Buffer, int _MaxCount, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "fopen", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern _iobuf* fopen(byte* _FileName, byte* _Mode);
+        internal static extern _iobuf* fopen(byte* _FileName, byte* _Mode);
 
         [DllImport(__DllName, EntryPoint = "fputc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fputc(int _Character, _iobuf* _Stream);
+        internal static extern int fputc(int _Character, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "fputs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fputs(byte* _Buffer, _iobuf* _Stream);
+        internal static extern int fputs(byte* _Buffer, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "fread", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ulong fread(void* _Buffer, ulong _ElementSize, ulong _ElementCount, _iobuf* _Stream);
+        internal static extern ulong fread(void* _Buffer, ulong _ElementSize, ulong _ElementCount, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "freopen", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern _iobuf* freopen(byte* _FileName, byte* _Mode, _iobuf* _Stream);
+        internal static extern _iobuf* freopen(byte* _FileName, byte* _Mode, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "fsetpos", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fsetpos(_iobuf* _Stream, long* _Position);
+        internal static extern int fsetpos(_iobuf* _Stream, long* _Position);
 
         [DllImport(__DllName, EntryPoint = "fseek", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fseek(_iobuf* _Stream, CLong _Offset, int _Origin);
+        internal static extern int fseek(_iobuf* _Stream, CLong _Offset, int _Origin);
 
         [DllImport(__DllName, EntryPoint = "ftell", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern CLong ftell(_iobuf* _Stream);
+        internal static extern CLong ftell(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "fwrite", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ulong fwrite(void* _Buffer, ulong _ElementSize, ulong _ElementCount, _iobuf* _Stream);
+        internal static extern ulong fwrite(void* _Buffer, ulong _ElementSize, ulong _ElementCount, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "getc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int getc(_iobuf* _Stream);
+        internal static extern int getc(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "getchar", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int getchar();
+        internal static extern int getchar();
 
         [DllImport(__DllName, EntryPoint = "perror", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void perror(byte* _ErrorMessage);
+        internal static extern void perror(byte* _ErrorMessage);
 
         [DllImport(__DllName, EntryPoint = "putc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int putc(int _Character, _iobuf* _Stream);
+        internal static extern int putc(int _Character, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "putchar", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int putchar(int _Character);
+        internal static extern int putchar(int _Character);
 
         [DllImport(__DllName, EntryPoint = "puts", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int puts(byte* _Buffer);
+        internal static extern int puts(byte* _Buffer);
 
         [DllImport(__DllName, EntryPoint = "remove", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int remove(byte* _FileName);
+        internal static extern int remove(byte* _FileName);
 
         [DllImport(__DllName, EntryPoint = "rename", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int rename(byte* _OldFileName, byte* _NewFileName);
+        internal static extern int rename(byte* _OldFileName, byte* _NewFileName);
 
         [DllImport(__DllName, EntryPoint = "unlink", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int unlink(byte* _FileName);
+        internal static extern int unlink(byte* _FileName);
 
         [DllImport(__DllName, EntryPoint = "rewind", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void rewind(_iobuf* _Stream);
+        internal static extern void rewind(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "setbuf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void setbuf(_iobuf* _Stream, byte* _Buffer);
+        internal static extern void setbuf(_iobuf* _Stream, byte* _Buffer);
 
         [DllImport(__DllName, EntryPoint = "setvbuf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int setvbuf(_iobuf* _Stream, byte* _Buffer, int _Mode, nuint _Size);
+        internal static extern int setvbuf(_iobuf* _Stream, byte* _Buffer, int _Mode, nuint _Size);
 
         [DllImport(__DllName, EntryPoint = "tmpfile", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern _iobuf* tmpfile();
+        internal static extern _iobuf* tmpfile();
 
         [DllImport(__DllName, EntryPoint = "tmpnam", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* tmpnam(byte* _Buffer);
+        internal static extern byte* tmpnam(byte* _Buffer);
 
         [DllImport(__DllName, EntryPoint = "ungetc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int ungetc(int _Character, _iobuf* _Stream);
+        internal static extern int ungetc(int _Character, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "tempnam", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* tempnam(byte* _Directory, byte* _FilePrefix);
+        internal static extern byte* tempnam(byte* _Directory, byte* _FilePrefix);
 
         [DllImport(__DllName, EntryPoint = "fcloseall", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fcloseall();
+        internal static extern int fcloseall();
 
         [DllImport(__DllName, EntryPoint = "fdopen", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern _iobuf* fdopen(int _FileHandle, byte* _Format);
+        internal static extern _iobuf* fdopen(int _FileHandle, byte* _Format);
 
         [DllImport(__DllName, EntryPoint = "fgetchar", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fgetchar();
+        internal static extern int fgetchar();
 
         [DllImport(__DllName, EntryPoint = "fileno", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fileno(_iobuf* _Stream);
+        internal static extern int fileno(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "flushall", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int flushall();
+        internal static extern int flushall();
 
         [DllImport(__DllName, EntryPoint = "fputchar", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int fputchar(int _Ch);
+        internal static extern int fputchar(int _Ch);
 
         [DllImport(__DllName, EntryPoint = "getw", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int getw(_iobuf* _Stream);
+        internal static extern int getw(_iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "putw", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int putw(int _Ch, _iobuf* _Stream);
+        internal static extern int putw(int _Ch, _iobuf* _Stream);
 
         [DllImport(__DllName, EntryPoint = "rmtmp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int rmtmp();
+        internal static extern int rmtmp();
 
         [DllImport(__DllName, EntryPoint = "wcsftime", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern nuint wcsftime(ushort* _Buffer, nuint _SizeInWords, ushort* _Format, tm* _Tm);
+        internal static extern nuint wcsftime(ushort* _Buffer, nuint _SizeInWords, ushort* _Format, tm* _Tm);
 
         [DllImport(__DllName, EntryPoint = "asctime", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* asctime(tm* _Tm);
+        internal static extern byte* asctime(tm* _Tm);
 
         [DllImport(__DllName, EntryPoint = "asctime_s", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int asctime_s(byte* _Buffer, nuint _SizeInBytes, tm* _Tm);
+        internal static extern int asctime_s(byte* _Buffer, nuint _SizeInBytes, tm* _Tm);
 
         [DllImport(__DllName, EntryPoint = "clock", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern CLong clock();
+        internal static extern CLong clock();
 
         [DllImport(__DllName, EntryPoint = "strftime", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern nuint strftime(byte* _Buffer, nuint _SizeInBytes, byte* _Format, tm* _Tm);
+        internal static extern nuint strftime(byte* _Buffer, nuint _SizeInBytes, byte* _Format, tm* _Tm);
 
         [DllImport(__DllName, EntryPoint = "tzset", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void tzset();
+        internal static extern void tzset();
 
         [DllImport(__DllName, EntryPoint = "png_access_version_number", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_access_version_number();
+        internal static extern uint png_access_version_number();
 
         [DllImport(__DllName, EntryPoint = "png_set_sig_bytes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_sig_bytes(png_struct_def* png_ptr, int num_bytes);
+        internal static extern void png_set_sig_bytes(png_struct_def* png_ptr, int num_bytes);
 
         [DllImport(__DllName, EntryPoint = "png_sig_cmp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_sig_cmp(byte* sig, nuint start, nuint num_to_check);
+        internal static extern int png_sig_cmp(byte* sig, nuint start, nuint num_to_check);
 
         [DllImport(__DllName, EntryPoint = "png_create_read_struct", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern png_struct_def* png_create_read_struct(byte* user_png_ver, void* error_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> error_fn, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> warn_fn);
+        internal static extern png_struct_def* png_create_read_struct(byte* user_png_ver, void* error_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> error_fn, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> warn_fn);
 
         [DllImport(__DllName, EntryPoint = "png_create_write_struct", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern png_struct_def* png_create_write_struct(byte* user_png_ver, void* error_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> error_fn, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> warn_fn);
+        internal static extern png_struct_def* png_create_write_struct(byte* user_png_ver, void* error_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> error_fn, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> warn_fn);
 
         [DllImport(__DllName, EntryPoint = "png_get_compression_buffer_size", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern nuint png_get_compression_buffer_size(png_struct_def* png_ptr);
+        internal static extern nuint png_get_compression_buffer_size(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_compression_buffer_size", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_compression_buffer_size(png_struct_def* png_ptr, nuint size);
+        internal static extern void png_set_compression_buffer_size(png_struct_def* png_ptr, nuint size);
 
         [DllImport(__DllName, EntryPoint = "png_set_longjmp_fn", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern _SETJMP_FLOAT128* png_set_longjmp_fn(png_struct_def* png_ptr, delegate* unmanaged[Cdecl]<_SETJMP_FLOAT128*, int, void> longjmp_fn, nuint jmp_buf_size);
+        internal static extern _SETJMP_FLOAT128* png_set_longjmp_fn(png_struct_def* png_ptr, delegate* unmanaged[Cdecl]<_SETJMP_FLOAT128*, int, void> longjmp_fn, nuint jmp_buf_size);
 
         [DllImport(__DllName, EntryPoint = "png_reset_zstream", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_reset_zstream(png_struct_def* png_ptr);
+        internal static extern int png_reset_zstream(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_create_read_struct_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern png_struct_def* png_create_read_struct_2(byte* user_png_ver, void* error_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> error_fn, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> warn_fn, void* mem_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, nuint, void*> malloc_fn, delegate* unmanaged[Cdecl]<png_struct_def*, void*, void> free_fn);
+        internal static extern png_struct_def* png_create_read_struct_2(byte* user_png_ver, void* error_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> error_fn, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> warn_fn, void* mem_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, nuint, void*> malloc_fn, delegate* unmanaged[Cdecl]<png_struct_def*, void*, void> free_fn);
 
         [DllImport(__DllName, EntryPoint = "png_create_write_struct_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern png_struct_def* png_create_write_struct_2(byte* user_png_ver, void* error_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> error_fn, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> warn_fn, void* mem_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, nuint, void*> malloc_fn, delegate* unmanaged[Cdecl]<png_struct_def*, void*, void> free_fn);
+        internal static extern png_struct_def* png_create_write_struct_2(byte* user_png_ver, void* error_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> error_fn, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> warn_fn, void* mem_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, nuint, void*> malloc_fn, delegate* unmanaged[Cdecl]<png_struct_def*, void*, void> free_fn);
 
         [DllImport(__DllName, EntryPoint = "png_write_sig", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_sig(png_struct_def* png_ptr);
+        internal static extern void png_write_sig(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_write_chunk", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_chunk(png_struct_def* png_ptr, byte* chunk_name, byte* data, nuint length);
+        internal static extern void png_write_chunk(png_struct_def* png_ptr, byte* chunk_name, byte* data, nuint length);
 
         [DllImport(__DllName, EntryPoint = "png_write_chunk_start", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_chunk_start(png_struct_def* png_ptr, byte* chunk_name, uint length);
+        internal static extern void png_write_chunk_start(png_struct_def* png_ptr, byte* chunk_name, uint length);
 
         [DllImport(__DllName, EntryPoint = "png_write_chunk_data", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_chunk_data(png_struct_def* png_ptr, byte* data, nuint length);
+        internal static extern void png_write_chunk_data(png_struct_def* png_ptr, byte* data, nuint length);
 
         [DllImport(__DllName, EntryPoint = "png_write_chunk_end", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_chunk_end(png_struct_def* png_ptr);
+        internal static extern void png_write_chunk_end(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_create_info_struct", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern png_info_def* png_create_info_struct(png_struct_def* png_ptr);
+        internal static extern png_info_def* png_create_info_struct(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_info_init_3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_info_init_3(png_info_def** info_ptr, nuint png_info_struct_size);
+        internal static extern void png_info_init_3(png_info_def** info_ptr, nuint png_info_struct_size);
 
         [DllImport(__DllName, EntryPoint = "png_write_info_before_PLTE", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_info_before_PLTE(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern void png_write_info_before_PLTE(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_write_info", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_info(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern void png_write_info(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_read_info", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_read_info(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern void png_read_info(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_convert_to_rfc1123", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* png_convert_to_rfc1123(png_struct_def* png_ptr, png_time_struct* ptime);
+        internal static extern byte* png_convert_to_rfc1123(png_struct_def* png_ptr, png_time_struct* ptime);
 
         [DllImport(__DllName, EntryPoint = "png_convert_to_rfc1123_buffer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_convert_to_rfc1123_buffer(byte* @out, png_time_struct* ptime);
+        internal static extern int png_convert_to_rfc1123_buffer(byte* @out, png_time_struct* ptime);
 
         [DllImport(__DllName, EntryPoint = "png_convert_from_struct_tm", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_convert_from_struct_tm(png_time_struct* ptime, tm* ttime);
+        internal static extern void png_convert_from_struct_tm(png_time_struct* ptime, tm* ttime);
 
         [DllImport(__DllName, EntryPoint = "png_convert_from_time_t", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_convert_from_time_t(png_time_struct* ptime, long ttime);
+        internal static extern void png_convert_from_time_t(png_time_struct* ptime, long ttime);
 
         [DllImport(__DllName, EntryPoint = "png_set_expand", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_expand(png_struct_def* png_ptr);
+        internal static extern void png_set_expand(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_expand_gray_1_2_4_to_8", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_expand_gray_1_2_4_to_8(png_struct_def* png_ptr);
+        internal static extern void png_set_expand_gray_1_2_4_to_8(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_palette_to_rgb", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_palette_to_rgb(png_struct_def* png_ptr);
+        internal static extern void png_set_palette_to_rgb(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_tRNS_to_alpha", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_tRNS_to_alpha(png_struct_def* png_ptr);
+        internal static extern void png_set_tRNS_to_alpha(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_expand_16", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_expand_16(png_struct_def* png_ptr);
+        internal static extern void png_set_expand_16(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_bgr", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_bgr(png_struct_def* png_ptr);
+        internal static extern void png_set_bgr(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_gray_to_rgb", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_gray_to_rgb(png_struct_def* png_ptr);
+        internal static extern void png_set_gray_to_rgb(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_rgb_to_gray", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_rgb_to_gray(png_struct_def* png_ptr, int error_action, double red, double green);
+        internal static extern void png_set_rgb_to_gray(png_struct_def* png_ptr, int error_action, double red, double green);
 
         [DllImport(__DllName, EntryPoint = "png_set_rgb_to_gray_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_rgb_to_gray_fixed(png_struct_def* png_ptr, int error_action, int red, int green);
+        internal static extern void png_set_rgb_to_gray_fixed(png_struct_def* png_ptr, int error_action, int red, int green);
 
         [DllImport(__DllName, EntryPoint = "png_get_rgb_to_gray_status", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte png_get_rgb_to_gray_status(png_struct_def* png_ptr);
+        internal static extern byte png_get_rgb_to_gray_status(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_build_grayscale_palette", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_build_grayscale_palette(int bit_depth, png_color_struct* palette);
+        internal static extern void png_build_grayscale_palette(int bit_depth, png_color_struct* palette);
 
         [DllImport(__DllName, EntryPoint = "png_set_alpha_mode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_alpha_mode(png_struct_def* png_ptr, int mode, double output_gamma);
+        internal static extern void png_set_alpha_mode(png_struct_def* png_ptr, int mode, double output_gamma);
 
         [DllImport(__DllName, EntryPoint = "png_set_alpha_mode_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_alpha_mode_fixed(png_struct_def* png_ptr, int mode, int output_gamma);
+        internal static extern void png_set_alpha_mode_fixed(png_struct_def* png_ptr, int mode, int output_gamma);
 
         [DllImport(__DllName, EntryPoint = "png_set_strip_alpha", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_strip_alpha(png_struct_def* png_ptr);
+        internal static extern void png_set_strip_alpha(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_swap_alpha", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_swap_alpha(png_struct_def* png_ptr);
+        internal static extern void png_set_swap_alpha(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_invert_alpha", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_invert_alpha(png_struct_def* png_ptr);
+        internal static extern void png_set_invert_alpha(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_filler", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_filler(png_struct_def* png_ptr, uint filler, int flags);
+        internal static extern void png_set_filler(png_struct_def* png_ptr, uint filler, int flags);
 
         [DllImport(__DllName, EntryPoint = "png_set_add_alpha", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_add_alpha(png_struct_def* png_ptr, uint filler, int flags);
+        internal static extern void png_set_add_alpha(png_struct_def* png_ptr, uint filler, int flags);
 
         [DllImport(__DllName, EntryPoint = "png_set_swap", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_swap(png_struct_def* png_ptr);
+        internal static extern void png_set_swap(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_packing", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_packing(png_struct_def* png_ptr);
+        internal static extern void png_set_packing(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_packswap", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_packswap(png_struct_def* png_ptr);
+        internal static extern void png_set_packswap(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_shift", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_shift(png_struct_def* png_ptr, png_color_8_struct* true_bits);
+        internal static extern void png_set_shift(png_struct_def* png_ptr, png_color_8_struct* true_bits);
 
         [DllImport(__DllName, EntryPoint = "png_set_interlace_handling", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_set_interlace_handling(png_struct_def* png_ptr);
+        internal static extern int png_set_interlace_handling(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_invert_mono", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_invert_mono(png_struct_def* png_ptr);
+        internal static extern void png_set_invert_mono(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_background", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_background(png_struct_def* png_ptr, png_color_16_struct* background_color, int background_gamma_code, int need_expand, double background_gamma);
+        internal static extern void png_set_background(png_struct_def* png_ptr, png_color_16_struct* background_color, int background_gamma_code, int need_expand, double background_gamma);
 
         [DllImport(__DllName, EntryPoint = "png_set_background_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_background_fixed(png_struct_def* png_ptr, png_color_16_struct* background_color, int background_gamma_code, int need_expand, int background_gamma);
+        internal static extern void png_set_background_fixed(png_struct_def* png_ptr, png_color_16_struct* background_color, int background_gamma_code, int need_expand, int background_gamma);
 
         [DllImport(__DllName, EntryPoint = "png_set_scale_16", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_scale_16(png_struct_def* png_ptr);
+        internal static extern void png_set_scale_16(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_strip_16", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_strip_16(png_struct_def* png_ptr);
+        internal static extern void png_set_strip_16(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_quantize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_quantize(png_struct_def* png_ptr, png_color_struct* palette, int num_palette, int maximum_colors, ushort* histogram, int full_quantize);
+        internal static extern void png_set_quantize(png_struct_def* png_ptr, png_color_struct* palette, int num_palette, int maximum_colors, ushort* histogram, int full_quantize);
 
         [DllImport(__DllName, EntryPoint = "png_set_gamma", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_gamma(png_struct_def* png_ptr, double screen_gamma, double override_file_gamma);
+        internal static extern void png_set_gamma(png_struct_def* png_ptr, double screen_gamma, double override_file_gamma);
 
         [DllImport(__DllName, EntryPoint = "png_set_gamma_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_gamma_fixed(png_struct_def* png_ptr, int screen_gamma, int override_file_gamma);
+        internal static extern void png_set_gamma_fixed(png_struct_def* png_ptr, int screen_gamma, int override_file_gamma);
 
         [DllImport(__DllName, EntryPoint = "png_set_flush", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_flush(png_struct_def* png_ptr, int nrows);
+        internal static extern void png_set_flush(png_struct_def* png_ptr, int nrows);
 
         [DllImport(__DllName, EntryPoint = "png_write_flush", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_flush(png_struct_def* png_ptr);
+        internal static extern void png_write_flush(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_start_read_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_start_read_image(png_struct_def* png_ptr);
+        internal static extern void png_start_read_image(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_read_update_info", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_read_update_info(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern void png_read_update_info(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_read_rows", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_read_rows(png_struct_def* png_ptr, byte** row, byte** display_row, uint num_rows);
+        internal static extern void png_read_rows(png_struct_def* png_ptr, byte** row, byte** display_row, uint num_rows);
 
         [DllImport(__DllName, EntryPoint = "png_read_row", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_read_row(png_struct_def* png_ptr, byte* row, byte* display_row);
+        internal static extern void png_read_row(png_struct_def* png_ptr, byte* row, byte* display_row);
 
         [DllImport(__DllName, EntryPoint = "png_read_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_read_image(png_struct_def* png_ptr, byte** image);
+        internal static extern void png_read_image(png_struct_def* png_ptr, byte** image);
 
         [DllImport(__DllName, EntryPoint = "png_write_row", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_row(png_struct_def* png_ptr, byte* row);
+        internal static extern void png_write_row(png_struct_def* png_ptr, byte* row);
 
         [DllImport(__DllName, EntryPoint = "png_write_rows", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_rows(png_struct_def* png_ptr, byte** row, uint num_rows);
+        internal static extern void png_write_rows(png_struct_def* png_ptr, byte** row, uint num_rows);
 
         [DllImport(__DllName, EntryPoint = "png_write_image", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_image(png_struct_def* png_ptr, byte** image);
+        internal static extern void png_write_image(png_struct_def* png_ptr, byte** image);
 
         [DllImport(__DllName, EntryPoint = "png_write_end", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_end(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern void png_write_end(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_read_end", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_read_end(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern void png_read_end(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_destroy_info_struct", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_destroy_info_struct(png_struct_def* png_ptr, png_info_def** info_ptr_ptr);
+        internal static extern void png_destroy_info_struct(png_struct_def* png_ptr, png_info_def** info_ptr_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_destroy_read_struct", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_destroy_read_struct(png_struct_def** png_ptr_ptr, png_info_def** info_ptr_ptr, png_info_def** end_info_ptr_ptr);
+        internal static extern void png_destroy_read_struct(png_struct_def** png_ptr_ptr, png_info_def** info_ptr_ptr, png_info_def** end_info_ptr_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_destroy_write_struct", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_destroy_write_struct(png_struct_def** png_ptr_ptr, png_info_def** info_ptr_ptr);
+        internal static extern void png_destroy_write_struct(png_struct_def** png_ptr_ptr, png_info_def** info_ptr_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_crc_action", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_crc_action(png_struct_def* png_ptr, int crit_action, int ancil_action);
+        internal static extern void png_set_crc_action(png_struct_def* png_ptr, int crit_action, int ancil_action);
 
         [DllImport(__DllName, EntryPoint = "png_set_filter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_filter(png_struct_def* png_ptr, int method, int filters);
+        internal static extern void png_set_filter(png_struct_def* png_ptr, int method, int filters);
 
         [DllImport(__DllName, EntryPoint = "png_set_filter_heuristics", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_filter_heuristics(png_struct_def* png_ptr, int heuristic_method, int num_weights, double* filter_weights, double* filter_costs);
+        internal static extern void png_set_filter_heuristics(png_struct_def* png_ptr, int heuristic_method, int num_weights, double* filter_weights, double* filter_costs);
 
         [DllImport(__DllName, EntryPoint = "png_set_filter_heuristics_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_filter_heuristics_fixed(png_struct_def* png_ptr, int heuristic_method, int num_weights, int* filter_weights, int* filter_costs);
+        internal static extern void png_set_filter_heuristics_fixed(png_struct_def* png_ptr, int heuristic_method, int num_weights, int* filter_weights, int* filter_costs);
 
         [DllImport(__DllName, EntryPoint = "png_set_compression_level", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_compression_level(png_struct_def* png_ptr, int level);
+        internal static extern void png_set_compression_level(png_struct_def* png_ptr, int level);
 
         [DllImport(__DllName, EntryPoint = "png_set_compression_mem_level", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_compression_mem_level(png_struct_def* png_ptr, int mem_level);
+        internal static extern void png_set_compression_mem_level(png_struct_def* png_ptr, int mem_level);
 
         [DllImport(__DllName, EntryPoint = "png_set_compression_strategy", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_compression_strategy(png_struct_def* png_ptr, int strategy);
+        internal static extern void png_set_compression_strategy(png_struct_def* png_ptr, int strategy);
 
         [DllImport(__DllName, EntryPoint = "png_set_compression_window_bits", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_compression_window_bits(png_struct_def* png_ptr, int window_bits);
+        internal static extern void png_set_compression_window_bits(png_struct_def* png_ptr, int window_bits);
 
         [DllImport(__DllName, EntryPoint = "png_set_compression_method", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_compression_method(png_struct_def* png_ptr, int method);
+        internal static extern void png_set_compression_method(png_struct_def* png_ptr, int method);
 
         [DllImport(__DllName, EntryPoint = "png_set_text_compression_level", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_text_compression_level(png_struct_def* png_ptr, int level);
+        internal static extern void png_set_text_compression_level(png_struct_def* png_ptr, int level);
 
         [DllImport(__DllName, EntryPoint = "png_set_text_compression_mem_level", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_text_compression_mem_level(png_struct_def* png_ptr, int mem_level);
+        internal static extern void png_set_text_compression_mem_level(png_struct_def* png_ptr, int mem_level);
 
         [DllImport(__DllName, EntryPoint = "png_set_text_compression_strategy", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_text_compression_strategy(png_struct_def* png_ptr, int strategy);
+        internal static extern void png_set_text_compression_strategy(png_struct_def* png_ptr, int strategy);
 
         [DllImport(__DllName, EntryPoint = "png_set_text_compression_window_bits", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_text_compression_window_bits(png_struct_def* png_ptr, int window_bits);
+        internal static extern void png_set_text_compression_window_bits(png_struct_def* png_ptr, int window_bits);
 
         [DllImport(__DllName, EntryPoint = "png_set_text_compression_method", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_text_compression_method(png_struct_def* png_ptr, int method);
+        internal static extern void png_set_text_compression_method(png_struct_def* png_ptr, int method);
 
         [DllImport(__DllName, EntryPoint = "png_init_io", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_init_io(png_struct_def* png_ptr, _iobuf* fp);
+        internal static extern void png_init_io(png_struct_def* png_ptr, _iobuf* fp);
 
         [DllImport(__DllName, EntryPoint = "png_set_error_fn", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_error_fn(png_struct_def* png_ptr, void* error_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> error_fn, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> warning_fn);
+        internal static extern void png_set_error_fn(png_struct_def* png_ptr, void* error_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> error_fn, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, void> warning_fn);
 
         [DllImport(__DllName, EntryPoint = "png_get_error_ptr", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* png_get_error_ptr(png_struct_def* png_ptr);
+        internal static extern void* png_get_error_ptr(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_write_fn", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_write_fn(png_struct_def* png_ptr, void* io_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, nuint, void> write_data_fn, delegate* unmanaged[Cdecl]<png_struct_def*, void> output_flush_fn);
+        internal static extern void png_set_write_fn(png_struct_def* png_ptr, void* io_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, nuint, void> write_data_fn, delegate* unmanaged[Cdecl]<png_struct_def*, void> output_flush_fn);
 
         [DllImport(__DllName, EntryPoint = "png_set_read_fn", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_read_fn(png_struct_def* png_ptr, void* io_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, nuint, void> read_data_fn);
+        internal static extern void png_set_read_fn(png_struct_def* png_ptr, void* io_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, nuint, void> read_data_fn);
 
         [DllImport(__DllName, EntryPoint = "png_get_io_ptr", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* png_get_io_ptr(png_struct_def* png_ptr);
+        internal static extern void* png_get_io_ptr(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_read_status_fn", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_read_status_fn(png_struct_def* png_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, uint, int, void> read_row_fn);
+        internal static extern void png_set_read_status_fn(png_struct_def* png_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, uint, int, void> read_row_fn);
 
         [DllImport(__DllName, EntryPoint = "png_set_write_status_fn", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_write_status_fn(png_struct_def* png_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, uint, int, void> write_row_fn);
+        internal static extern void png_set_write_status_fn(png_struct_def* png_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, uint, int, void> write_row_fn);
 
         [DllImport(__DllName, EntryPoint = "png_set_mem_fn", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_mem_fn(png_struct_def* png_ptr, void* mem_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, nuint, void*> malloc_fn, delegate* unmanaged[Cdecl]<png_struct_def*, void*, void> free_fn);
+        internal static extern void png_set_mem_fn(png_struct_def* png_ptr, void* mem_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, nuint, void*> malloc_fn, delegate* unmanaged[Cdecl]<png_struct_def*, void*, void> free_fn);
 
         [DllImport(__DllName, EntryPoint = "png_get_mem_ptr", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* png_get_mem_ptr(png_struct_def* png_ptr);
+        internal static extern void* png_get_mem_ptr(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_read_user_transform_fn", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_read_user_transform_fn(png_struct_def* png_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, png_row_info_struct*, byte*, void> read_user_transform_fn);
+        internal static extern void png_set_read_user_transform_fn(png_struct_def* png_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, png_row_info_struct*, byte*, void> read_user_transform_fn);
 
         [DllImport(__DllName, EntryPoint = "png_set_write_user_transform_fn", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_write_user_transform_fn(png_struct_def* png_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, png_row_info_struct*, byte*, void> write_user_transform_fn);
+        internal static extern void png_set_write_user_transform_fn(png_struct_def* png_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, png_row_info_struct*, byte*, void> write_user_transform_fn);
 
         [DllImport(__DllName, EntryPoint = "png_set_user_transform_info", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_user_transform_info(png_struct_def* png_ptr, void* user_transform_ptr, int user_transform_depth, int user_transform_channels);
+        internal static extern void png_set_user_transform_info(png_struct_def* png_ptr, void* user_transform_ptr, int user_transform_depth, int user_transform_channels);
 
         [DllImport(__DllName, EntryPoint = "png_get_user_transform_ptr", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* png_get_user_transform_ptr(png_struct_def* png_ptr);
+        internal static extern void* png_get_user_transform_ptr(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_current_row_number", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_current_row_number(png_struct_def* arg1);
+        internal static extern uint png_get_current_row_number(png_struct_def* arg1);
 
         [DllImport(__DllName, EntryPoint = "png_get_current_pass_number", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte png_get_current_pass_number(png_struct_def* arg1);
+        internal static extern byte png_get_current_pass_number(png_struct_def* arg1);
 
         [DllImport(__DllName, EntryPoint = "png_set_read_user_chunk_fn", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_read_user_chunk_fn(png_struct_def* png_ptr, void* user_chunk_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, png_unknown_chunk_t*, int> read_user_chunk_fn);
+        internal static extern void png_set_read_user_chunk_fn(png_struct_def* png_ptr, void* user_chunk_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, png_unknown_chunk_t*, int> read_user_chunk_fn);
 
         [DllImport(__DllName, EntryPoint = "png_get_user_chunk_ptr", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* png_get_user_chunk_ptr(png_struct_def* png_ptr);
+        internal static extern void* png_get_user_chunk_ptr(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_progressive_read_fn", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_progressive_read_fn(png_struct_def* png_ptr, void* progressive_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, png_info_def*, void> info_fn, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, uint, int, void> row_fn, delegate* unmanaged[Cdecl]<png_struct_def*, png_info_def*, void> end_fn);
+        internal static extern void png_set_progressive_read_fn(png_struct_def* png_ptr, void* progressive_ptr, delegate* unmanaged[Cdecl]<png_struct_def*, png_info_def*, void> info_fn, delegate* unmanaged[Cdecl]<png_struct_def*, byte*, uint, int, void> row_fn, delegate* unmanaged[Cdecl]<png_struct_def*, png_info_def*, void> end_fn);
 
         [DllImport(__DllName, EntryPoint = "png_get_progressive_ptr", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* png_get_progressive_ptr(png_struct_def* png_ptr);
+        internal static extern void* png_get_progressive_ptr(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_process_data", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_process_data(png_struct_def* png_ptr, png_info_def* info_ptr, byte* buffer, nuint buffer_size);
+        internal static extern void png_process_data(png_struct_def* png_ptr, png_info_def* info_ptr, byte* buffer, nuint buffer_size);
 
         [DllImport(__DllName, EntryPoint = "png_process_data_pause", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern nuint png_process_data_pause(png_struct_def* arg1, int save);
+        internal static extern nuint png_process_data_pause(png_struct_def* arg1, int save);
 
         [DllImport(__DllName, EntryPoint = "png_process_data_skip", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_process_data_skip(png_struct_def* arg1);
+        internal static extern uint png_process_data_skip(png_struct_def* arg1);
 
         [DllImport(__DllName, EntryPoint = "png_progressive_combine_row", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_progressive_combine_row(png_struct_def* png_ptr, byte* old_row, byte* new_row);
+        internal static extern void png_progressive_combine_row(png_struct_def* png_ptr, byte* old_row, byte* new_row);
 
         [DllImport(__DllName, EntryPoint = "png_malloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* png_malloc(png_struct_def* png_ptr, nuint size);
+        internal static extern void* png_malloc(png_struct_def* png_ptr, nuint size);
 
         [DllImport(__DllName, EntryPoint = "png_calloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* png_calloc(png_struct_def* png_ptr, nuint size);
+        internal static extern void* png_calloc(png_struct_def* png_ptr, nuint size);
 
         [DllImport(__DllName, EntryPoint = "png_malloc_warn", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* png_malloc_warn(png_struct_def* png_ptr, nuint size);
+        internal static extern void* png_malloc_warn(png_struct_def* png_ptr, nuint size);
 
         [DllImport(__DllName, EntryPoint = "png_free", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_free(png_struct_def* png_ptr, void* ptr);
+        internal static extern void png_free(png_struct_def* png_ptr, void* ptr);
 
         [DllImport(__DllName, EntryPoint = "png_free_data", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_free_data(png_struct_def* png_ptr, png_info_def* info_ptr, uint free_me, int num);
+        internal static extern void png_free_data(png_struct_def* png_ptr, png_info_def* info_ptr, uint free_me, int num);
 
         [DllImport(__DllName, EntryPoint = "png_data_freer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_data_freer(png_struct_def* png_ptr, png_info_def* info_ptr, int freer, uint mask);
+        internal static extern void png_data_freer(png_struct_def* png_ptr, png_info_def* info_ptr, int freer, uint mask);
 
         [DllImport(__DllName, EntryPoint = "png_malloc_default", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* png_malloc_default(png_struct_def* png_ptr, nuint size);
+        internal static extern void* png_malloc_default(png_struct_def* png_ptr, nuint size);
 
         [DllImport(__DllName, EntryPoint = "png_free_default", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_free_default(png_struct_def* png_ptr, void* ptr);
+        internal static extern void png_free_default(png_struct_def* png_ptr, void* ptr);
 
         [DllImport(__DllName, EntryPoint = "png_warning", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_warning(png_struct_def* png_ptr, byte* warning_message);
+        internal static extern void png_warning(png_struct_def* png_ptr, byte* warning_message);
 
         [DllImport(__DllName, EntryPoint = "png_chunk_warning", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_chunk_warning(png_struct_def* png_ptr, byte* warning_message);
+        internal static extern void png_chunk_warning(png_struct_def* png_ptr, byte* warning_message);
 
         [DllImport(__DllName, EntryPoint = "png_benign_error", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_benign_error(png_struct_def* png_ptr, byte* warning_message);
+        internal static extern void png_benign_error(png_struct_def* png_ptr, byte* warning_message);
 
         [DllImport(__DllName, EntryPoint = "png_chunk_benign_error", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_chunk_benign_error(png_struct_def* png_ptr, byte* warning_message);
+        internal static extern void png_chunk_benign_error(png_struct_def* png_ptr, byte* warning_message);
 
         [DllImport(__DllName, EntryPoint = "png_set_benign_errors", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_benign_errors(png_struct_def* png_ptr, int allowed);
+        internal static extern void png_set_benign_errors(png_struct_def* png_ptr, int allowed);
 
         [DllImport(__DllName, EntryPoint = "png_get_valid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_valid(png_struct_def* png_ptr, png_info_def* info_ptr, uint flag);
+        internal static extern uint png_get_valid(png_struct_def* png_ptr, png_info_def* info_ptr, uint flag);
 
         [DllImport(__DllName, EntryPoint = "png_get_rowbytes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern nuint png_get_rowbytes(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern nuint png_get_rowbytes(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_rows", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte** png_get_rows(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern byte** png_get_rows(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_rows", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_rows(png_struct_def* png_ptr, png_info_def* info_ptr, byte** row_pointers);
+        internal static extern void png_set_rows(png_struct_def* png_ptr, png_info_def* info_ptr, byte** row_pointers);
 
         [DllImport(__DllName, EntryPoint = "png_get_channels", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte png_get_channels(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern byte png_get_channels(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_image_width", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_image_width(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern uint png_get_image_width(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_image_height", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_image_height(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern uint png_get_image_height(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_bit_depth", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte png_get_bit_depth(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern byte png_get_bit_depth(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_color_type", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte png_get_color_type(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern byte png_get_color_type(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_filter_type", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte png_get_filter_type(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern byte png_get_filter_type(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_interlace_type", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte png_get_interlace_type(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern byte png_get_interlace_type(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_compression_type", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte png_get_compression_type(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern byte png_get_compression_type(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_pixels_per_meter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_pixels_per_meter(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern uint png_get_pixels_per_meter(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_x_pixels_per_meter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_x_pixels_per_meter(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern uint png_get_x_pixels_per_meter(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_y_pixels_per_meter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_y_pixels_per_meter(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern uint png_get_y_pixels_per_meter(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_pixel_aspect_ratio", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float png_get_pixel_aspect_ratio(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern float png_get_pixel_aspect_ratio(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_pixel_aspect_ratio_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_get_pixel_aspect_ratio_fixed(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern int png_get_pixel_aspect_ratio_fixed(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_x_offset_pixels", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_get_x_offset_pixels(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern int png_get_x_offset_pixels(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_y_offset_pixels", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_get_y_offset_pixels(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern int png_get_y_offset_pixels(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_x_offset_microns", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_get_x_offset_microns(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern int png_get_x_offset_microns(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_y_offset_microns", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_get_y_offset_microns(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern int png_get_y_offset_microns(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_signature", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* png_get_signature(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern byte* png_get_signature(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_bKGD", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_bKGD(png_struct_def* png_ptr, png_info_def* info_ptr, png_color_16_struct** background);
+        internal static extern uint png_get_bKGD(png_struct_def* png_ptr, png_info_def* info_ptr, png_color_16_struct** background);
 
         [DllImport(__DllName, EntryPoint = "png_set_bKGD", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_bKGD(png_struct_def* png_ptr, png_info_def* info_ptr, png_color_16_struct* background);
+        internal static extern void png_set_bKGD(png_struct_def* png_ptr, png_info_def* info_ptr, png_color_16_struct* background);
 
         [DllImport(__DllName, EntryPoint = "png_get_cHRM", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_cHRM(png_struct_def* png_ptr, png_info_def* info_ptr, double* white_x, double* white_y, double* red_x, double* red_y, double* green_x, double* green_y, double* blue_x, double* blue_y);
+        internal static extern uint png_get_cHRM(png_struct_def* png_ptr, png_info_def* info_ptr, double* white_x, double* white_y, double* red_x, double* red_y, double* green_x, double* green_y, double* blue_x, double* blue_y);
 
         [DllImport(__DllName, EntryPoint = "png_get_cHRM_XYZ", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_cHRM_XYZ(png_struct_def* png_ptr, png_info_def* info_ptr, double* red_X, double* red_Y, double* red_Z, double* green_X, double* green_Y, double* green_Z, double* blue_X, double* blue_Y, double* blue_Z);
+        internal static extern uint png_get_cHRM_XYZ(png_struct_def* png_ptr, png_info_def* info_ptr, double* red_X, double* red_Y, double* red_Z, double* green_X, double* green_Y, double* green_Z, double* blue_X, double* blue_Y, double* blue_Z);
 
         [DllImport(__DllName, EntryPoint = "png_get_cHRM_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_cHRM_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int* int_white_x, int* int_white_y, int* int_red_x, int* int_red_y, int* int_green_x, int* int_green_y, int* int_blue_x, int* int_blue_y);
+        internal static extern uint png_get_cHRM_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int* int_white_x, int* int_white_y, int* int_red_x, int* int_red_y, int* int_green_x, int* int_green_y, int* int_blue_x, int* int_blue_y);
 
         [DllImport(__DllName, EntryPoint = "png_get_cHRM_XYZ_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_cHRM_XYZ_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int* int_red_X, int* int_red_Y, int* int_red_Z, int* int_green_X, int* int_green_Y, int* int_green_Z, int* int_blue_X, int* int_blue_Y, int* int_blue_Z);
+        internal static extern uint png_get_cHRM_XYZ_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int* int_red_X, int* int_red_Y, int* int_red_Z, int* int_green_X, int* int_green_Y, int* int_green_Z, int* int_blue_X, int* int_blue_Y, int* int_blue_Z);
 
         [DllImport(__DllName, EntryPoint = "png_set_cHRM", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_cHRM(png_struct_def* png_ptr, png_info_def* info_ptr, double white_x, double white_y, double red_x, double red_y, double green_x, double green_y, double blue_x, double blue_y);
+        internal static extern void png_set_cHRM(png_struct_def* png_ptr, png_info_def* info_ptr, double white_x, double white_y, double red_x, double red_y, double green_x, double green_y, double blue_x, double blue_y);
 
         [DllImport(__DllName, EntryPoint = "png_set_cHRM_XYZ", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_cHRM_XYZ(png_struct_def* png_ptr, png_info_def* info_ptr, double red_X, double red_Y, double red_Z, double green_X, double green_Y, double green_Z, double blue_X, double blue_Y, double blue_Z);
+        internal static extern void png_set_cHRM_XYZ(png_struct_def* png_ptr, png_info_def* info_ptr, double red_X, double red_Y, double red_Z, double green_X, double green_Y, double green_Z, double blue_X, double blue_Y, double blue_Z);
 
         [DllImport(__DllName, EntryPoint = "png_set_cHRM_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_cHRM_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int int_white_x, int int_white_y, int int_red_x, int int_red_y, int int_green_x, int int_green_y, int int_blue_x, int int_blue_y);
+        internal static extern void png_set_cHRM_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int int_white_x, int int_white_y, int int_red_x, int int_red_y, int int_green_x, int int_green_y, int int_blue_x, int int_blue_y);
 
         [DllImport(__DllName, EntryPoint = "png_set_cHRM_XYZ_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_cHRM_XYZ_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int int_red_X, int int_red_Y, int int_red_Z, int int_green_X, int int_green_Y, int int_green_Z, int int_blue_X, int int_blue_Y, int int_blue_Z);
+        internal static extern void png_set_cHRM_XYZ_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int int_red_X, int int_red_Y, int int_red_Z, int int_green_X, int int_green_Y, int int_green_Z, int int_blue_X, int int_blue_Y, int int_blue_Z);
 
         [DllImport(__DllName, EntryPoint = "png_get_eXIf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_eXIf(png_struct_def* png_ptr, png_info_def* info_ptr, byte** exif);
+        internal static extern uint png_get_eXIf(png_struct_def* png_ptr, png_info_def* info_ptr, byte** exif);
 
         [DllImport(__DllName, EntryPoint = "png_set_eXIf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_eXIf(png_struct_def* png_ptr, png_info_def* info_ptr, byte* exif);
+        internal static extern void png_set_eXIf(png_struct_def* png_ptr, png_info_def* info_ptr, byte* exif);
 
         [DllImport(__DllName, EntryPoint = "png_get_eXIf_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_eXIf_1(png_struct_def* png_ptr, png_info_def* info_ptr, uint* num_exif, byte** exif);
+        internal static extern uint png_get_eXIf_1(png_struct_def* png_ptr, png_info_def* info_ptr, uint* num_exif, byte** exif);
 
         [DllImport(__DllName, EntryPoint = "png_set_eXIf_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_eXIf_1(png_struct_def* png_ptr, png_info_def* info_ptr, uint num_exif, byte* exif);
+        internal static extern void png_set_eXIf_1(png_struct_def* png_ptr, png_info_def* info_ptr, uint num_exif, byte* exif);
 
         [DllImport(__DllName, EntryPoint = "png_get_gAMA", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_gAMA(png_struct_def* png_ptr, png_info_def* info_ptr, double* file_gamma);
+        internal static extern uint png_get_gAMA(png_struct_def* png_ptr, png_info_def* info_ptr, double* file_gamma);
 
         [DllImport(__DllName, EntryPoint = "png_get_gAMA_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_gAMA_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int* int_file_gamma);
+        internal static extern uint png_get_gAMA_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int* int_file_gamma);
 
         [DllImport(__DllName, EntryPoint = "png_set_gAMA", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_gAMA(png_struct_def* png_ptr, png_info_def* info_ptr, double file_gamma);
+        internal static extern void png_set_gAMA(png_struct_def* png_ptr, png_info_def* info_ptr, double file_gamma);
 
         [DllImport(__DllName, EntryPoint = "png_set_gAMA_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_gAMA_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int int_file_gamma);
+        internal static extern void png_set_gAMA_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int int_file_gamma);
 
         [DllImport(__DllName, EntryPoint = "png_get_hIST", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_hIST(png_struct_def* png_ptr, png_info_def* info_ptr, ushort** hist);
+        internal static extern uint png_get_hIST(png_struct_def* png_ptr, png_info_def* info_ptr, ushort** hist);
 
         [DllImport(__DllName, EntryPoint = "png_set_hIST", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_hIST(png_struct_def* png_ptr, png_info_def* info_ptr, ushort* hist);
+        internal static extern void png_set_hIST(png_struct_def* png_ptr, png_info_def* info_ptr, ushort* hist);
 
         [DllImport(__DllName, EntryPoint = "png_get_IHDR", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_IHDR(png_struct_def* png_ptr, png_info_def* info_ptr, uint* width, uint* height, int* bit_depth, int* color_type, int* interlace_method, int* compression_method, int* filter_method);
+        internal static extern uint png_get_IHDR(png_struct_def* png_ptr, png_info_def* info_ptr, uint* width, uint* height, int* bit_depth, int* color_type, int* interlace_method, int* compression_method, int* filter_method);
 
         [DllImport(__DllName, EntryPoint = "png_set_IHDR", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_IHDR(png_struct_def* png_ptr, png_info_def* info_ptr, uint width, uint height, int bit_depth, int color_type, int interlace_method, int compression_method, int filter_method);
+        internal static extern void png_set_IHDR(png_struct_def* png_ptr, png_info_def* info_ptr, uint width, uint height, int bit_depth, int color_type, int interlace_method, int compression_method, int filter_method);
 
         [DllImport(__DllName, EntryPoint = "png_get_oFFs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_oFFs(png_struct_def* png_ptr, png_info_def* info_ptr, int* offset_x, int* offset_y, int* unit_type);
+        internal static extern uint png_get_oFFs(png_struct_def* png_ptr, png_info_def* info_ptr, int* offset_x, int* offset_y, int* unit_type);
 
         [DllImport(__DllName, EntryPoint = "png_set_oFFs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_oFFs(png_struct_def* png_ptr, png_info_def* info_ptr, int offset_x, int offset_y, int unit_type);
+        internal static extern void png_set_oFFs(png_struct_def* png_ptr, png_info_def* info_ptr, int offset_x, int offset_y, int unit_type);
 
         [DllImport(__DllName, EntryPoint = "png_get_pCAL", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_pCAL(png_struct_def* png_ptr, png_info_def* info_ptr, byte** purpose, int* X0, int* X1, int* type_, int* nparams, byte** units, byte*** @params);
+        internal static extern uint png_get_pCAL(png_struct_def* png_ptr, png_info_def* info_ptr, byte** purpose, int* X0, int* X1, int* type_, int* nparams, byte** units, byte*** @params);
 
         [DllImport(__DllName, EntryPoint = "png_set_pCAL", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_pCAL(png_struct_def* png_ptr, png_info_def* info_ptr, byte* purpose, int X0, int X1, int type_, int nparams, byte* units, byte** @params);
+        internal static extern void png_set_pCAL(png_struct_def* png_ptr, png_info_def* info_ptr, byte* purpose, int X0, int X1, int type_, int nparams, byte* units, byte** @params);
 
         [DllImport(__DllName, EntryPoint = "png_get_pHYs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_pHYs(png_struct_def* png_ptr, png_info_def* info_ptr, uint* res_x, uint* res_y, int* unit_type);
+        internal static extern uint png_get_pHYs(png_struct_def* png_ptr, png_info_def* info_ptr, uint* res_x, uint* res_y, int* unit_type);
 
         [DllImport(__DllName, EntryPoint = "png_set_pHYs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_pHYs(png_struct_def* png_ptr, png_info_def* info_ptr, uint res_x, uint res_y, int unit_type);
+        internal static extern void png_set_pHYs(png_struct_def* png_ptr, png_info_def* info_ptr, uint res_x, uint res_y, int unit_type);
 
         [DllImport(__DllName, EntryPoint = "png_get_PLTE", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_PLTE(png_struct_def* png_ptr, png_info_def* info_ptr, png_color_struct** palette, int* num_palette);
+        internal static extern uint png_get_PLTE(png_struct_def* png_ptr, png_info_def* info_ptr, png_color_struct** palette, int* num_palette);
 
         [DllImport(__DllName, EntryPoint = "png_set_PLTE", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_PLTE(png_struct_def* png_ptr, png_info_def* info_ptr, png_color_struct* palette, int num_palette);
+        internal static extern void png_set_PLTE(png_struct_def* png_ptr, png_info_def* info_ptr, png_color_struct* palette, int num_palette);
 
         [DllImport(__DllName, EntryPoint = "png_get_sBIT", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_sBIT(png_struct_def* png_ptr, png_info_def* info_ptr, png_color_8_struct** sig_bit);
+        internal static extern uint png_get_sBIT(png_struct_def* png_ptr, png_info_def* info_ptr, png_color_8_struct** sig_bit);
 
         [DllImport(__DllName, EntryPoint = "png_set_sBIT", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_sBIT(png_struct_def* png_ptr, png_info_def* info_ptr, png_color_8_struct* sig_bit);
+        internal static extern void png_set_sBIT(png_struct_def* png_ptr, png_info_def* info_ptr, png_color_8_struct* sig_bit);
 
         [DllImport(__DllName, EntryPoint = "png_get_sRGB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_sRGB(png_struct_def* png_ptr, png_info_def* info_ptr, int* file_srgb_intent);
+        internal static extern uint png_get_sRGB(png_struct_def* png_ptr, png_info_def* info_ptr, int* file_srgb_intent);
 
         [DllImport(__DllName, EntryPoint = "png_set_sRGB", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_sRGB(png_struct_def* png_ptr, png_info_def* info_ptr, int srgb_intent);
+        internal static extern void png_set_sRGB(png_struct_def* png_ptr, png_info_def* info_ptr, int srgb_intent);
 
         [DllImport(__DllName, EntryPoint = "png_set_sRGB_gAMA_and_cHRM", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_sRGB_gAMA_and_cHRM(png_struct_def* png_ptr, png_info_def* info_ptr, int srgb_intent);
+        internal static extern void png_set_sRGB_gAMA_and_cHRM(png_struct_def* png_ptr, png_info_def* info_ptr, int srgb_intent);
 
         [DllImport(__DllName, EntryPoint = "png_get_iCCP", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_iCCP(png_struct_def* png_ptr, png_info_def* info_ptr, byte** name, int* compression_type, byte** profile, uint* proflen);
+        internal static extern uint png_get_iCCP(png_struct_def* png_ptr, png_info_def* info_ptr, byte** name, int* compression_type, byte** profile, uint* proflen);
 
         [DllImport(__DllName, EntryPoint = "png_set_iCCP", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_iCCP(png_struct_def* png_ptr, png_info_def* info_ptr, byte* name, int compression_type, byte* profile, uint proflen);
+        internal static extern void png_set_iCCP(png_struct_def* png_ptr, png_info_def* info_ptr, byte* name, int compression_type, byte* profile, uint proflen);
 
         [DllImport(__DllName, EntryPoint = "png_get_sPLT", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_get_sPLT(png_struct_def* png_ptr, png_info_def* info_ptr, png_sPLT_struct** entries);
+        internal static extern int png_get_sPLT(png_struct_def* png_ptr, png_info_def* info_ptr, png_sPLT_struct** entries);
 
         [DllImport(__DllName, EntryPoint = "png_set_sPLT", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_sPLT(png_struct_def* png_ptr, png_info_def* info_ptr, png_sPLT_struct* entries, int nentries);
+        internal static extern void png_set_sPLT(png_struct_def* png_ptr, png_info_def* info_ptr, png_sPLT_struct* entries, int nentries);
 
         [DllImport(__DllName, EntryPoint = "png_get_text", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_get_text(png_struct_def* png_ptr, png_info_def* info_ptr, png_text_struct** text_ptr, int* num_text);
+        internal static extern int png_get_text(png_struct_def* png_ptr, png_info_def* info_ptr, png_text_struct** text_ptr, int* num_text);
 
         [DllImport(__DllName, EntryPoint = "png_set_text", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_text(png_struct_def* png_ptr, png_info_def* info_ptr, png_text_struct* text_ptr, int num_text);
+        internal static extern void png_set_text(png_struct_def* png_ptr, png_info_def* info_ptr, png_text_struct* text_ptr, int num_text);
 
         [DllImport(__DllName, EntryPoint = "png_get_tIME", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_tIME(png_struct_def* png_ptr, png_info_def* info_ptr, png_time_struct** mod_time);
+        internal static extern uint png_get_tIME(png_struct_def* png_ptr, png_info_def* info_ptr, png_time_struct** mod_time);
 
         [DllImport(__DllName, EntryPoint = "png_set_tIME", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_tIME(png_struct_def* png_ptr, png_info_def* info_ptr, png_time_struct* mod_time);
+        internal static extern void png_set_tIME(png_struct_def* png_ptr, png_info_def* info_ptr, png_time_struct* mod_time);
 
         [DllImport(__DllName, EntryPoint = "png_get_tRNS", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_tRNS(png_struct_def* png_ptr, png_info_def* info_ptr, byte** trans_alpha, int* num_trans, png_color_16_struct** trans_color);
+        internal static extern uint png_get_tRNS(png_struct_def* png_ptr, png_info_def* info_ptr, byte** trans_alpha, int* num_trans, png_color_16_struct** trans_color);
 
         [DllImport(__DllName, EntryPoint = "png_set_tRNS", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_tRNS(png_struct_def* png_ptr, png_info_def* info_ptr, byte* trans_alpha, int num_trans, png_color_16_struct* trans_color);
+        internal static extern void png_set_tRNS(png_struct_def* png_ptr, png_info_def* info_ptr, byte* trans_alpha, int num_trans, png_color_16_struct* trans_color);
 
         [DllImport(__DllName, EntryPoint = "png_get_sCAL", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_sCAL(png_struct_def* png_ptr, png_info_def* info_ptr, int* unit, double* width, double* height);
+        internal static extern uint png_get_sCAL(png_struct_def* png_ptr, png_info_def* info_ptr, int* unit, double* width, double* height);
 
         [DllImport(__DllName, EntryPoint = "png_get_sCAL_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_sCAL_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int* unit, int* width, int* height);
+        internal static extern uint png_get_sCAL_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int* unit, int* width, int* height);
 
         [DllImport(__DllName, EntryPoint = "png_get_sCAL_s", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_sCAL_s(png_struct_def* png_ptr, png_info_def* info_ptr, int* unit, byte** swidth, byte** sheight);
+        internal static extern uint png_get_sCAL_s(png_struct_def* png_ptr, png_info_def* info_ptr, int* unit, byte** swidth, byte** sheight);
 
         [DllImport(__DllName, EntryPoint = "png_set_sCAL", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_sCAL(png_struct_def* png_ptr, png_info_def* info_ptr, int unit, double width, double height);
+        internal static extern void png_set_sCAL(png_struct_def* png_ptr, png_info_def* info_ptr, int unit, double width, double height);
 
         [DllImport(__DllName, EntryPoint = "png_set_sCAL_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_sCAL_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int unit, int width, int height);
+        internal static extern void png_set_sCAL_fixed(png_struct_def* png_ptr, png_info_def* info_ptr, int unit, int width, int height);
 
         [DllImport(__DllName, EntryPoint = "png_set_sCAL_s", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_sCAL_s(png_struct_def* png_ptr, png_info_def* info_ptr, int unit, byte* swidth, byte* sheight);
+        internal static extern void png_set_sCAL_s(png_struct_def* png_ptr, png_info_def* info_ptr, int unit, byte* swidth, byte* sheight);
 
         [DllImport(__DllName, EntryPoint = "png_set_keep_unknown_chunks", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_keep_unknown_chunks(png_struct_def* png_ptr, int keep, byte* chunk_list, int num_chunks);
+        internal static extern void png_set_keep_unknown_chunks(png_struct_def* png_ptr, int keep, byte* chunk_list, int num_chunks);
 
         [DllImport(__DllName, EntryPoint = "png_handle_as_unknown", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_handle_as_unknown(png_struct_def* png_ptr, byte* chunk_name);
+        internal static extern int png_handle_as_unknown(png_struct_def* png_ptr, byte* chunk_name);
 
         [DllImport(__DllName, EntryPoint = "png_set_unknown_chunks", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_unknown_chunks(png_struct_def* png_ptr, png_info_def* info_ptr, png_unknown_chunk_t* unknowns, int num_unknowns);
+        internal static extern void png_set_unknown_chunks(png_struct_def* png_ptr, png_info_def* info_ptr, png_unknown_chunk_t* unknowns, int num_unknowns);
 
         [DllImport(__DllName, EntryPoint = "png_set_unknown_chunk_location", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_unknown_chunk_location(png_struct_def* png_ptr, png_info_def* info_ptr, int chunk, int location);
+        internal static extern void png_set_unknown_chunk_location(png_struct_def* png_ptr, png_info_def* info_ptr, int chunk, int location);
 
         [DllImport(__DllName, EntryPoint = "png_get_unknown_chunks", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_get_unknown_chunks(png_struct_def* png_ptr, png_info_def* info_ptr, png_unknown_chunk_t** entries);
+        internal static extern int png_get_unknown_chunks(png_struct_def* png_ptr, png_info_def* info_ptr, png_unknown_chunk_t** entries);
 
         [DllImport(__DllName, EntryPoint = "png_set_invalid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_invalid(png_struct_def* png_ptr, png_info_def* info_ptr, int mask);
+        internal static extern void png_set_invalid(png_struct_def* png_ptr, png_info_def* info_ptr, int mask);
 
         [DllImport(__DllName, EntryPoint = "png_read_png", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_read_png(png_struct_def* png_ptr, png_info_def* info_ptr, int transforms, void* @params);
+        internal static extern void png_read_png(png_struct_def* png_ptr, png_info_def* info_ptr, int transforms, void* @params);
 
         [DllImport(__DllName, EntryPoint = "png_write_png", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_write_png(png_struct_def* png_ptr, png_info_def* info_ptr, int transforms, void* @params);
+        internal static extern void png_write_png(png_struct_def* png_ptr, png_info_def* info_ptr, int transforms, void* @params);
 
         [DllImport(__DllName, EntryPoint = "png_get_copyright", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* png_get_copyright(png_struct_def* png_ptr);
+        internal static extern byte* png_get_copyright(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_header_ver", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* png_get_header_ver(png_struct_def* png_ptr);
+        internal static extern byte* png_get_header_ver(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_header_version", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* png_get_header_version(png_struct_def* png_ptr);
+        internal static extern byte* png_get_header_version(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_libpng_ver", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* png_get_libpng_ver(png_struct_def* png_ptr);
+        internal static extern byte* png_get_libpng_ver(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_permit_mng_features", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_permit_mng_features(png_struct_def* png_ptr, uint mng_features_permitted);
+        internal static extern uint png_permit_mng_features(png_struct_def* png_ptr, uint mng_features_permitted);
 
         [DllImport(__DllName, EntryPoint = "png_set_user_limits", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_user_limits(png_struct_def* png_ptr, uint user_width_max, uint user_height_max);
+        internal static extern void png_set_user_limits(png_struct_def* png_ptr, uint user_width_max, uint user_height_max);
 
         [DllImport(__DllName, EntryPoint = "png_get_user_width_max", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_user_width_max(png_struct_def* png_ptr);
+        internal static extern uint png_get_user_width_max(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_user_height_max", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_user_height_max(png_struct_def* png_ptr);
+        internal static extern uint png_get_user_height_max(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_chunk_cache_max", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_chunk_cache_max(png_struct_def* png_ptr, uint user_chunk_cache_max);
+        internal static extern void png_set_chunk_cache_max(png_struct_def* png_ptr, uint user_chunk_cache_max);
 
         [DllImport(__DllName, EntryPoint = "png_get_chunk_cache_max", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_chunk_cache_max(png_struct_def* png_ptr);
+        internal static extern uint png_get_chunk_cache_max(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_set_chunk_malloc_max", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_chunk_malloc_max(png_struct_def* png_ptr, nuint user_chunk_cache_max);
+        internal static extern void png_set_chunk_malloc_max(png_struct_def* png_ptr, nuint user_chunk_cache_max);
 
         [DllImport(__DllName, EntryPoint = "png_get_chunk_malloc_max", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern nuint png_get_chunk_malloc_max(png_struct_def* png_ptr);
+        internal static extern nuint png_get_chunk_malloc_max(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_pixels_per_inch", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_pixels_per_inch(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern uint png_get_pixels_per_inch(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_x_pixels_per_inch", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_x_pixels_per_inch(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern uint png_get_x_pixels_per_inch(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_y_pixels_per_inch", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_y_pixels_per_inch(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern uint png_get_y_pixels_per_inch(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_x_offset_inches", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float png_get_x_offset_inches(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern float png_get_x_offset_inches(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_x_offset_inches_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_get_x_offset_inches_fixed(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern int png_get_x_offset_inches_fixed(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_y_offset_inches", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float png_get_y_offset_inches(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern float png_get_y_offset_inches(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_y_offset_inches_fixed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_get_y_offset_inches_fixed(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern int png_get_y_offset_inches_fixed(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_pHYs_dpi", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_pHYs_dpi(png_struct_def* png_ptr, png_info_def* info_ptr, uint* res_x, uint* res_y, int* unit_type);
+        internal static extern uint png_get_pHYs_dpi(png_struct_def* png_ptr, png_info_def* info_ptr, uint* res_x, uint* res_y, int* unit_type);
 
         [DllImport(__DllName, EntryPoint = "png_get_io_state", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_io_state(png_struct_def* png_ptr);
+        internal static extern uint png_get_io_state(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_io_chunk_type", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_io_chunk_type(png_struct_def* png_ptr);
+        internal static extern uint png_get_io_chunk_type(png_struct_def* png_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_get_uint_32", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_uint_32(byte* buf);
+        internal static extern uint png_get_uint_32(byte* buf);
 
         [DllImport(__DllName, EntryPoint = "png_get_uint_16", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort png_get_uint_16(byte* buf);
+        internal static extern ushort png_get_uint_16(byte* buf);
 
         [DllImport(__DllName, EntryPoint = "png_get_int_32", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_get_int_32(byte* buf);
+        internal static extern int png_get_int_32(byte* buf);
 
         [DllImport(__DllName, EntryPoint = "png_get_uint_31", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint png_get_uint_31(png_struct_def* png_ptr, byte* buf);
+        internal static extern uint png_get_uint_31(png_struct_def* png_ptr, byte* buf);
 
         [DllImport(__DllName, EntryPoint = "png_save_uint_32", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_save_uint_32(byte* buf, uint i);
+        internal static extern void png_save_uint_32(byte* buf, uint i);
 
         [DllImport(__DllName, EntryPoint = "png_save_int_32", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_save_int_32(byte* buf, int i);
+        internal static extern void png_save_int_32(byte* buf, int i);
 
         [DllImport(__DllName, EntryPoint = "png_save_uint_16", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_save_uint_16(byte* buf, uint i);
+        internal static extern void png_save_uint_16(byte* buf, uint i);
 
         [DllImport(__DllName, EntryPoint = "png_set_check_for_invalid_index", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_set_check_for_invalid_index(png_struct_def* png_ptr, int allowed);
+        internal static extern void png_set_check_for_invalid_index(png_struct_def* png_ptr, int allowed);
 
         [DllImport(__DllName, EntryPoint = "png_get_palette_max", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_get_palette_max(png_struct_def* png_ptr, png_info_def* info_ptr);
+        internal static extern int png_get_palette_max(png_struct_def* png_ptr, png_info_def* info_ptr);
 
         [DllImport(__DllName, EntryPoint = "png_image_begin_read_from_file", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_image_begin_read_from_file(png_image* image, byte* file_name);
+        internal static extern int png_image_begin_read_from_file(png_image* image, byte* file_name);
 
         [DllImport(__DllName, EntryPoint = "png_image_begin_read_from_stdio", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_image_begin_read_from_stdio(png_image* image, _iobuf* file);
+        internal static extern int png_image_begin_read_from_stdio(png_image* image, _iobuf* file);
 
         [DllImport(__DllName, EntryPoint = "png_image_begin_read_from_memory", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_image_begin_read_from_memory(png_image* image, void* memory, nuint size);
+        internal static extern int png_image_begin_read_from_memory(png_image* image, void* memory, nuint size);
 
         [DllImport(__DllName, EntryPoint = "png_image_finish_read", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_image_finish_read(png_image* image, png_color_struct* background, void* buffer, int row_stride, void* colormap);
+        internal static extern int png_image_finish_read(png_image* image, png_color_struct* background, void* buffer, int row_stride, void* colormap);
 
         [DllImport(__DllName, EntryPoint = "png_image_free", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void png_image_free(png_image* image);
+        internal static extern void png_image_free(png_image* image);
 
         [DllImport(__DllName, EntryPoint = "png_image_write_to_file", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_image_write_to_file(png_image* image, byte* file, int convert_to_8bit, void* buffer, int row_stride, void* colormap);
+        internal static extern int png_image_write_to_file(png_image* image, byte* file, int convert_to_8bit, void* buffer, int row_stride, void* colormap);
 
         [DllImport(__DllName, EntryPoint = "png_image_write_to_stdio", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_image_write_to_stdio(png_image* image, _iobuf* file, int convert_to_8_bit, void* buffer, int row_stride, void* colormap);
+        internal static extern int png_image_write_to_stdio(png_image* image, _iobuf* file, int convert_to_8_bit, void* buffer, int row_stride, void* colormap);
 
         [DllImport(__DllName, EntryPoint = "png_image_write_to_memory", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_image_write_to_memory(png_image* image, void* memory, nuint* memory_bytes, int convert_to_8_bit, void* buffer, int row_stride, void* colormap);
+        internal static extern int png_image_write_to_memory(png_image* image, void* memory, nuint* memory_bytes, int convert_to_8_bit, void* buffer, int row_stride, void* colormap);
 
         [DllImport(__DllName, EntryPoint = "png_set_option", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int png_set_option(png_struct_def* png_ptr, int option, int onoff);
+        internal static extern int png_set_option(png_struct_def* png_ptr, int option, int onoff);
 
 
     }

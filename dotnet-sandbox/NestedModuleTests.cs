@@ -17,13 +17,13 @@ namespace CsBindgen
 
 
         [DllImport(__DllName, EntryPoint = "triple_input", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int triple_input(NumberStruct input);
+        internal static extern int triple_input(NumberStruct input);
 
         [DllImport(__DllName, EntryPoint = "triple_input_aliased", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int triple_input_aliased(NumberStruct input);
+        internal static extern int triple_input_aliased(NumberStruct input);
 
         [DllImport(__DllName, EntryPoint = "number_map", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int number_map(NumberEnum input);
+        internal static extern int number_map(NumberEnum input);
 
 
     }

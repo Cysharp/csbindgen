@@ -17,7 +17,7 @@ namespace Physx
 
 
         [DllImport(__DllName, EntryPoint = "PxAllocatorCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAllocatorCallback_delete(PxAllocatorCallback* self_);
+        internal static extern void PxAllocatorCallback_delete(PxAllocatorCallback* self_);
 
         /// <summary>
         ///  Allocates size bytes of memory, which must be 16-byte aligned.
@@ -32,7 +32,7 @@ namespace Physx
         ///  The allocated block of memory.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAllocatorCallback_allocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxAllocatorCallback_allocate_mut(PxAllocatorCallback* self_, nuint size, byte* typeName, byte* filename, int line);
+        internal static extern void* PxAllocatorCallback_allocate_mut(PxAllocatorCallback* self_, nuint size, byte* typeName, byte* filename, int line);
 
         /// <summary>
         ///  Frees memory previously allocated by allocate().
@@ -42,16 +42,16 @@ namespace Physx
         ///  and physics processing thread(s).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAllocatorCallback_deallocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAllocatorCallback_deallocate_mut(PxAllocatorCallback* self_, void* ptr);
+        internal static extern void PxAllocatorCallback_deallocate_mut(PxAllocatorCallback* self_, void* ptr);
 
         [DllImport(__DllName, EntryPoint = "PxAssertHandler_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAssertHandler_delete(PxAssertHandler* self_);
+        internal static extern void PxAssertHandler_delete(PxAssertHandler* self_);
 
         [DllImport(__DllName, EntryPoint = "phys_PxGetAssertHandler", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxAssertHandler* phys_PxGetAssertHandler();
+        internal static extern PxAssertHandler* phys_PxGetAssertHandler();
 
         [DllImport(__DllName, EntryPoint = "phys_PxSetAssertHandler", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxSetAssertHandler(PxAssertHandler* handler);
+        internal static extern void phys_PxSetAssertHandler(PxAssertHandler* handler);
 
         /// <summary>
         ///  Destroys the instance it is called on.
@@ -60,38 +60,38 @@ namespace Physx
         ///  prior to calling this method.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFoundation_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxFoundation_release_mut(PxFoundation* self_);
+        internal static extern void PxFoundation_release_mut(PxFoundation* self_);
 
         /// <summary>
         ///  retrieves error callback
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFoundation_getErrorCallback_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxErrorCallback* PxFoundation_getErrorCallback_mut(PxFoundation* self_);
+        internal static extern PxErrorCallback* PxFoundation_getErrorCallback_mut(PxFoundation* self_);
 
         /// <summary>
         ///  Sets mask of errors to report.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFoundation_setErrorLevel_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxFoundation_setErrorLevel_mut(PxFoundation* self_, uint mask);
+        internal static extern void PxFoundation_setErrorLevel_mut(PxFoundation* self_, uint mask);
 
         /// <summary>
         ///  Retrieves mask of errors to be reported.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFoundation_getErrorLevel", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxFoundation_getErrorLevel(PxFoundation* self_);
+        internal static extern uint PxFoundation_getErrorLevel(PxFoundation* self_);
 
         /// <summary>
         ///  Retrieves the allocator this object was created with.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFoundation_getAllocatorCallback_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxAllocatorCallback* PxFoundation_getAllocatorCallback_mut(PxFoundation* self_);
+        internal static extern PxAllocatorCallback* PxFoundation_getAllocatorCallback_mut(PxFoundation* self_);
 
         /// <summary>
         ///  Retrieves if allocation names are being passed to allocator callback.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFoundation_getReportAllocationNames", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxFoundation_getReportAllocationNames(PxFoundation* self_);
+        internal static extern bool PxFoundation_getReportAllocationNames(PxFoundation* self_);
 
         /// <summary>
         ///  Set if allocation names are being passed to allocator callback.
@@ -99,19 +99,19 @@ namespace Physx
         ///  Enabled by default in debug and checked build, disabled by default in profile and release build.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFoundation_setReportAllocationNames_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxFoundation_setReportAllocationNames_mut(PxFoundation* self_, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxFoundation_setReportAllocationNames_mut(PxFoundation* self_, [MarshalAs(UnmanagedType.U1)] bool value);
 
         [DllImport(__DllName, EntryPoint = "PxFoundation_registerAllocationListener_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxFoundation_registerAllocationListener_mut(PxFoundation* self_, PxAllocationListener* listener);
+        internal static extern void PxFoundation_registerAllocationListener_mut(PxFoundation* self_, PxAllocationListener* listener);
 
         [DllImport(__DllName, EntryPoint = "PxFoundation_deregisterAllocationListener_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxFoundation_deregisterAllocationListener_mut(PxFoundation* self_, PxAllocationListener* listener);
+        internal static extern void PxFoundation_deregisterAllocationListener_mut(PxFoundation* self_, PxAllocationListener* listener);
 
         [DllImport(__DllName, EntryPoint = "PxFoundation_registerErrorCallback_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxFoundation_registerErrorCallback_mut(PxFoundation* self_, PxErrorCallback* callback);
+        internal static extern void PxFoundation_registerErrorCallback_mut(PxFoundation* self_, PxErrorCallback* callback);
 
         [DllImport(__DllName, EntryPoint = "PxFoundation_deregisterErrorCallback_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxFoundation_deregisterErrorCallback_mut(PxFoundation* self_, PxErrorCallback* callback);
+        internal static extern void PxFoundation_deregisterErrorCallback_mut(PxFoundation* self_, PxErrorCallback* callback);
 
         /// <summary>
         ///  Creates an instance of the foundation class
@@ -123,115 +123,115 @@ namespace Physx
         ///  Foundation instance on success, NULL if operation failed
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateFoundation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFoundation* phys_PxCreateFoundation(uint version, PxAllocatorCallback* allocator, PxErrorCallback* errorCallback);
+        internal static extern PxFoundation* phys_PxCreateFoundation(uint version, PxAllocatorCallback* allocator, PxErrorCallback* errorCallback);
 
         [DllImport(__DllName, EntryPoint = "phys_PxSetFoundationInstance", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxSetFoundationInstance(PxFoundation* foundation);
+        internal static extern void phys_PxSetFoundationInstance(PxFoundation* foundation);
 
         [DllImport(__DllName, EntryPoint = "phys_PxGetFoundation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFoundation* phys_PxGetFoundation();
+        internal static extern PxFoundation* phys_PxGetFoundation();
 
         /// <summary>
         ///  Get the callback that will be used for all profiling.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetProfilerCallback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxProfilerCallback* phys_PxGetProfilerCallback();
+        internal static extern PxProfilerCallback* phys_PxGetProfilerCallback();
 
         /// <summary>
         ///  Set the callback that will be used for all profiling.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxSetProfilerCallback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxSetProfilerCallback(PxProfilerCallback* profiler);
+        internal static extern void phys_PxSetProfilerCallback(PxProfilerCallback* profiler);
 
         /// <summary>
         ///  Get the allocator callback
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetAllocatorCallback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxAllocatorCallback* phys_PxGetAllocatorCallback();
+        internal static extern PxAllocatorCallback* phys_PxGetAllocatorCallback();
 
         /// <summary>
         ///  Get the broadcasting allocator callback
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetBroadcastAllocator", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxAllocatorCallback* phys_PxGetBroadcastAllocator();
+        internal static extern PxAllocatorCallback* phys_PxGetBroadcastAllocator();
 
         /// <summary>
         ///  Get the error callback
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetErrorCallback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxErrorCallback* phys_PxGetErrorCallback();
+        internal static extern PxErrorCallback* phys_PxGetErrorCallback();
 
         /// <summary>
         ///  Get the broadcasting error callback
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetBroadcastError", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxErrorCallback* phys_PxGetBroadcastError();
+        internal static extern PxErrorCallback* phys_PxGetBroadcastError();
 
         /// <summary>
         ///  Get the warn once timestamp
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetWarnOnceTimeStamp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxGetWarnOnceTimeStamp();
+        internal static extern uint phys_PxGetWarnOnceTimeStamp();
 
         /// <summary>
         ///  Decrement the ref count of PxFoundation
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxDecFoundationRefCount", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxDecFoundationRefCount();
+        internal static extern void phys_PxDecFoundationRefCount();
 
         /// <summary>
         ///  Increment the ref count of PxFoundation
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxIncFoundationRefCount", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxIncFoundationRefCount();
+        internal static extern void phys_PxIncFoundationRefCount();
 
         [DllImport(__DllName, EntryPoint = "PxAllocator_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxAllocator PxAllocator_new(byte* anon_param0);
+        internal static extern PxAllocator PxAllocator_new(byte* anon_param0);
 
         [DllImport(__DllName, EntryPoint = "PxAllocator_allocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxAllocator_allocate_mut(PxAllocator* self_, nuint size, byte* file, int line);
+        internal static extern void* PxAllocator_allocate_mut(PxAllocator* self_, nuint size, byte* file, int line);
 
         [DllImport(__DllName, EntryPoint = "PxAllocator_deallocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAllocator_deallocate_mut(PxAllocator* self_, void* ptr);
+        internal static extern void PxAllocator_deallocate_mut(PxAllocator* self_, void* ptr);
 
         [DllImport(__DllName, EntryPoint = "PxRawAllocator_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRawAllocator PxRawAllocator_new(byte* anon_param0);
+        internal static extern PxRawAllocator PxRawAllocator_new(byte* anon_param0);
 
         [DllImport(__DllName, EntryPoint = "PxRawAllocator_allocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxRawAllocator_allocate_mut(PxRawAllocator* self_, nuint size, byte* anon_param1, int anon_param2);
+        internal static extern void* PxRawAllocator_allocate_mut(PxRawAllocator* self_, nuint size, byte* anon_param1, int anon_param2);
 
         [DllImport(__DllName, EntryPoint = "PxRawAllocator_deallocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRawAllocator_deallocate_mut(PxRawAllocator* self_, void* ptr);
+        internal static extern void PxRawAllocator_deallocate_mut(PxRawAllocator* self_, void* ptr);
 
         [DllImport(__DllName, EntryPoint = "PxVirtualAllocatorCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxVirtualAllocatorCallback_delete(PxVirtualAllocatorCallback* self_);
+        internal static extern void PxVirtualAllocatorCallback_delete(PxVirtualAllocatorCallback* self_);
 
         [DllImport(__DllName, EntryPoint = "PxVirtualAllocatorCallback_allocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxVirtualAllocatorCallback_allocate_mut(PxVirtualAllocatorCallback* self_, nuint size, int group, byte* file, int line);
+        internal static extern void* PxVirtualAllocatorCallback_allocate_mut(PxVirtualAllocatorCallback* self_, nuint size, int group, byte* file, int line);
 
         [DllImport(__DllName, EntryPoint = "PxVirtualAllocatorCallback_deallocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxVirtualAllocatorCallback_deallocate_mut(PxVirtualAllocatorCallback* self_, void* ptr);
+        internal static extern void PxVirtualAllocatorCallback_deallocate_mut(PxVirtualAllocatorCallback* self_, void* ptr);
 
         [DllImport(__DllName, EntryPoint = "PxVirtualAllocator_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVirtualAllocator PxVirtualAllocator_new(PxVirtualAllocatorCallback* callback, int group);
+        internal static extern PxVirtualAllocator PxVirtualAllocator_new(PxVirtualAllocatorCallback* callback, int group);
 
         [DllImport(__DllName, EntryPoint = "PxVirtualAllocator_allocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxVirtualAllocator_allocate_mut(PxVirtualAllocator* self_, nuint size, byte* file, int line);
+        internal static extern void* PxVirtualAllocator_allocate_mut(PxVirtualAllocator* self_, nuint size, byte* file, int line);
 
         [DllImport(__DllName, EntryPoint = "PxVirtualAllocator_deallocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxVirtualAllocator_deallocate_mut(PxVirtualAllocator* self_, void* ptr);
+        internal static extern void PxVirtualAllocator_deallocate_mut(PxVirtualAllocator* self_, void* ptr);
 
         [DllImport(__DllName, EntryPoint = "PxTempAllocatorChunk_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTempAllocatorChunk PxTempAllocatorChunk_new();
+        internal static extern PxTempAllocatorChunk PxTempAllocatorChunk_new();
 
         [DllImport(__DllName, EntryPoint = "PxTempAllocator_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTempAllocator PxTempAllocator_new(byte* anon_param0);
+        internal static extern PxTempAllocator PxTempAllocator_new(byte* anon_param0);
 
         [DllImport(__DllName, EntryPoint = "PxTempAllocator_allocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxTempAllocator_allocate_mut(PxTempAllocator* self_, nuint size, byte* file, int line);
+        internal static extern void* PxTempAllocator_allocate_mut(PxTempAllocator* self_, nuint size, byte* file, int line);
 
         [DllImport(__DllName, EntryPoint = "PxTempAllocator_deallocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTempAllocator_deallocate_mut(PxTempAllocator* self_, void* ptr);
+        internal static extern void PxTempAllocator_deallocate_mut(PxTempAllocator* self_, void* ptr);
 
         /// <summary>
         ///  Sets the bytes of the provided buffer to zero.
@@ -239,7 +239,7 @@ namespace Physx
         ///  Pointer to memory block (same as input)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxMemZero", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* phys_PxMemZero(void* dest, uint count);
+        internal static extern void* phys_PxMemZero(void* dest, uint count);
 
         /// <summary>
         ///  Sets the bytes of the provided buffer to the specified value.
@@ -247,7 +247,7 @@ namespace Physx
         ///  Pointer to memory block (same as input)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxMemSet", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* phys_PxMemSet(void* dest, int c, uint count);
+        internal static extern void* phys_PxMemSet(void* dest, int c, uint count);
 
         /// <summary>
         ///  Copies the bytes of one memory block to another. The memory blocks must not overlap.
@@ -257,7 +257,7 @@ namespace Physx
         ///  Pointer to destination memory block
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxMemCopy", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* phys_PxMemCopy(void* dest, void* src, uint count);
+        internal static extern void* phys_PxMemCopy(void* dest, void* src, uint count);
 
         /// <summary>
         ///  Copies the bytes of one memory block to another. The memory blocks can overlap.
@@ -267,85 +267,85 @@ namespace Physx
         ///  Pointer to destination memory block
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxMemMove", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* phys_PxMemMove(void* dest, void* src, uint count);
+        internal static extern void* phys_PxMemMove(void* dest, void* src, uint count);
 
         /// <summary>
         ///  Mark a specified amount of memory with 0xcd pattern. This is used to check that the meta data
         ///  definition for serialized classes is complete in checked builds.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxMarkSerializedMemory", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxMarkSerializedMemory(void* ptr, uint byteSize);
+        internal static extern void phys_PxMarkSerializedMemory(void* ptr, uint byteSize);
 
         [DllImport(__DllName, EntryPoint = "phys_PxMemoryBarrier", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxMemoryBarrier();
+        internal static extern void phys_PxMemoryBarrier();
 
         /// <summary>
         ///  Return the index of the highest set bit. Undefined for zero arg.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxHighestSetBitUnsafe", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxHighestSetBitUnsafe(uint v);
+        internal static extern uint phys_PxHighestSetBitUnsafe(uint v);
 
         /// <summary>
         ///  Return the index of the highest set bit. Undefined for zero arg.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxLowestSetBitUnsafe", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxLowestSetBitUnsafe(uint v);
+        internal static extern uint phys_PxLowestSetBitUnsafe(uint v);
 
         /// <summary>
         ///  Returns the index of the highest set bit. Returns 32 for v=0.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCountLeadingZeros", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxCountLeadingZeros(uint v);
+        internal static extern uint phys_PxCountLeadingZeros(uint v);
 
         /// <summary>
         ///  Prefetch aligned 64B x86, 32b ARM around
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxPrefetchLine", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxPrefetchLine(void* ptr, uint offset);
+        internal static extern void phys_PxPrefetchLine(void* ptr, uint offset);
 
         /// <summary>
         ///  Prefetch
         ///  bytes starting at
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxPrefetch", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxPrefetch(void* ptr, uint count);
+        internal static extern void phys_PxPrefetch(void* ptr, uint count);
 
         [DllImport(__DllName, EntryPoint = "phys_PxBitCount", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxBitCount(uint v);
+        internal static extern uint phys_PxBitCount(uint v);
 
         [DllImport(__DllName, EntryPoint = "phys_PxIsPowerOfTwo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxIsPowerOfTwo(uint x);
+        internal static extern bool phys_PxIsPowerOfTwo(uint x);
 
         [DllImport(__DllName, EntryPoint = "phys_PxNextPowerOfTwo", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxNextPowerOfTwo(uint x);
+        internal static extern uint phys_PxNextPowerOfTwo(uint x);
 
         /// <summary>
         ///  Return the index of the highest set bit. Not valid for zero arg.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxLowestSetBit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxLowestSetBit(uint x);
+        internal static extern uint phys_PxLowestSetBit(uint x);
 
         /// <summary>
         ///  Return the index of the highest set bit. Not valid for zero arg.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxHighestSetBit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxHighestSetBit(uint x);
+        internal static extern uint phys_PxHighestSetBit(uint x);
 
         [DllImport(__DllName, EntryPoint = "phys_PxILog2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxILog2(uint num);
+        internal static extern uint phys_PxILog2(uint num);
 
         /// <summary>
         ///  default constructor leaves data uninitialized.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxVec3_new();
+        internal static extern PxVec3 PxVec3_new();
 
         /// <summary>
         ///  zero constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxVec3_new_1(PxZERO anon_param0);
+        internal static extern PxVec3 PxVec3_new_1(PxZERO anon_param0);
 
         /// <summary>
         ///  Assigns scalar parameter to all elements.
@@ -353,34 +353,34 @@ namespace Physx
         ///  Useful to initialize to zero or one.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_new_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxVec3_new_2(float a);
+        internal static extern PxVec3 PxVec3_new_2(float a);
 
         /// <summary>
         ///  Initializes from 3 scalar parameters.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_new_3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxVec3_new_3(float nx, float ny, float nz);
+        internal static extern PxVec3 PxVec3_new_3(float nx, float ny, float nz);
 
         /// <summary>
         ///  tests for exact zero vector
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_isZero", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxVec3_isZero(PxVec3* self_);
+        internal static extern bool PxVec3_isZero(PxVec3* self_);
 
         /// <summary>
         ///  returns true if all 3 elems of the vector are finite (not NAN or INF, etc.)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_isFinite", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxVec3_isFinite(PxVec3* self_);
+        internal static extern bool PxVec3_isFinite(PxVec3* self_);
 
         /// <summary>
         ///  is normalized - used by API parameter validation
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_isNormalized", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxVec3_isNormalized(PxVec3* self_);
+        internal static extern bool PxVec3_isNormalized(PxVec3* self_);
 
         /// <summary>
         ///  returns the squared magnitude
@@ -388,123 +388,123 @@ namespace Physx
         ///  Avoids calling PxSqrt()!
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_magnitudeSquared", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec3_magnitudeSquared(PxVec3* self_);
+        internal static extern float PxVec3_magnitudeSquared(PxVec3* self_);
 
         /// <summary>
         ///  returns the magnitude
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_magnitude", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec3_magnitude(PxVec3* self_);
+        internal static extern float PxVec3_magnitude(PxVec3* self_);
 
         /// <summary>
         ///  returns the scalar product of this and other.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_dot", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec3_dot(PxVec3* self_, PxVec3* v);
+        internal static extern float PxVec3_dot(PxVec3* self_, PxVec3* v);
 
         /// <summary>
         ///  cross product
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_cross", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxVec3_cross(PxVec3* self_, PxVec3* v);
+        internal static extern PxVec3 PxVec3_cross(PxVec3* self_, PxVec3* v);
 
         /// <summary>
         ///  returns a unit vector
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_getNormalized", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxVec3_getNormalized(PxVec3* self_);
+        internal static extern PxVec3 PxVec3_getNormalized(PxVec3* self_);
 
         /// <summary>
         ///  normalizes the vector in place
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_normalize_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec3_normalize_mut(PxVec3* self_);
+        internal static extern float PxVec3_normalize_mut(PxVec3* self_);
 
         /// <summary>
         ///  normalizes the vector in place. Does nothing if vector magnitude is under PX_NORMALIZATION_EPSILON.
         ///  Returns vector magnitude if &gt;= PX_NORMALIZATION_EPSILON and 0.0f otherwise.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_normalizeSafe_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec3_normalizeSafe_mut(PxVec3* self_);
+        internal static extern float PxVec3_normalizeSafe_mut(PxVec3* self_);
 
         /// <summary>
         ///  normalizes the vector in place. Asserts if vector magnitude is under PX_NORMALIZATION_EPSILON.
         ///  returns vector magnitude.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_normalizeFast_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec3_normalizeFast_mut(PxVec3* self_);
+        internal static extern float PxVec3_normalizeFast_mut(PxVec3* self_);
 
         /// <summary>
         ///  a[i] * b[i], for all i.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_multiply", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxVec3_multiply(PxVec3* self_, PxVec3* a);
+        internal static extern PxVec3 PxVec3_multiply(PxVec3* self_, PxVec3* a);
 
         /// <summary>
         ///  element-wise minimum
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_minimum", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxVec3_minimum(PxVec3* self_, PxVec3* v);
+        internal static extern PxVec3 PxVec3_minimum(PxVec3* self_, PxVec3* v);
 
         /// <summary>
         ///  returns MIN(x, y, z);
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_minElement", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec3_minElement(PxVec3* self_);
+        internal static extern float PxVec3_minElement(PxVec3* self_);
 
         /// <summary>
         ///  element-wise maximum
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_maximum", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxVec3_maximum(PxVec3* self_, PxVec3* v);
+        internal static extern PxVec3 PxVec3_maximum(PxVec3* self_, PxVec3* v);
 
         /// <summary>
         ///  returns MAX(x, y, z);
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_maxElement", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec3_maxElement(PxVec3* self_);
+        internal static extern float PxVec3_maxElement(PxVec3* self_);
 
         /// <summary>
         ///  returns absolute values of components;
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec3_abs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxVec3_abs(PxVec3* self_);
+        internal static extern PxVec3 PxVec3_abs(PxVec3* self_);
 
         [DllImport(__DllName, EntryPoint = "PxVec3Padded_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3Padded* PxVec3Padded_new_alloc();
+        internal static extern PxVec3Padded* PxVec3Padded_new_alloc();
 
         [DllImport(__DllName, EntryPoint = "PxVec3Padded_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxVec3Padded_delete(PxVec3Padded* self_);
+        internal static extern void PxVec3Padded_delete(PxVec3Padded* self_);
 
         [DllImport(__DllName, EntryPoint = "PxVec3Padded_new_alloc_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3Padded* PxVec3Padded_new_alloc_1(PxVec3* p);
+        internal static extern PxVec3Padded* PxVec3Padded_new_alloc_1(PxVec3* p);
 
         [DllImport(__DllName, EntryPoint = "PxVec3Padded_new_alloc_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3Padded* PxVec3Padded_new_alloc_2(float f);
+        internal static extern PxVec3Padded* PxVec3Padded_new_alloc_2(float f);
 
         /// <summary>
         ///  Default constructor, does not do any initialization.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQuat PxQuat_new();
+        internal static extern PxQuat PxQuat_new();
 
         /// <summary>
         ///  identity constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQuat PxQuat_new_1(PxIDENTITY anon_param0);
+        internal static extern PxQuat PxQuat_new_1(PxIDENTITY anon_param0);
 
         /// <summary>
         ///  Constructor from a scalar: sets the real part w to the scalar value, and the imaginary parts (x,y,z) to zero
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_new_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQuat PxQuat_new_2(float r);
+        internal static extern PxQuat PxQuat_new_2(float r);
 
         /// <summary>
         ///  Constructor. Take note of the order of the elements!
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_new_3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQuat PxQuat_new_3(float nx, float ny, float nz, float nw);
+        internal static extern PxQuat PxQuat_new_3(float nx, float ny, float nz, float nw);
 
         /// <summary>
         ///  Creates from angle-axis representation.
@@ -517,34 +517,34 @@ namespace Physx
         ///  Radians
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_new_4", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQuat PxQuat_new_4(float angleRadians, PxVec3* unitAxis);
+        internal static extern PxQuat PxQuat_new_4(float angleRadians, PxVec3* unitAxis);
 
         /// <summary>
         ///  Creates from orientation matrix.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_new_5", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQuat PxQuat_new_5(PxMat33* m);
+        internal static extern PxQuat PxQuat_new_5(PxMat33* m);
 
         /// <summary>
         ///  returns true if quat is identity
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_isIdentity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxQuat_isIdentity(PxQuat* self_);
+        internal static extern bool PxQuat_isIdentity(PxQuat* self_);
 
         /// <summary>
         ///  returns true if all elements are finite (not NAN or INF, etc.)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_isFinite", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxQuat_isFinite(PxQuat* self_);
+        internal static extern bool PxQuat_isFinite(PxQuat* self_);
 
         /// <summary>
         ///  returns true if finite and magnitude is close to unit
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_isUnit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxQuat_isUnit(PxQuat* self_);
+        internal static extern bool PxQuat_isUnit(PxQuat* self_);
 
         /// <summary>
         ///  returns true if finite and magnitude is reasonably close to unit to allow for some accumulation of error vs
@@ -552,13 +552,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_isSane", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxQuat_isSane(PxQuat* self_);
+        internal static extern bool PxQuat_isSane(PxQuat* self_);
 
         /// <summary>
         ///  converts this quaternion to angle-axis representation
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_toRadiansAndUnitAxis", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxQuat_toRadiansAndUnitAxis(PxQuat* self_, float* angle, PxVec3* axis);
+        internal static extern void PxQuat_toRadiansAndUnitAxis(PxQuat* self_, float* angle, PxVec3* axis);
 
         /// <summary>
         ///  Gets the angle between this quat and the identity quaternion.
@@ -567,7 +567,7 @@ namespace Physx
         ///  Radians
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_getAngle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxQuat_getAngle(PxQuat* self_);
+        internal static extern float PxQuat_getAngle(PxQuat* self_);
 
         /// <summary>
         ///  Gets the angle between this quat and the argument
@@ -576,116 +576,116 @@ namespace Physx
         ///  Radians
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_getAngle_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxQuat_getAngle_1(PxQuat* self_, PxQuat* q);
+        internal static extern float PxQuat_getAngle_1(PxQuat* self_, PxQuat* q);
 
         /// <summary>
         ///  This is the squared 4D vector length, should be 1 for unit quaternions.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_magnitudeSquared", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxQuat_magnitudeSquared(PxQuat* self_);
+        internal static extern float PxQuat_magnitudeSquared(PxQuat* self_);
 
         /// <summary>
         ///  returns the scalar product of this and other.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_dot", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxQuat_dot(PxQuat* self_, PxQuat* v);
+        internal static extern float PxQuat_dot(PxQuat* self_, PxQuat* v);
 
         [DllImport(__DllName, EntryPoint = "PxQuat_getNormalized", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQuat PxQuat_getNormalized(PxQuat* self_);
+        internal static extern PxQuat PxQuat_getNormalized(PxQuat* self_);
 
         [DllImport(__DllName, EntryPoint = "PxQuat_magnitude", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxQuat_magnitude(PxQuat* self_);
+        internal static extern float PxQuat_magnitude(PxQuat* self_);
 
         /// <summary>
         ///  maps to the closest unit quaternion.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_normalize_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxQuat_normalize_mut(PxQuat* self_);
+        internal static extern float PxQuat_normalize_mut(PxQuat* self_);
 
         [DllImport(__DllName, EntryPoint = "PxQuat_getConjugate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQuat PxQuat_getConjugate(PxQuat* self_);
+        internal static extern PxQuat PxQuat_getConjugate(PxQuat* self_);
 
         [DllImport(__DllName, EntryPoint = "PxQuat_getImaginaryPart", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxQuat_getImaginaryPart(PxQuat* self_);
+        internal static extern PxVec3 PxQuat_getImaginaryPart(PxQuat* self_);
 
         /// <summary>
         ///  brief computes rotation of x-axis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_getBasisVector0", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxQuat_getBasisVector0(PxQuat* self_);
+        internal static extern PxVec3 PxQuat_getBasisVector0(PxQuat* self_);
 
         /// <summary>
         ///  brief computes rotation of y-axis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_getBasisVector1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxQuat_getBasisVector1(PxQuat* self_);
+        internal static extern PxVec3 PxQuat_getBasisVector1(PxQuat* self_);
 
         /// <summary>
         ///  brief computes rotation of z-axis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_getBasisVector2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxQuat_getBasisVector2(PxQuat* self_);
+        internal static extern PxVec3 PxQuat_getBasisVector2(PxQuat* self_);
 
         /// <summary>
         ///  rotates passed vec by this (assumed unitary)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_rotate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxQuat_rotate(PxQuat* self_, PxVec3* v);
+        internal static extern PxVec3 PxQuat_rotate(PxQuat* self_, PxVec3* v);
 
         /// <summary>
         ///  inverse rotates passed vec by this (assumed unitary)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQuat_rotateInv", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxQuat_rotateInv(PxQuat* self_, PxVec3* v);
+        internal static extern PxVec3 PxQuat_rotateInv(PxQuat* self_, PxVec3* v);
 
         [DllImport(__DllName, EntryPoint = "PxTransform_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxTransform_new();
+        internal static extern PxTransform PxTransform_new();
 
         [DllImport(__DllName, EntryPoint = "PxTransform_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxTransform_new_1(PxVec3* position);
+        internal static extern PxTransform PxTransform_new_1(PxVec3* position);
 
         [DllImport(__DllName, EntryPoint = "PxTransform_new_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxTransform_new_2(PxIDENTITY anon_param0);
+        internal static extern PxTransform PxTransform_new_2(PxIDENTITY anon_param0);
 
         [DllImport(__DllName, EntryPoint = "PxTransform_new_3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxTransform_new_3(PxQuat* orientation);
+        internal static extern PxTransform PxTransform_new_3(PxQuat* orientation);
 
         [DllImport(__DllName, EntryPoint = "PxTransform_new_4", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxTransform_new_4(float x, float y, float z, PxQuat aQ);
+        internal static extern PxTransform PxTransform_new_4(float x, float y, float z, PxQuat aQ);
 
         [DllImport(__DllName, EntryPoint = "PxTransform_new_5", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxTransform_new_5(PxVec3* p0, PxQuat* q0);
+        internal static extern PxTransform PxTransform_new_5(PxVec3* p0, PxQuat* q0);
 
         [DllImport(__DllName, EntryPoint = "PxTransform_new_6", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxTransform_new_6(PxMat44* m);
+        internal static extern PxTransform PxTransform_new_6(PxMat44* m);
 
         [DllImport(__DllName, EntryPoint = "PxTransform_getInverse", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxTransform_getInverse(PxTransform* self_);
+        internal static extern PxTransform PxTransform_getInverse(PxTransform* self_);
 
         [DllImport(__DllName, EntryPoint = "PxTransform_transform", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxTransform_transform(PxTransform* self_, PxVec3* input);
+        internal static extern PxVec3 PxTransform_transform(PxTransform* self_, PxVec3* input);
 
         [DllImport(__DllName, EntryPoint = "PxTransform_transformInv", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxTransform_transformInv(PxTransform* self_, PxVec3* input);
+        internal static extern PxVec3 PxTransform_transformInv(PxTransform* self_, PxVec3* input);
 
         [DllImport(__DllName, EntryPoint = "PxTransform_rotate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxTransform_rotate(PxTransform* self_, PxVec3* input);
+        internal static extern PxVec3 PxTransform_rotate(PxTransform* self_, PxVec3* input);
 
         [DllImport(__DllName, EntryPoint = "PxTransform_rotateInv", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxTransform_rotateInv(PxTransform* self_, PxVec3* input);
+        internal static extern PxVec3 PxTransform_rotateInv(PxTransform* self_, PxVec3* input);
 
         /// <summary>
         ///  Transform transform to parent (returns compound transform: first src, then *this)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTransform_transform_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxTransform_transform_1(PxTransform* self_, PxTransform* src);
+        internal static extern PxTransform PxTransform_transform_1(PxTransform* self_, PxTransform* src);
 
         /// <summary>
         ///  returns true if finite and q is a unit quaternion
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTransform_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxTransform_isValid(PxTransform* self_);
+        internal static extern bool PxTransform_isValid(PxTransform* self_);
 
         /// <summary>
         ///  returns true if finite and quat magnitude is reasonably close to unit to allow for some accumulation of error
@@ -693,113 +693,113 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTransform_isSane", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxTransform_isSane(PxTransform* self_);
+        internal static extern bool PxTransform_isSane(PxTransform* self_);
 
         /// <summary>
         ///  returns true if all elems are finite (not NAN or INF, etc.)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTransform_isFinite", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxTransform_isFinite(PxTransform* self_);
+        internal static extern bool PxTransform_isFinite(PxTransform* self_);
 
         /// <summary>
         ///  Transform transform from parent (returns compound transform: first src, then this-&gt;inverse)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTransform_transformInv_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxTransform_transformInv_1(PxTransform* self_, PxTransform* src);
+        internal static extern PxTransform PxTransform_transformInv_1(PxTransform* self_, PxTransform* src);
 
         /// <summary>
         ///  return a normalized transform (i.e. one in which the quaternion has unit magnitude)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTransform_getNormalized", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxTransform_getNormalized(PxTransform* self_);
+        internal static extern PxTransform PxTransform_getNormalized(PxTransform* self_);
 
         /// <summary>
         ///  Default constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMat33_new();
+        internal static extern PxMat33 PxMat33_new();
 
         /// <summary>
         ///  identity constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMat33_new_1(PxIDENTITY anon_param0);
+        internal static extern PxMat33 PxMat33_new_1(PxIDENTITY anon_param0);
 
         /// <summary>
         ///  zero constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_new_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMat33_new_2(PxZERO anon_param0);
+        internal static extern PxMat33 PxMat33_new_2(PxZERO anon_param0);
 
         /// <summary>
         ///  Construct from three base vectors
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_new_3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMat33_new_3(PxVec3* col0, PxVec3* col1, PxVec3* col2);
+        internal static extern PxMat33 PxMat33_new_3(PxVec3* col0, PxVec3* col1, PxVec3* col2);
 
         /// <summary>
         ///  constructor from a scalar, which generates a multiple of the identity matrix
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_new_4", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMat33_new_4(float r);
+        internal static extern PxMat33 PxMat33_new_4(float r);
 
         /// <summary>
         ///  Construct from float[9]
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_new_5", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMat33_new_5(float* values);
+        internal static extern PxMat33 PxMat33_new_5(float* values);
 
         /// <summary>
         ///  Construct from a quaternion
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_new_6", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMat33_new_6(PxQuat* q);
+        internal static extern PxMat33 PxMat33_new_6(PxQuat* q);
 
         /// <summary>
         ///  Construct from diagonal, off-diagonals are zero.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_createDiagonal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMat33_createDiagonal(PxVec3* d);
+        internal static extern PxMat33 PxMat33_createDiagonal(PxVec3* d);
 
         /// <summary>
         ///  Computes the outer product of two vectors
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_outer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMat33_outer(PxVec3* a, PxVec3* b);
+        internal static extern PxMat33 PxMat33_outer(PxVec3* a, PxVec3* b);
 
         /// <summary>
         ///  Get transposed matrix
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_getTranspose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMat33_getTranspose(PxMat33* self_);
+        internal static extern PxMat33 PxMat33_getTranspose(PxMat33* self_);
 
         /// <summary>
         ///  Get the real inverse
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_getInverse", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMat33_getInverse(PxMat33* self_);
+        internal static extern PxMat33 PxMat33_getInverse(PxMat33* self_);
 
         /// <summary>
         ///  Get determinant
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_getDeterminant", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxMat33_getDeterminant(PxMat33* self_);
+        internal static extern float PxMat33_getDeterminant(PxMat33* self_);
 
         /// <summary>
         ///  Transform vector by matrix, equal to v' = M*v
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_transform", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxMat33_transform(PxMat33* self_, PxVec3* other);
+        internal static extern PxVec3 PxMat33_transform(PxMat33* self_, PxVec3* other);
 
         /// <summary>
         ///  Transform vector by matrix transpose, v' = M^t*v
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat33_transformTranspose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxMat33_transformTranspose(PxMat33* self_, PxVec3* other);
+        internal static extern PxVec3 PxMat33_transformTranspose(PxMat33* self_, PxVec3* other);
 
         [DllImport(__DllName, EntryPoint = "PxMat33_front", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float* PxMat33_front(PxMat33* self_);
+        internal static extern float* PxMat33_front(PxMat33* self_);
 
         /// <summary>
         ///  Default constructor, not performing any initialization for performance reason.
@@ -807,43 +807,43 @@ namespace Physx
         ///  Use empty() function below to construct empty bounds.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxBounds3_new();
+        internal static extern PxBounds3 PxBounds3_new();
 
         /// <summary>
         ///  Construct from two bounding points
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxBounds3_new_1(PxVec3* minimum, PxVec3* maximum);
+        internal static extern PxBounds3 PxBounds3_new_1(PxVec3* minimum, PxVec3* maximum);
 
         /// <summary>
         ///  Return empty bounds.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_empty", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxBounds3_empty();
+        internal static extern PxBounds3 PxBounds3_empty();
 
         /// <summary>
         ///  returns the AABB containing v0 and v1.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_boundsOfPoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxBounds3_boundsOfPoints(PxVec3* v0, PxVec3* v1);
+        internal static extern PxBounds3 PxBounds3_boundsOfPoints(PxVec3* v0, PxVec3* v1);
 
         /// <summary>
         ///  returns the AABB from center and extents vectors.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_centerExtents", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxBounds3_centerExtents(PxVec3* center, PxVec3* extent);
+        internal static extern PxBounds3 PxBounds3_centerExtents(PxVec3* center, PxVec3* extent);
 
         /// <summary>
         ///  Construct from center, extent, and (not necessarily orthogonal) basis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_basisExtent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxBounds3_basisExtent(PxVec3* center, PxMat33* basis, PxVec3* extent);
+        internal static extern PxBounds3 PxBounds3_basisExtent(PxVec3* center, PxMat33* basis, PxVec3* extent);
 
         /// <summary>
         ///  Construct from pose and extent
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_poseExtent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxBounds3_poseExtent(PxTransform* pose, PxVec3* extent);
+        internal static extern PxBounds3 PxBounds3_poseExtent(PxTransform* pose, PxVec3* extent);
 
         /// <summary>
         ///  gets the transformed bounds of the passed AABB (resulting in a bigger AABB).
@@ -851,7 +851,7 @@ namespace Physx
         ///  This version is safe to call for empty bounds.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_transformSafe", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxBounds3_transformSafe(PxMat33* matrix, PxBounds3* bounds);
+        internal static extern PxBounds3 PxBounds3_transformSafe(PxMat33* matrix, PxBounds3* bounds);
 
         /// <summary>
         ///  gets the transformed bounds of the passed AABB (resulting in a bigger AABB).
@@ -859,7 +859,7 @@ namespace Physx
         ///  Calling this method for empty bounds leads to undefined behavior. Use [`transformSafe`]() instead.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_transformFast", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxBounds3_transformFast(PxMat33* matrix, PxBounds3* bounds);
+        internal static extern PxBounds3 PxBounds3_transformFast(PxMat33* matrix, PxBounds3* bounds);
 
         /// <summary>
         ///  gets the transformed bounds of the passed AABB (resulting in a bigger AABB).
@@ -867,7 +867,7 @@ namespace Physx
         ///  This version is safe to call for empty bounds.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_transformSafe_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxBounds3_transformSafe_1(PxTransform* transform, PxBounds3* bounds);
+        internal static extern PxBounds3 PxBounds3_transformSafe_1(PxTransform* transform, PxBounds3* bounds);
 
         /// <summary>
         ///  gets the transformed bounds of the passed AABB (resulting in a bigger AABB).
@@ -875,93 +875,93 @@ namespace Physx
         ///  Calling this method for empty bounds leads to undefined behavior. Use [`transformSafe`]() instead.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_transformFast_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxBounds3_transformFast_1(PxTransform* transform, PxBounds3* bounds);
+        internal static extern PxBounds3 PxBounds3_transformFast_1(PxTransform* transform, PxBounds3* bounds);
 
         /// <summary>
         ///  Sets empty to true
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_setEmpty_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBounds3_setEmpty_mut(PxBounds3* self_);
+        internal static extern void PxBounds3_setEmpty_mut(PxBounds3* self_);
 
         /// <summary>
         ///  Sets the bounds to maximum size [-PX_MAX_BOUNDS_EXTENTS, PX_MAX_BOUNDS_EXTENTS].
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_setMaximal_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBounds3_setMaximal_mut(PxBounds3* self_);
+        internal static extern void PxBounds3_setMaximal_mut(PxBounds3* self_);
 
         /// <summary>
         ///  expands the volume to include v
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_include_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBounds3_include_mut(PxBounds3* self_, PxVec3* v);
+        internal static extern void PxBounds3_include_mut(PxBounds3* self_, PxVec3* v);
 
         /// <summary>
         ///  expands the volume to include b.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_include_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBounds3_include_mut_1(PxBounds3* self_, PxBounds3* b);
+        internal static extern void PxBounds3_include_mut_1(PxBounds3* self_, PxBounds3* b);
 
         [DllImport(__DllName, EntryPoint = "PxBounds3_isEmpty", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBounds3_isEmpty(PxBounds3* self_);
+        internal static extern bool PxBounds3_isEmpty(PxBounds3* self_);
 
         /// <summary>
         ///  indicates whether the intersection of this and b is empty or not.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_intersects", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBounds3_intersects(PxBounds3* self_, PxBounds3* b);
+        internal static extern bool PxBounds3_intersects(PxBounds3* self_, PxBounds3* b);
 
         /// <summary>
         ///  computes the 1D-intersection between two AABBs, on a given axis.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_intersects1D", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBounds3_intersects1D(PxBounds3* self_, PxBounds3* a, uint axis);
+        internal static extern bool PxBounds3_intersects1D(PxBounds3* self_, PxBounds3* a, uint axis);
 
         /// <summary>
         ///  indicates if these bounds contain v.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_contains", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBounds3_contains(PxBounds3* self_, PxVec3* v);
+        internal static extern bool PxBounds3_contains(PxBounds3* self_, PxVec3* v);
 
         /// <summary>
         ///  checks a box is inside another box.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_isInside", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBounds3_isInside(PxBounds3* self_, PxBounds3* box_);
+        internal static extern bool PxBounds3_isInside(PxBounds3* self_, PxBounds3* box_);
 
         /// <summary>
         ///  returns the center of this axis aligned box.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_getCenter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxBounds3_getCenter(PxBounds3* self_);
+        internal static extern PxVec3 PxBounds3_getCenter(PxBounds3* self_);
 
         /// <summary>
         ///  get component of the box's center along a given axis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_getCenter_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxBounds3_getCenter_1(PxBounds3* self_, uint axis);
+        internal static extern float PxBounds3_getCenter_1(PxBounds3* self_, uint axis);
 
         /// <summary>
         ///  get component of the box's extents along a given axis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_getExtents", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxBounds3_getExtents(PxBounds3* self_, uint axis);
+        internal static extern float PxBounds3_getExtents(PxBounds3* self_, uint axis);
 
         /// <summary>
         ///  returns the dimensions (width/height/depth) of this axis aligned box.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_getDimensions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxBounds3_getDimensions(PxBounds3* self_);
+        internal static extern PxVec3 PxBounds3_getDimensions(PxBounds3* self_);
 
         /// <summary>
         ///  returns the extents, which are half of the width/height/depth.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_getExtents_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxBounds3_getExtents_1(PxBounds3* self_);
+        internal static extern PxVec3 PxBounds3_getExtents_1(PxBounds3* self_);
 
         /// <summary>
         ///  scales the AABB.
@@ -969,7 +969,7 @@ namespace Physx
         ///  This version is safe to call for empty bounds.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_scaleSafe_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBounds3_scaleSafe_mut(PxBounds3* self_, float scale);
+        internal static extern void PxBounds3_scaleSafe_mut(PxBounds3* self_, float scale);
 
         /// <summary>
         ///  scales the AABB.
@@ -977,7 +977,7 @@ namespace Physx
         ///  Calling this method for empty bounds leads to undefined behavior. Use [`scaleSafe`]() instead.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_scaleFast_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBounds3_scaleFast_mut(PxBounds3* self_, float scale);
+        internal static extern void PxBounds3_scaleFast_mut(PxBounds3* self_, float scale);
 
         /// <summary>
         ///  fattens the AABB in all 3 dimensions by the given distance.
@@ -985,7 +985,7 @@ namespace Physx
         ///  This version is safe to call for empty bounds.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_fattenSafe_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBounds3_fattenSafe_mut(PxBounds3* self_, float distance);
+        internal static extern void PxBounds3_fattenSafe_mut(PxBounds3* self_, float distance);
 
         /// <summary>
         ///  fattens the AABB in all 3 dimensions by the given distance.
@@ -993,61 +993,61 @@ namespace Physx
         ///  Calling this method for empty bounds leads to undefined behavior. Use [`fattenSafe`]() instead.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_fattenFast_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBounds3_fattenFast_mut(PxBounds3* self_, float distance);
+        internal static extern void PxBounds3_fattenFast_mut(PxBounds3* self_, float distance);
 
         /// <summary>
         ///  checks that the AABB values are not NaN
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_isFinite", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBounds3_isFinite(PxBounds3* self_);
+        internal static extern bool PxBounds3_isFinite(PxBounds3* self_);
 
         /// <summary>
         ///  checks that the AABB values describe a valid configuration.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBounds3_isValid(PxBounds3* self_);
+        internal static extern bool PxBounds3_isValid(PxBounds3* self_);
 
         /// <summary>
         ///  Finds the closest point in the box to the point p. If p is contained, this will be p, otherwise it
         ///  will be the closest point on the surface of the box.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBounds3_closestPoint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxBounds3_closestPoint(PxBounds3* self_, PxVec3* p);
+        internal static extern PxVec3 PxBounds3_closestPoint(PxBounds3* self_, PxVec3* p);
 
         [DllImport(__DllName, EntryPoint = "PxErrorCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxErrorCallback_delete(PxErrorCallback* self_);
+        internal static extern void PxErrorCallback_delete(PxErrorCallback* self_);
 
         /// <summary>
         ///  Reports an error code.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxErrorCallback_reportError_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxErrorCallback_reportError_mut(PxErrorCallback* self_, PxErrorCode code, byte* message, byte* file, int line);
+        internal static extern void PxErrorCallback_reportError_mut(PxErrorCallback* self_, PxErrorCode code, byte* message, byte* file, int line);
 
         /// <summary>
         ///  callback when memory is allocated.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAllocationListener_onAllocation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAllocationListener_onAllocation_mut(PxAllocationListener* self_, nuint size, byte* typeName, byte* filename, int line, void* allocatedMemory);
+        internal static extern void PxAllocationListener_onAllocation_mut(PxAllocationListener* self_, nuint size, byte* typeName, byte* filename, int line, void* allocatedMemory);
 
         /// <summary>
         ///  callback when memory is deallocated.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAllocationListener_onDeallocation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAllocationListener_onDeallocation_mut(PxAllocationListener* self_, void* allocatedMemory);
+        internal static extern void PxAllocationListener_onDeallocation_mut(PxAllocationListener* self_, void* allocatedMemory);
 
         /// <summary>
         ///  The default constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadcastingAllocator_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBroadcastingAllocator* PxBroadcastingAllocator_new_alloc(PxAllocatorCallback* allocator, PxErrorCallback* error);
+        internal static extern PxBroadcastingAllocator* PxBroadcastingAllocator_new_alloc(PxAllocatorCallback* allocator, PxErrorCallback* error);
 
         /// <summary>
         ///  The default constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadcastingAllocator_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadcastingAllocator_delete(PxBroadcastingAllocator* self_);
+        internal static extern void PxBroadcastingAllocator_delete(PxBroadcastingAllocator* self_);
 
         /// <summary>
         ///  Allocates size bytes of memory, which must be 16-byte aligned.
@@ -1062,7 +1062,7 @@ namespace Physx
         ///  The allocated block of memory.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadcastingAllocator_allocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxBroadcastingAllocator_allocate_mut(PxBroadcastingAllocator* self_, nuint size, byte* typeName, byte* filename, int line);
+        internal static extern void* PxBroadcastingAllocator_allocate_mut(PxBroadcastingAllocator* self_, nuint size, byte* typeName, byte* filename, int line);
 
         /// <summary>
         ///  Frees memory previously allocated by allocate().
@@ -1072,37 +1072,37 @@ namespace Physx
         ///  and physics processing thread(s).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadcastingAllocator_deallocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadcastingAllocator_deallocate_mut(PxBroadcastingAllocator* self_, void* ptr);
+        internal static extern void PxBroadcastingAllocator_deallocate_mut(PxBroadcastingAllocator* self_, void* ptr);
 
         /// <summary>
         ///  The default constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadcastingErrorCallback_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBroadcastingErrorCallback* PxBroadcastingErrorCallback_new_alloc(PxErrorCallback* errorCallback);
+        internal static extern PxBroadcastingErrorCallback* PxBroadcastingErrorCallback_new_alloc(PxErrorCallback* errorCallback);
 
         /// <summary>
         ///  The default destructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadcastingErrorCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadcastingErrorCallback_delete(PxBroadcastingErrorCallback* self_);
+        internal static extern void PxBroadcastingErrorCallback_delete(PxBroadcastingErrorCallback* self_);
 
         /// <summary>
         ///  Reports an error code.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadcastingErrorCallback_reportError_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadcastingErrorCallback_reportError_mut(PxBroadcastingErrorCallback* self_, PxErrorCode code, byte* message, byte* file, int line);
+        internal static extern void PxBroadcastingErrorCallback_reportError_mut(PxBroadcastingErrorCallback* self_, PxErrorCode code, byte* message, byte* file, int line);
 
         /// <summary>
         ///  Enables floating point exceptions for the scalar and SIMD unit
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxEnableFPExceptions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxEnableFPExceptions();
+        internal static extern void phys_PxEnableFPExceptions();
 
         /// <summary>
         ///  Disables floating point exceptions for the scalar and SIMD unit
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxDisableFPExceptions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxDisableFPExceptions();
+        internal static extern void phys_PxDisableFPExceptions();
 
         /// <summary>
         ///  read from the stream. The number of bytes read may be less than the number requested.
@@ -1110,10 +1110,10 @@ namespace Physx
         ///  the number of bytes read from the stream.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxInputStream_read_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxInputStream_read_mut(PxInputStream* self_, void* dest, uint count);
+        internal static extern uint PxInputStream_read_mut(PxInputStream* self_, void* dest, uint count);
 
         [DllImport(__DllName, EntryPoint = "PxInputStream_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxInputStream_delete(PxInputStream* self_);
+        internal static extern void PxInputStream_delete(PxInputStream* self_);
 
         /// <summary>
         ///  return the length of the input data
@@ -1121,13 +1121,13 @@ namespace Physx
         ///  size in bytes of the input data
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxInputData_getLength", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxInputData_getLength(PxInputData* self_);
+        internal static extern uint PxInputData_getLength(PxInputData* self_);
 
         /// <summary>
         ///  seek to the given offset from the start of the data.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxInputData_seek_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxInputData_seek_mut(PxInputData* self_, uint offset);
+        internal static extern void PxInputData_seek_mut(PxInputData* self_, uint offset);
 
         /// <summary>
         ///  return the current offset from the start of the data
@@ -1135,10 +1135,10 @@ namespace Physx
         ///  the offset to seek to.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxInputData_tell", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxInputData_tell(PxInputData* self_);
+        internal static extern uint PxInputData_tell(PxInputData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxInputData_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxInputData_delete(PxInputData* self_);
+        internal static extern void PxInputData_delete(PxInputData* self_);
 
         /// <summary>
         ///  write to the stream. The number of bytes written may be less than the number sent.
@@ -1146,22 +1146,22 @@ namespace Physx
         ///  the number of bytes written to the stream by this call.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxOutputStream_write_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxOutputStream_write_mut(PxOutputStream* self_, void* src, uint count);
+        internal static extern uint PxOutputStream_write_mut(PxOutputStream* self_, void* src, uint count);
 
         [DllImport(__DllName, EntryPoint = "PxOutputStream_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxOutputStream_delete(PxOutputStream* self_);
+        internal static extern void PxOutputStream_delete(PxOutputStream* self_);
 
         /// <summary>
         ///  default constructor leaves data uninitialized.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec4 PxVec4_new();
+        internal static extern PxVec4 PxVec4_new();
 
         /// <summary>
         ///  zero constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec4 PxVec4_new_1(PxZERO anon_param0);
+        internal static extern PxVec4 PxVec4_new_1(PxZERO anon_param0);
 
         /// <summary>
         ///  Assigns scalar parameter to all elements.
@@ -1169,46 +1169,46 @@ namespace Physx
         ///  Useful to initialize to zero or one.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_new_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec4 PxVec4_new_2(float a);
+        internal static extern PxVec4 PxVec4_new_2(float a);
 
         /// <summary>
         ///  Initializes from 3 scalar parameters.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_new_3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec4 PxVec4_new_3(float nx, float ny, float nz, float nw);
+        internal static extern PxVec4 PxVec4_new_3(float nx, float ny, float nz, float nw);
 
         /// <summary>
         ///  Initializes from 3 scalar parameters.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_new_4", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec4 PxVec4_new_4(PxVec3* v, float nw);
+        internal static extern PxVec4 PxVec4_new_4(PxVec3* v, float nw);
 
         /// <summary>
         ///  Initializes from an array of scalar parameters.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_new_5", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec4 PxVec4_new_5(float* v);
+        internal static extern PxVec4 PxVec4_new_5(float* v);
 
         /// <summary>
         ///  tests for exact zero vector
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_isZero", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxVec4_isZero(PxVec4* self_);
+        internal static extern bool PxVec4_isZero(PxVec4* self_);
 
         /// <summary>
         ///  returns true if all 3 elems of the vector are finite (not NAN or INF, etc.)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_isFinite", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxVec4_isFinite(PxVec4* self_);
+        internal static extern bool PxVec4_isFinite(PxVec4* self_);
 
         /// <summary>
         ///  is normalized - used by API parameter validation
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_isNormalized", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxVec4_isNormalized(PxVec4* self_);
+        internal static extern bool PxVec4_isNormalized(PxVec4* self_);
 
         /// <summary>
         ///  returns the squared magnitude
@@ -1216,234 +1216,234 @@ namespace Physx
         ///  Avoids calling PxSqrt()!
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_magnitudeSquared", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec4_magnitudeSquared(PxVec4* self_);
+        internal static extern float PxVec4_magnitudeSquared(PxVec4* self_);
 
         /// <summary>
         ///  returns the magnitude
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_magnitude", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec4_magnitude(PxVec4* self_);
+        internal static extern float PxVec4_magnitude(PxVec4* self_);
 
         /// <summary>
         ///  returns the scalar product of this and other.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_dot", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec4_dot(PxVec4* self_, PxVec4* v);
+        internal static extern float PxVec4_dot(PxVec4* self_, PxVec4* v);
 
         /// <summary>
         ///  returns a unit vector
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_getNormalized", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec4 PxVec4_getNormalized(PxVec4* self_);
+        internal static extern PxVec4 PxVec4_getNormalized(PxVec4* self_);
 
         /// <summary>
         ///  normalizes the vector in place
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_normalize_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec4_normalize_mut(PxVec4* self_);
+        internal static extern float PxVec4_normalize_mut(PxVec4* self_);
 
         /// <summary>
         ///  a[i] * b[i], for all i.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_multiply", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec4 PxVec4_multiply(PxVec4* self_, PxVec4* a);
+        internal static extern PxVec4 PxVec4_multiply(PxVec4* self_, PxVec4* a);
 
         /// <summary>
         ///  element-wise minimum
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_minimum", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec4 PxVec4_minimum(PxVec4* self_, PxVec4* v);
+        internal static extern PxVec4 PxVec4_minimum(PxVec4* self_, PxVec4* v);
 
         /// <summary>
         ///  element-wise maximum
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec4_maximum", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec4 PxVec4_maximum(PxVec4* self_, PxVec4* v);
+        internal static extern PxVec4 PxVec4_maximum(PxVec4* self_, PxVec4* v);
 
         [DllImport(__DllName, EntryPoint = "PxVec4_getXYZ", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxVec4_getXYZ(PxVec4* self_);
+        internal static extern PxVec3 PxVec4_getXYZ(PxVec4* self_);
 
         /// <summary>
         ///  Default constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_new();
+        internal static extern PxMat44 PxMat44_new();
 
         /// <summary>
         ///  identity constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_new_1(PxIDENTITY anon_param0);
+        internal static extern PxMat44 PxMat44_new_1(PxIDENTITY anon_param0);
 
         /// <summary>
         ///  zero constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_new_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_new_2(PxZERO anon_param0);
+        internal static extern PxMat44 PxMat44_new_2(PxZERO anon_param0);
 
         /// <summary>
         ///  Construct from four 4-vectors
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_new_3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_new_3(PxVec4* col0, PxVec4* col1, PxVec4* col2, PxVec4* col3);
+        internal static extern PxMat44 PxMat44_new_3(PxVec4* col0, PxVec4* col1, PxVec4* col2, PxVec4* col3);
 
         /// <summary>
         ///  constructor that generates a multiple of the identity matrix
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_new_4", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_new_4(float r);
+        internal static extern PxMat44 PxMat44_new_4(float r);
 
         /// <summary>
         ///  Construct from three base vectors and a translation
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_new_5", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_new_5(PxVec3* col0, PxVec3* col1, PxVec3* col2, PxVec3* col3);
+        internal static extern PxMat44 PxMat44_new_5(PxVec3* col0, PxVec3* col1, PxVec3* col2, PxVec3* col3);
 
         /// <summary>
         ///  Construct from float[16]
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_new_6", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_new_6(float* values);
+        internal static extern PxMat44 PxMat44_new_6(float* values);
 
         /// <summary>
         ///  Construct from a quaternion
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_new_7", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_new_7(PxQuat* q);
+        internal static extern PxMat44 PxMat44_new_7(PxQuat* q);
 
         /// <summary>
         ///  Construct from a diagonal vector
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_new_8", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_new_8(PxVec4* diagonal);
+        internal static extern PxMat44 PxMat44_new_8(PxVec4* diagonal);
 
         /// <summary>
         ///  Construct from Mat33 and a translation
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_new_9", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_new_9(PxMat33* axes, PxVec3* position);
+        internal static extern PxMat44 PxMat44_new_9(PxMat33* axes, PxVec3* position);
 
         [DllImport(__DllName, EntryPoint = "PxMat44_new_10", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_new_10(PxTransform* t);
+        internal static extern PxMat44 PxMat44_new_10(PxTransform* t);
 
         /// <summary>
         ///  Get transposed matrix
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_getTranspose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_getTranspose(PxMat44* self_);
+        internal static extern PxMat44 PxMat44_getTranspose(PxMat44* self_);
 
         /// <summary>
         ///  Transform vector by matrix, equal to v' = M*v
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_transform", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec4 PxMat44_transform(PxMat44* self_, PxVec4* other);
+        internal static extern PxVec4 PxMat44_transform(PxMat44* self_, PxVec4* other);
 
         /// <summary>
         ///  Transform vector by matrix, equal to v' = M*v
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_transform_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxMat44_transform_1(PxMat44* self_, PxVec3* other);
+        internal static extern PxVec3 PxMat44_transform_1(PxMat44* self_, PxVec3* other);
 
         /// <summary>
         ///  Rotate vector by matrix, equal to v' = M*v
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_rotate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec4 PxMat44_rotate(PxMat44* self_, PxVec4* other);
+        internal static extern PxVec4 PxMat44_rotate(PxMat44* self_, PxVec4* other);
 
         /// <summary>
         ///  Rotate vector by matrix, equal to v' = M*v
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMat44_rotate_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxMat44_rotate_1(PxMat44* self_, PxVec3* other);
+        internal static extern PxVec3 PxMat44_rotate_1(PxMat44* self_, PxVec3* other);
 
         [DllImport(__DllName, EntryPoint = "PxMat44_getBasis", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxMat44_getBasis(PxMat44* self_, uint num);
+        internal static extern PxVec3 PxMat44_getBasis(PxMat44* self_, uint num);
 
         [DllImport(__DllName, EntryPoint = "PxMat44_getPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxMat44_getPosition(PxMat44* self_);
+        internal static extern PxVec3 PxMat44_getPosition(PxMat44* self_);
 
         [DllImport(__DllName, EntryPoint = "PxMat44_setPosition_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMat44_setPosition_mut(PxMat44* self_, PxVec3* position);
+        internal static extern void PxMat44_setPosition_mut(PxMat44* self_, PxVec3* position);
 
         [DllImport(__DllName, EntryPoint = "PxMat44_front", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float* PxMat44_front(PxMat44* self_);
+        internal static extern float* PxMat44_front(PxMat44* self_);
 
         [DllImport(__DllName, EntryPoint = "PxMat44_scale_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMat44_scale_mut(PxMat44* self_, PxVec4* p);
+        internal static extern void PxMat44_scale_mut(PxMat44* self_, PxVec4* p);
 
         [DllImport(__DllName, EntryPoint = "PxMat44_inverseRT", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat44 PxMat44_inverseRT(PxMat44* self_);
+        internal static extern PxMat44 PxMat44_inverseRT(PxMat44* self_);
 
         [DllImport(__DllName, EntryPoint = "PxMat44_isFinite", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxMat44_isFinite(PxMat44* self_);
+        internal static extern bool PxMat44_isFinite(PxMat44* self_);
 
         /// <summary>
         ///  Constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPlane_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPlane PxPlane_new();
+        internal static extern PxPlane PxPlane_new();
 
         /// <summary>
         ///  Constructor from a normal and a distance
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPlane_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPlane PxPlane_new_1(float nx, float ny, float nz, float distance);
+        internal static extern PxPlane PxPlane_new_1(float nx, float ny, float nz, float distance);
 
         /// <summary>
         ///  Constructor from a normal and a distance
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPlane_new_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPlane PxPlane_new_2(PxVec3* normal, float distance);
+        internal static extern PxPlane PxPlane_new_2(PxVec3* normal, float distance);
 
         /// <summary>
         ///  Constructor from a point on the plane and a normal
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPlane_new_3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPlane PxPlane_new_3(PxVec3* point, PxVec3* normal);
+        internal static extern PxPlane PxPlane_new_3(PxVec3* point, PxVec3* normal);
 
         /// <summary>
         ///  Constructor from three points
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPlane_new_4", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPlane PxPlane_new_4(PxVec3* p0, PxVec3* p1, PxVec3* p2);
+        internal static extern PxPlane PxPlane_new_4(PxVec3* p0, PxVec3* p1, PxVec3* p2);
 
         [DllImport(__DllName, EntryPoint = "PxPlane_distance", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxPlane_distance(PxPlane* self_, PxVec3* p);
+        internal static extern float PxPlane_distance(PxPlane* self_, PxVec3* p);
 
         [DllImport(__DllName, EntryPoint = "PxPlane_contains", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxPlane_contains(PxPlane* self_, PxVec3* p);
+        internal static extern bool PxPlane_contains(PxPlane* self_, PxVec3* p);
 
         /// <summary>
         ///  projects p into the plane
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPlane_project", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxPlane_project(PxPlane* self_, PxVec3* p);
+        internal static extern PxVec3 PxPlane_project(PxPlane* self_, PxVec3* p);
 
         /// <summary>
         ///  find an arbitrary point in the plane
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPlane_pointInPlane", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxPlane_pointInPlane(PxPlane* self_);
+        internal static extern PxVec3 PxPlane_pointInPlane(PxPlane* self_);
 
         /// <summary>
         ///  equivalent plane with unit normal
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPlane_normalize_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPlane_normalize_mut(PxPlane* self_);
+        internal static extern void PxPlane_normalize_mut(PxPlane* self_);
 
         /// <summary>
         ///  transform plane
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPlane_transform", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPlane PxPlane_transform(PxPlane* self_, PxTransform* pose);
+        internal static extern PxPlane PxPlane_transform(PxPlane* self_, PxTransform* pose);
 
         /// <summary>
         ///  inverse-transform plane
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPlane_inverseTransform", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPlane PxPlane_inverseTransform(PxPlane* self_, PxTransform* pose);
+        internal static extern PxPlane PxPlane_inverseTransform(PxPlane* self_, PxTransform* pose);
 
         /// <summary>
         ///  finds the shortest rotation between two vectors.
@@ -1451,10 +1451,10 @@ namespace Physx
         ///  a rotation about an axis normal to the two vectors which takes one to the other via the shortest path
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxShortestRotation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQuat phys_PxShortestRotation(PxVec3* from, PxVec3* target);
+        internal static extern PxQuat phys_PxShortestRotation(PxVec3* from, PxVec3* target);
 
         [DllImport(__DllName, EntryPoint = "phys_PxDiagonalize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 phys_PxDiagonalize(PxMat33* m, PxQuat* axes);
+        internal static extern PxVec3 phys_PxDiagonalize(PxMat33* m, PxQuat* axes);
 
         /// <summary>
         ///  creates a transform from the endpoints of a segment, suitable for an actor transform for a PxCapsuleGeometry
@@ -1462,7 +1462,7 @@ namespace Physx
         ///  A PxTransform which will transform the vector (1,0,0) to the capsule axis shrunk by the halfHeight
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxTransformFromSegment", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform phys_PxTransformFromSegment(PxVec3* p0, PxVec3* p1, float* halfHeight);
+        internal static extern PxTransform phys_PxTransformFromSegment(PxVec3* p0, PxVec3* p1, float* halfHeight);
 
         /// <summary>
         ///  creates a transform from a plane equation, suitable for an actor transform for a PxPlaneGeometry
@@ -1470,7 +1470,7 @@ namespace Physx
         ///  a PxTransform which will transform the plane PxPlane(1,0,0,0) to the specified plane
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxTransformFromPlaneEquation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform phys_PxTransformFromPlaneEquation(PxPlane* plane);
+        internal static extern PxTransform phys_PxTransformFromPlaneEquation(PxPlane* plane);
 
         /// <summary>
         ///  creates a plane equation from a transform, such as the actor transform for a PxPlaneGeometry
@@ -1478,7 +1478,7 @@ namespace Physx
         ///  the plane
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxPlaneEquationFromTransform", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPlane phys_PxPlaneEquationFromTransform(PxTransform* pose);
+        internal static extern PxPlane phys_PxPlaneEquationFromTransform(PxTransform* pose);
 
         /// <summary>
         ///  Spherical linear interpolation of two quaternions.
@@ -1491,19 +1491,19 @@ namespace Physx
         ///  Returns angle between -PI and PI in radians
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxSlerp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQuat phys_PxSlerp(float t, PxQuat* left, PxQuat* right);
+        internal static extern PxQuat phys_PxSlerp(float t, PxQuat* left, PxQuat* right);
 
         /// <summary>
         ///  integrate transform.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxIntegrateTransform", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxIntegrateTransform(PxTransform* curTrans, PxVec3* linvel, PxVec3* angvel, float timeStep, PxTransform* result);
+        internal static extern void phys_PxIntegrateTransform(PxTransform* curTrans, PxVec3* linvel, PxVec3* angvel, float timeStep, PxTransform* result);
 
         /// <summary>
         ///  Compute the exponent of a PxVec3
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxExp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQuat phys_PxExp(PxVec3* v);
+        internal static extern PxQuat phys_PxExp(PxVec3* v);
 
         /// <summary>
         ///  computes a oriented bounding box around the scaled basis.
@@ -1511,19 +1511,19 @@ namespace Physx
         ///  Bounding box extent.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxOptimizeBoundingBox", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 phys_PxOptimizeBoundingBox(PxMat33* basis);
+        internal static extern PxVec3 phys_PxOptimizeBoundingBox(PxMat33* basis);
 
         /// <summary>
         ///  return Returns the log of a PxQuat
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxLog", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 phys_PxLog(PxQuat* q);
+        internal static extern PxVec3 phys_PxLog(PxQuat* q);
 
         /// <summary>
         ///  return Returns 0 if v.x is largest element of v, 1 if v.y is largest element, 2 if v.z is largest element.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxLargestAxis", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxLargestAxis(PxVec3* v);
+        internal static extern uint phys_PxLargestAxis(PxVec3* v);
 
         /// <summary>
         ///  Compute tan(theta/2) given sin(theta) and cos(theta) as inputs.
@@ -1531,7 +1531,7 @@ namespace Physx
         ///  Returns tan(theta/2)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxTanHalf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float phys_PxTanHalf(float sin, float cos);
+        internal static extern float phys_PxTanHalf(float sin, float cos);
 
         /// <summary>
         ///  Compute the closest point on an 2d ellipse to a given 2d point.
@@ -1539,7 +1539,7 @@ namespace Physx
         ///  Returns the 2d position on the surface of the ellipse that is closest to point.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxEllipseClamp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 phys_PxEllipseClamp(PxVec3* point, PxVec3* radii);
+        internal static extern PxVec3 phys_PxEllipseClamp(PxVec3* point, PxVec3* radii);
 
         /// <summary>
         ///  Compute from an input quaternion q a pair of quaternions (swing, twist) such that
@@ -1547,7 +1547,7 @@ namespace Physx
         ///  with the caveats that swing.x = twist.y = twist.z = 0.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxSeparateSwingTwist", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxSeparateSwingTwist(PxQuat* q, PxQuat* swing, PxQuat* twist);
+        internal static extern void phys_PxSeparateSwingTwist(PxQuat* q, PxQuat* swing, PxQuat* twist);
 
         /// <summary>
         ///  Compute the angle between two non-unit vectors
@@ -1555,62 +1555,62 @@ namespace Physx
         ///  Returns the angle (in radians) between the two vector v0 and v1.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxComputeAngle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float phys_PxComputeAngle(PxVec3* v0, PxVec3* v1);
+        internal static extern float phys_PxComputeAngle(PxVec3* v0, PxVec3* v1);
 
         /// <summary>
         ///  Compute two normalized vectors (right and up) that are perpendicular to an input normalized vector (dir).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxComputeBasisVectors", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxComputeBasisVectors(PxVec3* dir, PxVec3* right, PxVec3* up);
+        internal static extern void phys_PxComputeBasisVectors(PxVec3* dir, PxVec3* right, PxVec3* up);
 
         /// <summary>
         ///  Compute three normalized vectors (dir, right and up) that are parallel to (dir) and perpendicular to (right, up) the
         ///  normalized direction vector (p1 - p0)/||p1 - p0||.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxComputeBasisVectors_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxComputeBasisVectors_1(PxVec3* p0, PxVec3* p1, PxVec3* dir, PxVec3* right, PxVec3* up);
+        internal static extern void phys_PxComputeBasisVectors_1(PxVec3* p0, PxVec3* p1, PxVec3* dir, PxVec3* right, PxVec3* up);
 
         /// <summary>
         ///  Compute (i+1)%3
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetNextIndex3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxGetNextIndex3(uint i);
+        internal static extern uint phys_PxGetNextIndex3(uint i);
 
         [DllImport(__DllName, EntryPoint = "phys_computeBarycentric", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_computeBarycentric(PxVec3* a, PxVec3* b, PxVec3* c, PxVec3* d, PxVec3* p, PxVec4* bary);
+        internal static extern void phys_computeBarycentric(PxVec3* a, PxVec3* b, PxVec3* c, PxVec3* d, PxVec3* p, PxVec4* bary);
 
         [DllImport(__DllName, EntryPoint = "phys_computeBarycentric_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_computeBarycentric_1(PxVec3* a, PxVec3* b, PxVec3* c, PxVec3* p, PxVec4* bary);
+        internal static extern void phys_computeBarycentric_1(PxVec3* a, PxVec3* b, PxVec3* c, PxVec3* p, PxVec4* bary);
 
         [DllImport(__DllName, EntryPoint = "Interpolation_PxLerp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float Interpolation_PxLerp(float a, float b, float t);
+        internal static extern float Interpolation_PxLerp(float a, float b, float t);
 
         [DllImport(__DllName, EntryPoint = "Interpolation_PxBiLerp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float Interpolation_PxBiLerp(float f00, float f10, float f01, float f11, float tx, float ty);
+        internal static extern float Interpolation_PxBiLerp(float f00, float f10, float f01, float f11, float tx, float ty);
 
         [DllImport(__DllName, EntryPoint = "Interpolation_PxTriLerp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float Interpolation_PxTriLerp(float f000, float f100, float f010, float f110, float f001, float f101, float f011, float f111, float tx, float ty, float tz);
+        internal static extern float Interpolation_PxTriLerp(float f000, float f100, float f010, float f110, float f001, float f101, float f011, float f111, float tx, float ty, float tz);
 
         [DllImport(__DllName, EntryPoint = "Interpolation_PxSDFIdx", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint Interpolation_PxSDFIdx(uint i, uint j, uint k, uint nbX, uint nbY);
+        internal static extern uint Interpolation_PxSDFIdx(uint i, uint j, uint k, uint nbX, uint nbY);
 
         [DllImport(__DllName, EntryPoint = "Interpolation_PxSDFSampleImpl", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float Interpolation_PxSDFSampleImpl(float* sdf, PxVec3* localPos, PxVec3* sdfBoxLower, PxVec3* sdfBoxHigher, float sdfDx, float invSdfDx, uint dimX, uint dimY, uint dimZ, float tolerance);
+        internal static extern float Interpolation_PxSDFSampleImpl(float* sdf, PxVec3* localPos, PxVec3* sdfBoxLower, PxVec3* sdfBoxHigher, float sdfDx, float invSdfDx, uint dimX, uint dimY, uint dimZ, float tolerance);
 
         [DllImport(__DllName, EntryPoint = "phys_PxSdfSample", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float phys_PxSdfSample(float* sdf, PxVec3* localPos, PxVec3* sdfBoxLower, PxVec3* sdfBoxHigher, float sdfDx, float invSdfDx, uint dimX, uint dimY, uint dimZ, PxVec3* gradient, float tolerance);
+        internal static extern float phys_PxSdfSample(float* sdf, PxVec3* localPos, PxVec3* sdfBoxLower, PxVec3* sdfBoxHigher, float sdfDx, float invSdfDx, uint dimX, uint dimY, uint dimZ, PxVec3* gradient, float tolerance);
 
         /// <summary>
         ///  The constructor for Mutex creates a mutex. It is initially unlocked.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMutexImpl_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMutexImpl* PxMutexImpl_new_alloc();
+        internal static extern PxMutexImpl* PxMutexImpl_new_alloc();
 
         /// <summary>
         ///  The destructor for Mutex deletes the mutex.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMutexImpl_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMutexImpl_delete(PxMutexImpl* self_);
+        internal static extern void PxMutexImpl_delete(PxMutexImpl* self_);
 
         /// <summary>
         ///  Acquire (lock) the mutex. If the mutex is already locked
@@ -1618,7 +1618,7 @@ namespace Physx
         ///  unlocked.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMutexImpl_lock_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMutexImpl_lock_mut(PxMutexImpl* self_);
+        internal static extern void PxMutexImpl_lock_mut(PxMutexImpl* self_);
 
         /// <summary>
         ///  Acquire (lock) the mutex. If the mutex is already locked
@@ -1626,37 +1626,37 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMutexImpl_trylock_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxMutexImpl_trylock_mut(PxMutexImpl* self_);
+        internal static extern bool PxMutexImpl_trylock_mut(PxMutexImpl* self_);
 
         /// <summary>
         ///  Release (unlock) the mutex.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMutexImpl_unlock_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMutexImpl_unlock_mut(PxMutexImpl* self_);
+        internal static extern void PxMutexImpl_unlock_mut(PxMutexImpl* self_);
 
         /// <summary>
         ///  Size of this class.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMutexImpl_getSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxMutexImpl_getSize();
+        internal static extern uint PxMutexImpl_getSize();
 
         [DllImport(__DllName, EntryPoint = "PxReadWriteLock_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxReadWriteLock* PxReadWriteLock_new_alloc();
+        internal static extern PxReadWriteLock* PxReadWriteLock_new_alloc();
 
         [DllImport(__DllName, EntryPoint = "PxReadWriteLock_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxReadWriteLock_delete(PxReadWriteLock* self_);
+        internal static extern void PxReadWriteLock_delete(PxReadWriteLock* self_);
 
         [DllImport(__DllName, EntryPoint = "PxReadWriteLock_lockReader_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxReadWriteLock_lockReader_mut(PxReadWriteLock* self_, [MarshalAs(UnmanagedType.U1)] bool takeLock);
+        internal static extern void PxReadWriteLock_lockReader_mut(PxReadWriteLock* self_, [MarshalAs(UnmanagedType.U1)] bool takeLock);
 
         [DllImport(__DllName, EntryPoint = "PxReadWriteLock_lockWriter_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxReadWriteLock_lockWriter_mut(PxReadWriteLock* self_);
+        internal static extern void PxReadWriteLock_lockWriter_mut(PxReadWriteLock* self_);
 
         [DllImport(__DllName, EntryPoint = "PxReadWriteLock_unlockReader_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxReadWriteLock_unlockReader_mut(PxReadWriteLock* self_);
+        internal static extern void PxReadWriteLock_unlockReader_mut(PxReadWriteLock* self_);
 
         [DllImport(__DllName, EntryPoint = "PxReadWriteLock_unlockWriter_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxReadWriteLock_unlockWriter_mut(PxReadWriteLock* self_);
+        internal static extern void PxReadWriteLock_unlockWriter_mut(PxReadWriteLock* self_);
 
         /// <summary>
         ///  Mark the beginning of a nested profile block
@@ -1664,7 +1664,7 @@ namespace Physx
         ///  Returns implementation-specific profiler data for this event
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxProfilerCallback_zoneStart_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxProfilerCallback_zoneStart_mut(PxProfilerCallback* self_, byte* eventName, [MarshalAs(UnmanagedType.U1)] bool detached, ulong contextId);
+        internal static extern void* PxProfilerCallback_zoneStart_mut(PxProfilerCallback* self_, byte* eventName, [MarshalAs(UnmanagedType.U1)] bool detached, ulong contextId);
 
         /// <summary>
         ///  Mark the end of a nested profile block
@@ -1672,43 +1672,43 @@ namespace Physx
         ///  eventName plus contextId can be used to uniquely match up start and end of a zone.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxProfilerCallback_zoneEnd_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxProfilerCallback_zoneEnd_mut(PxProfilerCallback* self_, void* profilerData, byte* eventName, [MarshalAs(UnmanagedType.U1)] bool detached, ulong contextId);
+        internal static extern void PxProfilerCallback_zoneEnd_mut(PxProfilerCallback* self_, void* profilerData, byte* eventName, [MarshalAs(UnmanagedType.U1)] bool detached, ulong contextId);
 
         [DllImport(__DllName, EntryPoint = "PxProfileScoped_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxProfileScoped* PxProfileScoped_new_alloc(PxProfilerCallback* callback, byte* eventName, [MarshalAs(UnmanagedType.U1)] bool detached, ulong contextId);
+        internal static extern PxProfileScoped* PxProfileScoped_new_alloc(PxProfilerCallback* callback, byte* eventName, [MarshalAs(UnmanagedType.U1)] bool detached, ulong contextId);
 
         [DllImport(__DllName, EntryPoint = "PxProfileScoped_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxProfileScoped_delete(PxProfileScoped* self_);
+        internal static extern void PxProfileScoped_delete(PxProfileScoped* self_);
 
         [DllImport(__DllName, EntryPoint = "PxSListEntry_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSListEntry PxSListEntry_new();
+        internal static extern PxSListEntry PxSListEntry_new();
 
         [DllImport(__DllName, EntryPoint = "PxSListEntry_next_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSListEntry* PxSListEntry_next_mut(PxSListEntry* self_);
+        internal static extern PxSListEntry* PxSListEntry_next_mut(PxSListEntry* self_);
 
         [DllImport(__DllName, EntryPoint = "PxSListImpl_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSListImpl* PxSListImpl_new_alloc();
+        internal static extern PxSListImpl* PxSListImpl_new_alloc();
 
         [DllImport(__DllName, EntryPoint = "PxSListImpl_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSListImpl_delete(PxSListImpl* self_);
+        internal static extern void PxSListImpl_delete(PxSListImpl* self_);
 
         [DllImport(__DllName, EntryPoint = "PxSListImpl_push_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSListImpl_push_mut(PxSListImpl* self_, PxSListEntry* entry);
+        internal static extern void PxSListImpl_push_mut(PxSListImpl* self_, PxSListEntry* entry);
 
         [DllImport(__DllName, EntryPoint = "PxSListImpl_pop_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSListEntry* PxSListImpl_pop_mut(PxSListImpl* self_);
+        internal static extern PxSListEntry* PxSListImpl_pop_mut(PxSListImpl* self_);
 
         [DllImport(__DllName, EntryPoint = "PxSListImpl_flush_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSListEntry* PxSListImpl_flush_mut(PxSListImpl* self_);
+        internal static extern PxSListEntry* PxSListImpl_flush_mut(PxSListImpl* self_);
 
         [DllImport(__DllName, EntryPoint = "PxSListImpl_getSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxSListImpl_getSize();
+        internal static extern uint PxSListImpl_getSize();
 
         [DllImport(__DllName, EntryPoint = "PxSyncImpl_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSyncImpl* PxSyncImpl_new_alloc();
+        internal static extern PxSyncImpl* PxSyncImpl_new_alloc();
 
         [DllImport(__DllName, EntryPoint = "PxSyncImpl_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSyncImpl_delete(PxSyncImpl* self_);
+        internal static extern void PxSyncImpl_delete(PxSyncImpl* self_);
 
         /// <summary>
         ///  Wait on the object for at most the given number of ms. Returns
@@ -1717,94 +1717,94 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSyncImpl_wait_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSyncImpl_wait_mut(PxSyncImpl* self_, uint milliseconds);
+        internal static extern bool PxSyncImpl_wait_mut(PxSyncImpl* self_, uint milliseconds);
 
         /// <summary>
         ///  Signal the synchronization object, waking all threads waiting on it
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSyncImpl_set_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSyncImpl_set_mut(PxSyncImpl* self_);
+        internal static extern void PxSyncImpl_set_mut(PxSyncImpl* self_);
 
         /// <summary>
         ///  Reset the synchronization object
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSyncImpl_reset_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSyncImpl_reset_mut(PxSyncImpl* self_);
+        internal static extern void PxSyncImpl_reset_mut(PxSyncImpl* self_);
 
         /// <summary>
         ///  Size of this class.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSyncImpl_getSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxSyncImpl_getSize();
+        internal static extern uint PxSyncImpl_getSize();
 
         [DllImport(__DllName, EntryPoint = "PxRunnable_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRunnable* PxRunnable_new_alloc();
+        internal static extern PxRunnable* PxRunnable_new_alloc();
 
         [DllImport(__DllName, EntryPoint = "PxRunnable_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRunnable_delete(PxRunnable* self_);
+        internal static extern void PxRunnable_delete(PxRunnable* self_);
 
         [DllImport(__DllName, EntryPoint = "PxRunnable_execute_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRunnable_execute_mut(PxRunnable* self_);
+        internal static extern void PxRunnable_execute_mut(PxRunnable* self_);
 
         [DllImport(__DllName, EntryPoint = "phys_PxTlsAlloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxTlsAlloc();
+        internal static extern uint phys_PxTlsAlloc();
 
         [DllImport(__DllName, EntryPoint = "phys_PxTlsFree", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxTlsFree(uint index);
+        internal static extern void phys_PxTlsFree(uint index);
 
         [DllImport(__DllName, EntryPoint = "phys_PxTlsGet", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* phys_PxTlsGet(uint index);
+        internal static extern void* phys_PxTlsGet(uint index);
 
         [DllImport(__DllName, EntryPoint = "phys_PxTlsGetValue", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern nuint phys_PxTlsGetValue(uint index);
+        internal static extern nuint phys_PxTlsGetValue(uint index);
 
         [DllImport(__DllName, EntryPoint = "phys_PxTlsSet", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxTlsSet(uint index, void* value);
+        internal static extern uint phys_PxTlsSet(uint index, void* value);
 
         [DllImport(__DllName, EntryPoint = "phys_PxTlsSetValue", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxTlsSetValue(uint index, nuint value);
+        internal static extern uint phys_PxTlsSetValue(uint index, nuint value);
 
         [DllImport(__DllName, EntryPoint = "PxCounterFrequencyToTensOfNanos_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCounterFrequencyToTensOfNanos PxCounterFrequencyToTensOfNanos_new(ulong inNum, ulong inDenom);
+        internal static extern PxCounterFrequencyToTensOfNanos PxCounterFrequencyToTensOfNanos_new(ulong inNum, ulong inDenom);
 
         [DllImport(__DllName, EntryPoint = "PxCounterFrequencyToTensOfNanos_toTensOfNanos", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ulong PxCounterFrequencyToTensOfNanos_toTensOfNanos(PxCounterFrequencyToTensOfNanos* self_, ulong inCounter);
+        internal static extern ulong PxCounterFrequencyToTensOfNanos_toTensOfNanos(PxCounterFrequencyToTensOfNanos* self_, ulong inCounter);
 
         [DllImport(__DllName, EntryPoint = "PxTime_getBootCounterFrequency", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCounterFrequencyToTensOfNanos* PxTime_getBootCounterFrequency();
+        internal static extern PxCounterFrequencyToTensOfNanos* PxTime_getBootCounterFrequency();
 
         [DllImport(__DllName, EntryPoint = "PxTime_getCounterFrequency", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCounterFrequencyToTensOfNanos PxTime_getCounterFrequency();
+        internal static extern PxCounterFrequencyToTensOfNanos PxTime_getCounterFrequency();
 
         [DllImport(__DllName, EntryPoint = "PxTime_getCurrentCounterValue", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ulong PxTime_getCurrentCounterValue();
+        internal static extern ulong PxTime_getCurrentCounterValue();
 
         [DllImport(__DllName, EntryPoint = "PxTime_getCurrentTimeInTensOfNanoSeconds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ulong PxTime_getCurrentTimeInTensOfNanoSeconds();
+        internal static extern ulong PxTime_getCurrentTimeInTensOfNanoSeconds();
 
         [DllImport(__DllName, EntryPoint = "PxTime_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTime PxTime_new();
+        internal static extern PxTime PxTime_new();
 
         [DllImport(__DllName, EntryPoint = "PxTime_getElapsedSeconds_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double PxTime_getElapsedSeconds_mut(PxTime* self_);
+        internal static extern double PxTime_getElapsedSeconds_mut(PxTime* self_);
 
         [DllImport(__DllName, EntryPoint = "PxTime_peekElapsedSeconds_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double PxTime_peekElapsedSeconds_mut(PxTime* self_);
+        internal static extern double PxTime_peekElapsedSeconds_mut(PxTime* self_);
 
         [DllImport(__DllName, EntryPoint = "PxTime_getLastTime", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double PxTime_getLastTime(PxTime* self_);
+        internal static extern double PxTime_getLastTime(PxTime* self_);
 
         /// <summary>
         ///  default constructor leaves data uninitialized.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec2 PxVec2_new();
+        internal static extern PxVec2 PxVec2_new();
 
         /// <summary>
         ///  zero constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec2 PxVec2_new_1(PxZERO anon_param0);
+        internal static extern PxVec2 PxVec2_new_1(PxZERO anon_param0);
 
         /// <summary>
         ///  Assigns scalar parameter to all elements.
@@ -1812,34 +1812,34 @@ namespace Physx
         ///  Useful to initialize to zero or one.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_new_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec2 PxVec2_new_2(float a);
+        internal static extern PxVec2 PxVec2_new_2(float a);
 
         /// <summary>
         ///  Initializes from 2 scalar parameters.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_new_3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec2 PxVec2_new_3(float nx, float ny);
+        internal static extern PxVec2 PxVec2_new_3(float nx, float ny);
 
         /// <summary>
         ///  tests for exact zero vector
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_isZero", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxVec2_isZero(PxVec2* self_);
+        internal static extern bool PxVec2_isZero(PxVec2* self_);
 
         /// <summary>
         ///  returns true if all 2 elems of the vector are finite (not NAN or INF, etc.)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_isFinite", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxVec2_isFinite(PxVec2* self_);
+        internal static extern bool PxVec2_isFinite(PxVec2* self_);
 
         /// <summary>
         ///  is normalized - used by API parameter validation
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_isNormalized", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxVec2_isNormalized(PxVec2* self_);
+        internal static extern bool PxVec2_isNormalized(PxVec2* self_);
 
         /// <summary>
         ///  returns the squared magnitude
@@ -1847,137 +1847,137 @@ namespace Physx
         ///  Avoids calling PxSqrt()!
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_magnitudeSquared", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec2_magnitudeSquared(PxVec2* self_);
+        internal static extern float PxVec2_magnitudeSquared(PxVec2* self_);
 
         /// <summary>
         ///  returns the magnitude
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_magnitude", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec2_magnitude(PxVec2* self_);
+        internal static extern float PxVec2_magnitude(PxVec2* self_);
 
         /// <summary>
         ///  returns the scalar product of this and other.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_dot", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec2_dot(PxVec2* self_, PxVec2* v);
+        internal static extern float PxVec2_dot(PxVec2* self_, PxVec2* v);
 
         /// <summary>
         ///  returns a unit vector
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_getNormalized", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec2 PxVec2_getNormalized(PxVec2* self_);
+        internal static extern PxVec2 PxVec2_getNormalized(PxVec2* self_);
 
         /// <summary>
         ///  normalizes the vector in place
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_normalize_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec2_normalize_mut(PxVec2* self_);
+        internal static extern float PxVec2_normalize_mut(PxVec2* self_);
 
         /// <summary>
         ///  a[i] * b[i], for all i.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_multiply", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec2 PxVec2_multiply(PxVec2* self_, PxVec2* a);
+        internal static extern PxVec2 PxVec2_multiply(PxVec2* self_, PxVec2* a);
 
         /// <summary>
         ///  element-wise minimum
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_minimum", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec2 PxVec2_minimum(PxVec2* self_, PxVec2* v);
+        internal static extern PxVec2 PxVec2_minimum(PxVec2* self_, PxVec2* v);
 
         /// <summary>
         ///  returns MIN(x, y);
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_minElement", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec2_minElement(PxVec2* self_);
+        internal static extern float PxVec2_minElement(PxVec2* self_);
 
         /// <summary>
         ///  element-wise maximum
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_maximum", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec2 PxVec2_maximum(PxVec2* self_, PxVec2* v);
+        internal static extern PxVec2 PxVec2_maximum(PxVec2* self_, PxVec2* v);
 
         /// <summary>
         ///  returns MAX(x, y);
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxVec2_maxElement", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxVec2_maxElement(PxVec2* self_);
+        internal static extern float PxVec2_maxElement(PxVec2* self_);
 
         [DllImport(__DllName, EntryPoint = "PxStridedData_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxStridedData PxStridedData_new();
+        internal static extern PxStridedData PxStridedData_new();
 
         [DllImport(__DllName, EntryPoint = "PxBoundedData_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBoundedData PxBoundedData_new();
+        internal static extern PxBoundedData PxBoundedData_new();
 
         [DllImport(__DllName, EntryPoint = "PxDebugPoint_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDebugPoint PxDebugPoint_new(PxVec3* p, uint* c);
+        internal static extern PxDebugPoint PxDebugPoint_new(PxVec3* p, uint* c);
 
         [DllImport(__DllName, EntryPoint = "PxDebugLine_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDebugLine PxDebugLine_new(PxVec3* p0, PxVec3* p1, uint* c);
+        internal static extern PxDebugLine PxDebugLine_new(PxVec3* p0, PxVec3* p1, uint* c);
 
         [DllImport(__DllName, EntryPoint = "PxDebugTriangle_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDebugTriangle PxDebugTriangle_new(PxVec3* p0, PxVec3* p1, PxVec3* p2, uint* c);
+        internal static extern PxDebugTriangle PxDebugTriangle_new(PxVec3* p0, PxVec3* p1, PxVec3* p2, uint* c);
 
         [DllImport(__DllName, EntryPoint = "PxDebugText_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDebugText PxDebugText_new();
+        internal static extern PxDebugText PxDebugText_new();
 
         [DllImport(__DllName, EntryPoint = "PxDebugText_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDebugText PxDebugText_new_1(PxVec3* pos, float* sz, uint* clr, byte* str);
+        internal static extern PxDebugText PxDebugText_new_1(PxVec3* pos, float* sz, uint* clr, byte* str);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRenderBuffer_delete(PxRenderBuffer* self_);
+        internal static extern void PxRenderBuffer_delete(PxRenderBuffer* self_);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_getNbPoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxRenderBuffer_getNbPoints(PxRenderBuffer* self_);
+        internal static extern uint PxRenderBuffer_getNbPoints(PxRenderBuffer* self_);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_getPoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDebugPoint* PxRenderBuffer_getPoints(PxRenderBuffer* self_);
+        internal static extern PxDebugPoint* PxRenderBuffer_getPoints(PxRenderBuffer* self_);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_addPoint_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRenderBuffer_addPoint_mut(PxRenderBuffer* self_, PxDebugPoint* point);
+        internal static extern void PxRenderBuffer_addPoint_mut(PxRenderBuffer* self_, PxDebugPoint* point);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_getNbLines", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxRenderBuffer_getNbLines(PxRenderBuffer* self_);
+        internal static extern uint PxRenderBuffer_getNbLines(PxRenderBuffer* self_);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_getLines", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDebugLine* PxRenderBuffer_getLines(PxRenderBuffer* self_);
+        internal static extern PxDebugLine* PxRenderBuffer_getLines(PxRenderBuffer* self_);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_addLine_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRenderBuffer_addLine_mut(PxRenderBuffer* self_, PxDebugLine* line);
+        internal static extern void PxRenderBuffer_addLine_mut(PxRenderBuffer* self_, PxDebugLine* line);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_reserveLines_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDebugLine* PxRenderBuffer_reserveLines_mut(PxRenderBuffer* self_, uint nbLines);
+        internal static extern PxDebugLine* PxRenderBuffer_reserveLines_mut(PxRenderBuffer* self_, uint nbLines);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_reservePoints_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDebugPoint* PxRenderBuffer_reservePoints_mut(PxRenderBuffer* self_, uint nbLines);
+        internal static extern PxDebugPoint* PxRenderBuffer_reservePoints_mut(PxRenderBuffer* self_, uint nbLines);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_getNbTriangles", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxRenderBuffer_getNbTriangles(PxRenderBuffer* self_);
+        internal static extern uint PxRenderBuffer_getNbTriangles(PxRenderBuffer* self_);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_getTriangles", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDebugTriangle* PxRenderBuffer_getTriangles(PxRenderBuffer* self_);
+        internal static extern PxDebugTriangle* PxRenderBuffer_getTriangles(PxRenderBuffer* self_);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_addTriangle_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRenderBuffer_addTriangle_mut(PxRenderBuffer* self_, PxDebugTriangle* triangle);
+        internal static extern void PxRenderBuffer_addTriangle_mut(PxRenderBuffer* self_, PxDebugTriangle* triangle);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_append_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRenderBuffer_append_mut(PxRenderBuffer* self_, PxRenderBuffer* other);
+        internal static extern void PxRenderBuffer_append_mut(PxRenderBuffer* self_, PxRenderBuffer* other);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_clear_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRenderBuffer_clear_mut(PxRenderBuffer* self_);
+        internal static extern void PxRenderBuffer_clear_mut(PxRenderBuffer* self_);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_shift_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRenderBuffer_shift_mut(PxRenderBuffer* self_, PxVec3* delta);
+        internal static extern void PxRenderBuffer_shift_mut(PxRenderBuffer* self_, PxVec3* delta);
 
         [DllImport(__DllName, EntryPoint = "PxRenderBuffer_empty", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxRenderBuffer_empty(PxRenderBuffer* self_);
+        internal static extern bool PxRenderBuffer_empty(PxRenderBuffer* self_);
 
         [DllImport(__DllName, EntryPoint = "PxProcessPxBaseCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxProcessPxBaseCallback_delete(PxProcessPxBaseCallback* self_);
+        internal static extern void PxProcessPxBaseCallback_delete(PxProcessPxBaseCallback* self_);
 
         [DllImport(__DllName, EntryPoint = "PxProcessPxBaseCallback_process_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxProcessPxBaseCallback_process_mut(PxProcessPxBaseCallback* self_, PxBase* anon_param0);
+        internal static extern void PxProcessPxBaseCallback_process_mut(PxProcessPxBaseCallback* self_, PxBase* anon_param0);
 
         /// <summary>
         ///  Registers a reference value corresponding to a PxBase object.
@@ -1995,13 +1995,13 @@ namespace Physx
         ///  for pointer types the kind value needs to be marked with the PX_SERIAL_REF_KIND_PTR_TYPE_BIT.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializationContext_registerReference_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerializationContext_registerReference_mut(PxSerializationContext* self_, PxBase* @base, uint kind, nuint reference);
+        internal static extern void PxSerializationContext_registerReference_mut(PxSerializationContext* self_, PxBase* @base, uint kind, nuint reference);
 
         /// <summary>
         ///  Returns the collection that is being serialized.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializationContext_getCollection", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCollection* PxSerializationContext_getCollection(PxSerializationContext* self_);
+        internal static extern PxCollection* PxSerializationContext_getCollection(PxSerializationContext* self_);
 
         /// <summary>
         ///  Serializes object data and object extra data.
@@ -2009,7 +2009,7 @@ namespace Physx
         ///  This function is assumed to be called within the implementation of PxSerializer::exportData and PxSerializer::exportExtraData.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializationContext_writeData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerializationContext_writeData_mut(PxSerializationContext* self_, void* data, uint size);
+        internal static extern void PxSerializationContext_writeData_mut(PxSerializationContext* self_, void* data, uint size);
 
         /// <summary>
         ///  Aligns the serialized data.
@@ -2017,7 +2017,7 @@ namespace Physx
         ///  This function is assumed to be called within the implementation of PxSerializer::exportData and PxSerializer::exportExtraData.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializationContext_alignData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerializationContext_alignData_mut(PxSerializationContext* self_, uint alignment);
+        internal static extern void PxSerializationContext_alignData_mut(PxSerializationContext* self_, uint alignment);
 
         /// <summary>
         ///  Helper function to write a name to the extraData if serialization is configured to save names.
@@ -2025,7 +2025,7 @@ namespace Physx
         ///  This function is assumed to be called within the implementation of PxSerializer::exportExtraData.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializationContext_writeName_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerializationContext_writeName_mut(PxSerializationContext* self_, byte* name);
+        internal static extern void PxSerializationContext_writeName_mut(PxSerializationContext* self_, byte* name);
 
         /// <summary>
         ///  Retrieves a pointer to a deserialized PxBase object given a corresponding deserialized reference value
@@ -2042,7 +2042,7 @@ namespace Physx
         ///  PxBase object associated with the reference value
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDeserializationContext_resolveReference", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBase* PxDeserializationContext_resolveReference(PxDeserializationContext* self_, uint kind, nuint reference);
+        internal static extern PxBase* PxDeserializationContext_resolveReference(PxDeserializationContext* self_, uint kind, nuint reference);
 
         /// <summary>
         ///  Helper function to read a name from the extra data during deserialization.
@@ -2050,7 +2050,7 @@ namespace Physx
         ///  This function is assumed to be called within the implementation of PxSerializer::createObject.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDeserializationContext_readName_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDeserializationContext_readName_mut(PxDeserializationContext* self_, byte** name);
+        internal static extern void PxDeserializationContext_readName_mut(PxDeserializationContext* self_, byte** name);
 
         /// <summary>
         ///  Function to align the extra data stream to a power of 2 alignment
@@ -2058,13 +2058,13 @@ namespace Physx
         ///  This function is assumed to be called within the implementation of PxSerializer::createObject.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDeserializationContext_alignExtraData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDeserializationContext_alignExtraData_mut(PxDeserializationContext* self_, uint alignment);
+        internal static extern void PxDeserializationContext_alignExtraData_mut(PxDeserializationContext* self_, uint alignment);
 
         /// <summary>
         ///  Register a serializer for a concrete type
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializationRegistry_registerSerializer_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerializationRegistry_registerSerializer_mut(PxSerializationRegistry* self_, ushort type_, PxSerializer* serializer);
+        internal static extern void PxSerializationRegistry_registerSerializer_mut(PxSerializationRegistry* self_, ushort type_, PxSerializer* serializer);
 
         /// <summary>
         ///  Unregister a serializer for a concrete type, and retrieves the corresponding serializer object.
@@ -2072,7 +2072,7 @@ namespace Physx
         ///  Unregistered serializer corresponding to type, NULL for types for which no serializer has been registered.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializationRegistry_unregisterSerializer_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSerializer* PxSerializationRegistry_unregisterSerializer_mut(PxSerializationRegistry* self_, ushort type_);
+        internal static extern PxSerializer* PxSerializationRegistry_unregisterSerializer_mut(PxSerializationRegistry* self_, ushort type_);
 
         /// <summary>
         ///  Returns PxSerializer corresponding to type
@@ -2080,13 +2080,13 @@ namespace Physx
         ///  Registered PxSerializer object corresponding to type
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializationRegistry_getSerializer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSerializer* PxSerializationRegistry_getSerializer(PxSerializationRegistry* self_, ushort type_);
+        internal static extern PxSerializer* PxSerializationRegistry_getSerializer(PxSerializationRegistry* self_, ushort type_);
 
         /// <summary>
         ///  Register a RepX serializer for a concrete type
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializationRegistry_registerRepXSerializer_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerializationRegistry_registerRepXSerializer_mut(PxSerializationRegistry* self_, ushort type_, PxRepXSerializer* serializer);
+        internal static extern void PxSerializationRegistry_registerRepXSerializer_mut(PxSerializationRegistry* self_, ushort type_, PxRepXSerializer* serializer);
 
         /// <summary>
         ///  Unregister a RepX serializer for a concrete type, and retrieves the corresponding serializer object.
@@ -2094,7 +2094,7 @@ namespace Physx
         ///  Unregistered PxRepxSerializer corresponding to type, NULL for types for which no RepX serializer has been registered.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializationRegistry_unregisterRepXSerializer_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRepXSerializer* PxSerializationRegistry_unregisterRepXSerializer_mut(PxSerializationRegistry* self_, ushort type_);
+        internal static extern PxRepXSerializer* PxSerializationRegistry_unregisterRepXSerializer_mut(PxSerializationRegistry* self_, ushort type_);
 
         /// <summary>
         ///  Returns RepX serializer given the corresponding type name
@@ -2102,7 +2102,7 @@ namespace Physx
         ///  Registered PxRepXSerializer object corresponding to type name
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializationRegistry_getRepXSerializer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRepXSerializer* PxSerializationRegistry_getRepXSerializer(PxSerializationRegistry* self_, byte* typeName);
+        internal static extern PxRepXSerializer* PxSerializationRegistry_getRepXSerializer(PxSerializationRegistry* self_, byte* typeName);
 
         /// <summary>
         ///  Releases PxSerializationRegistry instance.
@@ -2111,7 +2111,7 @@ namespace Physx
         ///  serializers before releasing the PxSerializationRegistry.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializationRegistry_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerializationRegistry_release_mut(PxSerializationRegistry* self_);
+        internal static extern void PxSerializationRegistry_release_mut(PxSerializationRegistry* self_);
 
         /// <summary>
         ///  Adds a PxBase object to the collection.
@@ -2123,7 +2123,7 @@ namespace Physx
         ///  operation fails.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_add_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCollection_add_mut(PxCollection* self_, PxBase* @object, ulong id);
+        internal static extern void PxCollection_add_mut(PxCollection* self_, PxBase* @object, ulong id);
 
         /// <summary>
         ///  Removes a PxBase member object from the collection.
@@ -2131,7 +2131,7 @@ namespace Physx
         ///  Object needs to be contained by the collection.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_remove_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCollection_remove_mut(PxCollection* self_, PxBase* @object);
+        internal static extern void PxCollection_remove_mut(PxCollection* self_, PxBase* @object);
 
         /// <summary>
         ///  Returns whether the collection contains a certain PxBase object.
@@ -2140,7 +2140,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_contains", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxCollection_contains(PxCollection* self_, PxBase* @object);
+        internal static extern bool PxCollection_contains(PxCollection* self_, PxBase* @object);
 
         /// <summary>
         ///  Adds an id to a member PxBase object.
@@ -2150,7 +2150,7 @@ namespace Physx
         ///  within the collection.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_addId_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCollection_addId_mut(PxCollection* self_, PxBase* @object, ulong id);
+        internal static extern void PxCollection_addId_mut(PxCollection* self_, PxBase* @object, ulong id);
 
         /// <summary>
         ///  Removes id from a contained PxBase object.
@@ -2158,7 +2158,7 @@ namespace Physx
         ///  May only be called for ids that are associated with an object in the collection.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_removeId_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCollection_removeId_mut(PxCollection* self_, ulong id);
+        internal static extern void PxCollection_removeId_mut(PxCollection* self_, ulong id);
 
         /// <summary>
         ///  Adds all PxBase objects and their ids of collection to this collection.
@@ -2167,7 +2167,7 @@ namespace Physx
         ///  free, i.e. the same object may not have two different ids within the two collections.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_add_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCollection_add_mut_1(PxCollection* self_, PxCollection* collection);
+        internal static extern void PxCollection_add_mut_1(PxCollection* self_, PxCollection* collection);
 
         /// <summary>
         ///  Removes all PxBase objects of collection from this collection.
@@ -2176,7 +2176,7 @@ namespace Physx
         ///  which are removed are also removed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_remove_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCollection_remove_mut_1(PxCollection* self_, PxCollection* collection);
+        internal static extern void PxCollection_remove_mut_1(PxCollection* self_, PxCollection* collection);
 
         /// <summary>
         ///  Gets number of PxBase objects in this collection.
@@ -2184,7 +2184,7 @@ namespace Physx
         ///  Number of objects in this collection
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_getNbObjects", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxCollection_getNbObjects(PxCollection* self_);
+        internal static extern uint PxCollection_getNbObjects(PxCollection* self_);
 
         /// <summary>
         ///  Gets the PxBase object of this collection given its index.
@@ -2192,7 +2192,7 @@ namespace Physx
         ///  PxBase object at index index
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_getObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBase* PxCollection_getObject(PxCollection* self_, uint index);
+        internal static extern PxBase* PxCollection_getObject(PxCollection* self_, uint index);
 
         /// <summary>
         ///  Copies member PxBase pointers to a user specified buffer.
@@ -2200,7 +2200,7 @@ namespace Physx
         ///  number of members PxBase objects that have been written to the userBuffer
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_getObjects", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxCollection_getObjects(PxCollection* self_, PxBase** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxCollection_getObjects(PxCollection* self_, PxBase** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Looks for a PxBase object given a PxSerialObjectId value.
@@ -2210,7 +2210,7 @@ namespace Physx
         ///  PxBase object with the given id value or NULL
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_find", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBase* PxCollection_find(PxCollection* self_, ulong id);
+        internal static extern PxBase* PxCollection_find(PxCollection* self_, ulong id);
 
         /// <summary>
         ///  Gets number of PxSerialObjectId names in this collection.
@@ -2218,7 +2218,7 @@ namespace Physx
         ///  Number of PxSerialObjectId names in this collection
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_getNbIds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxCollection_getNbIds(PxCollection* self_);
+        internal static extern uint PxCollection_getNbIds(PxCollection* self_);
 
         /// <summary>
         ///  Copies member PxSerialObjectId values to a user specified buffer.
@@ -2226,7 +2226,7 @@ namespace Physx
         ///  number of members PxSerialObjectId values that have been written to the userBuffer
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_getIds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxCollection_getIds(PxCollection* self_, ulong* userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxCollection_getIds(PxCollection* self_, ulong* userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Gets the PxSerialObjectId name of a PxBase object within the collection.
@@ -2236,7 +2236,7 @@ namespace Physx
         ///  PxSerialObjectId name of the object or PX_SERIAL_OBJECT_ID_INVALID if the object is unnamed
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_getId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ulong PxCollection_getId(PxCollection* self_, PxBase* @object);
+        internal static extern ulong PxCollection_getId(PxCollection* self_, PxBase* @object);
 
         /// <summary>
         ///  Deletes a collection object.
@@ -2245,7 +2245,7 @@ namespace Physx
         ///  that are part of the collection.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCollection_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCollection_release_mut(PxCollection* self_);
+        internal static extern void PxCollection_release_mut(PxCollection* self_);
 
         /// <summary>
         ///  Creates a collection object.
@@ -2257,13 +2257,13 @@ namespace Physx
         ///  The new collection object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateCollection", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCollection* phys_PxCreateCollection();
+        internal static extern PxCollection* phys_PxCreateCollection();
 
         /// <summary>
         ///  Releases the PxBase instance, please check documentation of release in derived class.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBase_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBase_release_mut(PxBase* self_);
+        internal static extern void PxBase_release_mut(PxBase* self_);
 
         /// <summary>
         ///  Returns string name of dynamic type.
@@ -2271,7 +2271,7 @@ namespace Physx
         ///  Class name of most derived type of this object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBase_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxBase_getConcreteTypeName(PxBase* self_);
+        internal static extern byte* PxBase_getConcreteTypeName(PxBase* self_);
 
         /// <summary>
         ///  Returns concrete type of object.
@@ -2279,19 +2279,19 @@ namespace Physx
         ///  PxConcreteType::Enum of serialized object
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBase_getConcreteType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort PxBase_getConcreteType(PxBase* self_);
+        internal static extern ushort PxBase_getConcreteType(PxBase* self_);
 
         /// <summary>
         ///  Set PxBaseFlag
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBase_setBaseFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBase_setBaseFlag_mut(PxBase* self_, PxBaseFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxBase_setBaseFlag_mut(PxBase* self_, PxBaseFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         /// <summary>
         ///  Set PxBaseFlags
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBase_setBaseFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBase_setBaseFlags_mut(PxBase* self_, PxBaseFlags inFlags);
+        internal static extern void PxBase_setBaseFlags_mut(PxBase* self_, PxBaseFlags inFlags);
 
         /// <summary>
         ///  Returns PxBaseFlags
@@ -2299,7 +2299,7 @@ namespace Physx
         ///  PxBaseFlags
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBase_getBaseFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBaseFlags PxBase_getBaseFlags(PxBase* self_);
+        internal static extern PxBaseFlags PxBase_getBaseFlags(PxBase* self_);
 
         /// <summary>
         ///  Whether the object is subordinate.
@@ -2310,13 +2310,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBase_isReleasable", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBase_isReleasable(PxBase* self_);
+        internal static extern bool PxBase_isReleasable(PxBase* self_);
 
         /// <summary>
         ///  Decrements the reference count of the object and releases it if the new reference count is zero.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRefCounted_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRefCounted_release_mut(PxRefCounted* self_);
+        internal static extern void PxRefCounted_release_mut(PxRefCounted* self_);
 
         /// <summary>
         ///  Returns the reference count of the object.
@@ -2327,7 +2327,7 @@ namespace Physx
         ///  the current reference count.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRefCounted_getReferenceCount", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxRefCounted_getReferenceCount(PxRefCounted* self_);
+        internal static extern uint PxRefCounted_getReferenceCount(PxRefCounted* self_);
 
         /// <summary>
         ///  Acquires a counted reference to this object.
@@ -2335,13 +2335,13 @@ namespace Physx
         ///  This method increases the reference count of the object by 1. Decrement the reference count by calling release()
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRefCounted_acquireReference_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRefCounted_acquireReference_mut(PxRefCounted* self_);
+        internal static extern void PxRefCounted_acquireReference_mut(PxRefCounted* self_);
 
         /// <summary>
         ///  constructor sets to default
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTolerancesScale_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTolerancesScale PxTolerancesScale_new(float defaultLength, float defaultSpeed);
+        internal static extern PxTolerancesScale PxTolerancesScale_new(float defaultLength, float defaultSpeed);
 
         /// <summary>
         ///  Returns true if the descriptor is valid.
@@ -2350,7 +2350,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTolerancesScale_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxTolerancesScale_isValid(PxTolerancesScale* self_);
+        internal static extern bool PxTolerancesScale_isValid(PxTolerancesScale* self_);
 
         /// <summary>
         ///  Allocate a new string.
@@ -2358,13 +2358,13 @@ namespace Physx
         ///  *Always* a valid null terminated string.  "" is returned if "" or null is passed in.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxStringTable_allocateStr_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxStringTable_allocateStr_mut(PxStringTable* self_, byte* inSrc);
+        internal static extern byte* PxStringTable_allocateStr_mut(PxStringTable* self_, byte* inSrc);
 
         /// <summary>
         ///  Release the string table and all the strings associated with it.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxStringTable_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxStringTable_release_mut(PxStringTable* self_);
+        internal static extern void PxStringTable_release_mut(PxStringTable* self_);
 
         /// <summary>
         ///  Returns string name of dynamic type.
@@ -2372,7 +2372,7 @@ namespace Physx
         ///  Class name of most derived type of this object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializer_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxSerializer_getConcreteTypeName(PxSerializer* self_);
+        internal static extern byte* PxSerializer_getConcreteTypeName(PxSerializer* self_);
 
         /// <summary>
         ///  Adds required objects to the collection.
@@ -2380,7 +2380,7 @@ namespace Physx
         ///  This method does not add the required objects recursively, e.g. objects required by required objects.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializer_requiresObjects", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerializer_requiresObjects(PxSerializer* self_, PxBase* anon_param0, PxProcessPxBaseCallback* anon_param1);
+        internal static extern void PxSerializer_requiresObjects(PxSerializer* self_, PxBase* anon_param0, PxProcessPxBaseCallback* anon_param1);
 
         /// <summary>
         ///  Whether the object is subordinate.
@@ -2391,25 +2391,25 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializer_isSubordinate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSerializer_isSubordinate(PxSerializer* self_);
+        internal static extern bool PxSerializer_isSubordinate(PxSerializer* self_);
 
         /// <summary>
         ///  Exports object's extra data to stream.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializer_exportExtraData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerializer_exportExtraData(PxSerializer* self_, PxBase* anon_param0, PxSerializationContext* anon_param1);
+        internal static extern void PxSerializer_exportExtraData(PxSerializer* self_, PxBase* anon_param0, PxSerializationContext* anon_param1);
 
         /// <summary>
         ///  Exports object's data to stream.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializer_exportData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerializer_exportData(PxSerializer* self_, PxBase* anon_param0, PxSerializationContext* anon_param1);
+        internal static extern void PxSerializer_exportData(PxSerializer* self_, PxBase* anon_param0, PxSerializationContext* anon_param1);
 
         /// <summary>
         ///  Register references that the object maintains to other objects.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializer_registerReferences", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerializer_registerReferences(PxSerializer* self_, PxBase* obj, PxSerializationContext* s);
+        internal static extern void PxSerializer_registerReferences(PxSerializer* self_, PxBase* obj, PxSerializationContext* s);
 
         /// <summary>
         ///  Returns size needed to create the class instance.
@@ -2417,7 +2417,7 @@ namespace Physx
         ///  sizeof class instance.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializer_getClassSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern nuint PxSerializer_getClassSize(PxSerializer* self_);
+        internal static extern nuint PxSerializer_getClassSize(PxSerializer* self_);
 
         /// <summary>
         ///  Create object at a given address, resolve references and import extra data.
@@ -2425,13 +2425,13 @@ namespace Physx
         ///  Created PxBase pointer (needs to be identical to address before increment).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializer_createObject", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBase* PxSerializer_createObject(PxSerializer* self_, byte** address, PxDeserializationContext* context);
+        internal static extern PxBase* PxSerializer_createObject(PxSerializer* self_, byte** address, PxDeserializationContext* context);
 
         /// <summary>
         ///  *******************************************************************************************************************
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerializer_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerializer_delete(PxSerializer* self_);
+        internal static extern void PxSerializer_delete(PxSerializer* self_);
 
         /// <summary>
         ///  Builds object (TriangleMesh, Heightfield, ConvexMesh or BVH) from given data in PxPhysics.
@@ -2439,13 +2439,13 @@ namespace Physx
         ///  PxBase Created object in PxPhysics.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxInsertionCallback_buildObjectFromData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBase* PxInsertionCallback_buildObjectFromData_mut(PxInsertionCallback* self_, PxConcreteType type_, void* data);
+        internal static extern PxBase* PxInsertionCallback_buildObjectFromData_mut(PxInsertionCallback* self_, PxConcreteType type_, void* data);
 
         /// <summary>
         ///  Set the user-provided dispatcher object for CPU tasks
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTaskManager_setCpuDispatcher_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTaskManager_setCpuDispatcher_mut(PxTaskManager* self_, PxCpuDispatcher* ref_);
+        internal static extern void PxTaskManager_setCpuDispatcher_mut(PxTaskManager* self_, PxCpuDispatcher* ref_);
 
         /// <summary>
         ///  Get the user-provided dispatcher object for CPU tasks
@@ -2453,7 +2453,7 @@ namespace Physx
         ///  The CPU dispatcher object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTaskManager_getCpuDispatcher", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCpuDispatcher* PxTaskManager_getCpuDispatcher(PxTaskManager* self_);
+        internal static extern PxCpuDispatcher* PxTaskManager_getCpuDispatcher(PxTaskManager* self_);
 
         /// <summary>
         ///  Reset any dependencies between Tasks
@@ -2461,7 +2461,7 @@ namespace Physx
         ///  Will be called at the start of every frame before tasks are submitted.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTaskManager_resetDependencies_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTaskManager_resetDependencies_mut(PxTaskManager* self_);
+        internal static extern void PxTaskManager_resetDependencies_mut(PxTaskManager* self_);
 
         /// <summary>
         ///  Called by the owning scene to start the task graph.
@@ -2469,19 +2469,19 @@ namespace Physx
         ///  All tasks with ref count of 1 will be dispatched.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTaskManager_startSimulation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTaskManager_startSimulation_mut(PxTaskManager* self_);
+        internal static extern void PxTaskManager_startSimulation_mut(PxTaskManager* self_);
 
         /// <summary>
         ///  Called by the owning scene at the end of a simulation step.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTaskManager_stopSimulation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTaskManager_stopSimulation_mut(PxTaskManager* self_);
+        internal static extern void PxTaskManager_stopSimulation_mut(PxTaskManager* self_);
 
         /// <summary>
         ///  Called by the worker threads to inform the PxTaskManager that a task has completed processing.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTaskManager_taskCompleted_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTaskManager_taskCompleted_mut(PxTaskManager* self_, PxTask* task);
+        internal static extern void PxTaskManager_taskCompleted_mut(PxTaskManager* self_, PxTask* task);
 
         /// <summary>
         ///  Retrieve a task by name
@@ -2489,7 +2489,7 @@ namespace Physx
         ///  The ID of the task with that name, or eNOT_PRESENT if not found
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTaskManager_getNamedTask_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxTaskManager_getNamedTask_mut(PxTaskManager* self_, byte* name);
+        internal static extern uint PxTaskManager_getNamedTask_mut(PxTaskManager* self_, byte* name);
 
         /// <summary>
         ///  Submit a task with a unique name.
@@ -2497,7 +2497,7 @@ namespace Physx
         ///  The ID of the task with that name, or eNOT_PRESENT if not found
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTaskManager_submitNamedTask_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxTaskManager_submitNamedTask_mut(PxTaskManager* self_, PxTask* task, byte* name, PxTaskType type_);
+        internal static extern uint PxTaskManager_submitNamedTask_mut(PxTaskManager* self_, PxTask* task, byte* name, PxTaskType type_);
 
         /// <summary>
         ///  Submit an unnamed task.
@@ -2505,7 +2505,7 @@ namespace Physx
         ///  The ID of the task with that name, or eNOT_PRESENT if not found
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTaskManager_submitUnnamedTask_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxTaskManager_submitUnnamedTask_mut(PxTaskManager* self_, PxTask* task, PxTaskType type_);
+        internal static extern uint PxTaskManager_submitUnnamedTask_mut(PxTaskManager* self_, PxTask* task, PxTaskType type_);
 
         /// <summary>
         ///  Retrieve a task given a task ID
@@ -2513,19 +2513,19 @@ namespace Physx
         ///  The task associated with the ID
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTaskManager_getTaskFromID_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTask* PxTaskManager_getTaskFromID_mut(PxTaskManager* self_, uint id);
+        internal static extern PxTask* PxTaskManager_getTaskFromID_mut(PxTaskManager* self_, uint id);
 
         /// <summary>
         ///  Release the PxTaskManager object, referenced dispatchers will not be released
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTaskManager_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTaskManager_release_mut(PxTaskManager* self_);
+        internal static extern void PxTaskManager_release_mut(PxTaskManager* self_);
 
         /// <summary>
         ///  Construct a new PxTaskManager instance with the given [optional] dispatchers
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTaskManager_createTaskManager", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTaskManager* PxTaskManager_createTaskManager(PxErrorCallback* errorCallback, PxCpuDispatcher* anon_param1);
+        internal static extern PxTaskManager* PxTaskManager_createTaskManager(PxErrorCallback* errorCallback, PxCpuDispatcher* anon_param1);
 
         /// <summary>
         ///  Called by the TaskManager when a task is to be queued for execution.
@@ -2535,7 +2535,7 @@ namespace Physx
         ///  discard its pointer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCpuDispatcher_submitTask_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCpuDispatcher_submitTask_mut(PxCpuDispatcher* self_, PxBaseTask* task);
+        internal static extern void PxCpuDispatcher_submitTask_mut(PxCpuDispatcher* self_, PxBaseTask* task);
 
         /// <summary>
         ///  Returns the number of available worker threads for this dispatcher.
@@ -2545,10 +2545,10 @@ namespace Physx
         ///  overhead can be reduced.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCpuDispatcher_getWorkerCount", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxCpuDispatcher_getWorkerCount(PxCpuDispatcher* self_);
+        internal static extern uint PxCpuDispatcher_getWorkerCount(PxCpuDispatcher* self_);
 
         [DllImport(__DllName, EntryPoint = "PxCpuDispatcher_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCpuDispatcher_delete(PxCpuDispatcher* self_);
+        internal static extern void PxCpuDispatcher_delete(PxCpuDispatcher* self_);
 
         /// <summary>
         ///  The user-implemented run method where the task's work should be performed
@@ -2557,7 +2557,7 @@ namespace Physx
         ///  must never block.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBaseTask_run_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBaseTask_run_mut(PxBaseTask* self_);
+        internal static extern void PxBaseTask_run_mut(PxBaseTask* self_);
 
         /// <summary>
         ///  Return a user-provided task name for profiling purposes.
@@ -2567,25 +2567,25 @@ namespace Physx
         ///  The name of this task
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBaseTask_getName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxBaseTask_getName(PxBaseTask* self_);
+        internal static extern byte* PxBaseTask_getName(PxBaseTask* self_);
 
         /// <summary>
         ///  Implemented by derived implementation classes
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBaseTask_addReference_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBaseTask_addReference_mut(PxBaseTask* self_);
+        internal static extern void PxBaseTask_addReference_mut(PxBaseTask* self_);
 
         /// <summary>
         ///  Implemented by derived implementation classes
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBaseTask_removeReference_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBaseTask_removeReference_mut(PxBaseTask* self_);
+        internal static extern void PxBaseTask_removeReference_mut(PxBaseTask* self_);
 
         /// <summary>
         ///  Implemented by derived implementation classes
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBaseTask_getReference", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int PxBaseTask_getReference(PxBaseTask* self_);
+        internal static extern int PxBaseTask_getReference(PxBaseTask* self_);
 
         /// <summary>
         ///  Implemented by derived implementation classes
@@ -2595,7 +2595,7 @@ namespace Physx
         ///  provided no additional user references to the task exist
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBaseTask_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBaseTask_release_mut(PxBaseTask* self_);
+        internal static extern void PxBaseTask_release_mut(PxBaseTask* self_);
 
         /// <summary>
         ///  Return PxTaskManager to which this task was submitted
@@ -2604,57 +2604,57 @@ namespace Physx
         ///  completed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBaseTask_getTaskManager", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTaskManager* PxBaseTask_getTaskManager(PxBaseTask* self_);
+        internal static extern PxTaskManager* PxBaseTask_getTaskManager(PxBaseTask* self_);
 
         [DllImport(__DllName, EntryPoint = "PxBaseTask_setContextId_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBaseTask_setContextId_mut(PxBaseTask* self_, ulong id);
+        internal static extern void PxBaseTask_setContextId_mut(PxBaseTask* self_, ulong id);
 
         [DllImport(__DllName, EntryPoint = "PxBaseTask_getContextId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ulong PxBaseTask_getContextId(PxBaseTask* self_);
+        internal static extern ulong PxBaseTask_getContextId(PxBaseTask* self_);
 
         /// <summary>
         ///  Release method implementation
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTask_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTask_release_mut(PxTask* self_);
+        internal static extern void PxTask_release_mut(PxTask* self_);
 
         /// <summary>
         ///  Inform the PxTaskManager this task must finish before the given
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTask_finishBefore_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTask_finishBefore_mut(PxTask* self_, uint taskID);
+        internal static extern void PxTask_finishBefore_mut(PxTask* self_, uint taskID);
 
         /// <summary>
         ///  Inform the PxTaskManager this task cannot start until the given
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTask_startAfter_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTask_startAfter_mut(PxTask* self_, uint taskID);
+        internal static extern void PxTask_startAfter_mut(PxTask* self_, uint taskID);
 
         /// <summary>
         ///  Manually increment this task's reference count. The task will
         ///  not be allowed to run until removeReference() is called.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTask_addReference_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTask_addReference_mut(PxTask* self_);
+        internal static extern void PxTask_addReference_mut(PxTask* self_);
 
         /// <summary>
         ///  Manually decrement this task's reference count. If the reference
         ///  count reaches zero, the task will be dispatched.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTask_removeReference_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTask_removeReference_mut(PxTask* self_);
+        internal static extern void PxTask_removeReference_mut(PxTask* self_);
 
         /// <summary>
         ///  Return the ref-count for this task
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTask_getReference", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int PxTask_getReference(PxTask* self_);
+        internal static extern int PxTask_getReference(PxTask* self_);
 
         /// <summary>
         ///  Return the unique ID for this task
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTask_getTaskID", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxTask_getTaskID(PxTask* self_);
+        internal static extern uint PxTask_getTaskID(PxTask* self_);
 
         /// <summary>
         ///  Called by PxTaskManager at submission time for initialization
@@ -2662,7 +2662,7 @@ namespace Physx
         ///  Perform simulation step initialization here.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTask_submitted_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTask_submitted_mut(PxTask* self_);
+        internal static extern void PxTask_submitted_mut(PxTask* self_);
 
         /// <summary>
         ///  Initialize this task and specify the task that will have its ref count decremented on completion.
@@ -2671,7 +2671,7 @@ namespace Physx
         ///  Note that we only use the PxTaskManager to query the appropriate dispatcher.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxLightCpuTask_setContinuation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxLightCpuTask_setContinuation_mut(PxLightCpuTask* self_, PxTaskManager* tm, PxBaseTask* c);
+        internal static extern void PxLightCpuTask_setContinuation_mut(PxLightCpuTask* self_, PxTaskManager* tm, PxBaseTask* c);
 
         /// <summary>
         ///  Initialize this task and specify the task that will have its ref count decremented on completion.
@@ -2680,33 +2680,33 @@ namespace Physx
         ///  task, which cannot be NULL.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxLightCpuTask_setContinuation_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxLightCpuTask_setContinuation_mut_1(PxLightCpuTask* self_, PxBaseTask* c);
+        internal static extern void PxLightCpuTask_setContinuation_mut_1(PxLightCpuTask* self_, PxBaseTask* c);
 
         /// <summary>
         ///  Retrieves continuation task
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxLightCpuTask_getContinuation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBaseTask* PxLightCpuTask_getContinuation(PxLightCpuTask* self_);
+        internal static extern PxBaseTask* PxLightCpuTask_getContinuation(PxLightCpuTask* self_);
 
         /// <summary>
         ///  Manually decrement this task's reference count. If the reference
         ///  count reaches zero, the task will be dispatched.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxLightCpuTask_removeReference_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxLightCpuTask_removeReference_mut(PxLightCpuTask* self_);
+        internal static extern void PxLightCpuTask_removeReference_mut(PxLightCpuTask* self_);
 
         /// <summary>
         ///  Return the ref-count for this task
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxLightCpuTask_getReference", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int PxLightCpuTask_getReference(PxLightCpuTask* self_);
+        internal static extern int PxLightCpuTask_getReference(PxLightCpuTask* self_);
 
         /// <summary>
         ///  Manually increment this task's reference count. The task will
         ///  not be allowed to run until removeReference() is called.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxLightCpuTask_addReference_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxLightCpuTask_addReference_mut(PxLightCpuTask* self_);
+        internal static extern void PxLightCpuTask_addReference_mut(PxLightCpuTask* self_);
 
         /// <summary>
         ///  called by CpuDispatcher after run method has completed
@@ -2714,7 +2714,7 @@ namespace Physx
         ///  Decrements the continuation task's reference count, if specified.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxLightCpuTask_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxLightCpuTask_release_mut(PxLightCpuTask* self_);
+        internal static extern void PxLightCpuTask_release_mut(PxLightCpuTask* self_);
 
         /// <summary>
         ///  Returns the type of the geometry.
@@ -2722,19 +2722,19 @@ namespace Physx
         ///  The type of the object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxGeometry_getType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeometryType PxGeometry_getType(PxGeometry* self_);
+        internal static extern PxGeometryType PxGeometry_getType(PxGeometry* self_);
 
         /// <summary>
         ///  Constructor to initialize half extents from scalar parameters.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBoxGeometry_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBoxGeometry PxBoxGeometry_new(float hx, float hy, float hz);
+        internal static extern PxBoxGeometry PxBoxGeometry_new(float hx, float hy, float hz);
 
         /// <summary>
         ///  Constructor to initialize half extents from vector parameter.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBoxGeometry_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBoxGeometry PxBoxGeometry_new_1(PxVec3 halfExtents_);
+        internal static extern PxBoxGeometry PxBoxGeometry_new_1(PxVec3 halfExtents_);
 
         /// <summary>
         ///  Returns true if the geometry is valid.
@@ -2746,32 +2746,32 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBoxGeometry_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBoxGeometry_isValid(PxBoxGeometry* self_);
+        internal static extern bool PxBoxGeometry_isValid(PxBoxGeometry* self_);
 
         [DllImport(__DllName, EntryPoint = "PxBVHRaycastCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBVHRaycastCallback_delete(PxBVHRaycastCallback* self_);
+        internal static extern void PxBVHRaycastCallback_delete(PxBVHRaycastCallback* self_);
 
         [DllImport(__DllName, EntryPoint = "PxBVHRaycastCallback_reportHit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBVHRaycastCallback_reportHit_mut(PxBVHRaycastCallback* self_, uint boundsIndex, float* distance);
+        internal static extern bool PxBVHRaycastCallback_reportHit_mut(PxBVHRaycastCallback* self_, uint boundsIndex, float* distance);
 
         [DllImport(__DllName, EntryPoint = "PxBVHOverlapCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBVHOverlapCallback_delete(PxBVHOverlapCallback* self_);
+        internal static extern void PxBVHOverlapCallback_delete(PxBVHOverlapCallback* self_);
 
         [DllImport(__DllName, EntryPoint = "PxBVHOverlapCallback_reportHit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBVHOverlapCallback_reportHit_mut(PxBVHOverlapCallback* self_, uint boundsIndex);
+        internal static extern bool PxBVHOverlapCallback_reportHit_mut(PxBVHOverlapCallback* self_, uint boundsIndex);
 
         [DllImport(__DllName, EntryPoint = "PxBVHTraversalCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBVHTraversalCallback_delete(PxBVHTraversalCallback* self_);
+        internal static extern void PxBVHTraversalCallback_delete(PxBVHTraversalCallback* self_);
 
         [DllImport(__DllName, EntryPoint = "PxBVHTraversalCallback_visitNode_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBVHTraversalCallback_visitNode_mut(PxBVHTraversalCallback* self_, PxBounds3* bounds);
+        internal static extern bool PxBVHTraversalCallback_visitNode_mut(PxBVHTraversalCallback* self_, PxBounds3* bounds);
 
         [DllImport(__DllName, EntryPoint = "PxBVHTraversalCallback_reportLeaf_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBVHTraversalCallback_reportLeaf_mut(PxBVHTraversalCallback* self_, uint nbPrims, uint* prims);
+        internal static extern bool PxBVHTraversalCallback_reportLeaf_mut(PxBVHTraversalCallback* self_, uint nbPrims, uint* prims);
 
         /// <summary>
         ///  Raycast test against a BVH.
@@ -2780,7 +2780,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH_raycast", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBVH_raycast(PxBVH* self_, PxVec3* origin, PxVec3* unitDir, float maxDist, PxBVHRaycastCallback* cb, PxGeometryQueryFlags queryFlags);
+        internal static extern bool PxBVH_raycast(PxBVH* self_, PxVec3* origin, PxVec3* unitDir, float maxDist, PxBVHRaycastCallback* cb, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  Sweep test against a BVH.
@@ -2789,7 +2789,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH_sweep", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBVH_sweep(PxBVH* self_, PxGeometry* geom, PxTransform* pose, PxVec3* unitDir, float maxDist, PxBVHRaycastCallback* cb, PxGeometryQueryFlags queryFlags);
+        internal static extern bool PxBVH_sweep(PxBVH* self_, PxGeometry* geom, PxTransform* pose, PxVec3* unitDir, float maxDist, PxBVHRaycastCallback* cb, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  Overlap test against a BVH.
@@ -2798,7 +2798,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH_overlap", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBVH_overlap(PxBVH* self_, PxGeometry* geom, PxTransform* pose, PxBVHOverlapCallback* cb, PxGeometryQueryFlags queryFlags);
+        internal static extern bool PxBVH_overlap(PxBVH* self_, PxGeometry* geom, PxTransform* pose, PxBVHOverlapCallback* cb, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  Frustum culling test against a BVH.
@@ -2815,7 +2815,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH_cull", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBVH_cull(PxBVH* self_, uint nbPlanes, PxPlane* planes, PxBVHOverlapCallback* cb, PxGeometryQueryFlags queryFlags);
+        internal static extern bool PxBVH_cull(PxBVH* self_, uint nbPlanes, PxPlane* planes, PxBVHOverlapCallback* cb, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  Returns the number of bounds in the BVH.
@@ -2827,7 +2827,7 @@ namespace Physx
         ///  Number of bounds in the BVH.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH_getNbBounds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxBVH_getNbBounds(PxBVH* self_);
+        internal static extern uint PxBVH_getNbBounds(PxBVH* self_);
 
         /// <summary>
         ///  Retrieve the read-only bounds in the BVH.
@@ -2835,7 +2835,7 @@ namespace Physx
         ///  These are the user-defined bounds passed to the BVH builder, not the internal bounds around each BVH node.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH_getBounds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3* PxBVH_getBounds(PxBVH* self_);
+        internal static extern PxBounds3* PxBVH_getBounds(PxBVH* self_);
 
         /// <summary>
         ///  Retrieve the bounds in the BVH.
@@ -2845,7 +2845,7 @@ namespace Physx
         ///  These are the user-defined bounds passed to the BVH builder, not the internal bounds around each BVH node.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH_getBoundsForModification_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3* PxBVH_getBoundsForModification_mut(PxBVH* self_);
+        internal static extern PxBounds3* PxBVH_getBoundsForModification_mut(PxBVH* self_);
 
         /// <summary>
         ///  Refit the BVH.
@@ -2862,7 +2862,7 @@ namespace Physx
         ///  more efficient to use setBounds() and partialRefit() instead.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH_refit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBVH_refit_mut(PxBVH* self_);
+        internal static extern void PxBVH_refit_mut(PxBVH* self_);
 
         /// <summary>
         ///  Update single bounds.
@@ -2878,7 +2878,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH_updateBounds_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBVH_updateBounds_mut(PxBVH* self_, uint boundsIndex, PxBounds3* newBounds);
+        internal static extern bool PxBVH_updateBounds_mut(PxBVH* self_, uint boundsIndex, PxBounds3* newBounds);
 
         /// <summary>
         ///  Refits subset of marked nodes.
@@ -2887,7 +2887,7 @@ namespace Physx
         ///  See updateBounds() for details.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH_partialRefit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBVH_partialRefit_mut(PxBVH* self_);
+        internal static extern void PxBVH_partialRefit_mut(PxBVH* self_);
 
         /// <summary>
         ///  Generic BVH traversal function.
@@ -2899,16 +2899,16 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH_traverse", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBVH_traverse(PxBVH* self_, PxBVHTraversalCallback* cb);
+        internal static extern bool PxBVH_traverse(PxBVH* self_, PxBVHTraversalCallback* cb);
 
         [DllImport(__DllName, EntryPoint = "PxBVH_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxBVH_getConcreteTypeName(PxBVH* self_);
+        internal static extern byte* PxBVH_getConcreteTypeName(PxBVH* self_);
 
         /// <summary>
         ///  Constructor, initializes to a capsule with passed radius and half height.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCapsuleGeometry_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCapsuleGeometry PxCapsuleGeometry_new(float radius_, float halfHeight_);
+        internal static extern PxCapsuleGeometry PxCapsuleGeometry_new(float radius_, float halfHeight_);
 
         /// <summary>
         ///  Returns true if the geometry is valid.
@@ -2920,7 +2920,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCapsuleGeometry_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxCapsuleGeometry_isValid(PxCapsuleGeometry* self_);
+        internal static extern bool PxCapsuleGeometry_isValid(PxCapsuleGeometry* self_);
 
         /// <summary>
         ///  Returns the number of vertices.
@@ -2928,7 +2928,7 @@ namespace Physx
         ///  Number of vertices.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMesh_getNbVertices", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxConvexMesh_getNbVertices(PxConvexMesh* self_);
+        internal static extern uint PxConvexMesh_getNbVertices(PxConvexMesh* self_);
 
         /// <summary>
         ///  Returns the vertices.
@@ -2936,7 +2936,7 @@ namespace Physx
         ///  Array of vertices.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMesh_getVertices", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3* PxConvexMesh_getVertices(PxConvexMesh* self_);
+        internal static extern PxVec3* PxConvexMesh_getVertices(PxConvexMesh* self_);
 
         /// <summary>
         ///  Returns the index buffer.
@@ -2944,7 +2944,7 @@ namespace Physx
         ///  Index buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMesh_getIndexBuffer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxConvexMesh_getIndexBuffer(PxConvexMesh* self_);
+        internal static extern byte* PxConvexMesh_getIndexBuffer(PxConvexMesh* self_);
 
         /// <summary>
         ///  Returns the number of polygons.
@@ -2952,7 +2952,7 @@ namespace Physx
         ///  Number of polygons.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMesh_getNbPolygons", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxConvexMesh_getNbPolygons(PxConvexMesh* self_);
+        internal static extern uint PxConvexMesh_getNbPolygons(PxConvexMesh* self_);
 
         /// <summary>
         ///  Returns the polygon data.
@@ -2961,13 +2961,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMesh_getPolygonData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxConvexMesh_getPolygonData(PxConvexMesh* self_, uint index, PxHullPolygon* data);
+        internal static extern bool PxConvexMesh_getPolygonData(PxConvexMesh* self_, uint index, PxHullPolygon* data);
 
         /// <summary>
         ///  Decrements the reference count of a convex mesh and releases it if the new reference count is zero.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMesh_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConvexMesh_release_mut(PxConvexMesh* self_);
+        internal static extern void PxConvexMesh_release_mut(PxConvexMesh* self_);
 
         /// <summary>
         ///  Returns the mass properties of the mesh assuming unit density.
@@ -2982,7 +2982,7 @@ namespace Physx
         ///  localInertia of the unit density mesh by d.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMesh_getMassInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConvexMesh_getMassInformation(PxConvexMesh* self_, float* mass, PxMat33* localInertia, PxVec3* localCenterOfMass);
+        internal static extern void PxConvexMesh_getMassInformation(PxConvexMesh* self_, float* mass, PxMat33* localInertia, PxVec3* localCenterOfMass);
 
         /// <summary>
         ///  Returns the local-space (vertex space) AABB from the convex mesh.
@@ -2990,7 +2990,7 @@ namespace Physx
         ///  local-space bounds
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMesh_getLocalBounds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxConvexMesh_getLocalBounds(PxConvexMesh* self_);
+        internal static extern PxBounds3 PxConvexMesh_getLocalBounds(PxConvexMesh* self_);
 
         /// <summary>
         ///  Returns the local-space Signed Distance Field for this mesh if it has one.
@@ -2998,10 +2998,10 @@ namespace Physx
         ///  local-space SDF.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMesh_getSDF", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float* PxConvexMesh_getSDF(PxConvexMesh* self_);
+        internal static extern float* PxConvexMesh_getSDF(PxConvexMesh* self_);
 
         [DllImport(__DllName, EntryPoint = "PxConvexMesh_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxConvexMesh_getConcreteTypeName(PxConvexMesh* self_);
+        internal static extern byte* PxConvexMesh_getConcreteTypeName(PxConvexMesh* self_);
 
         /// <summary>
         ///  This method decides whether a convex mesh is gpu compatible. If the total number of vertices are more than 64 or any number of vertices in a polygon is more than 32, or
@@ -3012,74 +3012,74 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMesh_isGpuCompatible", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxConvexMesh_isGpuCompatible(PxConvexMesh* self_);
+        internal static extern bool PxConvexMesh_isGpuCompatible(PxConvexMesh* self_);
 
         /// <summary>
         ///  Constructor initializes to identity scale.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshScale_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMeshScale PxMeshScale_new();
+        internal static extern PxMeshScale PxMeshScale_new();
 
         /// <summary>
         ///  Constructor from scalar.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshScale_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMeshScale PxMeshScale_new_1(float r);
+        internal static extern PxMeshScale PxMeshScale_new_1(float r);
 
         /// <summary>
         ///  Constructor to initialize to arbitrary scale and identity scale rotation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshScale_new_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMeshScale PxMeshScale_new_2(PxVec3* s);
+        internal static extern PxMeshScale PxMeshScale_new_2(PxVec3* s);
 
         /// <summary>
         ///  Constructor to initialize to arbitrary scaling.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshScale_new_3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMeshScale PxMeshScale_new_3(PxVec3* s, PxQuat* r);
+        internal static extern PxMeshScale PxMeshScale_new_3(PxVec3* s, PxQuat* r);
 
         /// <summary>
         ///  Returns true if the scaling is an identity transformation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshScale_isIdentity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxMeshScale_isIdentity(PxMeshScale* self_);
+        internal static extern bool PxMeshScale_isIdentity(PxMeshScale* self_);
 
         /// <summary>
         ///  Returns the inverse of this scaling transformation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshScale_getInverse", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMeshScale PxMeshScale_getInverse(PxMeshScale* self_);
+        internal static extern PxMeshScale PxMeshScale_getInverse(PxMeshScale* self_);
 
         /// <summary>
         ///  Converts this transformation to a 3x3 matrix representation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshScale_toMat33", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMeshScale_toMat33(PxMeshScale* self_);
+        internal static extern PxMat33 PxMeshScale_toMat33(PxMeshScale* self_);
 
         /// <summary>
         ///  Returns true if combination of negative scale components will cause the triangle normal to flip. The SDK will flip the normals internally.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshScale_hasNegativeDeterminant", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxMeshScale_hasNegativeDeterminant(PxMeshScale* self_);
+        internal static extern bool PxMeshScale_hasNegativeDeterminant(PxMeshScale* self_);
 
         [DllImport(__DllName, EntryPoint = "PxMeshScale_transform", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxMeshScale_transform(PxMeshScale* self_, PxVec3* v);
+        internal static extern PxVec3 PxMeshScale_transform(PxMeshScale* self_, PxVec3* v);
 
         [DllImport(__DllName, EntryPoint = "PxMeshScale_isValidForTriangleMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxMeshScale_isValidForTriangleMesh(PxMeshScale* self_);
+        internal static extern bool PxMeshScale_isValidForTriangleMesh(PxMeshScale* self_);
 
         [DllImport(__DllName, EntryPoint = "PxMeshScale_isValidForConvexMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxMeshScale_isValidForConvexMesh(PxMeshScale* self_);
+        internal static extern bool PxMeshScale_isValidForConvexMesh(PxMeshScale* self_);
 
         /// <summary>
         ///  Constructor. By default creates an empty object with a NULL mesh and identity scale.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMeshGeometry_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConvexMeshGeometry PxConvexMeshGeometry_new(PxConvexMesh* mesh, PxMeshScale* scaling, PxConvexMeshGeometryFlags flags);
+        internal static extern PxConvexMeshGeometry PxConvexMeshGeometry_new(PxConvexMesh* mesh, PxMeshScale* scaling, PxConvexMeshGeometryFlags flags);
 
         /// <summary>
         ///  Returns true if the geometry is valid.
@@ -3091,13 +3091,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMeshGeometry_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxConvexMeshGeometry_isValid(PxConvexMeshGeometry* self_);
+        internal static extern bool PxConvexMeshGeometry_isValid(PxConvexMeshGeometry* self_);
 
         /// <summary>
         ///  Constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSphereGeometry_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSphereGeometry PxSphereGeometry_new(float ir);
+        internal static extern PxSphereGeometry PxSphereGeometry_new(float ir);
 
         /// <summary>
         ///  Returns true if the geometry is valid.
@@ -3109,13 +3109,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSphereGeometry_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSphereGeometry_isValid(PxSphereGeometry* self_);
+        internal static extern bool PxSphereGeometry_isValid(PxSphereGeometry* self_);
 
         /// <summary>
         ///  Constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPlaneGeometry_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPlaneGeometry PxPlaneGeometry_new();
+        internal static extern PxPlaneGeometry PxPlaneGeometry_new();
 
         /// <summary>
         ///  Returns true if the geometry is valid.
@@ -3124,13 +3124,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPlaneGeometry_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxPlaneGeometry_isValid(PxPlaneGeometry* self_);
+        internal static extern bool PxPlaneGeometry_isValid(PxPlaneGeometry* self_);
 
         /// <summary>
         ///  Constructor. By default creates an empty object with a NULL mesh and identity scale.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMeshGeometry_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTriangleMeshGeometry PxTriangleMeshGeometry_new(PxTriangleMesh* mesh, PxMeshScale* scaling, PxMeshGeometryFlags flags);
+        internal static extern PxTriangleMeshGeometry PxTriangleMeshGeometry_new(PxTriangleMesh* mesh, PxMeshScale* scaling, PxMeshGeometryFlags flags);
 
         /// <summary>
         ///  Returns true if the geometry is valid.
@@ -3142,13 +3142,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMeshGeometry_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxTriangleMeshGeometry_isValid(PxTriangleMeshGeometry* self_);
+        internal static extern bool PxTriangleMeshGeometry_isValid(PxTriangleMeshGeometry* self_);
 
         /// <summary>
         ///  Constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightFieldGeometry_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxHeightFieldGeometry PxHeightFieldGeometry_new(PxHeightField* hf, PxMeshGeometryFlags flags, float heightScale_, float rowScale_, float columnScale_);
+        internal static extern PxHeightFieldGeometry PxHeightFieldGeometry_new(PxHeightField* hf, PxMeshGeometryFlags flags, float heightScale_, float rowScale_, float columnScale_);
 
         /// <summary>
         ///  Returns true if the geometry is valid.
@@ -3160,7 +3160,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightFieldGeometry_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxHeightFieldGeometry_isValid(PxHeightFieldGeometry* self_);
+        internal static extern bool PxHeightFieldGeometry_isValid(PxHeightFieldGeometry* self_);
 
         /// <summary>
         ///  Default constructor.
@@ -3168,7 +3168,7 @@ namespace Physx
         ///  Creates an empty object with no particles.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxParticleSystemGeometry_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxParticleSystemGeometry PxParticleSystemGeometry_new();
+        internal static extern PxParticleSystemGeometry PxParticleSystemGeometry_new();
 
         /// <summary>
         ///  Returns true if the geometry is valid.
@@ -3177,13 +3177,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxParticleSystemGeometry_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxParticleSystemGeometry_isValid(PxParticleSystemGeometry* self_);
+        internal static extern bool PxParticleSystemGeometry_isValid(PxParticleSystemGeometry* self_);
 
         /// <summary>
         ///  Default constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHairSystemGeometry_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxHairSystemGeometry PxHairSystemGeometry_new();
+        internal static extern PxHairSystemGeometry PxHairSystemGeometry_new();
 
         /// <summary>
         ///  Returns true if the geometry is valid.
@@ -3192,13 +3192,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHairSystemGeometry_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxHairSystemGeometry_isValid(PxHairSystemGeometry* self_);
+        internal static extern bool PxHairSystemGeometry_isValid(PxHairSystemGeometry* self_);
 
         /// <summary>
         ///  Constructor. By default creates an empty object with a NULL mesh and identity scale.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMeshGeometry_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMeshGeometry PxTetrahedronMeshGeometry_new(PxTetrahedronMesh* mesh);
+        internal static extern PxTetrahedronMeshGeometry PxTetrahedronMeshGeometry_new(PxTetrahedronMesh* mesh);
 
         /// <summary>
         ///  Returns true if the geometry is valid.
@@ -3210,13 +3210,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMeshGeometry_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxTetrahedronMeshGeometry_isValid(PxTetrahedronMeshGeometry* self_);
+        internal static extern bool PxTetrahedronMeshGeometry_isValid(PxTetrahedronMeshGeometry* self_);
 
         [DllImport(__DllName, EntryPoint = "PxQueryHit_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQueryHit PxQueryHit_new();
+        internal static extern PxQueryHit PxQueryHit_new();
 
         [DllImport(__DllName, EntryPoint = "PxLocationHit_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxLocationHit PxLocationHit_new();
+        internal static extern PxLocationHit PxLocationHit_new();
 
         /// <summary>
         ///  For raycast hits: true for shapes overlapping with raycast origin.
@@ -3225,40 +3225,40 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxLocationHit_hadInitialOverlap", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxLocationHit_hadInitialOverlap(PxLocationHit* self_);
+        internal static extern bool PxLocationHit_hadInitialOverlap(PxLocationHit* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeomRaycastHit_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeomRaycastHit PxGeomRaycastHit_new();
+        internal static extern PxGeomRaycastHit PxGeomRaycastHit_new();
 
         [DllImport(__DllName, EntryPoint = "PxGeomOverlapHit_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeomOverlapHit PxGeomOverlapHit_new();
+        internal static extern PxGeomOverlapHit PxGeomOverlapHit_new();
 
         [DllImport(__DllName, EntryPoint = "PxGeomSweepHit_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeomSweepHit PxGeomSweepHit_new();
+        internal static extern PxGeomSweepHit PxGeomSweepHit_new();
 
         [DllImport(__DllName, EntryPoint = "PxGeomIndexPair_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeomIndexPair PxGeomIndexPair_new();
+        internal static extern PxGeomIndexPair PxGeomIndexPair_new();
 
         [DllImport(__DllName, EntryPoint = "PxGeomIndexPair_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeomIndexPair PxGeomIndexPair_new_1(uint _id0, uint _id1);
+        internal static extern PxGeomIndexPair PxGeomIndexPair_new_1(uint _id0, uint _id1);
 
         /// <summary>
         ///  For internal use
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCustomGeometry_getUniqueID", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxCustomGeometry_getUniqueID();
+        internal static extern uint phys_PxCustomGeometry_getUniqueID();
 
         /// <summary>
         ///  Default constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometryType_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCustomGeometryType PxCustomGeometryType_new();
+        internal static extern PxCustomGeometryType PxCustomGeometryType_new();
 
         /// <summary>
         ///  Invalid type
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometryType_INVALID", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCustomGeometryType PxCustomGeometryType_INVALID();
+        internal static extern PxCustomGeometryType PxCustomGeometryType_INVALID();
 
         /// <summary>
         ///  Return custom type. The type purpose is for user to differentiate custom geometries. Not used by PhysX.
@@ -3268,7 +3268,7 @@ namespace Physx
         ///  User should use DECLARE_CUSTOM_GEOMETRY_TYPE and IMPLEMENT_CUSTOM_GEOMETRY_TYPE intead of overwriting this function.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometryCallbacks_getCustomType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCustomGeometryType PxCustomGeometryCallbacks_getCustomType(PxCustomGeometryCallbacks* self_);
+        internal static extern PxCustomGeometryType PxCustomGeometryCallbacks_getCustomType(PxCustomGeometryCallbacks* self_);
 
         /// <summary>
         ///  Return local bounds.
@@ -3276,7 +3276,7 @@ namespace Physx
         ///  Bounding box in the geometry local space.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometryCallbacks_getLocalBounds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxCustomGeometryCallbacks_getLocalBounds(PxCustomGeometryCallbacks* self_, PxGeometry* geometry);
+        internal static extern PxBounds3 PxCustomGeometryCallbacks_getLocalBounds(PxCustomGeometryCallbacks* self_, PxGeometry* geometry);
 
         /// <summary>
         ///  Raycast. Cast a ray against the geometry in given pose.
@@ -3284,7 +3284,7 @@ namespace Physx
         ///  Number of hits.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometryCallbacks_raycast", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxCustomGeometryCallbacks_raycast(PxCustomGeometryCallbacks* self_, PxVec3* origin, PxVec3* unitDir, PxGeometry* geom, PxTransform* pose, float maxDist, PxHitFlags hitFlags, uint maxHits, PxGeomRaycastHit* rayHits, uint stride, PxQueryThreadContext* threadContext);
+        internal static extern uint PxCustomGeometryCallbacks_raycast(PxCustomGeometryCallbacks* self_, PxVec3* origin, PxVec3* unitDir, PxGeometry* geom, PxTransform* pose, float maxDist, PxHitFlags hitFlags, uint maxHits, PxGeomRaycastHit* rayHits, uint stride, PxQueryThreadContext* threadContext);
 
         /// <summary>
         ///  Overlap. Test if geometries overlap.
@@ -3293,7 +3293,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometryCallbacks_overlap", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxCustomGeometryCallbacks_overlap(PxCustomGeometryCallbacks* self_, PxGeometry* geom0, PxTransform* pose0, PxGeometry* geom1, PxTransform* pose1, PxQueryThreadContext* threadContext);
+        internal static extern bool PxCustomGeometryCallbacks_overlap(PxCustomGeometryCallbacks* self_, PxGeometry* geom0, PxTransform* pose0, PxGeometry* geom1, PxTransform* pose1, PxQueryThreadContext* threadContext);
 
         /// <summary>
         ///  Sweep. Sweep one geometry against the other.
@@ -3302,23 +3302,23 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometryCallbacks_sweep", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxCustomGeometryCallbacks_sweep(PxCustomGeometryCallbacks* self_, PxVec3* unitDir, float maxDist, PxGeometry* geom0, PxTransform* pose0, PxGeometry* geom1, PxTransform* pose1, PxGeomSweepHit* sweepHit, PxHitFlags hitFlags, float inflation, PxQueryThreadContext* threadContext);
+        internal static extern bool PxCustomGeometryCallbacks_sweep(PxCustomGeometryCallbacks* self_, PxVec3* unitDir, float maxDist, PxGeometry* geom0, PxTransform* pose0, PxGeometry* geom1, PxTransform* pose1, PxGeomSweepHit* sweepHit, PxHitFlags hitFlags, float inflation, PxQueryThreadContext* threadContext);
 
         /// <summary>
         ///  Compute custom geometry mass properties. For geometries usable with dynamic rigidbodies.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometryCallbacks_computeMassProperties", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCustomGeometryCallbacks_computeMassProperties(PxCustomGeometryCallbacks* self_, PxGeometry* geometry, PxMassProperties* massProperties);
+        internal static extern void PxCustomGeometryCallbacks_computeMassProperties(PxCustomGeometryCallbacks* self_, PxGeometry* geometry, PxMassProperties* massProperties);
 
         /// <summary>
         ///  Compatible with PhysX's PCM feature. Allows to optimize contact generation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometryCallbacks_usePersistentContactManifold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxCustomGeometryCallbacks_usePersistentContactManifold(PxCustomGeometryCallbacks* self_, PxGeometry* geometry, float* breakingThreshold);
+        internal static extern bool PxCustomGeometryCallbacks_usePersistentContactManifold(PxCustomGeometryCallbacks* self_, PxGeometry* geometry, float* breakingThreshold);
 
         [DllImport(__DllName, EntryPoint = "PxCustomGeometryCallbacks_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCustomGeometryCallbacks_delete(PxCustomGeometryCallbacks* self_);
+        internal static extern void PxCustomGeometryCallbacks_delete(PxCustomGeometryCallbacks* self_);
 
         /// <summary>
         ///  Default constructor.
@@ -3326,13 +3326,13 @@ namespace Physx
         ///  Creates an empty object with a NULL callbacks pointer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometry_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCustomGeometry PxCustomGeometry_new();
+        internal static extern PxCustomGeometry PxCustomGeometry_new();
 
         /// <summary>
         ///  Constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometry_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCustomGeometry PxCustomGeometry_new_1(PxCustomGeometryCallbacks* _callbacks);
+        internal static extern PxCustomGeometry PxCustomGeometry_new_1(PxCustomGeometryCallbacks* _callbacks);
 
         /// <summary>
         ///  Returns true if the geometry is valid.
@@ -3341,97 +3341,97 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometry_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxCustomGeometry_isValid(PxCustomGeometry* self_);
+        internal static extern bool PxCustomGeometry_isValid(PxCustomGeometry* self_);
 
         /// <summary>
         ///  Returns the custom type of the custom geometry.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomGeometry_getCustomType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCustomGeometryType PxCustomGeometry_getCustomType(PxCustomGeometry* self_);
+        internal static extern PxCustomGeometryType PxCustomGeometry_getCustomType(PxCustomGeometry* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_getType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeometryType PxGeometryHolder_getType(PxGeometryHolder* self_);
+        internal static extern PxGeometryType PxGeometryHolder_getType(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_any_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeometry* PxGeometryHolder_any_mut(PxGeometryHolder* self_);
+        internal static extern PxGeometry* PxGeometryHolder_any_mut(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_any", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeometry* PxGeometryHolder_any(PxGeometryHolder* self_);
+        internal static extern PxGeometry* PxGeometryHolder_any(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_sphere_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSphereGeometry* PxGeometryHolder_sphere_mut(PxGeometryHolder* self_);
+        internal static extern PxSphereGeometry* PxGeometryHolder_sphere_mut(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_sphere", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSphereGeometry* PxGeometryHolder_sphere(PxGeometryHolder* self_);
+        internal static extern PxSphereGeometry* PxGeometryHolder_sphere(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_plane_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPlaneGeometry* PxGeometryHolder_plane_mut(PxGeometryHolder* self_);
+        internal static extern PxPlaneGeometry* PxGeometryHolder_plane_mut(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_plane", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPlaneGeometry* PxGeometryHolder_plane(PxGeometryHolder* self_);
+        internal static extern PxPlaneGeometry* PxGeometryHolder_plane(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_capsule_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCapsuleGeometry* PxGeometryHolder_capsule_mut(PxGeometryHolder* self_);
+        internal static extern PxCapsuleGeometry* PxGeometryHolder_capsule_mut(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_capsule", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCapsuleGeometry* PxGeometryHolder_capsule(PxGeometryHolder* self_);
+        internal static extern PxCapsuleGeometry* PxGeometryHolder_capsule(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_box_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBoxGeometry* PxGeometryHolder_box_mut(PxGeometryHolder* self_);
+        internal static extern PxBoxGeometry* PxGeometryHolder_box_mut(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_box", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBoxGeometry* PxGeometryHolder_box(PxGeometryHolder* self_);
+        internal static extern PxBoxGeometry* PxGeometryHolder_box(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_convexMesh_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConvexMeshGeometry* PxGeometryHolder_convexMesh_mut(PxGeometryHolder* self_);
+        internal static extern PxConvexMeshGeometry* PxGeometryHolder_convexMesh_mut(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_convexMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConvexMeshGeometry* PxGeometryHolder_convexMesh(PxGeometryHolder* self_);
+        internal static extern PxConvexMeshGeometry* PxGeometryHolder_convexMesh(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_tetMesh_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMeshGeometry* PxGeometryHolder_tetMesh_mut(PxGeometryHolder* self_);
+        internal static extern PxTetrahedronMeshGeometry* PxGeometryHolder_tetMesh_mut(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_tetMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMeshGeometry* PxGeometryHolder_tetMesh(PxGeometryHolder* self_);
+        internal static extern PxTetrahedronMeshGeometry* PxGeometryHolder_tetMesh(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_triangleMesh_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTriangleMeshGeometry* PxGeometryHolder_triangleMesh_mut(PxGeometryHolder* self_);
+        internal static extern PxTriangleMeshGeometry* PxGeometryHolder_triangleMesh_mut(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_triangleMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTriangleMeshGeometry* PxGeometryHolder_triangleMesh(PxGeometryHolder* self_);
+        internal static extern PxTriangleMeshGeometry* PxGeometryHolder_triangleMesh(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_heightField_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxHeightFieldGeometry* PxGeometryHolder_heightField_mut(PxGeometryHolder* self_);
+        internal static extern PxHeightFieldGeometry* PxGeometryHolder_heightField_mut(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_heightField", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxHeightFieldGeometry* PxGeometryHolder_heightField(PxGeometryHolder* self_);
+        internal static extern PxHeightFieldGeometry* PxGeometryHolder_heightField(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_particleSystem_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxParticleSystemGeometry* PxGeometryHolder_particleSystem_mut(PxGeometryHolder* self_);
+        internal static extern PxParticleSystemGeometry* PxGeometryHolder_particleSystem_mut(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_particleSystem", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxParticleSystemGeometry* PxGeometryHolder_particleSystem(PxGeometryHolder* self_);
+        internal static extern PxParticleSystemGeometry* PxGeometryHolder_particleSystem(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_hairSystem_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxHairSystemGeometry* PxGeometryHolder_hairSystem_mut(PxGeometryHolder* self_);
+        internal static extern PxHairSystemGeometry* PxGeometryHolder_hairSystem_mut(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_hairSystem", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxHairSystemGeometry* PxGeometryHolder_hairSystem(PxGeometryHolder* self_);
+        internal static extern PxHairSystemGeometry* PxGeometryHolder_hairSystem(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_custom_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCustomGeometry* PxGeometryHolder_custom_mut(PxGeometryHolder* self_);
+        internal static extern PxCustomGeometry* PxGeometryHolder_custom_mut(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_custom", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCustomGeometry* PxGeometryHolder_custom(PxGeometryHolder* self_);
+        internal static extern PxCustomGeometry* PxGeometryHolder_custom(PxGeometryHolder* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_storeAny_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxGeometryHolder_storeAny_mut(PxGeometryHolder* self_, PxGeometry* geometry);
+        internal static extern void PxGeometryHolder_storeAny_mut(PxGeometryHolder* self_, PxGeometry* geometry);
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeometryHolder PxGeometryHolder_new();
+        internal static extern PxGeometryHolder PxGeometryHolder_new();
 
         [DllImport(__DllName, EntryPoint = "PxGeometryHolder_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeometryHolder PxGeometryHolder_new_1(PxGeometry* geometry);
+        internal static extern PxGeometryHolder PxGeometryHolder_new_1(PxGeometry* geometry);
 
         /// <summary>
         ///  Raycast test against a geometry object.
@@ -3441,7 +3441,7 @@ namespace Physx
         ///  Number of hits between the ray and the geometry object
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxGeometryQuery_raycast", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxGeometryQuery_raycast(PxVec3* origin, PxVec3* unitDir, PxGeometry* geom, PxTransform* pose, float maxDist, PxHitFlags hitFlags, uint maxHits, PxGeomRaycastHit* rayHits, uint stride, PxGeometryQueryFlags queryFlags, PxQueryThreadContext* threadContext);
+        internal static extern uint PxGeometryQuery_raycast(PxVec3* origin, PxVec3* unitDir, PxGeometry* geom, PxTransform* pose, float maxDist, PxHitFlags hitFlags, uint maxHits, PxGeomRaycastHit* rayHits, uint stride, PxGeometryQueryFlags queryFlags, PxQueryThreadContext* threadContext);
 
         /// <summary>
         ///  Overlap test for two geometry objects.
@@ -3460,7 +3460,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxGeometryQuery_overlap", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxGeometryQuery_overlap(PxGeometry* geom0, PxTransform* pose0, PxGeometry* geom1, PxTransform* pose1, PxGeometryQueryFlags queryFlags, PxQueryThreadContext* threadContext);
+        internal static extern bool PxGeometryQuery_overlap(PxGeometry* geom0, PxTransform* pose0, PxGeometry* geom1, PxTransform* pose1, PxGeometryQueryFlags queryFlags, PxQueryThreadContext* threadContext);
 
         /// <summary>
         ///  Sweep a specified geometry object in space and test for collision with a given object.
@@ -3479,7 +3479,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxGeometryQuery_sweep", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxGeometryQuery_sweep(PxVec3* unitDir, float maxDist, PxGeometry* geom0, PxTransform* pose0, PxGeometry* geom1, PxTransform* pose1, PxGeomSweepHit* sweepHit, PxHitFlags hitFlags, float inflation, PxGeometryQueryFlags queryFlags, PxQueryThreadContext* threadContext);
+        internal static extern bool PxGeometryQuery_sweep(PxVec3* unitDir, float maxDist, PxGeometry* geom0, PxTransform* pose0, PxGeometry* geom1, PxTransform* pose1, PxGeomSweepHit* sweepHit, PxHitFlags hitFlags, float inflation, PxGeometryQueryFlags queryFlags, PxQueryThreadContext* threadContext);
 
         /// <summary>
         ///  Compute minimum translational distance (MTD) between two geometry objects.
@@ -3506,7 +3506,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxGeometryQuery_computePenetration", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxGeometryQuery_computePenetration(PxVec3* direction, float* depth, PxGeometry* geom0, PxTransform* pose0, PxGeometry* geom1, PxTransform* pose1, PxGeometryQueryFlags queryFlags);
+        internal static extern bool PxGeometryQuery_computePenetration(PxVec3* direction, float* depth, PxGeometry* geom0, PxTransform* pose0, PxGeometry* geom1, PxTransform* pose1, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  Computes distance between a point and a geometry object.
@@ -3518,13 +3518,13 @@ namespace Physx
         ///  Square distance between the point and the geom object, or 0.0 if the point is inside the object, or -1.0 if an error occured (geometry type is not supported, or invalid pose)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxGeometryQuery_pointDistance", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxGeometryQuery_pointDistance(PxVec3* point, PxGeometry* geom, PxTransform* pose, PxVec3* closestPoint, uint* closestIndex, PxGeometryQueryFlags queryFlags);
+        internal static extern float PxGeometryQuery_pointDistance(PxVec3* point, PxGeometry* geom, PxTransform* pose, PxVec3* closestPoint, uint* closestIndex, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  computes the bounds for a geometry object
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxGeometryQuery_computeGeomBounds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxGeometryQuery_computeGeomBounds(PxBounds3* bounds, PxGeometry* geom, PxTransform* pose, float offset, float inflation, PxGeometryQueryFlags queryFlags);
+        internal static extern void PxGeometryQuery_computeGeomBounds(PxBounds3* bounds, PxGeometry* geom, PxTransform* pose, float offset, float inflation, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  Checks if provided geometry is valid.
@@ -3533,22 +3533,22 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxGeometryQuery_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxGeometryQuery_isValid(PxGeometry* geom);
+        internal static extern bool PxGeometryQuery_isValid(PxGeometry* geom);
 
         [DllImport(__DllName, EntryPoint = "PxHeightFieldSample_tessFlag", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte PxHeightFieldSample_tessFlag(PxHeightFieldSample* self_);
+        internal static extern byte PxHeightFieldSample_tessFlag(PxHeightFieldSample* self_);
 
         [DllImport(__DllName, EntryPoint = "PxHeightFieldSample_setTessFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxHeightFieldSample_setTessFlag_mut(PxHeightFieldSample* self_);
+        internal static extern void PxHeightFieldSample_setTessFlag_mut(PxHeightFieldSample* self_);
 
         [DllImport(__DllName, EntryPoint = "PxHeightFieldSample_clearTessFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxHeightFieldSample_clearTessFlag_mut(PxHeightFieldSample* self_);
+        internal static extern void PxHeightFieldSample_clearTessFlag_mut(PxHeightFieldSample* self_);
 
         /// <summary>
         ///  Decrements the reference count of a height field and releases it if the new reference count is zero.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxHeightField_release_mut(PxHeightField* self_);
+        internal static extern void PxHeightField_release_mut(PxHeightField* self_);
 
         /// <summary>
         ///  Writes out the sample data array.
@@ -3559,7 +3559,7 @@ namespace Physx
         ///  The number of bytes written.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_saveCells", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxHeightField_saveCells(PxHeightField* self_, void* destBuffer, uint destBufferSize);
+        internal static extern uint PxHeightField_saveCells(PxHeightField* self_, void* destBuffer, uint destBufferSize);
 
         /// <summary>
         ///  Replaces a rectangular subfield in the sample data array.
@@ -3577,7 +3577,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_modifySamples_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxHeightField_modifySamples_mut(PxHeightField* self_, int startCol, int startRow, PxHeightFieldDesc* subfieldDesc, [MarshalAs(UnmanagedType.U1)] bool shrinkBounds);
+        internal static extern bool PxHeightField_modifySamples_mut(PxHeightField* self_, int startCol, int startRow, PxHeightFieldDesc* subfieldDesc, [MarshalAs(UnmanagedType.U1)] bool shrinkBounds);
 
         /// <summary>
         ///  Retrieves the number of sample rows in the samples array.
@@ -3585,7 +3585,7 @@ namespace Physx
         ///  The number of sample rows in the samples array.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_getNbRows", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxHeightField_getNbRows(PxHeightField* self_);
+        internal static extern uint PxHeightField_getNbRows(PxHeightField* self_);
 
         /// <summary>
         ///  Retrieves the number of sample columns in the samples array.
@@ -3593,7 +3593,7 @@ namespace Physx
         ///  The number of sample columns in the samples array.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_getNbColumns", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxHeightField_getNbColumns(PxHeightField* self_);
+        internal static extern uint PxHeightField_getNbColumns(PxHeightField* self_);
 
         /// <summary>
         ///  Retrieves the format of the sample data.
@@ -3601,7 +3601,7 @@ namespace Physx
         ///  The format of the sample data.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_getFormat", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxHeightFieldFormat PxHeightField_getFormat(PxHeightField* self_);
+        internal static extern PxHeightFieldFormat PxHeightField_getFormat(PxHeightField* self_);
 
         /// <summary>
         ///  Retrieves the offset in bytes between consecutive samples in the array.
@@ -3609,7 +3609,7 @@ namespace Physx
         ///  The offset in bytes between consecutive samples in the array.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_getSampleStride", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxHeightField_getSampleStride(PxHeightField* self_);
+        internal static extern uint PxHeightField_getSampleStride(PxHeightField* self_);
 
         /// <summary>
         ///  Retrieves the convex edge threshold.
@@ -3617,7 +3617,7 @@ namespace Physx
         ///  The convex edge threshold.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_getConvexEdgeThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxHeightField_getConvexEdgeThreshold(PxHeightField* self_);
+        internal static extern float PxHeightField_getConvexEdgeThreshold(PxHeightField* self_);
 
         /// <summary>
         ///  Retrieves the flags bits, combined from values of the enum ::PxHeightFieldFlag.
@@ -3625,7 +3625,7 @@ namespace Physx
         ///  The flags bits, combined from values of the enum ::PxHeightFieldFlag.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_getFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxHeightFieldFlags PxHeightField_getFlags(PxHeightField* self_);
+        internal static extern PxHeightFieldFlags PxHeightField_getFlags(PxHeightField* self_);
 
         /// <summary>
         ///  Retrieves the height at the given coordinates in grid space.
@@ -3633,7 +3633,7 @@ namespace Physx
         ///  The height at the given coordinates or 0 if the coordinates are out of range.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_getHeight", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxHeightField_getHeight(PxHeightField* self_, float x, float z);
+        internal static extern float PxHeightField_getHeight(PxHeightField* self_, float x, float z);
 
         /// <summary>
         ///  Returns material table index of given triangle
@@ -3643,7 +3643,7 @@ namespace Physx
         ///  Material table index, or 0xffff if no per-triangle materials are used
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_getTriangleMaterialIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort PxHeightField_getTriangleMaterialIndex(PxHeightField* self_, uint triangleIndex);
+        internal static extern ushort PxHeightField_getTriangleMaterialIndex(PxHeightField* self_, uint triangleIndex);
 
         /// <summary>
         ///  Returns a triangle face normal for a given triangle index
@@ -3653,7 +3653,7 @@ namespace Physx
         ///  Triangle normal for a given triangle index
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_getTriangleNormal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxHeightField_getTriangleNormal(PxHeightField* self_, uint triangleIndex);
+        internal static extern PxVec3 PxHeightField_getTriangleNormal(PxHeightField* self_, uint triangleIndex);
 
         /// <summary>
         ///  Returns heightfield sample of given row and column
@@ -3661,7 +3661,7 @@ namespace Physx
         ///  Heightfield sample
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_getSample", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxHeightFieldSample* PxHeightField_getSample(PxHeightField* self_, uint row, uint column);
+        internal static extern PxHeightFieldSample* PxHeightField_getSample(PxHeightField* self_, uint row, uint column);
 
         /// <summary>
         ///  Returns the number of times the heightfield data has been modified
@@ -3672,22 +3672,22 @@ namespace Physx
         ///  the number of times the heightfield sample data has been modified.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightField_getTimestamp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxHeightField_getTimestamp(PxHeightField* self_);
+        internal static extern uint PxHeightField_getTimestamp(PxHeightField* self_);
 
         [DllImport(__DllName, EntryPoint = "PxHeightField_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxHeightField_getConcreteTypeName(PxHeightField* self_);
+        internal static extern byte* PxHeightField_getConcreteTypeName(PxHeightField* self_);
 
         /// <summary>
         ///  Constructor sets to default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightFieldDesc_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxHeightFieldDesc PxHeightFieldDesc_new();
+        internal static extern PxHeightFieldDesc PxHeightFieldDesc_new();
 
         /// <summary>
         ///  (re)sets the structure to the default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightFieldDesc_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxHeightFieldDesc_setToDefault_mut(PxHeightFieldDesc* self_);
+        internal static extern void PxHeightFieldDesc_setToDefault_mut(PxHeightFieldDesc* self_);
 
         /// <summary>
         ///  Returns true if the descriptor is valid.
@@ -3696,7 +3696,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxHeightFieldDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxHeightFieldDesc_isValid(PxHeightFieldDesc* self_);
+        internal static extern bool PxHeightFieldDesc_isValid(PxHeightFieldDesc* self_);
 
         /// <summary>
         ///  Retrieves triangle data from a triangle ID.
@@ -3706,7 +3706,7 @@ namespace Physx
         ///  This function will flip the triangle normal whenever triGeom.scale.hasNegativeDeterminant() is true.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshQuery_getTriangle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMeshQuery_getTriangle(PxTriangleMeshGeometry* triGeom, PxTransform* transform, uint triangleIndex, PxTriangle* triangle, uint* vertexIndices, uint* adjacencyIndices);
+        internal static extern void PxMeshQuery_getTriangle(PxTriangleMeshGeometry* triGeom, PxTransform* transform, uint triangleIndex, PxTriangle* triangle, uint* vertexIndices, uint* adjacencyIndices);
 
         /// <summary>
         ///  Retrieves triangle data from a triangle ID.
@@ -3736,7 +3736,7 @@ namespace Physx
         ///  }
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshQuery_getTriangle_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMeshQuery_getTriangle_1(PxHeightFieldGeometry* hfGeom, PxTransform* transform, uint triangleIndex, PxTriangle* triangle, uint* vertexIndices, uint* adjacencyIndices);
+        internal static extern void PxMeshQuery_getTriangle_1(PxHeightFieldGeometry* hfGeom, PxTransform* transform, uint triangleIndex, PxTriangle* triangle, uint* vertexIndices, uint* adjacencyIndices);
 
         /// <summary>
         ///  Find the mesh triangles which touch the specified geometry object.
@@ -3748,7 +3748,7 @@ namespace Physx
         ///  Number of overlaps found, i.e. number of elements written to the results buffer
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshQuery_findOverlapTriangleMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxMeshQuery_findOverlapTriangleMesh(PxGeometry* geom, PxTransform* geomPose, PxTriangleMeshGeometry* meshGeom, PxTransform* meshPose, uint* results, uint maxResults, uint startIndex, bool* overflow, PxGeometryQueryFlags queryFlags);
+        internal static extern uint PxMeshQuery_findOverlapTriangleMesh(PxGeometry* geom, PxTransform* geomPose, PxTriangleMeshGeometry* meshGeom, PxTransform* meshPose, uint* results, uint maxResults, uint startIndex, bool* overflow, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  Find the height field triangles which touch the specified geometry object.
@@ -3758,7 +3758,7 @@ namespace Physx
         ///  Number of overlaps found, i.e. number of elements written to the results buffer
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshQuery_findOverlapHeightField", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxMeshQuery_findOverlapHeightField(PxGeometry* geom, PxTransform* geomPose, PxHeightFieldGeometry* hfGeom, PxTransform* hfPose, uint* results, uint maxResults, uint startIndex, bool* overflow, PxGeometryQueryFlags queryFlags);
+        internal static extern uint PxMeshQuery_findOverlapHeightField(PxGeometry* geom, PxTransform* geomPose, PxHeightFieldGeometry* hfGeom, PxTransform* hfPose, uint* results, uint maxResults, uint startIndex, bool* overflow, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  Sweep a specified geometry object in space and test for collision with a set of given triangles.
@@ -3788,56 +3788,56 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshQuery_sweep", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxMeshQuery_sweep(PxVec3* unitDir, float distance, PxGeometry* geom, PxTransform* pose, uint triangleCount, PxTriangle* triangles, PxGeomSweepHit* sweepHit, PxHitFlags hitFlags, uint* cachedIndex, float inflation, [MarshalAs(UnmanagedType.U1)] bool doubleSided, PxGeometryQueryFlags queryFlags);
+        internal static extern bool PxMeshQuery_sweep(PxVec3* unitDir, float distance, PxGeometry* geom, PxTransform* pose, uint triangleCount, PxTriangle* triangles, PxGeomSweepHit* sweepHit, PxHitFlags hitFlags, uint* cachedIndex, float inflation, [MarshalAs(UnmanagedType.U1)] bool doubleSided, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  constructor sets to default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimpleTriangleMesh_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSimpleTriangleMesh PxSimpleTriangleMesh_new();
+        internal static extern PxSimpleTriangleMesh PxSimpleTriangleMesh_new();
 
         /// <summary>
         ///  (re)sets the structure to the default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimpleTriangleMesh_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSimpleTriangleMesh_setToDefault_mut(PxSimpleTriangleMesh* self_);
+        internal static extern void PxSimpleTriangleMesh_setToDefault_mut(PxSimpleTriangleMesh* self_);
 
         /// <summary>
         ///  returns true if the current settings are valid
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimpleTriangleMesh_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSimpleTriangleMesh_isValid(PxSimpleTriangleMesh* self_);
+        internal static extern bool PxSimpleTriangleMesh_isValid(PxSimpleTriangleMesh* self_);
 
         /// <summary>
         ///  Constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangle_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTriangle* PxTriangle_new_alloc();
+        internal static extern PxTriangle* PxTriangle_new_alloc();
 
         /// <summary>
         ///  Constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangle_new_alloc_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTriangle* PxTriangle_new_alloc_1(PxVec3* p0, PxVec3* p1, PxVec3* p2);
+        internal static extern PxTriangle* PxTriangle_new_alloc_1(PxVec3* p0, PxVec3* p1, PxVec3* p2);
 
         /// <summary>
         ///  Destructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangle_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTriangle_delete(PxTriangle* self_);
+        internal static extern void PxTriangle_delete(PxTriangle* self_);
 
         /// <summary>
         ///  Compute the normal of the Triangle.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangle_normal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTriangle_normal(PxTriangle* self_, PxVec3* _normal);
+        internal static extern void PxTriangle_normal(PxTriangle* self_, PxVec3* _normal);
 
         /// <summary>
         ///  Compute the unnormalized normal of the triangle.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangle_denormalizedNormal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTriangle_denormalizedNormal(PxTriangle* self_, PxVec3* _normal);
+        internal static extern void PxTriangle_denormalizedNormal(PxTriangle* self_, PxVec3* _normal);
 
         /// <summary>
         ///  Compute the area of the triangle.
@@ -3845,19 +3845,19 @@ namespace Physx
         ///  Area of the triangle.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangle_area", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxTriangle_area(PxTriangle* self_);
+        internal static extern float PxTriangle_area(PxTriangle* self_);
 
         /// <summary>
         ///  Computes a point on the triangle from u and v barycentric coordinates.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangle_pointFromUV", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxTriangle_pointFromUV(PxTriangle* self_, float u, float v);
+        internal static extern PxVec3 PxTriangle_pointFromUV(PxTriangle* self_, float u, float v);
 
         [DllImport(__DllName, EntryPoint = "PxTrianglePadded_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTrianglePadded* PxTrianglePadded_new_alloc();
+        internal static extern PxTrianglePadded* PxTrianglePadded_new_alloc();
 
         [DllImport(__DllName, EntryPoint = "PxTrianglePadded_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTrianglePadded_delete(PxTrianglePadded* self_);
+        internal static extern void PxTrianglePadded_delete(PxTrianglePadded* self_);
 
         /// <summary>
         ///  Returns the number of vertices.
@@ -3865,7 +3865,7 @@ namespace Physx
         ///  number of vertices
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getNbVertices", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxTriangleMesh_getNbVertices(PxTriangleMesh* self_);
+        internal static extern uint PxTriangleMesh_getNbVertices(PxTriangleMesh* self_);
 
         /// <summary>
         ///  Returns the vertices.
@@ -3873,7 +3873,7 @@ namespace Physx
         ///  array of vertices
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getVertices", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3* PxTriangleMesh_getVertices(PxTriangleMesh* self_);
+        internal static extern PxVec3* PxTriangleMesh_getVertices(PxTriangleMesh* self_);
 
         /// <summary>
         ///  Returns all mesh vertices for modification.
@@ -3899,7 +3899,7 @@ namespace Physx
         ///  It is also recommended to make sure that a call to validateTriangleMesh returns true if mesh cleaning is disabled.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getVerticesForModification_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3* PxTriangleMesh_getVerticesForModification_mut(PxTriangleMesh* self_);
+        internal static extern PxVec3* PxTriangleMesh_getVerticesForModification_mut(PxTriangleMesh* self_);
 
         /// <summary>
         ///  Refits BVH for mesh vertices.
@@ -3922,7 +3922,7 @@ namespace Physx
         ///  Active edges information will be lost during refit, the rigid body mesh contact generation might not perform as expected.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_refitBVH_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxTriangleMesh_refitBVH_mut(PxTriangleMesh* self_);
+        internal static extern PxBounds3 PxTriangleMesh_refitBVH_mut(PxTriangleMesh* self_);
 
         /// <summary>
         ///  Returns the number of triangles.
@@ -3930,7 +3930,7 @@ namespace Physx
         ///  number of triangles
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getNbTriangles", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxTriangleMesh_getNbTriangles(PxTriangleMesh* self_);
+        internal static extern uint PxTriangleMesh_getNbTriangles(PxTriangleMesh* self_);
 
         /// <summary>
         ///  Returns the triangle indices.
@@ -3943,7 +3943,7 @@ namespace Physx
         ///  array of triangles
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getTriangles", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxTriangleMesh_getTriangles(PxTriangleMesh* self_);
+        internal static extern void* PxTriangleMesh_getTriangles(PxTriangleMesh* self_);
 
         /// <summary>
         ///  Reads the PxTriangleMesh flags.
@@ -3953,7 +3953,7 @@ namespace Physx
         ///  The values of the PxTriangleMesh flags.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getTriangleMeshFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTriangleMeshFlags PxTriangleMesh_getTriangleMeshFlags(PxTriangleMesh* self_);
+        internal static extern PxTriangleMeshFlags PxTriangleMesh_getTriangleMeshFlags(PxTriangleMesh* self_);
 
         /// <summary>
         ///  Returns the triangle remapping table.
@@ -3967,13 +3967,13 @@ namespace Physx
         ///  the remapping table (or NULL if 'PxCookingParams::suppressTriangleMeshRemapTable' has been used)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getTrianglesRemap", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint* PxTriangleMesh_getTrianglesRemap(PxTriangleMesh* self_);
+        internal static extern uint* PxTriangleMesh_getTrianglesRemap(PxTriangleMesh* self_);
 
         /// <summary>
         ///  Decrements the reference count of a triangle mesh and releases it if the new reference count is zero.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTriangleMesh_release_mut(PxTriangleMesh* self_);
+        internal static extern void PxTriangleMesh_release_mut(PxTriangleMesh* self_);
 
         /// <summary>
         ///  Returns material table index of given triangle
@@ -3983,7 +3983,7 @@ namespace Physx
         ///  Material table index, or 0xffff if no per-triangle materials are used
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getTriangleMaterialIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort PxTriangleMesh_getTriangleMaterialIndex(PxTriangleMesh* self_, uint triangleIndex);
+        internal static extern ushort PxTriangleMesh_getTriangleMaterialIndex(PxTriangleMesh* self_, uint triangleIndex);
 
         /// <summary>
         ///  Returns the local-space (vertex space) AABB from the triangle mesh.
@@ -3991,7 +3991,7 @@ namespace Physx
         ///  local-space bounds
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getLocalBounds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxTriangleMesh_getLocalBounds(PxTriangleMesh* self_);
+        internal static extern PxBounds3 PxTriangleMesh_getLocalBounds(PxTriangleMesh* self_);
 
         /// <summary>
         ///  Returns the local-space Signed Distance Field for this mesh if it has one.
@@ -3999,13 +3999,13 @@ namespace Physx
         ///  local-space SDF.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getSDF", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float* PxTriangleMesh_getSDF(PxTriangleMesh* self_);
+        internal static extern float* PxTriangleMesh_getSDF(PxTriangleMesh* self_);
 
         /// <summary>
         ///  Returns the resolution of the local-space dense SDF.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getSDFDimensions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTriangleMesh_getSDFDimensions(PxTriangleMesh* self_, uint* numX, uint* numY, uint* numZ);
+        internal static extern void PxTriangleMesh_getSDFDimensions(PxTriangleMesh* self_, uint* numX, uint* numY, uint* numZ);
 
         /// <summary>
         ///  Sets whether this mesh should be preferred for SDF projection.
@@ -4017,7 +4017,7 @@ namespace Physx
         ///  Where both models are flagged as preferring no projection, the less detailed model will be projected as before.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_setPreferSDFProjection_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTriangleMesh_setPreferSDFProjection_mut(PxTriangleMesh* self_, [MarshalAs(UnmanagedType.U1)] bool preferProjection);
+        internal static extern void PxTriangleMesh_setPreferSDFProjection_mut(PxTriangleMesh* self_, [MarshalAs(UnmanagedType.U1)] bool preferProjection);
 
         /// <summary>
         ///  Returns whether this mesh prefers SDF projection.
@@ -4026,7 +4026,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getPreferSDFProjection", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxTriangleMesh_getPreferSDFProjection(PxTriangleMesh* self_);
+        internal static extern bool PxTriangleMesh_getPreferSDFProjection(PxTriangleMesh* self_);
 
         /// <summary>
         ///  Returns the mass properties of the mesh assuming unit density.
@@ -4041,31 +4041,31 @@ namespace Physx
         ///  localInertia of the unit density mesh by d.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMesh_getMassInformation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTriangleMesh_getMassInformation(PxTriangleMesh* self_, float* mass, PxMat33* localInertia, PxVec3* localCenterOfMass);
+        internal static extern void PxTriangleMesh_getMassInformation(PxTriangleMesh* self_, float* mass, PxMat33* localInertia, PxVec3* localCenterOfMass);
 
         /// <summary>
         ///  Constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedron_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedron* PxTetrahedron_new_alloc();
+        internal static extern PxTetrahedron* PxTetrahedron_new_alloc();
 
         /// <summary>
         ///  Constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedron_new_alloc_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedron* PxTetrahedron_new_alloc_1(PxVec3* p0, PxVec3* p1, PxVec3* p2, PxVec3* p3);
+        internal static extern PxTetrahedron* PxTetrahedron_new_alloc_1(PxVec3* p0, PxVec3* p1, PxVec3* p2, PxVec3* p3);
 
         /// <summary>
         ///  Destructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedron_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTetrahedron_delete(PxTetrahedron* self_);
+        internal static extern void PxTetrahedron_delete(PxTetrahedron* self_);
 
         /// <summary>
         ///  Decrements the reference count of a tetrahedron mesh and releases it if the new reference count is zero.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSoftBodyAuxData_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSoftBodyAuxData_release_mut(PxSoftBodyAuxData* self_);
+        internal static extern void PxSoftBodyAuxData_release_mut(PxSoftBodyAuxData* self_);
 
         /// <summary>
         ///  Returns the number of vertices.
@@ -4073,7 +4073,7 @@ namespace Physx
         ///  number of vertices
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMesh_getNbVertices", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxTetrahedronMesh_getNbVertices(PxTetrahedronMesh* self_);
+        internal static extern uint PxTetrahedronMesh_getNbVertices(PxTetrahedronMesh* self_);
 
         /// <summary>
         ///  Returns the vertices
@@ -4081,7 +4081,7 @@ namespace Physx
         ///  array of vertices
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMesh_getVertices", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3* PxTetrahedronMesh_getVertices(PxTetrahedronMesh* self_);
+        internal static extern PxVec3* PxTetrahedronMesh_getVertices(PxTetrahedronMesh* self_);
 
         /// <summary>
         ///  Returns the number of tetrahedrons.
@@ -4089,7 +4089,7 @@ namespace Physx
         ///  number of tetrahedrons
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMesh_getNbTetrahedrons", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxTetrahedronMesh_getNbTetrahedrons(PxTetrahedronMesh* self_);
+        internal static extern uint PxTetrahedronMesh_getNbTetrahedrons(PxTetrahedronMesh* self_);
 
         /// <summary>
         ///  Returns the tetrahedron indices.
@@ -4102,7 +4102,7 @@ namespace Physx
         ///  array of tetrahedrons
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMesh_getTetrahedrons", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxTetrahedronMesh_getTetrahedrons(PxTetrahedronMesh* self_);
+        internal static extern void* PxTetrahedronMesh_getTetrahedrons(PxTetrahedronMesh* self_);
 
         /// <summary>
         ///  Reads the PxTetrahedronMesh flags.
@@ -4112,7 +4112,7 @@ namespace Physx
         ///  The values of the PxTetrahedronMesh flags.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMesh_getTetrahedronMeshFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMeshFlags PxTetrahedronMesh_getTetrahedronMeshFlags(PxTetrahedronMesh* self_);
+        internal static extern PxTetrahedronMeshFlags PxTetrahedronMesh_getTetrahedronMeshFlags(PxTetrahedronMesh* self_);
 
         /// <summary>
         ///  Returns the tetrahedra remapping table.
@@ -4126,7 +4126,7 @@ namespace Physx
         ///  the remapping table (or NULL if 'PxCookingParams::suppressTriangleMeshRemapTable' has been used)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMesh_getTetrahedraRemap", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint* PxTetrahedronMesh_getTetrahedraRemap(PxTetrahedronMesh* self_);
+        internal static extern uint* PxTetrahedronMesh_getTetrahedraRemap(PxTetrahedronMesh* self_);
 
         /// <summary>
         ///  Returns the local-space (vertex space) AABB from the tetrahedron mesh.
@@ -4134,82 +4134,82 @@ namespace Physx
         ///  local-space bounds
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMesh_getLocalBounds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxTetrahedronMesh_getLocalBounds(PxTetrahedronMesh* self_);
+        internal static extern PxBounds3 PxTetrahedronMesh_getLocalBounds(PxTetrahedronMesh* self_);
 
         /// <summary>
         ///  Decrements the reference count of a tetrahedron mesh and releases it if the new reference count is zero.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMesh_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTetrahedronMesh_release_mut(PxTetrahedronMesh* self_);
+        internal static extern void PxTetrahedronMesh_release_mut(PxTetrahedronMesh* self_);
 
         /// <summary>
         ///  Const accecssor to the softbody's collision mesh.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSoftBodyMesh_getCollisionMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMesh* PxSoftBodyMesh_getCollisionMesh(PxSoftBodyMesh* self_);
+        internal static extern PxTetrahedronMesh* PxSoftBodyMesh_getCollisionMesh(PxSoftBodyMesh* self_);
 
         /// <summary>
         ///  Accecssor to the softbody's collision mesh.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSoftBodyMesh_getCollisionMesh_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMesh* PxSoftBodyMesh_getCollisionMesh_mut(PxSoftBodyMesh* self_);
+        internal static extern PxTetrahedronMesh* PxSoftBodyMesh_getCollisionMesh_mut(PxSoftBodyMesh* self_);
 
         /// <summary>
         ///  Const accessor to the softbody's simulation mesh.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSoftBodyMesh_getSimulationMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMesh* PxSoftBodyMesh_getSimulationMesh(PxSoftBodyMesh* self_);
+        internal static extern PxTetrahedronMesh* PxSoftBodyMesh_getSimulationMesh(PxSoftBodyMesh* self_);
 
         /// <summary>
         ///  Accecssor to the softbody's simulation mesh.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSoftBodyMesh_getSimulationMesh_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMesh* PxSoftBodyMesh_getSimulationMesh_mut(PxSoftBodyMesh* self_);
+        internal static extern PxTetrahedronMesh* PxSoftBodyMesh_getSimulationMesh_mut(PxSoftBodyMesh* self_);
 
         /// <summary>
         ///  Const accessor to the softbodies simulation state.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSoftBodyMesh_getSoftBodyAuxData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSoftBodyAuxData* PxSoftBodyMesh_getSoftBodyAuxData(PxSoftBodyMesh* self_);
+        internal static extern PxSoftBodyAuxData* PxSoftBodyMesh_getSoftBodyAuxData(PxSoftBodyMesh* self_);
 
         /// <summary>
         ///  Accessor to the softbody's auxilary data like mass and rest pose information
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSoftBodyMesh_getSoftBodyAuxData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSoftBodyAuxData* PxSoftBodyMesh_getSoftBodyAuxData_mut(PxSoftBodyMesh* self_);
+        internal static extern PxSoftBodyAuxData* PxSoftBodyMesh_getSoftBodyAuxData_mut(PxSoftBodyMesh* self_);
 
         /// <summary>
         ///  Decrements the reference count of a tetrahedron mesh and releases it if the new reference count is zero.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSoftBodyMesh_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSoftBodyMesh_release_mut(PxSoftBodyMesh* self_);
+        internal static extern void PxSoftBodyMesh_release_mut(PxSoftBodyMesh* self_);
 
         [DllImport(__DllName, EntryPoint = "PxCollisionMeshMappingData_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCollisionMeshMappingData_release_mut(PxCollisionMeshMappingData* self_);
+        internal static extern void PxCollisionMeshMappingData_release_mut(PxCollisionMeshMappingData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxCollisionTetrahedronMeshData_getMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMeshData* PxCollisionTetrahedronMeshData_getMesh(PxCollisionTetrahedronMeshData* self_);
+        internal static extern PxTetrahedronMeshData* PxCollisionTetrahedronMeshData_getMesh(PxCollisionTetrahedronMeshData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxCollisionTetrahedronMeshData_getMesh_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMeshData* PxCollisionTetrahedronMeshData_getMesh_mut(PxCollisionTetrahedronMeshData* self_);
+        internal static extern PxTetrahedronMeshData* PxCollisionTetrahedronMeshData_getMesh_mut(PxCollisionTetrahedronMeshData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxCollisionTetrahedronMeshData_getData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSoftBodyCollisionData* PxCollisionTetrahedronMeshData_getData(PxCollisionTetrahedronMeshData* self_);
+        internal static extern PxSoftBodyCollisionData* PxCollisionTetrahedronMeshData_getData(PxCollisionTetrahedronMeshData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxCollisionTetrahedronMeshData_getData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSoftBodyCollisionData* PxCollisionTetrahedronMeshData_getData_mut(PxCollisionTetrahedronMeshData* self_);
+        internal static extern PxSoftBodyCollisionData* PxCollisionTetrahedronMeshData_getData_mut(PxCollisionTetrahedronMeshData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxCollisionTetrahedronMeshData_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCollisionTetrahedronMeshData_release_mut(PxCollisionTetrahedronMeshData* self_);
+        internal static extern void PxCollisionTetrahedronMeshData_release_mut(PxCollisionTetrahedronMeshData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxSimulationTetrahedronMeshData_getMesh_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMeshData* PxSimulationTetrahedronMeshData_getMesh_mut(PxSimulationTetrahedronMeshData* self_);
+        internal static extern PxTetrahedronMeshData* PxSimulationTetrahedronMeshData_getMesh_mut(PxSimulationTetrahedronMeshData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxSimulationTetrahedronMeshData_getData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSoftBodySimulationData* PxSimulationTetrahedronMeshData_getData_mut(PxSimulationTetrahedronMeshData* self_);
+        internal static extern PxSoftBodySimulationData* PxSimulationTetrahedronMeshData_getData_mut(PxSimulationTetrahedronMeshData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxSimulationTetrahedronMeshData_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSimulationTetrahedronMeshData_release_mut(PxSimulationTetrahedronMeshData* self_);
+        internal static extern void PxSimulationTetrahedronMeshData_release_mut(PxSimulationTetrahedronMeshData* self_);
 
         /// <summary>
         ///  Deletes the actor.
@@ -4219,7 +4219,7 @@ namespace Physx
         ///  If the actor belongs to a [`PxAggregate`] object, it is automatically removed from the aggregate.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxActor_release_mut(PxActor* self_);
+        internal static extern void PxActor_release_mut(PxActor* self_);
 
         /// <summary>
         ///  Retrieves the type of actor.
@@ -4227,7 +4227,7 @@ namespace Physx
         ///  The actor type of the actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_getType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxActorType PxActor_getType(PxActor* self_);
+        internal static extern PxActorType PxActor_getType(PxActor* self_);
 
         /// <summary>
         ///  Retrieves the scene which this actor belongs to.
@@ -4235,7 +4235,7 @@ namespace Physx
         ///  Owner Scene. NULL if not part of a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_getScene", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxScene* PxActor_getScene(PxActor* self_);
+        internal static extern PxScene* PxActor_getScene(PxActor* self_);
 
         /// <summary>
         ///  Sets a name string for the object that can be retrieved with getName().
@@ -4247,7 +4247,7 @@ namespace Physx
         ///  NULL
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_setName_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxActor_setName_mut(PxActor* self_, byte* name);
+        internal static extern void PxActor_setName_mut(PxActor* self_, byte* name);
 
         /// <summary>
         ///  Retrieves the name string set with setName().
@@ -4255,7 +4255,7 @@ namespace Physx
         ///  Name string associated with object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_getName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxActor_getName(PxActor* self_);
+        internal static extern byte* PxActor_getName(PxActor* self_);
 
         /// <summary>
         ///  Retrieves the axis aligned bounding box enclosing the actor.
@@ -4266,7 +4266,7 @@ namespace Physx
         ///  The actor's bounding box.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_getWorldBounds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxActor_getWorldBounds(PxActor* self_, float inflation);
+        internal static extern PxBounds3 PxActor_getWorldBounds(PxActor* self_, float inflation);
 
         /// <summary>
         ///  Raises or clears a particular actor flag.
@@ -4279,7 +4279,7 @@ namespace Physx
         ///  wake the actor up automatically.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_setActorFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxActor_setActorFlag_mut(PxActor* self_, PxActorFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxActor_setActorFlag_mut(PxActor* self_, PxActorFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         /// <summary>
         ///  Sets the actor flags.
@@ -4287,7 +4287,7 @@ namespace Physx
         ///  See the list of flags [`PxActorFlag`]
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_setActorFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxActor_setActorFlags_mut(PxActor* self_, PxActorFlags inFlags);
+        internal static extern void PxActor_setActorFlags_mut(PxActor* self_, PxActorFlags inFlags);
 
         /// <summary>
         ///  Reads the PxActor flags.
@@ -4297,7 +4297,7 @@ namespace Physx
         ///  The values of the PxActor flags.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_getActorFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxActorFlags PxActor_getActorFlags(PxActor* self_);
+        internal static extern PxActorFlags PxActor_getActorFlags(PxActor* self_);
 
         /// <summary>
         ///  Assigns dynamic actors a dominance group identifier.
@@ -4316,7 +4316,7 @@ namespace Physx
         ///  wake the actor up automatically.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_setDominanceGroup_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxActor_setDominanceGroup_mut(PxActor* self_, byte dominanceGroup);
+        internal static extern void PxActor_setDominanceGroup_mut(PxActor* self_, byte dominanceGroup);
 
         /// <summary>
         ///  Retrieves the value set with setDominanceGroup().
@@ -4324,7 +4324,7 @@ namespace Physx
         ///  The dominance group of this actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_getDominanceGroup", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte PxActor_getDominanceGroup(PxActor* self_);
+        internal static extern byte PxActor_getDominanceGroup(PxActor* self_);
 
         /// <summary>
         ///  Sets the owner client of an actor.
@@ -4335,7 +4335,7 @@ namespace Physx
         ///  PX_DEFAULT_CLIENT
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_setOwnerClient_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxActor_setOwnerClient_mut(PxActor* self_, byte inClient);
+        internal static extern void PxActor_setOwnerClient_mut(PxActor* self_, byte inClient);
 
         /// <summary>
         ///  Returns the owner client that was specified at creation time.
@@ -4343,7 +4343,7 @@ namespace Physx
         ///  This value cannot be changed once the object is placed into the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_getOwnerClient", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte PxActor_getOwnerClient(PxActor* self_);
+        internal static extern byte PxActor_getOwnerClient(PxActor* self_);
 
         /// <summary>
         ///  Retrieves the aggregate the actor might be a part of.
@@ -4351,16 +4351,16 @@ namespace Physx
         ///  The aggregate the actor is a part of, or NULL if the actor does not belong to an aggregate.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxActor_getAggregate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxAggregate* PxActor_getAggregate(PxActor* self_);
+        internal static extern PxAggregate* PxActor_getAggregate(PxActor* self_);
 
         [DllImport(__DllName, EntryPoint = "phys_PxGetAggregateFilterHint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxGetAggregateFilterHint(PxAggregateType type_, [MarshalAs(UnmanagedType.U1)] bool enableSelfCollision);
+        internal static extern uint phys_PxGetAggregateFilterHint(PxAggregateType type_, [MarshalAs(UnmanagedType.U1)] bool enableSelfCollision);
 
         [DllImport(__DllName, EntryPoint = "phys_PxGetAggregateSelfCollisionBit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxGetAggregateSelfCollisionBit(uint hint);
+        internal static extern uint phys_PxGetAggregateSelfCollisionBit(uint hint);
 
         [DllImport(__DllName, EntryPoint = "phys_PxGetAggregateType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxAggregateType phys_PxGetAggregateType(uint hint);
+        internal static extern PxAggregateType phys_PxGetAggregateType(uint hint);
 
         /// <summary>
         ///  Deletes the aggregate object.
@@ -4371,7 +4371,7 @@ namespace Physx
         ///  the PxAggregate when it is empty.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAggregate_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAggregate_release_mut(PxAggregate* self_);
+        internal static extern void PxAggregate_release_mut(PxAggregate* self_);
 
         /// <summary>
         ///  Adds an actor to the aggregate object.
@@ -4391,7 +4391,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAggregate_addActor_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxAggregate_addActor_mut(PxAggregate* self_, PxActor* actor, PxBVH* bvh);
+        internal static extern bool PxAggregate_addActor_mut(PxAggregate* self_, PxActor* actor, PxBVH* bvh);
 
         /// <summary>
         ///  Removes an actor from the aggregate object.
@@ -4403,7 +4403,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAggregate_removeActor_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxAggregate_removeActor_mut(PxAggregate* self_, PxActor* actor);
+        internal static extern bool PxAggregate_removeActor_mut(PxAggregate* self_, PxActor* actor);
 
         /// <summary>
         ///  Adds an articulation to the aggregate object.
@@ -4418,7 +4418,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAggregate_addArticulation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxAggregate_addArticulation_mut(PxAggregate* self_, PxArticulationReducedCoordinate* articulation);
+        internal static extern bool PxAggregate_addArticulation_mut(PxAggregate* self_, PxArticulationReducedCoordinate* articulation);
 
         /// <summary>
         ///  Removes an articulation from the aggregate object.
@@ -4430,7 +4430,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAggregate_removeArticulation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxAggregate_removeArticulation_mut(PxAggregate* self_, PxArticulationReducedCoordinate* articulation);
+        internal static extern bool PxAggregate_removeArticulation_mut(PxAggregate* self_, PxArticulationReducedCoordinate* articulation);
 
         /// <summary>
         ///  Returns the number of actors contained in the aggregate.
@@ -4440,7 +4440,7 @@ namespace Physx
         ///  Number of actors contained in the aggregate.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAggregate_getNbActors", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxAggregate_getNbActors(PxAggregate* self_);
+        internal static extern uint PxAggregate_getNbActors(PxAggregate* self_);
 
         /// <summary>
         ///  Retrieves max amount of shapes that can be contained in the aggregate.
@@ -4448,7 +4448,7 @@ namespace Physx
         ///  Max shape size.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAggregate_getMaxNbShapes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxAggregate_getMaxNbShapes(PxAggregate* self_);
+        internal static extern uint PxAggregate_getMaxNbShapes(PxAggregate* self_);
 
         /// <summary>
         ///  Retrieve all actors contained in the aggregate.
@@ -4458,7 +4458,7 @@ namespace Physx
         ///  Number of actor pointers written to the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAggregate_getActors", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxAggregate_getActors(PxAggregate* self_, PxActor** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxAggregate_getActors(PxAggregate* self_, PxActor** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Retrieves the scene which this aggregate belongs to.
@@ -4466,7 +4466,7 @@ namespace Physx
         ///  Owner Scene. NULL if not part of a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAggregate_getScene_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxScene* PxAggregate_getScene_mut(PxAggregate* self_);
+        internal static extern PxScene* PxAggregate_getScene_mut(PxAggregate* self_);
 
         /// <summary>
         ///  Retrieves aggregate's self-collision flag.
@@ -4475,52 +4475,52 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAggregate_getSelfCollision", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxAggregate_getSelfCollision(PxAggregate* self_);
+        internal static extern bool PxAggregate_getSelfCollision(PxAggregate* self_);
 
         [DllImport(__DllName, EntryPoint = "PxAggregate_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxAggregate_getConcreteTypeName(PxAggregate* self_);
+        internal static extern byte* PxAggregate_getConcreteTypeName(PxAggregate* self_);
 
         [DllImport(__DllName, EntryPoint = "PxConstraintInvMassScale_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConstraintInvMassScale PxConstraintInvMassScale_new();
+        internal static extern PxConstraintInvMassScale PxConstraintInvMassScale_new();
 
         [DllImport(__DllName, EntryPoint = "PxConstraintInvMassScale_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConstraintInvMassScale PxConstraintInvMassScale_new_1(float lin0, float ang0, float lin1, float ang1);
+        internal static extern PxConstraintInvMassScale PxConstraintInvMassScale_new_1(float lin0, float ang0, float lin1, float ang1);
 
         /// <summary>
         ///  Visualize joint frames
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintVisualizer_visualizeJointFrames_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraintVisualizer_visualizeJointFrames_mut(PxConstraintVisualizer* self_, PxTransform* parent, PxTransform* child);
+        internal static extern void PxConstraintVisualizer_visualizeJointFrames_mut(PxConstraintVisualizer* self_, PxTransform* parent, PxTransform* child);
 
         /// <summary>
         ///  Visualize joint linear limit
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintVisualizer_visualizeLinearLimit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraintVisualizer_visualizeLinearLimit_mut(PxConstraintVisualizer* self_, PxTransform* t0, PxTransform* t1, float value, [MarshalAs(UnmanagedType.U1)] bool active);
+        internal static extern void PxConstraintVisualizer_visualizeLinearLimit_mut(PxConstraintVisualizer* self_, PxTransform* t0, PxTransform* t1, float value, [MarshalAs(UnmanagedType.U1)] bool active);
 
         /// <summary>
         ///  Visualize joint angular limit
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintVisualizer_visualizeAngularLimit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraintVisualizer_visualizeAngularLimit_mut(PxConstraintVisualizer* self_, PxTransform* t0, float lower, float upper, [MarshalAs(UnmanagedType.U1)] bool active);
+        internal static extern void PxConstraintVisualizer_visualizeAngularLimit_mut(PxConstraintVisualizer* self_, PxTransform* t0, float lower, float upper, [MarshalAs(UnmanagedType.U1)] bool active);
 
         /// <summary>
         ///  Visualize limit cone
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintVisualizer_visualizeLimitCone_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraintVisualizer_visualizeLimitCone_mut(PxConstraintVisualizer* self_, PxTransform* t, float tanQSwingY, float tanQSwingZ, [MarshalAs(UnmanagedType.U1)] bool active);
+        internal static extern void PxConstraintVisualizer_visualizeLimitCone_mut(PxConstraintVisualizer* self_, PxTransform* t, float tanQSwingY, float tanQSwingZ, [MarshalAs(UnmanagedType.U1)] bool active);
 
         /// <summary>
         ///  Visualize joint double cone
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintVisualizer_visualizeDoubleCone_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraintVisualizer_visualizeDoubleCone_mut(PxConstraintVisualizer* self_, PxTransform* t, float angle, [MarshalAs(UnmanagedType.U1)] bool active);
+        internal static extern void PxConstraintVisualizer_visualizeDoubleCone_mut(PxConstraintVisualizer* self_, PxTransform* t, float angle, [MarshalAs(UnmanagedType.U1)] bool active);
 
         /// <summary>
         ///  Visualize line
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintVisualizer_visualizeLine_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraintVisualizer_visualizeLine_mut(PxConstraintVisualizer* self_, PxVec3* p0, PxVec3* p1, uint color);
+        internal static extern void PxConstraintVisualizer_visualizeLine_mut(PxConstraintVisualizer* self_, PxVec3* p0, PxVec3* p1, uint color);
 
         /// <summary>
         ///  Pre-simulation data preparation
@@ -4528,7 +4528,7 @@ namespace Physx
         ///  step for the SDK to copy the constraint data block.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintConnector_prepareData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxConstraintConnector_prepareData_mut(PxConstraintConnector* self_);
+        internal static extern void* PxConstraintConnector_prepareData_mut(PxConstraintConnector* self_);
 
         /// <summary>
         ///  Constraint release callback
@@ -4542,7 +4542,7 @@ namespace Physx
         ///  destruction of the PxPhysics object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintConnector_onConstraintRelease_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraintConnector_onConstraintRelease_mut(PxConstraintConnector* self_);
+        internal static extern void PxConstraintConnector_onConstraintRelease_mut(PxConstraintConnector* self_);
 
         /// <summary>
         ///  Center-of-mass shift callback
@@ -4553,7 +4553,7 @@ namespace Physx
         ///  when the application moves an object's center of mass.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintConnector_onComShift_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraintConnector_onComShift_mut(PxConstraintConnector* self_, uint actor);
+        internal static extern void PxConstraintConnector_onComShift_mut(PxConstraintConnector* self_, uint actor);
 
         /// <summary>
         ///  Origin shift callback
@@ -4565,7 +4565,7 @@ namespace Physx
         ///  to make sure that the data gets synced at the beginning of the next simulation step.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintConnector_onOriginShift_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraintConnector_onOriginShift_mut(PxConstraintConnector* self_, PxVec3* shift);
+        internal static extern void PxConstraintConnector_onOriginShift_mut(PxConstraintConnector* self_, PxVec3* shift);
 
         /// <summary>
         ///  Obtain a reference to a PxBase interface if the constraint has one.
@@ -4573,34 +4573,34 @@ namespace Physx
         ///  If the constraint does not implement the PxBase interface, it should return NULL.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintConnector_getSerializable_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBase* PxConstraintConnector_getSerializable_mut(PxConstraintConnector* self_);
+        internal static extern PxBase* PxConstraintConnector_getSerializable_mut(PxConstraintConnector* self_);
 
         /// <summary>
         ///  Obtain the pointer to the constraint's constant data
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintConnector_getConstantBlock", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxConstraintConnector_getConstantBlock(PxConstraintConnector* self_);
+        internal static extern void* PxConstraintConnector_getConstantBlock(PxConstraintConnector* self_);
 
         /// <summary>
         ///  Let the connector know it has been connected to a constraint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintConnector_connectToConstraint_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraintConnector_connectToConstraint_mut(PxConstraintConnector* self_, PxConstraint* anon_param0);
+        internal static extern void PxConstraintConnector_connectToConstraint_mut(PxConstraintConnector* self_, PxConstraint* anon_param0);
 
         /// <summary>
         ///  virtual destructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintConnector_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraintConnector_delete(PxConstraintConnector* self_);
+        internal static extern void PxConstraintConnector_delete(PxConstraintConnector* self_);
 
         [DllImport(__DllName, EntryPoint = "PxSolverBody_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSolverBody PxSolverBody_new();
+        internal static extern PxSolverBody PxSolverBody_new();
 
         [DllImport(__DllName, EntryPoint = "PxSolverBodyData_projectVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxSolverBodyData_projectVelocity(PxSolverBodyData* self_, PxVec3* lin, PxVec3* ang);
+        internal static extern float PxSolverBodyData_projectVelocity(PxSolverBodyData* self_, PxVec3* lin, PxVec3* ang);
 
         [DllImport(__DllName, EntryPoint = "PxSolverConstraintPrepDesc_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSolverConstraintPrepDesc_delete(PxSolverConstraintPrepDesc* self_);
+        internal static extern void PxSolverConstraintPrepDesc_delete(PxSolverConstraintPrepDesc* self_);
 
         /// <summary>
         ///  Allocates constraint data. It is the application's responsibility to release this memory after PxSolveConstraints has completed.
@@ -4608,7 +4608,7 @@ namespace Physx
         ///  The allocated memory. This address must be 16-byte aligned.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintAllocator_reserveConstraintData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxConstraintAllocator_reserveConstraintData_mut(PxConstraintAllocator* self_, uint byteSize);
+        internal static extern byte* PxConstraintAllocator_reserveConstraintData_mut(PxConstraintAllocator* self_, uint byteSize);
 
         /// <summary>
         ///  Allocates friction data. Friction data can be retained by the application for a given pair and provided as an input to PxSolverContactDesc to improve simulation stability.
@@ -4617,31 +4617,31 @@ namespace Physx
         ///  The allocated memory. This address must be 4-byte aligned.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraintAllocator_reserveFrictionData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxConstraintAllocator_reserveFrictionData_mut(PxConstraintAllocator* self_, uint byteSize);
+        internal static extern byte* PxConstraintAllocator_reserveFrictionData_mut(PxConstraintAllocator* self_, uint byteSize);
 
         [DllImport(__DllName, EntryPoint = "PxConstraintAllocator_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraintAllocator_delete(PxConstraintAllocator* self_);
+        internal static extern void PxConstraintAllocator_delete(PxConstraintAllocator* self_);
 
         [DllImport(__DllName, EntryPoint = "PxArticulationLimit_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationLimit PxArticulationLimit_new();
+        internal static extern PxArticulationLimit PxArticulationLimit_new();
 
         [DllImport(__DllName, EntryPoint = "PxArticulationLimit_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationLimit PxArticulationLimit_new_1(float low_, float high_);
+        internal static extern PxArticulationLimit PxArticulationLimit_new_1(float low_, float high_);
 
         [DllImport(__DllName, EntryPoint = "PxArticulationDrive_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationDrive PxArticulationDrive_new();
+        internal static extern PxArticulationDrive PxArticulationDrive_new();
 
         [DllImport(__DllName, EntryPoint = "PxArticulationDrive_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationDrive PxArticulationDrive_new_1(float stiffness_, float damping_, float maxForce_, PxArticulationDriveType driveType_);
+        internal static extern PxArticulationDrive PxArticulationDrive_new_1(float stiffness_, float damping_, float maxForce_, PxArticulationDriveType driveType_);
 
         [DllImport(__DllName, EntryPoint = "PxTGSSolverBodyVel_projectVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxTGSSolverBodyVel_projectVelocity(PxTGSSolverBodyVel* self_, PxVec3* lin, PxVec3* ang);
+        internal static extern float PxTGSSolverBodyVel_projectVelocity(PxTGSSolverBodyVel* self_, PxVec3* lin, PxVec3* ang);
 
         [DllImport(__DllName, EntryPoint = "PxTGSSolverBodyData_projectVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxTGSSolverBodyData_projectVelocity(PxTGSSolverBodyData* self_, PxVec3* linear, PxVec3* angular);
+        internal static extern float PxTGSSolverBodyData_projectVelocity(PxTGSSolverBodyData* self_, PxVec3* linear, PxVec3* angular);
 
         [DllImport(__DllName, EntryPoint = "PxTGSSolverConstraintPrepDesc_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTGSSolverConstraintPrepDesc_delete(PxTGSSolverConstraintPrepDesc* self_);
+        internal static extern void PxTGSSolverConstraintPrepDesc_delete(PxTGSSolverConstraintPrepDesc* self_);
 
         /// <summary>
         ///  Sets the spring rest length for the sub-tendon from the root to this leaf attachment.
@@ -4649,7 +4649,7 @@ namespace Physx
         ///  Setting this on non-leaf attachments has no effect.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_setRestLength_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationAttachment_setRestLength_mut(PxArticulationAttachment* self_, float restLength);
+        internal static extern void PxArticulationAttachment_setRestLength_mut(PxArticulationAttachment* self_, float restLength);
 
         /// <summary>
         ///  Gets the spring rest length for the sub-tendon from the root to this leaf attachment.
@@ -4657,7 +4657,7 @@ namespace Physx
         ///  The rest length.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_getRestLength", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationAttachment_getRestLength(PxArticulationAttachment* self_);
+        internal static extern float PxArticulationAttachment_getRestLength(PxArticulationAttachment* self_);
 
         /// <summary>
         ///  Sets the low and high limit on the length of the sub-tendon from the root to this leaf attachment.
@@ -4665,7 +4665,7 @@ namespace Physx
         ///  Setting this on non-leaf attachments has no effect.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_setLimitParameters_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationAttachment_setLimitParameters_mut(PxArticulationAttachment* self_, PxArticulationTendonLimit* parameters);
+        internal static extern void PxArticulationAttachment_setLimitParameters_mut(PxArticulationAttachment* self_, PxArticulationTendonLimit* parameters);
 
         /// <summary>
         ///  Gets the low and high limit on the length of the sub-tendon from the root to this leaf attachment.
@@ -4673,13 +4673,13 @@ namespace Physx
         ///  Struct with the low and high limit.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_getLimitParameters", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationTendonLimit PxArticulationAttachment_getLimitParameters(PxArticulationAttachment* self_);
+        internal static extern PxArticulationTendonLimit PxArticulationAttachment_getLimitParameters(PxArticulationAttachment* self_);
 
         /// <summary>
         ///  Sets the attachment's relative offset in the link actor frame.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_setRelativeOffset_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationAttachment_setRelativeOffset_mut(PxArticulationAttachment* self_, PxVec3* offset);
+        internal static extern void PxArticulationAttachment_setRelativeOffset_mut(PxArticulationAttachment* self_, PxVec3* offset);
 
         /// <summary>
         ///  Gets the attachment's relative offset in the link actor frame.
@@ -4687,13 +4687,13 @@ namespace Physx
         ///  The relative offset in the link actor frame.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_getRelativeOffset", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxArticulationAttachment_getRelativeOffset(PxArticulationAttachment* self_);
+        internal static extern PxVec3 PxArticulationAttachment_getRelativeOffset(PxArticulationAttachment* self_);
 
         /// <summary>
         ///  Sets the attachment coefficient.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_setCoefficient_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationAttachment_setCoefficient_mut(PxArticulationAttachment* self_, float coefficient);
+        internal static extern void PxArticulationAttachment_setCoefficient_mut(PxArticulationAttachment* self_, float coefficient);
 
         /// <summary>
         ///  Gets the attachment coefficient.
@@ -4701,7 +4701,7 @@ namespace Physx
         ///  The scale that the distance between this attachment and its parent is multiplied by when summing up the spatial tendon's length.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_getCoefficient", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationAttachment_getCoefficient(PxArticulationAttachment* self_);
+        internal static extern float PxArticulationAttachment_getCoefficient(PxArticulationAttachment* self_);
 
         /// <summary>
         ///  Gets the articulation link.
@@ -4709,7 +4709,7 @@ namespace Physx
         ///  The articulation link that this attachment is attached to.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_getLink", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationLink* PxArticulationAttachment_getLink(PxArticulationAttachment* self_);
+        internal static extern PxArticulationLink* PxArticulationAttachment_getLink(PxArticulationAttachment* self_);
 
         /// <summary>
         ///  Gets the parent attachment.
@@ -4717,7 +4717,7 @@ namespace Physx
         ///  The parent attachment.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_getParent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationAttachment* PxArticulationAttachment_getParent(PxArticulationAttachment* self_);
+        internal static extern PxArticulationAttachment* PxArticulationAttachment_getParent(PxArticulationAttachment* self_);
 
         /// <summary>
         ///  Indicates that this attachment is a leaf, and thus defines a sub-tendon from the root to this attachment.
@@ -4726,7 +4726,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_isLeaf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxArticulationAttachment_isLeaf(PxArticulationAttachment* self_);
+        internal static extern bool PxArticulationAttachment_isLeaf(PxArticulationAttachment* self_);
 
         /// <summary>
         ///  Gets the spatial tendon that the attachment is a part of.
@@ -4734,7 +4734,7 @@ namespace Physx
         ///  The tendon.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_getTendon", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationSpatialTendon* PxArticulationAttachment_getTendon(PxArticulationAttachment* self_);
+        internal static extern PxArticulationSpatialTendon* PxArticulationAttachment_getTendon(PxArticulationAttachment* self_);
 
         /// <summary>
         ///  Releases the attachment.
@@ -4743,7 +4743,7 @@ namespace Physx
         ///  release the attachment, remove and then re-add the articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationAttachment_release_mut(PxArticulationAttachment* self_);
+        internal static extern void PxArticulationAttachment_release_mut(PxArticulationAttachment* self_);
 
         /// <summary>
         ///  Returns the string name of the dynamic type.
@@ -4751,7 +4751,7 @@ namespace Physx
         ///  The string name.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationAttachment_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxArticulationAttachment_getConcreteTypeName(PxArticulationAttachment* self_);
+        internal static extern byte* PxArticulationAttachment_getConcreteTypeName(PxArticulationAttachment* self_);
 
         /// <summary>
         ///  Sets the tendon joint coefficient.
@@ -4760,13 +4760,13 @@ namespace Physx
         ///  have a joint axis only participate in the length computation of the tendon, but not have any tendon force applied to it.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendonJoint_setCoefficient_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationTendonJoint_setCoefficient_mut(PxArticulationTendonJoint* self_, PxArticulationAxis axis, float coefficient, float recipCoefficient);
+        internal static extern void PxArticulationTendonJoint_setCoefficient_mut(PxArticulationTendonJoint* self_, PxArticulationAxis axis, float coefficient, float recipCoefficient);
 
         /// <summary>
         ///  Gets the tendon joint coefficient.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendonJoint_getCoefficient", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationTendonJoint_getCoefficient(PxArticulationTendonJoint* self_, PxArticulationAxis* axis, float* coefficient, float* recipCoefficient);
+        internal static extern void PxArticulationTendonJoint_getCoefficient(PxArticulationTendonJoint* self_, PxArticulationAxis* axis, float* coefficient, float* recipCoefficient);
 
         /// <summary>
         ///  Gets the articulation link.
@@ -4774,7 +4774,7 @@ namespace Physx
         ///  The articulation link (and its incoming joint in particular) that this tendon joint is associated with.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendonJoint_getLink", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationLink* PxArticulationTendonJoint_getLink(PxArticulationTendonJoint* self_);
+        internal static extern PxArticulationLink* PxArticulationTendonJoint_getLink(PxArticulationTendonJoint* self_);
 
         /// <summary>
         ///  Gets the parent tendon joint.
@@ -4782,7 +4782,7 @@ namespace Physx
         ///  The parent tendon joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendonJoint_getParent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationTendonJoint* PxArticulationTendonJoint_getParent(PxArticulationTendonJoint* self_);
+        internal static extern PxArticulationTendonJoint* PxArticulationTendonJoint_getParent(PxArticulationTendonJoint* self_);
 
         /// <summary>
         ///  Gets the tendon that the joint is a part of.
@@ -4790,7 +4790,7 @@ namespace Physx
         ///  The tendon.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendonJoint_getTendon", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationFixedTendon* PxArticulationTendonJoint_getTendon(PxArticulationTendonJoint* self_);
+        internal static extern PxArticulationFixedTendon* PxArticulationTendonJoint_getTendon(PxArticulationTendonJoint* self_);
 
         /// <summary>
         ///  Releases a tendon joint.
@@ -4799,7 +4799,7 @@ namespace Physx
         ///  release the joint, remove and then re-add the articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendonJoint_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationTendonJoint_release_mut(PxArticulationTendonJoint* self_);
+        internal static extern void PxArticulationTendonJoint_release_mut(PxArticulationTendonJoint* self_);
 
         /// <summary>
         ///  Returns the string name of the dynamic type.
@@ -4807,13 +4807,13 @@ namespace Physx
         ///  The string name.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendonJoint_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxArticulationTendonJoint_getConcreteTypeName(PxArticulationTendonJoint* self_);
+        internal static extern byte* PxArticulationTendonJoint_getConcreteTypeName(PxArticulationTendonJoint* self_);
 
         /// <summary>
         ///  Sets the spring stiffness term acting on the tendon length.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendon_setStiffness_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationTendon_setStiffness_mut(PxArticulationTendon* self_, float stiffness);
+        internal static extern void PxArticulationTendon_setStiffness_mut(PxArticulationTendon* self_, float stiffness);
 
         /// <summary>
         ///  Gets the spring stiffness of the tendon.
@@ -4821,13 +4821,13 @@ namespace Physx
         ///  The spring stiffness.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendon_getStiffness", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationTendon_getStiffness(PxArticulationTendon* self_);
+        internal static extern float PxArticulationTendon_getStiffness(PxArticulationTendon* self_);
 
         /// <summary>
         ///  Sets the damping term acting both on the tendon length and tendon-length limits.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendon_setDamping_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationTendon_setDamping_mut(PxArticulationTendon* self_, float damping);
+        internal static extern void PxArticulationTendon_setDamping_mut(PxArticulationTendon* self_, float damping);
 
         /// <summary>
         ///  Gets the damping term acting both on the tendon length and tendon-length limits.
@@ -4835,7 +4835,7 @@ namespace Physx
         ///  The damping term.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendon_getDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationTendon_getDamping(PxArticulationTendon* self_);
+        internal static extern float PxArticulationTendon_getDamping(PxArticulationTendon* self_);
 
         /// <summary>
         ///  Sets the limit stiffness term acting on the tendon's length limits.
@@ -4843,7 +4843,7 @@ namespace Physx
         ///  For spatial tendons, this parameter applies to all its leaf attachments / sub-tendons.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendon_setLimitStiffness_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationTendon_setLimitStiffness_mut(PxArticulationTendon* self_, float stiffness);
+        internal static extern void PxArticulationTendon_setLimitStiffness_mut(PxArticulationTendon* self_, float stiffness);
 
         /// <summary>
         ///  Gets the limit stiffness term acting on the tendon's length limits.
@@ -4853,7 +4853,7 @@ namespace Physx
         ///  The limit stiffness term.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendon_getLimitStiffness", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationTendon_getLimitStiffness(PxArticulationTendon* self_);
+        internal static extern float PxArticulationTendon_getLimitStiffness(PxArticulationTendon* self_);
 
         /// <summary>
         ///  Sets the length offset term for the tendon.
@@ -4862,7 +4862,7 @@ namespace Physx
         ///  application to actuate the tendon by shortening or lengthening it.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendon_setOffset_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationTendon_setOffset_mut(PxArticulationTendon* self_, float offset, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxArticulationTendon_setOffset_mut(PxArticulationTendon* self_, float offset, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Gets the length offset term for the tendon.
@@ -4870,7 +4870,7 @@ namespace Physx
         ///  The offset term.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendon_getOffset", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationTendon_getOffset(PxArticulationTendon* self_);
+        internal static extern float PxArticulationTendon_getOffset(PxArticulationTendon* self_);
 
         /// <summary>
         ///  Gets the articulation that the tendon is a part of.
@@ -4878,7 +4878,7 @@ namespace Physx
         ///  The articulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendon_getArticulation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationReducedCoordinate* PxArticulationTendon_getArticulation(PxArticulationTendon* self_);
+        internal static extern PxArticulationReducedCoordinate* PxArticulationTendon_getArticulation(PxArticulationTendon* self_);
 
         /// <summary>
         ///  Releases a tendon to remove it from the articulation and free its associated memory.
@@ -4889,7 +4889,7 @@ namespace Physx
         ///  release the tendon, remove and then re-add the articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationTendon_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationTendon_release_mut(PxArticulationTendon* self_);
+        internal static extern void PxArticulationTendon_release_mut(PxArticulationTendon* self_);
 
         /// <summary>
         ///  Creates an articulation attachment and adds it to the list of children in the parent attachment.
@@ -4900,7 +4900,7 @@ namespace Physx
         ///  The newly-created attachment if creation was successful, otherwise a null pointer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSpatialTendon_createAttachment_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationAttachment* PxArticulationSpatialTendon_createAttachment_mut(PxArticulationSpatialTendon* self_, PxArticulationAttachment* parent, float coefficient, PxVec3 relativeOffset, PxArticulationLink* link);
+        internal static extern PxArticulationAttachment* PxArticulationSpatialTendon_createAttachment_mut(PxArticulationSpatialTendon* self_, PxArticulationAttachment* parent, float coefficient, PxVec3 relativeOffset, PxArticulationLink* link);
 
         /// <summary>
         ///  Fills a user-provided buffer of attachment pointers with the set of attachments.
@@ -4908,7 +4908,7 @@ namespace Physx
         ///  The number of attachments that were filled into the user buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSpatialTendon_getAttachments", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationSpatialTendon_getAttachments(PxArticulationSpatialTendon* self_, PxArticulationAttachment** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxArticulationSpatialTendon_getAttachments(PxArticulationSpatialTendon* self_, PxArticulationAttachment** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Returns the number of attachments in the tendon.
@@ -4916,7 +4916,7 @@ namespace Physx
         ///  The number of attachments.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSpatialTendon_getNbAttachments", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationSpatialTendon_getNbAttachments(PxArticulationSpatialTendon* self_);
+        internal static extern uint PxArticulationSpatialTendon_getNbAttachments(PxArticulationSpatialTendon* self_);
 
         /// <summary>
         ///  Returns the string name of the dynamic type.
@@ -4924,7 +4924,7 @@ namespace Physx
         ///  The string name.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSpatialTendon_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxArticulationSpatialTendon_getConcreteTypeName(PxArticulationSpatialTendon* self_);
+        internal static extern byte* PxArticulationSpatialTendon_getConcreteTypeName(PxArticulationSpatialTendon* self_);
 
         /// <summary>
         ///  Creates an articulation tendon joint and adds it to the list of children in the parent tendon joint.
@@ -4938,7 +4938,7 @@ namespace Physx
         ///  - The axis cannot be part of a fixed joint, i.e. joint configured as PxArticulationJointType::eFIX.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationFixedTendon_createTendonJoint_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationTendonJoint* PxArticulationFixedTendon_createTendonJoint_mut(PxArticulationFixedTendon* self_, PxArticulationTendonJoint* parent, PxArticulationAxis axis, float coefficient, float recipCoefficient, PxArticulationLink* link);
+        internal static extern PxArticulationTendonJoint* PxArticulationFixedTendon_createTendonJoint_mut(PxArticulationFixedTendon* self_, PxArticulationTendonJoint* parent, PxArticulationAxis axis, float coefficient, float recipCoefficient, PxArticulationLink* link);
 
         /// <summary>
         ///  Fills a user-provided buffer of tendon-joint pointers with the set of tendon joints.
@@ -4946,7 +4946,7 @@ namespace Physx
         ///  The number of tendon joints filled into the user buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationFixedTendon_getTendonJoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationFixedTendon_getTendonJoints(PxArticulationFixedTendon* self_, PxArticulationTendonJoint** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxArticulationFixedTendon_getTendonJoints(PxArticulationFixedTendon* self_, PxArticulationTendonJoint** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Returns the number of tendon joints in the tendon.
@@ -4954,7 +4954,7 @@ namespace Physx
         ///  The number of tendon joints.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationFixedTendon_getNbTendonJoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationFixedTendon_getNbTendonJoints(PxArticulationFixedTendon* self_);
+        internal static extern uint PxArticulationFixedTendon_getNbTendonJoints(PxArticulationFixedTendon* self_);
 
         /// <summary>
         ///  Sets the spring rest length of the tendon.
@@ -4967,7 +4967,7 @@ namespace Physx
         ///  tendon's accumulated length plus the tendon offset.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationFixedTendon_setRestLength_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationFixedTendon_setRestLength_mut(PxArticulationFixedTendon* self_, float restLength);
+        internal static extern void PxArticulationFixedTendon_setRestLength_mut(PxArticulationFixedTendon* self_, float restLength);
 
         /// <summary>
         ///  Gets the spring rest length of the tendon.
@@ -4975,7 +4975,7 @@ namespace Physx
         ///  The spring rest length of the tendon.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationFixedTendon_getRestLength", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationFixedTendon_getRestLength(PxArticulationFixedTendon* self_);
+        internal static extern float PxArticulationFixedTendon_getRestLength(PxArticulationFixedTendon* self_);
 
         /// <summary>
         ///  Sets the low and high limit on the length of the tendon.
@@ -4983,7 +4983,7 @@ namespace Physx
         ///  The limits, together with the damping and limit stiffness parameters, act on the accumulated length of the tendon.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationFixedTendon_setLimitParameters_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationFixedTendon_setLimitParameters_mut(PxArticulationFixedTendon* self_, PxArticulationTendonLimit* parameter);
+        internal static extern void PxArticulationFixedTendon_setLimitParameters_mut(PxArticulationFixedTendon* self_, PxArticulationTendonLimit* parameter);
 
         /// <summary>
         ///  Gets the low and high limit on the length of the tendon.
@@ -4991,7 +4991,7 @@ namespace Physx
         ///  Struct with the low and high limit.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationFixedTendon_getLimitParameters", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationTendonLimit PxArticulationFixedTendon_getLimitParameters(PxArticulationFixedTendon* self_);
+        internal static extern PxArticulationTendonLimit PxArticulationFixedTendon_getLimitParameters(PxArticulationFixedTendon* self_);
 
         /// <summary>
         ///  Returns the string name of the dynamic type.
@@ -4999,16 +4999,16 @@ namespace Physx
         ///  The string name.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationFixedTendon_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxArticulationFixedTendon_getConcreteTypeName(PxArticulationFixedTendon* self_);
+        internal static extern byte* PxArticulationFixedTendon_getConcreteTypeName(PxArticulationFixedTendon* self_);
 
         [DllImport(__DllName, EntryPoint = "PxArticulationCache_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationCache PxArticulationCache_new();
+        internal static extern PxArticulationCache PxArticulationCache_new();
 
         /// <summary>
         ///  Releases an articulation cache.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationCache_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationCache_release_mut(PxArticulationCache* self_);
+        internal static extern void PxArticulationCache_release_mut(PxArticulationCache* self_);
 
         /// <summary>
         ///  Releases the sensor.
@@ -5017,7 +5017,7 @@ namespace Physx
         ///  release a sensor, remove and then re-add the articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSensor_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationSensor_release_mut(PxArticulationSensor* self_);
+        internal static extern void PxArticulationSensor_release_mut(PxArticulationSensor* self_);
 
         /// <summary>
         ///  Returns the spatial force in the local frame of the sensor.
@@ -5028,7 +5028,7 @@ namespace Physx
         ///  and in PxContactModifyCallback or in contact report callbacks.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSensor_getForces", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSpatialForce PxArticulationSensor_getForces(PxArticulationSensor* self_);
+        internal static extern PxSpatialForce PxArticulationSensor_getForces(PxArticulationSensor* self_);
 
         /// <summary>
         ///  Returns the relative pose between this sensor and the body frame of the link that the sensor is attached to.
@@ -5038,7 +5038,7 @@ namespace Physx
         ///  The transform link body frame -&gt; sensor frame.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSensor_getRelativePose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxArticulationSensor_getRelativePose(PxArticulationSensor* self_);
+        internal static extern PxTransform PxArticulationSensor_getRelativePose(PxArticulationSensor* self_);
 
         /// <summary>
         ///  Sets the relative pose between this sensor and the body frame of the link that the sensor is attached to.
@@ -5049,7 +5049,7 @@ namespace Physx
         ///  set the pose, remove and then re-add the articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSensor_setRelativePose_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationSensor_setRelativePose_mut(PxArticulationSensor* self_, PxTransform* pose);
+        internal static extern void PxArticulationSensor_setRelativePose_mut(PxArticulationSensor* self_, PxTransform* pose);
 
         /// <summary>
         ///  Returns the link that this sensor is attached to.
@@ -5057,7 +5057,7 @@ namespace Physx
         ///  A pointer to the link.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSensor_getLink", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationLink* PxArticulationSensor_getLink(PxArticulationSensor* self_);
+        internal static extern PxArticulationLink* PxArticulationSensor_getLink(PxArticulationSensor* self_);
 
         /// <summary>
         ///  Returns the index of this sensor inside the articulation.
@@ -5067,7 +5067,7 @@ namespace Physx
         ///  The low-level index, or 0xFFFFFFFF if the articulation is not in a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSensor_getIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationSensor_getIndex(PxArticulationSensor* self_);
+        internal static extern uint PxArticulationSensor_getIndex(PxArticulationSensor* self_);
 
         /// <summary>
         ///  Returns the articulation that this sensor is part of.
@@ -5075,7 +5075,7 @@ namespace Physx
         ///  A pointer to the articulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSensor_getArticulation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationReducedCoordinate* PxArticulationSensor_getArticulation(PxArticulationSensor* self_);
+        internal static extern PxArticulationReducedCoordinate* PxArticulationSensor_getArticulation(PxArticulationSensor* self_);
 
         /// <summary>
         ///  Returns the sensor's flags.
@@ -5083,7 +5083,7 @@ namespace Physx
         ///  The current set of flags of the sensor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSensor_getFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationSensorFlags PxArticulationSensor_getFlags(PxArticulationSensor* self_);
+        internal static extern PxArticulationSensorFlags PxArticulationSensor_getFlags(PxArticulationSensor* self_);
 
         /// <summary>
         ///  Sets a flag of the sensor.
@@ -5092,7 +5092,7 @@ namespace Physx
         ///  set the flags, remove and then re-add the articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSensor_setFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationSensor_setFlag_mut(PxArticulationSensor* self_, PxArticulationSensorFlag flag, [MarshalAs(UnmanagedType.U1)] bool enabled);
+        internal static extern void PxArticulationSensor_setFlag_mut(PxArticulationSensor* self_, PxArticulationSensorFlag flag, [MarshalAs(UnmanagedType.U1)] bool enabled);
 
         /// <summary>
         ///  Returns the string name of the dynamic type.
@@ -5100,7 +5100,7 @@ namespace Physx
         ///  The string name.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationSensor_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxArticulationSensor_getConcreteTypeName(PxArticulationSensor* self_);
+        internal static extern byte* PxArticulationSensor_getConcreteTypeName(PxArticulationSensor* self_);
 
         /// <summary>
         ///  Returns the scene which this articulation belongs to.
@@ -5108,7 +5108,7 @@ namespace Physx
         ///  Owner Scene. NULL if not part of a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getScene", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxScene* PxArticulationReducedCoordinate_getScene(PxArticulationReducedCoordinate* self_);
+        internal static extern PxScene* PxArticulationReducedCoordinate_getScene(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the solver iteration counts for the articulation.
@@ -5128,13 +5128,13 @@ namespace Physx
         ///  This call may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_setSolverIterationCounts_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_setSolverIterationCounts_mut(PxArticulationReducedCoordinate* self_, uint minPositionIters, uint minVelocityIters);
+        internal static extern void PxArticulationReducedCoordinate_setSolverIterationCounts_mut(PxArticulationReducedCoordinate* self_, uint minPositionIters, uint minVelocityIters);
 
         /// <summary>
         ///  Returns the solver iteration counts.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getSolverIterationCounts", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_getSolverIterationCounts(PxArticulationReducedCoordinate* self_, uint* minPositionIters, uint* minVelocityIters);
+        internal static extern void PxArticulationReducedCoordinate_getSolverIterationCounts(PxArticulationReducedCoordinate* self_, uint* minPositionIters, uint* minVelocityIters);
 
         /// <summary>
         ///  Returns true if this articulation is sleeping.
@@ -5173,7 +5173,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_isSleeping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxArticulationReducedCoordinate_isSleeping(PxArticulationReducedCoordinate* self_);
+        internal static extern bool PxArticulationReducedCoordinate_isSleeping(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the mass-normalized energy threshold below which the articulation may go to sleep.
@@ -5183,7 +5183,7 @@ namespace Physx
         ///  This call may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_setSleepThreshold_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_setSleepThreshold_mut(PxArticulationReducedCoordinate* self_, float threshold);
+        internal static extern void PxArticulationReducedCoordinate_setSleepThreshold_mut(PxArticulationReducedCoordinate* self_, float threshold);
 
         /// <summary>
         ///  Returns the mass-normalized energy below which the articulation may go to sleep.
@@ -5191,7 +5191,7 @@ namespace Physx
         ///  The energy threshold for sleeping.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getSleepThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationReducedCoordinate_getSleepThreshold(PxArticulationReducedCoordinate* self_);
+        internal static extern float PxArticulationReducedCoordinate_getSleepThreshold(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the mass-normalized kinetic energy threshold below which the articulation may participate in stabilization.
@@ -5206,7 +5206,7 @@ namespace Physx
         ///  This call may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_setStabilizationThreshold_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_setStabilizationThreshold_mut(PxArticulationReducedCoordinate* self_, float threshold);
+        internal static extern void PxArticulationReducedCoordinate_setStabilizationThreshold_mut(PxArticulationReducedCoordinate* self_, float threshold);
 
         /// <summary>
         ///  Returns the mass-normalized kinetic energy below which the articulation may participate in stabilization.
@@ -5216,7 +5216,7 @@ namespace Physx
         ///  The energy threshold for participating in stabilization.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getStabilizationThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationReducedCoordinate_getStabilizationThreshold(PxArticulationReducedCoordinate* self_);
+        internal static extern float PxArticulationReducedCoordinate_getStabilizationThreshold(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the wake counter for the articulation in seconds.
@@ -5232,7 +5232,7 @@ namespace Physx
         ///  This call may not be made during simulation, except in a split simulation in-between [`PxScene::fetchCollision`] and #PxScene::advance.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_setWakeCounter_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_setWakeCounter_mut(PxArticulationReducedCoordinate* self_, float wakeCounterValue);
+        internal static extern void PxArticulationReducedCoordinate_setWakeCounter_mut(PxArticulationReducedCoordinate* self_, float wakeCounterValue);
 
         /// <summary>
         ///  Returns the wake counter of the articulation in seconds.
@@ -5242,7 +5242,7 @@ namespace Physx
         ///  This call may not be made during simulation, except in a split simulation in-between [`PxScene::fetchCollision`] and #PxScene::advance.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getWakeCounter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationReducedCoordinate_getWakeCounter(PxArticulationReducedCoordinate* self_);
+        internal static extern float PxArticulationReducedCoordinate_getWakeCounter(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Wakes up the articulation if it is sleeping.
@@ -5254,7 +5254,7 @@ namespace Physx
         ///  except in a split simulation in-between [`PxScene::fetchCollision`] and #PxScene::advance.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_wakeUp_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_wakeUp_mut(PxArticulationReducedCoordinate* self_);
+        internal static extern void PxArticulationReducedCoordinate_wakeUp_mut(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Forces the articulation to sleep.
@@ -5265,7 +5265,7 @@ namespace Physx
         ///  This call may not be made during simulation, and may only be made on articulations that are in a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_putToSleep_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_putToSleep_mut(PxArticulationReducedCoordinate* self_);
+        internal static extern void PxArticulationReducedCoordinate_putToSleep_mut(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the limit on the magnitude of the linear velocity of the articulation's center of mass.
@@ -5280,7 +5280,7 @@ namespace Physx
         ///  This call may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_setMaxCOMLinearVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_setMaxCOMLinearVelocity_mut(PxArticulationReducedCoordinate* self_, float maxLinearVelocity);
+        internal static extern void PxArticulationReducedCoordinate_setMaxCOMLinearVelocity_mut(PxArticulationReducedCoordinate* self_, float maxLinearVelocity);
 
         /// <summary>
         ///  Gets the limit on the magnitude of the linear velocity of the articulation's center of mass.
@@ -5288,7 +5288,7 @@ namespace Physx
         ///  The maximal linear velocity magnitude.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getMaxCOMLinearVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationReducedCoordinate_getMaxCOMLinearVelocity(PxArticulationReducedCoordinate* self_);
+        internal static extern float PxArticulationReducedCoordinate_getMaxCOMLinearVelocity(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the limit on the magnitude of the angular velocity at the articulation's center of mass.
@@ -5303,7 +5303,7 @@ namespace Physx
         ///  This call may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_setMaxCOMAngularVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_setMaxCOMAngularVelocity_mut(PxArticulationReducedCoordinate* self_, float maxAngularVelocity);
+        internal static extern void PxArticulationReducedCoordinate_setMaxCOMAngularVelocity_mut(PxArticulationReducedCoordinate* self_, float maxAngularVelocity);
 
         /// <summary>
         ///  Gets the limit on the magnitude of the angular velocity at the articulation's center of mass.
@@ -5311,7 +5311,7 @@ namespace Physx
         ///  The maximal angular velocity magnitude.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getMaxCOMAngularVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationReducedCoordinate_getMaxCOMAngularVelocity(PxArticulationReducedCoordinate* self_);
+        internal static extern float PxArticulationReducedCoordinate_getMaxCOMAngularVelocity(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Adds a link to the articulation with default attribute values.
@@ -5322,7 +5322,7 @@ namespace Physx
         ///  remove and then re-add the articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_createLink_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationLink* PxArticulationReducedCoordinate_createLink_mut(PxArticulationReducedCoordinate* self_, PxArticulationLink* parent, PxTransform* pose);
+        internal static extern PxArticulationLink* PxArticulationReducedCoordinate_createLink_mut(PxArticulationReducedCoordinate* self_, PxArticulationLink* parent, PxTransform* pose);
 
         /// <summary>
         ///  Releases the articulation, and all its links and corresponding joints.
@@ -5332,7 +5332,7 @@ namespace Physx
         ///  This call may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_release_mut(PxArticulationReducedCoordinate* self_);
+        internal static extern void PxArticulationReducedCoordinate_release_mut(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Returns the number of links in the articulation.
@@ -5340,7 +5340,7 @@ namespace Physx
         ///  The number of links.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getNbLinks", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getNbLinks(PxArticulationReducedCoordinate* self_);
+        internal static extern uint PxArticulationReducedCoordinate_getNbLinks(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Returns the set of links in the articulation in the order that they were added to the articulation using createLink.
@@ -5348,7 +5348,7 @@ namespace Physx
         ///  The number of links written into the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getLinks", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getLinks(PxArticulationReducedCoordinate* self_, PxArticulationLink** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxArticulationReducedCoordinate_getLinks(PxArticulationReducedCoordinate* self_, PxArticulationLink** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Returns the number of shapes in the articulation.
@@ -5356,7 +5356,7 @@ namespace Physx
         ///  The number of shapes.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getNbShapes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getNbShapes(PxArticulationReducedCoordinate* self_);
+        internal static extern uint PxArticulationReducedCoordinate_getNbShapes(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets a name string for the articulation that can be retrieved with getName().
@@ -5365,7 +5365,7 @@ namespace Physx
         ///  only the pointer is stored.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_setName_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_setName_mut(PxArticulationReducedCoordinate* self_, byte* name);
+        internal static extern void PxArticulationReducedCoordinate_setName_mut(PxArticulationReducedCoordinate* self_, byte* name);
 
         /// <summary>
         ///  Returns the name string set with setName().
@@ -5373,7 +5373,7 @@ namespace Physx
         ///  Name string associated with the articulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxArticulationReducedCoordinate_getName(PxArticulationReducedCoordinate* self_);
+        internal static extern byte* PxArticulationReducedCoordinate_getName(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Returns the axis-aligned bounding box enclosing the articulation.
@@ -5384,7 +5384,7 @@ namespace Physx
         ///  during [`PxScene::collide`]() and up to #PxScene::advance(), and in PxContactModifyCallback or in contact report callbacks.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getWorldBounds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxArticulationReducedCoordinate_getWorldBounds(PxArticulationReducedCoordinate* self_, float inflation);
+        internal static extern PxBounds3 PxArticulationReducedCoordinate_getWorldBounds(PxArticulationReducedCoordinate* self_, float inflation);
 
         /// <summary>
         ///  Returns the aggregate the articulation might be a part of.
@@ -5392,7 +5392,7 @@ namespace Physx
         ///  The aggregate the articulation is a part of, or NULL if the articulation does not belong to an aggregate.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getAggregate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxAggregate* PxArticulationReducedCoordinate_getAggregate(PxArticulationReducedCoordinate* self_);
+        internal static extern PxAggregate* PxArticulationReducedCoordinate_getAggregate(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets flags on the articulation.
@@ -5400,7 +5400,7 @@ namespace Physx
         ///  This call may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_setArticulationFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_setArticulationFlags_mut(PxArticulationReducedCoordinate* self_, PxArticulationFlags flags);
+        internal static extern void PxArticulationReducedCoordinate_setArticulationFlags_mut(PxArticulationReducedCoordinate* self_, PxArticulationFlags flags);
 
         /// <summary>
         ///  Raises or clears a flag on the articulation.
@@ -5408,7 +5408,7 @@ namespace Physx
         ///  This call may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_setArticulationFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_setArticulationFlag_mut(PxArticulationReducedCoordinate* self_, PxArticulationFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxArticulationReducedCoordinate_setArticulationFlag_mut(PxArticulationReducedCoordinate* self_, PxArticulationFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         /// <summary>
         ///  Returns the articulation's flags.
@@ -5416,7 +5416,7 @@ namespace Physx
         ///  The flags.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getArticulationFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationFlags PxArticulationReducedCoordinate_getArticulationFlags(PxArticulationReducedCoordinate* self_);
+        internal static extern PxArticulationFlags PxArticulationReducedCoordinate_getArticulationFlags(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Returns the total number of joint degrees-of-freedom (DOFs) of the articulation.
@@ -5428,7 +5428,7 @@ namespace Physx
         ///  The number of joint DOFs, or 0xFFFFFFFF if the articulation is not in a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getDofs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getDofs(PxArticulationReducedCoordinate* self_);
+        internal static extern uint PxArticulationReducedCoordinate_getDofs(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Creates an articulation cache that can be used to read and write internal articulation data.
@@ -5441,7 +5441,7 @@ namespace Physx
         ///  The cache, or NULL if the articulation is not in a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_createCache", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationCache* PxArticulationReducedCoordinate_createCache(PxArticulationReducedCoordinate* self_);
+        internal static extern PxArticulationCache* PxArticulationReducedCoordinate_createCache(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Returns the size of the articulation cache in bytes.
@@ -5453,7 +5453,7 @@ namespace Physx
         ///  The byte size of the cache, or 0xFFFFFFFF if the articulation is not in a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getCacheDataSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getCacheDataSize(PxArticulationReducedCoordinate* self_);
+        internal static extern uint PxArticulationReducedCoordinate_getCacheDataSize(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Zeroes all data in the articulation cache, except user-provided and scratch memory, and cache version.
@@ -5461,7 +5461,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_zeroCache", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_zeroCache(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
+        internal static extern void PxArticulationReducedCoordinate_zeroCache(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
 
         /// <summary>
         ///  Applies the data in the cache to the articulation.
@@ -5474,7 +5474,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene, and may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_applyCache_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_applyCache_mut(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache, PxArticulationCacheFlags flags, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxArticulationReducedCoordinate_applyCache_mut(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache, PxArticulationCacheFlags flags, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Copies internal data of the articulation to the cache.
@@ -5482,7 +5482,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene, and may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_copyInternalStateToCache", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_copyInternalStateToCache(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache, PxArticulationCacheFlags flags);
+        internal static extern void PxArticulationReducedCoordinate_copyInternalStateToCache(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache, PxArticulationCacheFlags flags);
 
         /// <summary>
         ///  Converts maximal-coordinate joint DOF data to reduced coordinates.
@@ -5493,7 +5493,7 @@ namespace Physx
         ///  The articulation must be in a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_packJointData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_packJointData(PxArticulationReducedCoordinate* self_, float* maximum, float* reduced);
+        internal static extern void PxArticulationReducedCoordinate_packJointData(PxArticulationReducedCoordinate* self_, float* maximum, float* reduced);
 
         /// <summary>
         ///  Converts reduced-coordinate joint DOF data to maximal coordinates.
@@ -5504,7 +5504,7 @@ namespace Physx
         ///  The articulation must be in a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_unpackJointData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_unpackJointData(PxArticulationReducedCoordinate* self_, float* reduced, float* maximum);
+        internal static extern void PxArticulationReducedCoordinate_unpackJointData(PxArticulationReducedCoordinate* self_, float* reduced, float* maximum);
 
         /// <summary>
         ///  Prepares common articulation data based on articulation pose for inverse dynamics calculations.
@@ -5517,7 +5517,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene, and may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_commonInit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_commonInit(PxArticulationReducedCoordinate* self_);
+        internal static extern void PxArticulationReducedCoordinate_commonInit(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Computes the joint DOF forces required to counteract gravitational forces for the given articulation pose.
@@ -5532,7 +5532,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene, and may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_computeGeneralizedGravityForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_computeGeneralizedGravityForce(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
+        internal static extern void PxArticulationReducedCoordinate_computeGeneralizedGravityForce(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
 
         /// <summary>
         ///  Computes the joint DOF forces required to counteract Coriolis and centrifugal forces for the given articulation state.
@@ -5548,7 +5548,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene, and may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_computeCoriolisAndCentrifugalForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_computeCoriolisAndCentrifugalForce(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
+        internal static extern void PxArticulationReducedCoordinate_computeCoriolisAndCentrifugalForce(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
 
         /// <summary>
         ///  Computes the joint DOF forces required to counteract external spatial forces applied to articulation links.
@@ -5563,7 +5563,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene, and may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_computeGeneralizedExternalForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_computeGeneralizedExternalForce(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
+        internal static extern void PxArticulationReducedCoordinate_computeGeneralizedExternalForce(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
 
         /// <summary>
         ///  Computes the joint accelerations for the given articulation state and joint forces.
@@ -5579,7 +5579,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene, and may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_computeJointAcceleration", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_computeJointAcceleration(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
+        internal static extern void PxArticulationReducedCoordinate_computeJointAcceleration(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
 
         /// <summary>
         ///  Computes the joint forces for the given articulation state and joint accelerations, not considering gravity.
@@ -5595,7 +5595,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene, and may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_computeJointForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_computeJointForce(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
+        internal static extern void PxArticulationReducedCoordinate_computeJointForce(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
 
         /// <summary>
         ///  Compute the dense Jacobian for the articulation in world space, including the DOFs of a potentially floating base.
@@ -5606,7 +5606,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene, and may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_computeDenseJacobian", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_computeDenseJacobian(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache, uint* nRows, uint* nCols);
+        internal static extern void PxArticulationReducedCoordinate_computeDenseJacobian(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache, uint* nRows, uint* nCols);
 
         /// <summary>
         ///  Computes the coefficient matrix for contact forces.
@@ -5619,7 +5619,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene, and may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_computeCoefficientMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_computeCoefficientMatrix(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
+        internal static extern void PxArticulationReducedCoordinate_computeCoefficientMatrix(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
 
         /// <summary>
         ///  Computes the lambda values when the test impulse is 1.
@@ -5633,7 +5633,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_computeLambda", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxArticulationReducedCoordinate_computeLambda(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache, PxArticulationCache* initialState, float* jointTorque, uint maxIter);
+        internal static extern bool PxArticulationReducedCoordinate_computeLambda(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache, PxArticulationCache* initialState, float* jointTorque, uint maxIter);
 
         /// <summary>
         ///  Compute the joint-space inertia matrix that maps joint accelerations to joint forces: forces = M * accelerations.
@@ -5646,7 +5646,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene, and may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_computeGeneralizedMassMatrix", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_computeGeneralizedMassMatrix(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
+        internal static extern void PxArticulationReducedCoordinate_computeGeneralizedMassMatrix(PxArticulationReducedCoordinate* self_, PxArticulationCache* cache);
 
         /// <summary>
         ///  Adds a loop joint to the articulation system for inverse dynamics.
@@ -5654,7 +5654,7 @@ namespace Physx
         ///  This call may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_addLoopJoint_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_addLoopJoint_mut(PxArticulationReducedCoordinate* self_, PxConstraint* joint);
+        internal static extern void PxArticulationReducedCoordinate_addLoopJoint_mut(PxArticulationReducedCoordinate* self_, PxConstraint* joint);
 
         /// <summary>
         ///  Removes a loop joint from the articulation for inverse dynamics.
@@ -5662,7 +5662,7 @@ namespace Physx
         ///  This call may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_removeLoopJoint_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_removeLoopJoint_mut(PxArticulationReducedCoordinate* self_, PxConstraint* joint);
+        internal static extern void PxArticulationReducedCoordinate_removeLoopJoint_mut(PxArticulationReducedCoordinate* self_, PxConstraint* joint);
 
         /// <summary>
         ///  Returns the number of loop joints in the articulation for inverse dynamics.
@@ -5670,7 +5670,7 @@ namespace Physx
         ///  The number of loop joints.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getNbLoopJoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getNbLoopJoints(PxArticulationReducedCoordinate* self_);
+        internal static extern uint PxArticulationReducedCoordinate_getNbLoopJoints(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Returns the set of loop constraints (i.e. joints) in the articulation.
@@ -5678,7 +5678,7 @@ namespace Physx
         ///  The number of constraints written into the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getLoopJoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getLoopJoints(PxArticulationReducedCoordinate* self_, PxConstraint** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxArticulationReducedCoordinate_getLoopJoints(PxArticulationReducedCoordinate* self_, PxConstraint** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Returns the required size of the coefficient matrix in the articulation.
@@ -5688,7 +5688,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getCoefficientMatrixSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getCoefficientMatrixSize(PxArticulationReducedCoordinate* self_);
+        internal static extern uint PxArticulationReducedCoordinate_getCoefficientMatrixSize(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the root link transform (world to actor frame).
@@ -5700,7 +5700,7 @@ namespace Physx
         ///  This call may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_setRootGlobalPose_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_setRootGlobalPose_mut(PxArticulationReducedCoordinate* self_, PxTransform* pose, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxArticulationReducedCoordinate_setRootGlobalPose_mut(PxArticulationReducedCoordinate* self_, PxTransform* pose, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Returns the root link transform (world to actor frame).
@@ -5713,7 +5713,7 @@ namespace Physx
         ///  and in PxContactModifyCallback or in contact report callbacks.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getRootGlobalPose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxArticulationReducedCoordinate_getRootGlobalPose(PxArticulationReducedCoordinate* self_);
+        internal static extern PxTransform PxArticulationReducedCoordinate_getRootGlobalPose(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the root link linear center-of-mass velocity.
@@ -5727,7 +5727,7 @@ namespace Physx
         ///  This call may not be made during simulation, except in a split simulation in-between [`PxScene::fetchCollision`] and #PxScene::advance.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_setRootLinearVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_setRootLinearVelocity_mut(PxArticulationReducedCoordinate* self_, PxVec3* linearVelocity, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxArticulationReducedCoordinate_setRootLinearVelocity_mut(PxArticulationReducedCoordinate* self_, PxVec3* linearVelocity, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Gets the root link center-of-mass linear velocity.
@@ -5741,7 +5741,7 @@ namespace Physx
         ///  and in PxContactModifyCallback or in contact report callbacks.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getRootLinearVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxArticulationReducedCoordinate_getRootLinearVelocity(PxArticulationReducedCoordinate* self_);
+        internal static extern PxVec3 PxArticulationReducedCoordinate_getRootLinearVelocity(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the root link angular velocity.
@@ -5754,7 +5754,7 @@ namespace Physx
         ///  This call may not be made during simulation, except in a split simulation in-between [`PxScene::fetchCollision`] and #PxScene::advance.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_setRootAngularVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_setRootAngularVelocity_mut(PxArticulationReducedCoordinate* self_, PxVec3* angularVelocity, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxArticulationReducedCoordinate_setRootAngularVelocity_mut(PxArticulationReducedCoordinate* self_, PxVec3* angularVelocity, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Gets the root link angular velocity.
@@ -5767,7 +5767,7 @@ namespace Physx
         ///  and in PxContactModifyCallback or in contact report callbacks.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getRootAngularVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxArticulationReducedCoordinate_getRootAngularVelocity(PxArticulationReducedCoordinate* self_);
+        internal static extern PxVec3 PxArticulationReducedCoordinate_getRootAngularVelocity(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Returns the (classical) link acceleration in world space for the given low-level link index.
@@ -5781,7 +5781,7 @@ namespace Physx
         ///  is running except in a split simulation during [`PxScene::collide`]() and up to #PxScene::advance(), and in PxContactModifyCallback or in contact report callbacks.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getLinkAcceleration_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSpatialVelocity PxArticulationReducedCoordinate_getLinkAcceleration_mut(PxArticulationReducedCoordinate* self_, uint linkId);
+        internal static extern PxSpatialVelocity PxArticulationReducedCoordinate_getLinkAcceleration_mut(PxArticulationReducedCoordinate* self_, uint linkId);
 
         /// <summary>
         ///  Returns the GPU articulation index.
@@ -5789,7 +5789,7 @@ namespace Physx
         ///  The GPU index, or 0xFFFFFFFF if the articulation is not in a scene or PxSceneFlag::eSUPPRESS_READBACK is not set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getGpuArticulationIndex_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getGpuArticulationIndex_mut(PxArticulationReducedCoordinate* self_);
+        internal static extern uint PxArticulationReducedCoordinate_getGpuArticulationIndex_mut(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Creates a spatial tendon to attach to the articulation with default attribute values.
@@ -5800,7 +5800,7 @@ namespace Physx
         ///  add the tendon, remove and then re-add the articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_createSpatialTendon_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationSpatialTendon* PxArticulationReducedCoordinate_createSpatialTendon_mut(PxArticulationReducedCoordinate* self_);
+        internal static extern PxArticulationSpatialTendon* PxArticulationReducedCoordinate_createSpatialTendon_mut(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Creates a fixed tendon to attach to the articulation with default attribute values.
@@ -5811,7 +5811,7 @@ namespace Physx
         ///  add the tendon, remove and then re-add the articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_createFixedTendon_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationFixedTendon* PxArticulationReducedCoordinate_createFixedTendon_mut(PxArticulationReducedCoordinate* self_);
+        internal static extern PxArticulationFixedTendon* PxArticulationReducedCoordinate_createFixedTendon_mut(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Creates a force sensor attached to a link of the articulation.
@@ -5822,7 +5822,7 @@ namespace Physx
         ///  add the sensor, remove and then re-add the articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_createSensor_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationSensor* PxArticulationReducedCoordinate_createSensor_mut(PxArticulationReducedCoordinate* self_, PxArticulationLink* link, PxTransform* relativePose);
+        internal static extern PxArticulationSensor* PxArticulationReducedCoordinate_createSensor_mut(PxArticulationReducedCoordinate* self_, PxArticulationLink* link, PxTransform* relativePose);
 
         /// <summary>
         ///  Returns the spatial tendons attached to the articulation.
@@ -5832,7 +5832,7 @@ namespace Physx
         ///  The number of tendons written into the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getSpatialTendons", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getSpatialTendons(PxArticulationReducedCoordinate* self_, PxArticulationSpatialTendon** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxArticulationReducedCoordinate_getSpatialTendons(PxArticulationReducedCoordinate* self_, PxArticulationSpatialTendon** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Returns the number of spatial tendons in the articulation.
@@ -5840,7 +5840,7 @@ namespace Physx
         ///  The number of tendons.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getNbSpatialTendons_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getNbSpatialTendons_mut(PxArticulationReducedCoordinate* self_);
+        internal static extern uint PxArticulationReducedCoordinate_getNbSpatialTendons_mut(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Returns the fixed tendons attached to the articulation.
@@ -5850,7 +5850,7 @@ namespace Physx
         ///  The number of tendons written into the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getFixedTendons", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getFixedTendons(PxArticulationReducedCoordinate* self_, PxArticulationFixedTendon** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxArticulationReducedCoordinate_getFixedTendons(PxArticulationReducedCoordinate* self_, PxArticulationFixedTendon** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Returns the number of fixed tendons in the articulation.
@@ -5858,7 +5858,7 @@ namespace Physx
         ///  The number of tendons.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getNbFixedTendons_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getNbFixedTendons_mut(PxArticulationReducedCoordinate* self_);
+        internal static extern uint PxArticulationReducedCoordinate_getNbFixedTendons_mut(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Returns the sensors attached to the articulation.
@@ -5868,7 +5868,7 @@ namespace Physx
         ///  The number of sensors written into the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getSensors", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getSensors(PxArticulationReducedCoordinate* self_, PxArticulationSensor** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxArticulationReducedCoordinate_getSensors(PxArticulationReducedCoordinate* self_, PxArticulationSensor** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Returns the number of sensors in the articulation.
@@ -5876,7 +5876,7 @@ namespace Physx
         ///  The number of sensors.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_getNbSensors_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationReducedCoordinate_getNbSensors_mut(PxArticulationReducedCoordinate* self_);
+        internal static extern uint PxArticulationReducedCoordinate_getNbSensors_mut(PxArticulationReducedCoordinate* self_);
 
         /// <summary>
         ///  Update link velocities and/or positions in the articulation.
@@ -5899,7 +5899,7 @@ namespace Physx
         ///  This call may only be made on articulations that are in a scene, and may not be made during simulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationReducedCoordinate_updateKinematic_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationReducedCoordinate_updateKinematic_mut(PxArticulationReducedCoordinate* self_, PxArticulationKinematicFlags flags);
+        internal static extern void PxArticulationReducedCoordinate_updateKinematic_mut(PxArticulationReducedCoordinate* self_, PxArticulationKinematicFlags flags);
 
         /// <summary>
         ///  Gets the parent articulation link of this joint.
@@ -5907,7 +5907,7 @@ namespace Physx
         ///  The parent link.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getParentArticulationLink", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationLink* PxArticulationJointReducedCoordinate_getParentArticulationLink(PxArticulationJointReducedCoordinate* self_);
+        internal static extern PxArticulationLink* PxArticulationJointReducedCoordinate_getParentArticulationLink(PxArticulationJointReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the joint pose in the parent link actor frame.
@@ -5915,7 +5915,7 @@ namespace Physx
         ///  This call is not allowed while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setParentPose_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setParentPose_mut(PxArticulationJointReducedCoordinate* self_, PxTransform* pose);
+        internal static extern void PxArticulationJointReducedCoordinate_setParentPose_mut(PxArticulationJointReducedCoordinate* self_, PxTransform* pose);
 
         /// <summary>
         ///  Gets the joint pose in the parent link actor frame.
@@ -5923,7 +5923,7 @@ namespace Physx
         ///  The joint pose.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getParentPose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxArticulationJointReducedCoordinate_getParentPose(PxArticulationJointReducedCoordinate* self_);
+        internal static extern PxTransform PxArticulationJointReducedCoordinate_getParentPose(PxArticulationJointReducedCoordinate* self_);
 
         /// <summary>
         ///  Gets the child articulation link of this joint.
@@ -5931,7 +5931,7 @@ namespace Physx
         ///  The child link.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getChildArticulationLink", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationLink* PxArticulationJointReducedCoordinate_getChildArticulationLink(PxArticulationJointReducedCoordinate* self_);
+        internal static extern PxArticulationLink* PxArticulationJointReducedCoordinate_getChildArticulationLink(PxArticulationJointReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the joint pose in the child link actor frame.
@@ -5939,7 +5939,7 @@ namespace Physx
         ///  This call is not allowed while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setChildPose_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setChildPose_mut(PxArticulationJointReducedCoordinate* self_, PxTransform* pose);
+        internal static extern void PxArticulationJointReducedCoordinate_setChildPose_mut(PxArticulationJointReducedCoordinate* self_, PxTransform* pose);
 
         /// <summary>
         ///  Gets the joint pose in the child link actor frame.
@@ -5947,7 +5947,7 @@ namespace Physx
         ///  The joint pose.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getChildPose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxArticulationJointReducedCoordinate_getChildPose(PxArticulationJointReducedCoordinate* self_);
+        internal static extern PxTransform PxArticulationJointReducedCoordinate_getChildPose(PxArticulationJointReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the joint type (e.g. revolute).
@@ -5956,7 +5956,7 @@ namespace Physx
         ///  In order to set the joint type, remove and then re-add the articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setJointType_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setJointType_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationJointType jointType);
+        internal static extern void PxArticulationJointReducedCoordinate_setJointType_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationJointType jointType);
 
         /// <summary>
         ///  Gets the joint type.
@@ -5964,7 +5964,7 @@ namespace Physx
         ///  The joint type.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getJointType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationJointType PxArticulationJointReducedCoordinate_getJointType(PxArticulationJointReducedCoordinate* self_);
+        internal static extern PxArticulationJointType PxArticulationJointReducedCoordinate_getJointType(PxArticulationJointReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the joint motion for a given axis.
@@ -5973,7 +5973,7 @@ namespace Physx
         ///  In order to set the motion, remove and then re-add the articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setMotion_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setMotion_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, PxArticulationMotion motion);
+        internal static extern void PxArticulationJointReducedCoordinate_setMotion_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, PxArticulationMotion motion);
 
         /// <summary>
         ///  Returns the joint motion for the given axis.
@@ -5981,7 +5981,7 @@ namespace Physx
         ///  The joint motion of the given axis.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getMotion", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationMotion PxArticulationJointReducedCoordinate_getMotion(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
+        internal static extern PxArticulationMotion PxArticulationJointReducedCoordinate_getMotion(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
 
         /// <summary>
         ///  Sets the joint limits for a given axis.
@@ -5995,7 +5995,7 @@ namespace Physx
         ///  For spherical joints, limit.min and limit.max must both be in range [-Pi, Pi].
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setLimitParams_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setLimitParams_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, PxArticulationLimit* limit);
+        internal static extern void PxArticulationJointReducedCoordinate_setLimitParams_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, PxArticulationLimit* limit);
 
         /// <summary>
         ///  Returns the joint limits for a given axis.
@@ -6003,7 +6003,7 @@ namespace Physx
         ///  The joint limits.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getLimitParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationLimit PxArticulationJointReducedCoordinate_getLimitParams(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
+        internal static extern PxArticulationLimit PxArticulationJointReducedCoordinate_getLimitParams(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
 
         /// <summary>
         ///  Configures a joint drive for the given axis.
@@ -6013,7 +6013,7 @@ namespace Physx
         ///  This call is not allowed while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setDriveParams_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setDriveParams_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, PxArticulationDrive* drive);
+        internal static extern void PxArticulationJointReducedCoordinate_setDriveParams_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, PxArticulationDrive* drive);
 
         /// <summary>
         ///  Gets the joint drive configuration for the given axis.
@@ -6021,7 +6021,7 @@ namespace Physx
         ///  The drive parameters.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getDriveParams", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationDrive PxArticulationJointReducedCoordinate_getDriveParams(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
+        internal static extern PxArticulationDrive PxArticulationJointReducedCoordinate_getDriveParams(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
 
         /// <summary>
         ///  Sets the joint drive position target for the given axis.
@@ -6037,7 +6037,7 @@ namespace Physx
         ///  For spherical joints with more than 1 degree of freedom, the joint target angles taken together can collectively represent a rotation of greater than Pi around a vector. When this happens the rotation that matches the joint drive target is not the shortest path rotation.  The joint pose J that is the outcome after driving to the target pose will always be the equivalent of the shortest path rotation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setDriveTarget_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setDriveTarget_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, float target, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxArticulationJointReducedCoordinate_setDriveTarget_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, float target, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Returns the joint drive position target for the given axis.
@@ -6045,7 +6045,7 @@ namespace Physx
         ///  The target position.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getDriveTarget", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationJointReducedCoordinate_getDriveTarget(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
+        internal static extern float PxArticulationJointReducedCoordinate_getDriveTarget(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
 
         /// <summary>
         ///  Sets the joint drive velocity target for the given axis.
@@ -6055,7 +6055,7 @@ namespace Physx
         ///  This call is not allowed while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setDriveVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setDriveVelocity_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, float targetVel, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxArticulationJointReducedCoordinate_setDriveVelocity_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, float targetVel, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Returns the joint drive velocity target for the given axis.
@@ -6063,7 +6063,7 @@ namespace Physx
         ///  The target velocity.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getDriveVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationJointReducedCoordinate_getDriveVelocity(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
+        internal static extern float PxArticulationJointReducedCoordinate_getDriveVelocity(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
 
         /// <summary>
         ///  Sets the joint armature for the given axis.
@@ -6074,7 +6074,7 @@ namespace Physx
         ///  This call is not allowed while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setArmature_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setArmature_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, float armature);
+        internal static extern void PxArticulationJointReducedCoordinate_setArmature_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, float armature);
 
         /// <summary>
         ///  Gets the joint armature for the given axis.
@@ -6082,7 +6082,7 @@ namespace Physx
         ///  The armature set on the given axis.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getArmature", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationJointReducedCoordinate_getArmature(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
+        internal static extern float PxArticulationJointReducedCoordinate_getArmature(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
 
         /// <summary>
         ///  Sets the joint friction coefficient, which applies to all joint axes.
@@ -6098,7 +6098,7 @@ namespace Physx
         ///  This call is not allowed while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setFrictionCoefficient_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setFrictionCoefficient_mut(PxArticulationJointReducedCoordinate* self_, float coefficient);
+        internal static extern void PxArticulationJointReducedCoordinate_setFrictionCoefficient_mut(PxArticulationJointReducedCoordinate* self_, float coefficient);
 
         /// <summary>
         ///  Gets the joint friction coefficient.
@@ -6106,7 +6106,7 @@ namespace Physx
         ///  The joint friction coefficient.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getFrictionCoefficient", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationJointReducedCoordinate_getFrictionCoefficient(PxArticulationJointReducedCoordinate* self_);
+        internal static extern float PxArticulationJointReducedCoordinate_getFrictionCoefficient(PxArticulationJointReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the maximal joint velocity enforced for all axes.
@@ -6117,7 +6117,7 @@ namespace Physx
         ///  This call is not allowed while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setMaxJointVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setMaxJointVelocity_mut(PxArticulationJointReducedCoordinate* self_, float maxJointV);
+        internal static extern void PxArticulationJointReducedCoordinate_setMaxJointVelocity_mut(PxArticulationJointReducedCoordinate* self_, float maxJointV);
 
         /// <summary>
         ///  Gets the maximal joint velocity enforced for all axes.
@@ -6125,7 +6125,7 @@ namespace Physx
         ///  The maximal per-axis joint velocity.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getMaxJointVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationJointReducedCoordinate_getMaxJointVelocity(PxArticulationJointReducedCoordinate* self_);
+        internal static extern float PxArticulationJointReducedCoordinate_getMaxJointVelocity(PxArticulationJointReducedCoordinate* self_);
 
         /// <summary>
         ///  Sets the joint position for the given axis.
@@ -6143,7 +6143,7 @@ namespace Physx
         ///  For spherical joints with more than 1 degree of freedom, the input joint positions taken together can collectively represent a rotation of greater than Pi around a vector. When this happens the rotation that matches the joint positions is not the shortest path rotation.  The joint pose J that is the outcome of setting and applying the joint positions will always be the equivalent of the shortest path rotation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setJointPosition_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setJointPosition_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, float jointPos);
+        internal static extern void PxArticulationJointReducedCoordinate_setJointPosition_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, float jointPos);
 
         /// <summary>
         ///  Gets the joint position for the given axis, i.e. joint degree of freedom (DOF).
@@ -6156,7 +6156,7 @@ namespace Physx
         ///  and in PxContactModifyCallback or in contact report callbacks.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getJointPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationJointReducedCoordinate_getJointPosition(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
+        internal static extern float PxArticulationJointReducedCoordinate_getJointPosition(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
 
         /// <summary>
         ///  Sets the joint velocity for the given axis.
@@ -6168,7 +6168,7 @@ namespace Physx
         ///  This call is not allowed while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_setJointVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationJointReducedCoordinate_setJointVelocity_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, float jointVel);
+        internal static extern void PxArticulationJointReducedCoordinate_setJointVelocity_mut(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis, float jointVel);
 
         /// <summary>
         ///  Gets the joint velocity for the given axis.
@@ -6181,7 +6181,7 @@ namespace Physx
         ///  and in PxContactModifyCallback or in contact report callbacks.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getJointVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationJointReducedCoordinate_getJointVelocity(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
+        internal static extern float PxArticulationJointReducedCoordinate_getJointVelocity(PxArticulationJointReducedCoordinate* self_, PxArticulationAxis axis);
 
         /// <summary>
         ///  Returns the string name of the dynamic type.
@@ -6189,7 +6189,7 @@ namespace Physx
         ///  The string name.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationJointReducedCoordinate_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxArticulationJointReducedCoordinate_getConcreteTypeName(PxArticulationJointReducedCoordinate* self_);
+        internal static extern byte* PxArticulationJointReducedCoordinate_getConcreteTypeName(PxArticulationJointReducedCoordinate* self_);
 
         /// <summary>
         ///  Decrements the reference count of a shape and releases it if the new reference count is zero.
@@ -6200,7 +6200,7 @@ namespace Physx
         ///  and so when the shape is detached it will also be destroyed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_release_mut(PxShape* self_);
+        internal static extern void PxShape_release_mut(PxShape* self_);
 
         /// <summary>
         ///  Adjust the geometry of the shape.
@@ -6212,7 +6212,7 @@ namespace Physx
         ///  This function does not guarantee correct/continuous behavior when objects are resting on top of old or new geometry.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setGeometry_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setGeometry_mut(PxShape* self_, PxGeometry* geometry);
+        internal static extern void PxShape_setGeometry_mut(PxShape* self_, PxGeometry* geometry);
 
         /// <summary>
         ///  Retrieve a reference to the shape's geometry.
@@ -6222,7 +6222,7 @@ namespace Physx
         ///  Reference to internal PxGeometry object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getGeometry", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeometry* PxShape_getGeometry(PxShape* self_);
+        internal static extern PxGeometry* PxShape_getGeometry(PxShape* self_);
 
         /// <summary>
         ///  Retrieves the actor which this shape is associated with.
@@ -6230,7 +6230,7 @@ namespace Physx
         ///  The actor this shape is associated with, if it is an exclusive shape, else NULL
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getActor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidActor* PxShape_getActor(PxShape* self_);
+        internal static extern PxRigidActor* PxShape_getActor(PxShape* self_);
 
         /// <summary>
         ///  Sets the pose of the shape in actor space, i.e. relative to the actors to which they are attached.
@@ -6252,7 +6252,7 @@ namespace Physx
         ///  the identity transform
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setLocalPose_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setLocalPose_mut(PxShape* self_, PxTransform* pose);
+        internal static extern void PxShape_setLocalPose_mut(PxShape* self_, PxTransform* pose);
 
         /// <summary>
         ///  Retrieves the pose of the shape in actor space, i.e. relative to the actor they are owned by.
@@ -6262,7 +6262,7 @@ namespace Physx
         ///  Pose of shape relative to the actor's frame.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getLocalPose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxShape_getLocalPose(PxShape* self_);
+        internal static extern PxTransform PxShape_getLocalPose(PxShape* self_);
 
         /// <summary>
         ///  Sets the user definable collision filter data.
@@ -6275,13 +6275,13 @@ namespace Physx
         ///  (0,0,0,0)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setSimulationFilterData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setSimulationFilterData_mut(PxShape* self_, PxFilterData* data);
+        internal static extern void PxShape_setSimulationFilterData_mut(PxShape* self_, PxFilterData* data);
 
         /// <summary>
         ///  Retrieves the shape's collision filter data.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getSimulationFilterData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFilterData PxShape_getSimulationFilterData(PxShape* self_);
+        internal static extern PxFilterData PxShape_getSimulationFilterData(PxShape* self_);
 
         /// <summary>
         ///  Sets the user definable query filter data.
@@ -6290,13 +6290,13 @@ namespace Physx
         ///  (0,0,0,0)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setQueryFilterData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setQueryFilterData_mut(PxShape* self_, PxFilterData* data);
+        internal static extern void PxShape_setQueryFilterData_mut(PxShape* self_, PxFilterData* data);
 
         /// <summary>
         ///  Retrieves the shape's Query filter data.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getQueryFilterData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFilterData PxShape_getQueryFilterData(PxShape* self_);
+        internal static extern PxFilterData PxShape_getQueryFilterData(PxShape* self_);
 
         /// <summary>
         ///  Assigns material(s) to the shape. Will remove existing materials from the shape.
@@ -6307,7 +6307,7 @@ namespace Physx
         ///  wake the associated actor up automatically.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setMaterials_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setMaterials_mut(PxShape* self_, PxMaterial** materials, ushort materialCount);
+        internal static extern void PxShape_setMaterials_mut(PxShape* self_, PxMaterial** materials, ushort materialCount);
 
         /// <summary>
         ///  Returns the number of materials assigned to the shape.
@@ -6317,7 +6317,7 @@ namespace Physx
         ///  Number of materials associated with this shape.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getNbMaterials", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort PxShape_getNbMaterials(PxShape* self_);
+        internal static extern ushort PxShape_getNbMaterials(PxShape* self_);
 
         /// <summary>
         ///  Retrieve all the material pointers associated with the shape.
@@ -6329,7 +6329,7 @@ namespace Physx
         ///  Number of material pointers written to the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getMaterials", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxShape_getMaterials(PxShape* self_, PxMaterial** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxShape_getMaterials(PxShape* self_, PxMaterial** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Retrieve material from given triangle index.
@@ -6348,7 +6348,7 @@ namespace Physx
         ///  Scene queries set the value of PxQueryHit::faceIndex to 0xFFFFffff whenever it is undefined or does not apply.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getMaterialFromInternalFaceIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBaseMaterial* PxShape_getMaterialFromInternalFaceIndex(PxShape* self_, uint faceIndex);
+        internal static extern PxBaseMaterial* PxShape_getMaterialFromInternalFaceIndex(PxShape* self_, uint faceIndex);
 
         /// <summary>
         ///  Sets the contact offset.
@@ -6367,7 +6367,7 @@ namespace Physx
         ///  wake the associated actor up automatically.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setContactOffset_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setContactOffset_mut(PxShape* self_, float contactOffset);
+        internal static extern void PxShape_setContactOffset_mut(PxShape* self_, float contactOffset);
 
         /// <summary>
         ///  Retrieves the contact offset.
@@ -6375,7 +6375,7 @@ namespace Physx
         ///  The contact offset of the shape.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getContactOffset", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxShape_getContactOffset(PxShape* self_);
+        internal static extern float PxShape_getContactOffset(PxShape* self_);
 
         /// <summary>
         ///  Sets the rest offset.
@@ -6393,7 +6393,7 @@ namespace Physx
         ///  wake the associated actor up automatically.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setRestOffset_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setRestOffset_mut(PxShape* self_, float restOffset);
+        internal static extern void PxShape_setRestOffset_mut(PxShape* self_, float restOffset);
 
         /// <summary>
         ///  Retrieves the rest offset.
@@ -6401,7 +6401,7 @@ namespace Physx
         ///  The rest offset of the shape.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getRestOffset", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxShape_getRestOffset(PxShape* self_);
+        internal static extern float PxShape_getRestOffset(PxShape* self_);
 
         /// <summary>
         ///  Sets the density used to interact with fluids.
@@ -6414,7 +6414,7 @@ namespace Physx
         ///  800.0f
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setDensityForFluid_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setDensityForFluid_mut(PxShape* self_, float densityForFluid);
+        internal static extern void PxShape_setDensityForFluid_mut(PxShape* self_, float densityForFluid);
 
         /// <summary>
         ///  Retrieves the density used to interact with fluids.
@@ -6422,7 +6422,7 @@ namespace Physx
         ///  The density of the body when interacting with fluid.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getDensityForFluid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxShape_getDensityForFluid(PxShape* self_);
+        internal static extern float PxShape_getDensityForFluid(PxShape* self_);
 
         /// <summary>
         ///  Sets torsional patch radius.
@@ -6436,7 +6436,7 @@ namespace Physx
         ///  0.0
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setTorsionalPatchRadius_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setTorsionalPatchRadius_mut(PxShape* self_, float radius);
+        internal static extern void PxShape_setTorsionalPatchRadius_mut(PxShape* self_, float radius);
 
         /// <summary>
         ///  Gets torsional patch radius.
@@ -6449,7 +6449,7 @@ namespace Physx
         ///  The torsional patch radius of the shape.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getTorsionalPatchRadius", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxShape_getTorsionalPatchRadius(PxShape* self_);
+        internal static extern float PxShape_getTorsionalPatchRadius(PxShape* self_);
 
         /// <summary>
         ///  Sets minimum torsional patch radius.
@@ -6463,7 +6463,7 @@ namespace Physx
         ///  0.0
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setMinTorsionalPatchRadius_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setMinTorsionalPatchRadius_mut(PxShape* self_, float radius);
+        internal static extern void PxShape_setMinTorsionalPatchRadius_mut(PxShape* self_, float radius);
 
         /// <summary>
         ///  Gets minimum torsional patch radius.
@@ -6476,7 +6476,7 @@ namespace Physx
         ///  The minimum torsional patch radius of the shape.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getMinTorsionalPatchRadius", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxShape_getMinTorsionalPatchRadius(PxShape* self_);
+        internal static extern float PxShape_getMinTorsionalPatchRadius(PxShape* self_);
 
         /// <summary>
         ///  Sets shape flags
@@ -6490,13 +6490,13 @@ namespace Physx
         ///  PxShapeFlag::eVISUALIZATION | PxShapeFlag::eSIMULATION_SHAPE | PxShapeFlag::eSCENE_QUERY_SHAPE
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setFlag_mut(PxShape* self_, PxShapeFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxShape_setFlag_mut(PxShape* self_, PxShapeFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         /// <summary>
         ///  Sets shape flags
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setFlags_mut(PxShape* self_, PxShapeFlags inFlags);
+        internal static extern void PxShape_setFlags_mut(PxShape* self_, PxShapeFlags inFlags);
 
         /// <summary>
         ///  Retrieves shape flags.
@@ -6504,14 +6504,14 @@ namespace Physx
         ///  The values of the shape flags.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxShapeFlags PxShape_getFlags(PxShape* self_);
+        internal static extern PxShapeFlags PxShape_getFlags(PxShape* self_);
 
         /// <summary>
         ///  Returns true if the shape is exclusive to an actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_isExclusive", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxShape_isExclusive(PxShape* self_);
+        internal static extern bool PxShape_isExclusive(PxShape* self_);
 
         /// <summary>
         ///  Sets a name string for the object that can be retrieved with [`getName`]().
@@ -6523,7 +6523,7 @@ namespace Physx
         ///  NULL
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_setName_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxShape_setName_mut(PxShape* self_, byte* name);
+        internal static extern void PxShape_setName_mut(PxShape* self_, byte* name);
 
         /// <summary>
         ///  retrieves the name string set with setName().
@@ -6531,10 +6531,10 @@ namespace Physx
         ///  The name associated with the shape.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShape_getName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxShape_getName(PxShape* self_);
+        internal static extern byte* PxShape_getName(PxShape* self_);
 
         [DllImport(__DllName, EntryPoint = "PxShape_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxShape_getConcreteTypeName(PxShape* self_);
+        internal static extern byte* PxShape_getConcreteTypeName(PxShape* self_);
 
         /// <summary>
         ///  Deletes the rigid actor object.
@@ -6552,7 +6552,7 @@ namespace Physx
         ///  Calls [`PxActor::release`]() so you might want to check the documentation of that method as well.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActor_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidActor_release_mut(PxRigidActor* self_);
+        internal static extern void PxRigidActor_release_mut(PxRigidActor* self_);
 
         /// <summary>
         ///  Returns the internal actor index.
@@ -6562,7 +6562,7 @@ namespace Physx
         ///  The internal actor index, or 0xffffffff if the actor is not part of a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActor_getInternalActorIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxRigidActor_getInternalActorIndex(PxRigidActor* self_);
+        internal static extern uint PxRigidActor_getInternalActorIndex(PxRigidActor* self_);
 
         /// <summary>
         ///  Retrieves the actors world space transform.
@@ -6575,7 +6575,7 @@ namespace Physx
         ///  Global pose of object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActor_getGlobalPose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxRigidActor_getGlobalPose(PxRigidActor* self_);
+        internal static extern PxTransform PxRigidActor_getGlobalPose(PxRigidActor* self_);
 
         /// <summary>
         ///  Method for setting an actor's pose in the world.
@@ -6599,7 +6599,7 @@ namespace Physx
         ///  This call wakes dynamic actors if they are sleeping and the autowake parameter is true (default).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActor_setGlobalPose_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidActor_setGlobalPose_mut(PxRigidActor* self_, PxTransform* pose, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxRigidActor_setGlobalPose_mut(PxRigidActor* self_, PxTransform* pose, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Attach a shape to an actor
@@ -6622,7 +6622,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActor_attachShape_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxRigidActor_attachShape_mut(PxRigidActor* self_, PxShape* shape);
+        internal static extern bool PxRigidActor_attachShape_mut(PxRigidActor* self_, PxShape* shape);
 
         /// <summary>
         ///  Detach a shape from an actor.
@@ -6635,7 +6635,7 @@ namespace Physx
         ///  wake the actor up automatically.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActor_detachShape_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidActor_detachShape_mut(PxRigidActor* self_, PxShape* shape, [MarshalAs(UnmanagedType.U1)] bool wakeOnLostTouch);
+        internal static extern void PxRigidActor_detachShape_mut(PxRigidActor* self_, PxShape* shape, [MarshalAs(UnmanagedType.U1)] bool wakeOnLostTouch);
 
         /// <summary>
         ///  Returns the number of shapes assigned to the actor.
@@ -6645,7 +6645,7 @@ namespace Physx
         ///  Number of shapes associated with this actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActor_getNbShapes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxRigidActor_getNbShapes(PxRigidActor* self_);
+        internal static extern uint PxRigidActor_getNbShapes(PxRigidActor* self_);
 
         /// <summary>
         ///  Retrieve all the shape pointers belonging to the actor.
@@ -6659,7 +6659,7 @@ namespace Physx
         ///  Number of shape pointers written to the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActor_getShapes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxRigidActor_getShapes(PxRigidActor* self_, PxShape** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxRigidActor_getShapes(PxRigidActor* self_, PxShape** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Returns the number of constraint shaders attached to the actor.
@@ -6669,7 +6669,7 @@ namespace Physx
         ///  Number of constraint shaders attached to this actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActor_getNbConstraints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxRigidActor_getNbConstraints(PxRigidActor* self_);
+        internal static extern uint PxRigidActor_getNbConstraints(PxRigidActor* self_);
 
         /// <summary>
         ///  Retrieve all the constraint shader pointers belonging to the actor.
@@ -6681,39 +6681,39 @@ namespace Physx
         ///  Number of constraint shader pointers written to the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActor_getConstraints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxRigidActor_getConstraints(PxRigidActor* self_, PxConstraint** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxRigidActor_getConstraints(PxRigidActor* self_, PxConstraint** userBuffer, uint bufferSize, uint startIndex);
 
         [DllImport(__DllName, EntryPoint = "PxNodeIndex_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxNodeIndex PxNodeIndex_new(uint id, uint articLinkId);
+        internal static extern PxNodeIndex PxNodeIndex_new(uint id, uint articLinkId);
 
         [DllImport(__DllName, EntryPoint = "PxNodeIndex_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxNodeIndex PxNodeIndex_new_1(uint id);
+        internal static extern PxNodeIndex PxNodeIndex_new_1(uint id);
 
         [DllImport(__DllName, EntryPoint = "PxNodeIndex_index", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxNodeIndex_index(PxNodeIndex* self_);
+        internal static extern uint PxNodeIndex_index(PxNodeIndex* self_);
 
         [DllImport(__DllName, EntryPoint = "PxNodeIndex_articulationLinkId", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxNodeIndex_articulationLinkId(PxNodeIndex* self_);
+        internal static extern uint PxNodeIndex_articulationLinkId(PxNodeIndex* self_);
 
         [DllImport(__DllName, EntryPoint = "PxNodeIndex_isArticulation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxNodeIndex_isArticulation(PxNodeIndex* self_);
+        internal static extern uint PxNodeIndex_isArticulation(PxNodeIndex* self_);
 
         [DllImport(__DllName, EntryPoint = "PxNodeIndex_isStaticBody", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxNodeIndex_isStaticBody(PxNodeIndex* self_);
+        internal static extern bool PxNodeIndex_isStaticBody(PxNodeIndex* self_);
 
         [DllImport(__DllName, EntryPoint = "PxNodeIndex_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxNodeIndex_isValid(PxNodeIndex* self_);
+        internal static extern bool PxNodeIndex_isValid(PxNodeIndex* self_);
 
         [DllImport(__DllName, EntryPoint = "PxNodeIndex_setIndices_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxNodeIndex_setIndices_mut(PxNodeIndex* self_, uint index, uint articLinkId);
+        internal static extern void PxNodeIndex_setIndices_mut(PxNodeIndex* self_, uint index, uint articLinkId);
 
         [DllImport(__DllName, EntryPoint = "PxNodeIndex_setIndices_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxNodeIndex_setIndices_mut_1(PxNodeIndex* self_, uint index);
+        internal static extern void PxNodeIndex_setIndices_mut_1(PxNodeIndex* self_, uint index);
 
         [DllImport(__DllName, EntryPoint = "PxNodeIndex_getInd", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ulong PxNodeIndex_getInd(PxNodeIndex* self_);
+        internal static extern ulong PxNodeIndex_getInd(PxNodeIndex* self_);
 
         /// <summary>
         ///  Sets the pose of the center of mass relative to the actor.
@@ -6727,7 +6727,7 @@ namespace Physx
         ///  the identity transform
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setCMassLocalPose_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setCMassLocalPose_mut(PxRigidBody* self_, PxTransform* pose);
+        internal static extern void PxRigidBody_setCMassLocalPose_mut(PxRigidBody* self_, PxTransform* pose);
 
         /// <summary>
         ///  Retrieves the center of mass pose relative to the actor frame.
@@ -6735,7 +6735,7 @@ namespace Physx
         ///  The center of mass pose relative to the actor frame.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getCMassLocalPose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxRigidBody_getCMassLocalPose(PxRigidBody* self_);
+        internal static extern PxTransform PxRigidBody_getCMassLocalPose(PxRigidBody* self_);
 
         /// <summary>
         ///  Sets the mass of a dynamic actor.
@@ -6758,7 +6758,7 @@ namespace Physx
         ///  wake the actor up automatically.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setMass_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setMass_mut(PxRigidBody* self_, float mass);
+        internal static extern void PxRigidBody_setMass_mut(PxRigidBody* self_, float mass);
 
         /// <summary>
         ///  Retrieves the mass of the actor.
@@ -6768,7 +6768,7 @@ namespace Physx
         ///  The mass of this actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getMass", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidBody_getMass(PxRigidBody* self_);
+        internal static extern float PxRigidBody_getMass(PxRigidBody* self_);
 
         /// <summary>
         ///  Retrieves the inverse mass of the actor.
@@ -6776,7 +6776,7 @@ namespace Physx
         ///  The inverse mass of this actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getInvMass", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidBody_getInvMass(PxRigidBody* self_);
+        internal static extern float PxRigidBody_getInvMass(PxRigidBody* self_);
 
         /// <summary>
         ///  Sets the inertia tensor, using a parameter specified in mass space coordinates.
@@ -6801,7 +6801,7 @@ namespace Physx
         ///  wake the actor up automatically.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setMassSpaceInertiaTensor_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setMassSpaceInertiaTensor_mut(PxRigidBody* self_, PxVec3* m);
+        internal static extern void PxRigidBody_setMassSpaceInertiaTensor_mut(PxRigidBody* self_, PxVec3* m);
 
         /// <summary>
         ///  Retrieves the diagonal inertia tensor of the actor relative to the mass coordinate frame.
@@ -6813,7 +6813,7 @@ namespace Physx
         ///  A value of 0 in an element is interpreted as infinite inertia along that axis.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getMassSpaceInertiaTensor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxRigidBody_getMassSpaceInertiaTensor(PxRigidBody* self_);
+        internal static extern PxVec3 PxRigidBody_getMassSpaceInertiaTensor(PxRigidBody* self_);
 
         /// <summary>
         ///  Retrieves the diagonal inverse inertia tensor of the actor relative to the mass coordinate frame.
@@ -6825,7 +6825,7 @@ namespace Physx
         ///  The mass space inverse inertia tensor of this actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getMassSpaceInvInertiaTensor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxRigidBody_getMassSpaceInvInertiaTensor(PxRigidBody* self_);
+        internal static extern PxVec3 PxRigidBody_getMassSpaceInvInertiaTensor(PxRigidBody* self_);
 
         /// <summary>
         ///  Sets the linear damping coefficient.
@@ -6836,7 +6836,7 @@ namespace Physx
         ///  0.0
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setLinearDamping_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setLinearDamping_mut(PxRigidBody* self_, float linDamp);
+        internal static extern void PxRigidBody_setLinearDamping_mut(PxRigidBody* self_, float linDamp);
 
         /// <summary>
         ///  Retrieves the linear damping coefficient.
@@ -6844,7 +6844,7 @@ namespace Physx
         ///  The linear damping coefficient associated with this actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getLinearDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidBody_getLinearDamping(PxRigidBody* self_);
+        internal static extern float PxRigidBody_getLinearDamping(PxRigidBody* self_);
 
         /// <summary>
         ///  Sets the angular damping coefficient.
@@ -6857,7 +6857,7 @@ namespace Physx
         ///  0.05
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setAngularDamping_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setAngularDamping_mut(PxRigidBody* self_, float angDamp);
+        internal static extern void PxRigidBody_setAngularDamping_mut(PxRigidBody* self_, float angDamp);
 
         /// <summary>
         ///  Retrieves the angular damping coefficient.
@@ -6865,7 +6865,7 @@ namespace Physx
         ///  The angular damping coefficient associated with this actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getAngularDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidBody_getAngularDamping(PxRigidBody* self_);
+        internal static extern float PxRigidBody_getAngularDamping(PxRigidBody* self_);
 
         /// <summary>
         ///  Retrieves the linear velocity of an actor.
@@ -6876,7 +6876,7 @@ namespace Physx
         ///  The linear velocity of the actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getLinearVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxRigidBody_getLinearVelocity(PxRigidBody* self_);
+        internal static extern PxVec3 PxRigidBody_getLinearVelocity(PxRigidBody* self_);
 
         /// <summary>
         ///  Retrieves the angular velocity of the actor.
@@ -6887,7 +6887,7 @@ namespace Physx
         ///  The angular velocity of the actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getAngularVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxRigidBody_getAngularVelocity(PxRigidBody* self_);
+        internal static extern PxVec3 PxRigidBody_getAngularVelocity(PxRigidBody* self_);
 
         /// <summary>
         ///  Lets you set the maximum linear velocity permitted for this actor.
@@ -6904,7 +6904,7 @@ namespace Physx
         ///  PX_MAX_F32
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setMaxLinearVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setMaxLinearVelocity_mut(PxRigidBody* self_, float maxLinVel);
+        internal static extern void PxRigidBody_setMaxLinearVelocity_mut(PxRigidBody* self_, float maxLinVel);
 
         /// <summary>
         ///  Retrieves the maximum angular velocity permitted for this actor.
@@ -6912,7 +6912,7 @@ namespace Physx
         ///  The maximum allowed angular velocity for this actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getMaxLinearVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidBody_getMaxLinearVelocity(PxRigidBody* self_);
+        internal static extern float PxRigidBody_getMaxLinearVelocity(PxRigidBody* self_);
 
         /// <summary>
         ///  Lets you set the maximum angular velocity permitted for this actor.
@@ -6932,7 +6932,7 @@ namespace Physx
         ///  100.0
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setMaxAngularVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setMaxAngularVelocity_mut(PxRigidBody* self_, float maxAngVel);
+        internal static extern void PxRigidBody_setMaxAngularVelocity_mut(PxRigidBody* self_, float maxAngVel);
 
         /// <summary>
         ///  Retrieves the maximum angular velocity permitted for this actor.
@@ -6940,7 +6940,7 @@ namespace Physx
         ///  The maximum allowed angular velocity for this actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getMaxAngularVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidBody_getMaxAngularVelocity(PxRigidBody* self_);
+        internal static extern float PxRigidBody_getMaxAngularVelocity(PxRigidBody* self_);
 
         /// <summary>
         ///  Applies a force (or impulse) defined in the global coordinate frame to the actor at its center of mass.
@@ -6968,7 +6968,7 @@ namespace Physx
         ///  This call wakes the actor if it is sleeping, and the autowake parameter is true (default) or the force is non-zero.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_addForce_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_addForce_mut(PxRigidBody* self_, PxVec3* force, PxForceMode mode, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxRigidBody_addForce_mut(PxRigidBody* self_, PxVec3* force, PxForceMode mode, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Applies an impulsive torque defined in the global coordinate frame to the actor.
@@ -6993,7 +6993,7 @@ namespace Physx
         ///  This call wakes the actor if it is sleeping, and the autowake parameter is true (default) or the torque is non-zero.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_addTorque_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_addTorque_mut(PxRigidBody* self_, PxVec3* torque, PxForceMode mode, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxRigidBody_addTorque_mut(PxRigidBody* self_, PxVec3* torque, PxForceMode mode, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Clears the accumulated forces (sets the accumulated force back to zero).
@@ -7011,7 +7011,7 @@ namespace Physx
         ///  It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_clearForce_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_clearForce_mut(PxRigidBody* self_, PxForceMode mode);
+        internal static extern void PxRigidBody_clearForce_mut(PxRigidBody* self_, PxForceMode mode);
 
         /// <summary>
         ///  Clears the impulsive torque defined in the global coordinate frame to the actor.
@@ -7029,7 +7029,7 @@ namespace Physx
         ///  It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_clearTorque_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_clearTorque_mut(PxRigidBody* self_, PxForceMode mode);
+        internal static extern void PxRigidBody_clearTorque_mut(PxRigidBody* self_, PxForceMode mode);
 
         /// <summary>
         ///  Sets the impulsive force and torque defined in the global coordinate frame to the actor.
@@ -7041,7 +7041,7 @@ namespace Physx
         ///  It is invalid to use this method if the actor has not been added to a scene already or if PxActorFlag::eDISABLE_SIMULATION is set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setForceAndTorque_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setForceAndTorque_mut(PxRigidBody* self_, PxVec3* force, PxVec3* torque, PxForceMode mode);
+        internal static extern void PxRigidBody_setForceAndTorque_mut(PxRigidBody* self_, PxVec3* force, PxVec3* torque, PxForceMode mode);
 
         /// <summary>
         ///  Raises or clears a particular rigid body flag.
@@ -7057,10 +7057,10 @@ namespace Physx
         ///  wake the actor up automatically.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setRigidBodyFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setRigidBodyFlag_mut(PxRigidBody* self_, PxRigidBodyFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxRigidBody_setRigidBodyFlag_mut(PxRigidBody* self_, PxRigidBodyFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setRigidBodyFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setRigidBodyFlags_mut(PxRigidBody* self_, PxRigidBodyFlags inFlags);
+        internal static extern void PxRigidBody_setRigidBodyFlags_mut(PxRigidBody* self_, PxRigidBodyFlags inFlags);
 
         /// <summary>
         ///  Reads the PxRigidBody flags.
@@ -7070,7 +7070,7 @@ namespace Physx
         ///  The values of the PxRigidBody flags.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getRigidBodyFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidBodyFlags PxRigidBody_getRigidBodyFlags(PxRigidBody* self_);
+        internal static extern PxRigidBodyFlags PxRigidBody_getRigidBodyFlags(PxRigidBody* self_);
 
         /// <summary>
         ///  Sets the CCD minimum advance coefficient.
@@ -7091,7 +7091,7 @@ namespace Physx
         ///  The chances of jamming can be reduced by increasing the number of CCD mass
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setMinCCDAdvanceCoefficient_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setMinCCDAdvanceCoefficient_mut(PxRigidBody* self_, float advanceCoefficient);
+        internal static extern void PxRigidBody_setMinCCDAdvanceCoefficient_mut(PxRigidBody* self_, float advanceCoefficient);
 
         /// <summary>
         ///  Gets the CCD minimum advance coefficient.
@@ -7099,14 +7099,14 @@ namespace Physx
         ///  The value of the CCD min advance coefficient.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getMinCCDAdvanceCoefficient", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidBody_getMinCCDAdvanceCoefficient(PxRigidBody* self_);
+        internal static extern float PxRigidBody_getMinCCDAdvanceCoefficient(PxRigidBody* self_);
 
         /// <summary>
         ///  Sets the maximum depenetration velocity permitted to be introduced by the solver.
         ///  This value controls how much velocity the solver can introduce to correct for penetrations in contacts.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setMaxDepenetrationVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setMaxDepenetrationVelocity_mut(PxRigidBody* self_, float biasClamp);
+        internal static extern void PxRigidBody_setMaxDepenetrationVelocity_mut(PxRigidBody* self_, float biasClamp);
 
         /// <summary>
         ///  Returns the maximum depenetration velocity the solver is permitted to introduced.
@@ -7115,7 +7115,7 @@ namespace Physx
         ///  The maximum penetration bias applied by the solver.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getMaxDepenetrationVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidBody_getMaxDepenetrationVelocity(PxRigidBody* self_);
+        internal static extern float PxRigidBody_getMaxDepenetrationVelocity(PxRigidBody* self_);
 
         /// <summary>
         ///  Sets a limit on the impulse that may be applied at a contact. The maximum impulse at a contact between two dynamic or kinematic
@@ -7123,7 +7123,7 @@ namespace Physx
         ///  by the value for the dynamic body.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setMaxContactImpulse_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setMaxContactImpulse_mut(PxRigidBody* self_, float maxImpulse);
+        internal static extern void PxRigidBody_setMaxContactImpulse_mut(PxRigidBody* self_, float maxImpulse);
 
         /// <summary>
         ///  Returns the maximum impulse that may be applied at a contact.
@@ -7131,7 +7131,7 @@ namespace Physx
         ///  The maximum impulse that may be applied at a contact
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getMaxContactImpulse", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidBody_getMaxContactImpulse(PxRigidBody* self_);
+        internal static extern float PxRigidBody_getMaxContactImpulse(PxRigidBody* self_);
 
         /// <summary>
         ///  Sets a distance scale whereby the angular influence of a contact on the normal constraint in a contact is
@@ -7140,7 +7140,7 @@ namespace Physx
         ///  than linear normal velocity (e.g. rolling wheels) achieve larger slop values as the angular velocity increases.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_setContactSlopCoefficient_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBody_setContactSlopCoefficient_mut(PxRigidBody* self_, float slopCoefficient);
+        internal static extern void PxRigidBody_setContactSlopCoefficient_mut(PxRigidBody* self_, float slopCoefficient);
 
         /// <summary>
         ///  Returns the contact slop coefficient.
@@ -7148,7 +7148,7 @@ namespace Physx
         ///  The contact slop coefficient.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getContactSlopCoefficient", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidBody_getContactSlopCoefficient(PxRigidBody* self_);
+        internal static extern float PxRigidBody_getContactSlopCoefficient(PxRigidBody* self_);
 
         /// <summary>
         ///  Returns the island node index
@@ -7156,7 +7156,7 @@ namespace Physx
         ///  The island node index.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBody_getInternalIslandNodeIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxNodeIndex PxRigidBody_getInternalIslandNodeIndex(PxRigidBody* self_);
+        internal static extern PxNodeIndex PxRigidBody_getInternalIslandNodeIndex(PxRigidBody* self_);
 
         /// <summary>
         ///  Releases the link from the articulation.
@@ -7167,7 +7167,7 @@ namespace Physx
         ///  remove and then re-add the corresponding articulation to the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationLink_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationLink_release_mut(PxArticulationLink* self_);
+        internal static extern void PxArticulationLink_release_mut(PxArticulationLink* self_);
 
         /// <summary>
         ///  Gets the articulation that the link is a part of.
@@ -7175,7 +7175,7 @@ namespace Physx
         ///  The articulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationLink_getArticulation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationReducedCoordinate* PxArticulationLink_getArticulation(PxArticulationLink* self_);
+        internal static extern PxArticulationReducedCoordinate* PxArticulationLink_getArticulation(PxArticulationLink* self_);
 
         /// <summary>
         ///  Gets the joint which connects this link to its parent.
@@ -7183,7 +7183,7 @@ namespace Physx
         ///  The joint connecting the link to the parent. NULL for the root link.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationLink_getInboundJoint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationJointReducedCoordinate* PxArticulationLink_getInboundJoint(PxArticulationLink* self_);
+        internal static extern PxArticulationJointReducedCoordinate* PxArticulationLink_getInboundJoint(PxArticulationLink* self_);
 
         /// <summary>
         ///  Gets the number of degrees of freedom of the joint which connects this link to its parent.
@@ -7194,7 +7194,7 @@ namespace Physx
         ///  The number of degrees of freedom, or 0xFFFFFFFF if the articulation is not in a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationLink_getInboundJointDof", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationLink_getInboundJointDof(PxArticulationLink* self_);
+        internal static extern uint PxArticulationLink_getInboundJointDof(PxArticulationLink* self_);
 
         /// <summary>
         ///  Gets the number of child links.
@@ -7202,7 +7202,7 @@ namespace Physx
         ///  The number of child links.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationLink_getNbChildren", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationLink_getNbChildren(PxArticulationLink* self_);
+        internal static extern uint PxArticulationLink_getNbChildren(PxArticulationLink* self_);
 
         /// <summary>
         ///  Gets the low-level link index that may be used to index into members of PxArticulationCache.
@@ -7212,7 +7212,7 @@ namespace Physx
         ///  The low-level index, or 0xFFFFFFFF if the articulation is not in a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationLink_getLinkIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationLink_getLinkIndex(PxArticulationLink* self_);
+        internal static extern uint PxArticulationLink_getLinkIndex(PxArticulationLink* self_);
 
         /// <summary>
         ///  Retrieves the child links.
@@ -7220,7 +7220,7 @@ namespace Physx
         ///  The number of articulation links written to the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationLink_getChildren", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxArticulationLink_getChildren(PxArticulationLink* self_, PxArticulationLink** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxArticulationLink_getChildren(PxArticulationLink* self_, PxArticulationLink** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Set the constraint-force-mixing scale term.
@@ -7237,7 +7237,7 @@ namespace Physx
         ///  This call is not allowed while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationLink_setCfmScale_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxArticulationLink_setCfmScale_mut(PxArticulationLink* self_, float cfm);
+        internal static extern void PxArticulationLink_setCfmScale_mut(PxArticulationLink* self_, float cfm);
 
         /// <summary>
         ///  Get the constraint-force-mixing scale term.
@@ -7245,7 +7245,7 @@ namespace Physx
         ///  The constraint-force-mixing scale term.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationLink_getCfmScale", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxArticulationLink_getCfmScale(PxArticulationLink* self_);
+        internal static extern float PxArticulationLink_getCfmScale(PxArticulationLink* self_);
 
         /// <summary>
         ///  Get the linear velocity of the link.
@@ -7260,7 +7260,7 @@ namespace Physx
         ///  and in PxContactModifyCallback or in contact report callbacks.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationLink_getLinearVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxArticulationLink_getLinearVelocity(PxArticulationLink* self_);
+        internal static extern PxVec3 PxArticulationLink_getLinearVelocity(PxArticulationLink* self_);
 
         /// <summary>
         ///  Get the angular velocity of the link.
@@ -7274,7 +7274,7 @@ namespace Physx
         ///  and in PxContactModifyCallback or in contact report callbacks.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationLink_getAngularVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxArticulationLink_getAngularVelocity(PxArticulationLink* self_);
+        internal static extern PxVec3 PxArticulationLink_getAngularVelocity(PxArticulationLink* self_);
 
         /// <summary>
         ///  Returns the string name of the dynamic type.
@@ -7282,10 +7282,10 @@ namespace Physx
         ///  The string name.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxArticulationLink_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxArticulationLink_getConcreteTypeName(PxArticulationLink* self_);
+        internal static extern byte* PxArticulationLink_getConcreteTypeName(PxArticulationLink* self_);
 
         [DllImport(__DllName, EntryPoint = "PxConeLimitedConstraint_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConeLimitedConstraint PxConeLimitedConstraint_new();
+        internal static extern PxConeLimitedConstraint PxConeLimitedConstraint_new();
 
         /// <summary>
         ///  Releases a PxConstraint instance.
@@ -7293,7 +7293,7 @@ namespace Physx
         ///  This call does not wake up the connected rigid bodies.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraint_release_mut(PxConstraint* self_);
+        internal static extern void PxConstraint_release_mut(PxConstraint* self_);
 
         /// <summary>
         ///  Retrieves the scene which this constraint belongs to.
@@ -7301,25 +7301,25 @@ namespace Physx
         ///  Owner Scene. NULL if not part of a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_getScene", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxScene* PxConstraint_getScene(PxConstraint* self_);
+        internal static extern PxScene* PxConstraint_getScene(PxConstraint* self_);
 
         /// <summary>
         ///  Retrieves the actors for this constraint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_getActors", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraint_getActors(PxConstraint* self_, PxRigidActor** actor0, PxRigidActor** actor1);
+        internal static extern void PxConstraint_getActors(PxConstraint* self_, PxRigidActor** actor0, PxRigidActor** actor1);
 
         /// <summary>
         ///  Sets the actors for this constraint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_setActors_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraint_setActors_mut(PxConstraint* self_, PxRigidActor* actor0, PxRigidActor* actor1);
+        internal static extern void PxConstraint_setActors_mut(PxConstraint* self_, PxRigidActor* actor0, PxRigidActor* actor1);
 
         /// <summary>
         ///  Notify the scene that the constraint shader data has been updated by the application
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_markDirty_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraint_markDirty_mut(PxConstraint* self_);
+        internal static extern void PxConstraint_markDirty_mut(PxConstraint* self_);
 
         /// <summary>
         ///  Retrieve the flags for this constraint
@@ -7327,7 +7327,7 @@ namespace Physx
         ///  the constraint flags
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_getFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConstraintFlags PxConstraint_getFlags(PxConstraint* self_);
+        internal static extern PxConstraintFlags PxConstraint_getFlags(PxConstraint* self_);
 
         /// <summary>
         ///  Set the flags for this constraint
@@ -7335,13 +7335,13 @@ namespace Physx
         ///  default: PxConstraintFlag::eDRIVE_LIMITS_ARE_FORCES
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_setFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraint_setFlags_mut(PxConstraint* self_, PxConstraintFlags flags);
+        internal static extern void PxConstraint_setFlags_mut(PxConstraint* self_, PxConstraintFlags flags);
 
         /// <summary>
         ///  Set a flag for this constraint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_setFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraint_setFlag_mut(PxConstraint* self_, PxConstraintFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxConstraint_setFlag_mut(PxConstraint* self_, PxConstraintFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         /// <summary>
         ///  Retrieve the constraint force most recently applied to maintain this constraint.
@@ -7350,7 +7350,7 @@ namespace Physx
         ///  in PxContactModifyCallback or in contact report callbacks).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_getForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraint_getForce(PxConstraint* self_, PxVec3* linear, PxVec3* angular);
+        internal static extern void PxConstraint_getForce(PxConstraint* self_, PxVec3* linear, PxVec3* angular);
 
         /// <summary>
         ///  whether the constraint is valid.
@@ -7363,7 +7363,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxConstraint_isValid(PxConstraint* self_);
+        internal static extern bool PxConstraint_isValid(PxConstraint* self_);
 
         /// <summary>
         ///  Set the break force and torque thresholds for this constraint.
@@ -7371,13 +7371,13 @@ namespace Physx
         ///  If either the force or torque measured at the constraint exceed these thresholds the constraint will break.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_setBreakForce_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraint_setBreakForce_mut(PxConstraint* self_, float linear, float angular);
+        internal static extern void PxConstraint_setBreakForce_mut(PxConstraint* self_, float linear, float angular);
 
         /// <summary>
         ///  Retrieve the constraint break force and torque thresholds
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_getBreakForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraint_getBreakForce(PxConstraint* self_, float* linear, float* angular);
+        internal static extern void PxConstraint_getBreakForce(PxConstraint* self_, float* linear, float* angular);
 
         /// <summary>
         ///  Set the minimum response threshold for a constraint row
@@ -7388,7 +7388,7 @@ namespace Physx
         ///  PxConstraintFlag::eDISABLE_PREPROCESSING. The solver accuracy for this joint may be reduced.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_setMinResponseThreshold_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraint_setMinResponseThreshold_mut(PxConstraint* self_, float threshold);
+        internal static extern void PxConstraint_setMinResponseThreshold_mut(PxConstraint* self_, float threshold);
 
         /// <summary>
         ///  Retrieve the constraint break force and torque thresholds
@@ -7396,7 +7396,7 @@ namespace Physx
         ///  the minimum response threshold for a constraint row
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_getMinResponseThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxConstraint_getMinResponseThreshold(PxConstraint* self_);
+        internal static extern float PxConstraint_getMinResponseThreshold(PxConstraint* self_);
 
         /// <summary>
         ///  Fetch external owner of the constraint.
@@ -7406,22 +7406,22 @@ namespace Physx
         ///  Reference to the external object which owns the constraint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_getExternalReference_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxConstraint_getExternalReference_mut(PxConstraint* self_, uint* typeID);
+        internal static extern void* PxConstraint_getExternalReference_mut(PxConstraint* self_, uint* typeID);
 
         /// <summary>
         ///  Set the constraint functions for this constraint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConstraint_setConstraintFunctions_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConstraint_setConstraintFunctions_mut(PxConstraint* self_, PxConstraintConnector* connector, PxConstraintShaderTable* shaders);
+        internal static extern void PxConstraint_setConstraintFunctions_mut(PxConstraint* self_, PxConstraintConnector* connector, PxConstraintShaderTable* shaders);
 
         [DllImport(__DllName, EntryPoint = "PxConstraint_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxConstraint_getConcreteTypeName(PxConstraint* self_);
+        internal static extern byte* PxConstraint_getConcreteTypeName(PxConstraint* self_);
 
         /// <summary>
         ///  Constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxContactStreamIterator PxContactStreamIterator_new(byte* contactPatches, byte* contactPoints, uint* contactFaceIndices, uint nbPatches, uint nbContacts);
+        internal static extern PxContactStreamIterator PxContactStreamIterator_new(byte* contactPatches, byte* contactPoints, uint* contactFaceIndices, uint nbPatches, uint nbContacts);
 
         /// <summary>
         ///  Returns whether there are more patches in this stream.
@@ -7430,7 +7430,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_hasNextPatch", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxContactStreamIterator_hasNextPatch(PxContactStreamIterator* self_);
+        internal static extern bool PxContactStreamIterator_hasNextPatch(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Returns the total contact count.
@@ -7438,7 +7438,7 @@ namespace Physx
         ///  Total contact count.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getTotalContactCount", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxContactStreamIterator_getTotalContactCount(PxContactStreamIterator* self_);
+        internal static extern uint PxContactStreamIterator_getTotalContactCount(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Returns the total patch count.
@@ -7446,13 +7446,13 @@ namespace Physx
         ///  Total patch count.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getTotalPatchCount", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxContactStreamIterator_getTotalPatchCount(PxContactStreamIterator* self_);
+        internal static extern uint PxContactStreamIterator_getTotalPatchCount(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Advances iterator to next contact patch.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_nextPatch_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactStreamIterator_nextPatch_mut(PxContactStreamIterator* self_);
+        internal static extern void PxContactStreamIterator_nextPatch_mut(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Returns if the current patch has more contacts.
@@ -7461,13 +7461,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_hasNextContact", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxContactStreamIterator_hasNextContact(PxContactStreamIterator* self_);
+        internal static extern bool PxContactStreamIterator_hasNextContact(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Advances to the next contact in the patch.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_nextContact_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactStreamIterator_nextContact_mut(PxContactStreamIterator* self_);
+        internal static extern void PxContactStreamIterator_nextContact_mut(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the current contact's normal
@@ -7475,7 +7475,7 @@ namespace Physx
         ///  The current contact's normal.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getContactNormal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3* PxContactStreamIterator_getContactNormal(PxContactStreamIterator* self_);
+        internal static extern PxVec3* PxContactStreamIterator_getContactNormal(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the inverse mass scale for body 0.
@@ -7483,7 +7483,7 @@ namespace Physx
         ///  The inverse mass scale for body 0.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getInvMassScale0", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactStreamIterator_getInvMassScale0(PxContactStreamIterator* self_);
+        internal static extern float PxContactStreamIterator_getInvMassScale0(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the inverse mass scale for body 1.
@@ -7491,7 +7491,7 @@ namespace Physx
         ///  The inverse mass scale for body 1.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getInvMassScale1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactStreamIterator_getInvMassScale1(PxContactStreamIterator* self_);
+        internal static extern float PxContactStreamIterator_getInvMassScale1(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the inverse inertia scale for body 0.
@@ -7499,7 +7499,7 @@ namespace Physx
         ///  The inverse inertia scale for body 0.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getInvInertiaScale0", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactStreamIterator_getInvInertiaScale0(PxContactStreamIterator* self_);
+        internal static extern float PxContactStreamIterator_getInvInertiaScale0(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the inverse inertia scale for body 1.
@@ -7507,7 +7507,7 @@ namespace Physx
         ///  The inverse inertia scale for body 1.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getInvInertiaScale1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactStreamIterator_getInvInertiaScale1(PxContactStreamIterator* self_);
+        internal static extern float PxContactStreamIterator_getInvInertiaScale1(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's max impulse.
@@ -7515,7 +7515,7 @@ namespace Physx
         ///  The contact's max impulse.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getMaxImpulse", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactStreamIterator_getMaxImpulse(PxContactStreamIterator* self_);
+        internal static extern float PxContactStreamIterator_getMaxImpulse(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's target velocity.
@@ -7523,7 +7523,7 @@ namespace Physx
         ///  The contact's target velocity.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getTargetVel", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3* PxContactStreamIterator_getTargetVel(PxContactStreamIterator* self_);
+        internal static extern PxVec3* PxContactStreamIterator_getTargetVel(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's contact point.
@@ -7531,7 +7531,7 @@ namespace Physx
         ///  The contact's contact point.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getContactPoint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3* PxContactStreamIterator_getContactPoint(PxContactStreamIterator* self_);
+        internal static extern PxVec3* PxContactStreamIterator_getContactPoint(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's separation.
@@ -7539,7 +7539,7 @@ namespace Physx
         ///  The contact's separation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getSeparation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactStreamIterator_getSeparation(PxContactStreamIterator* self_);
+        internal static extern float PxContactStreamIterator_getSeparation(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's face index for shape 0.
@@ -7547,7 +7547,7 @@ namespace Physx
         ///  The contact's face index for shape 0.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getFaceIndex0", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxContactStreamIterator_getFaceIndex0(PxContactStreamIterator* self_);
+        internal static extern uint PxContactStreamIterator_getFaceIndex0(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's face index for shape 1.
@@ -7555,7 +7555,7 @@ namespace Physx
         ///  The contact's face index for shape 1.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getFaceIndex1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxContactStreamIterator_getFaceIndex1(PxContactStreamIterator* self_);
+        internal static extern uint PxContactStreamIterator_getFaceIndex1(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's static friction coefficient.
@@ -7563,7 +7563,7 @@ namespace Physx
         ///  The contact's static friction coefficient.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getStaticFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactStreamIterator_getStaticFriction(PxContactStreamIterator* self_);
+        internal static extern float PxContactStreamIterator_getStaticFriction(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's dynamic friction coefficient.
@@ -7571,7 +7571,7 @@ namespace Physx
         ///  The contact's dynamic friction coefficient.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getDynamicFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactStreamIterator_getDynamicFriction(PxContactStreamIterator* self_);
+        internal static extern float PxContactStreamIterator_getDynamicFriction(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's restitution coefficient.
@@ -7579,7 +7579,7 @@ namespace Physx
         ///  The contact's restitution coefficient.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getRestitution", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactStreamIterator_getRestitution(PxContactStreamIterator* self_);
+        internal static extern float PxContactStreamIterator_getRestitution(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's damping value.
@@ -7587,7 +7587,7 @@ namespace Physx
         ///  The contact's damping value.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactStreamIterator_getDamping(PxContactStreamIterator* self_);
+        internal static extern float PxContactStreamIterator_getDamping(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's material flags.
@@ -7595,7 +7595,7 @@ namespace Physx
         ///  The contact's material flags.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getMaterialFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxContactStreamIterator_getMaterialFlags(PxContactStreamIterator* self_);
+        internal static extern uint PxContactStreamIterator_getMaterialFlags(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's material index for shape 0.
@@ -7603,7 +7603,7 @@ namespace Physx
         ///  The contact's material index for shape 0.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getMaterialIndex0", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort PxContactStreamIterator_getMaterialIndex0(PxContactStreamIterator* self_);
+        internal static extern ushort PxContactStreamIterator_getMaterialIndex0(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Gets the contact's material index for shape 1.
@@ -7611,7 +7611,7 @@ namespace Physx
         ///  The contact's material index for shape 1.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_getMaterialIndex1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort PxContactStreamIterator_getMaterialIndex1(PxContactStreamIterator* self_);
+        internal static extern ushort PxContactStreamIterator_getMaterialIndex1(PxContactStreamIterator* self_);
 
         /// <summary>
         ///  Advances the contact stream iterator to a specific contact index.
@@ -7620,7 +7620,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactStreamIterator_advanceToIndex_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxContactStreamIterator_advanceToIndex_mut(PxContactStreamIterator* self_, uint initialIndex);
+        internal static extern bool PxContactStreamIterator_advanceToIndex_mut(PxContactStreamIterator* self_, uint initialIndex);
 
         /// <summary>
         ///  Get the position of a specific contact point in the set.
@@ -7628,13 +7628,13 @@ namespace Physx
         ///  Position to the requested point in world space
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getPoint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3* PxContactSet_getPoint(PxContactSet* self_, uint i);
+        internal static extern PxVec3* PxContactSet_getPoint(PxContactSet* self_, uint i);
 
         /// <summary>
         ///  Alter the position of a specific contact point in the set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_setPoint_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_setPoint_mut(PxContactSet* self_, uint i, PxVec3* p);
+        internal static extern void PxContactSet_setPoint_mut(PxContactSet* self_, uint i, PxVec3* p);
 
         /// <summary>
         ///  Get the contact normal of a specific contact point in the set.
@@ -7642,7 +7642,7 @@ namespace Physx
         ///  The requested normal in world space
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getNormal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3* PxContactSet_getNormal(PxContactSet* self_, uint i);
+        internal static extern PxVec3* PxContactSet_getNormal(PxContactSet* self_, uint i);
 
         /// <summary>
         ///  Alter the contact normal of a specific contact point in the set.
@@ -7650,7 +7650,7 @@ namespace Physx
         ///  Changing the normal can cause contact points to be ignored.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_setNormal_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_setNormal_mut(PxContactSet* self_, uint i, PxVec3* n);
+        internal static extern void PxContactSet_setNormal_mut(PxContactSet* self_, uint i, PxVec3* n);
 
         /// <summary>
         ///  Get the separation distance of a specific contact point in the set.
@@ -7658,13 +7658,13 @@ namespace Physx
         ///  The separation. Negative implies penetration.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getSeparation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactSet_getSeparation(PxContactSet* self_, uint i);
+        internal static extern float PxContactSet_getSeparation(PxContactSet* self_, uint i);
 
         /// <summary>
         ///  Alter the separation of a specific contact point in the set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_setSeparation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_setSeparation_mut(PxContactSet* self_, uint i, float s);
+        internal static extern void PxContactSet_setSeparation_mut(PxContactSet* self_, uint i, float s);
 
         /// <summary>
         ///  Get the target velocity of a specific contact point in the set.
@@ -7672,13 +7672,13 @@ namespace Physx
         ///  The target velocity in world frame
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getTargetVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3* PxContactSet_getTargetVelocity(PxContactSet* self_, uint i);
+        internal static extern PxVec3* PxContactSet_getTargetVelocity(PxContactSet* self_, uint i);
 
         /// <summary>
         ///  Alter the target velocity of a specific contact point in the set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_setTargetVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_setTargetVelocity_mut(PxContactSet* self_, uint i, PxVec3* v);
+        internal static extern void PxContactSet_setTargetVelocity_mut(PxContactSet* self_, uint i, PxVec3* v);
 
         /// <summary>
         ///  Get the face index with respect to the first shape of the pair for a specific contact point in the set.
@@ -7688,7 +7688,7 @@ namespace Physx
         ///  At the moment, the first shape is never a tri-mesh, therefore this function always returns PXC_CONTACT_NO_FACE_INDEX
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getInternalFaceIndex0", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxContactSet_getInternalFaceIndex0(PxContactSet* self_, uint i);
+        internal static extern uint PxContactSet_getInternalFaceIndex0(PxContactSet* self_, uint i);
 
         /// <summary>
         ///  Get the face index with respect to the second shape of the pair for a specific contact point in the set.
@@ -7696,7 +7696,7 @@ namespace Physx
         ///  The face index of the second shape
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getInternalFaceIndex1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxContactSet_getInternalFaceIndex1(PxContactSet* self_, uint i);
+        internal static extern uint PxContactSet_getInternalFaceIndex1(PxContactSet* self_, uint i);
 
         /// <summary>
         ///  Get the maximum impulse for a specific contact point in the set.
@@ -7704,7 +7704,7 @@ namespace Physx
         ///  The maximum impulse
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getMaxImpulse", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactSet_getMaxImpulse(PxContactSet* self_, uint i);
+        internal static extern float PxContactSet_getMaxImpulse(PxContactSet* self_, uint i);
 
         /// <summary>
         ///  Alter the maximum impulse for a specific contact point in the set.
@@ -7712,7 +7712,7 @@ namespace Physx
         ///  Must be nonnegative. If set to zero, the contact point will be ignored
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_setMaxImpulse_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_setMaxImpulse_mut(PxContactSet* self_, uint i, float s);
+        internal static extern void PxContactSet_setMaxImpulse_mut(PxContactSet* self_, uint i, float s);
 
         /// <summary>
         ///  Get the restitution coefficient for a specific contact point in the set.
@@ -7720,7 +7720,7 @@ namespace Physx
         ///  The restitution coefficient
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getRestitution", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactSet_getRestitution(PxContactSet* self_, uint i);
+        internal static extern float PxContactSet_getRestitution(PxContactSet* self_, uint i);
 
         /// <summary>
         ///  Alter the restitution coefficient for a specific contact point in the set.
@@ -7728,7 +7728,7 @@ namespace Physx
         ///  Valid ranges [0,1]
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_setRestitution_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_setRestitution_mut(PxContactSet* self_, uint i, float r);
+        internal static extern void PxContactSet_setRestitution_mut(PxContactSet* self_, uint i, float r);
 
         /// <summary>
         ///  Get the static friction coefficient for a specific contact point in the set.
@@ -7736,13 +7736,13 @@ namespace Physx
         ///  The friction coefficient (dimensionless)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getStaticFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactSet_getStaticFriction(PxContactSet* self_, uint i);
+        internal static extern float PxContactSet_getStaticFriction(PxContactSet* self_, uint i);
 
         /// <summary>
         ///  Alter the static friction coefficient for a specific contact point in the set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_setStaticFriction_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_setStaticFriction_mut(PxContactSet* self_, uint i, float f);
+        internal static extern void PxContactSet_setStaticFriction_mut(PxContactSet* self_, uint i, float f);
 
         /// <summary>
         ///  Get the static friction coefficient for a specific contact point in the set.
@@ -7750,13 +7750,13 @@ namespace Physx
         ///  The friction coefficient
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getDynamicFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactSet_getDynamicFriction(PxContactSet* self_, uint i);
+        internal static extern float PxContactSet_getDynamicFriction(PxContactSet* self_, uint i);
 
         /// <summary>
         ///  Alter the static dynamic coefficient for a specific contact point in the set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_setDynamicFriction_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_setDynamicFriction_mut(PxContactSet* self_, uint i, float f);
+        internal static extern void PxContactSet_setDynamicFriction_mut(PxContactSet* self_, uint i, float f);
 
         /// <summary>
         ///  Ignore the contact point.
@@ -7764,13 +7764,13 @@ namespace Physx
         ///  If a contact point is ignored then no force will get applied at this point. This can be used to disable collision in certain areas of a shape, for example.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_ignore_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_ignore_mut(PxContactSet* self_, uint i);
+        internal static extern void PxContactSet_ignore_mut(PxContactSet* self_, uint i);
 
         /// <summary>
         ///  The number of contact points in the set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_size", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxContactSet_size(PxContactSet* self_);
+        internal static extern uint PxContactSet_size(PxContactSet* self_);
 
         /// <summary>
         ///  Returns the invMassScale of body 0
@@ -7781,7 +7781,7 @@ namespace Physx
         ///  treat the body as if it had infinite mass. Any value &gt; 1.f makes this contact treat the body as if it had smaller mass.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getInvMassScale0", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactSet_getInvMassScale0(PxContactSet* self_);
+        internal static extern float PxContactSet_getInvMassScale0(PxContactSet* self_);
 
         /// <summary>
         ///  Returns the invMassScale of body 1
@@ -7792,7 +7792,7 @@ namespace Physx
         ///  treat the body as if it had infinite mass. Any value &gt; 1.f makes this contact treat the body as if it had smaller mass.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getInvMassScale1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactSet_getInvMassScale1(PxContactSet* self_);
+        internal static extern float PxContactSet_getInvMassScale1(PxContactSet* self_);
 
         /// <summary>
         ///  Returns the invInertiaScale of body 0
@@ -7803,7 +7803,7 @@ namespace Physx
         ///  treat the body as if it had infinite inertia. Any value &gt; 1.f makes this contact treat the body as if it had smaller inertia.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getInvInertiaScale0", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactSet_getInvInertiaScale0(PxContactSet* self_);
+        internal static extern float PxContactSet_getInvInertiaScale0(PxContactSet* self_);
 
         /// <summary>
         ///  Returns the invInertiaScale of body 1
@@ -7814,7 +7814,7 @@ namespace Physx
         ///  treat the body as if it had infinite inertia. Any value &gt; 1.f makes this contact treat the body as if it had smaller inertia.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_getInvInertiaScale1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactSet_getInvInertiaScale1(PxContactSet* self_);
+        internal static extern float PxContactSet_getInvInertiaScale1(PxContactSet* self_);
 
         /// <summary>
         ///  Sets the invMassScale of body 0
@@ -7825,7 +7825,7 @@ namespace Physx
         ///  treat the body as if it had infinite mass. Any value &gt; 1.f makes this contact treat the body as if it had smaller mass.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_setInvMassScale0_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_setInvMassScale0_mut(PxContactSet* self_, float scale);
+        internal static extern void PxContactSet_setInvMassScale0_mut(PxContactSet* self_, float scale);
 
         /// <summary>
         ///  Sets the invMassScale of body 1
@@ -7836,7 +7836,7 @@ namespace Physx
         ///  treat the body as if it had infinite mass. Any value &gt; 1.f makes this contact treat the body as if it had smaller mass.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_setInvMassScale1_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_setInvMassScale1_mut(PxContactSet* self_, float scale);
+        internal static extern void PxContactSet_setInvMassScale1_mut(PxContactSet* self_, float scale);
 
         /// <summary>
         ///  Sets the invInertiaScale of body 0
@@ -7847,7 +7847,7 @@ namespace Physx
         ///  treat the body as if it had infinite inertia. Any value &gt; 1.f makes this contact treat the body as if it had smaller inertia.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_setInvInertiaScale0_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_setInvInertiaScale0_mut(PxContactSet* self_, float scale);
+        internal static extern void PxContactSet_setInvInertiaScale0_mut(PxContactSet* self_, float scale);
 
         /// <summary>
         ///  Sets the invInertiaScale of body 1
@@ -7858,7 +7858,7 @@ namespace Physx
         ///  treat the body as if it had infinite inertia. Any value &gt; 1.f makes this contact treat the body as if it had smaller inertia.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactSet_setInvInertiaScale1_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactSet_setInvInertiaScale1_mut(PxContactSet* self_, float scale);
+        internal static extern void PxContactSet_setInvInertiaScale1_mut(PxContactSet* self_, float scale);
 
         /// <summary>
         ///  Passes modifiable arrays of contacts to the application.
@@ -7869,7 +7869,7 @@ namespace Physx
         ///  disable contacts using PxContactSet::ignore().
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactModifyCallback_onContactModify_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactModifyCallback_onContactModify_mut(PxContactModifyCallback* self_, PxContactModifyPair* pairs, uint count);
+        internal static extern void PxContactModifyCallback_onContactModify_mut(PxContactModifyCallback* self_, PxContactModifyPair* pairs, uint count);
 
         /// <summary>
         ///  Passes modifiable arrays of contacts to the application.
@@ -7880,7 +7880,7 @@ namespace Physx
         ///  disable contacts using PxContactSet::ignore().
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCCDContactModifyCallback_onCCDContactModify_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCCDContactModifyCallback_onCCDContactModify_mut(PxCCDContactModifyCallback* self_, PxContactModifyPair* pairs, uint count);
+        internal static extern void PxCCDContactModifyCallback_onCCDContactModify_mut(PxCCDContactModifyCallback* self_, PxContactModifyPair* pairs, uint count);
 
         /// <summary>
         ///  Notification if an object or its memory gets released
@@ -7895,17 +7895,17 @@ namespace Physx
         ///  allowed to dereference the object pointer in the callback.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDeletionListener_onRelease_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDeletionListener_onRelease_mut(PxDeletionListener* self_, PxBase* observed, void* userData, PxDeletionEventFlag deletionEvent);
+        internal static extern void PxDeletionListener_onRelease_mut(PxDeletionListener* self_, PxBase* observed, void* userData, PxDeletionEventFlag deletionEvent);
 
         [DllImport(__DllName, EntryPoint = "PxBaseMaterial_isKindOf", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBaseMaterial_isKindOf(PxBaseMaterial* self_, byte* name);
+        internal static extern bool PxBaseMaterial_isKindOf(PxBaseMaterial* self_, byte* name);
 
         /// <summary>
         ///  Sets young's modulus which defines the body's stiffness
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFEMMaterial_setYoungsModulus_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxFEMMaterial_setYoungsModulus_mut(PxFEMMaterial* self_, float young);
+        internal static extern void PxFEMMaterial_setYoungsModulus_mut(PxFEMMaterial* self_, float young);
 
         /// <summary>
         ///  Retrieves the young's modulus value.
@@ -7913,13 +7913,13 @@ namespace Physx
         ///  The young's modulus value.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFEMMaterial_getYoungsModulus", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxFEMMaterial_getYoungsModulus(PxFEMMaterial* self_);
+        internal static extern float PxFEMMaterial_getYoungsModulus(PxFEMMaterial* self_);
 
         /// <summary>
         ///  Sets the Poisson's ratio which defines the body's volume preservation. Completely incompressible materials have a poisson ratio of 0.5. Its value should not be set to exactly 0.5 because this leads to numerical problems.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFEMMaterial_setPoissons_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxFEMMaterial_setPoissons_mut(PxFEMMaterial* self_, float poisson);
+        internal static extern void PxFEMMaterial_setPoissons_mut(PxFEMMaterial* self_, float poisson);
 
         /// <summary>
         ///  Retrieves the Poisson's ratio.
@@ -7927,13 +7927,13 @@ namespace Physx
         ///  The Poisson's ratio.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFEMMaterial_getPoissons", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxFEMMaterial_getPoissons(PxFEMMaterial* self_);
+        internal static extern float PxFEMMaterial_getPoissons(PxFEMMaterial* self_);
 
         /// <summary>
         ///  Sets the dynamic friction value which defines the strength of resistance when two objects slide relative to each other while in contact.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFEMMaterial_setDynamicFriction_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxFEMMaterial_setDynamicFriction_mut(PxFEMMaterial* self_, float dynamicFriction);
+        internal static extern void PxFEMMaterial_setDynamicFriction_mut(PxFEMMaterial* self_, float dynamicFriction);
 
         /// <summary>
         ///  Retrieves the dynamic friction value
@@ -7941,28 +7941,28 @@ namespace Physx
         ///  The dynamic friction value
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFEMMaterial_getDynamicFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxFEMMaterial_getDynamicFriction(PxFEMMaterial* self_);
+        internal static extern float PxFEMMaterial_getDynamicFriction(PxFEMMaterial* self_);
 
         [DllImport(__DllName, EntryPoint = "PxFilterData_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFilterData PxFilterData_new(PxEMPTY anon_param0);
+        internal static extern PxFilterData PxFilterData_new(PxEMPTY anon_param0);
 
         /// <summary>
         ///  Default constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFilterData_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFilterData PxFilterData_new_1();
+        internal static extern PxFilterData PxFilterData_new_1();
 
         /// <summary>
         ///  Constructor to set filter data initially.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFilterData_new_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFilterData PxFilterData_new_2(uint w0, uint w1, uint w2, uint w3);
+        internal static extern PxFilterData PxFilterData_new_2(uint w0, uint w1, uint w2, uint w3);
 
         /// <summary>
         ///  (re)sets the structure to the default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFilterData_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxFilterData_setToDefault_mut(PxFilterData* self_);
+        internal static extern void PxFilterData_setToDefault_mut(PxFilterData* self_);
 
         /// <summary>
         ///  Extract filter object type from the filter attributes of a collision pair object
@@ -7970,7 +7970,7 @@ namespace Physx
         ///  The type of the collision pair object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetFilterObjectType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFilterObjectType phys_PxGetFilterObjectType(uint attr);
+        internal static extern PxFilterObjectType phys_PxGetFilterObjectType(uint attr);
 
         /// <summary>
         ///  Specifies whether the collision object belongs to a kinematic rigid body
@@ -7979,7 +7979,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxFilterObjectIsKinematic", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxFilterObjectIsKinematic(uint attr);
+        internal static extern bool phys_PxFilterObjectIsKinematic(uint attr);
 
         /// <summary>
         ///  Specifies whether the collision object is a trigger shape
@@ -7988,7 +7988,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxFilterObjectIsTrigger", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxFilterObjectIsTrigger(uint attr);
+        internal static extern bool phys_PxFilterObjectIsTrigger(uint attr);
 
         /// <summary>
         ///  Filter method to specify how a pair of potentially colliding objects should be processed.
@@ -8002,7 +8002,7 @@ namespace Physx
         ///  should be tracked and send a report on pair deletion through the filter callback
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimulationFilterCallback_pairFound_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFilterFlags PxSimulationFilterCallback_pairFound_mut(PxSimulationFilterCallback* self_, uint pairID, uint attributes0, PxFilterData filterData0, PxActor* a0, PxShape* s0, uint attributes1, PxFilterData filterData1, PxActor* a1, PxShape* s1, PxPairFlags* pairFlags);
+        internal static extern PxFilterFlags PxSimulationFilterCallback_pairFound_mut(PxSimulationFilterCallback* self_, uint pairID, uint attributes0, PxFilterData filterData0, PxActor* a0, PxShape* s0, uint attributes1, PxFilterData filterData1, PxActor* a1, PxShape* s1, PxPairFlags* pairFlags);
 
         /// <summary>
         ///  Callback to inform that a tracked collision pair is gone.
@@ -8011,7 +8011,7 @@ namespace Physx
         ///  collision pairs which have been marked as filter callback pairs ([`PxFilterFlag::eNOTIFY`] set in #pairFound()).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimulationFilterCallback_pairLost_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSimulationFilterCallback_pairLost_mut(PxSimulationFilterCallback* self_, uint pairID, uint attributes0, PxFilterData filterData0, uint attributes1, PxFilterData filterData1, [MarshalAs(UnmanagedType.U1)] bool objectRemoved);
+        internal static extern void PxSimulationFilterCallback_pairLost_mut(PxSimulationFilterCallback* self_, uint pairID, uint attributes0, PxFilterData filterData0, uint attributes1, PxFilterData filterData1, [MarshalAs(UnmanagedType.U1)] bool objectRemoved);
 
         /// <summary>
         ///  Callback to give the opportunity to change the filter state of a tracked collision pair.
@@ -8032,25 +8032,25 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimulationFilterCallback_statusChange_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSimulationFilterCallback_statusChange_mut(PxSimulationFilterCallback* self_, uint* pairID, PxPairFlags* pairFlags, PxFilterFlags* filterFlags);
+        internal static extern bool PxSimulationFilterCallback_statusChange_mut(PxSimulationFilterCallback* self_, uint* pairID, PxPairFlags* pairFlags, PxFilterFlags* filterFlags);
 
         /// <summary>
         ///  Any combination of PxDataAccessFlag::eREADABLE and PxDataAccessFlag::eWRITABLE
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxLockedData_getDataAccessFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDataAccessFlags PxLockedData_getDataAccessFlags_mut(PxLockedData* self_);
+        internal static extern PxDataAccessFlags PxLockedData_getDataAccessFlags_mut(PxLockedData* self_);
 
         /// <summary>
         ///  Unlocks the bulk data.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxLockedData_unlock_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxLockedData_unlock_mut(PxLockedData* self_);
+        internal static extern void PxLockedData_unlock_mut(PxLockedData* self_);
 
         /// <summary>
         ///  virtual destructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxLockedData_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxLockedData_delete(PxLockedData* self_);
+        internal static extern void PxLockedData_delete(PxLockedData* self_);
 
         /// <summary>
         ///  Sets the coefficient of dynamic friction.
@@ -8063,7 +8063,7 @@ namespace Physx
         ///  wake any actors which may be affected.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_setDynamicFriction_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMaterial_setDynamicFriction_mut(PxMaterial* self_, float coef);
+        internal static extern void PxMaterial_setDynamicFriction_mut(PxMaterial* self_, float coef);
 
         /// <summary>
         ///  Retrieves the DynamicFriction value.
@@ -8071,7 +8071,7 @@ namespace Physx
         ///  The coefficient of dynamic friction.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_getDynamicFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxMaterial_getDynamicFriction(PxMaterial* self_);
+        internal static extern float PxMaterial_getDynamicFriction(PxMaterial* self_);
 
         /// <summary>
         ///  Sets the coefficient of static friction
@@ -8084,7 +8084,7 @@ namespace Physx
         ///  wake any actors which may be affected.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_setStaticFriction_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMaterial_setStaticFriction_mut(PxMaterial* self_, float coef);
+        internal static extern void PxMaterial_setStaticFriction_mut(PxMaterial* self_, float coef);
 
         /// <summary>
         ///  Retrieves the coefficient of static friction.
@@ -8092,7 +8092,7 @@ namespace Physx
         ///  The coefficient of static friction.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_getStaticFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxMaterial_getStaticFriction(PxMaterial* self_);
+        internal static extern float PxMaterial_getStaticFriction(PxMaterial* self_);
 
         /// <summary>
         ///  Sets the coefficient of restitution
@@ -8109,7 +8109,7 @@ namespace Physx
         ///  wake any actors which may be affected.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_setRestitution_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMaterial_setRestitution_mut(PxMaterial* self_, float rest);
+        internal static extern void PxMaterial_setRestitution_mut(PxMaterial* self_, float rest);
 
         /// <summary>
         ///  Retrieves the coefficient of restitution.
@@ -8119,7 +8119,7 @@ namespace Physx
         ///  The coefficient of restitution.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_getRestitution", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxMaterial_getRestitution(PxMaterial* self_);
+        internal static extern float PxMaterial_getRestitution(PxMaterial* self_);
 
         /// <summary>
         ///  Sets the coefficient of damping
@@ -8134,7 +8134,7 @@ namespace Physx
         ///  wake any actors which may be affected.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_setDamping_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMaterial_setDamping_mut(PxMaterial* self_, float damping);
+        internal static extern void PxMaterial_setDamping_mut(PxMaterial* self_, float damping);
 
         /// <summary>
         ///  Retrieves the coefficient of damping.
@@ -8144,7 +8144,7 @@ namespace Physx
         ///  The coefficient of damping.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_getDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxMaterial_getDamping(PxMaterial* self_);
+        internal static extern float PxMaterial_getDamping(PxMaterial* self_);
 
         /// <summary>
         ///  Raises or clears a particular material flag.
@@ -8160,7 +8160,7 @@ namespace Physx
         ///  wake any actors which may be affected.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_setFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMaterial_setFlag_mut(PxMaterial* self_, PxMaterialFlag flag, [MarshalAs(UnmanagedType.U1)] bool b);
+        internal static extern void PxMaterial_setFlag_mut(PxMaterial* self_, PxMaterialFlag flag, [MarshalAs(UnmanagedType.U1)] bool b);
 
         /// <summary>
         ///  sets all the material flags.
@@ -8176,7 +8176,7 @@ namespace Physx
         ///  wake any actors which may be affected.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_setFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMaterial_setFlags_mut(PxMaterial* self_, PxMaterialFlags flags);
+        internal static extern void PxMaterial_setFlags_mut(PxMaterial* self_, PxMaterialFlags flags);
 
         /// <summary>
         ///  Retrieves the flags. See [`PxMaterialFlag`].
@@ -8184,7 +8184,7 @@ namespace Physx
         ///  The material flags.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_getFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMaterialFlags PxMaterial_getFlags(PxMaterial* self_);
+        internal static extern PxMaterialFlags PxMaterial_getFlags(PxMaterial* self_);
 
         /// <summary>
         ///  Sets the friction combine mode.
@@ -8200,7 +8200,7 @@ namespace Physx
         ///  wake any actors which may be affected.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_setFrictionCombineMode_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMaterial_setFrictionCombineMode_mut(PxMaterial* self_, PxCombineMode combMode);
+        internal static extern void PxMaterial_setFrictionCombineMode_mut(PxMaterial* self_, PxCombineMode combMode);
 
         /// <summary>
         ///  Retrieves the friction combine mode.
@@ -8210,7 +8210,7 @@ namespace Physx
         ///  The friction combine mode for this material.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_getFrictionCombineMode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCombineMode PxMaterial_getFrictionCombineMode(PxMaterial* self_);
+        internal static extern PxCombineMode PxMaterial_getFrictionCombineMode(PxMaterial* self_);
 
         /// <summary>
         ///  Sets the restitution combine mode.
@@ -8226,7 +8226,7 @@ namespace Physx
         ///  wake any actors which may be affected.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_setRestitutionCombineMode_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMaterial_setRestitutionCombineMode_mut(PxMaterial* self_, PxCombineMode combMode);
+        internal static extern void PxMaterial_setRestitutionCombineMode_mut(PxMaterial* self_, PxCombineMode combMode);
 
         /// <summary>
         ///  Retrieves the restitution combine mode.
@@ -8236,28 +8236,28 @@ namespace Physx
         ///  The coefficient of restitution combine mode for this material.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMaterial_getRestitutionCombineMode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCombineMode PxMaterial_getRestitutionCombineMode(PxMaterial* self_);
+        internal static extern PxCombineMode PxMaterial_getRestitutionCombineMode(PxMaterial* self_);
 
         [DllImport(__DllName, EntryPoint = "PxMaterial_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxMaterial_getConcreteTypeName(PxMaterial* self_);
+        internal static extern byte* PxMaterial_getConcreteTypeName(PxMaterial* self_);
 
         /// <summary>
         ///  Construct parameters with default values.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDiffuseParticleParams_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDiffuseParticleParams PxDiffuseParticleParams_new();
+        internal static extern PxDiffuseParticleParams PxDiffuseParticleParams_new();
 
         /// <summary>
         ///  (re)sets the structure to the default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDiffuseParticleParams_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDiffuseParticleParams_setToDefault_mut(PxDiffuseParticleParams* self_);
+        internal static extern void PxDiffuseParticleParams_setToDefault_mut(PxDiffuseParticleParams* self_);
 
         /// <summary>
         ///  Sets friction
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxParticleMaterial_setFriction_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxParticleMaterial_setFriction_mut(PxParticleMaterial* self_, float friction);
+        internal static extern void PxParticleMaterial_setFriction_mut(PxParticleMaterial* self_, float friction);
 
         /// <summary>
         ///  Retrieves the friction value.
@@ -8265,13 +8265,13 @@ namespace Physx
         ///  The friction value.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxParticleMaterial_getFriction", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxParticleMaterial_getFriction(PxParticleMaterial* self_);
+        internal static extern float PxParticleMaterial_getFriction(PxParticleMaterial* self_);
 
         /// <summary>
         ///  Sets velocity damping term
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxParticleMaterial_setDamping_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxParticleMaterial_setDamping_mut(PxParticleMaterial* self_, float damping);
+        internal static extern void PxParticleMaterial_setDamping_mut(PxParticleMaterial* self_, float damping);
 
         /// <summary>
         ///  Retrieves the velocity damping term
@@ -8279,13 +8279,13 @@ namespace Physx
         ///  The velocity damping term.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxParticleMaterial_getDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxParticleMaterial_getDamping(PxParticleMaterial* self_);
+        internal static extern float PxParticleMaterial_getDamping(PxParticleMaterial* self_);
 
         /// <summary>
         ///  Sets adhesion term
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxParticleMaterial_setAdhesion_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxParticleMaterial_setAdhesion_mut(PxParticleMaterial* self_, float adhesion);
+        internal static extern void PxParticleMaterial_setAdhesion_mut(PxParticleMaterial* self_, float adhesion);
 
         /// <summary>
         ///  Retrieves the adhesion term
@@ -8293,13 +8293,13 @@ namespace Physx
         ///  The adhesion term.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxParticleMaterial_getAdhesion", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxParticleMaterial_getAdhesion(PxParticleMaterial* self_);
+        internal static extern float PxParticleMaterial_getAdhesion(PxParticleMaterial* self_);
 
         /// <summary>
         ///  Sets gravity scale term
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxParticleMaterial_setGravityScale_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxParticleMaterial_setGravityScale_mut(PxParticleMaterial* self_, float scale);
+        internal static extern void PxParticleMaterial_setGravityScale_mut(PxParticleMaterial* self_, float scale);
 
         /// <summary>
         ///  Retrieves the gravity scale term
@@ -8307,14 +8307,14 @@ namespace Physx
         ///  The gravity scale term.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxParticleMaterial_getGravityScale", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxParticleMaterial_getGravityScale(PxParticleMaterial* self_);
+        internal static extern float PxParticleMaterial_getGravityScale(PxParticleMaterial* self_);
 
         /// <summary>
         ///  Sets material adhesion radius scale. This is multiplied by the particle rest offset to compute the fall-off distance
         ///  at which point adhesion ceases to operate.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxParticleMaterial_setAdhesionRadiusScale_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxParticleMaterial_setAdhesionRadiusScale_mut(PxParticleMaterial* self_, float scale);
+        internal static extern void PxParticleMaterial_setAdhesionRadiusScale_mut(PxParticleMaterial* self_, float scale);
 
         /// <summary>
         ///  Retrieves the adhesion radius scale.
@@ -8322,7 +8322,7 @@ namespace Physx
         ///  The adhesion radius scale.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxParticleMaterial_getAdhesionRadiusScale", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxParticleMaterial_getAdhesionRadiusScale(PxParticleMaterial* self_);
+        internal static extern float PxParticleMaterial_getAdhesionRadiusScale(PxParticleMaterial* self_);
 
         /// <summary>
         ///  Destroys the instance it is called on.
@@ -8341,7 +8341,7 @@ namespace Physx
         ///  Releasing the PxPhysics instance is a prerequisite to releasing the PxFoundation instance.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPhysics_release_mut(PxPhysics* self_);
+        internal static extern void PxPhysics_release_mut(PxPhysics* self_);
 
         /// <summary>
         ///  Retrieves the Foundation instance.
@@ -8349,7 +8349,7 @@ namespace Physx
         ///  A reference to the Foundation object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getFoundation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFoundation* PxPhysics_getFoundation_mut(PxPhysics* self_);
+        internal static extern PxFoundation* PxPhysics_getFoundation_mut(PxPhysics* self_);
 
         /// <summary>
         ///  Creates an aggregate with the specified maximum size and filtering hint.
@@ -8364,7 +8364,7 @@ namespace Physx
         ///  The new aggregate.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createAggregate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxAggregate* PxPhysics_createAggregate_mut(PxPhysics* self_, uint maxActor, uint maxShape, uint filterHint);
+        internal static extern PxAggregate* PxPhysics_createAggregate_mut(PxPhysics* self_, uint maxActor, uint maxShape, uint filterHint);
 
         /// <summary>
         ///  Returns the simulation tolerance parameters.
@@ -8372,7 +8372,7 @@ namespace Physx
         ///  The current simulation tolerance parameters.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getTolerancesScale", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTolerancesScale* PxPhysics_getTolerancesScale(PxPhysics* self_);
+        internal static extern PxTolerancesScale* PxPhysics_getTolerancesScale(PxPhysics* self_);
 
         /// <summary>
         ///  Creates a triangle mesh object.
@@ -8382,7 +8382,7 @@ namespace Physx
         ///  The new triangle mesh.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createTriangleMesh_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTriangleMesh* PxPhysics_createTriangleMesh_mut(PxPhysics* self_, PxInputStream* stream);
+        internal static extern PxTriangleMesh* PxPhysics_createTriangleMesh_mut(PxPhysics* self_, PxInputStream* stream);
 
         /// <summary>
         ///  Return the number of triangle meshes that currently exist.
@@ -8390,7 +8390,7 @@ namespace Physx
         ///  Number of triangle meshes.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getNbTriangleMeshes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getNbTriangleMeshes(PxPhysics* self_);
+        internal static extern uint PxPhysics_getNbTriangleMeshes(PxPhysics* self_);
 
         /// <summary>
         ///  Writes the array of triangle mesh pointers to a user buffer.
@@ -8402,7 +8402,7 @@ namespace Physx
         ///  The number of triangle mesh pointers written to userBuffer, this should be less or equal to bufferSize.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getTriangleMeshes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getTriangleMeshes(PxPhysics* self_, PxTriangleMesh** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxPhysics_getTriangleMeshes(PxPhysics* self_, PxTriangleMesh** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Creates a tetrahedron mesh object.
@@ -8412,7 +8412,7 @@ namespace Physx
         ///  The new tetrahedron mesh.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createTetrahedronMesh_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMesh* PxPhysics_createTetrahedronMesh_mut(PxPhysics* self_, PxInputStream* stream);
+        internal static extern PxTetrahedronMesh* PxPhysics_createTetrahedronMesh_mut(PxPhysics* self_, PxInputStream* stream);
 
         /// <summary>
         ///  Creates a softbody mesh object.
@@ -8420,7 +8420,7 @@ namespace Physx
         ///  The new softbody mesh.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createSoftBodyMesh_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSoftBodyMesh* PxPhysics_createSoftBodyMesh_mut(PxPhysics* self_, PxInputStream* stream);
+        internal static extern PxSoftBodyMesh* PxPhysics_createSoftBodyMesh_mut(PxPhysics* self_, PxInputStream* stream);
 
         /// <summary>
         ///  Return the number of tetrahedron meshes that currently exist.
@@ -8428,7 +8428,7 @@ namespace Physx
         ///  Number of tetrahedron meshes.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getNbTetrahedronMeshes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getNbTetrahedronMeshes(PxPhysics* self_);
+        internal static extern uint PxPhysics_getNbTetrahedronMeshes(PxPhysics* self_);
 
         /// <summary>
         ///  Writes the array of tetrahedron mesh pointers to a user buffer.
@@ -8440,7 +8440,7 @@ namespace Physx
         ///  The number of tetrahedron mesh pointers written to userBuffer, this should be less or equal to bufferSize.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getTetrahedronMeshes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getTetrahedronMeshes(PxPhysics* self_, PxTetrahedronMesh** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxPhysics_getTetrahedronMeshes(PxPhysics* self_, PxTetrahedronMesh** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Creates a heightfield object from previously cooked stream.
@@ -8450,7 +8450,7 @@ namespace Physx
         ///  The new heightfield.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createHeightField_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxHeightField* PxPhysics_createHeightField_mut(PxPhysics* self_, PxInputStream* stream);
+        internal static extern PxHeightField* PxPhysics_createHeightField_mut(PxPhysics* self_, PxInputStream* stream);
 
         /// <summary>
         ///  Return the number of heightfields that currently exist.
@@ -8458,7 +8458,7 @@ namespace Physx
         ///  Number of heightfields.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getNbHeightFields", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getNbHeightFields(PxPhysics* self_);
+        internal static extern uint PxPhysics_getNbHeightFields(PxPhysics* self_);
 
         /// <summary>
         ///  Writes the array of heightfield pointers to a user buffer.
@@ -8470,7 +8470,7 @@ namespace Physx
         ///  The number of heightfield pointers written to userBuffer, this should be less or equal to bufferSize.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getHeightFields", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getHeightFields(PxPhysics* self_, PxHeightField** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxPhysics_getHeightFields(PxPhysics* self_, PxHeightField** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Creates a convex mesh object.
@@ -8480,7 +8480,7 @@ namespace Physx
         ///  The new convex mesh.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createConvexMesh_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConvexMesh* PxPhysics_createConvexMesh_mut(PxPhysics* self_, PxInputStream* stream);
+        internal static extern PxConvexMesh* PxPhysics_createConvexMesh_mut(PxPhysics* self_, PxInputStream* stream);
 
         /// <summary>
         ///  Return the number of convex meshes that currently exist.
@@ -8488,7 +8488,7 @@ namespace Physx
         ///  Number of convex meshes.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getNbConvexMeshes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getNbConvexMeshes(PxPhysics* self_);
+        internal static extern uint PxPhysics_getNbConvexMeshes(PxPhysics* self_);
 
         /// <summary>
         ///  Writes the array of convex mesh pointers to a user buffer.
@@ -8500,7 +8500,7 @@ namespace Physx
         ///  The number of convex mesh pointers written to userBuffer, this should be less or equal to bufferSize.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getConvexMeshes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getConvexMeshes(PxPhysics* self_, PxConvexMesh** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxPhysics_getConvexMeshes(PxPhysics* self_, PxConvexMesh** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Creates a bounding volume hierarchy.
@@ -8508,7 +8508,7 @@ namespace Physx
         ///  The new BVH.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createBVH_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBVH* PxPhysics_createBVH_mut(PxPhysics* self_, PxInputStream* stream);
+        internal static extern PxBVH* PxPhysics_createBVH_mut(PxPhysics* self_, PxInputStream* stream);
 
         /// <summary>
         ///  Return the number of bounding volume hierarchies that currently exist.
@@ -8516,7 +8516,7 @@ namespace Physx
         ///  Number of bounding volume hierarchies.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getNbBVHs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getNbBVHs(PxPhysics* self_);
+        internal static extern uint PxPhysics_getNbBVHs(PxPhysics* self_);
 
         /// <summary>
         ///  Writes the array of bounding volume hierarchy pointers to a user buffer.
@@ -8528,7 +8528,7 @@ namespace Physx
         ///  The number of BVH pointers written to userBuffer, this should be less or equal to bufferSize.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getBVHs", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getBVHs(PxPhysics* self_, PxBVH** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxPhysics_getBVHs(PxPhysics* self_, PxBVH** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Creates a scene.
@@ -8539,7 +8539,7 @@ namespace Physx
         ///  The new scene object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createScene_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxScene* PxPhysics_createScene_mut(PxPhysics* self_, PxSceneDesc* sceneDesc);
+        internal static extern PxScene* PxPhysics_createScene_mut(PxPhysics* self_, PxSceneDesc* sceneDesc);
 
         /// <summary>
         ///  Gets number of created scenes.
@@ -8547,7 +8547,7 @@ namespace Physx
         ///  The number of scenes created.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getNbScenes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getNbScenes(PxPhysics* self_);
+        internal static extern uint PxPhysics_getNbScenes(PxPhysics* self_);
 
         /// <summary>
         ///  Writes the array of scene pointers to a user buffer.
@@ -8559,21 +8559,21 @@ namespace Physx
         ///  The number of scene pointers written to userBuffer, this should be less or equal to bufferSize.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getScenes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getScenes(PxPhysics* self_, PxScene** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxPhysics_getScenes(PxPhysics* self_, PxScene** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Creates a static rigid actor with the specified pose and all other fields initialized
         ///  to their default values.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createRigidStatic_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidStatic* PxPhysics_createRigidStatic_mut(PxPhysics* self_, PxTransform* pose);
+        internal static extern PxRigidStatic* PxPhysics_createRigidStatic_mut(PxPhysics* self_, PxTransform* pose);
 
         /// <summary>
         ///  Creates a dynamic rigid actor with the specified pose and all other fields initialized
         ///  to their default values.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createRigidDynamic_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidDynamic* PxPhysics_createRigidDynamic_mut(PxPhysics* self_, PxTransform* pose);
+        internal static extern PxRigidDynamic* PxPhysics_createRigidDynamic_mut(PxPhysics* self_, PxTransform* pose);
 
         /// <summary>
         ///  Creates a pruning structure from actors.
@@ -8589,7 +8589,7 @@ namespace Physx
         ///  Pruning structure created from given actors, or NULL if any of the actors did not comply with the above requirements.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createPruningStructure_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPruningStructure* PxPhysics_createPruningStructure_mut(PxPhysics* self_, PxRigidActor** actors, uint nbActors);
+        internal static extern PxPruningStructure* PxPhysics_createPruningStructure_mut(PxPhysics* self_, PxRigidActor** actors, uint nbActors);
 
         /// <summary>
         ///  Creates a shape which may be attached to multiple actors
@@ -8601,7 +8601,7 @@ namespace Physx
         ///  Shared shapes are not mutable when they are attached to an actor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createShape_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxShape* PxPhysics_createShape_mut(PxPhysics* self_, PxGeometry* geometry, PxMaterial* material, [MarshalAs(UnmanagedType.U1)] bool isExclusive, PxShapeFlags shapeFlags);
+        internal static extern PxShape* PxPhysics_createShape_mut(PxPhysics* self_, PxGeometry* geometry, PxMaterial* material, [MarshalAs(UnmanagedType.U1)] bool isExclusive, PxShapeFlags shapeFlags);
 
         /// <summary>
         ///  Creates a shape which may be attached to multiple actors
@@ -8615,7 +8615,7 @@ namespace Physx
         ///  Shapes created from *SDF* triangle-mesh geometries do not support more than one material.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createShape_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxShape* PxPhysics_createShape_mut_1(PxPhysics* self_, PxGeometry* geometry, PxMaterial** materials, ushort materialCount, [MarshalAs(UnmanagedType.U1)] bool isExclusive, PxShapeFlags shapeFlags);
+        internal static extern PxShape* PxPhysics_createShape_mut_1(PxPhysics* self_, PxGeometry* geometry, PxMaterial** materials, ushort materialCount, [MarshalAs(UnmanagedType.U1)] bool isExclusive, PxShapeFlags shapeFlags);
 
         /// <summary>
         ///  Return the number of shapes that currently exist.
@@ -8623,7 +8623,7 @@ namespace Physx
         ///  Number of shapes.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getNbShapes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getNbShapes(PxPhysics* self_);
+        internal static extern uint PxPhysics_getNbShapes(PxPhysics* self_);
 
         /// <summary>
         ///  Writes the array of shape pointers to a user buffer.
@@ -8635,7 +8635,7 @@ namespace Physx
         ///  The number of shape pointers written to userBuffer, this should be less or equal to bufferSize.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getShapes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getShapes(PxPhysics* self_, PxShape** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxPhysics_getShapes(PxPhysics* self_, PxShape** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Creates a constraint shader.
@@ -8646,7 +8646,7 @@ namespace Physx
         ///  The new constraint shader.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createConstraint_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConstraint* PxPhysics_createConstraint_mut(PxPhysics* self_, PxRigidActor* actor0, PxRigidActor* actor1, PxConstraintConnector* connector, PxConstraintShaderTable* shaders, uint dataSize);
+        internal static extern PxConstraint* PxPhysics_createConstraint_mut(PxPhysics* self_, PxRigidActor* actor0, PxRigidActor* actor1, PxConstraintConnector* connector, PxConstraintShaderTable* shaders, uint dataSize);
 
         /// <summary>
         ///  Creates a reduced-coordinate articulation with all fields initialized to their default values.
@@ -8654,7 +8654,7 @@ namespace Physx
         ///  the new articulation
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createArticulationReducedCoordinate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxArticulationReducedCoordinate* PxPhysics_createArticulationReducedCoordinate_mut(PxPhysics* self_);
+        internal static extern PxArticulationReducedCoordinate* PxPhysics_createArticulationReducedCoordinate_mut(PxPhysics* self_);
 
         /// <summary>
         ///  Creates a new rigid body material with certain default properties.
@@ -8662,7 +8662,7 @@ namespace Physx
         ///  The new rigid body material.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_createMaterial_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMaterial* PxPhysics_createMaterial_mut(PxPhysics* self_, float staticFriction, float dynamicFriction, float restitution);
+        internal static extern PxMaterial* PxPhysics_createMaterial_mut(PxPhysics* self_, float staticFriction, float dynamicFriction, float restitution);
 
         /// <summary>
         ///  Return the number of rigid body materials that currently exist.
@@ -8670,7 +8670,7 @@ namespace Physx
         ///  Number of rigid body materials.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getNbMaterials", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getNbMaterials(PxPhysics* self_);
+        internal static extern uint PxPhysics_getNbMaterials(PxPhysics* self_);
 
         /// <summary>
         ///  Writes the array of rigid body material pointers to a user buffer.
@@ -8682,7 +8682,7 @@ namespace Physx
         ///  The number of material pointers written to userBuffer, this should be less or equal to bufferSize.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getMaterials", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPhysics_getMaterials(PxPhysics* self_, PxMaterial** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxPhysics_getMaterials(PxPhysics* self_, PxMaterial** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Register a deletion listener. Listeners will be called whenever an object is deleted.
@@ -8694,7 +8694,7 @@ namespace Physx
         ///  The deletion events are only supported on core PhysX objects. In general, objects in extension modules do not provide this functionality, however, in the case of PxJoint objects, the underlying PxConstraint will send the events.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_registerDeletionListener_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPhysics_registerDeletionListener_mut(PxPhysics* self_, PxDeletionListener* observer, PxDeletionEventFlags* deletionEvents, [MarshalAs(UnmanagedType.U1)] bool restrictedObjectSet);
+        internal static extern void PxPhysics_registerDeletionListener_mut(PxPhysics* self_, PxDeletionListener* observer, PxDeletionEventFlags* deletionEvents, [MarshalAs(UnmanagedType.U1)] bool restrictedObjectSet);
 
         /// <summary>
         ///  Unregister a deletion listener.
@@ -8702,7 +8702,7 @@ namespace Physx
         ///  It is illegal to register or unregister a deletion listener while deletions are being processed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_unregisterDeletionListener_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPhysics_unregisterDeletionListener_mut(PxPhysics* self_, PxDeletionListener* observer);
+        internal static extern void PxPhysics_unregisterDeletionListener_mut(PxPhysics* self_, PxDeletionListener* observer);
 
         /// <summary>
         ///  Register specific objects for deletion events.
@@ -8714,7 +8714,7 @@ namespace Physx
         ///  The deletion listener has to be registered through [`registerDeletionListener`]() and configured to support restricted object sets prior to this method being used.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_registerDeletionListenerObjects_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPhysics_registerDeletionListenerObjects_mut(PxPhysics* self_, PxDeletionListener* observer, PxBase** observables, uint observableCount);
+        internal static extern void PxPhysics_registerDeletionListenerObjects_mut(PxPhysics* self_, PxDeletionListener* observer, PxBase** observables, uint observableCount);
 
         /// <summary>
         ///  Unregister specific objects for deletion events.
@@ -8726,7 +8726,7 @@ namespace Physx
         ///  The deletion listener has to be registered through [`registerDeletionListener`]() and configured to support restricted object sets prior to this method being used.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_unregisterDeletionListenerObjects_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPhysics_unregisterDeletionListenerObjects_mut(PxPhysics* self_, PxDeletionListener* observer, PxBase** observables, uint observableCount);
+        internal static extern void PxPhysics_unregisterDeletionListenerObjects_mut(PxPhysics* self_, PxDeletionListener* observer, PxBase** observables, uint observableCount);
 
         /// <summary>
         ///  Gets PxPhysics object insertion interface.
@@ -8734,7 +8734,7 @@ namespace Physx
         ///  The insertion interface is needed for PxCreateTriangleMesh, PxCooking::createTriangleMesh etc., this allows runtime mesh creation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPhysics_getPhysicsInsertionCallback_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxInsertionCallback* PxPhysics_getPhysicsInsertionCallback_mut(PxPhysics* self_);
+        internal static extern PxInsertionCallback* PxPhysics_getPhysicsInsertionCallback_mut(PxPhysics* self_);
 
         /// <summary>
         ///  Creates an instance of the physics SDK.
@@ -8751,46 +8751,46 @@ namespace Physx
         ///  PxPhysics instance on success, NULL if operation failed
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreatePhysics", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPhysics* phys_PxCreatePhysics(uint version, PxFoundation* foundation, PxTolerancesScale* scale, [MarshalAs(UnmanagedType.U1)] bool trackOutstandingAllocations, PxPvd* pvd, PxOmniPvd* omniPvd);
+        internal static extern PxPhysics* phys_PxCreatePhysics(uint version, PxFoundation* foundation, PxTolerancesScale* scale, [MarshalAs(UnmanagedType.U1)] bool trackOutstandingAllocations, PxPvd* pvd, PxOmniPvd* omniPvd);
 
         [DllImport(__DllName, EntryPoint = "phys_PxGetPhysics", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPhysics* phys_PxGetPhysics();
+        internal static extern PxPhysics* phys_PxGetPhysics();
 
         [DllImport(__DllName, EntryPoint = "PxActorShape_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxActorShape PxActorShape_new();
+        internal static extern PxActorShape PxActorShape_new();
 
         [DllImport(__DllName, EntryPoint = "PxActorShape_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxActorShape PxActorShape_new_1(PxRigidActor* a, PxShape* s);
+        internal static extern PxActorShape PxActorShape_new_1(PxRigidActor* a, PxShape* s);
 
         /// <summary>
         ///  constructor sets to default
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQueryCache_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQueryCache PxQueryCache_new();
+        internal static extern PxQueryCache PxQueryCache_new();
 
         /// <summary>
         ///  constructor to set properties
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQueryCache_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQueryCache PxQueryCache_new_1(PxShape* s, uint findex);
+        internal static extern PxQueryCache PxQueryCache_new_1(PxShape* s, uint findex);
 
         /// <summary>
         ///  default constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQueryFilterData_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQueryFilterData PxQueryFilterData_new();
+        internal static extern PxQueryFilterData PxQueryFilterData_new();
 
         /// <summary>
         ///  constructor to set both filter data and filter flags
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQueryFilterData_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQueryFilterData PxQueryFilterData_new_1(PxFilterData* fd, PxQueryFlags f);
+        internal static extern PxQueryFilterData PxQueryFilterData_new_1(PxFilterData* fd, PxQueryFlags f);
 
         /// <summary>
         ///  constructor to set filter flags only
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQueryFilterData_new_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQueryFilterData PxQueryFilterData_new_2(PxQueryFlags f);
+        internal static extern PxQueryFilterData PxQueryFilterData_new_2(PxQueryFlags f);
 
         /// <summary>
         ///  This filter callback is executed before the exact intersection test if PxQueryFlag::ePREFILTER flag was set.
@@ -8798,7 +8798,7 @@ namespace Physx
         ///  the updated type for this hit  (see [`PxQueryHitType`])
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQueryFilterCallback_preFilter_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQueryHitType PxQueryFilterCallback_preFilter_mut(PxQueryFilterCallback* self_, PxFilterData* filterData, PxShape* shape, PxRigidActor* actor, PxHitFlags* queryFlags);
+        internal static extern PxQueryHitType PxQueryFilterCallback_preFilter_mut(PxQueryFilterCallback* self_, PxFilterData* filterData, PxShape* shape, PxRigidActor* actor, PxHitFlags* queryFlags);
 
         /// <summary>
         ///  This filter callback is executed if the exact intersection test returned true and PxQueryFlag::ePOSTFILTER flag was set.
@@ -8806,13 +8806,13 @@ namespace Physx
         ///  the updated hit type for this hit  (see [`PxQueryHitType`])
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQueryFilterCallback_postFilter_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxQueryHitType PxQueryFilterCallback_postFilter_mut(PxQueryFilterCallback* self_, PxFilterData* filterData, PxQueryHit* hit, PxShape* shape, PxRigidActor* actor);
+        internal static extern PxQueryHitType PxQueryFilterCallback_postFilter_mut(PxQueryFilterCallback* self_, PxFilterData* filterData, PxQueryHit* hit, PxShape* shape, PxRigidActor* actor);
 
         /// <summary>
         ///  virtual destructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxQueryFilterCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxQueryFilterCallback_delete(PxQueryFilterCallback* self_);
+        internal static extern void PxQueryFilterCallback_delete(PxQueryFilterCallback* self_);
 
         /// <summary>
         ///  Moves kinematically controlled dynamic actors through the game world.
@@ -8836,7 +8836,7 @@ namespace Physx
         ///  This call wakes the actor if it is sleeping and will set the wake counter to [`PxSceneDesc::wakeCounterResetValue`].
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_setKinematicTarget_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_setKinematicTarget_mut(PxRigidDynamic* self_, PxTransform* destination);
+        internal static extern void PxRigidDynamic_setKinematicTarget_mut(PxRigidDynamic* self_, PxTransform* destination);
 
         /// <summary>
         ///  Get target pose of a kinematically controlled dynamic actor.
@@ -8845,7 +8845,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_getKinematicTarget", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxRigidDynamic_getKinematicTarget(PxRigidDynamic* self_, PxTransform* target);
+        internal static extern bool PxRigidDynamic_getKinematicTarget(PxRigidDynamic* self_, PxTransform* target);
 
         /// <summary>
         ///  Returns true if this body is sleeping.
@@ -8887,7 +8887,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_isSleeping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxRigidDynamic_isSleeping(PxRigidDynamic* self_);
+        internal static extern bool PxRigidDynamic_isSleeping(PxRigidDynamic* self_);
 
         /// <summary>
         ///  Sets the mass-normalized kinetic energy threshold below which an actor may go to sleep.
@@ -8898,7 +8898,7 @@ namespace Physx
         ///  5e-5f * PxTolerancesScale::speed * PxTolerancesScale::speed
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_setSleepThreshold_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_setSleepThreshold_mut(PxRigidDynamic* self_, float threshold);
+        internal static extern void PxRigidDynamic_setSleepThreshold_mut(PxRigidDynamic* self_, float threshold);
 
         /// <summary>
         ///  Returns the mass-normalized kinetic energy below which an actor may go to sleep.
@@ -8906,7 +8906,7 @@ namespace Physx
         ///  The energy threshold for sleeping.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_getSleepThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidDynamic_getSleepThreshold(PxRigidDynamic* self_);
+        internal static extern float PxRigidDynamic_getSleepThreshold(PxRigidDynamic* self_);
 
         /// <summary>
         ///  Sets the mass-normalized kinetic energy threshold below which an actor may participate in stabilization.
@@ -8919,7 +8919,7 @@ namespace Physx
         ///  1e-5f * PxTolerancesScale::speed * PxTolerancesScale::speed
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_setStabilizationThreshold_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_setStabilizationThreshold_mut(PxRigidDynamic* self_, float threshold);
+        internal static extern void PxRigidDynamic_setStabilizationThreshold_mut(PxRigidDynamic* self_, float threshold);
 
         /// <summary>
         ///  Returns the mass-normalized kinetic energy below which an actor may participate in stabilization.
@@ -8929,7 +8929,7 @@ namespace Physx
         ///  The energy threshold for participating in stabilization.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_getStabilizationThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidDynamic_getStabilizationThreshold(PxRigidDynamic* self_);
+        internal static extern float PxRigidDynamic_getStabilizationThreshold(PxRigidDynamic* self_);
 
         /// <summary>
         ///  Reads the PxRigidDynamic lock flags.
@@ -8939,7 +8939,7 @@ namespace Physx
         ///  The values of the PxRigidDynamicLock flags.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_getRigidDynamicLockFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidDynamicLockFlags PxRigidDynamic_getRigidDynamicLockFlags(PxRigidDynamic* self_);
+        internal static extern PxRigidDynamicLockFlags PxRigidDynamic_getRigidDynamicLockFlags(PxRigidDynamic* self_);
 
         /// <summary>
         ///  Raises or clears a particular rigid dynamic lock flag.
@@ -8950,10 +8950,10 @@ namespace Physx
         ///  no flags are set
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_setRigidDynamicLockFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_setRigidDynamicLockFlag_mut(PxRigidDynamic* self_, PxRigidDynamicLockFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxRigidDynamic_setRigidDynamicLockFlag_mut(PxRigidDynamic* self_, PxRigidDynamicLockFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_setRigidDynamicLockFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_setRigidDynamicLockFlags_mut(PxRigidDynamic* self_, PxRigidDynamicLockFlags flags);
+        internal static extern void PxRigidDynamic_setRigidDynamicLockFlags_mut(PxRigidDynamic* self_, PxRigidDynamicLockFlags flags);
 
         /// <summary>
         ///  Retrieves the linear velocity of an actor.
@@ -8964,7 +8964,7 @@ namespace Physx
         ///  The linear velocity of the actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_getLinearVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxRigidDynamic_getLinearVelocity(PxRigidDynamic* self_);
+        internal static extern PxVec3 PxRigidDynamic_getLinearVelocity(PxRigidDynamic* self_);
 
         /// <summary>
         ///  Sets the linear velocity of the actor.
@@ -8983,7 +8983,7 @@ namespace Physx
         ///  It is invalid to use this method if PxActorFlag::eDISABLE_SIMULATION is set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_setLinearVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_setLinearVelocity_mut(PxRigidDynamic* self_, PxVec3* linVel, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxRigidDynamic_setLinearVelocity_mut(PxRigidDynamic* self_, PxVec3* linVel, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Retrieves the angular velocity of the actor.
@@ -8994,7 +8994,7 @@ namespace Physx
         ///  The angular velocity of the actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_getAngularVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxRigidDynamic_getAngularVelocity(PxRigidDynamic* self_);
+        internal static extern PxVec3 PxRigidDynamic_getAngularVelocity(PxRigidDynamic* self_);
 
         /// <summary>
         ///  Sets the angular velocity of the actor.
@@ -9012,7 +9012,7 @@ namespace Physx
         ///  It is invalid to use this method if PxActorFlag::eDISABLE_SIMULATION is set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_setAngularVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_setAngularVelocity_mut(PxRigidDynamic* self_, PxVec3* angVel, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxRigidDynamic_setAngularVelocity_mut(PxRigidDynamic* self_, PxVec3* angVel, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Sets the wake counter for the actor.
@@ -9032,7 +9032,7 @@ namespace Physx
         ///  0.4 (which corresponds to 20 frames for a time step of 0.02)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_setWakeCounter_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_setWakeCounter_mut(PxRigidDynamic* self_, float wakeCounterValue);
+        internal static extern void PxRigidDynamic_setWakeCounter_mut(PxRigidDynamic* self_, float wakeCounterValue);
 
         /// <summary>
         ///  Returns the wake counter of the actor.
@@ -9042,7 +9042,7 @@ namespace Physx
         ///  The wake counter of the actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_getWakeCounter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidDynamic_getWakeCounter(PxRigidDynamic* self_);
+        internal static extern float PxRigidDynamic_getWakeCounter(PxRigidDynamic* self_);
 
         /// <summary>
         ///  Wakes up the actor if it is sleeping.
@@ -9057,7 +9057,7 @@ namespace Physx
         ///  based on whether a target pose has been set (see the comment in [`isSleeping`]()).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_wakeUp_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_wakeUp_mut(PxRigidDynamic* self_);
+        internal static extern void PxRigidDynamic_wakeUp_mut(PxRigidDynamic* self_);
 
         /// <summary>
         ///  Forces the actor to sleep.
@@ -9072,7 +9072,7 @@ namespace Physx
         ///  based on whether a target pose has been set (see the comment in [`isSleeping`]()).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_putToSleep_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_putToSleep_mut(PxRigidDynamic* self_);
+        internal static extern void PxRigidDynamic_putToSleep_mut(PxRigidDynamic* self_);
 
         /// <summary>
         ///  Sets the solver iteration counts for the body.
@@ -9089,13 +9089,13 @@ namespace Physx
         ///  4 position iterations, 1 velocity iteration
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_setSolverIterationCounts_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_setSolverIterationCounts_mut(PxRigidDynamic* self_, uint minPositionIters, uint minVelocityIters);
+        internal static extern void PxRigidDynamic_setSolverIterationCounts_mut(PxRigidDynamic* self_, uint minPositionIters, uint minVelocityIters);
 
         /// <summary>
         ///  Retrieves the solver iteration counts.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_getSolverIterationCounts", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_getSolverIterationCounts(PxRigidDynamic* self_, uint* minPositionIters, uint* minVelocityIters);
+        internal static extern void PxRigidDynamic_getSolverIterationCounts(PxRigidDynamic* self_, uint* minPositionIters, uint* minVelocityIters);
 
         /// <summary>
         ///  Retrieves the force threshold for contact reports.
@@ -9116,7 +9116,7 @@ namespace Physx
         ///  Force threshold for contact reports.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_getContactReportThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRigidDynamic_getContactReportThreshold(PxRigidDynamic* self_);
+        internal static extern float PxRigidDynamic_getContactReportThreshold(PxRigidDynamic* self_);
 
         /// <summary>
         ///  Sets the force threshold for contact reports.
@@ -9124,25 +9124,25 @@ namespace Physx
         ///  See [`getContactReportThreshold`]().
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_setContactReportThreshold_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidDynamic_setContactReportThreshold_mut(PxRigidDynamic* self_, float threshold);
+        internal static extern void PxRigidDynamic_setContactReportThreshold_mut(PxRigidDynamic* self_, float threshold);
 
         [DllImport(__DllName, EntryPoint = "PxRigidDynamic_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxRigidDynamic_getConcreteTypeName(PxRigidDynamic* self_);
+        internal static extern byte* PxRigidDynamic_getConcreteTypeName(PxRigidDynamic* self_);
 
         [DllImport(__DllName, EntryPoint = "PxRigidStatic_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxRigidStatic_getConcreteTypeName(PxRigidStatic* self_);
+        internal static extern byte* PxRigidStatic_getConcreteTypeName(PxRigidStatic* self_);
 
         /// <summary>
         ///  constructor sets to default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQueryDesc_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSceneQueryDesc PxSceneQueryDesc_new();
+        internal static extern PxSceneQueryDesc PxSceneQueryDesc_new();
 
         /// <summary>
         ///  (re)sets the structure to the default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQueryDesc_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQueryDesc_setToDefault_mut(PxSceneQueryDesc* self_);
+        internal static extern void PxSceneQueryDesc_setToDefault_mut(PxSceneQueryDesc* self_);
 
         /// <summary>
         ///  Returns true if the descriptor is valid.
@@ -9151,13 +9151,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQueryDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneQueryDesc_isValid(PxSceneQueryDesc* self_);
+        internal static extern bool PxSceneQueryDesc_isValid(PxSceneQueryDesc* self_);
 
         /// <summary>
         ///  Sets the rebuild rate of the dynamic tree pruning structures.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystemBase_setDynamicTreeRebuildRateHint_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystemBase_setDynamicTreeRebuildRateHint_mut(PxSceneQuerySystemBase* self_, uint dynamicTreeRebuildRateHint);
+        internal static extern void PxSceneQuerySystemBase_setDynamicTreeRebuildRateHint_mut(PxSceneQuerySystemBase* self_, uint dynamicTreeRebuildRateHint);
 
         /// <summary>
         ///  Retrieves the rebuild rate of the dynamic tree pruning structures.
@@ -9165,7 +9165,7 @@ namespace Physx
         ///  The rebuild rate of the dynamic tree pruning structures.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystemBase_getDynamicTreeRebuildRateHint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxSceneQuerySystemBase_getDynamicTreeRebuildRateHint(PxSceneQuerySystemBase* self_);
+        internal static extern uint PxSceneQuerySystemBase_getDynamicTreeRebuildRateHint(PxSceneQuerySystemBase* self_);
 
         /// <summary>
         ///  Forces dynamic trees to be immediately rebuilt.
@@ -9173,13 +9173,13 @@ namespace Physx
         ///  PxScene will call this function with the PX_SCENE_PRUNER_STATIC or PX_SCENE_PRUNER_DYNAMIC value.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystemBase_forceRebuildDynamicTree_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystemBase_forceRebuildDynamicTree_mut(PxSceneQuerySystemBase* self_, uint prunerIndex);
+        internal static extern void PxSceneQuerySystemBase_forceRebuildDynamicTree_mut(PxSceneQuerySystemBase* self_, uint prunerIndex);
 
         /// <summary>
         ///  Sets scene query update mode
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystemBase_setUpdateMode_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystemBase_setUpdateMode_mut(PxSceneQuerySystemBase* self_, PxSceneQueryUpdateMode updateMode);
+        internal static extern void PxSceneQuerySystemBase_setUpdateMode_mut(PxSceneQuerySystemBase* self_, PxSceneQueryUpdateMode updateMode);
 
         /// <summary>
         ///  Gets scene query update mode
@@ -9187,7 +9187,7 @@ namespace Physx
         ///  Current scene query update mode.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystemBase_getUpdateMode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSceneQueryUpdateMode PxSceneQuerySystemBase_getUpdateMode(PxSceneQuerySystemBase* self_);
+        internal static extern PxSceneQueryUpdateMode PxSceneQuerySystemBase_getUpdateMode(PxSceneQuerySystemBase* self_);
 
         /// <summary>
         ///  Retrieves the system's internal scene query timestamp, increased each time a change to the
@@ -9196,7 +9196,7 @@ namespace Physx
         ///  scene query static timestamp
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystemBase_getStaticTimestamp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxSceneQuerySystemBase_getStaticTimestamp(PxSceneQuerySystemBase* self_);
+        internal static extern uint PxSceneQuerySystemBase_getStaticTimestamp(PxSceneQuerySystemBase* self_);
 
         /// <summary>
         ///  Flushes any changes to the scene query representation.
@@ -9212,7 +9212,7 @@ namespace Physx
         ///  subsequent queries issued from multiple threads will not block.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystemBase_flushUpdates_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystemBase_flushUpdates_mut(PxSceneQuerySystemBase* self_);
+        internal static extern void PxSceneQuerySystemBase_flushUpdates_mut(PxSceneQuerySystemBase* self_);
 
         /// <summary>
         ///  Performs a raycast against objects in the scene, returns results in a PxRaycastBuffer object
@@ -9226,7 +9226,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystemBase_raycast", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneQuerySystemBase_raycast(PxSceneQuerySystemBase* self_, PxVec3* origin, PxVec3* unitDir, float distance, PxRaycastCallback* hitCall, PxHitFlags hitFlags, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, PxGeometryQueryFlags queryFlags);
+        internal static extern bool PxSceneQuerySystemBase_raycast(PxSceneQuerySystemBase* self_, PxVec3* origin, PxVec3* unitDir, float distance, PxRaycastCallback* hitCall, PxHitFlags hitFlags, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  Performs a sweep test against objects in the scene, returns results in a PxSweepBuffer object
@@ -9241,7 +9241,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystemBase_sweep", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneQuerySystemBase_sweep(PxSceneQuerySystemBase* self_, PxGeometry* geometry, PxTransform* pose, PxVec3* unitDir, float distance, PxSweepCallback* hitCall, PxHitFlags hitFlags, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, float inflation, PxGeometryQueryFlags queryFlags);
+        internal static extern bool PxSceneQuerySystemBase_sweep(PxSceneQuerySystemBase* self_, PxGeometry* geometry, PxTransform* pose, PxVec3* unitDir, float distance, PxSweepCallback* hitCall, PxHitFlags hitFlags, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, float inflation, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  Performs an overlap test of a given geometry against objects in the scene, returns results in a PxOverlapBuffer object
@@ -9257,13 +9257,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystemBase_overlap", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneQuerySystemBase_overlap(PxSceneQuerySystemBase* self_, PxGeometry* geometry, PxTransform* pose, PxOverlapCallback* hitCall, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, PxGeometryQueryFlags queryFlags);
+        internal static extern bool PxSceneQuerySystemBase_overlap(PxSceneQuerySystemBase* self_, PxGeometry* geometry, PxTransform* pose, PxOverlapCallback* hitCall, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, PxGeometryQueryFlags queryFlags);
 
         /// <summary>
         ///  Sets scene query update mode
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneSQSystem_setSceneQueryUpdateMode_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneSQSystem_setSceneQueryUpdateMode_mut(PxSceneSQSystem* self_, PxSceneQueryUpdateMode updateMode);
+        internal static extern void PxSceneSQSystem_setSceneQueryUpdateMode_mut(PxSceneSQSystem* self_, PxSceneQueryUpdateMode updateMode);
 
         /// <summary>
         ///  Gets scene query update mode
@@ -9271,7 +9271,7 @@ namespace Physx
         ///  Current scene query update mode.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneSQSystem_getSceneQueryUpdateMode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSceneQueryUpdateMode PxSceneSQSystem_getSceneQueryUpdateMode(PxSceneSQSystem* self_);
+        internal static extern PxSceneQueryUpdateMode PxSceneSQSystem_getSceneQueryUpdateMode(PxSceneSQSystem* self_);
 
         /// <summary>
         ///  Retrieves the scene's internal scene query timestamp, increased each time a change to the
@@ -9280,31 +9280,31 @@ namespace Physx
         ///  scene query static timestamp
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneSQSystem_getSceneQueryStaticTimestamp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxSceneSQSystem_getSceneQueryStaticTimestamp(PxSceneSQSystem* self_);
+        internal static extern uint PxSceneSQSystem_getSceneQueryStaticTimestamp(PxSceneSQSystem* self_);
 
         /// <summary>
         ///  Flushes any changes to the scene query representation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneSQSystem_flushQueryUpdates_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneSQSystem_flushQueryUpdates_mut(PxSceneSQSystem* self_);
+        internal static extern void PxSceneSQSystem_flushQueryUpdates_mut(PxSceneSQSystem* self_);
 
         /// <summary>
         ///  Forces dynamic trees to be immediately rebuilt.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneSQSystem_forceDynamicTreeRebuild_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneSQSystem_forceDynamicTreeRebuild_mut(PxSceneSQSystem* self_, [MarshalAs(UnmanagedType.U1)] bool rebuildStaticStructure, [MarshalAs(UnmanagedType.U1)] bool rebuildDynamicStructure);
+        internal static extern void PxSceneSQSystem_forceDynamicTreeRebuild_mut(PxSceneSQSystem* self_, [MarshalAs(UnmanagedType.U1)] bool rebuildStaticStructure, [MarshalAs(UnmanagedType.U1)] bool rebuildDynamicStructure);
 
         /// <summary>
         ///  Return the value of PxSceneQueryDesc::staticStructure that was set when creating the scene with PxPhysics::createScene
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneSQSystem_getStaticStructure", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPruningStructureType PxSceneSQSystem_getStaticStructure(PxSceneSQSystem* self_);
+        internal static extern PxPruningStructureType PxSceneSQSystem_getStaticStructure(PxSceneSQSystem* self_);
 
         /// <summary>
         ///  Return the value of PxSceneQueryDesc::dynamicStructure that was set when creating the scene with PxPhysics::createScene
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneSQSystem_getDynamicStructure", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPruningStructureType PxSceneSQSystem_getDynamicStructure(PxSceneSQSystem* self_);
+        internal static extern PxPruningStructureType PxSceneSQSystem_getDynamicStructure(PxSceneSQSystem* self_);
 
         /// <summary>
         ///  Executes scene queries update tasks.
@@ -9330,7 +9330,7 @@ namespace Physx
         ///  using this function.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneSQSystem_sceneQueriesUpdate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneSQSystem_sceneQueriesUpdate_mut(PxSceneSQSystem* self_, PxBaseTask* completionTask, [MarshalAs(UnmanagedType.U1)] bool controlSimulation);
+        internal static extern void PxSceneSQSystem_sceneQueriesUpdate_mut(PxSceneSQSystem* self_, PxBaseTask* completionTask, [MarshalAs(UnmanagedType.U1)] bool controlSimulation);
 
         /// <summary>
         ///  This checks to see if the scene queries update has completed.
@@ -9342,7 +9342,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneSQSystem_checkQueries_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneSQSystem_checkQueries_mut(PxSceneSQSystem* self_, [MarshalAs(UnmanagedType.U1)] bool block);
+        internal static extern bool PxSceneSQSystem_checkQueries_mut(PxSceneSQSystem* self_, [MarshalAs(UnmanagedType.U1)] bool block);
 
         /// <summary>
         ///  This method must be called after sceneQueriesUpdate. It will wait for the scene queries update to finish. If the user makes an illegal scene queries update call,
@@ -9352,13 +9352,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneSQSystem_fetchQueries_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneSQSystem_fetchQueries_mut(PxSceneSQSystem* self_, [MarshalAs(UnmanagedType.U1)] bool block);
+        internal static extern bool PxSceneSQSystem_fetchQueries_mut(PxSceneSQSystem* self_, [MarshalAs(UnmanagedType.U1)] bool block);
 
         /// <summary>
         ///  Decrements the reference count of the object and releases it if the new reference count is zero.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_release_mut(PxSceneQuerySystem* self_);
+        internal static extern void PxSceneQuerySystem_release_mut(PxSceneQuerySystem* self_);
 
         /// <summary>
         ///  Acquires a counted reference to this object.
@@ -9366,7 +9366,7 @@ namespace Physx
         ///  This method increases the reference count of the object by 1. Decrement the reference count by calling release()
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_acquireReference_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_acquireReference_mut(PxSceneQuerySystem* self_);
+        internal static extern void PxSceneQuerySystem_acquireReference_mut(PxSceneQuerySystem* self_);
 
         /// <summary>
         ///  Preallocates internal arrays to minimize the amount of reallocations.
@@ -9375,7 +9375,7 @@ namespace Physx
         ///  or to add more shapes to the system than the preallocated amounts.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_preallocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_preallocate_mut(PxSceneQuerySystem* self_, uint prunerIndex, uint nbShapes);
+        internal static extern void PxSceneQuerySystem_preallocate_mut(PxSceneQuerySystem* self_, uint prunerIndex, uint nbShapes);
 
         /// <summary>
         ///  Frees internal memory that may not be in-use anymore.
@@ -9385,7 +9385,7 @@ namespace Physx
         ///  some memory, but it might also produce a new set of allocations in the next frame.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_flushMemory_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_flushMemory_mut(PxSceneQuerySystem* self_);
+        internal static extern void PxSceneQuerySystem_flushMemory_mut(PxSceneQuerySystem* self_);
 
         /// <summary>
         ///  Adds a shape to the SQ system.
@@ -9393,7 +9393,7 @@ namespace Physx
         ///  The same function is used to add either a regular shape, or a SQ compound shape.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_addSQShape_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_addSQShape_mut(PxSceneQuerySystem* self_, PxRigidActor* actor, PxShape* shape, PxBounds3* bounds, PxTransform* transform, uint* compoundHandle, [MarshalAs(UnmanagedType.U1)] bool hasPruningStructure);
+        internal static extern void PxSceneQuerySystem_addSQShape_mut(PxSceneQuerySystem* self_, PxRigidActor* actor, PxShape* shape, PxBounds3* bounds, PxTransform* transform, uint* compoundHandle, [MarshalAs(UnmanagedType.U1)] bool hasPruningStructure);
 
         /// <summary>
         ///  Removes a shape from the SQ system.
@@ -9401,7 +9401,7 @@ namespace Physx
         ///  The same function is used to remove either a regular shape, or a SQ compound shape.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_removeSQShape_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_removeSQShape_mut(PxSceneQuerySystem* self_, PxRigidActor* actor, PxShape* shape);
+        internal static extern void PxSceneQuerySystem_removeSQShape_mut(PxSceneQuerySystem* self_, PxRigidActor* actor, PxShape* shape);
 
         /// <summary>
         ///  Updates a shape in the SQ system.
@@ -9413,7 +9413,7 @@ namespace Physx
         ///  recomputed by the system whenever needed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_updateSQShape_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_updateSQShape_mut(PxSceneQuerySystem* self_, PxRigidActor* actor, PxShape* shape, PxTransform* transform);
+        internal static extern void PxSceneQuerySystem_updateSQShape_mut(PxSceneQuerySystem* self_, PxRigidActor* actor, PxShape* shape, PxTransform* transform);
 
         /// <summary>
         ///  Adds a compound to the SQ system.
@@ -9421,13 +9421,13 @@ namespace Physx
         ///  SQ compound handle
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_addSQCompound_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxSceneQuerySystem_addSQCompound_mut(PxSceneQuerySystem* self_, PxRigidActor* actor, PxShape** shapes, PxBVH* bvh, PxTransform* transforms);
+        internal static extern uint PxSceneQuerySystem_addSQCompound_mut(PxSceneQuerySystem* self_, PxRigidActor* actor, PxShape** shapes, PxBVH* bvh, PxTransform* transforms);
 
         /// <summary>
         ///  Removes a compound from the SQ system.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_removeSQCompound_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_removeSQCompound_mut(PxSceneQuerySystem* self_, uint compoundHandle);
+        internal static extern void PxSceneQuerySystem_removeSQCompound_mut(PxSceneQuerySystem* self_, uint compoundHandle);
 
         /// <summary>
         ///  Updates a compound in the SQ system.
@@ -9435,7 +9435,7 @@ namespace Physx
         ///  The compound structures are immediately updated when the call occurs.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_updateSQCompound_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_updateSQCompound_mut(PxSceneQuerySystem* self_, uint compoundHandle, PxTransform* compoundTransform);
+        internal static extern void PxSceneQuerySystem_updateSQCompound_mut(PxSceneQuerySystem* self_, uint compoundHandle, PxTransform* compoundTransform);
 
         /// <summary>
         ///  Shift the data structures' origin by the specified vector.
@@ -9443,13 +9443,13 @@ namespace Physx
         ///  Please refer to the notes of the similar function in PxScene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_shiftOrigin_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_shiftOrigin_mut(PxSceneQuerySystem* self_, PxVec3* shift);
+        internal static extern void PxSceneQuerySystem_shiftOrigin_mut(PxSceneQuerySystem* self_, PxVec3* shift);
 
         /// <summary>
         ///  Merges a pruning structure with the SQ system's internal pruners.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_merge_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_merge_mut(PxSceneQuerySystem* self_, PxPruningStructure* pruningStructure);
+        internal static extern void PxSceneQuerySystem_merge_mut(PxSceneQuerySystem* self_, PxPruningStructure* pruningStructure);
 
         /// <summary>
         ///  Shape to SQ-pruner-handle mapping function.
@@ -9460,7 +9460,7 @@ namespace Physx
         ///  Associated SQ pruner handle.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_getHandle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxSceneQuerySystem_getHandle(PxSceneQuerySystem* self_, PxRigidActor* actor, PxShape* shape, uint* prunerIndex);
+        internal static extern uint PxSceneQuerySystem_getHandle(PxSceneQuerySystem* self_, PxRigidActor* actor, PxShape* shape, uint* prunerIndex);
 
         /// <summary>
         ///  Synchronizes the scene-query system with another system that references the same objects.
@@ -9472,7 +9472,7 @@ namespace Physx
         ///  in the rigid-body engine.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_sync_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_sync_mut(PxSceneQuerySystem* self_, uint prunerIndex, uint* handles, uint* indices, PxBounds3* bounds, PxTransformPadded* transforms, uint count, PxBitMap* ignoredIndices);
+        internal static extern void PxSceneQuerySystem_sync_mut(PxSceneQuerySystem* self_, uint prunerIndex, uint* handles, uint* indices, PxBounds3* bounds, PxTransformPadded* transforms, uint count, PxBitMap* ignoredIndices);
 
         /// <summary>
         ///  Finalizes updates made to the SQ system.
@@ -9490,7 +9490,7 @@ namespace Physx
         ///  The amount of work performed in this function depends on PxSceneQueryUpdateMode.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_finalizeUpdates_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_finalizeUpdates_mut(PxSceneQuerySystem* self_);
+        internal static extern void PxSceneQuerySystem_finalizeUpdates_mut(PxSceneQuerySystem* self_);
 
         /// <summary>
         ///  Prepares asynchronous build step.
@@ -9508,7 +9508,7 @@ namespace Physx
         ///  Null if there is no work to do, otherwise a pruner-specific handle.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_prepareSceneQueryBuildStep_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxSceneQuerySystem_prepareSceneQueryBuildStep_mut(PxSceneQuerySystem* self_, uint prunerIndex);
+        internal static extern void* PxSceneQuerySystem_prepareSceneQueryBuildStep_mut(PxSceneQuerySystem* self_, uint prunerIndex);
 
         /// <summary>
         ///  Executes asynchronous build step.
@@ -9519,14 +9519,14 @@ namespace Physx
         ///  called from different threads for building multiple trees at the same time.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQuerySystem_sceneQueryBuildStep_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneQuerySystem_sceneQueryBuildStep_mut(PxSceneQuerySystem* self_, void* handle);
+        internal static extern void PxSceneQuerySystem_sceneQueryBuildStep_mut(PxSceneQuerySystem* self_, void* handle);
 
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseDesc_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBroadPhaseDesc PxBroadPhaseDesc_new(PxBroadPhaseType type_);
+        internal static extern PxBroadPhaseDesc PxBroadPhaseDesc_new(PxBroadPhaseType type_);
 
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBroadPhaseDesc_isValid(PxBroadPhaseDesc* self_);
+        internal static extern bool PxBroadPhaseDesc_isValid(PxBroadPhaseDesc* self_);
 
         /// <summary>
         ///  Retrieves the filter group for static objects.
@@ -9538,7 +9538,7 @@ namespace Physx
         ///  Filter group for static objects.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetBroadPhaseStaticFilterGroup", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxGetBroadPhaseStaticFilterGroup();
+        internal static extern uint phys_PxGetBroadPhaseStaticFilterGroup();
 
         /// <summary>
         ///  Retrieves a filter group for dynamic objects.
@@ -9551,7 +9551,7 @@ namespace Physx
         ///  Filter group for the object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetBroadPhaseDynamicFilterGroup", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxGetBroadPhaseDynamicFilterGroup(uint id);
+        internal static extern uint phys_PxGetBroadPhaseDynamicFilterGroup(uint id);
 
         /// <summary>
         ///  Retrieves a filter group for kinematic objects.
@@ -9563,13 +9563,13 @@ namespace Physx
         ///  Filter group for the object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetBroadPhaseKinematicFilterGroup", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxGetBroadPhaseKinematicFilterGroup(uint id);
+        internal static extern uint phys_PxGetBroadPhaseKinematicFilterGroup(uint id);
 
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseUpdateData_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBroadPhaseUpdateData PxBroadPhaseUpdateData_new(uint* created, uint nbCreated, uint* updated, uint nbUpdated, uint* removed, uint nbRemoved, PxBounds3* bounds, uint* groups, float* distances, uint capacity);
+        internal static extern PxBroadPhaseUpdateData PxBroadPhaseUpdateData_new(uint* created, uint nbCreated, uint* updated, uint nbUpdated, uint* removed, uint nbRemoved, PxBounds3* bounds, uint* groups, float* distances, uint capacity);
 
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseResults_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBroadPhaseResults PxBroadPhaseResults_new();
+        internal static extern PxBroadPhaseResults PxBroadPhaseResults_new();
 
         /// <summary>
         ///  Returns number of regions currently registered in the broad-phase.
@@ -9577,7 +9577,7 @@ namespace Physx
         ///  Number of regions
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseRegions_getNbRegions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxBroadPhaseRegions_getNbRegions(PxBroadPhaseRegions* self_);
+        internal static extern uint PxBroadPhaseRegions_getNbRegions(PxBroadPhaseRegions* self_);
 
         /// <summary>
         ///  Gets broad-phase regions.
@@ -9585,7 +9585,7 @@ namespace Physx
         ///  Number of written out regions.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseRegions_getRegions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxBroadPhaseRegions_getRegions(PxBroadPhaseRegions* self_, PxBroadPhaseRegionInfo* userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxBroadPhaseRegions_getRegions(PxBroadPhaseRegions* self_, PxBroadPhaseRegionInfo* userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Adds a new broad-phase region.
@@ -9612,7 +9612,7 @@ namespace Physx
         ///  Handle for newly created region, or 0xffffffff in case of failure.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseRegions_addRegion_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxBroadPhaseRegions_addRegion_mut(PxBroadPhaseRegions* self_, PxBroadPhaseRegion* region, [MarshalAs(UnmanagedType.U1)] bool populateRegion, PxBounds3* bounds, float* distances);
+        internal static extern uint PxBroadPhaseRegions_addRegion_mut(PxBroadPhaseRegions* self_, PxBroadPhaseRegion* region, [MarshalAs(UnmanagedType.U1)] bool populateRegion, PxBounds3* bounds, float* distances);
 
         /// <summary>
         ///  Removes a broad-phase region.
@@ -9628,16 +9628,16 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseRegions_removeRegion_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBroadPhaseRegions_removeRegion_mut(PxBroadPhaseRegions* self_, uint handle);
+        internal static extern bool PxBroadPhaseRegions_removeRegion_mut(PxBroadPhaseRegions* self_, uint handle);
 
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseRegions_getNbOutOfBoundsObjects", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxBroadPhaseRegions_getNbOutOfBoundsObjects(PxBroadPhaseRegions* self_);
+        internal static extern uint PxBroadPhaseRegions_getNbOutOfBoundsObjects(PxBroadPhaseRegions* self_);
 
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseRegions_getOutOfBoundsObjects", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint* PxBroadPhaseRegions_getOutOfBoundsObjects(PxBroadPhaseRegions* self_);
+        internal static extern uint* PxBroadPhaseRegions_getOutOfBoundsObjects(PxBroadPhaseRegions* self_);
 
         [DllImport(__DllName, EntryPoint = "PxBroadPhase_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadPhase_release_mut(PxBroadPhase* self_);
+        internal static extern void PxBroadPhase_release_mut(PxBroadPhase* self_);
 
         /// <summary>
         ///  Gets the broadphase type.
@@ -9645,13 +9645,13 @@ namespace Physx
         ///  Broadphase type.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhase_getType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBroadPhaseType PxBroadPhase_getType(PxBroadPhase* self_);
+        internal static extern PxBroadPhaseType PxBroadPhase_getType(PxBroadPhase* self_);
 
         /// <summary>
         ///  Gets broad-phase caps.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhase_getCaps", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadPhase_getCaps(PxBroadPhase* self_, PxBroadPhaseCaps* caps);
+        internal static extern void PxBroadPhase_getCaps(PxBroadPhase* self_, PxBroadPhaseCaps* caps);
 
         /// <summary>
         ///  Retrieves the regions API if applicable.
@@ -9661,7 +9661,7 @@ namespace Physx
         ///  Region API, or NULL.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhase_getRegions_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBroadPhaseRegions* PxBroadPhase_getRegions_mut(PxBroadPhase* self_);
+        internal static extern PxBroadPhaseRegions* PxBroadPhase_getRegions_mut(PxBroadPhase* self_);
 
         /// <summary>
         ///  Retrieves the broadphase allocator.
@@ -9673,7 +9673,7 @@ namespace Physx
         ///  The broadphase allocator.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhase_getAllocator_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxAllocatorCallback* PxBroadPhase_getAllocator_mut(PxBroadPhase* self_);
+        internal static extern PxAllocatorCallback* PxBroadPhase_getAllocator_mut(PxBroadPhase* self_);
 
         /// <summary>
         ///  Retrieves the profiler's context ID.
@@ -9681,7 +9681,7 @@ namespace Physx
         ///  The context ID.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhase_getContextID", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ulong PxBroadPhase_getContextID(PxBroadPhase* self_);
+        internal static extern ulong PxBroadPhase_getContextID(PxBroadPhase* self_);
 
         /// <summary>
         ///  Sets a scratch buffer
@@ -9692,7 +9692,7 @@ namespace Physx
         ///  that can potentially reduce runtime allocations.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhase_setScratchBlock_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadPhase_setScratchBlock_mut(PxBroadPhase* self_, void* scratchBlock, uint size);
+        internal static extern void PxBroadPhase_setScratchBlock_mut(PxBroadPhase* self_, void* scratchBlock, uint size);
 
         /// <summary>
         ///  Updates the broadphase and computes the lists of created/deleted pairs.
@@ -9704,7 +9704,7 @@ namespace Physx
         ///  then run single-threaded.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhase_update_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadPhase_update_mut(PxBroadPhase* self_, PxBroadPhaseUpdateData* updateData, PxBaseTask* continuation);
+        internal static extern void PxBroadPhase_update_mut(PxBroadPhase* self_, PxBroadPhaseUpdateData* updateData, PxBaseTask* continuation);
 
         /// <summary>
         ///  Retrieves the broadphase results after an update.
@@ -9713,7 +9713,7 @@ namespace Physx
         ///  results are incremental, i.e. the system only returns new and lost pairs, not all current pairs.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhase_fetchResults_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadPhase_fetchResults_mut(PxBroadPhase* self_, PxBroadPhaseResults* results);
+        internal static extern void PxBroadPhase_fetchResults_mut(PxBroadPhase* self_, PxBroadPhaseResults* results);
 
         /// <summary>
         ///  Helper for single-threaded updates.
@@ -9721,7 +9721,7 @@ namespace Physx
         ///  This short helper function performs a single-theaded update and reports the results in a single call.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhase_update_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadPhase_update_mut_1(PxBroadPhase* self_, PxBroadPhaseResults* results, PxBroadPhaseUpdateData* updateData);
+        internal static extern void PxBroadPhase_update_mut_1(PxBroadPhase* self_, PxBroadPhaseResults* results, PxBroadPhaseUpdateData* updateData);
 
         /// <summary>
         ///  Broadphase factory function.
@@ -9731,10 +9731,10 @@ namespace Physx
         ///  Newly created broadphase, or NULL
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateBroadPhase", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBroadPhase* phys_PxCreateBroadPhase(PxBroadPhaseDesc* desc);
+        internal static extern PxBroadPhase* phys_PxCreateBroadPhase(PxBroadPhaseDesc* desc);
 
         [DllImport(__DllName, EntryPoint = "PxAABBManager_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAABBManager_release_mut(PxAABBManager* self_);
+        internal static extern void PxAABBManager_release_mut(PxAABBManager* self_);
 
         /// <summary>
         ///  Retrieves the underlying broadphase.
@@ -9742,7 +9742,7 @@ namespace Physx
         ///  The managed broadphase.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAABBManager_getBroadPhase_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBroadPhase* PxAABBManager_getBroadPhase_mut(PxAABBManager* self_);
+        internal static extern PxBroadPhase* PxAABBManager_getBroadPhase_mut(PxAABBManager* self_);
 
         /// <summary>
         ///  Retrieves the managed bounds.
@@ -9752,7 +9752,7 @@ namespace Physx
         ///  The managed object bounds.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAABBManager_getBounds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3* PxAABBManager_getBounds(PxAABBManager* self_);
+        internal static extern PxBounds3* PxAABBManager_getBounds(PxAABBManager* self_);
 
         /// <summary>
         ///  Retrieves the managed distances.
@@ -9762,7 +9762,7 @@ namespace Physx
         ///  The managed object distances.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAABBManager_getDistances", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float* PxAABBManager_getDistances(PxAABBManager* self_);
+        internal static extern float* PxAABBManager_getDistances(PxAABBManager* self_);
 
         /// <summary>
         ///  Retrieves the managed filter groups.
@@ -9770,7 +9770,7 @@ namespace Physx
         ///  The managed object groups.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAABBManager_getGroups", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint* PxAABBManager_getGroups(PxAABBManager* self_);
+        internal static extern uint* PxAABBManager_getGroups(PxAABBManager* self_);
 
         /// <summary>
         ///  Retrieves the managed buffers' capacity.
@@ -9780,7 +9780,7 @@ namespace Physx
         ///  The managed buffers' capacity.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAABBManager_getCapacity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxAABBManager_getCapacity(PxAABBManager* self_);
+        internal static extern uint PxAABBManager_getCapacity(PxAABBManager* self_);
 
         /// <summary>
         ///  Adds an object to the manager.
@@ -9790,13 +9790,13 @@ namespace Physx
         ///  and use the same ID in multiple sub-systems.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAABBManager_addObject_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAABBManager_addObject_mut(PxAABBManager* self_, uint index, PxBounds3* bounds, uint group, float distance);
+        internal static extern void PxAABBManager_addObject_mut(PxAABBManager* self_, uint index, PxBounds3* bounds, uint group, float distance);
 
         /// <summary>
         ///  Removes an object from the manager.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAABBManager_removeObject_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAABBManager_removeObject_mut(PxAABBManager* self_, uint index);
+        internal static extern void PxAABBManager_removeObject_mut(PxAABBManager* self_, uint index);
 
         /// <summary>
         ///  Updates an object in the manager.
@@ -9805,7 +9805,7 @@ namespace Physx
         ///  It is not possible to update an object's filter group.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAABBManager_updateObject_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAABBManager_updateObject_mut(PxAABBManager* self_, uint index, PxBounds3* bounds, float* distance);
+        internal static extern void PxAABBManager_updateObject_mut(PxAABBManager* self_, uint index, PxBounds3* bounds, float* distance);
 
         /// <summary>
         ///  Updates the broadphase and computes the lists of created/deleted pairs.
@@ -9817,7 +9817,7 @@ namespace Physx
         ///  then run single-threaded.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAABBManager_update_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAABBManager_update_mut(PxAABBManager* self_, PxBaseTask* continuation);
+        internal static extern void PxAABBManager_update_mut(PxAABBManager* self_, PxBaseTask* continuation);
 
         /// <summary>
         ///  Retrieves the broadphase results after an update.
@@ -9826,7 +9826,7 @@ namespace Physx
         ///  results are incremental, i.e. the system only returns new and lost pairs, not all current pairs.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAABBManager_fetchResults_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAABBManager_fetchResults_mut(PxAABBManager* self_, PxBroadPhaseResults* results);
+        internal static extern void PxAABBManager_fetchResults_mut(PxAABBManager* self_, PxBroadPhaseResults* results);
 
         /// <summary>
         ///  Helper for single-threaded updates.
@@ -9834,7 +9834,7 @@ namespace Physx
         ///  This short helper function performs a single-theaded update and reports the results in a single call.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxAABBManager_update_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxAABBManager_update_mut_1(PxAABBManager* self_, PxBroadPhaseResults* results);
+        internal static extern void PxAABBManager_update_mut_1(PxAABBManager* self_, PxBroadPhaseResults* results);
 
         /// <summary>
         ///  AABB manager factory function.
@@ -9844,19 +9844,19 @@ namespace Physx
         ///  Newly created AABB manager, or NULL
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateAABBManager", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxAABBManager* phys_PxCreateAABBManager(PxBroadPhase* broadphase);
+        internal static extern PxAABBManager* phys_PxCreateAABBManager(PxBroadPhase* broadphase);
 
         /// <summary>
         ///  constructor sets to default
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneLimits_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSceneLimits PxSceneLimits_new();
+        internal static extern PxSceneLimits PxSceneLimits_new();
 
         /// <summary>
         ///  (re)sets the structure to the default
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneLimits_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneLimits_setToDefault_mut(PxSceneLimits* self_);
+        internal static extern void PxSceneLimits_setToDefault_mut(PxSceneLimits* self_);
 
         /// <summary>
         ///  Returns true if the descriptor is valid.
@@ -9865,26 +9865,26 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneLimits_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneLimits_isValid(PxSceneLimits* self_);
+        internal static extern bool PxSceneLimits_isValid(PxSceneLimits* self_);
 
         [DllImport(__DllName, EntryPoint = "PxgDynamicsMemoryConfig_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxgDynamicsMemoryConfig PxgDynamicsMemoryConfig_new();
+        internal static extern PxgDynamicsMemoryConfig PxgDynamicsMemoryConfig_new();
 
         [DllImport(__DllName, EntryPoint = "PxgDynamicsMemoryConfig_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxgDynamicsMemoryConfig_isValid(PxgDynamicsMemoryConfig* self_);
+        internal static extern bool PxgDynamicsMemoryConfig_isValid(PxgDynamicsMemoryConfig* self_);
 
         /// <summary>
         ///  constructor sets to default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneDesc_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSceneDesc PxSceneDesc_new(PxTolerancesScale* scale);
+        internal static extern PxSceneDesc PxSceneDesc_new(PxTolerancesScale* scale);
 
         /// <summary>
         ///  (re)sets the structure to the default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneDesc_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneDesc_setToDefault_mut(PxSceneDesc* self_, PxTolerancesScale* scale);
+        internal static extern void PxSceneDesc_setToDefault_mut(PxSceneDesc* self_, PxTolerancesScale* scale);
 
         /// <summary>
         ///  Returns true if the descriptor is valid.
@@ -9893,10 +9893,10 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneDesc_isValid(PxSceneDesc* self_);
+        internal static extern bool PxSceneDesc_isValid(PxSceneDesc* self_);
 
         [DllImport(__DllName, EntryPoint = "PxSceneDesc_getTolerancesScale", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTolerancesScale* PxSceneDesc_getTolerancesScale(PxSceneDesc* self_);
+        internal static extern PxTolerancesScale* PxSceneDesc_getTolerancesScale(PxSceneDesc* self_);
 
         /// <summary>
         ///  Get number of broadphase volumes added for the current simulation step.
@@ -9904,7 +9904,7 @@ namespace Physx
         ///  Number of broadphase volumes added.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimulationStatistics_getNbBroadPhaseAdds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxSimulationStatistics_getNbBroadPhaseAdds(PxSimulationStatistics* self_);
+        internal static extern uint PxSimulationStatistics_getNbBroadPhaseAdds(PxSimulationStatistics* self_);
 
         /// <summary>
         ///  Get number of broadphase volumes removed for the current simulation step.
@@ -9912,7 +9912,7 @@ namespace Physx
         ///  Number of broadphase volumes removed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimulationStatistics_getNbBroadPhaseRemoves", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxSimulationStatistics_getNbBroadPhaseRemoves(PxSimulationStatistics* self_);
+        internal static extern uint PxSimulationStatistics_getNbBroadPhaseRemoves(PxSimulationStatistics* self_);
 
         /// <summary>
         ///  Get number of shape collision pairs of a certain type processed for the current simulation step.
@@ -9925,64 +9925,64 @@ namespace Physx
         ///  Number of processed pairs of the specified geometry types.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimulationStatistics_getRbPairStats", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxSimulationStatistics_getRbPairStats(PxSimulationStatistics* self_, RbPairStatsType pairType, PxGeometryType g0, PxGeometryType g1);
+        internal static extern uint PxSimulationStatistics_getRbPairStats(PxSimulationStatistics* self_, RbPairStatsType pairType, PxGeometryType g0, PxGeometryType g1);
 
         [DllImport(__DllName, EntryPoint = "PxSimulationStatistics_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSimulationStatistics PxSimulationStatistics_new();
+        internal static extern PxSimulationStatistics PxSimulationStatistics_new();
 
         /// <summary>
         ///  Sets the PVD flag. See PxPvdSceneFlag.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdSceneClient_setScenePvdFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvdSceneClient_setScenePvdFlag_mut(PxPvdSceneClient* self_, PxPvdSceneFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxPvdSceneClient_setScenePvdFlag_mut(PxPvdSceneClient* self_, PxPvdSceneFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         /// <summary>
         ///  Sets the PVD flags. See PxPvdSceneFlags.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdSceneClient_setScenePvdFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvdSceneClient_setScenePvdFlags_mut(PxPvdSceneClient* self_, PxPvdSceneFlags flags);
+        internal static extern void PxPvdSceneClient_setScenePvdFlags_mut(PxPvdSceneClient* self_, PxPvdSceneFlags flags);
 
         /// <summary>
         ///  Retrieves the PVD flags. See PxPvdSceneFlags.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdSceneClient_getScenePvdFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPvdSceneFlags PxPvdSceneClient_getScenePvdFlags(PxPvdSceneClient* self_);
+        internal static extern PxPvdSceneFlags PxPvdSceneClient_getScenePvdFlags(PxPvdSceneClient* self_);
 
         /// <summary>
         ///  update camera on PVD application's render window
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdSceneClient_updateCamera_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvdSceneClient_updateCamera_mut(PxPvdSceneClient* self_, byte* name, PxVec3* origin, PxVec3* up, PxVec3* target);
+        internal static extern void PxPvdSceneClient_updateCamera_mut(PxPvdSceneClient* self_, byte* name, PxVec3* origin, PxVec3* up, PxVec3* target);
 
         /// <summary>
         ///  draw points on PVD application's render window
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdSceneClient_drawPoints_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvdSceneClient_drawPoints_mut(PxPvdSceneClient* self_, PxDebugPoint* points, uint count);
+        internal static extern void PxPvdSceneClient_drawPoints_mut(PxPvdSceneClient* self_, PxDebugPoint* points, uint count);
 
         /// <summary>
         ///  draw lines on PVD application's render window
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdSceneClient_drawLines_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvdSceneClient_drawLines_mut(PxPvdSceneClient* self_, PxDebugLine* lines, uint count);
+        internal static extern void PxPvdSceneClient_drawLines_mut(PxPvdSceneClient* self_, PxDebugLine* lines, uint count);
 
         /// <summary>
         ///  draw triangles on PVD application's render window
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdSceneClient_drawTriangles_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvdSceneClient_drawTriangles_mut(PxPvdSceneClient* self_, PxDebugTriangle* triangles, uint count);
+        internal static extern void PxPvdSceneClient_drawTriangles_mut(PxPvdSceneClient* self_, PxDebugTriangle* triangles, uint count);
 
         /// <summary>
         ///  draw text on PVD application's render window
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdSceneClient_drawText_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvdSceneClient_drawText_mut(PxPvdSceneClient* self_, PxDebugText* text);
+        internal static extern void PxPvdSceneClient_drawText_mut(PxPvdSceneClient* self_, PxDebugText* text);
 
         [DllImport(__DllName, EntryPoint = "PxDominanceGroupPair_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDominanceGroupPair PxDominanceGroupPair_new(byte a, byte b);
+        internal static extern PxDominanceGroupPair PxDominanceGroupPair_new(byte a, byte b);
 
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadPhaseCallback_delete(PxBroadPhaseCallback* self_);
+        internal static extern void PxBroadPhaseCallback_delete(PxBroadPhaseCallback* self_);
 
         /// <summary>
         ///  Out-of-bounds notification.
@@ -9990,7 +9990,7 @@ namespace Physx
         ///  This function is called when an object leaves the broad-phase.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseCallback_onObjectOutOfBounds_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadPhaseCallback_onObjectOutOfBounds_mut(PxBroadPhaseCallback* self_, PxShape* shape, PxActor* actor);
+        internal static extern void PxBroadPhaseCallback_onObjectOutOfBounds_mut(PxBroadPhaseCallback* self_, PxShape* shape, PxActor* actor);
 
         /// <summary>
         ///  Out-of-bounds notification.
@@ -9998,7 +9998,7 @@ namespace Physx
         ///  This function is called when an aggregate leaves the broad-phase.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseCallback_onObjectOutOfBounds_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBroadPhaseCallback_onObjectOutOfBounds_mut_1(PxBroadPhaseCallback* self_, PxAggregate* aggregate);
+        internal static extern void PxBroadPhaseCallback_onObjectOutOfBounds_mut_1(PxBroadPhaseCallback* self_, PxAggregate* aggregate);
 
         /// <summary>
         ///  Deletes the scene.
@@ -10010,7 +10010,7 @@ namespace Physx
         ///  Avoid release calls while the scene is simulating (in between simulate() and fetchResults() calls).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_release_mut(PxScene* self_);
+        internal static extern void PxScene_release_mut(PxScene* self_);
 
         /// <summary>
         ///  Sets a scene flag. You can only set one flag at a time.
@@ -10018,7 +10018,7 @@ namespace Physx
         ///  Not all flags are mutable and changing some will result in an error. Please check [`PxSceneFlag`] to see which flags can be changed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setFlag_mut(PxScene* self_, PxSceneFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxScene_setFlag_mut(PxScene* self_, PxSceneFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         /// <summary>
         ///  Get the scene flags.
@@ -10026,7 +10026,7 @@ namespace Physx
         ///  The scene flags. See [`PxSceneFlag`]
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSceneFlags PxScene_getFlags(PxScene* self_);
+        internal static extern PxSceneFlags PxScene_getFlags(PxScene* self_);
 
         /// <summary>
         ///  Set new scene limits.
@@ -10036,7 +10036,7 @@ namespace Physx
         ///  are for preallocation and do not represent hard limits.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setLimits_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setLimits_mut(PxScene* self_, PxSceneLimits* limits);
+        internal static extern void PxScene_setLimits_mut(PxScene* self_, PxSceneLimits* limits);
 
         /// <summary>
         ///  Get current scene limits.
@@ -10044,7 +10044,7 @@ namespace Physx
         ///  Current scene limits.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getLimits", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSceneLimits PxScene_getLimits(PxScene* self_);
+        internal static extern PxSceneLimits PxScene_getLimits(PxScene* self_);
 
         /// <summary>
         ///  Call this method to retrieve the Physics SDK.
@@ -10052,7 +10052,7 @@ namespace Physx
         ///  The physics SDK this scene is associated with.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getPhysics_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPhysics* PxScene_getPhysics_mut(PxScene* self_);
+        internal static extern PxPhysics* PxScene_getPhysics_mut(PxScene* self_);
 
         /// <summary>
         ///  Retrieves the scene's internal timestamp, increased each time a simulation step is completed.
@@ -10060,7 +10060,7 @@ namespace Physx
         ///  scene timestamp
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getTimestamp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getTimestamp(PxScene* self_);
+        internal static extern uint PxScene_getTimestamp(PxScene* self_);
 
         /// <summary>
         ///  Adds an articulation to this scene.
@@ -10071,7 +10071,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_addArticulation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_addArticulation_mut(PxScene* self_, PxArticulationReducedCoordinate* articulation);
+        internal static extern bool PxScene_addArticulation_mut(PxScene* self_, PxArticulationReducedCoordinate* articulation);
 
         /// <summary>
         ///  Removes an articulation from this scene.
@@ -10081,7 +10081,7 @@ namespace Physx
         ///  If the articulation is in an aggregate it will be removed from the aggregate.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_removeArticulation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_removeArticulation_mut(PxScene* self_, PxArticulationReducedCoordinate* articulation, [MarshalAs(UnmanagedType.U1)] bool wakeOnLostTouch);
+        internal static extern void PxScene_removeArticulation_mut(PxScene* self_, PxArticulationReducedCoordinate* articulation, [MarshalAs(UnmanagedType.U1)] bool wakeOnLostTouch);
 
         /// <summary>
         ///  Adds an actor to this scene.
@@ -10104,7 +10104,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_addActor_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_addActor_mut(PxScene* self_, PxActor* actor, PxBVH* bvh);
+        internal static extern bool PxScene_addActor_mut(PxScene* self_, PxActor* actor, PxBVH* bvh);
 
         /// <summary>
         ///  Adds actors to this scene. Only supports actors of type PxRigidStatic and PxRigidDynamic.
@@ -10125,7 +10125,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_addActors_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_addActors_mut(PxScene* self_, PxActor** actors, uint nbActors);
+        internal static extern bool PxScene_addActors_mut(PxScene* self_, PxActor** actors, uint nbActors);
 
         /// <summary>
         ///  Adds a pruning structure together with its actors to this scene. Only supports actors of type PxRigidStatic and PxRigidDynamic.
@@ -10149,7 +10149,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_addActors_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_addActors_mut_1(PxScene* self_, PxPruningStructure* pruningStructure);
+        internal static extern bool PxScene_addActors_mut_1(PxScene* self_, PxPruningStructure* pruningStructure);
 
         /// <summary>
         ///  Removes an actor from this scene.
@@ -10163,7 +10163,7 @@ namespace Physx
         ///  If the actor is in an aggregate it will be removed from the aggregate.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_removeActor_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_removeActor_mut(PxScene* self_, PxActor* actor, [MarshalAs(UnmanagedType.U1)] bool wakeOnLostTouch);
+        internal static extern void PxScene_removeActor_mut(PxScene* self_, PxActor* actor, [MarshalAs(UnmanagedType.U1)] bool wakeOnLostTouch);
 
         /// <summary>
         ///  Removes actors from this scene. Only supports actors of type PxRigidStatic and PxRigidDynamic.
@@ -10178,7 +10178,7 @@ namespace Physx
         ///  If the actor is a PxRigidActor then all assigned PxConstraint objects will get removed from the scene automatically.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_removeActors_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_removeActors_mut(PxScene* self_, PxActor** actors, uint nbActors, [MarshalAs(UnmanagedType.U1)] bool wakeOnLostTouch);
+        internal static extern void PxScene_removeActors_mut(PxScene* self_, PxActor** actors, uint nbActors, [MarshalAs(UnmanagedType.U1)] bool wakeOnLostTouch);
 
         /// <summary>
         ///  Adds an aggregate to this scene.
@@ -10193,7 +10193,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_addAggregate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_addAggregate_mut(PxScene* self_, PxAggregate* aggregate);
+        internal static extern bool PxScene_addAggregate_mut(PxScene* self_, PxAggregate* aggregate);
 
         /// <summary>
         ///  Removes an aggregate from this scene.
@@ -10203,7 +10203,7 @@ namespace Physx
         ///  If the aggregate contains actors, those actors are removed from the scene as well.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_removeAggregate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_removeAggregate_mut(PxScene* self_, PxAggregate* aggregate, [MarshalAs(UnmanagedType.U1)] bool wakeOnLostTouch);
+        internal static extern void PxScene_removeAggregate_mut(PxScene* self_, PxAggregate* aggregate, [MarshalAs(UnmanagedType.U1)] bool wakeOnLostTouch);
 
         /// <summary>
         ///  Adds objects in the collection to this scene.
@@ -10217,7 +10217,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_addCollection_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_addCollection_mut(PxScene* self_, PxCollection* collection);
+        internal static extern bool PxScene_addCollection_mut(PxScene* self_, PxCollection* collection);
 
         /// <summary>
         ///  Retrieve the number of actors of certain types in the scene. For supported types, see PxActorTypeFlags.
@@ -10225,7 +10225,7 @@ namespace Physx
         ///  the number of actors.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getNbActors", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getNbActors(PxScene* self_, PxActorTypeFlags types);
+        internal static extern uint PxScene_getNbActors(PxScene* self_, PxActorTypeFlags types);
 
         /// <summary>
         ///  Retrieve an array of all the actors of certain types in the scene. For supported types, see PxActorTypeFlags.
@@ -10233,7 +10233,7 @@ namespace Physx
         ///  Number of actors written to the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getActors", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getActors(PxScene* self_, PxActorTypeFlags types, PxActor** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxScene_getActors(PxScene* self_, PxActorTypeFlags types, PxActor** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Queries the PxScene for a list of the PxActors whose transforms have been
@@ -10246,7 +10246,7 @@ namespace Physx
         ///  A pointer to the list of active PxActors generated during the last call to fetchResults().
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getActiveActors_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxActor** PxScene_getActiveActors_mut(PxScene* self_, uint* nbActorsOut);
+        internal static extern PxActor** PxScene_getActiveActors_mut(PxScene* self_, uint* nbActorsOut);
 
         /// <summary>
         ///  Returns the number of articulations in the scene.
@@ -10254,7 +10254,7 @@ namespace Physx
         ///  the number of articulations in this scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getNbArticulations", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getNbArticulations(PxScene* self_);
+        internal static extern uint PxScene_getNbArticulations(PxScene* self_);
 
         /// <summary>
         ///  Retrieve all the articulations in the scene.
@@ -10262,7 +10262,7 @@ namespace Physx
         ///  Number of articulations written to the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getArticulations", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getArticulations(PxScene* self_, PxArticulationReducedCoordinate** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxScene_getArticulations(PxScene* self_, PxArticulationReducedCoordinate** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Returns the number of constraint shaders in the scene.
@@ -10270,7 +10270,7 @@ namespace Physx
         ///  the number of constraint shaders in this scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getNbConstraints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getNbConstraints(PxScene* self_);
+        internal static extern uint PxScene_getNbConstraints(PxScene* self_);
 
         /// <summary>
         ///  Retrieve all the constraint shaders in the scene.
@@ -10278,7 +10278,7 @@ namespace Physx
         ///  Number of constraint shaders written to the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getConstraints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getConstraints(PxScene* self_, PxConstraint** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxScene_getConstraints(PxScene* self_, PxConstraint** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Returns the number of aggregates in the scene.
@@ -10286,7 +10286,7 @@ namespace Physx
         ///  the number of aggregates in this scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getNbAggregates", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getNbAggregates(PxScene* self_);
+        internal static extern uint PxScene_getNbAggregates(PxScene* self_);
 
         /// <summary>
         ///  Retrieve all the aggregates in the scene.
@@ -10294,7 +10294,7 @@ namespace Physx
         ///  Number of aggregates written to the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getAggregates", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getAggregates(PxScene* self_, PxAggregate** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxScene_getAggregates(PxScene* self_, PxAggregate** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Specifies the dominance behavior of contacts between two actors with two certain dominance groups.
@@ -10349,19 +10349,19 @@ namespace Physx
         ///  wake actors up automatically.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setDominanceGroupPair_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setDominanceGroupPair_mut(PxScene* self_, byte group1, byte group2, PxDominanceGroupPair* dominance);
+        internal static extern void PxScene_setDominanceGroupPair_mut(PxScene* self_, byte group1, byte group2, PxDominanceGroupPair* dominance);
 
         /// <summary>
         ///  Samples the dominance matrix.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getDominanceGroupPair", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDominanceGroupPair PxScene_getDominanceGroupPair(PxScene* self_, byte group1, byte group2);
+        internal static extern PxDominanceGroupPair PxScene_getDominanceGroupPair(PxScene* self_, byte group1, byte group2);
 
         /// <summary>
         ///  Return the cpu dispatcher that was set in PxSceneDesc::cpuDispatcher when creating the scene with PxPhysics::createScene
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getCpuDispatcher", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCpuDispatcher* PxScene_getCpuDispatcher(PxScene* self_);
+        internal static extern PxCpuDispatcher* PxScene_getCpuDispatcher(PxScene* self_);
 
         /// <summary>
         ///  Reserves a new client ID.
@@ -10371,7 +10371,7 @@ namespace Physx
         ///  An error is reported when more than a supported number of clients (currently 128) are created.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_createClient_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte PxScene_createClient_mut(PxScene* self_);
+        internal static extern byte PxScene_createClient_mut(PxScene* self_);
 
         /// <summary>
         ///  Sets a user notify object which receives special simulation events when they occur.
@@ -10379,7 +10379,7 @@ namespace Physx
         ///  Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setSimulationEventCallback_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setSimulationEventCallback_mut(PxScene* self_, PxSimulationEventCallback* callback);
+        internal static extern void PxScene_setSimulationEventCallback_mut(PxScene* self_, PxSimulationEventCallback* callback);
 
         /// <summary>
         ///  Retrieves the simulationEventCallback pointer set with setSimulationEventCallback().
@@ -10387,7 +10387,7 @@ namespace Physx
         ///  The current user notify pointer. See [`PxSimulationEventCallback`].
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getSimulationEventCallback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSimulationEventCallback* PxScene_getSimulationEventCallback(PxScene* self_);
+        internal static extern PxSimulationEventCallback* PxScene_getSimulationEventCallback(PxScene* self_);
 
         /// <summary>
         ///  Sets a user callback object, which receives callbacks on all contacts generated for specified actors.
@@ -10395,7 +10395,7 @@ namespace Physx
         ///  Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setContactModifyCallback_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setContactModifyCallback_mut(PxScene* self_, PxContactModifyCallback* callback);
+        internal static extern void PxScene_setContactModifyCallback_mut(PxScene* self_, PxContactModifyCallback* callback);
 
         /// <summary>
         ///  Sets a user callback object, which receives callbacks on all CCD contacts generated for specified actors.
@@ -10403,7 +10403,7 @@ namespace Physx
         ///  Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setCCDContactModifyCallback_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setCCDContactModifyCallback_mut(PxScene* self_, PxCCDContactModifyCallback* callback);
+        internal static extern void PxScene_setCCDContactModifyCallback_mut(PxScene* self_, PxCCDContactModifyCallback* callback);
 
         /// <summary>
         ///  Retrieves the PxContactModifyCallback pointer set with setContactModifyCallback().
@@ -10411,7 +10411,7 @@ namespace Physx
         ///  The current user contact modify callback pointer. See [`PxContactModifyCallback`].
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getContactModifyCallback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxContactModifyCallback* PxScene_getContactModifyCallback(PxScene* self_);
+        internal static extern PxContactModifyCallback* PxScene_getContactModifyCallback(PxScene* self_);
 
         /// <summary>
         ///  Retrieves the PxCCDContactModifyCallback pointer set with setContactModifyCallback().
@@ -10419,7 +10419,7 @@ namespace Physx
         ///  The current user contact modify callback pointer. See [`PxContactModifyCallback`].
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getCCDContactModifyCallback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCCDContactModifyCallback* PxScene_getCCDContactModifyCallback(PxScene* self_);
+        internal static extern PxCCDContactModifyCallback* PxScene_getCCDContactModifyCallback(PxScene* self_);
 
         /// <summary>
         ///  Sets a broad-phase user callback object.
@@ -10427,7 +10427,7 @@ namespace Physx
         ///  Do not set the callback while the simulation is running. Calls to this method while the simulation is running will be ignored.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setBroadPhaseCallback_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setBroadPhaseCallback_mut(PxScene* self_, PxBroadPhaseCallback* callback);
+        internal static extern void PxScene_setBroadPhaseCallback_mut(PxScene* self_, PxBroadPhaseCallback* callback);
 
         /// <summary>
         ///  Retrieves the PxBroadPhaseCallback pointer set with setBroadPhaseCallback().
@@ -10435,7 +10435,7 @@ namespace Physx
         ///  The current broad-phase callback pointer. See [`PxBroadPhaseCallback`].
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getBroadPhaseCallback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBroadPhaseCallback* PxScene_getBroadPhaseCallback(PxScene* self_);
+        internal static extern PxBroadPhaseCallback* PxScene_getBroadPhaseCallback(PxScene* self_);
 
         /// <summary>
         ///  Sets the shared global filter data which will get passed into the filter shader.
@@ -10449,7 +10449,7 @@ namespace Physx
         ///  Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setFilterShaderData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setFilterShaderData_mut(PxScene* self_, void* data, uint dataSize);
+        internal static extern void PxScene_setFilterShaderData_mut(PxScene* self_, void* data, uint dataSize);
 
         /// <summary>
         ///  Gets the shared global filter data in use for this scene.
@@ -10459,7 +10459,7 @@ namespace Physx
         ///  Shared filter data for filter shader.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getFilterShaderData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxScene_getFilterShaderData(PxScene* self_);
+        internal static extern void* PxScene_getFilterShaderData(PxScene* self_);
 
         /// <summary>
         ///  Gets the size of the shared global filter data ([`PxSceneDesc`].filterShaderData)
@@ -10467,7 +10467,7 @@ namespace Physx
         ///  Size of shared filter data [bytes].
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getFilterShaderDataSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getFilterShaderDataSize(PxScene* self_);
+        internal static extern uint PxScene_getFilterShaderDataSize(PxScene* self_);
 
         /// <summary>
         ///  Marks the object to reset interactions and re-run collision filters in the next simulation step.
@@ -10501,7 +10501,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_resetFiltering_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_resetFiltering_mut(PxScene* self_, PxActor* actor);
+        internal static extern bool PxScene_resetFiltering_mut(PxScene* self_, PxActor* actor);
 
         /// <summary>
         ///  Marks the object to reset interactions and re-run collision filters for specified shapes in the next simulation step.
@@ -10518,7 +10518,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_resetFiltering_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_resetFiltering_mut_1(PxScene* self_, PxRigidActor* actor, PxShape** shapes, uint shapeCount);
+        internal static extern bool PxScene_resetFiltering_mut_1(PxScene* self_, PxRigidActor* actor, PxShape** shapes, uint shapeCount);
 
         /// <summary>
         ///  Gets the pair filtering mode for kinematic-kinematic pairs.
@@ -10526,7 +10526,7 @@ namespace Physx
         ///  Filtering mode for kinematic-kinematic pairs.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getKinematicKinematicFilteringMode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPairFilteringMode PxScene_getKinematicKinematicFilteringMode(PxScene* self_);
+        internal static extern PxPairFilteringMode PxScene_getKinematicKinematicFilteringMode(PxScene* self_);
 
         /// <summary>
         ///  Gets the pair filtering mode for static-kinematic pairs.
@@ -10534,7 +10534,7 @@ namespace Physx
         ///  Filtering mode for static-kinematic pairs.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getStaticKinematicFilteringMode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPairFilteringMode PxScene_getStaticKinematicFilteringMode(PxScene* self_);
+        internal static extern PxPairFilteringMode PxScene_getStaticKinematicFilteringMode(PxScene* self_);
 
         /// <summary>
         ///  Advances the simulation by an elapsedTime time.
@@ -10558,7 +10558,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_simulate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_simulate_mut(PxScene* self_, float elapsedTime, PxBaseTask* completionTask, void* scratchMemBlock, uint scratchMemBlockSize, [MarshalAs(UnmanagedType.U1)] bool controlSimulation);
+        internal static extern bool PxScene_simulate_mut(PxScene* self_, float elapsedTime, PxBaseTask* completionTask, void* scratchMemBlock, uint scratchMemBlockSize, [MarshalAs(UnmanagedType.U1)] bool controlSimulation);
 
         /// <summary>
         ///  Performs dynamics phase of the simulation pipeline.
@@ -10569,7 +10569,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_advance_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_advance_mut(PxScene* self_, PxBaseTask* completionTask);
+        internal static extern bool PxScene_advance_mut(PxScene* self_, PxBaseTask* completionTask);
 
         /// <summary>
         ///  Performs collision detection for the scene over elapsedTime
@@ -10580,7 +10580,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_collide_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_collide_mut(PxScene* self_, float elapsedTime, PxBaseTask* completionTask, void* scratchMemBlock, uint scratchMemBlockSize, [MarshalAs(UnmanagedType.U1)] bool controlSimulation);
+        internal static extern bool PxScene_collide_mut(PxScene* self_, float elapsedTime, PxBaseTask* completionTask, void* scratchMemBlock, uint scratchMemBlockSize, [MarshalAs(UnmanagedType.U1)] bool controlSimulation);
 
         /// <summary>
         ///  This checks to see if the simulation run has completed.
@@ -10592,7 +10592,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_checkResults_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_checkResults_mut(PxScene* self_, [MarshalAs(UnmanagedType.U1)] bool block);
+        internal static extern bool PxScene_checkResults_mut(PxScene* self_, [MarshalAs(UnmanagedType.U1)] bool block);
 
         /// <summary>
         ///  This method must be called after collide() and before advance(). It will wait for the collision phase to finish. If the user makes an illegal simulation call, the SDK will issue an error
@@ -10600,7 +10600,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_fetchCollision_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_fetchCollision_mut(PxScene* self_, [MarshalAs(UnmanagedType.U1)] bool block);
+        internal static extern bool PxScene_fetchCollision_mut(PxScene* self_, [MarshalAs(UnmanagedType.U1)] bool block);
 
         /// <summary>
         ///  This is the big brother to checkResults() it basically does the following:
@@ -10609,7 +10609,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_fetchResults_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_fetchResults_mut(PxScene* self_, [MarshalAs(UnmanagedType.U1)] bool block, uint* errorState);
+        internal static extern bool PxScene_fetchResults_mut(PxScene* self_, [MarshalAs(UnmanagedType.U1)] bool block, uint* errorState);
 
         /// <summary>
         ///  This call performs the first section of fetchResults, and returns a pointer to the contact streams output by the simulation. It can be used to process contact pairs in parallel, which is often a limiting factor
@@ -10622,7 +10622,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_fetchResultsStart_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_fetchResultsStart_mut(PxScene* self_, PxContactPairHeader** contactPairs, uint* nbContactPairs, [MarshalAs(UnmanagedType.U1)] bool block);
+        internal static extern bool PxScene_fetchResultsStart_mut(PxScene* self_, PxContactPairHeader** contactPairs, uint* nbContactPairs, [MarshalAs(UnmanagedType.U1)] bool block);
 
         /// <summary>
         ///  This call processes all event callbacks in parallel. It takes a continuation task, which will be executed once all callbacks have been processed.
@@ -10631,7 +10631,7 @@ namespace Physx
         ///  fetchResultsStart(...) and fetchResultsFinish(...)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_processCallbacks_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_processCallbacks_mut(PxScene* self_, PxBaseTask* continuation);
+        internal static extern void PxScene_processCallbacks_mut(PxScene* self_, PxBaseTask* continuation);
 
         /// <summary>
         ///  This call performs the second section of fetchResults.
@@ -10641,13 +10641,13 @@ namespace Physx
         ///  Note that once fetchResultsFinish() has been called, the contact streams returned in fetchResultsStart() will be invalid.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_fetchResultsFinish_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_fetchResultsFinish_mut(PxScene* self_, uint* errorState);
+        internal static extern void PxScene_fetchResultsFinish_mut(PxScene* self_, uint* errorState);
 
         /// <summary>
         ///  This call performs the synchronization of particle system data copies.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_fetchResultsParticleSystem_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_fetchResultsParticleSystem_mut(PxScene* self_);
+        internal static extern void PxScene_fetchResultsParticleSystem_mut(PxScene* self_);
 
         /// <summary>
         ///  Clear internal buffers and free memory.
@@ -10658,7 +10658,7 @@ namespace Physx
         ///  It is not allowed to call this method while the simulation is running. The call will fail.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_flushSimulation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_flushSimulation_mut(PxScene* self_, [MarshalAs(UnmanagedType.U1)] bool sendPendingReports);
+        internal static extern void PxScene_flushSimulation_mut(PxScene* self_, [MarshalAs(UnmanagedType.U1)] bool sendPendingReports);
 
         /// <summary>
         ///  Sets a constant gravity for the entire scene.
@@ -10671,7 +10671,7 @@ namespace Physx
         ///  wake the actor up automatically.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setGravity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setGravity_mut(PxScene* self_, PxVec3* vec);
+        internal static extern void PxScene_setGravity_mut(PxScene* self_, PxVec3* vec);
 
         /// <summary>
         ///  Retrieves the current gravity setting.
@@ -10679,7 +10679,7 @@ namespace Physx
         ///  The current gravity for the scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getGravity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxScene_getGravity(PxScene* self_);
+        internal static extern PxVec3 PxScene_getGravity(PxScene* self_);
 
         /// <summary>
         ///  Set the bounce threshold velocity.  Collision speeds below this threshold will not cause a bounce.
@@ -10687,13 +10687,13 @@ namespace Physx
         ///  Do not use this method while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setBounceThresholdVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setBounceThresholdVelocity_mut(PxScene* self_, float t);
+        internal static extern void PxScene_setBounceThresholdVelocity_mut(PxScene* self_, float t);
 
         /// <summary>
         ///  Return the bounce threshold velocity.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getBounceThresholdVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxScene_getBounceThresholdVelocity(PxScene* self_);
+        internal static extern float PxScene_getBounceThresholdVelocity(PxScene* self_);
 
         /// <summary>
         ///  Sets the maximum number of CCD passes
@@ -10701,7 +10701,7 @@ namespace Physx
         ///  Do not use this method while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setCCDMaxPasses_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setCCDMaxPasses_mut(PxScene* self_, uint ccdMaxPasses);
+        internal static extern void PxScene_setCCDMaxPasses_mut(PxScene* self_, uint ccdMaxPasses);
 
         /// <summary>
         ///  Gets the maximum number of CCD passes.
@@ -10709,7 +10709,7 @@ namespace Physx
         ///  The maximum number of CCD passes.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getCCDMaxPasses", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getCCDMaxPasses(PxScene* self_);
+        internal static extern uint PxScene_getCCDMaxPasses(PxScene* self_);
 
         /// <summary>
         ///  Set the maximum CCD separation.
@@ -10717,7 +10717,7 @@ namespace Physx
         ///  Do not use this method while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setCCDMaxSeparation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setCCDMaxSeparation_mut(PxScene* self_, float t);
+        internal static extern void PxScene_setCCDMaxSeparation_mut(PxScene* self_, float t);
 
         /// <summary>
         ///  Gets the maximum CCD separation.
@@ -10725,7 +10725,7 @@ namespace Physx
         ///  The maximum CCD separation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getCCDMaxSeparation", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxScene_getCCDMaxSeparation(PxScene* self_);
+        internal static extern float PxScene_getCCDMaxSeparation(PxScene* self_);
 
         /// <summary>
         ///  Set the CCD threshold.
@@ -10733,7 +10733,7 @@ namespace Physx
         ///  Do not use this method while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setCCDThreshold_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setCCDThreshold_mut(PxScene* self_, float t);
+        internal static extern void PxScene_setCCDThreshold_mut(PxScene* self_, float t);
 
         /// <summary>
         ///  Gets the CCD threshold.
@@ -10741,7 +10741,7 @@ namespace Physx
         ///  The CCD threshold.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getCCDThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxScene_getCCDThreshold(PxScene* self_);
+        internal static extern float PxScene_getCCDThreshold(PxScene* self_);
 
         /// <summary>
         ///  Set the max bias coefficient.
@@ -10749,7 +10749,7 @@ namespace Physx
         ///  Do not use this method while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setMaxBiasCoefficient_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setMaxBiasCoefficient_mut(PxScene* self_, float t);
+        internal static extern void PxScene_setMaxBiasCoefficient_mut(PxScene* self_, float t);
 
         /// <summary>
         ///  Gets the max bias coefficient.
@@ -10757,7 +10757,7 @@ namespace Physx
         ///  The max bias coefficient.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getMaxBiasCoefficient", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxScene_getMaxBiasCoefficient(PxScene* self_);
+        internal static extern float PxScene_getMaxBiasCoefficient(PxScene* self_);
 
         /// <summary>
         ///  Set the friction offset threshold.
@@ -10765,13 +10765,13 @@ namespace Physx
         ///  Do not use this method while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setFrictionOffsetThreshold_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setFrictionOffsetThreshold_mut(PxScene* self_, float t);
+        internal static extern void PxScene_setFrictionOffsetThreshold_mut(PxScene* self_, float t);
 
         /// <summary>
         ///  Gets the friction offset threshold.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getFrictionOffsetThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxScene_getFrictionOffsetThreshold(PxScene* self_);
+        internal static extern float PxScene_getFrictionOffsetThreshold(PxScene* self_);
 
         /// <summary>
         ///  Set the friction correlation distance.
@@ -10779,25 +10779,25 @@ namespace Physx
         ///  Do not use this method while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setFrictionCorrelationDistance_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setFrictionCorrelationDistance_mut(PxScene* self_, float t);
+        internal static extern void PxScene_setFrictionCorrelationDistance_mut(PxScene* self_, float t);
 
         /// <summary>
         ///  Gets the friction correlation distance.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getFrictionCorrelationDistance", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxScene_getFrictionCorrelationDistance(PxScene* self_);
+        internal static extern float PxScene_getFrictionCorrelationDistance(PxScene* self_);
 
         /// <summary>
         ///  Return the friction model.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getFrictionType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFrictionType PxScene_getFrictionType(PxScene* self_);
+        internal static extern PxFrictionType PxScene_getFrictionType(PxScene* self_);
 
         /// <summary>
         ///  Return the solver model.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getSolverType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSolverType PxScene_getSolverType(PxScene* self_);
+        internal static extern PxSolverType PxScene_getSolverType(PxScene* self_);
 
         /// <summary>
         ///  Function that lets you set debug visualization parameters.
@@ -10810,7 +10810,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setVisualizationParameter_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_setVisualizationParameter_mut(PxScene* self_, PxVisualizationParameter param, float value);
+        internal static extern bool PxScene_setVisualizationParameter_mut(PxScene* self_, PxVisualizationParameter param, float value);
 
         /// <summary>
         ///  Function that lets you query debug visualization parameters.
@@ -10818,7 +10818,7 @@ namespace Physx
         ///  The value of the parameter.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getVisualizationParameter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxScene_getVisualizationParameter(PxScene* self_, PxVisualizationParameter paramEnum);
+        internal static extern float PxScene_getVisualizationParameter(PxScene* self_, PxVisualizationParameter paramEnum);
 
         /// <summary>
         ///  Defines a box in world space to which visualization geometry will be (conservatively) culled. Use a non-empty culling box to enable the feature, and an empty culling box to disable it.
@@ -10826,7 +10826,7 @@ namespace Physx
         ///  Do not use this method while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setVisualizationCullingBox_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setVisualizationCullingBox_mut(PxScene* self_, PxBounds3* box_);
+        internal static extern void PxScene_setVisualizationCullingBox_mut(PxScene* self_, PxBounds3* box_);
 
         /// <summary>
         ///  Retrieves the visualization culling box.
@@ -10834,7 +10834,7 @@ namespace Physx
         ///  the box to which the geometry will be culled.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getVisualizationCullingBox", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxScene_getVisualizationCullingBox(PxScene* self_);
+        internal static extern PxBounds3 PxScene_getVisualizationCullingBox(PxScene* self_);
 
         /// <summary>
         ///  Retrieves the render buffer.
@@ -10846,7 +10846,7 @@ namespace Physx
         ///  The render buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getRenderBuffer_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRenderBuffer* PxScene_getRenderBuffer_mut(PxScene* self_);
+        internal static extern PxRenderBuffer* PxScene_getRenderBuffer_mut(PxScene* self_);
 
         /// <summary>
         ///  Call this method to retrieve statistics for the current simulation step.
@@ -10854,7 +10854,7 @@ namespace Physx
         ///  Do not use this method while the simulation is running. Calls to this method while the simulation is running will be ignored.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getSimulationStatistics", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_getSimulationStatistics(PxScene* self_, PxSimulationStatistics* stats);
+        internal static extern void PxScene_getSimulationStatistics(PxScene* self_, PxSimulationStatistics* stats);
 
         /// <summary>
         ///  Returns broad-phase type.
@@ -10862,7 +10862,7 @@ namespace Physx
         ///  Broad-phase type
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getBroadPhaseType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBroadPhaseType PxScene_getBroadPhaseType(PxScene* self_);
+        internal static extern PxBroadPhaseType PxScene_getBroadPhaseType(PxScene* self_);
 
         /// <summary>
         ///  Gets broad-phase caps.
@@ -10871,7 +10871,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getBroadPhaseCaps", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_getBroadPhaseCaps(PxScene* self_, PxBroadPhaseCaps* caps);
+        internal static extern bool PxScene_getBroadPhaseCaps(PxScene* self_, PxBroadPhaseCaps* caps);
 
         /// <summary>
         ///  Returns number of regions currently registered in the broad-phase.
@@ -10879,7 +10879,7 @@ namespace Physx
         ///  Number of regions
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getNbBroadPhaseRegions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getNbBroadPhaseRegions(PxScene* self_);
+        internal static extern uint PxScene_getNbBroadPhaseRegions(PxScene* self_);
 
         /// <summary>
         ///  Gets broad-phase regions.
@@ -10887,7 +10887,7 @@ namespace Physx
         ///  Number of written out regions
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getBroadPhaseRegions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getBroadPhaseRegions(PxScene* self_, PxBroadPhaseRegionInfo* userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxScene_getBroadPhaseRegions(PxScene* self_, PxBroadPhaseRegionInfo* userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Adds a new broad-phase region.
@@ -10916,7 +10916,7 @@ namespace Physx
         ///  Handle for newly created region, or 0xffffffff in case of failure.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_addBroadPhaseRegion_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_addBroadPhaseRegion_mut(PxScene* self_, PxBroadPhaseRegion* region, [MarshalAs(UnmanagedType.U1)] bool populateRegion);
+        internal static extern uint PxScene_addBroadPhaseRegion_mut(PxScene* self_, PxBroadPhaseRegion* region, [MarshalAs(UnmanagedType.U1)] bool populateRegion);
 
         /// <summary>
         ///  Removes a new broad-phase region.
@@ -10932,7 +10932,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_removeBroadPhaseRegion_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxScene_removeBroadPhaseRegion_mut(PxScene* self_, uint handle);
+        internal static extern bool PxScene_removeBroadPhaseRegion_mut(PxScene* self_, uint handle);
 
         /// <summary>
         ///  Get the task manager associated with this scene
@@ -10940,7 +10940,7 @@ namespace Physx
         ///  the task manager associated with the scene
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getTaskManager", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTaskManager* PxScene_getTaskManager(PxScene* self_);
+        internal static extern PxTaskManager* PxScene_getTaskManager(PxScene* self_);
 
         /// <summary>
         ///  Lock the scene for reading from the calling thread.
@@ -10958,7 +10958,7 @@ namespace Physx
         ///  Recursive locking is supported but each lockRead() call must be paired with an unlockRead().
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_lockRead_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_lockRead_mut(PxScene* self_, byte* file, uint line);
+        internal static extern void PxScene_lockRead_mut(PxScene* self_, byte* file, uint line);
 
         /// <summary>
         ///  Unlock the scene from reading.
@@ -10966,7 +10966,7 @@ namespace Physx
         ///  Each unlockRead() must be paired with a lockRead() from the same thread.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_unlockRead_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_unlockRead_mut(PxScene* self_);
+        internal static extern void PxScene_unlockRead_mut(PxScene* self_);
 
         /// <summary>
         ///  Lock the scene for writing from this thread.
@@ -10991,7 +10991,7 @@ namespace Physx
         ///  lockRead().
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_lockWrite_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_lockWrite_mut(PxScene* self_, byte* file, uint line);
+        internal static extern void PxScene_lockWrite_mut(PxScene* self_, byte* file, uint line);
 
         /// <summary>
         ///  Unlock the scene from writing.
@@ -10999,7 +10999,7 @@ namespace Physx
         ///  Each unlockWrite() must be paired with a lockWrite() from the same thread.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_unlockWrite_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_unlockWrite_mut(PxScene* self_);
+        internal static extern void PxScene_unlockWrite_mut(PxScene* self_);
 
         /// <summary>
         ///  set the cache blocks that can be used during simulate().
@@ -11013,7 +11013,7 @@ namespace Physx
         ///  Do not use this method while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setNbContactDataBlocks_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setNbContactDataBlocks_mut(PxScene* self_, uint numBlocks);
+        internal static extern void PxScene_setNbContactDataBlocks_mut(PxScene* self_, uint numBlocks);
 
         /// <summary>
         ///  get the number of cache blocks currently used by the scene
@@ -11023,7 +11023,7 @@ namespace Physx
         ///  the number of cache blocks currently used by the scene
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getNbContactDataBlocksUsed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getNbContactDataBlocksUsed(PxScene* self_);
+        internal static extern uint PxScene_getNbContactDataBlocksUsed(PxScene* self_);
 
         /// <summary>
         ///  get the maximum number of cache blocks used by the scene
@@ -11033,13 +11033,13 @@ namespace Physx
         ///  the maximum number of cache blocks everused by the scene
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getMaxNbContactDataBlocksUsed", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getMaxNbContactDataBlocksUsed(PxScene* self_);
+        internal static extern uint PxScene_getMaxNbContactDataBlocksUsed(PxScene* self_);
 
         /// <summary>
         ///  Return the value of PxSceneDesc::contactReportStreamBufferSize that was set when creating the scene with PxPhysics::createScene
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getContactReportStreamBufferSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getContactReportStreamBufferSize(PxScene* self_);
+        internal static extern uint PxScene_getContactReportStreamBufferSize(PxScene* self_);
 
         /// <summary>
         ///  Sets the number of actors required to spawn a separate rigid body solver thread.
@@ -11047,7 +11047,7 @@ namespace Physx
         ///  Do not use this method while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setSolverBatchSize_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setSolverBatchSize_mut(PxScene* self_, uint solverBatchSize);
+        internal static extern void PxScene_setSolverBatchSize_mut(PxScene* self_, uint solverBatchSize);
 
         /// <summary>
         ///  Retrieves the number of actors required to spawn a separate rigid body solver thread.
@@ -11055,7 +11055,7 @@ namespace Physx
         ///  Current number of actors required to spawn a separate rigid body solver thread.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getSolverBatchSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getSolverBatchSize(PxScene* self_);
+        internal static extern uint PxScene_getSolverBatchSize(PxScene* self_);
 
         /// <summary>
         ///  Sets the number of articulations required to spawn a separate rigid body solver thread.
@@ -11063,7 +11063,7 @@ namespace Physx
         ///  Do not use this method while the simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_setSolverArticulationBatchSize_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_setSolverArticulationBatchSize_mut(PxScene* self_, uint solverBatchSize);
+        internal static extern void PxScene_setSolverArticulationBatchSize_mut(PxScene* self_, uint solverBatchSize);
 
         /// <summary>
         ///  Retrieves the number of articulations required to spawn a separate rigid body solver thread.
@@ -11071,7 +11071,7 @@ namespace Physx
         ///  Current number of articulations required to spawn a separate rigid body solver thread.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getSolverArticulationBatchSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxScene_getSolverArticulationBatchSize(PxScene* self_);
+        internal static extern uint PxScene_getSolverArticulationBatchSize(PxScene* self_);
 
         /// <summary>
         ///  Returns the wake counter reset value.
@@ -11079,7 +11079,7 @@ namespace Physx
         ///  Wake counter reset value
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getWakeCounterResetValue", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxScene_getWakeCounterResetValue(PxScene* self_);
+        internal static extern float PxScene_getWakeCounterResetValue(PxScene* self_);
 
         /// <summary>
         ///  Shift the scene origin by the specified vector.
@@ -11096,7 +11096,7 @@ namespace Physx
         ///  This is an expensive operation and we recommend to use it only in the case where distance related precision issues may arise in areas far from the origin.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_shiftOrigin_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_shiftOrigin_mut(PxScene* self_, PxVec3* shift);
+        internal static extern void PxScene_shiftOrigin_mut(PxScene* self_, PxVec3* shift);
 
         /// <summary>
         ///  Returns the Pvd client associated with the scene.
@@ -11104,31 +11104,31 @@ namespace Physx
         ///  the client, NULL if no PVD supported.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_getScenePvdClient_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPvdSceneClient* PxScene_getScenePvdClient_mut(PxScene* self_);
+        internal static extern PxPvdSceneClient* PxScene_getScenePvdClient_mut(PxScene* self_);
 
         /// <summary>
         ///  Copy GPU articulation data from the internal GPU buffer to a user-provided device buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_copyArticulationData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_copyArticulationData_mut(PxScene* self_, void* data, void* index, PxArticulationGpuDataType dataType, uint nbCopyArticulations, void* copyEvent);
+        internal static extern void PxScene_copyArticulationData_mut(PxScene* self_, void* data, void* index, PxArticulationGpuDataType dataType, uint nbCopyArticulations, void* copyEvent);
 
         /// <summary>
         ///  Apply GPU articulation data from a user-provided device buffer to the internal GPU buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_applyArticulationData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_applyArticulationData_mut(PxScene* self_, void* data, void* index, PxArticulationGpuDataType dataType, uint nbUpdatedArticulations, void* waitEvent, void* signalEvent);
+        internal static extern void PxScene_applyArticulationData_mut(PxScene* self_, void* data, void* index, PxArticulationGpuDataType dataType, uint nbUpdatedArticulations, void* waitEvent, void* signalEvent);
 
         /// <summary>
         ///  Copy GPU softbody data from the internal GPU buffer to a user-provided device buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_copySoftBodyData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_copySoftBodyData_mut(PxScene* self_, void** data, void* dataSizes, void* softBodyIndices, PxSoftBodyDataFlag flag, uint nbCopySoftBodies, uint maxSize, void* copyEvent);
+        internal static extern void PxScene_copySoftBodyData_mut(PxScene* self_, void** data, void* dataSizes, void* softBodyIndices, PxSoftBodyDataFlag flag, uint nbCopySoftBodies, uint maxSize, void* copyEvent);
 
         /// <summary>
         ///  Apply user-provided data to the internal softbody system.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_applySoftBodyData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_applySoftBodyData_mut(PxScene* self_, void** data, void* dataSizes, void* softBodyIndices, PxSoftBodyDataFlag flag, uint nbUpdatedSoftBodies, uint maxSize, void* applyEvent);
+        internal static extern void PxScene_applySoftBodyData_mut(PxScene* self_, void** data, void* dataSizes, void* softBodyIndices, PxSoftBodyDataFlag flag, uint nbUpdatedSoftBodies, uint maxSize, void* applyEvent);
 
         /// <summary>
         ///  Copy contact data from the internal GPU buffer to a user-provided device buffer.
@@ -11136,19 +11136,19 @@ namespace Physx
         ///  The contact data contains pointers to internal state and is only valid until the next call to simulate().
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_copyContactData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_copyContactData_mut(PxScene* self_, void* data, uint maxContactPairs, void* numContactPairs, void* copyEvent);
+        internal static extern void PxScene_copyContactData_mut(PxScene* self_, void* data, uint maxContactPairs, void* numContactPairs, void* copyEvent);
 
         /// <summary>
         ///  Copy GPU rigid body data from the internal GPU buffer to a user-provided device buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_copyBodyData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_copyBodyData_mut(PxScene* self_, PxGpuBodyData* data, PxGpuActorPair* index, uint nbCopyActors, void* copyEvent);
+        internal static extern void PxScene_copyBodyData_mut(PxScene* self_, PxGpuBodyData* data, PxGpuActorPair* index, uint nbCopyActors, void* copyEvent);
 
         /// <summary>
         ///  Apply user-provided data to rigid body.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_applyActorData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_applyActorData_mut(PxScene* self_, void* data, PxGpuActorPair* index, PxActorCacheFlag flag, uint nbUpdatedActors, void* waitEvent, void* signalEvent);
+        internal static extern void PxScene_applyActorData_mut(PxScene* self_, void* data, PxGpuActorPair* index, PxActorCacheFlag flag, uint nbUpdatedActors, void* waitEvent, void* signalEvent);
 
         /// <summary>
         ///  Compute dense Jacobian matrices for specified articulations on the GPU.
@@ -11162,7 +11162,7 @@ namespace Physx
         ///  The user must ensure that adequate space is provided for each Jacobian matrix.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_computeDenseJacobians_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_computeDenseJacobians_mut(PxScene* self_, PxIndexDataPair* indices, uint nbIndices, void* computeEvent);
+        internal static extern void PxScene_computeDenseJacobians_mut(PxScene* self_, PxIndexDataPair* indices, uint nbIndices, void* computeEvent);
 
         /// <summary>
         ///  Compute the joint-space inertia matrices that maps joint accelerations to joint forces: forces = M * accelerations on the GPU.
@@ -11175,7 +11175,7 @@ namespace Physx
         ///  The user must ensure that adequate space is provided for each mass matrix.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_computeGeneralizedMassMatrices_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_computeGeneralizedMassMatrices_mut(PxScene* self_, PxIndexDataPair* indices, uint nbIndices, void* computeEvent);
+        internal static extern void PxScene_computeGeneralizedMassMatrices_mut(PxScene* self_, PxIndexDataPair* indices, uint nbIndices, void* computeEvent);
 
         /// <summary>
         ///  Computes the joint DOF forces required to counteract gravitational forces for the given articulation pose.
@@ -11188,7 +11188,7 @@ namespace Physx
         ///  The user must ensure that adequate space is provided for each articulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_computeGeneralizedGravityForces_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_computeGeneralizedGravityForces_mut(PxScene* self_, PxIndexDataPair* indices, uint nbIndices, void* computeEvent);
+        internal static extern void PxScene_computeGeneralizedGravityForces_mut(PxScene* self_, PxIndexDataPair* indices, uint nbIndices, void* computeEvent);
 
         /// <summary>
         ///  Computes the joint DOF forces required to counteract coriolis and centrifugal forces for the given articulation pose.
@@ -11201,10 +11201,10 @@ namespace Physx
         ///  The user must ensure that adequate space is provided for each articulation.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_computeCoriolisAndCentrifugalForces_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_computeCoriolisAndCentrifugalForces_mut(PxScene* self_, PxIndexDataPair* indices, uint nbIndices, void* computeEvent);
+        internal static extern void PxScene_computeCoriolisAndCentrifugalForces_mut(PxScene* self_, PxIndexDataPair* indices, uint nbIndices, void* computeEvent);
 
         [DllImport(__DllName, EntryPoint = "PxScene_getGpuDynamicsConfig", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxgDynamicsMemoryConfig PxScene_getGpuDynamicsConfig(PxScene* self_);
+        internal static extern PxgDynamicsMemoryConfig PxScene_getGpuDynamicsConfig(PxScene* self_);
 
         /// <summary>
         ///  Apply user-provided data to particle buffers.
@@ -11215,43 +11215,43 @@ namespace Physx
         ///  This assumes the data has been changed directly in the PxParticleBuffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxScene_applyParticleBufferData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxScene_applyParticleBufferData_mut(PxScene* self_, uint* indices, PxGpuParticleBufferIndexPair* bufferIndexPair, PxParticleBufferFlags* flags, uint nbUpdatedBuffers, void* waitEvent, void* signalEvent);
+        internal static extern void PxScene_applyParticleBufferData_mut(PxScene* self_, uint* indices, PxGpuParticleBufferIndexPair* bufferIndexPair, PxParticleBufferFlags* flags, uint nbUpdatedBuffers, void* waitEvent, void* signalEvent);
 
         /// <summary>
         ///  Constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneReadLock_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSceneReadLock* PxSceneReadLock_new_alloc(PxScene* scene, byte* file, uint line);
+        internal static extern PxSceneReadLock* PxSceneReadLock_new_alloc(PxScene* scene, byte* file, uint line);
 
         [DllImport(__DllName, EntryPoint = "PxSceneReadLock_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneReadLock_delete(PxSceneReadLock* self_);
+        internal static extern void PxSceneReadLock_delete(PxSceneReadLock* self_);
 
         /// <summary>
         ///  Constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneWriteLock_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSceneWriteLock* PxSceneWriteLock_new_alloc(PxScene* scene, byte* file, uint line);
+        internal static extern PxSceneWriteLock* PxSceneWriteLock_new_alloc(PxScene* scene, byte* file, uint line);
 
         [DllImport(__DllName, EntryPoint = "PxSceneWriteLock_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSceneWriteLock_delete(PxSceneWriteLock* self_);
+        internal static extern void PxSceneWriteLock_delete(PxSceneWriteLock* self_);
 
         [DllImport(__DllName, EntryPoint = "PxContactPairExtraDataItem_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxContactPairExtraDataItem PxContactPairExtraDataItem_new();
+        internal static extern PxContactPairExtraDataItem PxContactPairExtraDataItem_new();
 
         [DllImport(__DllName, EntryPoint = "PxContactPairVelocity_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxContactPairVelocity PxContactPairVelocity_new();
+        internal static extern PxContactPairVelocity PxContactPairVelocity_new();
 
         [DllImport(__DllName, EntryPoint = "PxContactPairPose_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxContactPairPose PxContactPairPose_new();
+        internal static extern PxContactPairPose PxContactPairPose_new();
 
         [DllImport(__DllName, EntryPoint = "PxContactPairIndex_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxContactPairIndex PxContactPairIndex_new();
+        internal static extern PxContactPairIndex PxContactPairIndex_new();
 
         /// <summary>
         ///  Constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactPairExtraDataIterator_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxContactPairExtraDataIterator PxContactPairExtraDataIterator_new(byte* stream, uint size);
+        internal static extern PxContactPairExtraDataIterator PxContactPairExtraDataIterator_new(byte* stream, uint size);
 
         /// <summary>
         ///  Advances the iterator to next set of extra data items.
@@ -11271,13 +11271,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactPairExtraDataIterator_nextItemSet_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxContactPairExtraDataIterator_nextItemSet_mut(PxContactPairExtraDataIterator* self_);
+        internal static extern bool PxContactPairExtraDataIterator_nextItemSet_mut(PxContactPairExtraDataIterator* self_);
 
         [DllImport(__DllName, EntryPoint = "PxContactPairHeader_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxContactPairHeader PxContactPairHeader_new();
+        internal static extern PxContactPairHeader PxContactPairHeader_new();
 
         [DllImport(__DllName, EntryPoint = "PxContactPair_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxContactPair PxContactPair_new();
+        internal static extern PxContactPair PxContactPair_new();
 
         /// <summary>
         ///  Extracts the contact points from the stream and stores them in a convenient format.
@@ -11285,7 +11285,7 @@ namespace Physx
         ///  Number of contact points written to the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactPair_extractContacts", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxContactPair_extractContacts(PxContactPair* self_, PxContactPairPoint* userBuffer, uint bufferSize);
+        internal static extern uint PxContactPair_extractContacts(PxContactPair* self_, PxContactPairPoint* userBuffer, uint bufferSize);
 
         /// <summary>
         ///  Helper method to clone the contact pair and copy the contact data stream into a user buffer.
@@ -11294,19 +11294,19 @@ namespace Physx
         ///  to buffer the contact stream information such that it can get accessed at a later stage.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactPair_bufferContacts", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactPair_bufferContacts(PxContactPair* self_, PxContactPair* newPair, byte* bufferMemory);
+        internal static extern void PxContactPair_bufferContacts(PxContactPair* self_, PxContactPair* newPair, byte* bufferMemory);
 
         [DllImport(__DllName, EntryPoint = "PxContactPair_getInternalFaceIndices", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint* PxContactPair_getInternalFaceIndices(PxContactPair* self_);
+        internal static extern uint* PxContactPair_getInternalFaceIndices(PxContactPair* self_);
 
         [DllImport(__DllName, EntryPoint = "PxTriggerPair_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTriggerPair PxTriggerPair_new();
+        internal static extern PxTriggerPair PxTriggerPair_new();
 
         [DllImport(__DllName, EntryPoint = "PxConstraintInfo_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConstraintInfo PxConstraintInfo_new();
+        internal static extern PxConstraintInfo PxConstraintInfo_new();
 
         [DllImport(__DllName, EntryPoint = "PxConstraintInfo_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConstraintInfo PxConstraintInfo_new_1(PxConstraint* c, void* extRef, uint t);
+        internal static extern PxConstraintInfo PxConstraintInfo_new_1(PxConstraint* c, void* extRef, uint t);
 
         /// <summary>
         ///  This is called when a breakable constraint breaks.
@@ -11316,7 +11316,7 @@ namespace Physx
         ///  No event will get reported if the constraint breaks but gets deleted while the time step is still being simulated.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimulationEventCallback_onConstraintBreak_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSimulationEventCallback_onConstraintBreak_mut(PxSimulationEventCallback* self_, PxConstraintInfo* constraints, uint count);
+        internal static extern void PxSimulationEventCallback_onConstraintBreak_mut(PxSimulationEventCallback* self_, PxConstraintInfo* constraints, uint count);
 
         /// <summary>
         ///  This is called with the actors which have just been woken up.
@@ -11333,7 +11333,7 @@ namespace Physx
         ///  the user or simulation, then an onWake() event will get sent at the next simulate/fetchResults() step.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimulationEventCallback_onWake_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSimulationEventCallback_onWake_mut(PxSimulationEventCallback* self_, PxActor** actors, uint count);
+        internal static extern void PxSimulationEventCallback_onWake_mut(PxSimulationEventCallback* self_, PxActor** actors, uint count);
 
         /// <summary>
         ///  This is called with the actors which have just been put to sleep.
@@ -11351,7 +11351,7 @@ namespace Physx
         ///  the user or simulation, then an onSleep() event will get sent at the next simulate/fetchResults() step.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimulationEventCallback_onSleep_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSimulationEventCallback_onSleep_mut(PxSimulationEventCallback* self_, PxActor** actors, uint count);
+        internal static extern void PxSimulationEventCallback_onSleep_mut(PxSimulationEventCallback* self_, PxActor** actors, uint count);
 
         /// <summary>
         ///  This is called when certain contact events occur.
@@ -11364,7 +11364,7 @@ namespace Physx
         ///  invalid after this function returns.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimulationEventCallback_onContact_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSimulationEventCallback_onContact_mut(PxSimulationEventCallback* self_, PxContactPairHeader* pairHeader, PxContactPair* pairs, uint nbPairs);
+        internal static extern void PxSimulationEventCallback_onContact_mut(PxSimulationEventCallback* self_, PxContactPairHeader* pairHeader, PxContactPair* pairs, uint nbPairs);
 
         /// <summary>
         ///  This is called with the current trigger pair events.
@@ -11375,7 +11375,7 @@ namespace Physx
         ///  Trigger shapes will no longer send notification events for interactions with other trigger shapes.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimulationEventCallback_onTrigger_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSimulationEventCallback_onTrigger_mut(PxSimulationEventCallback* self_, PxTriggerPair* pairs, uint count);
+        internal static extern void PxSimulationEventCallback_onTrigger_mut(PxSimulationEventCallback* self_, PxTriggerPair* pairs, uint count);
 
         /// <summary>
         ///  Provides early access to the new pose of moving rigid bodies.
@@ -11393,19 +11393,19 @@ namespace Physx
         ///  [`PxScene::fetchResults`]() call.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSimulationEventCallback_onAdvance_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSimulationEventCallback_onAdvance_mut(PxSimulationEventCallback* self_, PxRigidBody** bodyBuffer, PxTransform* poseBuffer, uint count);
+        internal static extern void PxSimulationEventCallback_onAdvance_mut(PxSimulationEventCallback* self_, PxRigidBody** bodyBuffer, PxTransform* poseBuffer, uint count);
 
         [DllImport(__DllName, EntryPoint = "PxSimulationEventCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSimulationEventCallback_delete(PxSimulationEventCallback* self_);
+        internal static extern void PxSimulationEventCallback_delete(PxSimulationEventCallback* self_);
 
         [DllImport(__DllName, EntryPoint = "PxFEMParameters_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFEMParameters PxFEMParameters_new();
+        internal static extern PxFEMParameters PxFEMParameters_new();
 
         /// <summary>
         ///  Release this object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPruningStructure_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPruningStructure_release_mut(PxPruningStructure* self_);
+        internal static extern void PxPruningStructure_release_mut(PxPruningStructure* self_);
 
         /// <summary>
         ///  Retrieve rigid actors in the pruning structure.
@@ -11415,7 +11415,7 @@ namespace Physx
         ///  Number of rigid actor pointers written to the buffer.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPruningStructure_getRigidActors", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPruningStructure_getRigidActors(PxPruningStructure* self_, PxRigidActor** userBuffer, uint bufferSize, uint startIndex);
+        internal static extern uint PxPruningStructure_getRigidActors(PxPruningStructure* self_, PxRigidActor** userBuffer, uint bufferSize, uint startIndex);
 
         /// <summary>
         ///  Returns the number of rigid actors in the pruning structure.
@@ -11425,7 +11425,7 @@ namespace Physx
         ///  Number of rigid actors in the pruning structure.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPruningStructure_getNbRigidActors", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxPruningStructure_getNbRigidActors(PxPruningStructure* self_);
+        internal static extern uint PxPruningStructure_getNbRigidActors(PxPruningStructure* self_);
 
         /// <summary>
         ///  Gets the merge data for static actors
@@ -11436,7 +11436,7 @@ namespace Physx
         ///  Implementation-dependent merge data for static actors.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPruningStructure_getStaticMergeData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxPruningStructure_getStaticMergeData(PxPruningStructure* self_);
+        internal static extern void* PxPruningStructure_getStaticMergeData(PxPruningStructure* self_);
 
         /// <summary>
         ///  Gets the merge data for dynamic actors
@@ -11447,84 +11447,84 @@ namespace Physx
         ///  Implementation-dependent merge data for dynamic actors.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPruningStructure_getDynamicMergeData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxPruningStructure_getDynamicMergeData(PxPruningStructure* self_);
+        internal static extern void* PxPruningStructure_getDynamicMergeData(PxPruningStructure* self_);
 
         [DllImport(__DllName, EntryPoint = "PxPruningStructure_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxPruningStructure_getConcreteTypeName(PxPruningStructure* self_);
+        internal static extern byte* PxPruningStructure_getConcreteTypeName(PxPruningStructure* self_);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxExtendedVec3 PxExtendedVec3_new();
+        internal static extern PxExtendedVec3 PxExtendedVec3_new();
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxExtendedVec3 PxExtendedVec3_new_1(double _x, double _y, double _z);
+        internal static extern PxExtendedVec3 PxExtendedVec3_new_1(double _x, double _y, double _z);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_isZero", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxExtendedVec3_isZero(PxExtendedVec3* self_);
+        internal static extern bool PxExtendedVec3_isZero(PxExtendedVec3* self_);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_dot", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double PxExtendedVec3_dot(PxExtendedVec3* self_, PxVec3* v);
+        internal static extern double PxExtendedVec3_dot(PxExtendedVec3* self_, PxVec3* v);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_distanceSquared", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double PxExtendedVec3_distanceSquared(PxExtendedVec3* self_, PxExtendedVec3* v);
+        internal static extern double PxExtendedVec3_distanceSquared(PxExtendedVec3* self_, PxExtendedVec3* v);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_magnitudeSquared", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double PxExtendedVec3_magnitudeSquared(PxExtendedVec3* self_);
+        internal static extern double PxExtendedVec3_magnitudeSquared(PxExtendedVec3* self_);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_magnitude", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double PxExtendedVec3_magnitude(PxExtendedVec3* self_);
+        internal static extern double PxExtendedVec3_magnitude(PxExtendedVec3* self_);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_normalize_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern double PxExtendedVec3_normalize_mut(PxExtendedVec3* self_);
+        internal static extern double PxExtendedVec3_normalize_mut(PxExtendedVec3* self_);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_isFinite", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxExtendedVec3_isFinite(PxExtendedVec3* self_);
+        internal static extern bool PxExtendedVec3_isFinite(PxExtendedVec3* self_);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_maximum_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxExtendedVec3_maximum_mut(PxExtendedVec3* self_, PxExtendedVec3* v);
+        internal static extern void PxExtendedVec3_maximum_mut(PxExtendedVec3* self_, PxExtendedVec3* v);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_minimum_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxExtendedVec3_minimum_mut(PxExtendedVec3* self_, PxExtendedVec3* v);
+        internal static extern void PxExtendedVec3_minimum_mut(PxExtendedVec3* self_, PxExtendedVec3* v);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_set_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxExtendedVec3_set_mut(PxExtendedVec3* self_, double x_, double y_, double z_);
+        internal static extern void PxExtendedVec3_set_mut(PxExtendedVec3* self_, double x_, double y_, double z_);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_setPlusInfinity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxExtendedVec3_setPlusInfinity_mut(PxExtendedVec3* self_);
+        internal static extern void PxExtendedVec3_setPlusInfinity_mut(PxExtendedVec3* self_);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_setMinusInfinity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxExtendedVec3_setMinusInfinity_mut(PxExtendedVec3* self_);
+        internal static extern void PxExtendedVec3_setMinusInfinity_mut(PxExtendedVec3* self_);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_cross_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxExtendedVec3_cross_mut(PxExtendedVec3* self_, PxExtendedVec3* left, PxVec3* right);
+        internal static extern void PxExtendedVec3_cross_mut(PxExtendedVec3* self_, PxExtendedVec3* left, PxVec3* right);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_cross_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxExtendedVec3_cross_mut_1(PxExtendedVec3* self_, PxExtendedVec3* left, PxExtendedVec3* right);
+        internal static extern void PxExtendedVec3_cross_mut_1(PxExtendedVec3* self_, PxExtendedVec3* left, PxExtendedVec3* right);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_cross", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxExtendedVec3 PxExtendedVec3_cross(PxExtendedVec3* self_, PxExtendedVec3* v);
+        internal static extern PxExtendedVec3 PxExtendedVec3_cross(PxExtendedVec3* self_, PxExtendedVec3* v);
 
         [DllImport(__DllName, EntryPoint = "PxExtendedVec3_cross_mut_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxExtendedVec3_cross_mut_2(PxExtendedVec3* self_, PxVec3* left, PxExtendedVec3* right);
+        internal static extern void PxExtendedVec3_cross_mut_2(PxExtendedVec3* self_, PxVec3* left, PxExtendedVec3* right);
 
         [DllImport(__DllName, EntryPoint = "phys_toVec3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 phys_toVec3(PxExtendedVec3* v);
+        internal static extern PxVec3 phys_toVec3(PxExtendedVec3* v);
 
         [DllImport(__DllName, EntryPoint = "PxObstacle_getType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGeometryType PxObstacle_getType(PxObstacle* self_);
+        internal static extern PxGeometryType PxObstacle_getType(PxObstacle* self_);
 
         [DllImport(__DllName, EntryPoint = "PxBoxObstacle_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBoxObstacle PxBoxObstacle_new();
+        internal static extern PxBoxObstacle PxBoxObstacle_new();
 
         [DllImport(__DllName, EntryPoint = "PxCapsuleObstacle_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCapsuleObstacle PxCapsuleObstacle_new();
+        internal static extern PxCapsuleObstacle PxCapsuleObstacle_new();
 
         /// <summary>
         ///  Releases the context.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxObstacleContext_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxObstacleContext_release_mut(PxObstacleContext* self_);
+        internal static extern void PxObstacleContext_release_mut(PxObstacleContext* self_);
 
         /// <summary>
         ///  Retrieves the controller manager associated with this context.
@@ -11532,7 +11532,7 @@ namespace Physx
         ///  The associated controller manager
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxObstacleContext_getControllerManager", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxControllerManager* PxObstacleContext_getControllerManager(PxObstacleContext* self_);
+        internal static extern PxControllerManager* PxObstacleContext_getControllerManager(PxObstacleContext* self_);
 
         /// <summary>
         ///  Adds an obstacle to the context.
@@ -11540,7 +11540,7 @@ namespace Physx
         ///  Handle for newly-added obstacle
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxObstacleContext_addObstacle_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxObstacleContext_addObstacle_mut(PxObstacleContext* self_, PxObstacle* obstacle);
+        internal static extern uint PxObstacleContext_addObstacle_mut(PxObstacleContext* self_, PxObstacle* obstacle);
 
         /// <summary>
         ///  Removes an obstacle from the context.
@@ -11549,7 +11549,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxObstacleContext_removeObstacle_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxObstacleContext_removeObstacle_mut(PxObstacleContext* self_, uint handle);
+        internal static extern bool PxObstacleContext_removeObstacle_mut(PxObstacleContext* self_, uint handle);
 
         /// <summary>
         ///  Updates data for an existing obstacle.
@@ -11558,7 +11558,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxObstacleContext_updateObstacle_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxObstacleContext_updateObstacle_mut(PxObstacleContext* self_, uint handle, PxObstacle* obstacle);
+        internal static extern bool PxObstacleContext_updateObstacle_mut(PxObstacleContext* self_, uint handle, PxObstacle* obstacle);
 
         /// <summary>
         ///  Retrieves number of obstacles in the context.
@@ -11566,7 +11566,7 @@ namespace Physx
         ///  Number of obstacles in the context
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxObstacleContext_getNbObstacles", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxObstacleContext_getNbObstacles(PxObstacleContext* self_);
+        internal static extern uint PxObstacleContext_getNbObstacles(PxObstacleContext* self_);
 
         /// <summary>
         ///  Retrieves desired obstacle.
@@ -11574,7 +11574,7 @@ namespace Physx
         ///  Desired obstacle
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxObstacleContext_getObstacle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxObstacle* PxObstacleContext_getObstacle(PxObstacleContext* self_, uint i);
+        internal static extern PxObstacle* PxObstacleContext_getObstacle(PxObstacleContext* self_, uint i);
 
         /// <summary>
         ///  Retrieves desired obstacle by given handle.
@@ -11582,7 +11582,7 @@ namespace Physx
         ///  Desired obstacle
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxObstacleContext_getObstacleByHandle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxObstacle* PxObstacleContext_getObstacleByHandle(PxObstacleContext* self_, uint handle);
+        internal static extern PxObstacle* PxObstacleContext_getObstacleByHandle(PxObstacleContext* self_, uint handle);
 
         /// <summary>
         ///  Called when current controller hits a shape.
@@ -11590,22 +11590,22 @@ namespace Physx
         ///  This is called when the CCT moves and hits a shape. This will not be called when a moving shape hits a non-moving CCT.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxUserControllerHitReport_onShapeHit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxUserControllerHitReport_onShapeHit_mut(PxUserControllerHitReport* self_, PxControllerShapeHit* hit);
+        internal static extern void PxUserControllerHitReport_onShapeHit_mut(PxUserControllerHitReport* self_, PxControllerShapeHit* hit);
 
         /// <summary>
         ///  Called when current controller hits another controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxUserControllerHitReport_onControllerHit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxUserControllerHitReport_onControllerHit_mut(PxUserControllerHitReport* self_, PxControllersHit* hit);
+        internal static extern void PxUserControllerHitReport_onControllerHit_mut(PxUserControllerHitReport* self_, PxControllersHit* hit);
 
         /// <summary>
         ///  Called when current controller hits a user-defined obstacle.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxUserControllerHitReport_onObstacleHit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxUserControllerHitReport_onObstacleHit_mut(PxUserControllerHitReport* self_, PxControllerObstacleHit* hit);
+        internal static extern void PxUserControllerHitReport_onObstacleHit_mut(PxUserControllerHitReport* self_, PxControllerObstacleHit* hit);
 
         [DllImport(__DllName, EntryPoint = "PxControllerFilterCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxControllerFilterCallback_delete(PxControllerFilterCallback* self_);
+        internal static extern void PxControllerFilterCallback_delete(PxControllerFilterCallback* self_);
 
         /// <summary>
         ///  Filtering method for CCT-vs-CCT.
@@ -11614,10 +11614,10 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerFilterCallback_filter_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxControllerFilterCallback_filter_mut(PxControllerFilterCallback* self_, PxController* a, PxController* b);
+        internal static extern bool PxControllerFilterCallback_filter_mut(PxControllerFilterCallback* self_, PxController* a, PxController* b);
 
         [DllImport(__DllName, EntryPoint = "PxControllerFilters_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxControllerFilters PxControllerFilters_new(PxFilterData* filterData, PxQueryFilterCallback* cb, PxControllerFilterCallback* cctFilterCb);
+        internal static extern PxControllerFilters PxControllerFilters_new(PxFilterData* filterData, PxQueryFilterCallback* cb, PxControllerFilterCallback* cctFilterCb);
 
         /// <summary>
         ///  returns true if the current settings are valid
@@ -11626,7 +11626,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxControllerDesc_isValid(PxControllerDesc* self_);
+        internal static extern bool PxControllerDesc_isValid(PxControllerDesc* self_);
 
         /// <summary>
         ///  Returns the character controller type
@@ -11634,19 +11634,19 @@ namespace Physx
         ///  The controllers type.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerDesc_getType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxControllerShapeType PxControllerDesc_getType(PxControllerDesc* self_);
+        internal static extern PxControllerShapeType PxControllerDesc_getType(PxControllerDesc* self_);
 
         /// <summary>
         ///  Return the type of controller
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxControllerShapeType PxController_getType(PxController* self_);
+        internal static extern PxControllerShapeType PxController_getType(PxController* self_);
 
         /// <summary>
         ///  Releases the controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxController_release_mut(PxController* self_);
+        internal static extern void PxController_release_mut(PxController* self_);
 
         /// <summary>
         ///  Moves the character using a "collide-and-slide" algorithm.
@@ -11654,7 +11654,7 @@ namespace Physx
         ///  Collision flags, collection of ::PxControllerCollisionFlags
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_move_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxControllerCollisionFlags PxController_move_mut(PxController* self_, PxVec3* disp, float minDist, float elapsedTime, PxControllerFilters* filters, PxObstacleContext* obstacles);
+        internal static extern PxControllerCollisionFlags PxController_move_mut(PxController* self_, PxVec3* disp, float minDist, float elapsedTime, PxControllerFilters* filters, PxObstacleContext* obstacles);
 
         /// <summary>
         ///  Sets controller's position.
@@ -11671,7 +11671,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_setPosition_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxController_setPosition_mut(PxController* self_, PxExtendedVec3* position);
+        internal static extern bool PxController_setPosition_mut(PxController* self_, PxExtendedVec3* position);
 
         /// <summary>
         ///  Retrieve the raw position of the controller.
@@ -11685,7 +11685,7 @@ namespace Physx
         ///  The controller's center position
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxExtendedVec3* PxController_getPosition(PxController* self_);
+        internal static extern PxExtendedVec3* PxController_getPosition(PxController* self_);
 
         /// <summary>
         ///  Set controller's foot position.
@@ -11702,7 +11702,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_setFootPosition_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxController_setFootPosition_mut(PxController* self_, PxExtendedVec3* position);
+        internal static extern bool PxController_setFootPosition_mut(PxController* self_, PxExtendedVec3* position);
 
         /// <summary>
         ///  Retrieve the "foot" position of the controller, i.e. the position of the bottom of the CCT's shape.
@@ -11712,7 +11712,7 @@ namespace Physx
         ///  The controller's foot position
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getFootPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxExtendedVec3 PxController_getFootPosition(PxController* self_);
+        internal static extern PxExtendedVec3 PxController_getFootPosition(PxController* self_);
 
         /// <summary>
         ///  Get the rigid body actor associated with this controller (see PhysX documentation).
@@ -11722,13 +11722,13 @@ namespace Physx
         ///  the actor associated with the controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getActor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidDynamic* PxController_getActor(PxController* self_);
+        internal static extern PxRigidDynamic* PxController_getActor(PxController* self_);
 
         /// <summary>
         ///  The step height.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_setStepOffset_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxController_setStepOffset_mut(PxController* self_, float offset);
+        internal static extern void PxController_setStepOffset_mut(PxController* self_, float offset);
 
         /// <summary>
         ///  Retrieve the step height.
@@ -11736,13 +11736,13 @@ namespace Physx
         ///  The step offset for the controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getStepOffset", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxController_getStepOffset(PxController* self_);
+        internal static extern float PxController_getStepOffset(PxController* self_);
 
         /// <summary>
         ///  Sets the non-walkable mode for the CCT.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_setNonWalkableMode_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxController_setNonWalkableMode_mut(PxController* self_, PxControllerNonWalkableMode flag);
+        internal static extern void PxController_setNonWalkableMode_mut(PxController* self_, PxControllerNonWalkableMode flag);
 
         /// <summary>
         ///  Retrieves the non-walkable mode for the CCT.
@@ -11750,7 +11750,7 @@ namespace Physx
         ///  The current non-walkable mode.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getNonWalkableMode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxControllerNonWalkableMode PxController_getNonWalkableMode(PxController* self_);
+        internal static extern PxControllerNonWalkableMode PxController_getNonWalkableMode(PxController* self_);
 
         /// <summary>
         ///  Retrieve the contact offset.
@@ -11758,13 +11758,13 @@ namespace Physx
         ///  The contact offset for the controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getContactOffset", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxController_getContactOffset(PxController* self_);
+        internal static extern float PxController_getContactOffset(PxController* self_);
 
         /// <summary>
         ///  Sets the contact offset.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_setContactOffset_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxController_setContactOffset_mut(PxController* self_, float offset);
+        internal static extern void PxController_setContactOffset_mut(PxController* self_, float offset);
 
         /// <summary>
         ///  Retrieve the 'up' direction.
@@ -11772,13 +11772,13 @@ namespace Physx
         ///  The up direction for the controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getUpDirection", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxController_getUpDirection(PxController* self_);
+        internal static extern PxVec3 PxController_getUpDirection(PxController* self_);
 
         /// <summary>
         ///  Sets the 'up' direction.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_setUpDirection_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxController_setUpDirection_mut(PxController* self_, PxVec3* up);
+        internal static extern void PxController_setUpDirection_mut(PxController* self_, PxVec3* up);
 
         /// <summary>
         ///  Retrieve the slope limit.
@@ -11786,7 +11786,7 @@ namespace Physx
         ///  The slope limit for the controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getSlopeLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxController_getSlopeLimit(PxController* self_);
+        internal static extern float PxController_getSlopeLimit(PxController* self_);
 
         /// <summary>
         ///  Sets the slope limit.
@@ -11796,7 +11796,7 @@ namespace Physx
         ///  will be ignored.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_setSlopeLimit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxController_setSlopeLimit_mut(PxController* self_, float slopeLimit);
+        internal static extern void PxController_setSlopeLimit_mut(PxController* self_, float slopeLimit);
 
         /// <summary>
         ///  Flushes internal geometry cache.
@@ -11812,7 +11812,7 @@ namespace Physx
         ///  function.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_invalidateCache_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxController_invalidateCache_mut(PxController* self_);
+        internal static extern void PxController_invalidateCache_mut(PxController* self_);
 
         /// <summary>
         ///  Retrieve the scene associated with the controller.
@@ -11820,7 +11820,7 @@ namespace Physx
         ///  The physics scene
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getScene_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxScene* PxController_getScene_mut(PxController* self_);
+        internal static extern PxScene* PxController_getScene_mut(PxController* self_);
 
         /// <summary>
         ///  Returns the user data associated with this controller.
@@ -11828,25 +11828,25 @@ namespace Physx
         ///  The user pointer associated with the controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getUserData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxController_getUserData(PxController* self_);
+        internal static extern void* PxController_getUserData(PxController* self_);
 
         /// <summary>
         ///  Sets the user data associated with this controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_setUserData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxController_setUserData_mut(PxController* self_, void* userData);
+        internal static extern void PxController_setUserData_mut(PxController* self_, void* userData);
 
         /// <summary>
         ///  Returns information about the controller's internal state.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getState", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxController_getState(PxController* self_, PxControllerState* state);
+        internal static extern void PxController_getState(PxController* self_, PxControllerState* state);
 
         /// <summary>
         ///  Returns the controller's internal statistics.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_getStats", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxController_getStats(PxController* self_, PxControllerStats* stats);
+        internal static extern void PxController_getStats(PxController* self_, PxControllerStats* stats);
 
         /// <summary>
         ///  Resizes the controller.
@@ -11857,22 +11857,22 @@ namespace Physx
         ///  to implement a 'crouch' functionality for example.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxController_resize_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxController_resize_mut(PxController* self_, float height);
+        internal static extern void PxController_resize_mut(PxController* self_, float height);
 
         /// <summary>
         ///  constructor sets to default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBoxControllerDesc_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBoxControllerDesc* PxBoxControllerDesc_new_alloc();
+        internal static extern PxBoxControllerDesc* PxBoxControllerDesc_new_alloc();
 
         [DllImport(__DllName, EntryPoint = "PxBoxControllerDesc_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBoxControllerDesc_delete(PxBoxControllerDesc* self_);
+        internal static extern void PxBoxControllerDesc_delete(PxBoxControllerDesc* self_);
 
         /// <summary>
         ///  (re)sets the structure to the default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBoxControllerDesc_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBoxControllerDesc_setToDefault_mut(PxBoxControllerDesc* self_);
+        internal static extern void PxBoxControllerDesc_setToDefault_mut(PxBoxControllerDesc* self_);
 
         /// <summary>
         ///  returns true if the current settings are valid
@@ -11881,7 +11881,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBoxControllerDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBoxControllerDesc_isValid(PxBoxControllerDesc* self_);
+        internal static extern bool PxBoxControllerDesc_isValid(PxBoxControllerDesc* self_);
 
         /// <summary>
         ///  Gets controller's half height.
@@ -11889,7 +11889,7 @@ namespace Physx
         ///  The half height of the controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBoxController_getHalfHeight", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxBoxController_getHalfHeight(PxBoxController* self_);
+        internal static extern float PxBoxController_getHalfHeight(PxBoxController* self_);
 
         /// <summary>
         ///  Gets controller's half side extent.
@@ -11897,7 +11897,7 @@ namespace Physx
         ///  The half side extent of the controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBoxController_getHalfSideExtent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxBoxController_getHalfSideExtent(PxBoxController* self_);
+        internal static extern float PxBoxController_getHalfSideExtent(PxBoxController* self_);
 
         /// <summary>
         ///  Gets controller's half forward extent.
@@ -11905,7 +11905,7 @@ namespace Physx
         ///  The half forward extent of the controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBoxController_getHalfForwardExtent", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxBoxController_getHalfForwardExtent(PxBoxController* self_);
+        internal static extern float PxBoxController_getHalfForwardExtent(PxBoxController* self_);
 
         /// <summary>
         ///  Sets controller's half height.
@@ -11916,7 +11916,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBoxController_setHalfHeight_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBoxController_setHalfHeight_mut(PxBoxController* self_, float halfHeight);
+        internal static extern bool PxBoxController_setHalfHeight_mut(PxBoxController* self_, float halfHeight);
 
         /// <summary>
         ///  Sets controller's half side extent.
@@ -11927,7 +11927,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBoxController_setHalfSideExtent_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBoxController_setHalfSideExtent_mut(PxBoxController* self_, float halfSideExtent);
+        internal static extern bool PxBoxController_setHalfSideExtent_mut(PxBoxController* self_, float halfSideExtent);
 
         /// <summary>
         ///  Sets controller's half forward extent.
@@ -11938,22 +11938,22 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBoxController_setHalfForwardExtent_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBoxController_setHalfForwardExtent_mut(PxBoxController* self_, float halfForwardExtent);
+        internal static extern bool PxBoxController_setHalfForwardExtent_mut(PxBoxController* self_, float halfForwardExtent);
 
         /// <summary>
         ///  constructor sets to default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCapsuleControllerDesc_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCapsuleControllerDesc* PxCapsuleControllerDesc_new_alloc();
+        internal static extern PxCapsuleControllerDesc* PxCapsuleControllerDesc_new_alloc();
 
         [DllImport(__DllName, EntryPoint = "PxCapsuleControllerDesc_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCapsuleControllerDesc_delete(PxCapsuleControllerDesc* self_);
+        internal static extern void PxCapsuleControllerDesc_delete(PxCapsuleControllerDesc* self_);
 
         /// <summary>
         ///  (re)sets the structure to the default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCapsuleControllerDesc_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCapsuleControllerDesc_setToDefault_mut(PxCapsuleControllerDesc* self_);
+        internal static extern void PxCapsuleControllerDesc_setToDefault_mut(PxCapsuleControllerDesc* self_);
 
         /// <summary>
         ///  returns true if the current settings are valid
@@ -11962,7 +11962,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCapsuleControllerDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxCapsuleControllerDesc_isValid(PxCapsuleControllerDesc* self_);
+        internal static extern bool PxCapsuleControllerDesc_isValid(PxCapsuleControllerDesc* self_);
 
         /// <summary>
         ///  Gets controller's radius.
@@ -11970,7 +11970,7 @@ namespace Physx
         ///  The radius of the controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCapsuleController_getRadius", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxCapsuleController_getRadius(PxCapsuleController* self_);
+        internal static extern float PxCapsuleController_getRadius(PxCapsuleController* self_);
 
         /// <summary>
         ///  Sets controller's radius.
@@ -11981,7 +11981,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCapsuleController_setRadius_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxCapsuleController_setRadius_mut(PxCapsuleController* self_, float radius);
+        internal static extern bool PxCapsuleController_setRadius_mut(PxCapsuleController* self_, float radius);
 
         /// <summary>
         ///  Gets controller's height.
@@ -11989,7 +11989,7 @@ namespace Physx
         ///  The height of the capsule controller.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCapsuleController_getHeight", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxCapsuleController_getHeight(PxCapsuleController* self_);
+        internal static extern float PxCapsuleController_getHeight(PxCapsuleController* self_);
 
         /// <summary>
         ///  Resets controller's height.
@@ -12000,7 +12000,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCapsuleController_setHeight_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxCapsuleController_setHeight_mut(PxCapsuleController* self_, float height);
+        internal static extern bool PxCapsuleController_setHeight_mut(PxCapsuleController* self_, float height);
 
         /// <summary>
         ///  Gets controller's climbing mode.
@@ -12008,14 +12008,14 @@ namespace Physx
         ///  The capsule controller's climbing mode.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCapsuleController_getClimbingMode", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCapsuleClimbingMode PxCapsuleController_getClimbingMode(PxCapsuleController* self_);
+        internal static extern PxCapsuleClimbingMode PxCapsuleController_getClimbingMode(PxCapsuleController* self_);
 
         /// <summary>
         ///  Sets controller's climbing mode.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCapsuleController_setClimbingMode_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxCapsuleController_setClimbingMode_mut(PxCapsuleController* self_, PxCapsuleClimbingMode mode);
+        internal static extern bool PxCapsuleController_setClimbingMode_mut(PxCapsuleController* self_, PxCapsuleClimbingMode mode);
 
         /// <summary>
         ///  Retrieve behavior flags for a shape.
@@ -12028,7 +12028,7 @@ namespace Physx
         ///  Desired behavior flags for the given shape
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerBehaviorCallback_getBehaviorFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxControllerBehaviorFlags PxControllerBehaviorCallback_getBehaviorFlags_mut(PxControllerBehaviorCallback* self_, PxShape* shape, PxActor* actor);
+        internal static extern PxControllerBehaviorFlags PxControllerBehaviorCallback_getBehaviorFlags_mut(PxControllerBehaviorCallback* self_, PxShape* shape, PxActor* actor);
 
         /// <summary>
         ///  Retrieve behavior flags for a controller.
@@ -12043,7 +12043,7 @@ namespace Physx
         ///  Desired behavior flags for the given controller
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerBehaviorCallback_getBehaviorFlags_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxControllerBehaviorFlags PxControllerBehaviorCallback_getBehaviorFlags_mut_1(PxControllerBehaviorCallback* self_, PxController* controller);
+        internal static extern PxControllerBehaviorFlags PxControllerBehaviorCallback_getBehaviorFlags_mut_1(PxControllerBehaviorCallback* self_, PxController* controller);
 
         /// <summary>
         ///  Retrieve behavior flags for an obstacle.
@@ -12056,7 +12056,7 @@ namespace Physx
         ///  Desired behavior flags for the given obstacle
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerBehaviorCallback_getBehaviorFlags_mut_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxControllerBehaviorFlags PxControllerBehaviorCallback_getBehaviorFlags_mut_2(PxControllerBehaviorCallback* self_, PxObstacle* obstacle);
+        internal static extern PxControllerBehaviorFlags PxControllerBehaviorCallback_getBehaviorFlags_mut_2(PxControllerBehaviorCallback* self_, PxObstacle* obstacle);
 
         /// <summary>
         ///  Releases the controller manager.
@@ -12066,7 +12066,7 @@ namespace Physx
         ///  This function is required to be called to release foundation usage.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxControllerManager_release_mut(PxControllerManager* self_);
+        internal static extern void PxControllerManager_release_mut(PxControllerManager* self_);
 
         /// <summary>
         ///  Returns the scene the manager is adding the controllers to.
@@ -12074,7 +12074,7 @@ namespace Physx
         ///  The associated physics scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_getScene", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxScene* PxControllerManager_getScene(PxControllerManager* self_);
+        internal static extern PxScene* PxControllerManager_getScene(PxControllerManager* self_);
 
         /// <summary>
         ///  Returns the number of controllers that are being managed.
@@ -12082,7 +12082,7 @@ namespace Physx
         ///  The number of controllers.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_getNbControllers", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxControllerManager_getNbControllers(PxControllerManager* self_);
+        internal static extern uint PxControllerManager_getNbControllers(PxControllerManager* self_);
 
         /// <summary>
         ///  Retrieve one of the controllers in the manager.
@@ -12090,7 +12090,7 @@ namespace Physx
         ///  The controller with the specified index.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_getController_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxController* PxControllerManager_getController_mut(PxControllerManager* self_, uint index);
+        internal static extern PxController* PxControllerManager_getController_mut(PxControllerManager* self_, uint index);
 
         /// <summary>
         ///  Creates a new character controller.
@@ -12098,13 +12098,13 @@ namespace Physx
         ///  The new controller
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_createController_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxController* PxControllerManager_createController_mut(PxControllerManager* self_, PxControllerDesc* desc);
+        internal static extern PxController* PxControllerManager_createController_mut(PxControllerManager* self_, PxControllerDesc* desc);
 
         /// <summary>
         ///  Releases all the controllers that are being managed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_purgeControllers_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxControllerManager_purgeControllers_mut(PxControllerManager* self_);
+        internal static extern void PxControllerManager_purgeControllers_mut(PxControllerManager* self_);
 
         /// <summary>
         ///  Retrieves debug data.
@@ -12112,13 +12112,13 @@ namespace Physx
         ///  The render buffer filled with debug-render data
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_getRenderBuffer_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRenderBuffer* PxControllerManager_getRenderBuffer_mut(PxControllerManager* self_);
+        internal static extern PxRenderBuffer* PxControllerManager_getRenderBuffer_mut(PxControllerManager* self_);
 
         /// <summary>
         ///  Sets debug rendering flags
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_setDebugRenderingFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxControllerManager_setDebugRenderingFlags_mut(PxControllerManager* self_, PxControllerDebugRenderFlags flags);
+        internal static extern void PxControllerManager_setDebugRenderingFlags_mut(PxControllerManager* self_, PxControllerDebugRenderFlags flags);
 
         /// <summary>
         ///  Returns the number of obstacle contexts that are being managed.
@@ -12126,7 +12126,7 @@ namespace Physx
         ///  The number of obstacle contexts.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_getNbObstacleContexts", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxControllerManager_getNbObstacleContexts(PxControllerManager* self_);
+        internal static extern uint PxControllerManager_getNbObstacleContexts(PxControllerManager* self_);
 
         /// <summary>
         ///  Retrieve one of the obstacle contexts in the manager.
@@ -12134,7 +12134,7 @@ namespace Physx
         ///  The obstacle context with the specified index.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_getObstacleContext_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxObstacleContext* PxControllerManager_getObstacleContext_mut(PxControllerManager* self_, uint index);
+        internal static extern PxObstacleContext* PxControllerManager_getObstacleContext_mut(PxControllerManager* self_, uint index);
 
         /// <summary>
         ///  Creates an obstacle context.
@@ -12142,7 +12142,7 @@ namespace Physx
         ///  New obstacle context
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_createObstacleContext_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxObstacleContext* PxControllerManager_createObstacleContext_mut(PxControllerManager* self_);
+        internal static extern PxObstacleContext* PxControllerManager_createObstacleContext_mut(PxControllerManager* self_);
 
         /// <summary>
         ///  Computes character-character interactions.
@@ -12159,7 +12159,7 @@ namespace Physx
         ///  Releasing the manager will automatically release all the associated obstacle contexts.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_computeInteractions_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxControllerManager_computeInteractions_mut(PxControllerManager* self_, float elapsedTime, PxControllerFilterCallback* cctFilterCb);
+        internal static extern void PxControllerManager_computeInteractions_mut(PxControllerManager* self_, float elapsedTime, PxControllerFilterCallback* cctFilterCb);
 
         /// <summary>
         ///  Enables or disables runtime tessellation.
@@ -12172,7 +12172,7 @@ namespace Physx
         ///  This features only applies to triangle meshes, convex meshes, heightfields and boxes.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_setTessellation_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxControllerManager_setTessellation_mut(PxControllerManager* self_, [MarshalAs(UnmanagedType.U1)] bool flag, float maxEdgeLength);
+        internal static extern void PxControllerManager_setTessellation_mut(PxControllerManager* self_, [MarshalAs(UnmanagedType.U1)] bool flag, float maxEdgeLength);
 
         /// <summary>
         ///  Enables or disables the overlap recovery module.
@@ -12192,7 +12192,7 @@ namespace Physx
         ///  The recovery module currently works with all geometries except heightfields.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_setOverlapRecoveryModule_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxControllerManager_setOverlapRecoveryModule_mut(PxControllerManager* self_, [MarshalAs(UnmanagedType.U1)] bool flag);
+        internal static extern void PxControllerManager_setOverlapRecoveryModule_mut(PxControllerManager* self_, [MarshalAs(UnmanagedType.U1)] bool flag);
 
         /// <summary>
         ///  Enables or disables the precise sweeps.
@@ -12202,7 +12202,7 @@ namespace Physx
         ///  By default, precise sweeps are enabled.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_setPreciseSweeps_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxControllerManager_setPreciseSweeps_mut(PxControllerManager* self_, [MarshalAs(UnmanagedType.U1)] bool flag);
+        internal static extern void PxControllerManager_setPreciseSweeps_mut(PxControllerManager* self_, [MarshalAs(UnmanagedType.U1)] bool flag);
 
         /// <summary>
         ///  Enables or disables vertical sliding against ceilings.
@@ -12218,7 +12218,7 @@ namespace Physx
         ///  By default, sliding is allowed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_setPreventVerticalSlidingAgainstCeiling_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxControllerManager_setPreventVerticalSlidingAgainstCeiling_mut(PxControllerManager* self_, [MarshalAs(UnmanagedType.U1)] bool flag);
+        internal static extern void PxControllerManager_setPreventVerticalSlidingAgainstCeiling_mut(PxControllerManager* self_, [MarshalAs(UnmanagedType.U1)] bool flag);
 
         /// <summary>
         ///  Shift the origin of the character controllers and obstacle objects by the specified vector.
@@ -12231,7 +12231,7 @@ namespace Physx
         ///  This call will not automatically shift the PhysX scene and its objects. You need to call PxScene::shiftOrigin() seperately to keep the systems in sync.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxControllerManager_shiftOrigin_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxControllerManager_shiftOrigin_mut(PxControllerManager* self_, PxVec3* shift);
+        internal static extern void PxControllerManager_shiftOrigin_mut(PxControllerManager* self_, PxVec3* shift);
 
         /// <summary>
         ///  Creates the controller manager.
@@ -12247,16 +12247,16 @@ namespace Physx
         ///  By default, locking is disabled.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateControllerManager", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxControllerManager* phys_PxCreateControllerManager(PxScene* scene, [MarshalAs(UnmanagedType.U1)] bool lockingEnabled);
+        internal static extern PxControllerManager* phys_PxCreateControllerManager(PxScene* scene, [MarshalAs(UnmanagedType.U1)] bool lockingEnabled);
 
         [DllImport(__DllName, EntryPoint = "PxDim3_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDim3 PxDim3_new();
+        internal static extern PxDim3 PxDim3_new();
 
         /// <summary>
         ///  Constructor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSDFDesc_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSDFDesc PxSDFDesc_new();
+        internal static extern PxSDFDesc PxSDFDesc_new();
 
         /// <summary>
         ///  Returns true if the descriptor is valid.
@@ -12265,19 +12265,19 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSDFDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSDFDesc_isValid(PxSDFDesc* self_);
+        internal static extern bool PxSDFDesc_isValid(PxSDFDesc* self_);
 
         /// <summary>
         ///  constructor sets to default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMeshDesc_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConvexMeshDesc PxConvexMeshDesc_new();
+        internal static extern PxConvexMeshDesc PxConvexMeshDesc_new();
 
         /// <summary>
         ///  (re)sets the structure to the default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMeshDesc_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxConvexMeshDesc_setToDefault_mut(PxConvexMeshDesc* self_);
+        internal static extern void PxConvexMeshDesc_setToDefault_mut(PxConvexMeshDesc* self_);
 
         /// <summary>
         ///  Returns true if the descriptor is valid.
@@ -12286,19 +12286,19 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxConvexMeshDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxConvexMeshDesc_isValid(PxConvexMeshDesc* self_);
+        internal static extern bool PxConvexMeshDesc_isValid(PxConvexMeshDesc* self_);
 
         /// <summary>
         ///  Constructor sets to default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMeshDesc_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTriangleMeshDesc PxTriangleMeshDesc_new();
+        internal static extern PxTriangleMeshDesc PxTriangleMeshDesc_new();
 
         /// <summary>
         ///  (re)sets the structure to the default.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMeshDesc_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTriangleMeshDesc_setToDefault_mut(PxTriangleMeshDesc* self_);
+        internal static extern void PxTriangleMeshDesc_setToDefault_mut(PxTriangleMeshDesc* self_);
 
         /// <summary>
         ///  Returns true if the descriptor is valid.
@@ -12307,33 +12307,33 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMeshDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxTriangleMeshDesc_isValid(PxTriangleMeshDesc* self_);
+        internal static extern bool PxTriangleMeshDesc_isValid(PxTriangleMeshDesc* self_);
 
         /// <summary>
         ///  Constructor to build an empty tetmesh description
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMeshDesc_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTetrahedronMeshDesc PxTetrahedronMeshDesc_new();
+        internal static extern PxTetrahedronMeshDesc PxTetrahedronMeshDesc_new();
 
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMeshDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxTetrahedronMeshDesc_isValid(PxTetrahedronMeshDesc* self_);
+        internal static extern bool PxTetrahedronMeshDesc_isValid(PxTetrahedronMeshDesc* self_);
 
         /// <summary>
         ///  Constructor to build an empty simulation description
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSoftBodySimulationDataDesc_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSoftBodySimulationDataDesc PxSoftBodySimulationDataDesc_new();
+        internal static extern PxSoftBodySimulationDataDesc PxSoftBodySimulationDataDesc_new();
 
         [DllImport(__DllName, EntryPoint = "PxSoftBodySimulationDataDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSoftBodySimulationDataDesc_isValid(PxSoftBodySimulationDataDesc* self_);
+        internal static extern bool PxSoftBodySimulationDataDesc_isValid(PxSoftBodySimulationDataDesc* self_);
 
         /// <summary>
         ///  Desc initialization to default value.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH34MidphaseDesc_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBVH34MidphaseDesc_setToDefault_mut(PxBVH34MidphaseDesc* self_);
+        internal static extern void PxBVH34MidphaseDesc_setToDefault_mut(PxBVH34MidphaseDesc* self_);
 
         /// <summary>
         ///  Returns true if the descriptor is valid.
@@ -12342,10 +12342,10 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVH34MidphaseDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBVH34MidphaseDesc_isValid(PxBVH34MidphaseDesc* self_);
+        internal static extern bool PxBVH34MidphaseDesc_isValid(PxBVH34MidphaseDesc* self_);
 
         [DllImport(__DllName, EntryPoint = "PxMidphaseDesc_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMidphaseDesc PxMidphaseDesc_new();
+        internal static extern PxMidphaseDesc PxMidphaseDesc_new();
 
         /// <summary>
         ///  Returns type of midphase mesh structure.
@@ -12353,13 +12353,13 @@ namespace Physx
         ///  PxMeshMidPhase::Enum
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMidphaseDesc_getType", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMeshMidPhase PxMidphaseDesc_getType(PxMidphaseDesc* self_);
+        internal static extern PxMeshMidPhase PxMidphaseDesc_getType(PxMidphaseDesc* self_);
 
         /// <summary>
         ///  Initialize the midphase mesh structure descriptor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMidphaseDesc_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMidphaseDesc_setToDefault_mut(PxMidphaseDesc* self_, PxMeshMidPhase type_);
+        internal static extern void PxMidphaseDesc_setToDefault_mut(PxMidphaseDesc* self_, PxMeshMidPhase type_);
 
         /// <summary>
         ///  Returns true if the descriptor is valid.
@@ -12368,16 +12368,16 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMidphaseDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxMidphaseDesc_isValid(PxMidphaseDesc* self_);
+        internal static extern bool PxMidphaseDesc_isValid(PxMidphaseDesc* self_);
 
         [DllImport(__DllName, EntryPoint = "PxBVHDesc_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBVHDesc PxBVHDesc_new();
+        internal static extern PxBVHDesc PxBVHDesc_new();
 
         /// <summary>
         ///  Initialize the BVH descriptor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVHDesc_setToDefault_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBVHDesc_setToDefault_mut(PxBVHDesc* self_);
+        internal static extern void PxBVHDesc_setToDefault_mut(PxBVHDesc* self_);
 
         /// <summary>
         ///  Returns true if the descriptor is valid.
@@ -12386,13 +12386,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBVHDesc_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxBVHDesc_isValid(PxBVHDesc* self_);
+        internal static extern bool PxBVHDesc_isValid(PxBVHDesc* self_);
 
         [DllImport(__DllName, EntryPoint = "PxCookingParams_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCookingParams PxCookingParams_new(PxTolerancesScale* sc);
+        internal static extern PxCookingParams PxCookingParams_new(PxTolerancesScale* sc);
 
         [DllImport(__DllName, EntryPoint = "phys_PxGetStandaloneInsertionCallback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxInsertionCallback* phys_PxGetStandaloneInsertionCallback();
+        internal static extern PxInsertionCallback* phys_PxGetStandaloneInsertionCallback();
 
         /// <summary>
         ///  Cooks a bounding volume hierarchy. The results are written to the stream.
@@ -12404,7 +12404,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCookBVH", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxCookBVH(PxBVHDesc* desc, PxOutputStream* stream);
+        internal static extern bool phys_PxCookBVH(PxBVHDesc* desc, PxOutputStream* stream);
 
         /// <summary>
         ///  Cooks and creates a bounding volume hierarchy without going through a stream.
@@ -12419,7 +12419,7 @@ namespace Physx
         ///  PxBVH pointer on success
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateBVH", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBVH* phys_PxCreateBVH(PxBVHDesc* desc, PxInsertionCallback* insertionCallback);
+        internal static extern PxBVH* phys_PxCreateBVH(PxBVHDesc* desc, PxInsertionCallback* insertionCallback);
 
         /// <summary>
         ///  Cooks a heightfield. The results are written to the stream.
@@ -12433,7 +12433,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCookHeightField", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxCookHeightField(PxHeightFieldDesc* desc, PxOutputStream* stream);
+        internal static extern bool phys_PxCookHeightField(PxHeightFieldDesc* desc, PxOutputStream* stream);
 
         /// <summary>
         ///  Cooks and creates a heightfield mesh and inserts it into PxPhysics.
@@ -12441,7 +12441,7 @@ namespace Physx
         ///  PxHeightField pointer on success
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateHeightField", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxHeightField* phys_PxCreateHeightField(PxHeightFieldDesc* desc, PxInsertionCallback* insertionCallback);
+        internal static extern PxHeightField* phys_PxCreateHeightField(PxHeightFieldDesc* desc, PxInsertionCallback* insertionCallback);
 
         /// <summary>
         ///  Cooks a convex mesh. The results are written to the stream.
@@ -12460,7 +12460,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCookConvexMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxCookConvexMesh(PxCookingParams* @params, PxConvexMeshDesc* desc, PxOutputStream* stream, PxConvexMeshCookingResult* condition);
+        internal static extern bool phys_PxCookConvexMesh(PxCookingParams* @params, PxConvexMeshDesc* desc, PxOutputStream* stream, PxConvexMeshCookingResult* condition);
 
         /// <summary>
         ///  Cooks and creates a convex mesh without going through a stream.
@@ -12475,7 +12475,7 @@ namespace Physx
         ///  PxConvexMesh pointer on success
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateConvexMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConvexMesh* phys_PxCreateConvexMesh(PxCookingParams* @params, PxConvexMeshDesc* desc, PxInsertionCallback* insertionCallback, PxConvexMeshCookingResult* condition);
+        internal static extern PxConvexMesh* phys_PxCreateConvexMesh(PxCookingParams* @params, PxConvexMeshDesc* desc, PxInsertionCallback* insertionCallback, PxConvexMeshCookingResult* condition);
 
         /// <summary>
         ///  Verifies if the convex mesh is valid. Prints an error message for each inconsistency found.
@@ -12488,7 +12488,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxValidateConvexMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxValidateConvexMesh(PxCookingParams* @params, PxConvexMeshDesc* desc);
+        internal static extern bool phys_PxValidateConvexMesh(PxCookingParams* @params, PxConvexMeshDesc* desc);
 
         /// <summary>
         ///  Computed hull polygons from given vertices and triangles. Polygons are needed for PxConvexMeshDesc rather than triangles.
@@ -12503,7 +12503,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxComputeHullPolygons", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxComputeHullPolygons(PxCookingParams* @params, PxSimpleTriangleMesh* mesh, PxAllocatorCallback* inCallback, uint* nbVerts, PxVec3** vertices, uint* nbIndices, uint** indices, uint* nbPolygons, PxHullPolygon** hullPolygons);
+        internal static extern bool phys_PxComputeHullPolygons(PxCookingParams* @params, PxSimpleTriangleMesh* mesh, PxAllocatorCallback* inCallback, uint* nbVerts, PxVec3** vertices, uint* nbIndices, uint** indices, uint* nbPolygons, PxHullPolygon** hullPolygons);
 
         /// <summary>
         ///  Verifies if the triangle mesh is valid. Prints an error message for each inconsistency found.
@@ -12516,7 +12516,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxValidateTriangleMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxValidateTriangleMesh(PxCookingParams* @params, PxTriangleMeshDesc* desc);
+        internal static extern bool phys_PxValidateTriangleMesh(PxCookingParams* @params, PxTriangleMeshDesc* desc);
 
         /// <summary>
         ///  Cooks and creates a triangle mesh without going through a stream.
@@ -12531,7 +12531,7 @@ namespace Physx
         ///  PxTriangleMesh pointer on success.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateTriangleMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTriangleMesh* phys_PxCreateTriangleMesh(PxCookingParams* @params, PxTriangleMeshDesc* desc, PxInsertionCallback* insertionCallback, PxTriangleMeshCookingResult* condition);
+        internal static extern PxTriangleMesh* phys_PxCreateTriangleMesh(PxCookingParams* @params, PxTriangleMeshDesc* desc, PxInsertionCallback* insertionCallback, PxTriangleMeshCookingResult* condition);
 
         /// <summary>
         ///  Cooks a triangle mesh. The results are written to the stream.
@@ -12546,87 +12546,87 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCookTriangleMesh", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxCookTriangleMesh(PxCookingParams* @params, PxTriangleMeshDesc* desc, PxOutputStream* stream, PxTriangleMeshCookingResult* condition);
+        internal static extern bool phys_PxCookTriangleMesh(PxCookingParams* @params, PxTriangleMeshDesc* desc, PxOutputStream* stream, PxTriangleMeshCookingResult* condition);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultMemoryOutputStream_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDefaultMemoryOutputStream* PxDefaultMemoryOutputStream_new_alloc(PxAllocatorCallback* allocator);
+        internal static extern PxDefaultMemoryOutputStream* PxDefaultMemoryOutputStream_new_alloc(PxAllocatorCallback* allocator);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultMemoryOutputStream_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDefaultMemoryOutputStream_delete(PxDefaultMemoryOutputStream* self_);
+        internal static extern void PxDefaultMemoryOutputStream_delete(PxDefaultMemoryOutputStream* self_);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultMemoryOutputStream_write_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxDefaultMemoryOutputStream_write_mut(PxDefaultMemoryOutputStream* self_, void* src, uint count);
+        internal static extern uint PxDefaultMemoryOutputStream_write_mut(PxDefaultMemoryOutputStream* self_, void* src, uint count);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultMemoryOutputStream_getSize", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxDefaultMemoryOutputStream_getSize(PxDefaultMemoryOutputStream* self_);
+        internal static extern uint PxDefaultMemoryOutputStream_getSize(PxDefaultMemoryOutputStream* self_);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultMemoryOutputStream_getData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxDefaultMemoryOutputStream_getData(PxDefaultMemoryOutputStream* self_);
+        internal static extern byte* PxDefaultMemoryOutputStream_getData(PxDefaultMemoryOutputStream* self_);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultMemoryInputData_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDefaultMemoryInputData* PxDefaultMemoryInputData_new_alloc(byte* data, uint length);
+        internal static extern PxDefaultMemoryInputData* PxDefaultMemoryInputData_new_alloc(byte* data, uint length);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultMemoryInputData_read_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxDefaultMemoryInputData_read_mut(PxDefaultMemoryInputData* self_, void* dest, uint count);
+        internal static extern uint PxDefaultMemoryInputData_read_mut(PxDefaultMemoryInputData* self_, void* dest, uint count);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultMemoryInputData_getLength", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxDefaultMemoryInputData_getLength(PxDefaultMemoryInputData* self_);
+        internal static extern uint PxDefaultMemoryInputData_getLength(PxDefaultMemoryInputData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultMemoryInputData_seek_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDefaultMemoryInputData_seek_mut(PxDefaultMemoryInputData* self_, uint pos);
+        internal static extern void PxDefaultMemoryInputData_seek_mut(PxDefaultMemoryInputData* self_, uint pos);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultMemoryInputData_tell", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxDefaultMemoryInputData_tell(PxDefaultMemoryInputData* self_);
+        internal static extern uint PxDefaultMemoryInputData_tell(PxDefaultMemoryInputData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultFileOutputStream_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDefaultFileOutputStream* PxDefaultFileOutputStream_new_alloc(byte* name);
+        internal static extern PxDefaultFileOutputStream* PxDefaultFileOutputStream_new_alloc(byte* name);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultFileOutputStream_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDefaultFileOutputStream_delete(PxDefaultFileOutputStream* self_);
+        internal static extern void PxDefaultFileOutputStream_delete(PxDefaultFileOutputStream* self_);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultFileOutputStream_write_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxDefaultFileOutputStream_write_mut(PxDefaultFileOutputStream* self_, void* src, uint count);
+        internal static extern uint PxDefaultFileOutputStream_write_mut(PxDefaultFileOutputStream* self_, void* src, uint count);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultFileOutputStream_isValid_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxDefaultFileOutputStream_isValid_mut(PxDefaultFileOutputStream* self_);
+        internal static extern bool PxDefaultFileOutputStream_isValid_mut(PxDefaultFileOutputStream* self_);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultFileInputData_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDefaultFileInputData* PxDefaultFileInputData_new_alloc(byte* name);
+        internal static extern PxDefaultFileInputData* PxDefaultFileInputData_new_alloc(byte* name);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultFileInputData_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDefaultFileInputData_delete(PxDefaultFileInputData* self_);
+        internal static extern void PxDefaultFileInputData_delete(PxDefaultFileInputData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultFileInputData_read_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxDefaultFileInputData_read_mut(PxDefaultFileInputData* self_, void* dest, uint count);
+        internal static extern uint PxDefaultFileInputData_read_mut(PxDefaultFileInputData* self_, void* dest, uint count);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultFileInputData_seek_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDefaultFileInputData_seek_mut(PxDefaultFileInputData* self_, uint pos);
+        internal static extern void PxDefaultFileInputData_seek_mut(PxDefaultFileInputData* self_, uint pos);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultFileInputData_tell", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxDefaultFileInputData_tell(PxDefaultFileInputData* self_);
+        internal static extern uint PxDefaultFileInputData_tell(PxDefaultFileInputData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultFileInputData_getLength", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxDefaultFileInputData_getLength(PxDefaultFileInputData* self_);
+        internal static extern uint PxDefaultFileInputData_getLength(PxDefaultFileInputData* self_);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultFileInputData_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxDefaultFileInputData_isValid(PxDefaultFileInputData* self_);
+        internal static extern bool PxDefaultFileInputData_isValid(PxDefaultFileInputData* self_);
 
         [DllImport(__DllName, EntryPoint = "phys_platformAlignedAlloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* phys_platformAlignedAlloc(nuint size);
+        internal static extern void* phys_platformAlignedAlloc(nuint size);
 
         [DllImport(__DllName, EntryPoint = "phys_platformAlignedFree", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_platformAlignedFree(void* ptr);
+        internal static extern void phys_platformAlignedFree(void* ptr);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultAllocator_allocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void* PxDefaultAllocator_allocate_mut(PxDefaultAllocator* self_, nuint size, byte* anon_param1, byte* anon_param2, int anon_param3);
+        internal static extern void* PxDefaultAllocator_allocate_mut(PxDefaultAllocator* self_, nuint size, byte* anon_param1, byte* anon_param2, int anon_param3);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultAllocator_deallocate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDefaultAllocator_deallocate_mut(PxDefaultAllocator* self_, void* ptr);
+        internal static extern void PxDefaultAllocator_deallocate_mut(PxDefaultAllocator* self_, void* ptr);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultAllocator_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDefaultAllocator_delete(PxDefaultAllocator* self_);
+        internal static extern void PxDefaultAllocator_delete(PxDefaultAllocator* self_);
 
         /// <summary>
         ///  Set the actors for this joint.
@@ -12634,13 +12634,13 @@ namespace Physx
         ///  An actor may be NULL to indicate the world frame. At most one of the actors may be NULL.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_setActors_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_setActors_mut(PxJoint* self_, PxRigidActor* actor0, PxRigidActor* actor1);
+        internal static extern void PxJoint_setActors_mut(PxJoint* self_, PxRigidActor* actor0, PxRigidActor* actor1);
 
         /// <summary>
         ///  Get the actors for this joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getActors", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_getActors(PxJoint* self_, PxRigidActor** actor0, PxRigidActor** actor1);
+        internal static extern void PxJoint_getActors(PxJoint* self_, PxRigidActor** actor0, PxRigidActor** actor1);
 
         /// <summary>
         ///  Set the joint local pose for an actor.
@@ -12648,7 +12648,7 @@ namespace Physx
         ///  This is the relative pose which locates the joint frame relative to the actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_setLocalPose_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_setLocalPose_mut(PxJoint* self_, PxJointActorIndex actor, PxTransform* localPose);
+        internal static extern void PxJoint_setLocalPose_mut(PxJoint* self_, PxJointActorIndex actor, PxTransform* localPose);
 
         /// <summary>
         ///  get the joint local pose for an actor.
@@ -12656,7 +12656,7 @@ namespace Physx
         ///  return the local pose for this joint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getLocalPose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxJoint_getLocalPose(PxJoint* self_, PxJointActorIndex actor);
+        internal static extern PxTransform PxJoint_getLocalPose(PxJoint* self_, PxJointActorIndex actor);
 
         /// <summary>
         ///  get the relative pose for this joint
@@ -12664,7 +12664,7 @@ namespace Physx
         ///  This function returns the pose of the joint frame of actor1 relative to actor0
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getRelativeTransform", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxJoint_getRelativeTransform(PxJoint* self_);
+        internal static extern PxTransform PxJoint_getRelativeTransform(PxJoint* self_);
 
         /// <summary>
         ///  get the relative linear velocity of the joint
@@ -12673,7 +12673,7 @@ namespace Physx
         ///  frame of actor0. The value is returned in the constraint frame of actor0
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getRelativeLinearVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxJoint_getRelativeLinearVelocity(PxJoint* self_);
+        internal static extern PxVec3 PxJoint_getRelativeLinearVelocity(PxJoint* self_);
 
         /// <summary>
         ///  get the relative angular velocity of the joint
@@ -12681,7 +12681,7 @@ namespace Physx
         ///  This function returns the angular velocity of  actor1 relative to actor0. The value is returned in the constraint frame of actor0
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getRelativeAngularVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxJoint_getRelativeAngularVelocity(PxJoint* self_);
+        internal static extern PxVec3 PxJoint_getRelativeAngularVelocity(PxJoint* self_);
 
         /// <summary>
         ///  set the break force for this joint.
@@ -12691,25 +12691,25 @@ namespace Physx
         ///  force and torque are measured in the joint frame of the first actor
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_setBreakForce_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_setBreakForce_mut(PxJoint* self_, float force, float torque);
+        internal static extern void PxJoint_setBreakForce_mut(PxJoint* self_, float force, float torque);
 
         /// <summary>
         ///  get the break force for this joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getBreakForce", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_getBreakForce(PxJoint* self_, float* force, float* torque);
+        internal static extern void PxJoint_getBreakForce(PxJoint* self_, float* force, float* torque);
 
         /// <summary>
         ///  set the constraint flags for this joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_setConstraintFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_setConstraintFlags_mut(PxJoint* self_, PxConstraintFlags flags);
+        internal static extern void PxJoint_setConstraintFlags_mut(PxJoint* self_, PxConstraintFlags flags);
 
         /// <summary>
         ///  set a constraint flags for this joint to a specified value.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_setConstraintFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_setConstraintFlag_mut(PxJoint* self_, PxConstraintFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxJoint_setConstraintFlag_mut(PxJoint* self_, PxConstraintFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         /// <summary>
         ///  get the constraint flags for this joint.
@@ -12717,13 +12717,13 @@ namespace Physx
         ///  the constraint flags
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getConstraintFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConstraintFlags PxJoint_getConstraintFlags(PxJoint* self_);
+        internal static extern PxConstraintFlags PxJoint_getConstraintFlags(PxJoint* self_);
 
         /// <summary>
         ///  set the inverse mass scale for actor0.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_setInvMassScale0_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_setInvMassScale0_mut(PxJoint* self_, float invMassScale);
+        internal static extern void PxJoint_setInvMassScale0_mut(PxJoint* self_, float invMassScale);
 
         /// <summary>
         ///  get the inverse mass scale for actor0.
@@ -12731,13 +12731,13 @@ namespace Physx
         ///  inverse mass scale for actor0
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getInvMassScale0", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxJoint_getInvMassScale0(PxJoint* self_);
+        internal static extern float PxJoint_getInvMassScale0(PxJoint* self_);
 
         /// <summary>
         ///  set the inverse inertia scale for actor0.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_setInvInertiaScale0_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_setInvInertiaScale0_mut(PxJoint* self_, float invInertiaScale);
+        internal static extern void PxJoint_setInvInertiaScale0_mut(PxJoint* self_, float invInertiaScale);
 
         /// <summary>
         ///  get the inverse inertia scale for actor0.
@@ -12745,13 +12745,13 @@ namespace Physx
         ///  inverse inertia scale for actor0
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getInvInertiaScale0", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxJoint_getInvInertiaScale0(PxJoint* self_);
+        internal static extern float PxJoint_getInvInertiaScale0(PxJoint* self_);
 
         /// <summary>
         ///  set the inverse mass scale for actor1.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_setInvMassScale1_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_setInvMassScale1_mut(PxJoint* self_, float invMassScale);
+        internal static extern void PxJoint_setInvMassScale1_mut(PxJoint* self_, float invMassScale);
 
         /// <summary>
         ///  get the inverse mass scale for actor1.
@@ -12759,13 +12759,13 @@ namespace Physx
         ///  inverse mass scale for actor1
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getInvMassScale1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxJoint_getInvMassScale1(PxJoint* self_);
+        internal static extern float PxJoint_getInvMassScale1(PxJoint* self_);
 
         /// <summary>
         ///  set the inverse inertia scale for actor1.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_setInvInertiaScale1_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_setInvInertiaScale1_mut(PxJoint* self_, float invInertiaScale);
+        internal static extern void PxJoint_setInvInertiaScale1_mut(PxJoint* self_, float invInertiaScale);
 
         /// <summary>
         ///  get the inverse inertia scale for actor1.
@@ -12773,7 +12773,7 @@ namespace Physx
         ///  inverse inertia scale for actor1
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getInvInertiaScale1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxJoint_getInvInertiaScale1(PxJoint* self_);
+        internal static extern float PxJoint_getInvInertiaScale1(PxJoint* self_);
 
         /// <summary>
         ///  Retrieves the PxConstraint corresponding to this joint.
@@ -12783,7 +12783,7 @@ namespace Physx
         ///  the constraint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getConstraint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxConstraint* PxJoint_getConstraint(PxJoint* self_);
+        internal static extern PxConstraint* PxJoint_getConstraint(PxJoint* self_);
 
         /// <summary>
         ///  Sets a name string for the object that can be retrieved with getName().
@@ -12792,7 +12792,7 @@ namespace Physx
         ///  only the pointer is stored.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_setName_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_setName_mut(PxJoint* self_, byte* name);
+        internal static extern void PxJoint_setName_mut(PxJoint* self_, byte* name);
 
         /// <summary>
         ///  Retrieves the name string set with setName().
@@ -12800,7 +12800,7 @@ namespace Physx
         ///  Name string associated with object.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxJoint_getName(PxJoint* self_);
+        internal static extern byte* PxJoint_getName(PxJoint* self_);
 
         /// <summary>
         ///  Deletes the joint.
@@ -12808,7 +12808,7 @@ namespace Physx
         ///  This call does not wake up the connected rigid bodies.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_release_mut(PxJoint* self_);
+        internal static extern void PxJoint_release_mut(PxJoint* self_);
 
         /// <summary>
         ///  Retrieves the scene which this joint belongs to.
@@ -12816,16 +12816,16 @@ namespace Physx
         ///  Owner Scene. NULL if not part of a scene.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getScene", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxScene* PxJoint_getScene(PxJoint* self_);
+        internal static extern PxScene* PxJoint_getScene(PxJoint* self_);
 
         /// <summary>
         ///  Put class meta data in stream, used for serialization
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJoint_getBinaryMetaData", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJoint_getBinaryMetaData(PxOutputStream* stream);
+        internal static extern void PxJoint_getBinaryMetaData(PxOutputStream* stream);
 
         [DllImport(__DllName, EntryPoint = "PxSpring_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSpring PxSpring_new(float stiffness_, float damping_);
+        internal static extern PxSpring PxSpring_new(float stiffness_, float damping_);
 
         /// <summary>
         ///  Helper function to setup a joint's global frame
@@ -12842,19 +12842,19 @@ namespace Physx
         ///  The function sets the joint's localPose using world-space input parameters.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxSetJointGlobalFrame", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxSetJointGlobalFrame(PxJoint* joint, PxVec3* wsAnchor, PxVec3* wsAxis);
+        internal static extern void phys_PxSetJointGlobalFrame(PxJoint* joint, PxVec3* wsAnchor, PxVec3* wsAxis);
 
         /// <summary>
         ///  Create a distance Joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxDistanceJointCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDistanceJoint* phys_PxDistanceJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
+        internal static extern PxDistanceJoint* phys_PxDistanceJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
 
         /// <summary>
         ///  Return the current distance of the joint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_getDistance", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxDistanceJoint_getDistance(PxDistanceJoint* self_);
+        internal static extern float PxDistanceJoint_getDistance(PxDistanceJoint* self_);
 
         /// <summary>
         ///  Set the allowed minimum distance for the joint.
@@ -12867,7 +12867,7 @@ namespace Physx
         ///  [0, PX_MAX_F32)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_setMinDistance_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDistanceJoint_setMinDistance_mut(PxDistanceJoint* self_, float distance);
+        internal static extern void PxDistanceJoint_setMinDistance_mut(PxDistanceJoint* self_, float distance);
 
         /// <summary>
         ///  Get the allowed minimum distance for the joint.
@@ -12875,7 +12875,7 @@ namespace Physx
         ///  the allowed minimum distance
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_getMinDistance", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxDistanceJoint_getMinDistance(PxDistanceJoint* self_);
+        internal static extern float PxDistanceJoint_getMinDistance(PxDistanceJoint* self_);
 
         /// <summary>
         ///  Set the allowed maximum distance for the joint.
@@ -12888,7 +12888,7 @@ namespace Physx
         ///  [0, PX_MAX_F32)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_setMaxDistance_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDistanceJoint_setMaxDistance_mut(PxDistanceJoint* self_, float distance);
+        internal static extern void PxDistanceJoint_setMaxDistance_mut(PxDistanceJoint* self_, float distance);
 
         /// <summary>
         ///  Get the allowed maximum distance for the joint.
@@ -12896,13 +12896,13 @@ namespace Physx
         ///  the allowed maximum distance
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_getMaxDistance", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxDistanceJoint_getMaxDistance(PxDistanceJoint* self_);
+        internal static extern float PxDistanceJoint_getMaxDistance(PxDistanceJoint* self_);
 
         /// <summary>
         ///  Set the error tolerance of the joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_setTolerance_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDistanceJoint_setTolerance_mut(PxDistanceJoint* self_, float tolerance);
+        internal static extern void PxDistanceJoint_setTolerance_mut(PxDistanceJoint* self_, float tolerance);
 
         /// <summary>
         ///  Get the error tolerance of the joint.
@@ -12918,7 +12918,7 @@ namespace Physx
         ///  spring function is in use, the rest length of the spring is non-zero.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_getTolerance", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxDistanceJoint_getTolerance(PxDistanceJoint* self_);
+        internal static extern float PxDistanceJoint_getTolerance(PxDistanceJoint* self_);
 
         /// <summary>
         ///  Set the strength of the joint spring.
@@ -12931,7 +12931,7 @@ namespace Physx
         ///  [0, PX_MAX_F32)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_setStiffness_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDistanceJoint_setStiffness_mut(PxDistanceJoint* self_, float stiffness);
+        internal static extern void PxDistanceJoint_setStiffness_mut(PxDistanceJoint* self_, float stiffness);
 
         /// <summary>
         ///  Get the strength of the joint spring.
@@ -12939,7 +12939,7 @@ namespace Physx
         ///  stiffness the spring strength of the joint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_getStiffness", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxDistanceJoint_getStiffness(PxDistanceJoint* self_);
+        internal static extern float PxDistanceJoint_getStiffness(PxDistanceJoint* self_);
 
         /// <summary>
         ///  Set the damping of the joint spring.
@@ -12952,7 +12952,7 @@ namespace Physx
         ///  [0, PX_MAX_F32)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_setDamping_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDistanceJoint_setDamping_mut(PxDistanceJoint* self_, float damping);
+        internal static extern void PxDistanceJoint_setDamping_mut(PxDistanceJoint* self_, float damping);
 
         /// <summary>
         ///  Get the damping of the joint spring.
@@ -12960,7 +12960,7 @@ namespace Physx
         ///  the degree of damping of the joint spring of the joint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_getDamping", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxDistanceJoint_getDamping(PxDistanceJoint* self_);
+        internal static extern float PxDistanceJoint_getDamping(PxDistanceJoint* self_);
 
         /// <summary>
         ///  Set the contact distance for the min
@@ -12980,7 +12980,7 @@ namespace Physx
         ///  [0, PX_MAX_F32)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_setContactDistance_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDistanceJoint_setContactDistance_mut(PxDistanceJoint* self_, float contactDistance);
+        internal static extern void PxDistanceJoint_setContactDistance_mut(PxDistanceJoint* self_, float contactDistance);
 
         /// <summary>
         ///  Get the contact distance.
@@ -12988,7 +12988,7 @@ namespace Physx
         ///  the contact distance
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_getContactDistance", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxDistanceJoint_getContactDistance(PxDistanceJoint* self_);
+        internal static extern float PxDistanceJoint_getContactDistance(PxDistanceJoint* self_);
 
         /// <summary>
         ///  Set the flags specific to the Distance Joint.
@@ -12997,13 +12997,13 @@ namespace Physx
         ///  PxDistanceJointFlag::eMAX_DISTANCE_ENABLED
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_setDistanceJointFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDistanceJoint_setDistanceJointFlags_mut(PxDistanceJoint* self_, PxDistanceJointFlags flags);
+        internal static extern void PxDistanceJoint_setDistanceJointFlags_mut(PxDistanceJoint* self_, PxDistanceJointFlags flags);
 
         /// <summary>
         ///  Set a single flag specific to a Distance Joint to true or false.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_setDistanceJointFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDistanceJoint_setDistanceJointFlag_mut(PxDistanceJoint* self_, PxDistanceJointFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxDistanceJoint_setDistanceJointFlag_mut(PxDistanceJoint* self_, PxDistanceJointFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         /// <summary>
         ///  Get the flags specific to the Distance Joint.
@@ -13011,100 +13011,100 @@ namespace Physx
         ///  the joint flags
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_getDistanceJointFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDistanceJointFlags PxDistanceJoint_getDistanceJointFlags(PxDistanceJoint* self_);
+        internal static extern PxDistanceJointFlags PxDistanceJoint_getDistanceJointFlags(PxDistanceJoint* self_);
 
         /// <summary>
         ///  Returns string name of PxDistanceJoint, used for serialization
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDistanceJoint_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxDistanceJoint_getConcreteTypeName(PxDistanceJoint* self_);
+        internal static extern byte* PxDistanceJoint_getConcreteTypeName(PxDistanceJoint* self_);
 
         /// <summary>
         ///  Create a distance Joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxContactJointCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxContactJoint* phys_PxContactJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
+        internal static extern PxContactJoint* phys_PxContactJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
 
         [DllImport(__DllName, EntryPoint = "PxJacobianRow_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJacobianRow PxJacobianRow_new();
+        internal static extern PxJacobianRow PxJacobianRow_new();
 
         [DllImport(__DllName, EntryPoint = "PxJacobianRow_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJacobianRow PxJacobianRow_new_1(PxVec3* lin0, PxVec3* lin1, PxVec3* ang0, PxVec3* ang1);
+        internal static extern PxJacobianRow PxJacobianRow_new_1(PxVec3* lin0, PxVec3* lin1, PxVec3* ang0, PxVec3* ang1);
 
         /// <summary>
         ///  Set the current contact of the joint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactJoint_setContact_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactJoint_setContact_mut(PxContactJoint* self_, PxVec3* contact);
+        internal static extern void PxContactJoint_setContact_mut(PxContactJoint* self_, PxVec3* contact);
 
         /// <summary>
         ///  Set the current contact normal of the joint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactJoint_setContactNormal_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactJoint_setContactNormal_mut(PxContactJoint* self_, PxVec3* contactNormal);
+        internal static extern void PxContactJoint_setContactNormal_mut(PxContactJoint* self_, PxVec3* contactNormal);
 
         /// <summary>
         ///  Set the current penetration of the joint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactJoint_setPenetration_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactJoint_setPenetration_mut(PxContactJoint* self_, float penetration);
+        internal static extern void PxContactJoint_setPenetration_mut(PxContactJoint* self_, float penetration);
 
         /// <summary>
         ///  Return the current contact of the joint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactJoint_getContact", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxContactJoint_getContact(PxContactJoint* self_);
+        internal static extern PxVec3 PxContactJoint_getContact(PxContactJoint* self_);
 
         /// <summary>
         ///  Return the current contact normal of the joint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactJoint_getContactNormal", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxContactJoint_getContactNormal(PxContactJoint* self_);
+        internal static extern PxVec3 PxContactJoint_getContactNormal(PxContactJoint* self_);
 
         /// <summary>
         ///  Return the current penetration value of the joint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactJoint_getPenetration", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactJoint_getPenetration(PxContactJoint* self_);
+        internal static extern float PxContactJoint_getPenetration(PxContactJoint* self_);
 
         [DllImport(__DllName, EntryPoint = "PxContactJoint_getRestitution", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactJoint_getRestitution(PxContactJoint* self_);
+        internal static extern float PxContactJoint_getRestitution(PxContactJoint* self_);
 
         [DllImport(__DllName, EntryPoint = "PxContactJoint_setRestitution_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactJoint_setRestitution_mut(PxContactJoint* self_, float restitution);
+        internal static extern void PxContactJoint_setRestitution_mut(PxContactJoint* self_, float restitution);
 
         [DllImport(__DllName, EntryPoint = "PxContactJoint_getBounceThreshold", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxContactJoint_getBounceThreshold(PxContactJoint* self_);
+        internal static extern float PxContactJoint_getBounceThreshold(PxContactJoint* self_);
 
         [DllImport(__DllName, EntryPoint = "PxContactJoint_setBounceThreshold_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactJoint_setBounceThreshold_mut(PxContactJoint* self_, float bounceThreshold);
+        internal static extern void PxContactJoint_setBounceThreshold_mut(PxContactJoint* self_, float bounceThreshold);
 
         /// <summary>
         ///  Returns string name of PxContactJoint, used for serialization
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxContactJoint_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxContactJoint_getConcreteTypeName(PxContactJoint* self_);
+        internal static extern byte* PxContactJoint_getConcreteTypeName(PxContactJoint* self_);
 
         [DllImport(__DllName, EntryPoint = "PxContactJoint_computeJacobians", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxContactJoint_computeJacobians(PxContactJoint* self_, PxJacobianRow* jacobian);
+        internal static extern void PxContactJoint_computeJacobians(PxContactJoint* self_, PxJacobianRow* jacobian);
 
         [DllImport(__DllName, EntryPoint = "PxContactJoint_getNbJacobianRows", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxContactJoint_getNbJacobianRows(PxContactJoint* self_);
+        internal static extern uint PxContactJoint_getNbJacobianRows(PxContactJoint* self_);
 
         /// <summary>
         ///  Create a fixed joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxFixedJointCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFixedJoint* phys_PxFixedJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
+        internal static extern PxFixedJoint* phys_PxFixedJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
 
         /// <summary>
         ///  Returns string name of PxFixedJoint, used for serialization
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxFixedJoint_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxFixedJoint_getConcreteTypeName(PxFixedJoint* self_);
+        internal static extern byte* PxFixedJoint_getConcreteTypeName(PxFixedJoint* self_);
 
         [DllImport(__DllName, EntryPoint = "PxJointLimitParameters_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLimitParameters* PxJointLimitParameters_new_alloc();
+        internal static extern PxJointLimitParameters* PxJointLimitParameters_new_alloc();
 
         /// <summary>
         ///  Returns true if the current settings are valid.
@@ -13113,23 +13113,23 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLimitParameters_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxJointLimitParameters_isValid(PxJointLimitParameters* self_);
+        internal static extern bool PxJointLimitParameters_isValid(PxJointLimitParameters* self_);
 
         [DllImport(__DllName, EntryPoint = "PxJointLimitParameters_isSoft", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxJointLimitParameters_isSoft(PxJointLimitParameters* self_);
+        internal static extern bool PxJointLimitParameters_isSoft(PxJointLimitParameters* self_);
 
         /// <summary>
         ///  construct a linear hard limit
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLinearLimit_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLinearLimit PxJointLinearLimit_new(PxTolerancesScale* scale, float extent, float contactDist_deprecated);
+        internal static extern PxJointLinearLimit PxJointLinearLimit_new(PxTolerancesScale* scale, float extent, float contactDist_deprecated);
 
         /// <summary>
         ///  construct a linear soft limit
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLinearLimit_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLinearLimit PxJointLinearLimit_new_1(float extent, PxSpring* spring);
+        internal static extern PxJointLinearLimit PxJointLinearLimit_new_1(float extent, PxSpring* spring);
 
         /// <summary>
         ///  Returns true if the limit is valid
@@ -13138,22 +13138,22 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLinearLimit_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxJointLinearLimit_isValid(PxJointLinearLimit* self_);
+        internal static extern bool PxJointLinearLimit_isValid(PxJointLinearLimit* self_);
 
         [DllImport(__DllName, EntryPoint = "PxJointLinearLimit_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJointLinearLimit_delete(PxJointLinearLimit* self_);
+        internal static extern void PxJointLinearLimit_delete(PxJointLinearLimit* self_);
 
         /// <summary>
         ///  Construct a linear hard limit pair. The lower distance value must be less than the upper distance value.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLinearLimitPair_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLinearLimitPair PxJointLinearLimitPair_new(PxTolerancesScale* scale, float lowerLimit, float upperLimit, float contactDist_deprecated);
+        internal static extern PxJointLinearLimitPair PxJointLinearLimitPair_new(PxTolerancesScale* scale, float lowerLimit, float upperLimit, float contactDist_deprecated);
 
         /// <summary>
         ///  construct a linear soft limit pair
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLinearLimitPair_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLinearLimitPair PxJointLinearLimitPair_new_1(float lowerLimit, float upperLimit, PxSpring* spring);
+        internal static extern PxJointLinearLimitPair PxJointLinearLimitPair_new_1(float lowerLimit, float upperLimit, PxSpring* spring);
 
         /// <summary>
         ///  Returns true if the limit is valid.
@@ -13162,10 +13162,10 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLinearLimitPair_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxJointLinearLimitPair_isValid(PxJointLinearLimitPair* self_);
+        internal static extern bool PxJointLinearLimitPair_isValid(PxJointLinearLimitPair* self_);
 
         [DllImport(__DllName, EntryPoint = "PxJointLinearLimitPair_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJointLinearLimitPair_delete(PxJointLinearLimitPair* self_);
+        internal static extern void PxJointLinearLimitPair_delete(PxJointLinearLimitPair* self_);
 
         /// <summary>
         ///  construct an angular hard limit pair.
@@ -13173,7 +13173,7 @@ namespace Physx
         ///  The lower value must be less than the upper value.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointAngularLimitPair_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointAngularLimitPair PxJointAngularLimitPair_new(float lowerLimit, float upperLimit, float contactDist_deprecated);
+        internal static extern PxJointAngularLimitPair PxJointAngularLimitPair_new(float lowerLimit, float upperLimit, float contactDist_deprecated);
 
         /// <summary>
         ///  construct an angular soft limit pair.
@@ -13181,7 +13181,7 @@ namespace Physx
         ///  The lower value must be less than the upper value.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointAngularLimitPair_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointAngularLimitPair PxJointAngularLimitPair_new_1(float lowerLimit, float upperLimit, PxSpring* spring);
+        internal static extern PxJointAngularLimitPair PxJointAngularLimitPair_new_1(float lowerLimit, float upperLimit, PxSpring* spring);
 
         /// <summary>
         ///  Returns true if the limit is valid.
@@ -13190,22 +13190,22 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointAngularLimitPair_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxJointAngularLimitPair_isValid(PxJointAngularLimitPair* self_);
+        internal static extern bool PxJointAngularLimitPair_isValid(PxJointAngularLimitPair* self_);
 
         [DllImport(__DllName, EntryPoint = "PxJointAngularLimitPair_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJointAngularLimitPair_delete(PxJointAngularLimitPair* self_);
+        internal static extern void PxJointAngularLimitPair_delete(PxJointAngularLimitPair* self_);
 
         /// <summary>
         ///  Construct a cone hard limit.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLimitCone_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLimitCone PxJointLimitCone_new(float yLimitAngle, float zLimitAngle, float contactDist_deprecated);
+        internal static extern PxJointLimitCone PxJointLimitCone_new(float yLimitAngle, float zLimitAngle, float contactDist_deprecated);
 
         /// <summary>
         ///  Construct a cone soft limit.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLimitCone_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLimitCone PxJointLimitCone_new_1(float yLimitAngle, float zLimitAngle, PxSpring* spring);
+        internal static extern PxJointLimitCone PxJointLimitCone_new_1(float yLimitAngle, float zLimitAngle, PxSpring* spring);
 
         /// <summary>
         ///  Returns true if the limit is valid.
@@ -13214,22 +13214,22 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLimitCone_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxJointLimitCone_isValid(PxJointLimitCone* self_);
+        internal static extern bool PxJointLimitCone_isValid(PxJointLimitCone* self_);
 
         [DllImport(__DllName, EntryPoint = "PxJointLimitCone_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJointLimitCone_delete(PxJointLimitCone* self_);
+        internal static extern void PxJointLimitCone_delete(PxJointLimitCone* self_);
 
         /// <summary>
         ///  Construct a pyramid hard limit.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLimitPyramid_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLimitPyramid PxJointLimitPyramid_new(float yLimitAngleMin, float yLimitAngleMax, float zLimitAngleMin, float zLimitAngleMax, float contactDist_deprecated);
+        internal static extern PxJointLimitPyramid PxJointLimitPyramid_new(float yLimitAngleMin, float yLimitAngleMax, float zLimitAngleMin, float zLimitAngleMax, float contactDist_deprecated);
 
         /// <summary>
         ///  Construct a pyramid soft limit.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLimitPyramid_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLimitPyramid PxJointLimitPyramid_new_1(float yLimitAngleMin, float yLimitAngleMax, float zLimitAngleMin, float zLimitAngleMax, PxSpring* spring);
+        internal static extern PxJointLimitPyramid PxJointLimitPyramid_new_1(float yLimitAngleMin, float yLimitAngleMax, float zLimitAngleMin, float zLimitAngleMax, PxSpring* spring);
 
         /// <summary>
         ///  Returns true if the limit is valid.
@@ -13238,28 +13238,28 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxJointLimitPyramid_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxJointLimitPyramid_isValid(PxJointLimitPyramid* self_);
+        internal static extern bool PxJointLimitPyramid_isValid(PxJointLimitPyramid* self_);
 
         [DllImport(__DllName, EntryPoint = "PxJointLimitPyramid_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxJointLimitPyramid_delete(PxJointLimitPyramid* self_);
+        internal static extern void PxJointLimitPyramid_delete(PxJointLimitPyramid* self_);
 
         /// <summary>
         ///  Create a prismatic joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxPrismaticJointCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPrismaticJoint* phys_PxPrismaticJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
+        internal static extern PxPrismaticJoint* phys_PxPrismaticJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
 
         /// <summary>
         ///  returns the displacement of the joint along its axis.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPrismaticJoint_getPosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxPrismaticJoint_getPosition(PxPrismaticJoint* self_);
+        internal static extern float PxPrismaticJoint_getPosition(PxPrismaticJoint* self_);
 
         /// <summary>
         ///  returns the velocity of the joint along its axis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPrismaticJoint_getVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxPrismaticJoint_getVelocity(PxPrismaticJoint* self_);
+        internal static extern float PxPrismaticJoint_getVelocity(PxPrismaticJoint* self_);
 
         /// <summary>
         ///  sets the joint limit  parameters.
@@ -13268,13 +13268,13 @@ namespace Physx
         ///  a valid float.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPrismaticJoint_setLimit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPrismaticJoint_setLimit_mut(PxPrismaticJoint* self_, PxJointLinearLimitPair* anon_param0);
+        internal static extern void PxPrismaticJoint_setLimit_mut(PxPrismaticJoint* self_, PxJointLinearLimitPair* anon_param0);
 
         /// <summary>
         ///  gets the joint limit  parameters.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPrismaticJoint_getLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLinearLimitPair PxPrismaticJoint_getLimit(PxPrismaticJoint* self_);
+        internal static extern PxJointLinearLimitPair PxPrismaticJoint_getLimit(PxPrismaticJoint* self_);
 
         /// <summary>
         ///  Set the flags specific to the Prismatic Joint.
@@ -13283,13 +13283,13 @@ namespace Physx
         ///  PxPrismaticJointFlags(0)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPrismaticJoint_setPrismaticJointFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPrismaticJoint_setPrismaticJointFlags_mut(PxPrismaticJoint* self_, PxPrismaticJointFlags flags);
+        internal static extern void PxPrismaticJoint_setPrismaticJointFlags_mut(PxPrismaticJoint* self_, PxPrismaticJointFlags flags);
 
         /// <summary>
         ///  Set a single flag specific to a Prismatic Joint to true or false.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPrismaticJoint_setPrismaticJointFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPrismaticJoint_setPrismaticJointFlag_mut(PxPrismaticJoint* self_, PxPrismaticJointFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxPrismaticJoint_setPrismaticJointFlag_mut(PxPrismaticJoint* self_, PxPrismaticJointFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         /// <summary>
         ///  Get the flags specific to the Prismatic Joint.
@@ -13297,31 +13297,31 @@ namespace Physx
         ///  the joint flags
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPrismaticJoint_getPrismaticJointFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPrismaticJointFlags PxPrismaticJoint_getPrismaticJointFlags(PxPrismaticJoint* self_);
+        internal static extern PxPrismaticJointFlags PxPrismaticJoint_getPrismaticJointFlags(PxPrismaticJoint* self_);
 
         /// <summary>
         ///  Returns string name of PxPrismaticJoint, used for serialization
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPrismaticJoint_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxPrismaticJoint_getConcreteTypeName(PxPrismaticJoint* self_);
+        internal static extern byte* PxPrismaticJoint_getConcreteTypeName(PxPrismaticJoint* self_);
 
         /// <summary>
         ///  Create a revolute joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxRevoluteJointCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRevoluteJoint* phys_PxRevoluteJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
+        internal static extern PxRevoluteJoint* phys_PxRevoluteJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
 
         /// <summary>
         ///  return the angle of the joint, in the range (-2*Pi, 2*Pi]
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_getAngle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRevoluteJoint_getAngle(PxRevoluteJoint* self_);
+        internal static extern float PxRevoluteJoint_getAngle(PxRevoluteJoint* self_);
 
         /// <summary>
         ///  return the velocity of the joint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_getVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRevoluteJoint_getVelocity(PxRevoluteJoint* self_);
+        internal static extern float PxRevoluteJoint_getVelocity(PxRevoluteJoint* self_);
 
         /// <summary>
         ///  set the joint limit parameters.
@@ -13331,7 +13331,7 @@ namespace Physx
         ///  The limit angle range is (-2*Pi, 2*Pi).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_setLimit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRevoluteJoint_setLimit_mut(PxRevoluteJoint* self_, PxJointAngularLimitPair* limits);
+        internal static extern void PxRevoluteJoint_setLimit_mut(PxRevoluteJoint* self_, PxJointAngularLimitPair* limits);
 
         /// <summary>
         ///  get the joint limit parameters.
@@ -13339,7 +13339,7 @@ namespace Physx
         ///  the joint limit parameters
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_getLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointAngularLimitPair PxRevoluteJoint_getLimit(PxRevoluteJoint* self_);
+        internal static extern PxJointAngularLimitPair PxRevoluteJoint_getLimit(PxRevoluteJoint* self_);
 
         /// <summary>
         ///  set the target velocity for the drive model.
@@ -13358,7 +13358,7 @@ namespace Physx
         ///  0.0
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_setDriveVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRevoluteJoint_setDriveVelocity_mut(PxRevoluteJoint* self_, float velocity, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxRevoluteJoint_setDriveVelocity_mut(PxRevoluteJoint* self_, float velocity, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  gets the target velocity for the drive model.
@@ -13366,7 +13366,7 @@ namespace Physx
         ///  the drive target velocity
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_getDriveVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRevoluteJoint_getDriveVelocity(PxRevoluteJoint* self_);
+        internal static extern float PxRevoluteJoint_getDriveVelocity(PxRevoluteJoint* self_);
 
         /// <summary>
         ///  sets the maximum torque the drive can exert.
@@ -13379,7 +13379,7 @@ namespace Physx
         ///  PX_MAX_F32
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_setDriveForceLimit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRevoluteJoint_setDriveForceLimit_mut(PxRevoluteJoint* self_, float limit);
+        internal static extern void PxRevoluteJoint_setDriveForceLimit_mut(PxRevoluteJoint* self_, float limit);
 
         /// <summary>
         ///  gets the maximum torque the drive can exert.
@@ -13387,7 +13387,7 @@ namespace Physx
         ///  the torque limit
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_getDriveForceLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRevoluteJoint_getDriveForceLimit(PxRevoluteJoint* self_);
+        internal static extern float PxRevoluteJoint_getDriveForceLimit(PxRevoluteJoint* self_);
 
         /// <summary>
         ///  sets the gear ratio for the drive.
@@ -13401,7 +13401,7 @@ namespace Physx
         ///  1.0
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_setDriveGearRatio_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRevoluteJoint_setDriveGearRatio_mut(PxRevoluteJoint* self_, float ratio);
+        internal static extern void PxRevoluteJoint_setDriveGearRatio_mut(PxRevoluteJoint* self_, float ratio);
 
         /// <summary>
         ///  gets the gear ratio.
@@ -13409,7 +13409,7 @@ namespace Physx
         ///  the drive gear ratio
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_getDriveGearRatio", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRevoluteJoint_getDriveGearRatio(PxRevoluteJoint* self_);
+        internal static extern float PxRevoluteJoint_getDriveGearRatio(PxRevoluteJoint* self_);
 
         /// <summary>
         ///  sets the flags specific to the Revolute Joint.
@@ -13418,13 +13418,13 @@ namespace Physx
         ///  PxRevoluteJointFlags(0)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_setRevoluteJointFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRevoluteJoint_setRevoluteJointFlags_mut(PxRevoluteJoint* self_, PxRevoluteJointFlags flags);
+        internal static extern void PxRevoluteJoint_setRevoluteJointFlags_mut(PxRevoluteJoint* self_, PxRevoluteJointFlags flags);
 
         /// <summary>
         ///  sets a single flag specific to a Revolute Joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_setRevoluteJointFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRevoluteJoint_setRevoluteJointFlag_mut(PxRevoluteJoint* self_, PxRevoluteJointFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxRevoluteJoint_setRevoluteJointFlag_mut(PxRevoluteJoint* self_, PxRevoluteJointFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         /// <summary>
         ///  gets the flags specific to the Revolute Joint.
@@ -13432,19 +13432,19 @@ namespace Physx
         ///  the joint flags
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_getRevoluteJointFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRevoluteJointFlags PxRevoluteJoint_getRevoluteJointFlags(PxRevoluteJoint* self_);
+        internal static extern PxRevoluteJointFlags PxRevoluteJoint_getRevoluteJointFlags(PxRevoluteJoint* self_);
 
         /// <summary>
         ///  Returns string name of PxRevoluteJoint, used for serialization
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRevoluteJoint_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxRevoluteJoint_getConcreteTypeName(PxRevoluteJoint* self_);
+        internal static extern byte* PxRevoluteJoint_getConcreteTypeName(PxRevoluteJoint* self_);
 
         /// <summary>
         ///  Create a spherical joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxSphericalJointCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSphericalJoint* phys_PxSphericalJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
+        internal static extern PxSphericalJoint* phys_PxSphericalJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
 
         /// <summary>
         ///  Set the limit cone.
@@ -13455,25 +13455,25 @@ namespace Physx
         ///  the limit cone
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSphericalJoint_getLimitCone", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLimitCone PxSphericalJoint_getLimitCone(PxSphericalJoint* self_);
+        internal static extern PxJointLimitCone PxSphericalJoint_getLimitCone(PxSphericalJoint* self_);
 
         /// <summary>
         ///  Get the limit cone.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSphericalJoint_setLimitCone_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSphericalJoint_setLimitCone_mut(PxSphericalJoint* self_, PxJointLimitCone* limit);
+        internal static extern void PxSphericalJoint_setLimitCone_mut(PxSphericalJoint* self_, PxJointLimitCone* limit);
 
         /// <summary>
         ///  get the swing angle of the joint from the Y axis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSphericalJoint_getSwingYAngle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxSphericalJoint_getSwingYAngle(PxSphericalJoint* self_);
+        internal static extern float PxSphericalJoint_getSwingYAngle(PxSphericalJoint* self_);
 
         /// <summary>
         ///  get the swing angle of the joint from the Z axis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSphericalJoint_getSwingZAngle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxSphericalJoint_getSwingZAngle(PxSphericalJoint* self_);
+        internal static extern float PxSphericalJoint_getSwingZAngle(PxSphericalJoint* self_);
 
         /// <summary>
         ///  Set the flags specific to the Spherical Joint.
@@ -13482,13 +13482,13 @@ namespace Physx
         ///  PxSphericalJointFlags(0)
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSphericalJoint_setSphericalJointFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSphericalJoint_setSphericalJointFlags_mut(PxSphericalJoint* self_, PxSphericalJointFlags flags);
+        internal static extern void PxSphericalJoint_setSphericalJointFlags_mut(PxSphericalJoint* self_, PxSphericalJointFlags flags);
 
         /// <summary>
         ///  Set a single flag specific to a Spherical Joint to true or false.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSphericalJoint_setSphericalJointFlag_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSphericalJoint_setSphericalJointFlag_mut(PxSphericalJoint* self_, PxSphericalJointFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
+        internal static extern void PxSphericalJoint_setSphericalJointFlag_mut(PxSphericalJoint* self_, PxSphericalJointFlag flag, [MarshalAs(UnmanagedType.U1)] bool value);
 
         /// <summary>
         ///  Get the flags specific to the Spherical Joint.
@@ -13496,38 +13496,38 @@ namespace Physx
         ///  the joint flags
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSphericalJoint_getSphericalJointFlags", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSphericalJointFlags PxSphericalJoint_getSphericalJointFlags(PxSphericalJoint* self_);
+        internal static extern PxSphericalJointFlags PxSphericalJoint_getSphericalJointFlags(PxSphericalJoint* self_);
 
         /// <summary>
         ///  Returns string name of PxSphericalJoint, used for serialization
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSphericalJoint_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxSphericalJoint_getConcreteTypeName(PxSphericalJoint* self_);
+        internal static extern byte* PxSphericalJoint_getConcreteTypeName(PxSphericalJoint* self_);
 
         /// <summary>
         ///  Create a D6 joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxD6JointCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxD6Joint* phys_PxD6JointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
+        internal static extern PxD6Joint* phys_PxD6JointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
 
         /// <summary>
         ///  default constructor for PxD6JointDrive.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6JointDrive_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxD6JointDrive PxD6JointDrive_new();
+        internal static extern PxD6JointDrive PxD6JointDrive_new();
 
         /// <summary>
         ///  constructor a PxD6JointDrive.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6JointDrive_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxD6JointDrive PxD6JointDrive_new_1(float driveStiffness, float driveDamping, float driveForceLimit, [MarshalAs(UnmanagedType.U1)] bool isAcceleration);
+        internal static extern PxD6JointDrive PxD6JointDrive_new_1(float driveStiffness, float driveDamping, float driveForceLimit, [MarshalAs(UnmanagedType.U1)] bool isAcceleration);
 
         /// <summary>
         ///  returns true if the drive is valid
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6JointDrive_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxD6JointDrive_isValid(PxD6JointDrive* self_);
+        internal static extern bool PxD6JointDrive_isValid(PxD6JointDrive* self_);
 
         /// <summary>
         ///  Set the motion type around the specified axis.
@@ -13539,7 +13539,7 @@ namespace Physx
         ///  all degrees of freedom are locked
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_setMotion_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxD6Joint_setMotion_mut(PxD6Joint* self_, PxD6Axis axis, PxD6Motion type_);
+        internal static extern void PxD6Joint_setMotion_mut(PxD6Joint* self_, PxD6Axis axis, PxD6Motion type_);
 
         /// <summary>
         ///  Get the motion type around the specified axis.
@@ -13547,25 +13547,25 @@ namespace Physx
         ///  the motion type around the specified axis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getMotion", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxD6Motion PxD6Joint_getMotion(PxD6Joint* self_, PxD6Axis axis);
+        internal static extern PxD6Motion PxD6Joint_getMotion(PxD6Joint* self_, PxD6Axis axis);
 
         /// <summary>
         ///  get the twist angle of the joint, in the range (-2*Pi, 2*Pi]
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getTwistAngle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxD6Joint_getTwistAngle(PxD6Joint* self_);
+        internal static extern float PxD6Joint_getTwistAngle(PxD6Joint* self_);
 
         /// <summary>
         ///  get the swing angle of the joint from the Y axis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getSwingYAngle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxD6Joint_getSwingYAngle(PxD6Joint* self_);
+        internal static extern float PxD6Joint_getSwingYAngle(PxD6Joint* self_);
 
         /// <summary>
         ///  get the swing angle of the joint from the Z axis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getSwingZAngle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxD6Joint_getSwingZAngle(PxD6Joint* self_);
+        internal static extern float PxD6Joint_getSwingZAngle(PxD6Joint* self_);
 
         /// <summary>
         ///  Set the distance limit for the joint.
@@ -13575,7 +13575,7 @@ namespace Physx
         ///  to a distance limit.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_setDistanceLimit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxD6Joint_setDistanceLimit_mut(PxD6Joint* self_, PxJointLinearLimit* limit);
+        internal static extern void PxD6Joint_setDistanceLimit_mut(PxD6Joint* self_, PxJointLinearLimit* limit);
 
         /// <summary>
         ///  Get the distance limit for the joint.
@@ -13583,7 +13583,7 @@ namespace Physx
         ///  the distance limit structure
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getDistanceLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLinearLimit PxD6Joint_getDistanceLimit(PxD6Joint* self_);
+        internal static extern PxJointLinearLimit PxD6Joint_getDistanceLimit(PxD6Joint* self_);
 
         /// <summary>
         ///  Set the linear limit for a given linear axis.
@@ -13596,7 +13596,7 @@ namespace Physx
         ///  or point-in-box joints.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_setLinearLimit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxD6Joint_setLinearLimit_mut(PxD6Joint* self_, PxD6Axis axis, PxJointLinearLimitPair* limit);
+        internal static extern void PxD6Joint_setLinearLimit_mut(PxD6Joint* self_, PxD6Axis axis, PxJointLinearLimitPair* limit);
 
         /// <summary>
         ///  Get the linear limit for a given linear axis.
@@ -13604,7 +13604,7 @@ namespace Physx
         ///  the linear limit pair structure from desired axis
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getLinearLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLinearLimitPair PxD6Joint_getLinearLimit(PxD6Joint* self_, PxD6Axis axis);
+        internal static extern PxJointLinearLimitPair PxD6Joint_getLinearLimit(PxD6Joint* self_, PxD6Axis axis);
 
         /// <summary>
         ///  Set the twist limit for the joint.
@@ -13614,7 +13614,7 @@ namespace Physx
         ///  The limit angle range is (-2*Pi, 2*Pi).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_setTwistLimit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxD6Joint_setTwistLimit_mut(PxD6Joint* self_, PxJointAngularLimitPair* limit);
+        internal static extern void PxD6Joint_setTwistLimit_mut(PxD6Joint* self_, PxJointAngularLimitPair* limit);
 
         /// <summary>
         ///  Get the twist limit for the joint.
@@ -13622,7 +13622,7 @@ namespace Physx
         ///  the twist limit structure
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getTwistLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointAngularLimitPair PxD6Joint_getTwistLimit(PxD6Joint* self_);
+        internal static extern PxJointAngularLimitPair PxD6Joint_getTwistLimit(PxD6Joint* self_);
 
         /// <summary>
         ///  Set the swing cone limit for the joint.
@@ -13632,7 +13632,7 @@ namespace Physx
         ///  is limited, the corresponding value from the cone limit defines the limit range.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_setSwingLimit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxD6Joint_setSwingLimit_mut(PxD6Joint* self_, PxJointLimitCone* limit);
+        internal static extern void PxD6Joint_setSwingLimit_mut(PxD6Joint* self_, PxJointLimitCone* limit);
 
         /// <summary>
         ///  Get the cone limit for the joint.
@@ -13640,7 +13640,7 @@ namespace Physx
         ///  the swing limit structure
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getSwingLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLimitCone PxD6Joint_getSwingLimit(PxD6Joint* self_);
+        internal static extern PxJointLimitCone PxD6Joint_getSwingLimit(PxD6Joint* self_);
 
         /// <summary>
         ///  Set a pyramidal swing limit for the joint.
@@ -13652,7 +13652,7 @@ namespace Physx
         ///  The remaining cases (Y limited and Z is free, or vice versa) are not supported.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_setPyramidSwingLimit_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxD6Joint_setPyramidSwingLimit_mut(PxD6Joint* self_, PxJointLimitPyramid* limit);
+        internal static extern void PxD6Joint_setPyramidSwingLimit_mut(PxD6Joint* self_, PxJointLimitPyramid* limit);
 
         /// <summary>
         ///  Get the pyramidal swing limit for the joint.
@@ -13660,7 +13660,7 @@ namespace Physx
         ///  the swing limit structure
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getPyramidSwingLimit", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxJointLimitPyramid PxD6Joint_getPyramidSwingLimit(PxD6Joint* self_);
+        internal static extern PxJointLimitPyramid PxD6Joint_getPyramidSwingLimit(PxD6Joint* self_);
 
         /// <summary>
         ///  Set the drive parameters for the specified drive type.
@@ -13669,13 +13669,13 @@ namespace Physx
         ///  The default drive spring and damping values are zero, the force limit is zero, and no flags are set.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_setDrive_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxD6Joint_setDrive_mut(PxD6Joint* self_, PxD6Drive index, PxD6JointDrive* drive);
+        internal static extern void PxD6Joint_setDrive_mut(PxD6Joint* self_, PxD6Drive index, PxD6JointDrive* drive);
 
         /// <summary>
         ///  Get the drive parameters for the specified drive type.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getDrive", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxD6JointDrive PxD6Joint_getDrive(PxD6Joint* self_, PxD6Drive index);
+        internal static extern PxD6JointDrive PxD6Joint_getDrive(PxD6Joint* self_, PxD6Drive index);
 
         /// <summary>
         ///  Set the drive goal pose
@@ -13686,13 +13686,13 @@ namespace Physx
         ///  the identity transform
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_setDrivePosition_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxD6Joint_setDrivePosition_mut(PxD6Joint* self_, PxTransform* pose, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxD6Joint_setDrivePosition_mut(PxD6Joint* self_, PxTransform* pose, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Get the drive goal pose.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getDrivePosition", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxD6Joint_getDrivePosition(PxD6Joint* self_);
+        internal static extern PxTransform PxD6Joint_getDrivePosition(PxD6Joint* self_);
 
         /// <summary>
         ///  Set the target goal velocity for drive.
@@ -13700,13 +13700,13 @@ namespace Physx
         ///  The velocity is measured in the constraint frame of actor[0]
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_setDriveVelocity_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxD6Joint_setDriveVelocity_mut(PxD6Joint* self_, PxVec3* linear, PxVec3* angular, [MarshalAs(UnmanagedType.U1)] bool autowake);
+        internal static extern void PxD6Joint_setDriveVelocity_mut(PxD6Joint* self_, PxVec3* linear, PxVec3* angular, [MarshalAs(UnmanagedType.U1)] bool autowake);
 
         /// <summary>
         ///  Get the target goal velocity for joint drive.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getDriveVelocity", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxD6Joint_getDriveVelocity(PxD6Joint* self_, PxVec3* linear, PxVec3* angular);
+        internal static extern void PxD6Joint_getDriveVelocity(PxD6Joint* self_, PxVec3* linear, PxVec3* angular);
 
         /// <summary>
         ///  Set the linear tolerance threshold for projection. Projection is enabled if PxConstraintFlag::ePROJECTION
@@ -13725,7 +13725,7 @@ namespace Physx
         ///  1e10f
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_setProjectionLinearTolerance_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxD6Joint_setProjectionLinearTolerance_mut(PxD6Joint* self_, float tolerance);
+        internal static extern void PxD6Joint_setProjectionLinearTolerance_mut(PxD6Joint* self_, float tolerance);
 
         /// <summary>
         ///  Get the linear tolerance threshold for projection.
@@ -13733,7 +13733,7 @@ namespace Physx
         ///  the linear tolerance threshold
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getProjectionLinearTolerance", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxD6Joint_getProjectionLinearTolerance(PxD6Joint* self_);
+        internal static extern float PxD6Joint_getProjectionLinearTolerance(PxD6Joint* self_);
 
         /// <summary>
         ///  Set the angular tolerance threshold for projection. Projection is enabled if
@@ -13754,7 +13754,7 @@ namespace Physx
         ///  Angular projection is implemented only for the case of two or three locked angular degrees of freedom.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_setProjectionAngularTolerance_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxD6Joint_setProjectionAngularTolerance_mut(PxD6Joint* self_, float tolerance);
+        internal static extern void PxD6Joint_setProjectionAngularTolerance_mut(PxD6Joint* self_, float tolerance);
 
         /// <summary>
         ///  Get the angular tolerance threshold for projection.
@@ -13762,19 +13762,19 @@ namespace Physx
         ///  tolerance the angular tolerance threshold in radians
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getProjectionAngularTolerance", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxD6Joint_getProjectionAngularTolerance(PxD6Joint* self_);
+        internal static extern float PxD6Joint_getProjectionAngularTolerance(PxD6Joint* self_);
 
         /// <summary>
         ///  Returns string name of PxD6Joint, used for serialization
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxD6Joint_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxD6Joint_getConcreteTypeName(PxD6Joint* self_);
+        internal static extern byte* PxD6Joint_getConcreteTypeName(PxD6Joint* self_);
 
         /// <summary>
         ///  Create a gear Joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGearJointCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGearJoint* phys_PxGearJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
+        internal static extern PxGearJoint* phys_PxGearJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
 
         /// <summary>
         ///  Set the hinge/revolute joints connected by the gear joint.
@@ -13793,7 +13793,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxGearJoint_setHinges_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxGearJoint_setHinges_mut(PxGearJoint* self_, PxBase* hinge0, PxBase* hinge1);
+        internal static extern bool PxGearJoint_setHinges_mut(PxGearJoint* self_, PxBase* hinge0, PxBase* hinge1);
 
         /// <summary>
         ///  Set the desired gear ratio.
@@ -13805,7 +13805,7 @@ namespace Physx
         ///  Calling this function resets the internal positional error correction term.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxGearJoint_setGearRatio_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxGearJoint_setGearRatio_mut(PxGearJoint* self_, float ratio);
+        internal static extern void PxGearJoint_setGearRatio_mut(PxGearJoint* self_, float ratio);
 
         /// <summary>
         ///  Get the gear ratio.
@@ -13813,10 +13813,10 @@ namespace Physx
         ///  Current ratio
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxGearJoint_getGearRatio", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxGearJoint_getGearRatio(PxGearJoint* self_);
+        internal static extern float PxGearJoint_getGearRatio(PxGearJoint* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGearJoint_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxGearJoint_getConcreteTypeName(PxGearJoint* self_);
+        internal static extern byte* PxGearJoint_getConcreteTypeName(PxGearJoint* self_);
 
         /// <summary>
         ///  Create a rack
@@ -13824,7 +13824,7 @@ namespace Physx
         ///  pinion Joint.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxRackAndPinionJointCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRackAndPinionJoint* phys_PxRackAndPinionJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
+        internal static extern PxRackAndPinionJoint* phys_PxRackAndPinionJointCreate(PxPhysics* physics, PxRigidActor* actor0, PxTransform* localFrame0, PxRigidActor* actor1, PxTransform* localFrame1);
 
         /// <summary>
         ///  Set the hinge
@@ -13851,7 +13851,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRackAndPinionJoint_setJoints_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxRackAndPinionJoint_setJoints_mut(PxRackAndPinionJoint* self_, PxBase* hinge, PxBase* prismatic);
+        internal static extern bool PxRackAndPinionJoint_setJoints_mut(PxRackAndPinionJoint* self_, PxBase* hinge, PxBase* prismatic);
 
         /// <summary>
         ///  Set the desired ratio directly.
@@ -13861,7 +13861,7 @@ namespace Physx
         ///  Calling this function resets the internal positional error correction term.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRackAndPinionJoint_setRatio_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRackAndPinionJoint_setRatio_mut(PxRackAndPinionJoint* self_, float ratio);
+        internal static extern void PxRackAndPinionJoint_setRatio_mut(PxRackAndPinionJoint* self_, float ratio);
 
         /// <summary>
         ///  Get the ratio.
@@ -13869,7 +13869,7 @@ namespace Physx
         ///  Current ratio
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRackAndPinionJoint_getRatio", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern float PxRackAndPinionJoint_getRatio(PxRackAndPinionJoint* self_);
+        internal static extern float PxRackAndPinionJoint_getRatio(PxRackAndPinionJoint* self_);
 
         /// <summary>
         ///  Set the desired ratio indirectly.
@@ -13884,16 +13884,16 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRackAndPinionJoint_setData_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxRackAndPinionJoint_setData_mut(PxRackAndPinionJoint* self_, uint nbRackTeeth, uint nbPinionTeeth, float rackLength);
+        internal static extern bool PxRackAndPinionJoint_setData_mut(PxRackAndPinionJoint* self_, uint nbRackTeeth, uint nbPinionTeeth, float rackLength);
 
         [DllImport(__DllName, EntryPoint = "PxRackAndPinionJoint_getConcreteTypeName", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxRackAndPinionJoint_getConcreteTypeName(PxRackAndPinionJoint* self_);
+        internal static extern byte* PxRackAndPinionJoint_getConcreteTypeName(PxRackAndPinionJoint* self_);
 
         [DllImport(__DllName, EntryPoint = "PxGroupsMask_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGroupsMask* PxGroupsMask_new_alloc();
+        internal static extern PxGroupsMask* PxGroupsMask_new_alloc();
 
         [DllImport(__DllName, EntryPoint = "PxGroupsMask_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxGroupsMask_delete(PxGroupsMask* self_);
+        internal static extern void PxGroupsMask_delete(PxGroupsMask* self_);
 
         /// <summary>
         ///  Implementation of a simple filter shader that emulates PhysX 2.8.x filtering
@@ -13914,7 +13914,7 @@ namespace Physx
         ///  2) Collision filtering equation is satisfied
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxDefaultSimulationFilterShader", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxFilterFlags phys_PxDefaultSimulationFilterShader(uint attributes0, PxFilterData filterData0, uint attributes1, PxFilterData filterData1, PxPairFlags* pairFlags, void* constantBlock, uint constantBlockSize);
+        internal static extern PxFilterFlags phys_PxDefaultSimulationFilterShader(uint attributes0, PxFilterData filterData0, uint attributes1, PxFilterData filterData1, PxPairFlags* pairFlags, void* constantBlock, uint constantBlockSize);
 
         /// <summary>
         ///  Determines if collision detection is performed between a pair of groups
@@ -13925,7 +13925,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetGroupCollisionFlag", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxGetGroupCollisionFlag(ushort group1, ushort group2);
+        internal static extern bool phys_PxGetGroupCollisionFlag(ushort group1, ushort group2);
 
         /// <summary>
         ///  Specifies if collision should be performed by a pair of groups
@@ -13933,7 +13933,7 @@ namespace Physx
         ///  Collision group is an integer between 0 and 31.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxSetGroupCollisionFlag", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxSetGroupCollisionFlag(ushort group1, ushort group2, [MarshalAs(UnmanagedType.U1)] bool enable);
+        internal static extern void phys_PxSetGroupCollisionFlag(ushort group1, ushort group2, [MarshalAs(UnmanagedType.U1)] bool enable);
 
         /// <summary>
         ///  Retrieves the value set with PxSetGroup()
@@ -13943,7 +13943,7 @@ namespace Physx
         ///  The collision group this actor belongs to
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetGroup", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ushort phys_PxGetGroup(PxActor* actor);
+        internal static extern ushort phys_PxGetGroup(PxActor* actor);
 
         /// <summary>
         ///  Sets which collision group this actor is part of
@@ -13951,19 +13951,19 @@ namespace Physx
         ///  Collision group is an integer between 0 and 31.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxSetGroup", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxSetGroup(PxActor* actor, ushort collisionGroup);
+        internal static extern void phys_PxSetGroup(PxActor* actor, ushort collisionGroup);
 
         /// <summary>
         ///  Retrieves filtering operation. See comments for PxGroupsMask
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetFilterOps", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxGetFilterOps(PxFilterOp* op0, PxFilterOp* op1, PxFilterOp* op2);
+        internal static extern void phys_PxGetFilterOps(PxFilterOp* op0, PxFilterOp* op1, PxFilterOp* op2);
 
         /// <summary>
         ///  Setups filtering operations. See comments for PxGroupsMask
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxSetFilterOps", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxSetFilterOps(PxFilterOp* op0, PxFilterOp* op1, PxFilterOp* op2);
+        internal static extern void phys_PxSetFilterOps(PxFilterOp* op0, PxFilterOp* op1, PxFilterOp* op2);
 
         /// <summary>
         ///  Retrieves filtering's boolean value. See comments for PxGroupsMask
@@ -13972,25 +13972,25 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetFilterBool", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxGetFilterBool();
+        internal static extern bool phys_PxGetFilterBool();
 
         /// <summary>
         ///  Setups filtering's boolean value. See comments for PxGroupsMask
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxSetFilterBool", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxSetFilterBool([MarshalAs(UnmanagedType.U1)] bool enable);
+        internal static extern void phys_PxSetFilterBool([MarshalAs(UnmanagedType.U1)] bool enable);
 
         /// <summary>
         ///  Gets filtering constant K0 and K1. See comments for PxGroupsMask
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetFilterConstants", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxGetFilterConstants(PxGroupsMask* c0, PxGroupsMask* c1);
+        internal static extern void phys_PxGetFilterConstants(PxGroupsMask* c0, PxGroupsMask* c1);
 
         /// <summary>
         ///  Setups filtering's K0 and K1 value. See comments for PxGroupsMask
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxSetFilterConstants", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxSetFilterConstants(PxGroupsMask* c0, PxGroupsMask* c1);
+        internal static extern void phys_PxSetFilterConstants(PxGroupsMask* c0, PxGroupsMask* c1);
 
         /// <summary>
         ///  Gets 64-bit mask used for collision filtering. See comments for PxGroupsMask
@@ -13998,22 +13998,22 @@ namespace Physx
         ///  The group mask for the actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxGetGroupsMask", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxGroupsMask phys_PxGetGroupsMask(PxActor* actor);
+        internal static extern PxGroupsMask phys_PxGetGroupsMask(PxActor* actor);
 
         /// <summary>
         ///  Sets 64-bit mask used for collision filtering. See comments for PxGroupsMask
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxSetGroupsMask", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxSetGroupsMask(PxActor* actor, PxGroupsMask* mask);
+        internal static extern void phys_PxSetGroupsMask(PxActor* actor, PxGroupsMask* mask);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultErrorCallback_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDefaultErrorCallback* PxDefaultErrorCallback_new_alloc();
+        internal static extern PxDefaultErrorCallback* PxDefaultErrorCallback_new_alloc();
 
         [DllImport(__DllName, EntryPoint = "PxDefaultErrorCallback_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDefaultErrorCallback_delete(PxDefaultErrorCallback* self_);
+        internal static extern void PxDefaultErrorCallback_delete(PxDefaultErrorCallback* self_);
 
         [DllImport(__DllName, EntryPoint = "PxDefaultErrorCallback_reportError_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDefaultErrorCallback_reportError_mut(PxDefaultErrorCallback* self_, PxErrorCode code, byte* message, byte* file, int line);
+        internal static extern void PxDefaultErrorCallback_reportError_mut(PxDefaultErrorCallback* self_, PxErrorCode code, byte* message, byte* file, int line);
 
         /// <summary>
         ///  Creates a new shape with default properties and a list of materials and adds it to the list of shapes of this actor.
@@ -14045,7 +14045,7 @@ namespace Physx
         ///  The newly created shape.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActorExt_createExclusiveShape", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxShape* PxRigidActorExt_createExclusiveShape(PxRigidActor* actor, PxGeometry* geometry, PxMaterial** materials, ushort materialCount, PxShapeFlags shapeFlags);
+        internal static extern PxShape* PxRigidActorExt_createExclusiveShape(PxRigidActor* actor, PxGeometry* geometry, PxMaterial** materials, ushort materialCount, PxShapeFlags shapeFlags);
 
         /// <summary>
         ///  Creates a new shape with default properties and a single material adds it to the list of shapes of this actor.
@@ -14077,14 +14077,14 @@ namespace Physx
         ///  The newly created shape.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActorExt_createExclusiveShape_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxShape* PxRigidActorExt_createExclusiveShape_1(PxRigidActor* actor, PxGeometry* geometry, PxMaterial* material, PxShapeFlags shapeFlags);
+        internal static extern PxShape* PxRigidActorExt_createExclusiveShape_1(PxRigidActor* actor, PxGeometry* geometry, PxMaterial* material, PxShapeFlags shapeFlags);
 
         /// <summary>
         ///  Gets a list of bounds based on shapes in rigid actor. This list can be used to cook/create
         ///  bounding volume hierarchy though PxCooking API.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActorExt_getRigidActorShapeLocalBoundsList", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3* PxRigidActorExt_getRigidActorShapeLocalBoundsList(PxRigidActor* actor, uint* numBounds);
+        internal static extern PxBounds3* PxRigidActorExt_getRigidActorShapeLocalBoundsList(PxRigidActor* actor, uint* numBounds);
 
         /// <summary>
         ///  Convenience function to create a PxBVH object from a PxRigidActor.
@@ -14097,19 +14097,19 @@ namespace Physx
         ///  The PxBVH for this actor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidActorExt_createBVHFromActor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBVH* PxRigidActorExt_createBVHFromActor(PxPhysics* physics, PxRigidActor* actor);
+        internal static extern PxBVH* PxRigidActorExt_createBVHFromActor(PxPhysics* physics, PxRigidActor* actor);
 
         /// <summary>
         ///  Default constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMassProperties_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMassProperties PxMassProperties_new();
+        internal static extern PxMassProperties PxMassProperties_new();
 
         /// <summary>
         ///  Construct from individual elements.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMassProperties_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMassProperties PxMassProperties_new_1(float m, PxMat33* inertiaT, PxVec3* com);
+        internal static extern PxMassProperties PxMassProperties_new_1(float m, PxMat33* inertiaT, PxVec3* com);
 
         /// <summary>
         ///  Compute mass properties based on a provided geometry structure.
@@ -14117,13 +14117,13 @@ namespace Physx
         ///  This constructor assumes the geometry has a density of 1. Mass and inertia tensor scale linearly with density.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMassProperties_new_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMassProperties PxMassProperties_new_2(PxGeometry* geometry);
+        internal static extern PxMassProperties PxMassProperties_new_2(PxGeometry* geometry);
 
         /// <summary>
         ///  Translate the center of mass by a given vector and adjust the inertia tensor accordingly.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMassProperties_translate_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMassProperties_translate_mut(PxMassProperties* self_, PxVec3* t);
+        internal static extern void PxMassProperties_translate_mut(PxMassProperties* self_, PxVec3* t);
 
         /// <summary>
         ///  Get the entries of the diagonalized inertia tensor and the corresponding reference rotation.
@@ -14131,7 +14131,7 @@ namespace Physx
         ///  The entries of the diagonalized inertia tensor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMassProperties_getMassSpaceInertia", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxMassProperties_getMassSpaceInertia(PxMat33* inertia, PxQuat* massFrame);
+        internal static extern PxVec3 PxMassProperties_getMassSpaceInertia(PxMat33* inertia, PxQuat* massFrame);
 
         /// <summary>
         ///  Translate an inertia tensor using the parallel axis theorem
@@ -14139,7 +14139,7 @@ namespace Physx
         ///  The translated inertia tensor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMassProperties_translateInertia", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMassProperties_translateInertia(PxMat33* inertia, float mass, PxVec3* t);
+        internal static extern PxMat33 PxMassProperties_translateInertia(PxMat33* inertia, float mass, PxVec3* t);
 
         /// <summary>
         ///  Rotate an inertia tensor around the center of mass
@@ -14147,7 +14147,7 @@ namespace Physx
         ///  The rotated inertia tensor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMassProperties_rotateInertia", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMassProperties_rotateInertia(PxMat33* inertia, PxQuat* q);
+        internal static extern PxMat33 PxMassProperties_rotateInertia(PxMat33* inertia, PxQuat* q);
 
         /// <summary>
         ///  Non-uniform scaling of the inertia tensor
@@ -14155,7 +14155,7 @@ namespace Physx
         ///  The scaled inertia tensor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMassProperties_scaleInertia", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMat33 PxMassProperties_scaleInertia(PxMat33* inertia, PxQuat* scaleRotation, PxVec3* scale);
+        internal static extern PxMat33 PxMassProperties_scaleInertia(PxMat33* inertia, PxQuat* scaleRotation, PxVec3* scale);
 
         /// <summary>
         ///  Sum up individual mass properties.
@@ -14163,7 +14163,7 @@ namespace Physx
         ///  The summed up mass properties.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMassProperties_sum", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMassProperties PxMassProperties_sum(PxMassProperties* props, PxTransform* transforms, uint count);
+        internal static extern PxMassProperties PxMassProperties_sum(PxMassProperties* props, PxTransform* transforms, uint count);
 
         /// <summary>
         ///  Computation of mass properties for a rigid body actor
@@ -14191,7 +14191,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_updateMassAndInertia", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxRigidBodyExt_updateMassAndInertia(PxRigidBody* body, float* shapeDensities, uint shapeDensityCount, PxVec3* massLocalPose, [MarshalAs(UnmanagedType.U1)] bool includeNonSimShapes);
+        internal static extern bool PxRigidBodyExt_updateMassAndInertia(PxRigidBody* body, float* shapeDensities, uint shapeDensityCount, PxVec3* massLocalPose, [MarshalAs(UnmanagedType.U1)] bool includeNonSimShapes);
 
         /// <summary>
         ///  Computation of mass properties for a rigid body actor
@@ -14202,7 +14202,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_updateMassAndInertia_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxRigidBodyExt_updateMassAndInertia_1(PxRigidBody* body, float density, PxVec3* massLocalPose, [MarshalAs(UnmanagedType.U1)] bool includeNonSimShapes);
+        internal static extern bool PxRigidBodyExt_updateMassAndInertia_1(PxRigidBody* body, float density, PxVec3* massLocalPose, [MarshalAs(UnmanagedType.U1)] bool includeNonSimShapes);
 
         /// <summary>
         ///  Computation of mass properties for a rigid body actor
@@ -14218,7 +14218,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_setMassAndUpdateInertia", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxRigidBodyExt_setMassAndUpdateInertia(PxRigidBody* body, float* shapeMasses, uint shapeMassCount, PxVec3* massLocalPose, [MarshalAs(UnmanagedType.U1)] bool includeNonSimShapes);
+        internal static extern bool PxRigidBodyExt_setMassAndUpdateInertia(PxRigidBody* body, float* shapeMasses, uint shapeMassCount, PxVec3* massLocalPose, [MarshalAs(UnmanagedType.U1)] bool includeNonSimShapes);
 
         /// <summary>
         ///  Computation of mass properties for a rigid body actor
@@ -14232,7 +14232,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_setMassAndUpdateInertia_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxRigidBodyExt_setMassAndUpdateInertia_1(PxRigidBody* body, float mass, PxVec3* massLocalPose, [MarshalAs(UnmanagedType.U1)] bool includeNonSimShapes);
+        internal static extern bool PxRigidBodyExt_setMassAndUpdateInertia_1(PxRigidBody* body, float mass, PxVec3* massLocalPose, [MarshalAs(UnmanagedType.U1)] bool includeNonSimShapes);
 
         /// <summary>
         ///  Compute the mass, inertia tensor and center of mass from a list of shapes.
@@ -14240,7 +14240,7 @@ namespace Physx
         ///  The mass properties from the combined shapes.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_computeMassPropertiesFromShapes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMassProperties PxRigidBodyExt_computeMassPropertiesFromShapes(PxShape** shapes, uint shapeCount);
+        internal static extern PxMassProperties PxRigidBodyExt_computeMassPropertiesFromShapes(PxShape** shapes, uint shapeCount);
 
         /// <summary>
         ///  Applies a force (or impulse) defined in the global coordinate frame, acting at a particular
@@ -14261,7 +14261,7 @@ namespace Physx
         ///  This call wakes the actor if it is sleeping and the wakeup parameter is true (default).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_addForceAtPos", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBodyExt_addForceAtPos(PxRigidBody* body, PxVec3* force, PxVec3* pos, PxForceMode mode, [MarshalAs(UnmanagedType.U1)] bool wakeup);
+        internal static extern void PxRigidBodyExt_addForceAtPos(PxRigidBody* body, PxVec3* force, PxVec3* pos, PxForceMode mode, [MarshalAs(UnmanagedType.U1)] bool wakeup);
 
         /// <summary>
         ///  Applies a force (or impulse) defined in the global coordinate frame, acting at a particular
@@ -14282,7 +14282,7 @@ namespace Physx
         ///  This call wakes the actor if it is sleeping and the wakeup parameter is true (default).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_addForceAtLocalPos", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBodyExt_addForceAtLocalPos(PxRigidBody* body, PxVec3* force, PxVec3* pos, PxForceMode mode, [MarshalAs(UnmanagedType.U1)] bool wakeup);
+        internal static extern void PxRigidBodyExt_addForceAtLocalPos(PxRigidBody* body, PxVec3* force, PxVec3* pos, PxForceMode mode, [MarshalAs(UnmanagedType.U1)] bool wakeup);
 
         /// <summary>
         ///  Applies a force (or impulse) defined in the actor local coordinate frame, acting at a
@@ -14303,7 +14303,7 @@ namespace Physx
         ///  This call wakes the actor if it is sleeping and the wakeup parameter is true (default).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_addLocalForceAtPos", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBodyExt_addLocalForceAtPos(PxRigidBody* body, PxVec3* force, PxVec3* pos, PxForceMode mode, [MarshalAs(UnmanagedType.U1)] bool wakeup);
+        internal static extern void PxRigidBodyExt_addLocalForceAtPos(PxRigidBody* body, PxVec3* force, PxVec3* pos, PxForceMode mode, [MarshalAs(UnmanagedType.U1)] bool wakeup);
 
         /// <summary>
         ///  Applies a force (or impulse) defined in the actor local coordinate frame, acting at a
@@ -14324,7 +14324,7 @@ namespace Physx
         ///  This call wakes the actor if it is sleeping and the wakeup parameter is true (default).
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_addLocalForceAtLocalPos", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBodyExt_addLocalForceAtLocalPos(PxRigidBody* body, PxVec3* force, PxVec3* pos, PxForceMode mode, [MarshalAs(UnmanagedType.U1)] bool wakeup);
+        internal static extern void PxRigidBodyExt_addLocalForceAtLocalPos(PxRigidBody* body, PxVec3* force, PxVec3* pos, PxForceMode mode, [MarshalAs(UnmanagedType.U1)] bool wakeup);
 
         /// <summary>
         ///  Computes the velocity of a point given in world coordinates if it were attached to the
@@ -14333,7 +14333,7 @@ namespace Physx
         ///  The velocity of point in the global frame.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_getVelocityAtPos", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxRigidBodyExt_getVelocityAtPos(PxRigidBody* body, PxVec3* pos);
+        internal static extern PxVec3 PxRigidBodyExt_getVelocityAtPos(PxRigidBody* body, PxVec3* pos);
 
         /// <summary>
         ///  Computes the velocity of a point given in local coordinates if it were attached to the
@@ -14342,7 +14342,7 @@ namespace Physx
         ///  The velocity of point in the local frame.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_getLocalVelocityAtLocalPos", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxRigidBodyExt_getLocalVelocityAtLocalPos(PxRigidBody* body, PxVec3* pos);
+        internal static extern PxVec3 PxRigidBodyExt_getLocalVelocityAtLocalPos(PxRigidBody* body, PxVec3* pos);
 
         /// <summary>
         ///  Computes the velocity of a point (offset from the origin of the body) given in world coordinates if it were attached to the
@@ -14351,7 +14351,7 @@ namespace Physx
         ///  The velocity of point (offset from the origin of the body) in the global frame.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_getVelocityAtOffset", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxVec3 PxRigidBodyExt_getVelocityAtOffset(PxRigidBody* body, PxVec3* pos);
+        internal static extern PxVec3 PxRigidBodyExt_getVelocityAtOffset(PxRigidBody* body, PxVec3* pos);
 
         /// <summary>
         ///  Compute the change to linear and angular velocity that would occur if an impulsive force and torque were to be applied to a specified rigid body.
@@ -14361,7 +14361,7 @@ namespace Physx
         ///  if this call is used to determine the velocity delta for an articulation link, only the mass properties of the link are taken into account.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_computeVelocityDeltaFromImpulse", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBodyExt_computeVelocityDeltaFromImpulse(PxRigidBody* body, PxVec3* impulsiveForce, PxVec3* impulsiveTorque, PxVec3* deltaLinearVelocity, PxVec3* deltaAngularVelocity);
+        internal static extern void PxRigidBodyExt_computeVelocityDeltaFromImpulse(PxRigidBody* body, PxVec3* impulsiveForce, PxVec3* impulsiveTorque, PxVec3* deltaLinearVelocity, PxVec3* deltaAngularVelocity);
 
         /// <summary>
         ///  Computes the linear and angular velocity change vectors for a given impulse at a world space position taking a mass and inertia scale into account
@@ -14371,7 +14371,7 @@ namespace Physx
         ///  if this call is used to determine the velocity delta for an articulation link, only the mass properties of the link are taken into account.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_computeVelocityDeltaFromImpulse_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBodyExt_computeVelocityDeltaFromImpulse_1(PxRigidBody* body, PxTransform* globalPose, PxVec3* point, PxVec3* impulse, float invMassScale, float invInertiaScale, PxVec3* deltaLinearVelocity, PxVec3* deltaAngularVelocity);
+        internal static extern void PxRigidBodyExt_computeVelocityDeltaFromImpulse_1(PxRigidBody* body, PxTransform* globalPose, PxVec3* point, PxVec3* impulse, float invMassScale, float invInertiaScale, PxVec3* deltaLinearVelocity, PxVec3* deltaAngularVelocity);
 
         /// <summary>
         ///  Computes the linear and angular impulse vectors for a given impulse at a world space position taking a mass and inertia scale into account
@@ -14379,7 +14379,7 @@ namespace Physx
         ///  This function is useful for extracting the respective linear and angular impulses from a contact or joint when the mass/inertia ratios have been adjusted.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_computeLinearAngularImpulse", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRigidBodyExt_computeLinearAngularImpulse(PxRigidBody* body, PxTransform* globalPose, PxVec3* point, PxVec3* impulse, float invMassScale, float invInertiaScale, PxVec3* linearImpulse, PxVec3* angularImpulse);
+        internal static extern void PxRigidBodyExt_computeLinearAngularImpulse(PxRigidBody* body, PxTransform* globalPose, PxVec3* point, PxVec3* impulse, float invMassScale, float invInertiaScale, PxVec3* linearImpulse, PxVec3* angularImpulse);
 
         /// <summary>
         ///  Performs a linear sweep through space with the body's geometry objects.
@@ -14396,7 +14396,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_linearSweepSingle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxRigidBodyExt_linearSweepSingle(PxRigidBody* body, PxScene* scene, PxVec3* unitDir, float distance, PxHitFlags outputFlags, PxSweepHit* closestHit, uint* shapeIndex, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, float inflation);
+        internal static extern bool PxRigidBodyExt_linearSweepSingle(PxRigidBody* body, PxScene* scene, PxVec3* unitDir, float distance, PxHitFlags outputFlags, PxSweepHit* closestHit, uint* shapeIndex, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, float inflation);
 
         /// <summary>
         ///  Performs a linear sweep through space with the body's geometry objects, returning all overlaps.
@@ -14410,7 +14410,7 @@ namespace Physx
         ///  the number of touching hits. If overflow is set to true, the results are incomplete. In case of overflow there are also no guarantees that all touching hits returned are closer than the blocking hit.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRigidBodyExt_linearSweepMultiple", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxRigidBodyExt_linearSweepMultiple(PxRigidBody* body, PxScene* scene, PxVec3* unitDir, float distance, PxHitFlags outputFlags, PxSweepHit* touchHitBuffer, uint* touchHitShapeIndices, uint touchHitBufferSize, PxSweepHit* block, int* blockingShapeIndex, bool* overflow, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, float inflation);
+        internal static extern uint PxRigidBodyExt_linearSweepMultiple(PxRigidBody* body, PxScene* scene, PxVec3* unitDir, float distance, PxHitFlags outputFlags, PxSweepHit* touchHitBuffer, uint* touchHitShapeIndices, uint touchHitBufferSize, PxSweepHit* block, int* blockingShapeIndex, bool* overflow, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, float inflation);
 
         /// <summary>
         ///  Retrieves the world space pose of the shape.
@@ -14418,7 +14418,7 @@ namespace Physx
         ///  Global pose of shape.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShapeExt_getGlobalPose", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTransform PxShapeExt_getGlobalPose(PxShape* shape, PxRigidActor* actor);
+        internal static extern PxTransform PxShapeExt_getGlobalPose(PxShape* shape, PxRigidActor* actor);
 
         /// <summary>
         ///  Raycast test against the shape.
@@ -14426,7 +14426,7 @@ namespace Physx
         ///  Number of hits between the ray and the shape
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShapeExt_raycast", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxShapeExt_raycast(PxShape* shape, PxRigidActor* actor, PxVec3* rayOrigin, PxVec3* rayDir, float maxDist, PxHitFlags hitFlags, uint maxHits, PxRaycastHit* rayHits);
+        internal static extern uint PxShapeExt_raycast(PxShape* shape, PxRigidActor* actor, PxVec3* rayOrigin, PxVec3* rayDir, float maxDist, PxHitFlags hitFlags, uint maxHits, PxRaycastHit* rayHits);
 
         /// <summary>
         ///  Test overlap between the shape and a geometry object
@@ -14435,7 +14435,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShapeExt_overlap", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxShapeExt_overlap(PxShape* shape, PxRigidActor* actor, PxGeometry* otherGeom, PxTransform* otherGeomPose);
+        internal static extern bool PxShapeExt_overlap(PxShape* shape, PxRigidActor* actor, PxGeometry* otherGeom, PxTransform* otherGeomPose);
 
         /// <summary>
         ///  Sweep a geometry object against the shape.
@@ -14446,7 +14446,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShapeExt_sweep", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxShapeExt_sweep(PxShape* shape, PxRigidActor* actor, PxVec3* unitDir, float distance, PxGeometry* otherGeom, PxTransform* otherGeomPose, PxSweepHit* sweepHit, PxHitFlags hitFlags);
+        internal static extern bool PxShapeExt_sweep(PxShape* shape, PxRigidActor* actor, PxVec3* unitDir, float distance, PxGeometry* otherGeom, PxTransform* otherGeomPose, PxSweepHit* sweepHit, PxHitFlags hitFlags);
 
         /// <summary>
         ///  Retrieves the axis aligned bounding box enclosing the shape.
@@ -14454,13 +14454,13 @@ namespace Physx
         ///  The shape's bounding box.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxShapeExt_getWorldBounds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBounds3 PxShapeExt_getWorldBounds(PxShape* shape, PxRigidActor* actor, float inflation);
+        internal static extern PxBounds3 PxShapeExt_getWorldBounds(PxShape* shape, PxRigidActor* actor, float inflation);
 
         [DllImport(__DllName, EntryPoint = "PxMeshOverlapUtil_new_alloc", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxMeshOverlapUtil* PxMeshOverlapUtil_new_alloc();
+        internal static extern PxMeshOverlapUtil* PxMeshOverlapUtil_new_alloc();
 
         [DllImport(__DllName, EntryPoint = "PxMeshOverlapUtil_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxMeshOverlapUtil_delete(PxMeshOverlapUtil* self_);
+        internal static extern void PxMeshOverlapUtil_delete(PxMeshOverlapUtil* self_);
 
         /// <summary>
         ///  Find the mesh triangles which touch the specified geometry object.
@@ -14468,7 +14468,7 @@ namespace Physx
         ///  Number of overlaps found. Triangle indices can then be accessed through the [`getResults`]() function.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshOverlapUtil_findOverlap_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxMeshOverlapUtil_findOverlap_mut(PxMeshOverlapUtil* self_, PxGeometry* geom, PxTransform* geomPose, PxTriangleMeshGeometry* meshGeom, PxTransform* meshPose);
+        internal static extern uint PxMeshOverlapUtil_findOverlap_mut(PxMeshOverlapUtil* self_, PxGeometry* geom, PxTransform* geomPose, PxTriangleMeshGeometry* meshGeom, PxTransform* meshPose);
 
         /// <summary>
         ///  Find the height field triangles which touch the specified geometry object.
@@ -14476,7 +14476,7 @@ namespace Physx
         ///  Number of overlaps found. Triangle indices can then be accessed through the [`getResults`]() function.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshOverlapUtil_findOverlap_mut_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxMeshOverlapUtil_findOverlap_mut_1(PxMeshOverlapUtil* self_, PxGeometry* geom, PxTransform* geomPose, PxHeightFieldGeometry* hfGeom, PxTransform* hfPose);
+        internal static extern uint PxMeshOverlapUtil_findOverlap_mut_1(PxMeshOverlapUtil* self_, PxGeometry* geom, PxTransform* geomPose, PxHeightFieldGeometry* hfGeom, PxTransform* hfPose);
 
         /// <summary>
         ///  Retrieves array of triangle indices after a findOverlap call.
@@ -14484,7 +14484,7 @@ namespace Physx
         ///  Indices of touched triangles
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshOverlapUtil_getResults", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint* PxMeshOverlapUtil_getResults(PxMeshOverlapUtil* self_);
+        internal static extern uint* PxMeshOverlapUtil_getResults(PxMeshOverlapUtil* self_);
 
         /// <summary>
         ///  Retrieves number of triangle indices after a findOverlap call.
@@ -14492,7 +14492,7 @@ namespace Physx
         ///  Number of touched triangles
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxMeshOverlapUtil_getNbResults", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxMeshOverlapUtil_getNbResults(PxMeshOverlapUtil* self_);
+        internal static extern uint PxMeshOverlapUtil_getNbResults(PxMeshOverlapUtil* self_);
 
         /// <summary>
         ///  Computes an approximate minimum translational distance (MTD) between a geometry object and a mesh.
@@ -14512,7 +14512,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxComputeTriangleMeshPenetration", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxComputeTriangleMeshPenetration(PxVec3* direction, float* depth, PxGeometry* geom, PxTransform* geomPose, PxTriangleMeshGeometry* meshGeom, PxTransform* meshPose, uint maxIter, uint* usedIter);
+        internal static extern bool phys_PxComputeTriangleMeshPenetration(PxVec3* direction, float* depth, PxGeometry* geom, PxTransform* geomPose, PxTriangleMeshGeometry* meshGeom, PxTransform* meshPose, uint maxIter, uint* usedIter);
 
         /// <summary>
         ///  Computes an approximate minimum translational distance (MTD) between a geometry object and a heightfield.
@@ -14532,13 +14532,13 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxComputeHeightFieldPenetration", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxComputeHeightFieldPenetration(PxVec3* direction, float* depth, PxGeometry* geom, PxTransform* geomPose, PxHeightFieldGeometry* heightFieldGeom, PxTransform* heightFieldPose, uint maxIter, uint* usedIter);
+        internal static extern bool phys_PxComputeHeightFieldPenetration(PxVec3* direction, float* depth, PxGeometry* geom, PxTransform* geomPose, PxHeightFieldGeometry* heightFieldGeom, PxTransform* heightFieldPose, uint maxIter, uint* usedIter);
 
         [DllImport(__DllName, EntryPoint = "PxXmlMiscParameter_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxXmlMiscParameter PxXmlMiscParameter_new();
+        internal static extern PxXmlMiscParameter PxXmlMiscParameter_new();
 
         [DllImport(__DllName, EntryPoint = "PxXmlMiscParameter_new_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxXmlMiscParameter PxXmlMiscParameter_new_1(PxVec3* inUpVector, PxTolerancesScale inScale);
+        internal static extern PxXmlMiscParameter PxXmlMiscParameter_new_1(PxVec3* inUpVector, PxTolerancesScale inScale);
 
         /// <summary>
         ///  Returns whether the collection is serializable with the externalReferences collection.
@@ -14568,7 +14568,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerialization_isSerializable", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSerialization_isSerializable(PxCollection* collection, PxSerializationRegistry* sr, PxCollection* externalReferences);
+        internal static extern bool PxSerialization_isSerializable(PxCollection* collection, PxSerializationRegistry* sr, PxCollection* externalReferences);
 
         /// <summary>
         ///  Adds to a collection all objects such that it can be successfully serialized.
@@ -14592,7 +14592,7 @@ namespace Physx
         ///  is interrupted whenever a object in exceptFor is encountered.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerialization_complete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerialization_complete(PxCollection* collection, PxSerializationRegistry* sr, PxCollection* exceptFor, [MarshalAs(UnmanagedType.U1)] bool followJoints);
+        internal static extern void PxSerialization_complete(PxCollection* collection, PxSerializationRegistry* sr, PxCollection* exceptFor, [MarshalAs(UnmanagedType.U1)] bool followJoints);
 
         /// <summary>
         ///  Creates PxSerialObjectId values for unnamed objects in a collection.
@@ -14601,7 +14601,7 @@ namespace Physx
         ///  skipping values that are already assigned to objects in the collection.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerialization_createSerialObjectIds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxSerialization_createSerialObjectIds(PxCollection* collection, ulong @base);
+        internal static extern void PxSerialization_createSerialObjectIds(PxCollection* collection, ulong @base);
 
         /// <summary>
         ///  Creates a PxCollection from XML data.
@@ -14609,7 +14609,7 @@ namespace Physx
         ///  a pointer to a PxCollection if successful or NULL if it failed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerialization_createCollectionFromXml", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCollection* PxSerialization_createCollectionFromXml(PxInputData* inputData, PxCooking* cooking, PxSerializationRegistry* sr, PxCollection* externalRefs, PxStringTable* stringTable, PxXmlMiscParameter* outArgs);
+        internal static extern PxCollection* PxSerialization_createCollectionFromXml(PxInputData* inputData, PxCooking* cooking, PxSerializationRegistry* sr, PxCollection* externalRefs, PxStringTable* stringTable, PxXmlMiscParameter* outArgs);
 
         /// <summary>
         ///  Deserializes a PxCollection from memory.
@@ -14623,7 +14623,7 @@ namespace Physx
         ///  For a list of compatible sdk releases refer to the documentation of PX_BINARY_SERIAL_VERSION.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerialization_createCollectionFromBinary", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCollection* PxSerialization_createCollectionFromBinary(void* memBlock, PxSerializationRegistry* sr, PxCollection* externalRefs);
+        internal static extern PxCollection* PxSerialization_createCollectionFromBinary(void* memBlock, PxSerializationRegistry* sr, PxCollection* externalRefs);
 
         /// <summary>
         ///  Serializes a physics collection to an XML output stream.
@@ -14636,7 +14636,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerialization_serializeCollectionToXml", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSerialization_serializeCollectionToXml(PxOutputStream* outputStream, PxCollection* collection, PxSerializationRegistry* sr, PxCooking* cooking, PxCollection* externalRefs, PxXmlMiscParameter* inArgs);
+        internal static extern bool PxSerialization_serializeCollectionToXml(PxOutputStream* outputStream, PxCollection* collection, PxSerializationRegistry* sr, PxCooking* cooking, PxCollection* externalRefs, PxXmlMiscParameter* inArgs);
 
         /// <summary>
         ///  Serializes a collection to a binary stream.
@@ -14655,7 +14655,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerialization_serializeCollectionToBinary", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSerialization_serializeCollectionToBinary(PxOutputStream* outputStream, PxCollection* collection, PxSerializationRegistry* sr, PxCollection* externalRefs, [MarshalAs(UnmanagedType.U1)] bool exportNames);
+        internal static extern bool PxSerialization_serializeCollectionToBinary(PxOutputStream* outputStream, PxCollection* collection, PxSerializationRegistry* sr, PxCollection* externalRefs, [MarshalAs(UnmanagedType.U1)] bool exportNames);
 
         /// <summary>
         ///  Creates an application managed registry for serialization.
@@ -14663,7 +14663,7 @@ namespace Physx
         ///  PxSerializationRegistry instance.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSerialization_createSerializationRegistry", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSerializationRegistry* PxSerialization_createSerializationRegistry(PxPhysics* physics);
+        internal static extern PxSerializationRegistry* PxSerialization_createSerializationRegistry(PxPhysics* physics);
 
         /// <summary>
         ///  Deletes the dispatcher.
@@ -14671,7 +14671,7 @@ namespace Physx
         ///  Do not keep a reference to the deleted instance.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDefaultCpuDispatcher_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDefaultCpuDispatcher_release_mut(PxDefaultCpuDispatcher* self_);
+        internal static extern void PxDefaultCpuDispatcher_release_mut(PxDefaultCpuDispatcher* self_);
 
         /// <summary>
         ///  Enables profiling at task level.
@@ -14679,7 +14679,7 @@ namespace Physx
         ///  By default enabled only in profiling builds.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDefaultCpuDispatcher_setRunProfiled_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxDefaultCpuDispatcher_setRunProfiled_mut(PxDefaultCpuDispatcher* self_, [MarshalAs(UnmanagedType.U1)] bool runProfiled);
+        internal static extern void PxDefaultCpuDispatcher_setRunProfiled_mut(PxDefaultCpuDispatcher* self_, [MarshalAs(UnmanagedType.U1)] bool runProfiled);
 
         /// <summary>
         ///  Checks if profiling is enabled at task level.
@@ -14688,7 +14688,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxDefaultCpuDispatcher_getRunProfiled", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxDefaultCpuDispatcher_getRunProfiled(PxDefaultCpuDispatcher* self_);
+        internal static extern bool PxDefaultCpuDispatcher_getRunProfiled(PxDefaultCpuDispatcher* self_);
 
         /// <summary>
         ///  Create default dispatcher, extensions SDK needs to be initialized first.
@@ -14702,7 +14702,7 @@ namespace Physx
         ///  It is left to users to keep threads inactive, if so desired, when no simulation is running.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxDefaultCpuDispatcherCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxDefaultCpuDispatcher* phys_PxDefaultCpuDispatcherCreate(uint numThreads, uint* affinityMasks, PxDefaultCpuDispatcherWaitForWorkMode mode, uint yieldProcessorCount);
+        internal static extern PxDefaultCpuDispatcher* phys_PxDefaultCpuDispatcherCreate(uint numThreads, uint* affinityMasks, PxDefaultCpuDispatcherWaitForWorkMode mode, uint yieldProcessorCount);
 
         /// <summary>
         ///  Builds smooth vertex normals over a mesh.
@@ -14717,7 +14717,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxBuildSmoothNormals", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxBuildSmoothNormals(uint nbTris, uint nbVerts, PxVec3* verts, uint* dFaces, ushort* wFaces, PxVec3* normals, [MarshalAs(UnmanagedType.U1)] bool flip);
+        internal static extern bool phys_PxBuildSmoothNormals(uint nbTris, uint nbVerts, PxVec3* verts, uint* dFaces, ushort* wFaces, PxVec3* normals, [MarshalAs(UnmanagedType.U1)] bool flip);
 
         /// <summary>
         ///  simple method to create a PxRigidDynamic actor with a single PxShape.
@@ -14726,7 +14726,7 @@ namespace Physx
         ///  not be constructed
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateDynamic", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidDynamic* phys_PxCreateDynamic(PxPhysics* sdk, PxTransform* transform, PxGeometry* geometry, PxMaterial* material, float density, PxTransform* shapeOffset);
+        internal static extern PxRigidDynamic* phys_PxCreateDynamic(PxPhysics* sdk, PxTransform* transform, PxGeometry* geometry, PxMaterial* material, float density, PxTransform* shapeOffset);
 
         /// <summary>
         ///  simple method to create a PxRigidDynamic actor with a single PxShape.
@@ -14735,7 +14735,7 @@ namespace Physx
         ///  not be constructed
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateDynamic_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidDynamic* phys_PxCreateDynamic_1(PxPhysics* sdk, PxTransform* transform, PxShape* shape, float density);
+        internal static extern PxRigidDynamic* phys_PxCreateDynamic_1(PxPhysics* sdk, PxTransform* transform, PxShape* shape, float density);
 
         /// <summary>
         ///  simple method to create a kinematic PxRigidDynamic actor with a single PxShape.
@@ -14749,7 +14749,7 @@ namespace Physx
         ///  not be constructed
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateKinematic", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidDynamic* phys_PxCreateKinematic(PxPhysics* sdk, PxTransform* transform, PxGeometry* geometry, PxMaterial* material, float density, PxTransform* shapeOffset);
+        internal static extern PxRigidDynamic* phys_PxCreateKinematic(PxPhysics* sdk, PxTransform* transform, PxGeometry* geometry, PxMaterial* material, float density, PxTransform* shapeOffset);
 
         /// <summary>
         ///  simple method to create a kinematic PxRigidDynamic actor with a single PxShape.
@@ -14763,7 +14763,7 @@ namespace Physx
         ///  not be constructed
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateKinematic_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidDynamic* phys_PxCreateKinematic_1(PxPhysics* sdk, PxTransform* transform, PxShape* shape, float density);
+        internal static extern PxRigidDynamic* phys_PxCreateKinematic_1(PxPhysics* sdk, PxTransform* transform, PxShape* shape, float density);
 
         /// <summary>
         ///  simple method to create a PxRigidStatic actor with a single PxShape.
@@ -14771,7 +14771,7 @@ namespace Physx
         ///  a new static actor, or NULL if it could not be constructed
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateStatic", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidStatic* phys_PxCreateStatic(PxPhysics* sdk, PxTransform* transform, PxGeometry* geometry, PxMaterial* material, PxTransform* shapeOffset);
+        internal static extern PxRigidStatic* phys_PxCreateStatic(PxPhysics* sdk, PxTransform* transform, PxGeometry* geometry, PxMaterial* material, PxTransform* shapeOffset);
 
         /// <summary>
         ///  simple method to create a PxRigidStatic actor with a single PxShape.
@@ -14779,7 +14779,7 @@ namespace Physx
         ///  a new static actor, or NULL if it could not be constructed
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateStatic_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidStatic* phys_PxCreateStatic_1(PxPhysics* sdk, PxTransform* transform, PxShape* shape);
+        internal static extern PxRigidStatic* phys_PxCreateStatic_1(PxPhysics* sdk, PxTransform* transform, PxShape* shape);
 
         /// <summary>
         ///  create a shape by copying attributes from another shape
@@ -14803,7 +14803,7 @@ namespace Physx
         ///  the newly-created rigid static
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCloneShape", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxShape* phys_PxCloneShape(PxPhysics* physicsSDK, PxShape* shape, [MarshalAs(UnmanagedType.U1)] bool isExclusive);
+        internal static extern PxShape* phys_PxCloneShape(PxPhysics* physicsSDK, PxShape* shape, [MarshalAs(UnmanagedType.U1)] bool isExclusive);
 
         /// <summary>
         ///  create a static body by copying attributes from another rigid actor
@@ -14825,7 +14825,7 @@ namespace Physx
         ///  the newly-created rigid static
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCloneStatic", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidStatic* phys_PxCloneStatic(PxPhysics* physicsSDK, PxTransform* transform, PxRigidActor* actor);
+        internal static extern PxRigidStatic* phys_PxCloneStatic(PxPhysics* physicsSDK, PxTransform* transform, PxRigidActor* actor);
 
         /// <summary>
         ///  create a dynamic body by copying attributes from an existing body
@@ -14859,7 +14859,7 @@ namespace Physx
         ///  the newly-created rigid static
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCloneDynamic", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidDynamic* phys_PxCloneDynamic(PxPhysics* physicsSDK, PxTransform* transform, PxRigidDynamic* body);
+        internal static extern PxRigidDynamic* phys_PxCloneDynamic(PxPhysics* physicsSDK, PxTransform* transform, PxRigidDynamic* body);
 
         /// <summary>
         ///  create a plane actor. The plane equation is n.x + d = 0
@@ -14867,7 +14867,7 @@ namespace Physx
         ///  a new static actor, or NULL if it could not be constructed
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreatePlane", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRigidStatic* phys_PxCreatePlane(PxPhysics* sdk, PxPlane* plane, PxMaterial* material);
+        internal static extern PxRigidStatic* phys_PxCreatePlane(PxPhysics* sdk, PxPlane* plane, PxMaterial* material);
 
         /// <summary>
         ///  scale a rigid actor by a uniform scale
@@ -14877,10 +14877,10 @@ namespace Physx
         ///  center of mass is linearly scaled, the mass is multiplied by the cube of the scale, and the inertia tensor by the fifth power of the scale.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxScaleRigidActor", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxScaleRigidActor(PxRigidActor* actor, float scale, [MarshalAs(UnmanagedType.U1)] bool scaleMassProps);
+        internal static extern void phys_PxScaleRigidActor(PxRigidActor* actor, float scale, [MarshalAs(UnmanagedType.U1)] bool scaleMassProps);
 
         [DllImport(__DllName, EntryPoint = "PxStringTableExt_createStringTable", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxStringTable* PxStringTableExt_createStringTable(PxAllocatorCallback* inAllocator);
+        internal static extern PxStringTable* PxStringTableExt_createStringTable(PxAllocatorCallback* inAllocator);
 
         /// <summary>
         ///  Creates regions for PxSceneDesc, from a global box.
@@ -14895,7 +14895,7 @@ namespace Physx
         ///  number of regions written out to the 'regions' array
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBroadPhaseExt_createRegionsFromWorldBounds", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxBroadPhaseExt_createRegionsFromWorldBounds(PxBounds3* regions, PxBounds3* globalBounds, uint nbSubdiv, uint upAxis);
+        internal static extern uint PxBroadPhaseExt_createRegionsFromWorldBounds(PxBounds3* regions, PxBounds3* globalBounds, uint nbSubdiv, uint upAxis);
 
         /// <summary>
         ///  Raycast returning any blocking hit, not necessarily the closest.
@@ -14908,7 +14908,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQueryExt_raycastAny", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneQueryExt_raycastAny(PxScene* scene, PxVec3* origin, PxVec3* unitDir, float distance, PxQueryHit* hit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache);
+        internal static extern bool PxSceneQueryExt_raycastAny(PxScene* scene, PxVec3* origin, PxVec3* unitDir, float distance, PxQueryHit* hit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache);
 
         /// <summary>
         ///  Raycast returning a single result.
@@ -14921,7 +14921,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQueryExt_raycastSingle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneQueryExt_raycastSingle(PxScene* scene, PxVec3* origin, PxVec3* unitDir, float distance, PxHitFlags outputFlags, PxRaycastHit* hit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache);
+        internal static extern bool PxSceneQueryExt_raycastSingle(PxScene* scene, PxVec3* origin, PxVec3* unitDir, float distance, PxHitFlags outputFlags, PxRaycastHit* hit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache);
 
         /// <summary>
         ///  Raycast returning multiple results.
@@ -14935,7 +14935,7 @@ namespace Physx
         ///  Number of hits in the buffer, or -1 if the buffer overflowed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQueryExt_raycastMultiple", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int PxSceneQueryExt_raycastMultiple(PxScene* scene, PxVec3* origin, PxVec3* unitDir, float distance, PxHitFlags outputFlags, PxRaycastHit* hitBuffer, uint hitBufferSize, bool* blockingHit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache);
+        internal static extern int PxSceneQueryExt_raycastMultiple(PxScene* scene, PxVec3* origin, PxVec3* unitDir, float distance, PxHitFlags outputFlags, PxRaycastHit* hitBuffer, uint hitBufferSize, bool* blockingHit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache);
 
         /// <summary>
         ///  Sweep returning any blocking hit, not necessarily the closest.
@@ -14948,7 +14948,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQueryExt_sweepAny", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneQueryExt_sweepAny(PxScene* scene, PxGeometry* geometry, PxTransform* pose, PxVec3* unitDir, float distance, PxHitFlags queryFlags, PxQueryHit* hit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, float inflation);
+        internal static extern bool PxSceneQueryExt_sweepAny(PxScene* scene, PxGeometry* geometry, PxTransform* pose, PxVec3* unitDir, float distance, PxHitFlags queryFlags, PxQueryHit* hit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, float inflation);
 
         /// <summary>
         ///  Sweep returning a single result.
@@ -14961,7 +14961,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQueryExt_sweepSingle", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneQueryExt_sweepSingle(PxScene* scene, PxGeometry* geometry, PxTransform* pose, PxVec3* unitDir, float distance, PxHitFlags outputFlags, PxSweepHit* hit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, float inflation);
+        internal static extern bool PxSceneQueryExt_sweepSingle(PxScene* scene, PxGeometry* geometry, PxTransform* pose, PxVec3* unitDir, float distance, PxHitFlags outputFlags, PxSweepHit* hit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, float inflation);
 
         /// <summary>
         ///  Sweep returning multiple results.
@@ -14975,7 +14975,7 @@ namespace Physx
         ///  Number of hits in the buffer, or -1 if the buffer overflowed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQueryExt_sweepMultiple", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int PxSceneQueryExt_sweepMultiple(PxScene* scene, PxGeometry* geometry, PxTransform* pose, PxVec3* unitDir, float distance, PxHitFlags outputFlags, PxSweepHit* hitBuffer, uint hitBufferSize, bool* blockingHit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, float inflation);
+        internal static extern int PxSceneQueryExt_sweepMultiple(PxScene* scene, PxGeometry* geometry, PxTransform* pose, PxVec3* unitDir, float distance, PxHitFlags outputFlags, PxSweepHit* hitBuffer, uint hitBufferSize, bool* blockingHit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall, PxQueryCache* cache, float inflation);
 
         /// <summary>
         ///  Test overlap between a geometry and objects in the scene.
@@ -14987,7 +14987,7 @@ namespace Physx
         ///  Number of hits in the buffer, or -1 if the buffer overflowed.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQueryExt_overlapMultiple", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int PxSceneQueryExt_overlapMultiple(PxScene* scene, PxGeometry* geometry, PxTransform* pose, PxOverlapHit* hitBuffer, uint hitBufferSize, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall);
+        internal static extern int PxSceneQueryExt_overlapMultiple(PxScene* scene, PxGeometry* geometry, PxTransform* pose, PxOverlapHit* hitBuffer, uint hitBufferSize, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall);
 
         /// <summary>
         ///  Test returning, for a given geometry, any overlapping object in the scene.
@@ -15000,10 +15000,10 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxSceneQueryExt_overlapAny", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxSceneQueryExt_overlapAny(PxScene* scene, PxGeometry* geometry, PxTransform* pose, PxOverlapHit* hit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall);
+        internal static extern bool PxSceneQueryExt_overlapAny(PxScene* scene, PxGeometry* geometry, PxTransform* pose, PxOverlapHit* hit, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall);
 
         [DllImport(__DllName, EntryPoint = "PxBatchQueryExt_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBatchQueryExt_release_mut(PxBatchQueryExt* self_);
+        internal static extern void PxBatchQueryExt_release_mut(PxBatchQueryExt* self_);
 
         /// <summary>
         ///  Performs a raycast against objects in the scene.
@@ -15019,7 +15019,7 @@ namespace Physx
         ///  This will point either to an element of the buffer allocated on construction or to a user buffer passed to the constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBatchQueryExt_raycast_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRaycastBuffer* PxBatchQueryExt_raycast_mut(PxBatchQueryExt* self_, PxVec3* origin, PxVec3* unitDir, float distance, ushort maxNbTouches, PxHitFlags hitFlags, PxQueryFilterData* filterData, PxQueryCache* cache);
+        internal static extern PxRaycastBuffer* PxBatchQueryExt_raycast_mut(PxBatchQueryExt* self_, PxVec3* origin, PxVec3* unitDir, float distance, ushort maxNbTouches, PxHitFlags hitFlags, PxQueryFilterData* filterData, PxQueryCache* cache);
 
         /// <summary>
         ///  Performs a sweep test against objects in the scene.
@@ -15036,7 +15036,7 @@ namespace Physx
         ///  This will point either to an element of the buffer allocated on construction or to a user buffer passed to the constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBatchQueryExt_sweep_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSweepBuffer* PxBatchQueryExt_sweep_mut(PxBatchQueryExt* self_, PxGeometry* geometry, PxTransform* pose, PxVec3* unitDir, float distance, ushort maxNbTouches, PxHitFlags hitFlags, PxQueryFilterData* filterData, PxQueryCache* cache, float inflation);
+        internal static extern PxSweepBuffer* PxBatchQueryExt_sweep_mut(PxBatchQueryExt* self_, PxGeometry* geometry, PxTransform* pose, PxVec3* unitDir, float distance, ushort maxNbTouches, PxHitFlags hitFlags, PxQueryFilterData* filterData, PxQueryCache* cache, float inflation);
 
         /// <summary>
         ///  Performs an overlap test of a given geometry against objects in the scene.
@@ -15054,10 +15054,10 @@ namespace Physx
         ///  This will point either to an element of the buffer allocated on construction or to a user buffer passed to the constructor.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxBatchQueryExt_overlap_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxOverlapBuffer* PxBatchQueryExt_overlap_mut(PxBatchQueryExt* self_, PxGeometry* geometry, PxTransform* pose, ushort maxNbTouches, PxQueryFilterData* filterData, PxQueryCache* cache);
+        internal static extern PxOverlapBuffer* PxBatchQueryExt_overlap_mut(PxBatchQueryExt* self_, PxGeometry* geometry, PxTransform* pose, ushort maxNbTouches, PxQueryFilterData* filterData, PxQueryCache* cache);
 
         [DllImport(__DllName, EntryPoint = "PxBatchQueryExt_execute_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxBatchQueryExt_execute_mut(PxBatchQueryExt* self_);
+        internal static extern void PxBatchQueryExt_execute_mut(PxBatchQueryExt* self_);
 
         /// <summary>
         ///  Create a PxBatchQueryExt without the need for pre-allocated result or touch buffers.
@@ -15066,7 +15066,7 @@ namespace Physx
         ///  In the event that a NULL pointer is returned a corresponding error will be issued to the error stream.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateBatchQueryExt", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBatchQueryExt* phys_PxCreateBatchQueryExt(PxScene* scene, PxQueryFilterCallback* queryFilterCallback, uint maxNbRaycasts, uint maxNbRaycastTouches, uint maxNbSweeps, uint maxNbSweepTouches, uint maxNbOverlaps, uint maxNbOverlapTouches);
+        internal static extern PxBatchQueryExt* phys_PxCreateBatchQueryExt(PxScene* scene, PxQueryFilterCallback* queryFilterCallback, uint maxNbRaycasts, uint maxNbRaycastTouches, uint maxNbSweeps, uint maxNbSweepTouches, uint maxNbOverlaps, uint maxNbOverlapTouches);
 
         /// <summary>
         ///  Create a PxBatchQueryExt with user-supplied result and touch buffers.
@@ -15075,7 +15075,7 @@ namespace Physx
         ///  In the event that a NULL pointer is returned a corresponding error will be issued to the error stream.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateBatchQueryExt_1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxBatchQueryExt* phys_PxCreateBatchQueryExt_1(PxScene* scene, PxQueryFilterCallback* queryFilterCallback, PxRaycastBuffer* raycastBuffers, uint maxNbRaycasts, PxRaycastHit* raycastTouches, uint maxNbRaycastTouches, PxSweepBuffer* sweepBuffers, uint maxNbSweeps, PxSweepHit* sweepTouches, uint maxNbSweepTouches, PxOverlapBuffer* overlapBuffers, uint maxNbOverlaps, PxOverlapHit* overlapTouches, uint maxNbOverlapTouches);
+        internal static extern PxBatchQueryExt* phys_PxCreateBatchQueryExt_1(PxScene* scene, PxQueryFilterCallback* queryFilterCallback, PxRaycastBuffer* raycastBuffers, uint maxNbRaycasts, PxRaycastHit* raycastTouches, uint maxNbRaycastTouches, PxSweepBuffer* sweepBuffers, uint maxNbSweeps, PxSweepHit* sweepTouches, uint maxNbSweepTouches, PxOverlapBuffer* overlapBuffers, uint maxNbOverlaps, PxOverlapHit* overlapTouches, uint maxNbOverlapTouches);
 
         /// <summary>
         ///  Creates an external scene query system.
@@ -15091,7 +15091,7 @@ namespace Physx
         ///  An external SQ system instance
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateExternalSceneQuerySystem", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxSceneQuerySystem* phys_PxCreateExternalSceneQuerySystem(PxSceneQueryDesc* desc, ulong contextID);
+        internal static extern PxSceneQuerySystem* phys_PxCreateExternalSceneQuerySystem(PxSceneQueryDesc* desc, ulong contextID);
 
         /// <summary>
         ///  Adds a pruner to the system.
@@ -15108,7 +15108,7 @@ namespace Physx
         ///  A pruner index
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomSceneQuerySystem_addPruner_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxCustomSceneQuerySystem_addPruner_mut(PxCustomSceneQuerySystem* self_, PxPruningStructureType primaryType, PxDynamicTreeSecondaryPruner secondaryType, uint preallocated);
+        internal static extern uint PxCustomSceneQuerySystem_addPruner_mut(PxCustomSceneQuerySystem* self_, PxPruningStructureType primaryType, PxDynamicTreeSecondaryPruner secondaryType, uint preallocated);
 
         /// <summary>
         ///  Start custom build-steps for all pruners
@@ -15134,13 +15134,13 @@ namespace Physx
         ///  The number of pruners in the system.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomSceneQuerySystem_startCustomBuildstep_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxCustomSceneQuerySystem_startCustomBuildstep_mut(PxCustomSceneQuerySystem* self_);
+        internal static extern uint PxCustomSceneQuerySystem_startCustomBuildstep_mut(PxCustomSceneQuerySystem* self_);
 
         /// <summary>
         ///  Perform a custom build-step for a given pruner.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomSceneQuerySystem_customBuildstep_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCustomSceneQuerySystem_customBuildstep_mut(PxCustomSceneQuerySystem* self_, uint index);
+        internal static extern void PxCustomSceneQuerySystem_customBuildstep_mut(PxCustomSceneQuerySystem* self_, uint index);
 
         /// <summary>
         ///  Finish custom build-steps
@@ -15148,10 +15148,10 @@ namespace Physx
         ///  Call this function once after all the customBuildstep() calls are done.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomSceneQuerySystem_finishCustomBuildstep_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCustomSceneQuerySystem_finishCustomBuildstep_mut(PxCustomSceneQuerySystem* self_);
+        internal static extern void PxCustomSceneQuerySystem_finishCustomBuildstep_mut(PxCustomSceneQuerySystem* self_);
 
         [DllImport(__DllName, EntryPoint = "PxCustomSceneQuerySystemAdapter_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxCustomSceneQuerySystemAdapter_delete(PxCustomSceneQuerySystemAdapter* self_);
+        internal static extern void PxCustomSceneQuerySystemAdapter_delete(PxCustomSceneQuerySystemAdapter* self_);
 
         /// <summary>
         ///  Gets a pruner index for an actor/shape.
@@ -15163,7 +15163,7 @@ namespace Physx
         ///  A pruner index for this actor/shape.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomSceneQuerySystemAdapter_getPrunerIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint PxCustomSceneQuerySystemAdapter_getPrunerIndex(PxCustomSceneQuerySystemAdapter* self_, PxRigidActor* actor, PxShape* shape);
+        internal static extern uint PxCustomSceneQuerySystemAdapter_getPrunerIndex(PxCustomSceneQuerySystemAdapter* self_, PxRigidActor* actor, PxShape* shape);
 
         /// <summary>
         ///  Pruner filtering callback.
@@ -15174,7 +15174,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxCustomSceneQuerySystemAdapter_processPruner", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxCustomSceneQuerySystemAdapter_processPruner(PxCustomSceneQuerySystemAdapter* self_, uint prunerIndex, PxQueryThreadContext* context, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall);
+        internal static extern bool PxCustomSceneQuerySystemAdapter_processPruner(PxCustomSceneQuerySystemAdapter* self_, uint prunerIndex, PxQueryThreadContext* context, PxQueryFilterData* filterData, PxQueryFilterCallback* filterCall);
 
         /// <summary>
         ///  Creates a custom scene query system.
@@ -15185,7 +15185,7 @@ namespace Physx
         ///  A custom SQ system instance
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateCustomSceneQuerySystem", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxCustomSceneQuerySystem* phys_PxCreateCustomSceneQuerySystem(PxSceneQueryUpdateMode sceneQueryUpdateMode, ulong contextID, PxCustomSceneQuerySystemAdapter* adapter, [MarshalAs(UnmanagedType.U1)] bool usesTreeOfPruners);
+        internal static extern PxCustomSceneQuerySystem* phys_PxCreateCustomSceneQuerySystem(PxSceneQueryUpdateMode sceneQueryUpdateMode, ulong contextID, PxCustomSceneQuerySystemAdapter* adapter, [MarshalAs(UnmanagedType.U1)] bool usesTreeOfPruners);
 
         /// <summary>
         ///  Computes closest polygon of the convex hull geometry for a given impact point
@@ -15197,7 +15197,7 @@ namespace Physx
         ///  Closest face index of the convex geometry.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxFindFaceIndex", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern uint phys_PxFindFaceIndex(PxConvexMeshGeometry* convexGeom, PxTransform* geomPose, PxVec3* impactPos, PxVec3* unitDir);
+        internal static extern uint phys_PxFindFaceIndex(PxConvexMeshGeometry* convexGeom, PxTransform* geomPose, PxVec3* impactPos, PxVec3* unitDir);
 
         /// <summary>
         ///  Sets the sampling radius
@@ -15206,22 +15206,22 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPoissonSampler_setSamplingRadius_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxPoissonSampler_setSamplingRadius_mut(PxPoissonSampler* self_, float samplingRadius);
+        internal static extern bool PxPoissonSampler_setSamplingRadius_mut(PxPoissonSampler* self_, float samplingRadius);
 
         /// <summary>
         ///  Adds new Poisson Samples inside the sphere specified
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPoissonSampler_addSamplesInSphere_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPoissonSampler_addSamplesInSphere_mut(PxPoissonSampler* self_, PxVec3* sphereCenter, float sphereRadius, [MarshalAs(UnmanagedType.U1)] bool createVolumeSamples);
+        internal static extern void PxPoissonSampler_addSamplesInSphere_mut(PxPoissonSampler* self_, PxVec3* sphereCenter, float sphereRadius, [MarshalAs(UnmanagedType.U1)] bool createVolumeSamples);
 
         /// <summary>
         ///  Adds new Poisson Samples inside the box specified
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPoissonSampler_addSamplesInBox_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPoissonSampler_addSamplesInBox_mut(PxPoissonSampler* self_, PxBounds3* axisAlignedBox, PxQuat* boxOrientation, [MarshalAs(UnmanagedType.U1)] bool createVolumeSamples);
+        internal static extern void PxPoissonSampler_addSamplesInBox_mut(PxPoissonSampler* self_, PxBounds3* axisAlignedBox, PxQuat* boxOrientation, [MarshalAs(UnmanagedType.U1)] bool createVolumeSamples);
 
         [DllImport(__DllName, EntryPoint = "PxPoissonSampler_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPoissonSampler_delete(PxPoissonSampler* self_);
+        internal static extern void PxPoissonSampler_delete(PxPoissonSampler* self_);
 
         /// <summary>
         ///  Creates a shape sampler
@@ -15229,7 +15229,7 @@ namespace Physx
         ///  Returns the sampler
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateShapeSampler", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPoissonSampler* phys_PxCreateShapeSampler(PxGeometry* geometry, PxTransform* transform, PxBounds3* worldBounds, float initialSamplingRadius, int numSampleAttemptsAroundPoint);
+        internal static extern PxPoissonSampler* phys_PxCreateShapeSampler(PxGeometry* geometry, PxTransform* transform, PxBounds3* worldBounds, float initialSamplingRadius, int numSampleAttemptsAroundPoint);
 
         /// <summary>
         ///  Checks whether a point is inside the triangle mesh
@@ -15238,10 +15238,10 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTriangleMeshPoissonSampler_isPointInTriangleMesh_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxTriangleMeshPoissonSampler_isPointInTriangleMesh_mut(PxTriangleMeshPoissonSampler* self_, PxVec3* p);
+        internal static extern bool PxTriangleMeshPoissonSampler_isPointInTriangleMesh_mut(PxTriangleMeshPoissonSampler* self_, PxVec3* p);
 
         [DllImport(__DllName, EntryPoint = "PxTriangleMeshPoissonSampler_delete", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxTriangleMeshPoissonSampler_delete(PxTriangleMeshPoissonSampler* self_);
+        internal static extern void PxTriangleMeshPoissonSampler_delete(PxTriangleMeshPoissonSampler* self_);
 
         /// <summary>
         ///  Creates a triangle mesh sampler
@@ -15249,7 +15249,7 @@ namespace Physx
         ///  Returns the sampler
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreateTriangleMeshSampler", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxTriangleMeshPoissonSampler* phys_PxCreateTriangleMeshSampler(uint* triangles, uint numTriangles, PxVec3* vertices, uint numVertices, float initialSamplingRadius, int numSampleAttemptsAroundPoint);
+        internal static extern PxTriangleMeshPoissonSampler* phys_PxCreateTriangleMeshSampler(uint* triangles, uint numTriangles, PxVec3* vertices, uint numVertices, float initialSamplingRadius, int numSampleAttemptsAroundPoint);
 
         /// <summary>
         ///  Returns the index of the tetrahedron that contains a point
@@ -15257,7 +15257,7 @@ namespace Physx
         ///  The index of the tetrahedon containing the point, -1 if not tetrahedron contains the opoint
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMeshExt_findTetrahedronContainingPoint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int PxTetrahedronMeshExt_findTetrahedronContainingPoint(PxTetrahedronMesh* mesh, PxVec3* point, PxVec4* bary, float tolerance);
+        internal static extern int PxTetrahedronMeshExt_findTetrahedronContainingPoint(PxTetrahedronMesh* mesh, PxVec3* point, PxVec4* bary, float tolerance);
 
         /// <summary>
         ///  Returns the index of the tetrahedron closest to a point
@@ -15265,7 +15265,7 @@ namespace Physx
         ///  The index of the tetrahedon closest to the point
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxTetrahedronMeshExt_findTetrahedronClosestToPoint", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int PxTetrahedronMeshExt_findTetrahedronClosestToPoint(PxTetrahedronMesh* mesh, PxVec3* point, PxVec4* bary);
+        internal static extern int PxTetrahedronMeshExt_findTetrahedronClosestToPoint(PxTetrahedronMesh* mesh, PxVec3* point, PxVec4* bary);
 
         /// <summary>
         ///  Initialize the PhysXExtensions library.
@@ -15276,7 +15276,7 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxInitExtensions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool phys_PxInitExtensions(PxPhysics* physics, PxPvd* pvd);
+        internal static extern bool phys_PxInitExtensions(PxPhysics* physics, PxPvd* pvd);
 
         /// <summary>
         ///  Shut down the PhysXExtensions library.
@@ -15286,29 +15286,29 @@ namespace Physx
         ///  This function is required to be called to release foundation usage.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCloseExtensions", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void phys_PxCloseExtensions();
+        internal static extern void phys_PxCloseExtensions();
 
         [DllImport(__DllName, EntryPoint = "PxRepXObject_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRepXObject PxRepXObject_new(byte* inTypeName, void* inSerializable, ulong inId);
+        internal static extern PxRepXObject PxRepXObject_new(byte* inTypeName, void* inSerializable, ulong inId);
 
         [DllImport(__DllName, EntryPoint = "PxRepXObject_isValid", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxRepXObject_isValid(PxRepXObject* self_);
+        internal static extern bool PxRepXObject_isValid(PxRepXObject* self_);
 
         [DllImport(__DllName, EntryPoint = "PxRepXInstantiationArgs_new", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRepXInstantiationArgs PxRepXInstantiationArgs_new(PxPhysics* inPhysics, PxCooking* inCooking, PxStringTable* inStringTable);
+        internal static extern PxRepXInstantiationArgs PxRepXInstantiationArgs_new(PxPhysics* inPhysics, PxCooking* inCooking, PxStringTable* inStringTable);
 
         /// <summary>
         ///  The type this Serializer is meant to operate on.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRepXSerializer_getTypeName_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* PxRepXSerializer_getTypeName_mut(PxRepXSerializer* self_);
+        internal static extern byte* PxRepXSerializer_getTypeName_mut(PxRepXSerializer* self_);
 
         /// <summary>
         ///  Convert from a RepX object to a key-value pair hierarchy
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRepXSerializer_objectToFile_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxRepXSerializer_objectToFile_mut(PxRepXSerializer* self_, PxRepXObject* inLiveObject, PxCollection* inCollection, XmlWriter* inWriter, MemoryBuffer* inTempBuffer, PxRepXInstantiationArgs* inArgs);
+        internal static extern void PxRepXSerializer_objectToFile_mut(PxRepXSerializer* self_, PxRepXObject* inLiveObject, PxCollection* inCollection, XmlWriter* inWriter, MemoryBuffer* inTempBuffer, PxRepXInstantiationArgs* inArgs);
 
         /// <summary>
         ///  Convert from a descriptor to a live object.  Must be an object of this Serializer type.
@@ -15316,53 +15316,53 @@ namespace Physx
         ///  The new live object.  It can be an invalid object if the instantiation cannot take place.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxRepXSerializer_fileToObject_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxRepXObject PxRepXSerializer_fileToObject_mut(PxRepXSerializer* self_, XmlReader* inReader, XmlMemoryAllocator* inAllocator, PxRepXInstantiationArgs* inArgs, PxCollection* inCollection);
+        internal static extern PxRepXObject PxRepXSerializer_fileToObject_mut(PxRepXSerializer* self_, XmlReader* inReader, XmlMemoryAllocator* inAllocator, PxRepXInstantiationArgs* inArgs, PxCollection* inCollection);
 
         /// <summary>
         ///  Connects the SDK to the PhysX Visual Debugger application.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvd_connect_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxPvd_connect_mut(PxPvd* self_, PxPvdTransport* transport, PxPvdInstrumentationFlags flags);
+        internal static extern bool PxPvd_connect_mut(PxPvd* self_, PxPvdTransport* transport, PxPvdInstrumentationFlags flags);
 
         /// <summary>
         ///  Disconnects the SDK from the PhysX Visual Debugger application.
         ///  If we are still connected, this will kill the entire debugger connection.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvd_disconnect_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvd_disconnect_mut(PxPvd* self_);
+        internal static extern void PxPvd_disconnect_mut(PxPvd* self_);
 
         /// <summary>
         ///  Return if connection to PVD is created.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvd_isConnected_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxPvd_isConnected_mut(PxPvd* self_, [MarshalAs(UnmanagedType.U1)] bool useCachedStatus);
+        internal static extern bool PxPvd_isConnected_mut(PxPvd* self_, [MarshalAs(UnmanagedType.U1)] bool useCachedStatus);
 
         /// <summary>
         ///  returns the PVD data transport
         ///  returns NULL if no transport is present.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvd_getTransport_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPvdTransport* PxPvd_getTransport_mut(PxPvd* self_);
+        internal static extern PxPvdTransport* PxPvd_getTransport_mut(PxPvd* self_);
 
         /// <summary>
         ///  Retrieves the PVD flags. See PxPvdInstrumentationFlags.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvd_getInstrumentationFlags_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPvdInstrumentationFlags PxPvd_getInstrumentationFlags_mut(PxPvd* self_);
+        internal static extern PxPvdInstrumentationFlags PxPvd_getInstrumentationFlags_mut(PxPvd* self_);
 
         /// <summary>
         ///  Releases the pvd instance.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvd_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvd_release_mut(PxPvd* self_);
+        internal static extern void PxPvd_release_mut(PxPvd* self_);
 
         /// <summary>
         ///  Create a pvd instance.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxCreatePvd", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPvd* phys_PxCreatePvd(PxFoundation* foundation);
+        internal static extern PxPvd* phys_PxCreatePvd(PxFoundation* foundation);
 
         /// <summary>
         ///  Connects to the Visual Debugger application.
@@ -15370,21 +15370,21 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdTransport_connect_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxPvdTransport_connect_mut(PxPvdTransport* self_);
+        internal static extern bool PxPvdTransport_connect_mut(PxPvdTransport* self_);
 
         /// <summary>
         ///  Disconnects from the Visual Debugger application.
         ///  If we are still connected, this will kill the entire debugger connection.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdTransport_disconnect_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvdTransport_disconnect_mut(PxPvdTransport* self_);
+        internal static extern void PxPvdTransport_disconnect_mut(PxPvdTransport* self_);
 
         /// <summary>
         ///  Return if connection to PVD is created.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdTransport_isConnected_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxPvdTransport_isConnected_mut(PxPvdTransport* self_);
+        internal static extern bool PxPvdTransport_isConnected_mut(PxPvdTransport* self_);
 
         /// <summary>
         ///  write bytes to the other endpoint of the connection. should lock before witre. If an error occurs
@@ -15392,40 +15392,40 @@ namespace Physx
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdTransport_write_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool PxPvdTransport_write_mut(PxPvdTransport* self_, byte* inBytes, uint inLength);
+        internal static extern bool PxPvdTransport_write_mut(PxPvdTransport* self_, byte* inBytes, uint inLength);
 
         [DllImport(__DllName, EntryPoint = "PxPvdTransport_lock_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPvdTransport* PxPvdTransport_lock_mut(PxPvdTransport* self_);
+        internal static extern PxPvdTransport* PxPvdTransport_lock_mut(PxPvdTransport* self_);
 
         [DllImport(__DllName, EntryPoint = "PxPvdTransport_unlock_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvdTransport_unlock_mut(PxPvdTransport* self_);
+        internal static extern void PxPvdTransport_unlock_mut(PxPvdTransport* self_);
 
         /// <summary>
         ///  send any data and block until we know it is at least on the wire.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdTransport_flush_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvdTransport_flush_mut(PxPvdTransport* self_);
+        internal static extern void PxPvdTransport_flush_mut(PxPvdTransport* self_);
 
         /// <summary>
         ///  Return size of written data.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "PxPvdTransport_getWrittenDataSize_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ulong PxPvdTransport_getWrittenDataSize_mut(PxPvdTransport* self_);
+        internal static extern ulong PxPvdTransport_getWrittenDataSize_mut(PxPvdTransport* self_);
 
         [DllImport(__DllName, EntryPoint = "PxPvdTransport_release_mut", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void PxPvdTransport_release_mut(PxPvdTransport* self_);
+        internal static extern void PxPvdTransport_release_mut(PxPvdTransport* self_);
 
         /// <summary>
         ///  Create a default socket transport.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxDefaultPvdSocketTransportCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPvdTransport* phys_PxDefaultPvdSocketTransportCreate(byte* host, int port, uint timeoutInMilliseconds);
+        internal static extern PxPvdTransport* phys_PxDefaultPvdSocketTransportCreate(byte* host, int port, uint timeoutInMilliseconds);
 
         /// <summary>
         ///  Create a default file transport.
         /// </summary>
         [DllImport(__DllName, EntryPoint = "phys_PxDefaultPvdFileTransportCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern PxPvdTransport* phys_PxDefaultPvdFileTransportCreate(byte* name);
+        internal static extern PxPvdTransport* phys_PxDefaultPvdFileTransportCreate(byte* name);
 
 
     }

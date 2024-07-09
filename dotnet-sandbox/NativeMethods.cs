@@ -27,158 +27,158 @@ namespace CsBindgen
 
 
         [DllImport(__DllName, EntryPoint = "JPH_PruneContactPoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void JPH_PruneContactPoints(void/* UInt128[] */* ioContactPointsOn1, JPH_ContactManifold* ioContactPointsOn2);
+        internal static extern void JPH_PruneContactPoints(void/* UInt128[] */* ioContactPointsOn1, JPH_ContactManifold* ioContactPointsOn2);
 
         /// <summary>
         ///  my comment!
         /// </summary>
         [DllImport(__DllName, EntryPoint = "comment_one", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void comment_one(EnumFlags _flags);
+        internal static extern void comment_one(EnumFlags _flags);
 
         [DllImport(__DllName, EntryPoint = "other_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void other_2(NfcCard _hoge);
+        internal static extern void other_2(NfcCard _hoge);
 
         [DllImport(__DllName, EntryPoint = "event", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void @event(@event @event);
+        internal static extern void @event(@event @event);
 
         [DllImport(__DllName, EntryPoint = "test_func_issue_39", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void test_func_issue_39(delegate* unmanaged[Cdecl]<int, void> _f);
+        internal static extern void test_func_issue_39(delegate* unmanaged[Cdecl]<int, void> _f);
 
         [DllImport(__DllName, EntryPoint = "test_func_issue_39_variation1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void test_func_issue_39_variation1(delegate* unmanaged[Cdecl]<int, int, int, void> _f);
+        internal static extern void test_func_issue_39_variation1(delegate* unmanaged[Cdecl]<int, int, int, void> _f);
 
         [DllImport(__DllName, EntryPoint = "nonnull_parameter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void nonnull_parameter(void/* byte[] */* _output_word_uuid);
+        internal static extern void nonnull_parameter(void/* byte[] */* _output_word_uuid);
 
         [DllImport(__DllName, EntryPoint = "non_nonnull_parameter2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void non_nonnull_parameter2(byte* _output_word_uuid);
+        internal static extern void non_nonnull_parameter2(byte* _output_word_uuid);
 
         [DllImport(__DllName, EntryPoint = "nonzero_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void nonzero_test(sbyte _a, byte _b, uint _c);
+        internal static extern void nonzero_test(sbyte _a, byte _b, uint _c);
 
         [DllImport(__DllName, EntryPoint = "ge", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void ge(delegate* unmanaged[Cdecl]<int, int, int, void> _f);
+        internal static extern void ge(delegate* unmanaged[Cdecl]<int, int, int, void> _f);
 
         [DllImport(__DllName, EntryPoint = "nest_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void nest_test(delegate* unmanaged[Cdecl]<delegate* unmanaged[Cdecl]<int, void>*, int> _f);
+        internal static extern void nest_test(delegate* unmanaged[Cdecl]<delegate* unmanaged[Cdecl]<int, void>*, int> _f);
 
         [DllImport(__DllName, EntryPoint = "alias_test1", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void alias_test1(long* _a);
+        internal static extern void alias_test1(long* _a);
 
         [DllImport(__DllName, EntryPoint = "alias_test2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void alias_test2(long _b);
+        internal static extern void alias_test2(long _b);
 
         [DllImport(__DllName, EntryPoint = "nullpointer_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void nullpointer_test(byte* p);
+        internal static extern void nullpointer_test(byte* p);
 
         [DllImport(__DllName, EntryPoint = "csharp_to_rust_string", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void csharp_to_rust_string(ushort* utf16_str, int utf16_len);
+        internal static extern void csharp_to_rust_string(ushort* utf16_str, int utf16_len);
 
         [DllImport(__DllName, EntryPoint = "csharp_to_rust_utf8", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void csharp_to_rust_utf8(byte* utf8_str, int utf8_len);
+        internal static extern void csharp_to_rust_utf8(byte* utf8_str, int utf8_len);
 
         [DllImport(__DllName, EntryPoint = "csharp_to_rust_bytes", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void csharp_to_rust_bytes(byte* bytes, int len);
+        internal static extern void csharp_to_rust_bytes(byte* bytes, int len);
 
         [DllImport(__DllName, EntryPoint = "callback_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int callback_test(delegate* unmanaged[Cdecl]<int, int> cb);
+        internal static extern int callback_test(delegate* unmanaged[Cdecl]<int, int> cb);
 
         [DllImport(__DllName, EntryPoint = "csharp_to_rust", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void csharp_to_rust(delegate* unmanaged[Cdecl]<int, int, int> cb);
+        internal static extern void csharp_to_rust(delegate* unmanaged[Cdecl]<int, int, int> cb);
 
         [DllImport(__DllName, EntryPoint = "rust_to_csharp", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern delegate* unmanaged[Cdecl]<int, int, int> rust_to_csharp();
+        internal static extern delegate* unmanaged[Cdecl]<int, int, int> rust_to_csharp();
 
         [DllImport(__DllName, EntryPoint = "cbt", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void cbt(CallbackTable _cb);
+        internal static extern void cbt(CallbackTable _cb);
 
         [DllImport(__DllName, EntryPoint = "nullable_callback_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int nullable_callback_test(delegate* unmanaged[Cdecl]<int, int> cb);
+        internal static extern int nullable_callback_test(delegate* unmanaged[Cdecl]<int, int> cb);
 
         [DllImport(__DllName, EntryPoint = "types_iroiro", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void types_iroiro(nint _i, nuint _u, CLong _cl, CULong _cul);
+        internal static extern void types_iroiro(nint _i, nuint _u, CLong _cl, CULong _cul);
 
         [DllImport(__DllName, EntryPoint = "callback_test2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern delegate* unmanaged[Cdecl]<int, int> callback_test2();
+        internal static extern delegate* unmanaged[Cdecl]<int, int> callback_test2();
 
         [DllImport(__DllName, EntryPoint = "enum_test", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int enum_test(IntEnumTest i);
+        internal static extern int enum_test(IntEnumTest i);
 
         [DllImport(__DllName, EntryPoint = "nop", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void nop();
+        internal static extern void nop();
 
         [DllImport(__DllName, EntryPoint = "my_add", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern int my_add(int x, int y);
+        internal static extern int my_add(int x, int y);
 
         [DllImport(__DllName, EntryPoint = "create_counter_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern CounterContext* create_counter_context();
+        internal static extern CounterContext* create_counter_context();
 
         [DllImport(__DllName, EntryPoint = "counter_context_insert", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void counter_context_insert(CounterContext* context, int value);
+        internal static extern void counter_context_insert(CounterContext* context, int value);
 
         [DllImport(__DllName, EntryPoint = "destroy_counter_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void destroy_counter_context(CounterContext* context);
+        internal static extern void destroy_counter_context(CounterContext* context);
 
         [DllImport(__DllName, EntryPoint = "pass_vector3", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void pass_vector3(MyVector3 v3);
+        internal static extern void pass_vector3(MyVector3 v3);
 
         [DllImport(__DllName, EntryPoint = "return_union", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern MyUnion return_union();
+        internal static extern MyUnion return_union();
 
         [DllImport(__DllName, EntryPoint = "my_bool", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         [return: MarshalAs(UnmanagedType.U1)]
-        public static extern bool my_bool([MarshalAs(UnmanagedType.U1)] bool x, [MarshalAs(UnmanagedType.U1)] bool y, [MarshalAs(UnmanagedType.U1)] bool z, bool* xr, bool* yr, bool* zr);
+        internal static extern bool my_bool([MarshalAs(UnmanagedType.U1)] bool x, [MarshalAs(UnmanagedType.U1)] bool y, [MarshalAs(UnmanagedType.U1)] bool z, bool* xr, bool* yr, bool* zr);
 
         [DllImport(__DllName, EntryPoint = "alloc_c_string", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern byte* alloc_c_string();
+        internal static extern byte* alloc_c_string();
 
         [DllImport(__DllName, EntryPoint = "free_c_string", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void free_c_string(byte* str);
+        internal static extern void free_c_string(byte* str);
 
         [DllImport(__DllName, EntryPoint = "alloc_u8_string", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ByteBuffer* alloc_u8_string();
+        internal static extern ByteBuffer* alloc_u8_string();
 
         [DllImport(__DllName, EntryPoint = "free_u8_string", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void free_u8_string(ByteBuffer* buffer);
+        internal static extern void free_u8_string(ByteBuffer* buffer);
 
         [DllImport(__DllName, EntryPoint = "alloc_u8_buffer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ByteBuffer* alloc_u8_buffer();
+        internal static extern ByteBuffer* alloc_u8_buffer();
 
         [DllImport(__DllName, EntryPoint = "free_u8_buffer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void free_u8_buffer(ByteBuffer* buffer);
+        internal static extern void free_u8_buffer(ByteBuffer* buffer);
 
         [DllImport(__DllName, EntryPoint = "alloc_i32_buffer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern ByteBuffer* alloc_i32_buffer();
+        internal static extern ByteBuffer* alloc_i32_buffer();
 
         [DllImport(__DllName, EntryPoint = "free_i32_buffer", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void free_i32_buffer(ByteBuffer* buffer);
+        internal static extern void free_i32_buffer(ByteBuffer* buffer);
 
         [DllImport(__DllName, EntryPoint = "create_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern Context* create_context();
+        internal static extern Context* create_context();
 
         [DllImport(__DllName, EntryPoint = "delete_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void delete_context(Context* context);
+        internal static extern void delete_context(Context* context);
 
         [DllImport(__DllName, EntryPoint = "call_bindgen", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void call_bindgen();
+        internal static extern void call_bindgen();
 
         [DllImport(__DllName, EntryPoint = "call_bindgen_lz4", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void call_bindgen_lz4();
+        internal static extern void call_bindgen_lz4();
 
         [DllImport(__DllName, EntryPoint = "create_counter_context2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern CounterContext2* create_counter_context2();
+        internal static extern CounterContext2* create_counter_context2();
 
         [DllImport(__DllName, EntryPoint = "insert_counter_context2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void insert_counter_context2(CounterContext2* context, int value);
+        internal static extern void insert_counter_context2(CounterContext2* context, int value);
 
         [DllImport(__DllName, EntryPoint = "delete_counter_context2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void delete_counter_context2(CounterContext2* context);
+        internal static extern void delete_counter_context2(CounterContext2* context);
 
         [DllImport(__DllName, EntryPoint = "init_treat_as_empty_struct_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void init_treat_as_empty_struct_context(TreatAsEmptyStruct** _out);
+        internal static extern void init_treat_as_empty_struct_context(TreatAsEmptyStruct** _out);
 
         [DllImport(__DllName, EntryPoint = "free_treat_as_empty_struct_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        public static extern void free_treat_as_empty_struct_context(TreatAsEmptyStruct* _src);
+        internal static extern void free_treat_as_empty_struct_context(TreatAsEmptyStruct* _src);
 
 
     }

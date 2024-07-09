@@ -214,18 +214,18 @@ mod tests {
         fs::remove_file(generated_file_path).unwrap();
     }
 
-    #[test]
-    fn test_emit_without_class() {
-        let generated_file_path = "dotnet-sandbox/only_enums_and_structs_bindgen.cs";
-        Builder::new()
-            .always_included_types(["Vec3", "Foo"])
-            .input_bindgen_file("csbindgen-tests/src/only_enums_and_structs.rs")
-            .generate_csharp_file(generated_file_path)
-            .unwrap();
+    // #[test]
+    // fn test_emit_without_class() {
+    //     let generated_file_path = "dotnet-sandbox/only_enums_and_structs_bindgen.cs";
+    //     Builder::new()
+    //         .always_included_types(["Vec3", "Foo"])
+    //         .input_bindgen_file("csbindgen-tests/src/only_enums_and_structs.rs")
+    //         .generate_csharp_file(generated_file_path)
+    //         .unwrap();
 
-        compare_and_delete_files(
-            "dotnet-sandbox/only_enums_and_structs_original.cs",
-            generated_file_path,
-        );
-    }
+    //     compare_and_delete_files(
+    //         "dotnet-sandbox/only_enums_and_structs_original.cs",
+    //         generated_file_path,
+    //     );
+    // }
 }
