@@ -111,7 +111,7 @@ using System.Runtime.InteropServices;
                 if (!string.IsNullOrEmpty(docComment))
                 {
                     var xElem = XElement.Parse(docComment);
-                    summaryComment = "/// " + xElem.Element("summary").ToString();
+                    summaryComment = "/// " + xElem.Element("summary").ToString().Replace("\r\n", " ").Replace("\r", " ").Replace("\n", " ");
                 }
 
                 var convertedMethodName = ConvertMethodName(((IPointerTypeSymbol)firstArgument.Type).PointedAtType.Name, item.Name, removePrefix, removeSuffix, removeUntilTypeName, fixMethodName);
@@ -231,7 +231,7 @@ using System.Runtime.InteropServices;
         for (var i = 1; i < camelCase.Length; ++i)
         {
             var ch = camelCase[i];
-            if(char.IsUpper(ch))
+            if (char.IsUpper(ch))
             {
                 buffer[written++] = '_';
                 buffer[written++] = char.ToLowerInvariant(ch);

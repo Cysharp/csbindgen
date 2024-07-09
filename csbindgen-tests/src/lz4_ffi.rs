@@ -3,7 +3,7 @@
 #[allow(unused)]
 use ::std::os::raw::*;
 
-
+use super::lz4;
 
 
 #[no_mangle]
@@ -11,7 +11,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_versionNumber(
 
 ) -> c_int
 {
-    LZ4_versionNumber(
+    lz4::LZ4_versionNumber(
 
     )
 }
@@ -21,7 +21,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_versionString(
 
 ) -> *const c_char
 {
-    LZ4_versionString(
+    lz4::LZ4_versionString(
 
     )
 }
@@ -34,7 +34,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_default(
     dstCapacity: c_int
 ) -> c_int
 {
-    LZ4_compress_default(
+    lz4::LZ4_compress_default(
         src,
         dst,
         srcSize,
@@ -50,7 +50,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_decompress_safe(
     dstCapacity: c_int
 ) -> c_int
 {
-    LZ4_decompress_safe(
+    lz4::LZ4_decompress_safe(
         src,
         dst,
         compressedSize,
@@ -63,7 +63,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressBound(
     inputSize: c_int
 ) -> c_int
 {
-    LZ4_compressBound(
+    lz4::LZ4_compressBound(
         inputSize
     )
 }
@@ -77,7 +77,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_fast(
     acceleration: c_int
 ) -> c_int
 {
-    LZ4_compress_fast(
+    lz4::LZ4_compress_fast(
         src,
         dst,
         srcSize,
@@ -91,7 +91,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_sizeofState(
 
 ) -> c_int
 {
-    LZ4_sizeofState(
+    lz4::LZ4_sizeofState(
 
     )
 }
@@ -106,7 +106,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_fast_extState(
     acceleration: c_int
 ) -> c_int
 {
-    LZ4_compress_fast_extState(
+    lz4::LZ4_compress_fast_extState(
         state,
         src,
         dst,
@@ -124,7 +124,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_destSize(
     targetDstSize: c_int
 ) -> c_int
 {
-    LZ4_compress_destSize(
+    lz4::LZ4_compress_destSize(
         src,
         dst,
         srcSizePtr,
@@ -141,7 +141,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_decompress_safe_partial(
     dstCapacity: c_int
 ) -> c_int
 {
-    LZ4_decompress_safe_partial(
+    lz4::LZ4_decompress_safe_partial(
         src,
         dst,
         srcSize,
@@ -153,41 +153,41 @@ pub unsafe extern "C" fn csbindgen_LZ4_decompress_safe_partial(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_createStream(
 
-) -> *mut LZ4_stream_t
+) -> *mut lz4::LZ4_stream_t
 {
-    LZ4_createStream(
+    lz4::LZ4_createStream(
 
     )
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_freeStream(
-    streamPtr: *mut LZ4_stream_t
+    streamPtr: *mut lz4::LZ4_stream_t
 ) -> c_int
 {
-    LZ4_freeStream(
+    lz4::LZ4_freeStream(
         streamPtr
     )
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_resetStream_fast(
-    streamPtr: *mut LZ4_stream_t
+    streamPtr: *mut lz4::LZ4_stream_t
 )
 {
-    LZ4_resetStream_fast(
+    lz4::LZ4_resetStream_fast(
         streamPtr
     )
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_loadDict(
-    streamPtr: *mut LZ4_stream_t,
+    streamPtr: *mut lz4::LZ4_stream_t,
     dictionary: *const c_char,
     dictSize: c_int
 ) -> c_int
 {
-    LZ4_loadDict(
+    lz4::LZ4_loadDict(
         streamPtr,
         dictionary,
         dictSize
@@ -196,7 +196,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_loadDict(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_compress_fast_continue(
-    streamPtr: *mut LZ4_stream_t,
+    streamPtr: *mut lz4::LZ4_stream_t,
     src: *const c_char,
     dst: *mut c_char,
     srcSize: c_int,
@@ -204,7 +204,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_fast_continue(
     acceleration: c_int
 ) -> c_int
 {
-    LZ4_compress_fast_continue(
+    lz4::LZ4_compress_fast_continue(
         streamPtr,
         src,
         dst,
@@ -216,12 +216,12 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_fast_continue(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_saveDict(
-    streamPtr: *mut LZ4_stream_t,
+    streamPtr: *mut lz4::LZ4_stream_t,
     safeBuffer: *mut c_char,
     maxDictSize: c_int
 ) -> c_int
 {
-    LZ4_saveDict(
+    lz4::LZ4_saveDict(
         streamPtr,
         safeBuffer,
         maxDictSize
@@ -231,31 +231,31 @@ pub unsafe extern "C" fn csbindgen_LZ4_saveDict(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_createStreamDecode(
 
-) -> *mut LZ4_streamDecode_t
+) -> *mut lz4::LZ4_streamDecode_t
 {
-    LZ4_createStreamDecode(
+    lz4::LZ4_createStreamDecode(
 
     )
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_freeStreamDecode(
-    LZ4_stream: *mut LZ4_streamDecode_t
+    LZ4_stream: *mut lz4::LZ4_streamDecode_t
 ) -> c_int
 {
-    LZ4_freeStreamDecode(
+    lz4::LZ4_freeStreamDecode(
         LZ4_stream
     )
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_setStreamDecode(
-    LZ4_streamDecode: *mut LZ4_streamDecode_t,
+    LZ4_streamDecode: *mut lz4::LZ4_streamDecode_t,
     dictionary: *const c_char,
     dictSize: c_int
 ) -> c_int
 {
-    LZ4_setStreamDecode(
+    lz4::LZ4_setStreamDecode(
         LZ4_streamDecode,
         dictionary,
         dictSize
@@ -267,21 +267,21 @@ pub unsafe extern "C" fn csbindgen_LZ4_decoderRingBufferSize(
     maxBlockSize: c_int
 ) -> c_int
 {
-    LZ4_decoderRingBufferSize(
+    lz4::LZ4_decoderRingBufferSize(
         maxBlockSize
     )
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_decompress_safe_continue(
-    LZ4_streamDecode: *mut LZ4_streamDecode_t,
+    LZ4_streamDecode: *mut lz4::LZ4_streamDecode_t,
     src: *const c_char,
     dst: *mut c_char,
     srcSize: c_int,
     dstCapacity: c_int
 ) -> c_int
 {
-    LZ4_decompress_safe_continue(
+    lz4::LZ4_decompress_safe_continue(
         LZ4_streamDecode,
         src,
         dst,
@@ -300,7 +300,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_decompress_safe_usingDict(
     dictSize: c_int
 ) -> c_int
 {
-    LZ4_decompress_safe_usingDict(
+    lz4::LZ4_decompress_safe_usingDict(
         src,
         dst,
         srcSize,
@@ -321,7 +321,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_decompress_safe_partial_usingDict(
     dictSize: c_int
 ) -> c_int
 {
-    LZ4_decompress_safe_partial_usingDict(
+    lz4::LZ4_decompress_safe_partial_usingDict(
         src,
         dst,
         compressedSize,
@@ -336,9 +336,9 @@ pub unsafe extern "C" fn csbindgen_LZ4_decompress_safe_partial_usingDict(
 pub unsafe extern "C" fn csbindgen_LZ4_initStream(
     buffer: *mut c_void,
     size: usize
-) -> *mut LZ4_stream_t
+) -> *mut lz4::LZ4_stream_t
 {
-    LZ4_initStream(
+    lz4::LZ4_initStream(
         buffer,
         size
     )
@@ -351,7 +351,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress(
     srcSize: c_int
 ) -> c_int
 {
-    LZ4_compress(
+    lz4::LZ4_compress(
         src,
         dest,
         srcSize
@@ -366,7 +366,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_limitedOutput(
     maxOutputSize: c_int
 ) -> c_int
 {
-    LZ4_compress_limitedOutput(
+    lz4::LZ4_compress_limitedOutput(
         src,
         dest,
         srcSize,
@@ -382,7 +382,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_withState(
     inputSize: c_int
 ) -> c_int
 {
-    LZ4_compress_withState(
+    lz4::LZ4_compress_withState(
         state,
         source,
         dest,
@@ -399,7 +399,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_limitedOutput_withState(
     maxOutputSize: c_int
 ) -> c_int
 {
-    LZ4_compress_limitedOutput_withState(
+    lz4::LZ4_compress_limitedOutput_withState(
         state,
         source,
         dest,
@@ -410,13 +410,13 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_limitedOutput_withState(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_compress_continue(
-    LZ4_streamPtr: *mut LZ4_stream_t,
+    LZ4_streamPtr: *mut lz4::LZ4_stream_t,
     source: *const c_char,
     dest: *mut c_char,
     inputSize: c_int
 ) -> c_int
 {
-    LZ4_compress_continue(
+    lz4::LZ4_compress_continue(
         LZ4_streamPtr,
         source,
         dest,
@@ -426,14 +426,14 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_continue(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_compress_limitedOutput_continue(
-    LZ4_streamPtr: *mut LZ4_stream_t,
+    LZ4_streamPtr: *mut lz4::LZ4_stream_t,
     source: *const c_char,
     dest: *mut c_char,
     inputSize: c_int,
     maxOutputSize: c_int
 ) -> c_int
 {
-    LZ4_compress_limitedOutput_continue(
+    lz4::LZ4_compress_limitedOutput_continue(
         LZ4_streamPtr,
         source,
         dest,
@@ -449,7 +449,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_uncompress(
     outputSize: c_int
 ) -> c_int
 {
-    LZ4_uncompress(
+    lz4::LZ4_uncompress(
         source,
         dest,
         outputSize
@@ -464,7 +464,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_uncompress_unknownOutputSize(
     maxOutputSize: c_int
 ) -> c_int
 {
-    LZ4_uncompress_unknownOutputSize(
+    lz4::LZ4_uncompress_unknownOutputSize(
         source,
         dest,
         isize_,
@@ -477,7 +477,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_create(
     inputBuffer: *mut c_char
 ) -> *mut c_void
 {
-    LZ4_create(
+    lz4::LZ4_create(
         inputBuffer
     )
 }
@@ -487,7 +487,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_sizeofStreamState(
 
 ) -> c_int
 {
-    LZ4_sizeofStreamState(
+    lz4::LZ4_sizeofStreamState(
 
     )
 }
@@ -498,7 +498,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_resetStreamState(
     inputBuffer: *mut c_char
 ) -> c_int
 {
-    LZ4_resetStreamState(
+    lz4::LZ4_resetStreamState(
         state,
         inputBuffer
     )
@@ -509,7 +509,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_slideInputBuffer(
     state: *mut c_void
 ) -> *mut c_char
 {
-    LZ4_slideInputBuffer(
+    lz4::LZ4_slideInputBuffer(
         state
     )
 }
@@ -522,7 +522,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_decompress_safe_withPrefix64k(
     maxDstSize: c_int
 ) -> c_int
 {
-    LZ4_decompress_safe_withPrefix64k(
+    lz4::LZ4_decompress_safe_withPrefix64k(
         src,
         dst,
         compressedSize,
@@ -537,7 +537,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_decompress_fast_withPrefix64k(
     originalSize: c_int
 ) -> c_int
 {
-    LZ4_decompress_fast_withPrefix64k(
+    lz4::LZ4_decompress_fast_withPrefix64k(
         src,
         dst,
         originalSize
@@ -551,7 +551,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_decompress_fast(
     originalSize: c_int
 ) -> c_int
 {
-    LZ4_decompress_fast(
+    lz4::LZ4_decompress_fast(
         src,
         dst,
         originalSize
@@ -560,13 +560,13 @@ pub unsafe extern "C" fn csbindgen_LZ4_decompress_fast(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_decompress_fast_continue(
-    LZ4_streamDecode: *mut LZ4_streamDecode_t,
+    LZ4_streamDecode: *mut lz4::LZ4_streamDecode_t,
     src: *const c_char,
     dst: *mut c_char,
     originalSize: c_int
 ) -> c_int
 {
-    LZ4_decompress_fast_continue(
+    lz4::LZ4_decompress_fast_continue(
         LZ4_streamDecode,
         src,
         dst,
@@ -583,7 +583,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_decompress_fast_usingDict(
     dictSize: c_int
 ) -> c_int
 {
-    LZ4_decompress_fast_usingDict(
+    lz4::LZ4_decompress_fast_usingDict(
         src,
         dst,
         originalSize,
@@ -594,10 +594,10 @@ pub unsafe extern "C" fn csbindgen_LZ4_decompress_fast_usingDict(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_resetStream(
-    streamPtr: *mut LZ4_stream_t
+    streamPtr: *mut lz4::LZ4_stream_t
 )
 {
-    LZ4_resetStream(
+    lz4::LZ4_resetStream(
         streamPtr
     )
 }
@@ -611,7 +611,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_HC(
     compressionLevel: c_int
 ) -> c_int
 {
-    LZ4_compress_HC(
+    lz4::LZ4_compress_HC(
         src,
         dst,
         srcSize,
@@ -625,7 +625,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_sizeofStateHC(
 
 ) -> c_int
 {
-    LZ4_sizeofStateHC(
+    lz4::LZ4_sizeofStateHC(
 
     )
 }
@@ -640,7 +640,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_HC_extStateHC(
     compressionLevel: c_int
 ) -> c_int
 {
-    LZ4_compress_HC_extStateHC(
+    lz4::LZ4_compress_HC_extStateHC(
         stateHC,
         src,
         dst,
@@ -660,7 +660,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_HC_destSize(
     compressionLevel: c_int
 ) -> c_int
 {
-    LZ4_compress_HC_destSize(
+    lz4::LZ4_compress_HC_destSize(
         stateHC,
         src,
         dst,
@@ -673,30 +673,30 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_HC_destSize(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_createStreamHC(
 
-) -> *mut LZ4_streamHC_t
+) -> *mut lz4::LZ4_streamHC_t
 {
-    LZ4_createStreamHC(
+    lz4::LZ4_createStreamHC(
 
     )
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_freeStreamHC(
-    streamHCPtr: *mut LZ4_streamHC_t
+    streamHCPtr: *mut lz4::LZ4_streamHC_t
 ) -> c_int
 {
-    LZ4_freeStreamHC(
+    lz4::LZ4_freeStreamHC(
         streamHCPtr
     )
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_resetStreamHC_fast(
-    streamHCPtr: *mut LZ4_streamHC_t,
+    streamHCPtr: *mut lz4::LZ4_streamHC_t,
     compressionLevel: c_int
 )
 {
-    LZ4_resetStreamHC_fast(
+    lz4::LZ4_resetStreamHC_fast(
         streamHCPtr,
         compressionLevel
     )
@@ -704,12 +704,12 @@ pub unsafe extern "C" fn csbindgen_LZ4_resetStreamHC_fast(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_loadDictHC(
-    streamHCPtr: *mut LZ4_streamHC_t,
+    streamHCPtr: *mut lz4::LZ4_streamHC_t,
     dictionary: *const c_char,
     dictSize: c_int
 ) -> c_int
 {
-    LZ4_loadDictHC(
+    lz4::LZ4_loadDictHC(
         streamHCPtr,
         dictionary,
         dictSize
@@ -718,14 +718,14 @@ pub unsafe extern "C" fn csbindgen_LZ4_loadDictHC(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_compress_HC_continue(
-    streamHCPtr: *mut LZ4_streamHC_t,
+    streamHCPtr: *mut lz4::LZ4_streamHC_t,
     src: *const c_char,
     dst: *mut c_char,
     srcSize: c_int,
     maxDstSize: c_int
 ) -> c_int
 {
-    LZ4_compress_HC_continue(
+    lz4::LZ4_compress_HC_continue(
         streamHCPtr,
         src,
         dst,
@@ -736,14 +736,14 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_HC_continue(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_compress_HC_continue_destSize(
-    LZ4_streamHCPtr: *mut LZ4_streamHC_t,
+    LZ4_streamHCPtr: *mut lz4::LZ4_streamHC_t,
     src: *const c_char,
     dst: *mut c_char,
     srcSizePtr: *mut c_int,
     targetDstSize: c_int
 ) -> c_int
 {
-    LZ4_compress_HC_continue_destSize(
+    lz4::LZ4_compress_HC_continue_destSize(
         LZ4_streamHCPtr,
         src,
         dst,
@@ -754,12 +754,12 @@ pub unsafe extern "C" fn csbindgen_LZ4_compress_HC_continue_destSize(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_saveDictHC(
-    streamHCPtr: *mut LZ4_streamHC_t,
+    streamHCPtr: *mut lz4::LZ4_streamHC_t,
     safeBuffer: *mut c_char,
     maxDictSize: c_int
 ) -> c_int
 {
-    LZ4_saveDictHC(
+    lz4::LZ4_saveDictHC(
         streamHCPtr,
         safeBuffer,
         maxDictSize
@@ -770,9 +770,9 @@ pub unsafe extern "C" fn csbindgen_LZ4_saveDictHC(
 pub unsafe extern "C" fn csbindgen_LZ4_initStreamHC(
     buffer: *mut c_void,
     size: usize
-) -> *mut LZ4_streamHC_t
+) -> *mut lz4::LZ4_streamHC_t
 {
-    LZ4_initStreamHC(
+    lz4::LZ4_initStreamHC(
         buffer,
         size
     )
@@ -785,7 +785,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressHC(
     inputSize: c_int
 ) -> c_int
 {
-    LZ4_compressHC(
+    lz4::LZ4_compressHC(
         source,
         dest,
         inputSize
@@ -800,7 +800,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressHC_limitedOutput(
     maxOutputSize: c_int
 ) -> c_int
 {
-    LZ4_compressHC_limitedOutput(
+    lz4::LZ4_compressHC_limitedOutput(
         source,
         dest,
         inputSize,
@@ -816,7 +816,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressHC2(
     compressionLevel: c_int
 ) -> c_int
 {
-    LZ4_compressHC2(
+    lz4::LZ4_compressHC2(
         source,
         dest,
         inputSize,
@@ -833,7 +833,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressHC2_limitedOutput(
     compressionLevel: c_int
 ) -> c_int
 {
-    LZ4_compressHC2_limitedOutput(
+    lz4::LZ4_compressHC2_limitedOutput(
         source,
         dest,
         inputSize,
@@ -850,7 +850,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressHC_withStateHC(
     inputSize: c_int
 ) -> c_int
 {
-    LZ4_compressHC_withStateHC(
+    lz4::LZ4_compressHC_withStateHC(
         state,
         source,
         dest,
@@ -867,7 +867,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressHC_limitedOutput_withStateHC(
     maxOutputSize: c_int
 ) -> c_int
 {
-    LZ4_compressHC_limitedOutput_withStateHC(
+    lz4::LZ4_compressHC_limitedOutput_withStateHC(
         state,
         source,
         dest,
@@ -885,7 +885,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressHC2_withStateHC(
     compressionLevel: c_int
 ) -> c_int
 {
-    LZ4_compressHC2_withStateHC(
+    lz4::LZ4_compressHC2_withStateHC(
         state,
         source,
         dest,
@@ -904,7 +904,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressHC2_limitedOutput_withStateHC(
     compressionLevel: c_int
 ) -> c_int
 {
-    LZ4_compressHC2_limitedOutput_withStateHC(
+    lz4::LZ4_compressHC2_limitedOutput_withStateHC(
         state,
         source,
         dest,
@@ -916,13 +916,13 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressHC2_limitedOutput_withStateHC(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_compressHC_continue(
-    LZ4_streamHCPtr: *mut LZ4_streamHC_t,
+    LZ4_streamHCPtr: *mut lz4::LZ4_streamHC_t,
     source: *const c_char,
     dest: *mut c_char,
     inputSize: c_int
 ) -> c_int
 {
-    LZ4_compressHC_continue(
+    lz4::LZ4_compressHC_continue(
         LZ4_streamHCPtr,
         source,
         dest,
@@ -932,14 +932,14 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressHC_continue(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_compressHC_limitedOutput_continue(
-    LZ4_streamHCPtr: *mut LZ4_streamHC_t,
+    LZ4_streamHCPtr: *mut lz4::LZ4_streamHC_t,
     source: *const c_char,
     dest: *mut c_char,
     inputSize: c_int,
     maxOutputSize: c_int
 ) -> c_int
 {
-    LZ4_compressHC_limitedOutput_continue(
+    lz4::LZ4_compressHC_limitedOutput_continue(
         LZ4_streamHCPtr,
         source,
         dest,
@@ -953,7 +953,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_createHC(
     inputBuffer: *const c_char
 ) -> *mut c_void
 {
-    LZ4_createHC(
+    lz4::LZ4_createHC(
         inputBuffer
     )
 }
@@ -963,7 +963,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_freeHC(
     LZ4HC_Data: *mut c_void
 ) -> c_int
 {
-    LZ4_freeHC(
+    lz4::LZ4_freeHC(
         LZ4HC_Data
     )
 }
@@ -973,7 +973,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_slideInputBufferHC(
     LZ4HC_Data: *mut c_void
 ) -> *mut c_char
 {
-    LZ4_slideInputBufferHC(
+    lz4::LZ4_slideInputBufferHC(
         LZ4HC_Data
     )
 }
@@ -987,7 +987,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressHC2_continue(
     compressionLevel: c_int
 ) -> c_int
 {
-    LZ4_compressHC2_continue(
+    lz4::LZ4_compressHC2_continue(
         LZ4HC_Data,
         source,
         dest,
@@ -1006,7 +1006,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_compressHC2_limitedOutput_continue(
     compressionLevel: c_int
 ) -> c_int
 {
-    LZ4_compressHC2_limitedOutput_continue(
+    lz4::LZ4_compressHC2_limitedOutput_continue(
         LZ4HC_Data,
         source,
         dest,
@@ -1021,7 +1021,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_sizeofStreamStateHC(
 
 ) -> c_int
 {
-    LZ4_sizeofStreamStateHC(
+    lz4::LZ4_sizeofStreamStateHC(
 
     )
 }
@@ -1032,7 +1032,7 @@ pub unsafe extern "C" fn csbindgen_LZ4_resetStreamStateHC(
     inputBuffer: *mut c_char
 ) -> c_int
 {
-    LZ4_resetStreamStateHC(
+    lz4::LZ4_resetStreamStateHC(
         state,
         inputBuffer
     )
@@ -1040,11 +1040,11 @@ pub unsafe extern "C" fn csbindgen_LZ4_resetStreamStateHC(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4_resetStreamHC(
-    streamHCPtr: *mut LZ4_streamHC_t,
+    streamHCPtr: *mut lz4::LZ4_streamHC_t,
     compressionLevel: c_int
 )
 {
-    LZ4_resetStreamHC(
+    lz4::LZ4_resetStreamHC(
         streamHCPtr,
         compressionLevel
     )
@@ -1052,20 +1052,20 @@ pub unsafe extern "C" fn csbindgen_LZ4_resetStreamHC(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_isError(
-    code: LZ4F_errorCode_t
+    code: lz4::LZ4F_errorCode_t
 ) -> c_uint
 {
-    LZ4F_isError(
+    lz4::LZ4F_isError(
         code
     )
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_getErrorName(
-    code: LZ4F_errorCode_t
+    code: lz4::LZ4F_errorCode_t
 ) -> *const c_char
 {
-    LZ4F_getErrorName(
+    lz4::LZ4F_getErrorName(
         code
     )
 }
@@ -1075,7 +1075,7 @@ pub unsafe extern "C" fn csbindgen_LZ4F_compressionLevel_max(
 
 ) -> c_int
 {
-    LZ4F_compressionLevel_max(
+    lz4::LZ4F_compressionLevel_max(
 
     )
 }
@@ -1083,10 +1083,10 @@ pub unsafe extern "C" fn csbindgen_LZ4F_compressionLevel_max(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_compressFrameBound(
     srcSize: usize,
-    preferencesPtr: *const LZ4F_preferences_t
+    preferencesPtr: *const lz4::LZ4F_preferences_t
 ) -> usize
 {
-    LZ4F_compressFrameBound(
+    lz4::LZ4F_compressFrameBound(
         srcSize,
         preferencesPtr
     )
@@ -1098,10 +1098,10 @@ pub unsafe extern "C" fn csbindgen_LZ4F_compressFrame(
     dstCapacity: usize,
     srcBuffer: *const c_void,
     srcSize: usize,
-    preferencesPtr: *const LZ4F_preferences_t
+    preferencesPtr: *const lz4::LZ4F_preferences_t
 ) -> usize
 {
-    LZ4F_compressFrame(
+    lz4::LZ4F_compressFrame(
         dstBuffer,
         dstCapacity,
         srcBuffer,
@@ -1115,18 +1115,18 @@ pub unsafe extern "C" fn csbindgen_LZ4F_getVersion(
 
 ) -> c_uint
 {
-    LZ4F_getVersion(
+    lz4::LZ4F_getVersion(
 
     )
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_createCompressionContext(
-    cctxPtr: *mut *mut LZ4F_cctx,
+    cctxPtr: *mut *mut lz4::LZ4F_cctx,
     version: c_uint
-) -> LZ4F_errorCode_t
+) -> lz4::LZ4F_errorCode_t
 {
-    LZ4F_createCompressionContext(
+    lz4::LZ4F_createCompressionContext(
         cctxPtr,
         version
     )
@@ -1134,23 +1134,23 @@ pub unsafe extern "C" fn csbindgen_LZ4F_createCompressionContext(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_freeCompressionContext(
-    cctx: *mut LZ4F_cctx
-) -> LZ4F_errorCode_t
+    cctx: *mut lz4::LZ4F_cctx
+) -> lz4::LZ4F_errorCode_t
 {
-    LZ4F_freeCompressionContext(
+    lz4::LZ4F_freeCompressionContext(
         cctx
     )
 }
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_compressBegin(
-    cctx: *mut LZ4F_cctx,
+    cctx: *mut lz4::LZ4F_cctx,
     dstBuffer: *mut c_void,
     dstCapacity: usize,
-    prefsPtr: *const LZ4F_preferences_t
+    prefsPtr: *const lz4::LZ4F_preferences_t
 ) -> usize
 {
-    LZ4F_compressBegin(
+    lz4::LZ4F_compressBegin(
         cctx,
         dstBuffer,
         dstCapacity,
@@ -1161,10 +1161,10 @@ pub unsafe extern "C" fn csbindgen_LZ4F_compressBegin(
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_compressBound(
     srcSize: usize,
-    prefsPtr: *const LZ4F_preferences_t
+    prefsPtr: *const lz4::LZ4F_preferences_t
 ) -> usize
 {
-    LZ4F_compressBound(
+    lz4::LZ4F_compressBound(
         srcSize,
         prefsPtr
     )
@@ -1172,15 +1172,15 @@ pub unsafe extern "C" fn csbindgen_LZ4F_compressBound(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_compressUpdate(
-    cctx: *mut LZ4F_cctx,
+    cctx: *mut lz4::LZ4F_cctx,
     dstBuffer: *mut c_void,
     dstCapacity: usize,
     srcBuffer: *const c_void,
     srcSize: usize,
-    cOptPtr: *const LZ4F_compressOptions_t
+    cOptPtr: *const lz4::LZ4F_compressOptions_t
 ) -> usize
 {
-    LZ4F_compressUpdate(
+    lz4::LZ4F_compressUpdate(
         cctx,
         dstBuffer,
         dstCapacity,
@@ -1192,13 +1192,13 @@ pub unsafe extern "C" fn csbindgen_LZ4F_compressUpdate(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_flush(
-    cctx: *mut LZ4F_cctx,
+    cctx: *mut lz4::LZ4F_cctx,
     dstBuffer: *mut c_void,
     dstCapacity: usize,
-    cOptPtr: *const LZ4F_compressOptions_t
+    cOptPtr: *const lz4::LZ4F_compressOptions_t
 ) -> usize
 {
-    LZ4F_flush(
+    lz4::LZ4F_flush(
         cctx,
         dstBuffer,
         dstCapacity,
@@ -1208,13 +1208,13 @@ pub unsafe extern "C" fn csbindgen_LZ4F_flush(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_compressEnd(
-    cctx: *mut LZ4F_cctx,
+    cctx: *mut lz4::LZ4F_cctx,
     dstBuffer: *mut c_void,
     dstCapacity: usize,
-    cOptPtr: *const LZ4F_compressOptions_t
+    cOptPtr: *const lz4::LZ4F_compressOptions_t
 ) -> usize
 {
-    LZ4F_compressEnd(
+    lz4::LZ4F_compressEnd(
         cctx,
         dstBuffer,
         dstCapacity,
@@ -1224,11 +1224,11 @@ pub unsafe extern "C" fn csbindgen_LZ4F_compressEnd(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_createDecompressionContext(
-    dctxPtr: *mut *mut LZ4F_dctx,
+    dctxPtr: *mut *mut lz4::LZ4F_dctx,
     version: c_uint
-) -> LZ4F_errorCode_t
+) -> lz4::LZ4F_errorCode_t
 {
-    LZ4F_createDecompressionContext(
+    lz4::LZ4F_createDecompressionContext(
         dctxPtr,
         version
     )
@@ -1236,10 +1236,10 @@ pub unsafe extern "C" fn csbindgen_LZ4F_createDecompressionContext(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_freeDecompressionContext(
-    dctx: *mut LZ4F_dctx
-) -> LZ4F_errorCode_t
+    dctx: *mut lz4::LZ4F_dctx
+) -> lz4::LZ4F_errorCode_t
 {
-    LZ4F_freeDecompressionContext(
+    lz4::LZ4F_freeDecompressionContext(
         dctx
     )
 }
@@ -1250,7 +1250,7 @@ pub unsafe extern "C" fn csbindgen_LZ4F_headerSize(
     srcSize: usize
 ) -> usize
 {
-    LZ4F_headerSize(
+    lz4::LZ4F_headerSize(
         src,
         srcSize
     )
@@ -1258,13 +1258,13 @@ pub unsafe extern "C" fn csbindgen_LZ4F_headerSize(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_getFrameInfo(
-    dctx: *mut LZ4F_dctx,
-    frameInfoPtr: *mut LZ4F_frameInfo_t,
+    dctx: *mut lz4::LZ4F_dctx,
+    frameInfoPtr: *mut lz4::LZ4F_frameInfo_t,
     srcBuffer: *const c_void,
     srcSizePtr: *mut usize
 ) -> usize
 {
-    LZ4F_getFrameInfo(
+    lz4::LZ4F_getFrameInfo(
         dctx,
         frameInfoPtr,
         srcBuffer,
@@ -1274,15 +1274,15 @@ pub unsafe extern "C" fn csbindgen_LZ4F_getFrameInfo(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_decompress(
-    dctx: *mut LZ4F_dctx,
+    dctx: *mut lz4::LZ4F_dctx,
     dstBuffer: *mut c_void,
     dstSizePtr: *mut usize,
     srcBuffer: *const c_void,
     srcSizePtr: *mut usize,
-    dOptPtr: *const LZ4F_decompressOptions_t
+    dOptPtr: *const lz4::LZ4F_decompressOptions_t
 ) -> usize
 {
-    LZ4F_decompress(
+    lz4::LZ4F_decompress(
         dctx,
         dstBuffer,
         dstSizePtr,
@@ -1294,229 +1294,11 @@ pub unsafe extern "C" fn csbindgen_LZ4F_decompress(
 
 #[no_mangle]
 pub unsafe extern "C" fn csbindgen_LZ4F_resetDecompressionContext(
-    dctx: *mut LZ4F_dctx
+    dctx: *mut lz4::LZ4F_dctx
 )
 {
-    LZ4F_resetDecompressionContext(
+    lz4::LZ4F_resetDecompressionContext(
         dctx
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH_versionNumber(
-
-) -> c_uint
-{
-    XXH_versionNumber(
-
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH32(
-    input: *const c_void,
-    length: usize,
-    seed: c_uint
-) -> XXH32_hash_t
-{
-    XXH32(
-        input,
-        length,
-        seed
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH32_createState(
-
-) -> *mut XXH32_state_t
-{
-    XXH32_createState(
-
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH32_freeState(
-    statePtr: *mut XXH32_state_t
-) -> XXH_errorcode
-{
-    XXH32_freeState(
-        statePtr
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH32_copyState(
-    dst_state: *mut XXH32_state_t,
-    src_state: *const XXH32_state_t
-)
-{
-    XXH32_copyState(
-        dst_state,
-        src_state
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH32_reset(
-    statePtr: *mut XXH32_state_t,
-    seed: c_uint
-) -> XXH_errorcode
-{
-    XXH32_reset(
-        statePtr,
-        seed
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH32_update(
-    statePtr: *mut XXH32_state_t,
-    input: *const c_void,
-    length: usize
-) -> XXH_errorcode
-{
-    XXH32_update(
-        statePtr,
-        input,
-        length
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH32_digest(
-    statePtr: *const XXH32_state_t
-) -> XXH32_hash_t
-{
-    XXH32_digest(
-        statePtr
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH32_canonicalFromHash(
-    dst: *mut XXH32_canonical_t,
-    hash: XXH32_hash_t
-)
-{
-    XXH32_canonicalFromHash(
-        dst,
-        hash
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH32_hashFromCanonical(
-    src: *const XXH32_canonical_t
-) -> XXH32_hash_t
-{
-    XXH32_hashFromCanonical(
-        src
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH64(
-    input: *const c_void,
-    length: usize,
-    seed: c_ulonglong
-) -> XXH64_hash_t
-{
-    XXH64(
-        input,
-        length,
-        seed
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH64_createState(
-
-) -> *mut XXH64_state_t
-{
-    XXH64_createState(
-
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH64_freeState(
-    statePtr: *mut XXH64_state_t
-) -> XXH_errorcode
-{
-    XXH64_freeState(
-        statePtr
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH64_copyState(
-    dst_state: *mut XXH64_state_t,
-    src_state: *const XXH64_state_t
-)
-{
-    XXH64_copyState(
-        dst_state,
-        src_state
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH64_reset(
-    statePtr: *mut XXH64_state_t,
-    seed: c_ulonglong
-) -> XXH_errorcode
-{
-    XXH64_reset(
-        statePtr,
-        seed
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH64_update(
-    statePtr: *mut XXH64_state_t,
-    input: *const c_void,
-    length: usize
-) -> XXH_errorcode
-{
-    XXH64_update(
-        statePtr,
-        input,
-        length
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH64_digest(
-    statePtr: *const XXH64_state_t
-) -> XXH64_hash_t
-{
-    XXH64_digest(
-        statePtr
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH64_canonicalFromHash(
-    dst: *mut XXH64_canonical_t,
-    hash: XXH64_hash_t
-)
-{
-    XXH64_canonicalFromHash(
-        dst,
-        hash
-    )
-}
-
-#[no_mangle]
-pub unsafe extern "C" fn csbindgen_XXH64_hashFromCanonical(
-    src: *const XXH64_canonical_t
-) -> XXH64_hash_t
-{
-    XXH64_hashFromCanonical(
-        src
     )
 }
 
