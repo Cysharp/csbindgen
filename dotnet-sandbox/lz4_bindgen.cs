@@ -19,35 +19,6 @@ namespace CsBindgen
 #endif
         
 
-        public const uint _VCRT_COMPILER_PREPROCESSOR = 1;
-        public const uint _SAL_VERSION = 20;
-        public const uint __SAL_H_VERSION = 180000000;
-        public const uint _USE_DECLSPECS_FOR_SAL = 0;
-        public const uint _USE_ATTRIBUTES_FOR_SAL = 0;
-        public const uint _CRT_PACKING = 8;
-        public const uint _HAS_EXCEPTIONS = 1;
-        public const uint _STL_LANG = 0;
-        public const uint _HAS_CXX17 = 0;
-        public const uint _HAS_CXX20 = 0;
-        public const uint _HAS_CXX23 = 0;
-        public const uint _HAS_NODISCARD = 0;
-        public const uint _ARM_WINAPI_PARTITION_DESKTOP_SDK_AVAILABLE = 1;
-        public const uint _CRT_BUILD_DESKTOP_APP = 1;
-        public const uint _ARGMAX = 100;
-        public const uint _CRT_INT_MAX = 2147483647;
-        public const uint _CRT_FUNCTIONS_REQUIRED = 1;
-        public const uint _CRT_HAS_CXX17 = 0;
-        public const uint _CRT_HAS_C11 = 1;
-        public const uint _CRT_INTERNAL_NONSTDC_NAMES = 1;
-        public const uint __STDC_SECURE_LIB__ = 200411;
-        public const uint __GOT_SECURE_LIB__ = 200411;
-        public const uint __STDC_WANT_SECURE_LIB__ = 1;
-        public const uint _SECURECRT_FILL_BUFFER_PATTERN = 254;
-        public const uint _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES = 0;
-        public const uint _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_COUNT = 0;
-        public const uint _CRT_SECURE_CPP_OVERLOAD_SECURE_NAMES = 1;
-        public const uint _CRT_SECURE_CPP_OVERLOAD_STANDARD_NAMES_MEMORY = 0;
-        public const uint _CRT_SECURE_CPP_OVERLOAD_SECURE_NAMES_MEMORY = 0;
         public const uint LZ4_FREESTANDING = 0;
         public const uint LZ4_VERSION_MAJOR = 1;
         public const uint LZ4_VERSION_MINOR = 9;
@@ -61,6 +32,18 @@ namespace CsBindgen
         public const uint LZ4_HASHLOG = 12;
         public const uint LZ4_HASHTABLESIZE = 16384;
         public const uint LZ4_HASH_SIZE_U32 = 4096;
+        public const uint _VCRT_COMPILER_PREPROCESSOR = 1;
+        public const uint _SAL_VERSION = 20;
+        public const uint __SAL_H_VERSION = 180000000;
+        public const uint _USE_DECLSPECS_FOR_SAL = 0;
+        public const uint _USE_ATTRIBUTES_FOR_SAL = 0;
+        public const uint _CRT_PACKING = 8;
+        public const uint _HAS_EXCEPTIONS = 1;
+        public const uint _STL_LANG = 0;
+        public const uint _HAS_CXX17 = 0;
+        public const uint _HAS_CXX20 = 0;
+        public const uint _HAS_CXX23 = 0;
+        public const uint _HAS_NODISCARD = 0;
         public const uint WCHAR_MIN = 0;
         public const uint WCHAR_MAX = 65535;
         public const uint WINT_MIN = 0;

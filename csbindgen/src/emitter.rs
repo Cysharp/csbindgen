@@ -406,6 +406,7 @@ fn convert_token_enum_repr(repr: &str) -> &str {
         "(i16)" => "short",
         "(i32)" => "int",
         "(i64)" => "long",
+        "C" => "uint",
         "u8" => "byte",
         "u16" => "ushort",
         "u32" => "uint",

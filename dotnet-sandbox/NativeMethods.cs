@@ -180,6 +180,21 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "free_treat_as_empty_struct_context", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         internal static extern void free_treat_as_empty_struct_context(TreatAsEmptyStruct* _src);
 
+        [DllImport(__DllName, EntryPoint = "set_callback", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        internal static extern void set_callback(delegate* unmanaged[Cdecl]<nuint, ushort*, byte*> alloc_callback);
+
+        [DllImport(__DllName, EntryPoint = "callback_test10", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        internal static extern int callback_test10(delegate* unmanaged[Cdecl]<int, int> cb);
+
+        [DllImport(__DllName, EntryPoint = "counterCreate", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        internal static extern Counter* counterCreate(Args args);
+
+        [DllImport(__DllName, EntryPoint = "counterGetValue", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        internal static extern uint counterGetValue(Counter* ptr);
+
+        [DllImport(__DllName, EntryPoint = "enum_test2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        internal static extern int enum_test2(CResultStatus status);
+
 
     }
 
@@ -266,6 +281,20 @@ namespace CsBindgen
     {
     }
 
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct Args
+    {
+        public uint init;
+        public uint by;
+    }
+
+    [StructLayout(LayoutKind.Sequential)]
+    internal unsafe partial struct Counter
+    {
+        public uint val;
+        public uint by;
+    }
+
 
     [Flags]
     internal enum EnumFlags : uint
@@ -281,6 +310,12 @@ namespace CsBindgen
         A = 1,
         B = 2,
         C = 10,
+    }
+
+    internal enum CResultStatus : uint
+    {
+        Ok,
+        Err,
     }
 
 
