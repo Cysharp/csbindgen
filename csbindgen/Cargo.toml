@@ -1,6 +1,6 @@
 [package]
 name = "csbindgen"
-version = "1.9.2"
+version = "1.9.3"
 edition = "2021"
 authors = ["Yoshifumi Kawai <ils@neue.cc>", "Cysharp, Inc."]
 description = "Generate C# FFI from Rust for automatically brings native code and C native library to .NET and Unity."
