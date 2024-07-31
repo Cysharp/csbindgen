@@ -84,6 +84,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     csbindgen::Builder::default()
         .input_extern_file("src/lib.rs")
         .input_extern_file("src/others.rs")
+        .input_extern_file("src/counter.rs")
         //.input_extern_files(&["src/lib.rs"])
         .csharp_class_name("NativeMethods")
         .csharp_dll_name("csbindgen_tests")

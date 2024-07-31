@@ -1,9 +1,8 @@
 use std::{
-    collections::HashSet,
-    ffi::{c_char, c_long, c_ulong, CString},
-    num::*,
-    ptr::NonNull,
+    collections::HashSet, ffi::{c_char, c_long, c_ulong, CString}, mem::transmute, num::*, ptr::NonNull
 };
+
+mod counter;
 
 #[allow(dead_code)]
 #[allow(non_snake_case)]
@@ -682,3 +681,42 @@ pub unsafe extern "C" fn free_treat_as_empty_struct_context(_src: *mut TreatAsEm
 //         // Your physics simulation goes here
 //     }
 // }
+
+type MyCallback = extern "C" fn(size: usize, data: *const u16) -> *mut u8;
+
+#[no_mangle]
+pub extern "C" fn set_callback(alloc_callback: MyCallback) {
+    println!("Your callback is {alloc_callback:p}");
+}
+
+
+#[no_mangle]
+pub extern "C" fn callback_test10(cb: extern "C" fn(a: i32) -> i32) -> i32 {
+    cb(100)
+}
+
+use counter::Args;
+use counter::Counter;
+
+#[no_mangle]
+pub extern fn counterCreate(args: Args) -> *mut Counter {
+    let _counter = unsafe { transmute(Box::new(Counter::new(args))) };
+    _counter
+}
+
+#[no_mangle]
+pub extern fn counterGetValue(ptr: *mut Counter) -> u32 {
+    let mut _counter = unsafe { &mut *ptr };
+    _counter.get()
+}
+
+#[repr(C)]
+pub enum CResultStatus {
+    Ok,
+    Err,
+}
+
+#[no_mangle]
+pub extern "C" fn enum_test2(status: CResultStatus) -> i32 {
+    status as i32
+}

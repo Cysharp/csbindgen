@@ -1,5 +1,6 @@
 use crate::alias_map::AliasMap;
 use crate::builder::BindgenOptions;
+use crate::doc_comment::escape_doc_comment;
 use crate::type_meta::ExportSymbolNaming::{ExportName, NoMangle};
 use crate::type_meta::*;
 use crate::util::*;
@@ -128,7 +129,8 @@ pub fn emit_csharp(
                 &"return".to_string(),
             ) {
                 method_list_string.push_str(
-                    format!("        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n")
+                    "        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n"
+                        .to_string()
                         .as_str(),
                 );
                 method_list_string
@@ -145,7 +147,8 @@ pub fn emit_csharp(
                 &p.name,
             ) {
                 method_list_string.push_str(
-                    format!("        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n")
+                    "        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n"
+                        .to_string()
                         .as_str(),
                 );
                 method_list_string
@@ -185,7 +188,7 @@ pub fn emit_csharp(
             .collect::<Vec<_>>()
             .join(", ");
 
-        if let Some(x) = item.escape_doc_comment("        ") {
+        if let Some(x) = escape_doc_comment(&item.doc_comment, "        ") {
             method_list_string.push_str_ln(&x);
         }
 
@@ -210,12 +213,19 @@ pub fn emit_csharp(
             "Sequential"
         };
 
+        if let Some(doc_comment) = escape_doc_comment(&item.doc_comment, "    ") {
+            structs_string.push_str_ln(&doc_comment);
+        }
+
         structs_string
             .push_str_ln(format!("    [StructLayout(LayoutKind.{layout_kind})]").as_str());
         structs_string
             .push_str_ln(format!("    {accessibility} unsafe partial struct {name}").as_str());
         structs_string.push_str_ln("    {");
         for field in &item.fields {
+            if let Some(doc_comment) = escape_doc_comment(&field.doc_comment, "        ") {
+                structs_string.push_str_ln(&doc_comment);
+            }
             if item.is_union {
                 structs_string.push_str_ln("        [FieldOffset(0)]");
             }
@@ -275,6 +285,10 @@ pub fn emit_csharp(
 
     let mut enum_string = String::new();
     for item in enums {
+        if let Some(doc_comment) = escape_doc_comment(&item.doc_comment, "    ") {
+            enum_string.push_str_ln(&doc_comment);
+        }
+
         let repr = match &item.repr {
             Some(x) => format!(" : {}", convert_token_enum_repr(x)),
             None => "".to_string(),
@@ -285,12 +299,16 @@ pub fn emit_csharp(
         }
         enum_string.push_str_ln(format!("    {accessibility} enum {name}{repr}").as_str());
         enum_string.push_str_ln("    {");
-        for (name, value) in &item.fields {
-            let value = match value {
+        for field in &item.fields {
+            if let Some(doc_comment) = escape_doc_comment(&field.doc_comment, "        ") {
+                enum_string.push_str_ln(&doc_comment);
+            }
+
+            let value = match &field.value {
                 Some(x) => format!(" = {x},"),
                 None => ",".to_string(),
             };
-            enum_string.push_str_ln(format!("        {name}{value}").as_str());
+            enum_string.push_str_ln(format!("        {}{}", field.name, value).as_str());
         }
         enum_string.push_str_ln("    }");
         enum_string.push('\n');
@@ -298,6 +316,10 @@ pub fn emit_csharp(
 
     let mut const_string: String = String::new();
     for item in consts {
+        if let Some(doc_comment) = escape_doc_comment(&item.doc_comment, "        ") {
+            const_string.push_str_ln(&doc_comment);
+        }
+
         let mut type_name = item.rust_type.to_csharp_string(
             options,
             aliases,
@@ -359,7 +381,7 @@ pub fn emit_csharp(
         )
     };
 
-    let file_header = if options.csharp_file_header.len() > 0 {
+    let file_header = if !options.csharp_file_header.is_empty() {
         options.csharp_file_header.to_string() + "\n"
     } else {
         "".to_string()
@@ -406,6 +428,7 @@ fn convert_token_enum_repr(repr: &str) -> &str {
         "(i16)" => "short",
         "(i32)" => "int",
         "(i64)" => "long",
+        "C" => "uint",
         "u8" => "byte",
         "u16" => "ushort",
         "u32" => "uint",
