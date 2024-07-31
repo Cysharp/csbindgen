@@ -416,6 +416,8 @@ namespace CsBindgen
         internal static extern void quiche_h3_conn_free(quiche_h3_conn* conn);
 
 
+
+
     }
 
     [StructLayout(LayoutKind.Sequential)]

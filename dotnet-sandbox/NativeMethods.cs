@@ -196,6 +196,8 @@ namespace CsBindgen
         internal static extern int enum_test2(CResultStatus status);
 
 
+
+
     }
 
     [StructLayout(LayoutKind.Sequential)]

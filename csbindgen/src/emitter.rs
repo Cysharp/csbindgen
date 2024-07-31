@@ -1,3 +1,5 @@
+use std::collections::HashSet;
+
 use crate::alias_map::AliasMap;
 use crate::builder::BindgenOptions;
 use crate::type_meta::ExportSymbolNaming::{ExportName, NoMangle};
@@ -88,6 +90,7 @@ pub fn emit_csharp(
     let class_name = &options.csharp_class_name;
     let method_prefix = &options.csharp_method_prefix;
     let accessibility = &options.csharp_class_accessibility;
+    let mut forward_decls: HashSet<String> = HashSet::new();
 
     let mut dll_name = match options.csharp_if_symbol.as_str() {
         "" => format!(
@@ -126,6 +129,7 @@ pub fn emit_csharp(
                 aliases,
                 method_name,
                 &"return".to_string(),
+                &mut forward_decls,
             ) {
                 method_list_string.push_str(
                     format!("        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n")
@@ -143,6 +147,7 @@ pub fn emit_csharp(
                 aliases,
                 method_name,
                 &p.name,
+                &mut forward_decls,
             ) {
                 method_list_string.push_str(
                     format!("        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n")
@@ -164,7 +169,7 @@ pub fn emit_csharp(
         };
         let return_type = match &item.return_type {
             Some(x) => {
-                x.to_csharp_string(options, aliases, false, method_name, &"return".to_string())
+                x.to_csharp_string(options, aliases, false, method_name, &"return".to_string(), &mut forward_decls)
             }
             None => "void".to_string(),
         };
@@ -175,7 +180,7 @@ pub fn emit_csharp(
             .map(|p| {
                 let mut type_name =
                     p.rust_type
-                        .to_csharp_string(options, aliases, false, method_name, &p.name);
+                        .to_csharp_string(options, aliases, false, method_name, &p.name, &mut forward_decls);
                 if type_name == "bool" {
                     type_name = "[MarshalAs(UnmanagedType.U1)] bool".to_string();
                 }
@@ -226,6 +231,7 @@ pub fn emit_csharp(
                 true,
                 &"".to_string(),
                 &"".to_string(),
+                &mut forward_decls,
             );
             let attr = if type_name == "bool" {
                 "[MarshalAs(UnmanagedType.U1)] ".to_string()
@@ -304,6 +310,7 @@ pub fn emit_csharp(
             false,
             &"".to_string(),
             &"".to_string(),
+            &mut forward_decls,
         );
 
         // special case for string, char, ByteStr
@@ -347,6 +354,8 @@ pub fn emit_csharp(
     let class_string = if method_list_string.is_empty() && const_string.is_empty() {
         String::new()
     } else {
+        let forward_decls_string = forward_decls.drain().collect::<Vec<_>>().join("\n");
+
         format!(
             "{accessibility} static unsafe partial class {class_name}
     {{
@@ -355,6 +364,8 @@ pub fn emit_csharp(
 {const_string}
 
 {method_list_string}
+
+{forward_decls_string}
     }}"
         )
     };
