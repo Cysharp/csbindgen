@@ -1,7 +1,11 @@
 #![allow(clippy::missing_safety_doc)]
 
 use std::{
-    collections::HashSet, ffi::{c_char, c_long, c_ulong, CString}, mem::transmute, num::*, ptr::NonNull
+    collections::HashSet,
+    ffi::{c_char, c_long, c_ulong, CString},
+    mem::transmute,
+    num::*,
+    ptr::NonNull,
 };
 
 mod counter;
@@ -398,7 +402,9 @@ pub extern "C" fn alloc_c_string() -> *mut c_char {
 
 #[no_mangle]
 pub unsafe extern "C" fn free_c_string(str: *mut c_char) {
-    unsafe { let _ = CString::from_raw(str); };
+    unsafe {
+        let _ = CString::from_raw(str);
+    };
 }
 
 #[no_mangle]
@@ -451,7 +457,9 @@ pub extern "C" fn create_context() -> *mut Context {
 
 #[no_mangle]
 pub unsafe extern "C" fn delete_context(context: *mut Context) {
-    unsafe { let _ = Box::from_raw(context); };
+    unsafe {
+        let _ = Box::from_raw(context);
+    };
 }
 
 #[no_mangle]
@@ -644,7 +652,7 @@ pub struct InternalHiddenContext {
 }
 
 pub struct TreatAsEmptyStruct {
-    _internal: std::sync::Arc<InternalHiddenContext>
+    _internal: std::sync::Arc<InternalHiddenContext>,
 }
 
 #[no_mangle]
@@ -690,7 +698,6 @@ pub extern "C" fn set_callback(alloc_callback: MyCallback) {
     println!("Your callback is {alloc_callback:p}");
 }
 
-
 #[no_mangle]
 pub extern "C" fn callback_test10(cb: extern "C" fn(a: i32) -> i32) -> i32 {
     cb(100)
@@ -700,12 +707,12 @@ use counter::Args;
 use counter::Counter;
 
 #[no_mangle]
-pub extern fn counterCreate(args: Args) -> *mut Counter {
+pub extern "C" fn counterCreate(args: Args) -> *mut Counter {
     unsafe { transmute::<Box<_>, *mut _>(Box::new(Counter::new(args))) }
 }
 
 #[no_mangle]
-pub unsafe extern fn counterGetValue(ptr: *mut Counter) -> u32 {
+pub unsafe extern "C" fn counterGetValue(ptr: *mut Counter) -> u32 {
     let mut _counter = unsafe { &mut *ptr };
     _counter.get()
 }

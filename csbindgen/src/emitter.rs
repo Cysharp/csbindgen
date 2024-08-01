@@ -127,9 +127,8 @@ pub fn emit_csharp(
                 method_name,
                 &"return".to_string(),
             ) {
-                method_list_string.push_str(
-                    "        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n"
-                );
+                method_list_string
+                    .push_str("        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n");
                 method_list_string
                     .push_str(format!("        {accessibility} {delegate_method};\n\n").as_str());
             }
@@ -143,9 +142,8 @@ pub fn emit_csharp(
                 method_name,
                 &p.name,
             ) {
-                method_list_string.push_str(
-                    "        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n"
-                );
+                method_list_string
+                    .push_str("        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]\n");
                 method_list_string
                     .push_str(format!("        {accessibility} {delegate_method};\n\n").as_str());
             }

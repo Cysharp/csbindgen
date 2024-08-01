@@ -14,7 +14,7 @@ use emitter::*;
 use field_map::FieldMap;
 use parser::*;
 use std::{collections::HashSet, error::Error};
-use type_meta::{ExternMethod, RustEnum, RustStruct, RustType, RustConst};
+use type_meta::{ExternMethod, RustConst, RustEnum, RustStruct, RustType};
 
 enum GenerateKind {
     InputBindgen,
@@ -49,8 +49,7 @@ pub(crate) fn generate(
         collect_struct(&file_ast, &mut structs);
         collect_enum(&file_ast, &mut enums);
 
-        collect_const(&file_ast, &mut consts,options.csharp_generate_const_filter);
-       
+        collect_const(&file_ast, &mut consts, options.csharp_generate_const_filter);
     }
 
     // collect using_types

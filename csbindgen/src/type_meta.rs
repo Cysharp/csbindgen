@@ -450,7 +450,8 @@ impl RustType {
                     method_name,
                     parameter_name,
                     emit_inner,
-                ) && emit_inner {
+                ) && emit_inner
+                {
                     sb.push_str(type_csharp_string.as_str());
                 }
             }
@@ -473,13 +474,9 @@ pub fn build_method_delegate_if_required(
                 None
             } else {
                 let return_type_name = match return_type {
-                    Some(x) => x.to_csharp_string(
-                        options,
-                        alias_map,
-                        false,
-                        method_name,
-                        parameter_name,
-                    ),
+                    Some(x) => {
+                        x.to_csharp_string(options, alias_map, false, method_name, parameter_name)
+                    }
                     None => "void".to_string(),
                 };
 

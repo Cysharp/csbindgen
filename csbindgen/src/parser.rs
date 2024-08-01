@@ -270,10 +270,7 @@ fn collect_fields_unnamed(fields: &syn::FieldsUnnamed) -> Vec<FieldMember> {
         i += 1;
         let name = format!("Item{i}");
         let t = parse_type(&field.ty);
-        result.push(FieldMember {
-            name,
-            rust_type: t,
-        });
+        result.push(FieldMember { name, rust_type: t });
     }
 
     result

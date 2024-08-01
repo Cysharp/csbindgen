@@ -1,7 +1,7 @@
 #[repr(C)]
 pub struct Args {
-    pub  init: u32,
-    pub  by: u32,
+    pub init: u32,
+    pub by: u32,
 }
 
 #[repr(C)]
@@ -12,7 +12,7 @@ pub struct Counter {
 
 impl Counter {
     pub fn new(args: Args) -> Counter {
-        Counter{
+        Counter {
             val: args.init,
             by: args.by,
         }
