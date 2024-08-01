@@ -14,7 +14,7 @@ use emitter::*;
 use field_map::FieldMap;
 use parser::*;
 use std::{collections::HashSet, error::Error};
-use type_meta::{ExternMethod, RustEnum, RustStruct, RustType, RustConst};
+use type_meta::{ExternMethod, RustConst, RustEnum, RustStruct, RustType};
 
 enum GenerateKind {
     InputBindgen,
@@ -49,8 +49,7 @@ pub(crate) fn generate(
         collect_struct(&file_ast, &mut structs);
         collect_enum(&file_ast, &mut enums);
 
-        collect_const(&file_ast, &mut consts,options.csharp_generate_const_filter);
-       
+        collect_const(&file_ast, &mut consts, options.csharp_generate_const_filter);
     }
 
     // collect using_types
@@ -202,17 +201,17 @@ mod tests {
         file.flush().unwrap();
     }
 
-    fn compare_and_delete_files(original_file_path: &str, generated_file_path: &str) {
-                let original = fs::read_to_string(original_file_path)
-            .expect("Should have been able to read original file");
-
-        let generated = fs::read_to_string(generated_file_path)
-            .expect("Should have been able to read generated file");
-
-        assert_eq!(original, generated);
-
-        fs::remove_file(generated_file_path).unwrap();
-    }
+    //fn compare_and_delete_files(original_file_path: &str, generated_file_path: &str) {
+    //            let original = fs::read_to_string(original_file_path)
+    //        .expect("Should have been able to read original file");
+    //
+    //    let generated = fs::read_to_string(generated_file_path)
+    //        .expect("Should have been able to read generated file");
+    //
+    //    assert_eq!(original, generated);
+    //
+    //    fs::remove_file(generated_file_path).unwrap();
+    //}
 
     // #[test]
     // fn test_emit_without_class() {

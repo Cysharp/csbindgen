@@ -29,12 +29,6 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "JPH_PruneContactPoints", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         internal static extern void JPH_PruneContactPoints(void/* UInt128[] */* ioContactPointsOn1, JPH_ContactManifold* ioContactPointsOn2);
 
-        /// <summary>
-        ///  my comment!
-        /// </summary>
-        [DllImport(__DllName, EntryPoint = "comment_one", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
-        internal static extern void comment_one(EnumFlags _flags);
-
         [DllImport(__DllName, EntryPoint = "other_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         internal static extern void other_2(NfcCard _hoge);
 
@@ -295,15 +289,6 @@ namespace CsBindgen
         public uint by;
     }
 
-
-    [Flags]
-    internal enum EnumFlags : uint
-    {
-        A = 0b00000001,
-        B = 0b00000010,
-        C = 0b00000100,
-        ABC = A | B | C,
-    }
 
     internal enum IntEnumTest : sbyte
     {
