@@ -111,6 +111,8 @@ pub fn emit_csharp(
     }
 
     let mut method_list_string = String::new();
+    let mut method_initialize_string = String::new();
+    let mut method_uninitialize_string = String::new();
     for item in methods {
         let mut method_name = &item.method_name;
         let method_name_temp: String;
@@ -189,15 +191,34 @@ pub fn emit_csharp(
             method_list_string.push_str_ln(&x);
         }
 
-        method_list_string.push_str_ln(
-            format!("        [DllImport(__DllName, EntryPoint = \"{entry_point}\", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]").as_str(),
-        );
-        if return_type == "bool" {
-            method_list_string.push_str_ln("        [return: MarshalAs(UnmanagedType.U1)]");
+        if options.csharp_use_dynamic_loading_for_win32 {
+            method_list_string.push_str_ln("        [UnmanagedFunctionPointer(CallingConvention.Cdecl)]");
+            if return_type == "bool" {
+                method_list_string.push_str_ln("        [return: MarshalAs(UnmanagedType.U1)]");
+            }
+            method_list_string.push_str_ln(
+                format!("        {accessibility} delegate {return_type} {method_prefix}{method_name}_func({parameters});").as_str(),
+            );
+            method_list_string.push_str_ln(
+                format!("        {accessibility} static {method_prefix}{method_name}_func {method_prefix}{method_name};").as_str(),
+            );
+            method_initialize_string.push_str_ln(
+                format!("                    {method_prefix}{method_name} = Win32.GetDelegateFromHandle<{method_prefix}{method_name}_func>(handle.Value, \"{entry_point}\");").as_str()
+            );
+            method_uninitialize_string.push_str_ln(
+                format!("            {method_prefix}{method_name} = static delegate {{ throw new InvalidOperationException(\"Native library not loaded. (EntryPoint={entry_point})\"); }};").as_str()
+            );
+        } else {
+            method_list_string.push_str_ln(
+                format!("        [DllImport(__DllName, EntryPoint = \"{entry_point}\", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]").as_str(),
+            );
+            if return_type == "bool" {
+                method_list_string.push_str_ln("        [return: MarshalAs(UnmanagedType.U1)]");
+            }
+            method_list_string.push_str_ln(
+                format!("        {accessibility} static extern {return_type} {method_prefix}{method_name}({parameters});").as_str(),
+            );
         }
-        method_list_string.push_str_ln(
-            format!("        {accessibility} static extern {return_type} {method_prefix}{method_name}({parameters});").as_str(),
-        );
         method_list_string.push('\n');
     }
 
@@ -342,6 +363,78 @@ pub fn emit_csharp(
             );
         }
     }
+
+    if options.csharp_use_dynamic_loading_for_win32 {
+        let mut dynamic_loading_helper = String::new();
+        dynamic_loading_helper.push_str_ln(format!("
+        static IntPtr? handle;
+        static readonly object gate = new();
+
+        static class Win32
+        {{
+            [DllImport(\"kernel32\", CharSet = CharSet.Auto)]
+            public extern static IntPtr LoadLibrary(string lpLibFileName);
+
+            [DllImport(\"kernel32\", CharSet = CharSet.Auto)]
+            public extern static bool FreeLibrary(IntPtr hLibModule);
+
+            [DllImport(\"kernel32\", ExactSpelling = true)]
+            public extern static IntPtr GetProcAddress(IntPtr hModule, string lpProcName);
+
+            public static T GetDelegateFromHandle<T>(IntPtr handle, string procName)
+            {{
+                var procAddr = Win32.GetProcAddress(handle, procName);
+                if (procAddr == IntPtr.Zero) throw new InvalidOperationException($\"Function '{{procName}}' not found in the library\");
+                return Marshal.GetDelegateForFunctionPointer<T>(procAddr);
+            }}
+        }}
+
+        static {class_name}()
+        {{
+            SetUninitializedSentinels();
+        }}
+
+        static void SetUninitializedSentinels()
+        {{").as_str());
+        dynamic_loading_helper.push_str_ln(method_uninitialize_string.as_str());
+        dynamic_loading_helper.push_str_ln(format!("
+        }}
+
+        public static void Initialize(string dllPath)
+        {{
+            lock (gate)
+            {{
+                if (handle is null)
+                {{
+                    handle = Win32.LoadLibrary(dllPath);
+
+                    if (handle.Value == IntPtr.Zero)
+                    {{
+                        throw new System.ComponentModel.Win32Exception(Marshal.GetLastWin32Error(), $\"Failed to load the library. (Path={{dllPath}})\");
+                    }}
+                    ").as_str());
+        dynamic_loading_helper.push_str_ln(method_initialize_string.as_str());
+        dynamic_loading_helper.push_str_ln(format!("
+                }}
+            }}
+        }}
+
+        public static void Unload()
+        {{
+            lock (gate)
+            {{
+                if (handle is not null)
+                {{
+                    Win32.FreeLibrary(handle.Value);
+                    handle = null;
+                    SetUninitializedSentinels();
+                }}
+            }}
+        }}").as_str());
+
+        dll_name = dynamic_loading_helper.to_string();
+    }
+
 
     // use empty string if the generated class is empty.
     let class_string = if method_list_string.is_empty() && const_string.is_empty() {
