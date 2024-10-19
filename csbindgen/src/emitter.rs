@@ -231,7 +231,7 @@ fn emit_csharp_method_groups(
                     );
                     assert_eq!(actual_type, group.rust_type);
                 }
-                _ => todo!("handle non-pointer return types"),
+                _ => panic!("cannot return non-pointer type from constructor {method:?}"),
             },
         };
 
@@ -263,7 +263,7 @@ fn emit_csharp_method_groups(
 
         let doc_comment = match method.escape_doc_comment("        ") {
             None => String::new(),
-            Some(escaped) => escaped + "\n"
+            Some(escaped) => escaped + "\n",
         };
 
         let class_name = &group.csharp_class;
@@ -284,21 +284,39 @@ fn emit_csharp_method_groups(
                 .is_some_and(move |csharp_type| csharp_type == class_name)
         });
 
+        let into_params = {
+            const TAG: &str = "servicepoint_csbindgen_consumes: ";
+            method
+                .doc_comment
+                .iter()
+                .find(move |line| line.trim_start().starts_with(TAG))
+                .map(move |line| {
+                    line[TAG.len()..]
+                        .split(',')
+                        .map(move |item| item.trim().to_string())
+                        .collect::<Vec<_>>()
+                })
+                .unwrap_or(vec!())
+        };
+
         let native_parameters = method
             .parameters
             .iter()
             .enumerate()
             .map(|(index, p)| {
-                if index == 0 && first_param_is_instance {
-                    "Instance".to_string()
+                let mut result = if index == 0 && first_param_is_instance {
+                    "this".to_string()
                 } else {
                     escape_csharp_name(p.name.as_str())
-                        + if is_mapped_type(&p.rust_type).is_some() {
-                        ".Instance"
-                    } else {
-                        ""
-                    }
+                };
+
+                if into_params.contains(&p.name) {
+                    result.push_str(".Into()");
+                } else if is_mapped_type(&p.rust_type).is_some() {
+                    result.push_str(".Instance");
                 }
+
+                result
             })
             .collect::<Vec<_>>()
             .join(", ");
@@ -357,16 +375,17 @@ fn emit_csharp_method_groups(
                         &method.method_name,
                         &p.name,
                     ),
-                    Some(csharp_type) => csharp_type.to_string(),
+                    Some(csharp_type) => csharp_type.to_string()
                 };
-                format!("{} {}", type_name, escape_csharp_name(p.name.as_str()))
+                let param_name = escape_csharp_name(p.name.as_str());
+                format!("{type_name} {param_name}")
             })
             .collect::<Vec<_>>()
             .join(", ");
 
         let doc_comment = match method.escape_doc_comment("        ") {
             None => String::new(),
-            Some(escaped) => escaped + "\n"
+            Some(escaped) => escaped + "\n",
         };
 
         let modifiers = if first_param_is_instance {
@@ -404,7 +423,7 @@ fn emit_csharp_method_groups(
                         "private",
                         &mut native_methods,
                         &method,
-                        true
+                        true,
                     );
 
                     let method_name = &method.method_name;
@@ -467,10 +486,15 @@ fn emit_csharp_method_groups(
     {{
 #nullable enable
 {csharp_methods}
+#region internal machinery
 {machinery}
-{dll_name}
+#endregion
+
 #nullable restore
+#region native methods
+{dll_name}
 {native_methods}
+#endregion
     }}
 "#
                 ))
