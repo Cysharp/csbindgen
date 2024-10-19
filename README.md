@@ -1,3 +1,8 @@
+# Fork notes
+
+This fork tries to extend the code generation for a particular use case.
+The goal is to generate actual C# classes based on function name prefixes.
+
 # csbindgen
 [![Crates](https://img.shields.io/crates/v/csbindgen.svg)](https://crates.io/crates/csbindgen) [![Api Rustdoc](https://img.shields.io/badge/api-rustdoc-blue)](https://docs.rs/csbindgen)
 
