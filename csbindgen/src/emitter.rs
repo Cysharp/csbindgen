@@ -282,12 +282,17 @@ fn emit_csharp_method_groups(
             .parameters
             .iter()
             .enumerate()
-            .map(|(index, p)| if index == 0 && first_param_is_instance {
-                "Instance".to_string()
-            } else {
-                escape_csharp_name(p.name.as_str()) + if is_mapped_type(&p.rust_type).is_some() {
-                    ".Instance"
-                } else { "" }
+            .map(|(index, p)| {
+                if index == 0 && first_param_is_instance {
+                    "Instance".to_string()
+                } else {
+                    escape_csharp_name(p.name.as_str())
+                        + if is_mapped_type(&p.rust_type).is_some() {
+                            ".Instance"
+                        } else {
+                            ""
+                        }
+                }
             })
             .collect::<Vec<_>>()
             .join(", ");
@@ -296,23 +301,46 @@ fn emit_csharp_method_groups(
         let mut native_call = format!("{class_name}.{native_name}({native_parameters})");
 
         let return_type = match &method.return_type {
-            None => "void".to_string(),
+            None => {
+                native_call.push(';');
+                "void".to_string()
+            }
             Some(x) => match is_mapped_type(x) {
                 Some(mapped_type) => {
-                    native_call = format!("new {mapped_type}({native_call})");
-                    mapped_type.to_string()
+                    let is_not_null = if let TypeKind::Pointer(pointer_type, _) = &x.type_kind {
+                        matches!(pointer_type, PointerType::NonNull)
+                    } else {
+                        false
+                    };
+
+                    let mut return_type = mapped_type.to_string();
+                    native_call = if is_not_null {
+                        format!("return new {mapped_type}({native_call});")
+                    } else {
+                        return_type.push('?');
+                        format!(
+                            r#"var native = {native_call};
+            return native == null ? null : new {mapped_type}(native);"#
+                        )
+                    };
+                    return_type
                 }
-                None => x.to_csharp_string(
-                    options,
-                    aliases,
-                    false,
-                    &method.method_name,
-                    &"return".to_string(),
-                ),
+                None => {
+                    native_call = format!("return {native_call};");
+                    x.to_csharp_string(
+                        options,
+                        aliases,
+                        false,
+                        &method.method_name,
+                        &"return".to_string(),
+                    )
+                }
             },
         };
 
-        let parameter_list = method.parameters.iter()
+        let parameter_list = method
+            .parameters
+            .iter()
             .skip(if first_param_is_instance { 1 } else { 0 })
             .map(|p| {
                 let type_name = match is_mapped_type(&p.rust_type) {
@@ -330,10 +358,16 @@ fn emit_csharp_method_groups(
             .collect::<Vec<_>>()
             .join(", ");
 
-        let modifiers = if first_param_is_instance { "" } else { "static " };
+        let modifiers = if first_param_is_instance {
+            ""
+        } else {
+            "static "
+        };
         format!(
             r#"        {accessibility} {modifiers}{return_type} {csharp_method_name}({parameter_list})
-            => {native_call};"#
+        {{
+            {native_call}
+        }}"#
         )
     };
 
@@ -356,21 +390,22 @@ fn emit_csharp_method_groups(
                         aliases,
                         options,
                         &"", // TODO: handle method prefix
-                        accessibility,
+                        "private",
                         &mut native_methods,
                         &method,
                     );
 
                     let method_name = &method.method_name;
-                    println!("cargo:warning={method_name} {constructor_rust_name}");
                     if *method_name == constructor_rust_name {
                         csharp_methods.push_str_ln(&emit_constructor(method, group));
+                        csharp_methods.push('\n');
                         continue;
                     } else if *method_name == destructor_rust_name {
                         continue;
                     }
 
                     csharp_methods.push_str_ln(&emit_method(method, group));
+                    csharp_methods.push('\n');
                 }
 
                 let machinery = format!(
@@ -418,11 +453,14 @@ fn emit_csharp_method_groups(
                 Some(format!(
                     r#"    {accessibility} unsafe sealed partial class {class_name}: IDisposable
     {{
+#nullable enable
 {csharp_methods}
 {machinery}
 {dll_name}
+#nullable restore
 {native_methods}
-    }}"#
+    }}
+"#
                 ))
             }
         })
@@ -597,7 +635,7 @@ fn emit_csharp_structs(
                     type_name,
                     escape_csharp_name(field.name.as_str())
                 )
-                    .as_str(),
+                .as_str(),
             );
 
             if let TypeKind::FixedArray(digits, _) = &field.rust_type.type_kind {
@@ -663,7 +701,7 @@ fn emit_csharp_consts(
                     escape_csharp_name(item.const_name.as_str()),
                     item.value.replace("[", "{ ").replace("]", " }")
                 )
-                    .as_str(),
+                .as_str(),
             );
         } else {
             let value = if type_name == "float" {
@@ -680,7 +718,7 @@ fn emit_csharp_consts(
                     escape_csharp_name(item.const_name.as_str()),
                     value
                 )
-                    .as_str(),
+                .as_str(),
             );
         }
     }
