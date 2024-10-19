@@ -296,7 +296,7 @@ fn emit_csharp_method_groups(
                         .map(move |item| item.trim().to_string())
                         .collect::<Vec<_>>()
                 })
-                .unwrap_or(vec!())
+                .unwrap_or(vec![])
         };
 
         let native_parameters = method
@@ -375,7 +375,7 @@ fn emit_csharp_method_groups(
                         &method.method_name,
                         &p.name,
                     ),
-                    Some(csharp_type) => csharp_type.to_string()
+                    Some(csharp_type) => csharp_type.to_string(),
                 };
                 let param_name = escape_csharp_name(p.name.as_str());
                 format!("{type_name} {param_name}")
@@ -393,8 +393,10 @@ fn emit_csharp_method_groups(
         } else {
             "static "
         };
+        let inline_attr = "        [System.Runtime.CompilerServices.MethodImplAttribute(System.Runtime.CompilerServices.MethodImplOptions.AggressiveInlining)]";
         format!(
-            r#"{doc_comment}        {accessibility} {modifiers}{return_type} {csharp_method_name}({parameter_list})
+            r#"{doc_comment}{inline_attr}
+        {accessibility} {modifiers}{return_type} {csharp_method_name}({parameter_list})
         {{
             {native_call}
         }}"#
@@ -674,7 +676,7 @@ fn emit_csharp_structs(
                     type_name,
                     escape_csharp_name(field.name.as_str())
                 )
-                    .as_str(),
+                .as_str(),
             );
 
             if let TypeKind::FixedArray(digits, _) = &field.rust_type.type_kind {
@@ -740,7 +742,7 @@ fn emit_csharp_consts(
                     escape_csharp_name(item.const_name.as_str()),
                     item.value.replace("[", "{ ").replace("]", " }")
                 )
-                    .as_str(),
+                .as_str(),
             );
         } else {
             let value = if type_name == "float" {
@@ -757,7 +759,7 @@ fn emit_csharp_consts(
                     escape_csharp_name(item.const_name.as_str()),
                     value
                 )
-                    .as_str(),
+                .as_str(),
             );
         }
     }
