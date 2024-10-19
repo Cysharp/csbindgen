@@ -134,6 +134,7 @@ pub fn emit_csharp(
             accessibility,
             &mut method_list_string,
             &item,
+            false,
         );
     }
 
@@ -260,10 +261,15 @@ fn emit_csharp_method_groups(
             .collect::<Vec<_>>()
             .join(", ");
 
+        let doc_comment = match method.escape_doc_comment("        ") {
+            None => String::new(),
+            Some(escaped) => escaped + "\n"
+        };
+
         let class_name = &group.csharp_class;
         let method_name = &method.method_name;
         format!(
-            r#"        {accessibility} {class_name}({parameters_list}) : this({method_name}({parameters})) {{}}"#
+            r#"{doc_comment}        {accessibility} {class_name}({parameters_list}) : this({method_name}({parameters})) {{}}"#
         )
     };
 
@@ -288,10 +294,10 @@ fn emit_csharp_method_groups(
                 } else {
                     escape_csharp_name(p.name.as_str())
                         + if is_mapped_type(&p.rust_type).is_some() {
-                            ".Instance"
-                        } else {
-                            ""
-                        }
+                        ".Instance"
+                    } else {
+                        ""
+                    }
                 }
             })
             .collect::<Vec<_>>()
@@ -358,13 +364,18 @@ fn emit_csharp_method_groups(
             .collect::<Vec<_>>()
             .join(", ");
 
+        let doc_comment = match method.escape_doc_comment("        ") {
+            None => String::new(),
+            Some(escaped) => escaped + "\n"
+        };
+
         let modifiers = if first_param_is_instance {
             ""
         } else {
             "static "
         };
         format!(
-            r#"        {accessibility} {modifiers}{return_type} {csharp_method_name}({parameter_list})
+            r#"{doc_comment}        {accessibility} {modifiers}{return_type} {csharp_method_name}({parameter_list})
         {{
             {native_call}
         }}"#
@@ -393,6 +404,7 @@ fn emit_csharp_method_groups(
                         "private",
                         &mut native_methods,
                         &method,
+                        true
                     );
 
                     let method_name = &method.method_name;
@@ -475,6 +487,7 @@ fn emit_csharp_native_method(
     accessibility: &str,
     method_list_string: &mut String,
     method: &&ExternMethod,
+    suppress_docs: bool,
 ) {
     let mut method_name = &method.method_name;
     let method_name_temp: String;
@@ -544,8 +557,10 @@ fn emit_csharp_native_method(
         .collect::<Vec<_>>()
         .join(", ");
 
-    if let Some(x) = method.escape_doc_comment("        ") {
-        method_list_string.push_str_ln(&x);
+    if !suppress_docs {
+        if let Some(x) = method.escape_doc_comment("        ") {
+            method_list_string.push_str_ln(&x);
+        }
     }
 
     method_list_string.push_str_ln(
@@ -635,7 +650,7 @@ fn emit_csharp_structs(
                     type_name,
                     escape_csharp_name(field.name.as_str())
                 )
-                .as_str(),
+                    .as_str(),
             );
 
             if let TypeKind::FixedArray(digits, _) = &field.rust_type.type_kind {
@@ -701,7 +716,7 @@ fn emit_csharp_consts(
                     escape_csharp_name(item.const_name.as_str()),
                     item.value.replace("[", "{ ").replace("]", " }")
                 )
-                .as_str(),
+                    .as_str(),
             );
         } else {
             let value = if type_name == "float" {
@@ -718,7 +733,7 @@ fn emit_csharp_consts(
                     escape_csharp_name(item.const_name.as_str()),
                     value
                 )
-                .as_str(),
+                    .as_str(),
             );
         }
     }
