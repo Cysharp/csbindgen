@@ -3,6 +3,7 @@ use crate::builder::{BindgenOptions, MethodGroup};
 use crate::type_meta::ExportSymbolNaming::{ExportName, NoMangle};
 use crate::type_meta::*;
 use crate::util::*;
+use convert_case::{Case, Casing};
 use std::collections::HashMap;
 
 pub fn emit_rust_method(list: &Vec<ExternMethod>, options: &BindgenOptions) -> String {
@@ -202,11 +203,24 @@ fn emit_csharp_method_groups(
     dll_name: &str,
     method_groups: HashMap<&MethodGroup, Vec<&ExternMethod>>,
 ) -> String {
+    let is_mapped_type = |rust_type: &RustType| -> Option<&str> {
+        match &rust_type.type_kind {
+            TypeKind::Pointer(_, r) => method_groups.keys().find_map(move |group| {
+                if group.rust_type == r.type_name {
+                    Some(&*group.csharp_class)
+                } else {
+                    None
+                }
+            }),
+            _ => None,
+        }
+    };
+
     let emit_constructor = |method: &ExternMethod, group: &MethodGroup| -> String {
         match &method.return_type {
             None => panic!("cannot return void from constructor {method:?}"),
             Some(x) => match &x.type_kind {
-                TypeKind::Pointer(p, r) => {
+                TypeKind::Pointer(_, r) => {
                     let actual_type = r.to_csharp_string(
                         options,
                         aliases,
@@ -224,13 +238,16 @@ fn emit_csharp_method_groups(
             .parameters
             .iter()
             .map(|p| {
-                let type_name = p.rust_type.to_csharp_string(
-                    options,
-                    aliases,
-                    false,
-                    &method.method_name,
-                    &p.name,
-                );
+                let type_name = match is_mapped_type(&p.rust_type) {
+                    None => p.rust_type.to_csharp_string(
+                        options,
+                        aliases,
+                        false,
+                        &method.method_name,
+                        &p.name,
+                    ),
+                    Some(csharp_type) => csharp_type.to_string(),
+                };
                 format!("{} {}", type_name, escape_csharp_name(p.name.as_str()))
             })
             .collect::<Vec<_>>()
@@ -246,22 +263,94 @@ fn emit_csharp_method_groups(
         let class_name = &group.csharp_class;
         let method_name = &method.method_name;
         format!(
-            r#"        {accessibility} {class_name}({parameters_list})
-            => this({method_name}({parameters}));"#
+            r#"        {accessibility} {class_name}({parameters_list}) : this({method_name}({parameters})) {{}}"#
         )
     };
 
-    let group_classes = method_groups
-        .into_iter()
+    let emit_method = |method: &ExternMethod, group: &MethodGroup| -> String {
+        let class_name = &group.csharp_class;
+        let csharp_method_name = method.method_name[group.rust_prefix.len()..]
+            .to_string()
+            .to_case(Case::UpperCamel);
+
+        let first_param_is_instance = method.parameters.first().is_some_and(move |first_param| {
+            is_mapped_type(&first_param.rust_type)
+                .is_some_and(move |csharp_type| csharp_type == class_name)
+        });
+
+        let native_parameters = method
+            .parameters
+            .iter()
+            .enumerate()
+            .map(|(index, p)| if index == 0 && first_param_is_instance {
+                "Instance".to_string()
+            } else {
+                escape_csharp_name(p.name.as_str()) + if is_mapped_type(&p.rust_type).is_some() {
+                    ".Instance"
+                } else { "" }
+            })
+            .collect::<Vec<_>>()
+            .join(", ");
+
+        let native_name = &method.method_name;
+        let mut native_call = format!("{class_name}.{native_name}({native_parameters})");
+
+        let return_type = match &method.return_type {
+            None => "void".to_string(),
+            Some(x) => match is_mapped_type(x) {
+                Some(mapped_type) => {
+                    native_call = format!("new {mapped_type}({native_call})");
+                    mapped_type.to_string()
+                }
+                None => x.to_csharp_string(
+                    options,
+                    aliases,
+                    false,
+                    &method.method_name,
+                    &"return".to_string(),
+                ),
+            },
+        };
+
+        let parameter_list = method.parameters.iter()
+            .skip(if first_param_is_instance { 1 } else { 0 })
+            .map(|p| {
+                let type_name = match is_mapped_type(&p.rust_type) {
+                    None => p.rust_type.to_csharp_string(
+                        options,
+                        aliases,
+                        false,
+                        &method.method_name,
+                        &p.name,
+                    ),
+                    Some(csharp_type) => csharp_type.to_string(),
+                };
+                format!("{} {}", type_name, escape_csharp_name(p.name.as_str()))
+            })
+            .collect::<Vec<_>>()
+            .join(", ");
+
+        let modifiers = if first_param_is_instance { "" } else { "static " };
+        format!(
+            r#"        {accessibility} {modifiers}{return_type} {csharp_method_name}({parameter_list})
+            => {native_call};"#
+        )
+    };
+
+    method_groups
+        .iter()
         .filter_map(move |(group, methods)| {
             if methods.is_empty() {
                 None
             } else {
                 let class_name = &group.csharp_class;
                 let rust_prefix = &group.rust_prefix;
+                let rust_type = &group.rust_type;
+
                 let mut csharp_methods = String::new();
                 let mut native_methods = String::new();
                 let constructor_rust_name = format!("{rust_prefix}new");
+                let destructor_rust_name = format!("{rust_prefix}free");
                 for method in methods {
                     emit_csharp_native_method(
                         aliases,
@@ -275,15 +364,18 @@ fn emit_csharp_method_groups(
                     let method_name = &method.method_name;
                     println!("cargo:warning={method_name} {constructor_rust_name}");
                     if *method_name == constructor_rust_name {
-                        csharp_methods.push_str_ln( &emit_constructor(method, group));
-                    } else {
-                        //csharp_methods.push_str_ln( &emit_constructor(method, group));
+                        csharp_methods.push_str_ln(&emit_constructor(method, group));
+                        continue;
+                    } else if *method_name == destructor_rust_name {
+                        continue;
                     }
+
+                    csharp_methods.push_str_ln(&emit_method(method, group));
                 }
 
                 let machinery = format!(
-                    r#"        private unsafe T* _instance;
-        internal unsafe T* Instance
+                    r#"        private {rust_type}* _instance;
+        internal {rust_type}* Instance
         {{
             get
             {{
@@ -293,13 +385,13 @@ fn emit_csharp_method_groups(
             }}
         }}
 
-        private protected unsafe {class_name}(T* instance)
+        private {class_name}({rust_type}* instance)
         {{
             ArgumentNullException.ThrowIfNull(instance);
             _instance = instance;
         }}
 
-        internal unsafe T* Into()
+        internal {rust_type}* Into()
         {{
             var instance = Instance;
             _instance = null;
@@ -309,7 +401,7 @@ fn emit_csharp_method_groups(
         private void Free()
         {{
             if (_instance != null)
-                {rust_prefix}free(Into());
+                {class_name}.{rust_prefix}free(Into());
         }}
 
         public void Dispose()
@@ -324,18 +416,18 @@ fn emit_csharp_method_groups(
 
                 // TODO: use Interlocked.Exchange so this also catches issues with multi threading
                 Some(format!(
-                    r#"    private unsafe partial class {class_name}: IDisposable
+                    r#"    {accessibility} unsafe sealed partial class {class_name}: IDisposable
     {{
 {csharp_methods}
 {machinery}
 {dll_name}
 {native_methods}
-    }}\n"#
+    }}"#
                 ))
             }
         })
-        .collect::<String>();
-    group_classes
+        .collect::<Vec<_>>()
+        .join("\n")
 }
 
 fn emit_csharp_native_method(
@@ -505,7 +597,7 @@ fn emit_csharp_structs(
                     type_name,
                     escape_csharp_name(field.name.as_str())
                 )
-                .as_str(),
+                    .as_str(),
             );
 
             if let TypeKind::FixedArray(digits, _) = &field.rust_type.type_kind {
@@ -571,7 +663,7 @@ fn emit_csharp_consts(
                     escape_csharp_name(item.const_name.as_str()),
                     item.value.replace("[", "{ ").replace("]", " }")
                 )
-                .as_str(),
+                    .as_str(),
             );
         } else {
             let value = if type_name == "float" {
@@ -588,7 +680,7 @@ fn emit_csharp_consts(
                     escape_csharp_name(item.const_name.as_str()),
                     value
                 )
-                .as_str(),
+                    .as_str(),
             );
         }
     }
