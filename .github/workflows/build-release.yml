@@ -22,7 +22,7 @@ jobs:
           export-env: false
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN_PUBLIC }}
-          CARGO_REGISTRY_TOKEN: "op://GitHubActionsPublic/CARGO_REGISTRY_TOKEN/credential"
+          CARGO_REGISTRY_TOKEN: "op://${{ vars.OP_VAULT_ACTIONS_PUBLIC }}/CARGO_REGISTRY_TOKEN/credential"
 
       - uses: actions/checkout@v4
       - run: cargo build --verbose
@@ -54,7 +54,7 @@ jobs:
           export-env: false
         env:
           OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN_PUBLIC }}
-          NUGET_KEY: "op://GitHubActionsPublic/NUGET_KEY/credential"
+          NUGET_KEY: "op://${{ vars.OP_VAULT_ACTIONS_PUBLIC }}/NUGET_KEY/credential"
 
       - uses: actions/checkout@v4
       - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
