@@ -121,17 +121,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     if !is_foreign_item {
         let found = attrs
             .iter()
-            .map(|attr| {
-                let name = &attr.path().segments.last().unwrap().ident;
-                if name == "no_mangle" {
-                    return Some(NoMangle);
-                } else if name == "export_name" {
-                    if let Some(x) = get_str_from_meta(&attr.meta) {
-                        return Some(ExportName(x));
-                    }
-                }
-                None
-            })
+            .map(|attr| parse_method_attribute(attr))
             .flatten()
             .next();
 
@@ -163,6 +153,56 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
         });
     }
 
+    None
+}
+
+fn parse_method_attribute(attr: &syn::Attribute) -> Option<ExportSymbolNaming> {
+    let name = &attr.path().segments.last().unwrap().ident;
+
+    match name.to_string().as_str() {
+        "no_mangle" => Some(NoMangle),
+        "export_name" => {
+            if let Some(x) = get_str_from_meta(&attr.meta) {
+                Some(ExportName(x))
+            } else {
+                None
+            }
+        }
+        "unsafe" => parse_method_attribute_arguments(attr),
+        _ => None,
+    }
+}
+
+fn parse_method_attribute_arguments(attr: &syn::Attribute) -> Option<ExportSymbolNaming> {
+    if let syn::Meta::List(_) = attr.meta {
+        let parse_result = attr.parse_args_with(|input: syn::parse::ParseStream| {
+            if input.is_empty() {
+                return Ok(None);
+            }
+
+            let mut result = None;
+            let meta = input.parse::<syn::Meta>()?;
+
+            if let Some(ident) = meta.path().get_ident() {
+                match ident.to_string().as_str() {
+                    "no_mangle" => result = Some(NoMangle),
+                    "export_name" => {
+                        if let Some(x) = get_str_from_meta(&meta) {
+                            result = Some(ExportName(x));
+                        }
+                    }
+                    _ => {}
+                }
+            }
+            Ok(result)
+        });
+
+        match parse_result {
+            Ok(Some(value)) => return Some(value),
+            Ok(None) => {}
+            Err(e) => println!("csbindgen can't parse attribute args: {}", e),
+        }
+    }
     None
 }
 
