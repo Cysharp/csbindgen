@@ -1,5 +1,11 @@
+#![allow(clippy::missing_safety_doc)]
+
 use std::{
-    collections::HashSet, ffi::{c_char, c_long, c_ulong, CString}, mem::transmute, num::*, ptr::NonNull
+    collections::HashSet,
+    ffi::{c_char, c_long, c_ulong, CString},
+    mem::transmute,
+    num::*,
+    ptr::NonNull,
 };
 
 mod counter;
@@ -309,7 +315,7 @@ pub extern "C" fn ignore_nop() -> (i32, i32) {
 }
 
 #[no_mangle]
-pub extern "C" fn nop() -> () {
+pub extern "C" fn nop() {
     println!("hello nop!");
 }
 
@@ -381,11 +387,9 @@ pub unsafe extern "C" fn my_bool(
     yr: *mut bool,
     zr: *mut bool,
 ) -> bool {
-    unsafe {
-        *xr = x;
-        *yr = y;
-        *zr = z;
-    }
+    *xr = x;
+    *yr = y;
+    *zr = z;
 
     true
 }
@@ -398,12 +402,14 @@ pub extern "C" fn alloc_c_string() -> *mut c_char {
 
 #[no_mangle]
 pub unsafe extern "C" fn free_c_string(str: *mut c_char) {
-    unsafe { CString::from_raw(str) };
+    unsafe {
+        let _ = CString::from_raw(str);
+    };
 }
 
 #[no_mangle]
 pub extern "C" fn alloc_u8_string() -> *mut ByteBuffer {
-    let str = format!("foo bar baz");
+    let str = "foo bar baz".to_string();
     let buf = ByteBuffer::from_vec(str.into_bytes());
     Box::into_raw(Box::new(buf))
 }
@@ -451,7 +457,9 @@ pub extern "C" fn create_context() -> *mut Context {
 
 #[no_mangle]
 pub unsafe extern "C" fn delete_context(context: *mut Context) {
-    unsafe { Box::from_raw(context) };
+    unsafe {
+        let _ = Box::from_raw(context);
+    };
 }
 
 #[no_mangle]
@@ -529,6 +537,7 @@ pub struct ByteBuffer {
 }
 
 impl ByteBuffer {
+    #[allow(clippy::len_without_is_empty)]
     pub fn len(&self) -> usize {
         self.length
             .try_into()
@@ -643,7 +652,7 @@ pub struct InternalHiddenContext {
 }
 
 pub struct TreatAsEmptyStruct {
-    internal: std::sync::Arc<InternalHiddenContext>,
+    _internal: std::sync::Arc<InternalHiddenContext>,
 }
 
 #[no_mangle]
@@ -689,7 +698,6 @@ pub extern "C" fn set_callback(alloc_callback: MyCallback) {
     println!("Your callback is {alloc_callback:p}");
 }
 
-
 #[no_mangle]
 pub extern "C" fn callback_test10(cb: extern "C" fn(a: i32) -> i32) -> i32 {
     cb(100)
@@ -699,13 +707,12 @@ use counter::Args;
 use counter::Counter;
 
 #[no_mangle]
-pub extern fn counterCreate(args: Args) -> *mut Counter {
-    let _counter = unsafe { transmute(Box::new(Counter::new(args))) };
-    _counter
+pub extern "C" fn counterCreate(args: Args) -> *mut Counter {
+    unsafe { transmute::<Box<_>, *mut _>(Box::new(Counter::new(args))) }
 }
 
 #[no_mangle]
-pub extern fn counterGetValue(ptr: *mut Counter) -> u32 {
+pub unsafe extern "C" fn counterGetValue(ptr: *mut Counter) -> u32 {
     let mut _counter = unsafe { &mut *ptr };
     _counter.get()
 }
