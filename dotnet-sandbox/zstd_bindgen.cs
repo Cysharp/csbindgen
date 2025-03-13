@@ -626,6 +626,8 @@ namespace CsBindgen
         internal static extern nuint ZSTD_sizeof_DDict(ZSTD_DDict_s* ddict);
 
 
+
+
     }
 
     [StructLayout(LayoutKind.Sequential)]

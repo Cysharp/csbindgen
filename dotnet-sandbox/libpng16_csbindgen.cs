@@ -938,6 +938,8 @@ namespace PixivApi.ImageFile
         internal static extern int png_set_option(png_struct_def* png_ptr, int option, int onoff);
 
 
+
+
     }
 
     [StructLayout(LayoutKind.Sequential)]

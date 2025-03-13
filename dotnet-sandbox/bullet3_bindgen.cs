@@ -1915,6 +1915,8 @@ namespace CsBindgen
         internal static extern void b3RotateVector(double* quat, double* vec, double* vecOut);
 
 
+
+
     }
 
     [StructLayout(LayoutKind.Sequential)]
