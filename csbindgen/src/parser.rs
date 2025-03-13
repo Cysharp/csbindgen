@@ -1,3 +1,4 @@
+use crate::doc_comment::gather_docs;
 use crate::type_meta::ExportSymbolNaming::{ExportName, NoMangle};
 use crate::util::get_str_from_meta;
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
@@ -13,16 +14,15 @@ enum FnItem {
 /// build a Vec of all Items, unless the Item is a Item::Mod, then append the Item contents of the vect
 /// Do this recursively.
 /// This is not memory-efficient, would work better with an iterator, but does not seem performance critical.
-fn depth_first_module_walk<'a>(ast: &'a Vec<Item>) -> Vec<&'a syn::Item> {
+fn depth_first_module_walk(ast: &[Item]) -> Vec<&syn::Item> {
     let mut unwrapped_items: Vec<&syn::Item> = vec![];
     for item in ast {
         match item {
-            Item::Mod(m) => match &m.content {
-                Some((_, items)) => {
+            Item::Mod(m) => {
+                if let Some((_, items)) = &m.content {
                     unwrapped_items.extend(depth_first_module_walk(items));
                 }
-                _ => {}
-            },
+            }
             _ => {
                 unwrapped_items.push(item);
             }
@@ -121,7 +121,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     if !is_foreign_item {
         let found = attrs
             .iter()
-            .map(|attr| {
+            .filter_map(|attr| {
                 let name = &attr.path().segments.last().unwrap().ident;
                 if name == "no_mangle" {
                     return Some(NoMangle);
@@ -132,7 +132,6 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
                 }
                 None
             })
-            .flatten()
             .next();
 
         if let Some(x) = found {
@@ -147,19 +146,13 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     }
 
     // doc
-    let doc_comment = attrs
-        .iter()
-        .filter(|x| x.path().is_ident("doc"))
-        .filter_map(|x| get_str_from_meta(&x.meta))
-        .collect::<Vec<_>>();
-
     if !method_name.is_empty() && (options.method_filter)(method_name.clone()) {
         return Some(ExternMethod {
             method_name,
             export_naming,
             parameters,
             return_type,
-            doc_comment,
+            doc_comment: gather_docs(&attrs),
         });
     }
 
@@ -201,6 +194,7 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                 struct_name,
                 fields,
                 is_union: true,
+                doc_comment: gather_docs(&t.attrs),
             });
         } else if let Item::Struct(t) = item {
             let mut repr = false;
@@ -210,6 +204,7 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                     repr = true;
                 }
             }
+            let doc_comment = gather_docs(&t.attrs);
 
             if repr {
                 if let syn::Fields::Named(f) = &t.fields {
@@ -219,6 +214,7 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                         struct_name,
                         fields,
                         is_union: false,
+                        doc_comment,
                     });
                 } else if let syn::Fields::Unnamed(f) = &t.fields {
                     let struct_name = t.ident.to_string();
@@ -227,6 +223,7 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                         struct_name,
                         fields,
                         is_union: false,
+                        doc_comment,
                     });
                 } else if let syn::Fields::Unit = &t.fields {
                     let struct_name = t.ident.to_string();
@@ -235,6 +232,7 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                         struct_name,
                         fields,
                         is_union: false,
+                        doc_comment,
                     });
                 }
             } else {
@@ -245,6 +243,7 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                     struct_name,
                     fields,
                     is_union: false,
+                    doc_comment,
                 });
             }
         }
@@ -260,6 +259,7 @@ fn collect_fields(fields: &syn::FieldsNamed) -> Vec<FieldMember> {
             result.push(FieldMember {
                 name: x.to_string(),
                 rust_type: t,
+                doc_comment: gather_docs(&field.attrs),
             });
         }
     }
@@ -276,8 +276,9 @@ fn collect_fields_unnamed(fields: &syn::FieldsUnnamed) -> Vec<FieldMember> {
         let name = format!("Item{i}");
         let t = parse_type(&field.ty);
         result.push(FieldMember {
-            name: name,
+            name,
             rust_type: t,
+            doc_comment: gather_docs(&field.attrs),
         });
     }
 
@@ -319,13 +320,14 @@ pub fn collect_const(
                         syn::Lit::Bool(b) => {
                             format!("{}", b.value)
                         }
-                        _ => format!(""),
+                        _ => String::new(),
                     };
 
                     result.push(RustConst {
-                        const_name: const_name,
+                        const_name,
                         rust_type: t,
-                        value: value,
+                        value,
+                        doc_comment: gather_docs(&ct.attrs),
                     });
                 }
             }
@@ -380,7 +382,11 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                     _ => (),
                 }
 
-                fields.push((name, value));
+                fields.push(RustEnumVariant {
+                    name,
+                    value,
+                    doc_comment: gather_docs(&v.attrs),
+                });
             }
 
             result.push(RustEnum {
@@ -388,6 +394,7 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                 fields,
                 repr,
                 is_flags: false,
+                doc_comment: gather_docs(&t.attrs),
             });
         } else if let Item::Macro(t) = item {
             let last_segment = t.mac.path.segments.last().unwrap();
@@ -430,6 +437,12 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                             ),
                         )
                     })
+                    //TODO: Unsure how to get the doc comments here, left empty for now
+                    .map(|x| RustEnumVariant {
+                        name: x.0,
+                        value: x.1,
+                        doc_comment: Vec::new(),
+                    })
                     .collect::<Vec<_>>();
 
                 result.push(RustEnum {
@@ -437,6 +450,7 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                     fields,
                     repr,
                     is_flags: true,
+                    doc_comment: gather_docs(&t.attrs),
                 });
             }
         }
@@ -526,7 +540,7 @@ fn parse_type(t: &syn::Type) -> RustType {
             };
         }
         syn::Type::Tuple(t) => {
-            if t.elems.len() == 0 {
+            if t.elems.is_empty() {
                 return RustType {
                     type_name: "()".to_string(),
                     type_kind: TypeKind::Normal,
@@ -549,7 +563,7 @@ fn parse_type(t: &syn::Type) -> RustType {
 
             let ret = match &t.output {
                 syn::ReturnType::Default => None,
-                syn::ReturnType::Type(_, t) => Some(Box::new(parse_type(&t))),
+                syn::ReturnType::Type(_, t) => Some(Box::new(parse_type(t))),
             };
 
             return RustType {
@@ -558,7 +572,7 @@ fn parse_type(t: &syn::Type) -> RustType {
             };
         }
         syn::Type::Reference(t) => {
-            let result = parse_type(&*t.elem);
+            let result = parse_type(&t.elem);
             let is_mut = t.mutability.is_some();
 
             match result {
@@ -575,7 +589,7 @@ fn parse_type(t: &syn::Type) -> RustType {
                                 } else {
                                     PointerType::ConstPointer
                                 },
-                                Box::new(parse_type(&*t.elem)),
+                                Box::new(parse_type(&t.elem)),
                             ),
                         };
                     }
@@ -588,7 +602,7 @@ fn parse_type(t: &syn::Type) -> RustType {
                                 } else {
                                     PointerType::ConstPointerPointer
                                 },
-                                Box::new(parse_type(&*t.elem)),
+                                Box::new(parse_type(&t.elem)),
                             ),
                         };
                     }
@@ -601,7 +615,7 @@ fn parse_type(t: &syn::Type) -> RustType {
                                 } else {
                                     PointerType::ConstMutPointerPointer
                                 },
-                                Box::new(parse_type(&*t.elem)),
+                                Box::new(parse_type(&t.elem)),
                             ),
                         };
                     }
@@ -613,7 +627,7 @@ fn parse_type(t: &syn::Type) -> RustType {
                         type_name: result.type_name,
                         type_kind: TypeKind::Pointer(
                             PointerType::ConstPointer,
-                            Box::new(parse_type(&*t.elem)),
+                            Box::new(parse_type(&t.elem)),
                         ),
                     };
                 }
@@ -654,8 +668,8 @@ fn parse_type_path(t: &syn::TypePath) -> RustType {
         }
     }
 
-    return RustType {
+    RustType {
         type_name: last_segment.ident.to_string(),
         type_kind: TypeKind::Normal,
-    };
+    }
 }
