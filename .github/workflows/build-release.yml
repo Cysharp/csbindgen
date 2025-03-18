@@ -6,9 +6,11 @@ on:
       tag:
         description: "tag: git tag you want create. (sample 1.0.0)"
         required: true
-
-env:
-  GIT_TAG: ${{ github.event.inputs.tag }}
+      dry-run:
+        description: "dry-run: true will never create relase/nuget."
+        required: true
+        default: false
+        type: boolean
 
 jobs:
   build-and-push-rust:
@@ -30,11 +32,11 @@ jobs:
       - run: |
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "Update cargo.toml version to ${{ env.GIT_TAG }}" -a
+          git commit -m "Update cargo.toml version to ${{ inputs.tag }}" -a
       - run: cargo publish --manifest-path csbindgen/Cargo.toml
         env:
           CARGO_REGISTRY_TOKEN: ${{ steps.op-load-secret.outputs.CARGO_REGISTRY_TOKEN }}
-      - run: git tag ${{ env.GIT_TAG }}
+      - run: git tag ${{ inputs.tag }}
       - name: Push changes
         uses: ad-m/github-push-action@master
         with:
@@ -65,16 +67,11 @@ jobs:
 
   create-release:
     needs: [build-dotnet, build-and-push-rust]
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      # Create Releases
-      - uses: actions/create-release@v1
-        id: create_release
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.GIT_TAG }}
-          release_name: Ver.${{ env.GIT_TAG }}
-          draft: true
-          prerelease: false
+    uses: Cysharp/Actions/.github/workflows/create-release.yaml@main
+    with:
+      commit-id: ''
+      tag: ${{ inputs.tag }}
+      dry-run: ${{ inputs.dry-run }}
+      nuget-push: false
+      release-upload: false
+    secrets: inherit
