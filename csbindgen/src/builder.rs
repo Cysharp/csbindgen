@@ -1,3 +1,4 @@
+use std::convert::identity;
 use std::path::PathBuf;
 use std::{
     error::Error,
@@ -5,7 +6,6 @@ use std::{
     io::{self, Write},
     path::Path,
 };
-use std::convert::identity;
 
 use crate::{generate, GenerateKind};
 
@@ -37,6 +37,14 @@ pub struct BindgenOptions {
     pub csharp_file_header: String,
     pub csharp_file_footer: String,
     pub always_included_types: Vec<String>,
+    pub csharp_method_groups: Vec<MethodGroup>,
+}
+
+#[derive(Debug, PartialEq, Eq, Hash)]
+pub struct MethodGroup {
+    pub rust_prefix: String,
+    pub csharp_class: String,
+    pub rust_type: String,
 }
 
 impl Default for Builder {
@@ -66,6 +74,7 @@ impl Default for Builder {
                 csharp_file_header: "".to_string(),
                 csharp_file_footer: "".to_string(),
                 always_included_types: vec![],
+                csharp_method_groups: vec![],
             },
         }
     }
@@ -78,7 +87,9 @@ impl Builder {
 
     /// Add an input .rs file(such as generated from bindgen) to generate binding.
     pub fn input_bindgen_file<T: AsRef<Path>>(mut self, input_bindgen_file: T) -> Builder {
-        self.options.input_bindgen_files.push(input_bindgen_file.as_ref().to_path_buf());
+        self.options
+            .input_bindgen_files
+            .push(input_bindgen_file.as_ref().to_path_buf());
         self
     }
 
@@ -99,9 +110,13 @@ impl Builder {
     /// Adds a list of types that will always be considered to be included in the
     /// generated bindings, even if not part of any function signature
     pub fn always_included_types<I, S>(mut self, always_included_types: I) -> Builder
-        where I: IntoIterator<Item = S>, S: ToString
+    where
+        I: IntoIterator<Item = S>,
+        S: ToString,
     {
-        self.options.always_included_types.extend(always_included_types.into_iter().map(|v| v.to_string()));
+        self.options
+            .always_included_types
+            .extend(always_included_types.into_iter().map(|v| v.to_string()));
         self
     }
 
@@ -214,17 +229,27 @@ impl Builder {
     /// equivalent to csharp_generate_const_filter(|_| csharp_generate_const)
     #[deprecated(note = "User csharp_generate_const_filter instead")]
     pub fn csharp_generate_const(self, csharp_generate_const: bool) -> Builder {
-        self.csharp_generate_const_filter(if csharp_generate_const { |_| true } else { |_| false })
+        self.csharp_generate_const_filter(if csharp_generate_const {
+            |_| true
+        } else {
+            |_| false
+        })
     }
 
     /// configure C# generate const filter, default `|_| false`
-    pub fn csharp_generate_const_filter(mut self, csharp_generate_const_filter: fn(const_name: &str) -> bool) -> Builder {
+    pub fn csharp_generate_const_filter(
+        mut self,
+        csharp_generate_const_filter: fn(const_name: &str) -> bool,
+    ) -> Builder {
         self.options.csharp_generate_const_filter = csharp_generate_const_filter;
         self
     }
 
     /// configure the mappings that C# type name from rust original type name, default `|x| x`
-    pub fn csharp_type_rename(mut self, csharp_type_rename: fn(rust_type_name: String) -> String) -> Builder {
+    pub fn csharp_type_rename(
+        mut self,
+        csharp_type_rename: fn(rust_type_name: String) -> String,
+    ) -> Builder {
         self.options.csharp_type_rename = csharp_type_rename;
         self
     }
@@ -238,6 +263,25 @@ impl Builder {
     /// configure the additional footer for the generated C# code.
     pub fn csharp_file_footer<T: Into<String>>(mut self, csharp_file_footer: T) -> Builder {
         self.options.csharp_file_footer = csharp_file_footer.into();
+        self
+    }
+
+    pub fn csharp_group_methods<T1, T2, T3>(
+        mut self,
+        rust_prefix: T1,
+        csharp_class: T2,
+        rust_type: T3,
+    ) -> Builder
+    where
+        T1: Into<String>,
+        T2: Into<String>,
+        T3: Into<String>,
+    {
+        self.options.csharp_method_groups.push(MethodGroup {
+            csharp_class: csharp_class.into(),
+            rust_prefix: rust_prefix.into(),
+            rust_type: rust_type.into(),
+        });
         self
     }
 
