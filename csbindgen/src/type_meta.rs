@@ -27,6 +27,7 @@ pub struct Parameter {
 pub struct FieldMember {
     pub name: String,
     pub rust_type: RustType,
+    pub doc_comment: Vec<String>,
 }
 
 #[derive(Clone, Debug)]
@@ -42,38 +43,6 @@ pub struct ExternMethod {
     pub parameters: Vec<Parameter>,
     pub return_type: Option<RustType>,
     pub export_naming: ExportSymbolNaming,
-}
-
-impl ExternMethod {
-    pub fn escape_doc_comment(&self, indent: &str) -> Option<String> {
-        if self.doc_comment.is_empty() {
-            return None;
-        }
-
-        let mut lines = Vec::with_capacity(self.doc_comment.len() + 2);
-
-        lines.push(format!("{}/// <summary>", indent));
-
-        for comment in self.doc_comment.iter() {
-            if comment.trim().is_empty() {
-                lines.push(format!("{}///", indent));
-            } else {
-                for line in comment.lines() {
-                    lines.push(format!(
-                        "{}/// {}",
-                        indent,
-                        line.replace("&", "&amp;")
-                            .replace("<", "&lt;")
-                            .replace(">", "&gt;"),
-                    ));
-                }
-            }
-        }
-
-        lines.push(format!("{}/// </summary>", indent));
-
-        Some(lines.join("\n"))
-    }
 }
 
 #[derive(Clone, Debug)]
@@ -108,14 +77,23 @@ pub struct RustStruct {
     pub struct_name: String,
     pub fields: Vec<FieldMember>,
     pub is_union: bool,
+    pub doc_comment: Vec<String>,
 }
 
 #[derive(Clone, Debug)]
 pub struct RustEnum {
     pub enum_name: String,
-    pub fields: Vec<(String, Option<String>)>, // name, value
+    pub fields: Vec<RustEnumVariant>, // name, value
     pub repr: Option<String>,
     pub is_flags: bool,
+    pub doc_comment: Vec<String>,
+}
+
+#[derive(Clone, Debug)]
+pub struct RustEnumVariant {
+    pub name: String,
+    pub value: Option<String>,
+    pub doc_comment: Vec<String>,
 }
 
 #[derive(Clone, Debug)]
@@ -123,6 +101,7 @@ pub struct RustConst {
     pub const_name: String,
     pub rust_type: RustType,
     pub value: String,
+    pub doc_comment: Vec<String>,
 }
 
 impl RustType {
@@ -142,10 +121,7 @@ impl RustType {
             };
 
             // return NonNull or Box requires close angle
-            match p {
-                NonNull | Box => true,
-                _ => false,
-            }
+            matches!(p, NonNull | Box)
         }
 
         let emit_type_name = |sb: &mut String| {
@@ -398,7 +374,7 @@ impl RustType {
                     if let TypeKind::Pointer(p, inner) = &rust_type.type_kind {
                         if emit_inner {
                             sb.push_str(
-                                &inner
+                                inner
                                     .to_csharp_string(
                                         options,
                                         alias_map,
@@ -445,17 +421,16 @@ impl RustType {
 
                 if !emit_pointer(
                     &mut sb,
-                    &self,
+                    self,
                     options,
                     alias_map,
                     emit_from_struct,
                     method_name,
                     parameter_name,
                     emit_inner,
-                ) {
-                    if emit_inner {
-                        sb.push_str(type_csharp_string.as_str());
-                    }
+                ) && emit_inner
+                {
+                    sb.push_str(type_csharp_string.as_str());
                 }
             }
         };
@@ -502,7 +477,7 @@ pub fn build_method_delegate_if_required(
                             method_name,
                             parameter_name,
                         );
-                        let parameter_name = if p.name == "" {
+                        let parameter_name = if p.name.is_empty() {
                             format!("arg{}", index + 1)
                         } else {
                             p.name.clone()
