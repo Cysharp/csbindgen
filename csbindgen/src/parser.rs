@@ -4,6 +4,7 @@ use crate::util::get_str_from_meta;
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
 use regex::Regex;
 use std::collections::HashSet;
+use convert_case::{Case, Casing};
 use syn::{ForeignItem, Item, Pat, ReturnType};
 
 enum FnItem {
@@ -342,7 +343,7 @@ fn collect_fields(fields: &syn::FieldsNamed) -> Vec<FieldMember> {
         if let Some(x) = &field.ident {
             let t = parse_type(&field.ty);
             result.push(FieldMember {
-                name: x.to_string(),
+                name: x.to_string().to_case(Case::UpperCamel),
                 rust_type: t,
                 doc_comment: gather_docs(&field.attrs),
             });
