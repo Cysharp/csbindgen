@@ -1,5 +1,4 @@
 use crate::{alias_map::AliasMap, builder::BindgenOptions};
-use std::collections::HashMap;
 
 pub fn escape_csharp_name(str: &str) -> String {
     match str {
@@ -56,6 +55,7 @@ pub struct RustType {
 #[derive(Clone, Debug)]
 pub enum TypeKind {
     Normal,
+    Generic(Vec<RustType>),
     Pointer(PointerType, Box<RustType>),
     FixedArray(String, Option<PointerType>),         // digits
     Function(Vec<Parameter>, Option<Box<RustType>>), // parameter, return
@@ -80,6 +80,7 @@ pub struct RustStruct {
     pub fields: Vec<FieldMember>,
     pub is_union: bool,
     pub doc_comment: Vec<String>,
+    pub generic_arguments: Vec<String>,
 }
 
 #[derive(Clone, Debug)]
@@ -143,6 +144,19 @@ impl RustType {
         match &self.type_kind {
             Normal => {
                 emit_type_name(&mut sb);
+            }
+            Generic(params) => {
+                emit_type_name(&mut sb);
+                sb.push('<');
+                for p in params.iter().take(params.len() - 1) {
+                    sb.push_str(&p.to_rust_string(type_path).as_str());
+                    sb.push_str(", ");
+                }
+
+                if let Some(p) = params.last() {
+                    sb.push_str(&p.to_rust_string(type_path).as_str());
+                }
+                sb.push('>');
             }
             Pointer(p, inner) => {
                 let need_close = emit_pointer(&mut sb, p);
@@ -432,6 +446,18 @@ impl RustType {
                         emit_inner,
                     ) {
                         sb.push_str(type_csharp_string.as_str());
+
+                        if let TypeKind::Generic(args) = &self.type_kind {
+                            sb.push('<');
+                            for p in args.iter().take(args.len() - 1) {
+                                sb.push_str(&p.to_csharp_string(options, alias_map, delegate_list, emit_from_struct, method_name, parameter_name));
+                                sb.push_str(", ");
+                            }
+                            if let Some(last) = args.last() {
+                                sb.push_str(&last.to_csharp_string(options, alias_map, delegate_list, emit_from_struct, method_name, parameter_name));
+                            }
+                            sb.push('>');
+                        }
                     }
 
                     emit_inner = false;
@@ -450,6 +476,17 @@ impl RustType {
                 ) && emit_inner
                 {
                     sb.push_str(type_csharp_string.as_str());
+                    if let TypeKind::Generic(args) = &self.type_kind {
+                        sb.push('<');
+                        for p in args.iter().take(args.len() - 1) {
+                            sb.push_str(&p.to_csharp_string(options, alias_map, delegate_list, emit_from_struct, method_name, parameter_name));
+                            sb.push_str(", ");
+                        }
+                        if let Some(last) = args.last() {
+                            sb.push_str(&last.to_csharp_string(options, alias_map, delegate_list, emit_from_struct, method_name, parameter_name));
+                        }
+                        sb.push('>');
+                    }
                 }
             }
         };

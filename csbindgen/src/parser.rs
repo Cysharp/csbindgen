@@ -4,7 +4,7 @@ use crate::util::get_str_from_meta;
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
 use regex::Regex;
 use std::collections::HashSet;
-use syn::{ForeignItem, Item, Pat, ReturnType};
+use syn::{ForeignItem, GenericArgument, Item, Pat, ReturnType};
 
 enum FnItem {
     ForeignItem(syn::ForeignItemFn),
@@ -135,7 +135,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
 
             let rust_type = parse_type(&t.ty);
             if rust_type.type_name.is_empty() {
-                println!("csbindgen can't handle this parameter type so ignore generate, method_name: {} parameter_name: {}", method_name, parameter_name);
+                println!("cargo::warning=csbindgen can't handle this parameter type so ignore generate, method_name: {} parameter_name: {}", method_name, parameter_name);
                 return None;
             }
 
@@ -151,7 +151,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
         let rust_type = parse_type(b);
         if rust_type.type_name.is_empty() {
             println!(
-                "csbindgen can't handle this return type so ignore generate, method_name: {}",
+                "cargo::warning=csbindgen can't handle this return type so ignore generate, method_name: {}",
                 method_name
             );
             return None;
@@ -172,7 +172,7 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
             export_naming = x;
         } else {
             println!(
-                "csbindgen can't handle this function because there is neither #[no_mangle] nor #[export_name] so ignore generate, method_name: {}",
+                "cargo::warning=csbindgen can't handle this function because there is neither #[no_mangle] nor #[export_name] so ignore generate, method_name: {}",
                 method_name
             );
             return None;
@@ -238,7 +238,7 @@ fn parse_method_attribute_arguments(attr: &syn::Attribute) -> Option<ExportSymbo
         match parse_result {
             Ok(Some(value)) => return Some(value),
             Ok(None) => {}
-            Err(e) => println!("csbindgen can't parse attribute args: {}", e),
+            Err(e) => println!("cargo::warning=csbindgen can't parse attribute args: {}", e),
         }
     }
     None
@@ -275,11 +275,14 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
             let struct_name = t.ident.to_string();
             let fields = collect_fields(&t.fields);
 
+            let generics = t.generics.type_params().map(|p| p.ident.to_string()).collect();
+
             result.push(RustStruct {
                 struct_name,
                 fields,
                 is_union: true,
                 doc_comment: gather_docs(&t.attrs),
+                generic_arguments: generics,
             });
         } else if let Item::Struct(t) = item {
             let mut repr = false;
@@ -290,6 +293,7 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                 }
             }
             let doc_comment = gather_docs(&t.attrs);
+            let generics = t.generics.type_params().map(|p| p.ident.to_string()).collect();
 
             if repr {
                 if let syn::Fields::Named(f) = &t.fields {
@@ -300,6 +304,7 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                         fields,
                         is_union: false,
                         doc_comment,
+                        generic_arguments: generics,
                     });
                 } else if let syn::Fields::Unnamed(f) = &t.fields {
                     let struct_name = t.ident.to_string();
@@ -309,6 +314,7 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                         fields,
                         is_union: false,
                         doc_comment,
+                        generic_arguments: generics,
                     });
                 } else if let syn::Fields::Unit = &t.fields {
                     let struct_name = t.ident.to_string();
@@ -318,6 +324,7 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                         fields,
                         is_union: false,
                         doc_comment,
+                        generic_arguments: generics,
                     });
                 }
             } else {
@@ -329,6 +336,7 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
                     fields,
                     is_union: false,
                     doc_comment,
+                    generic_arguments: generics,
                 });
             }
         }
@@ -442,7 +450,7 @@ pub fn collect_enum(ast: &syn::File, result: &mut Vec<RustEnum>) {
                 .iter()
                 .any(|x| !matches!(x.fields, syn::Fields::Unit))
             {
-                println!("csbindgen can't handle Enum containing any variable with field, so ignore generate, enum_name: {enum_name}");
+                println!("cargo::warning=csbindgen can't handle Enum containing any variable with field, so ignore generate, enum_name: {enum_name}");
                 continue;
             }
 
@@ -753,6 +761,20 @@ fn parse_type_path(t: &syn::TypePath) -> RustType {
                 return rust_type;
             }
         }
+
+        let args = x.args.iter().enumerate().filter_map(|(index,arg)| {
+            if let GenericArgument::Type(ty) = arg {
+                Some(parse_type(ty))
+            } else {
+                println!("cargo::warning=generic parameter {index} in struct {} is ignored - this kind is unsupported", last_segment.ident.to_string());
+
+                None
+            }
+        }).collect();
+
+        return RustType { type_name: last_segment.ident.to_string(), type_kind: TypeKind::Generic(
+            args
+        ) }
     }
 
     RustType {

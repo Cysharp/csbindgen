@@ -107,6 +107,17 @@ fn collect_using_types(
         for p in parameters {
             collect_using_types(using_types, aliases, &p.rust_type);
         }
+    } else if let type_meta::TypeKind::Generic(params) = &rust_type.type_kind {
+        let (normalized, normalized_rust_type) = aliases.normalize(&rust_type.type_name);
+        if let Some(x) = normalized_rust_type {
+            collect_using_types(using_types, aliases, &x);
+        } else {
+            using_types.insert(normalized.clone());
+        }
+
+        for p in params {
+            collect_using_types(using_types, aliases, p);
+        }
     } else {
         let (normalized, normalized_rust_type) = aliases.normalize(&rust_type.type_name);
         if let Some(x) = normalized_rust_type {
@@ -131,6 +142,19 @@ fn collect_field_types(
         }
         for p in parameters {
             collect_field_types(field_map, aliases, struct_type_normalized, &p.rust_type);
+        }
+    } else if let type_meta::TypeKind::Pointer(_, ty) = &rust_type.type_kind {
+        collect_field_types(field_map, aliases, struct_type_normalized, ty);
+    } else if let type_meta::TypeKind::Generic(params) = &rust_type.type_kind {
+        let (normalized, normalized_rust_type) = aliases.normalize(&rust_type.type_name);
+        if let Some(x) = normalized_rust_type {
+            collect_field_types(field_map, aliases, struct_type_normalized, &x);
+        } else {
+            field_map.insert(struct_type_normalized, &normalized);
+        }
+
+        for p in params {
+            collect_field_types(field_map, aliases, struct_type_normalized, &p);
         }
     } else {
         let (normalized, normalized_rust_type) = aliases.normalize(&rust_type.type_name);

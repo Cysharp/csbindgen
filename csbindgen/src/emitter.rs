@@ -212,7 +212,21 @@ pub fn emit_csharp(
         structs_string
             .push_str_ln(format!("    [StructLayout(LayoutKind.{layout_kind})]").as_str());
         structs_string
-            .push_str_ln(format!("    {accessibility} unsafe partial struct {name}").as_str());
+            .push_str(format!("    {accessibility} unsafe partial struct {name}").as_str());
+
+        if !item.generic_arguments.is_empty() {
+            structs_string.push('<');
+            for p in item.generic_arguments.iter().take(item.generic_arguments.len() - 1) {
+                structs_string.push_str(p);
+                structs_string.push_str(", ");
+            }
+            if let Some(item) = item.generic_arguments.last() {
+                structs_string.push_str(item);
+            }
+            structs_string.push_str_ln(">");
+        } else {
+            structs_string.push('\n');
+        }
         structs_string.push_str_ln("    {");
         for field in &item.fields {
             if let Some(doc_comment) = escape_doc_comment(&field.doc_comment, "        ") {
