@@ -1009,8 +1009,8 @@ impl ByteBuffer {
             vec![]
         } else {
             let element_size = std::mem::size_of::<T>() as i32;
-            let length = (self.length * element_size) as usize;
-            let capacity = (self.capacity * element_size) as usize;
+            let length = (self.length / element_size) as usize;
+            let capacity = (self.capacity / element_size) as usize;
 
             unsafe { Vec::from_raw_parts(self.ptr as *mut T, length, capacity) }
         }
