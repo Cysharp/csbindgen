@@ -382,32 +382,32 @@ pub fn collect_const(
             if filter(const_name.as_str()) {
                 let t = parse_type(&ct.ty);
 
-                if let syn::Expr::Lit(lit_expr) = &*ct.expr {
-                    let value = match &lit_expr.lit {
-                        syn::Lit::Str(s) => {
-                            format!("\"{}\"", s.value())
+                let expr = peel_expr(&ct.expr);
+                let value = match expr {
+                    syn::Expr::Lit(lit_expr) => match &lit_expr.lit {
+                        syn::Lit::Str(s) => Some(format!("\"{}\"", s.value())),
+                        syn::Lit::ByteStr(bs) => Some(format!("{:?}", bs.value())),
+                        syn::Lit::Byte(b) => Some(format!("{}", b.value())),
+                        syn::Lit::Char(c) => Some(format!("'{}'", c.value())),
+                        syn::Lit::Int(i) => Some(format!("{}", i.base10_parse::<i64>().unwrap())),
+                        syn::Lit::Float(f) => Some(format!("{}", f.base10_parse::<f64>().unwrap())),
+                        syn::Lit::Bool(b) => Some(format!("{}", b.value)),
+                        _ => Some(String::new()),
+                    },
+                    syn::Expr::Unary(unary_expr) if matches!(unary_expr.op, syn::UnOp::Neg(_)) => {
+                        let inner = peel_expr(&unary_expr.expr);
+                        match inner {
+                            syn::Expr::Lit(lit_expr) => match &lit_expr.lit {
+                                syn::Lit::Int(i) => Some(format!("{}", -i.base10_parse::<i64>().unwrap())),
+                                syn::Lit::Float(f) => Some(format!("{}", -f.base10_parse::<f64>().unwrap())),
+                                _ => None,
+                            },
+                            _ => None,
                         }
-                        syn::Lit::ByteStr(bs) => {
-                            format!("{:?}", bs.value())
-                        }
-                        syn::Lit::Byte(b) => {
-                            format!("{}", b.value())
-                        }
-                        syn::Lit::Char(c) => {
-                            format!("'{}'", c.value())
-                        }
-                        syn::Lit::Int(i) => {
-                            format!("{}", i.base10_parse::<i64>().unwrap())
-                        }
-                        syn::Lit::Float(f) => {
-                            format!("{}", f.base10_parse::<f64>().unwrap())
-                        }
-                        syn::Lit::Bool(b) => {
-                            format!("{}", b.value)
-                        }
-                        _ => String::new(),
-                    };
-
+                    },
+                    _ => None,
+                };
+                if let Some(value) = value {
                     result.push(RustConst {
                         const_name,
                         rust_type: t,
@@ -725,6 +725,16 @@ fn parse_type(t: &syn::Type) -> RustType {
     RustType {
         type_name: "".to_string(),
         type_kind: TypeKind::Normal,
+    }
+}
+
+fn peel_expr(mut e: &syn::Expr) -> &syn::Expr {
+    loop {
+        match e {
+            syn::Expr::Group(g) => e = &g.expr,
+            syn::Expr::Paren(p) => e = &p.expr,
+            _ => return e,
+        }
     }
 }
 
