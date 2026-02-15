@@ -382,7 +382,7 @@ pub fn collect_const(
             if filter(const_name.as_str()) {
                 let t = parse_type(&ct.ty);
 
-                let expr = peel_expr(&ct.expr);
+                let expr = peel_expr(ct.expr.as_ref());
                 let value = match expr {
                     syn::Expr::Lit(lit_expr) => match &lit_expr.lit {
                         syn::Lit::Str(s) => Some(format!("\"{}\"", s.value())),
@@ -395,16 +395,16 @@ pub fn collect_const(
                         _ => Some(String::new()),
                     },
                     syn::Expr::Unary(unary_expr) if matches!(unary_expr.op, syn::UnOp::Neg(_)) => {
-                        let inner = peel_expr(&unary_expr.expr);
+                        let inner = peel_expr(unary_expr.expr.as_ref());
                         match inner {
                             syn::Expr::Lit(lit_expr) => match &lit_expr.lit {
-                                syn::Lit::Int(i) => Some(format!("{}", -i.base10_parse::<i64>().unwrap())),
-                                syn::Lit::Float(f) => Some(format!("{}", -f.base10_parse::<f64>().unwrap())),
+                                syn::Lit::Int(i) => Some(format!("-{}", i.base10_digits())),
+                                syn::Lit::Float(f) => Some(format!("-{}", f.base10_digits())),
                                 _ => None,
                             },
                             _ => None,
                         }
-                    },
+                    }
                     _ => None,
                 };
                 if let Some(value) = value {
