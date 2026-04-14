@@ -34,7 +34,7 @@ jobs:
           CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
       - run: git tag ${{ inputs.tag }}
       - name: Push changes
-        uses: ad-m/github-push-action@77c5b412c50b723d2a4fbc6d71fb5723bcd439aa
+        uses: ad-m/github-push-action@4cc74773234f74829a8c21bc4d69dd4be9cfa599
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           branch: ${{ github.ref }}
@@ -49,7 +49,7 @@ jobs:
     steps:
       - name: Load secrets
         id: op-load-secret
-        uses: 1password/load-secrets-action@13f58eec611f8e5db52ec16247f58c508398f3e6 # v3.0.0
+        uses: 1password/load-secrets-action@92467eb28f72e8255933372f1e0707c567ce2259 # v4.0.0
         with:
           export-env: false
         env:
