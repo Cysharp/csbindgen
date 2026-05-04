@@ -41,7 +41,7 @@ pub(crate) fn generate(
 
     for path in paths {
         let file_content = std::fs::read_to_string(path)
-            .unwrap_or_else(|_| panic!("input file not found, path: {}", path.display()));
+            .unwrap_or_else(|_| panic!("input file not found, path: {}", std::path::absolute(path).unwrap().display()));
         let file_ast = syn::parse_file(file_content.as_str())?;
 
         match generate_kind {
@@ -161,15 +161,17 @@ mod tests {
         let path = std::env::current_dir().unwrap();
         println!("starting dir: {}", path.display()); // csbindgen/csbindgen
 
-        std::env::set_current_dir(path.parent().unwrap()).unwrap();
+        // NOTE: no longer changing the cwd here since it causes race conditions with other tests
+        // running at the same time
+        // std::env::set_current_dir(path.parent().unwrap()).unwrap();
 
         Builder::new()
-            .input_bindgen_file("csbindgen-tests/src/lz4.rs")
+            .input_bindgen_file("../csbindgen-tests/src/lz4.rs")
             .csharp_class_name("LibLz4")
             .csharp_dll_name("csbindgen_tests")
             .generate_to_file(
-                "csbindgen-tests/src/lz4_ffi.rs",
-                "dotnet-sandbox/lz4_bindgen.cs",
+                "../csbindgen-tests/src/lz4_ffi.rs",
+                "../dotnet-sandbox/lz4_bindgen.cs",
             )
             .unwrap();
     }
@@ -204,6 +206,41 @@ mod tests {
         file.flush().unwrap();
     }
 
+    #[test]
+    fn field_casing_original() {
+        let original_file_path = "../dotnet-sandbox/field_casing_original.cs";
+        let generated_file_path = "../dotnet-sandbox/field_casing_bindgen.cs";
+
+        Builder::new()
+            .always_included_types(["GeneratedStructFieldCasing"])
+            .input_bindgen_file("../csbindgen-tests/src/field_casing.rs")
+            .generate_csharp_file(generated_file_path)
+            .unwrap();
+
+        compare_and_delete_files(
+            original_file_path,
+            generated_file_path,
+        );
+    }
+
+    #[test]
+    fn field_casing_upper_camel() {
+        let original_file_path = "../dotnet-sandbox/field_casing_original_upper_camel.cs";
+        let generated_file_path = "../dotnet-sandbox/field_casing_bindgen_upper_camel.cs";
+
+        Builder::new()
+            .always_included_types(["GeneratedStructFieldCasing"])
+            .input_bindgen_file("../csbindgen-tests/src/field_casing.rs")
+            .csharp_field_casing(Case::UpperCamel)
+            .generate_csharp_file(generated_file_path)
+            .unwrap();
+
+        compare_and_delete_files(
+            original_file_path,
+            generated_file_path,
+        );
+    }
+
     fn compare_and_delete_files(original_file_path: &str, generated_file_path: &str) {
         let original = fs::read_to_string(original_file_path)
             .expect("Should have been able to read original file");
@@ -218,15 +255,15 @@ mod tests {
 
     // #[test]
     // fn test_emit_without_class() {
-    //     let generated_file_path = "dotnet-sandbox/only_enums_and_structs_bindgen.cs";
+    //     let generated_file_path = "../dotnet-sandbox/only_enums_and_structs_bindgen.cs";
     //     Builder::new()
     //         .always_included_types(["Vec3", "Foo"])
-    //         .input_bindgen_file("csbindgen-tests/src/only_enums_and_structs.rs")
+    //         .input_bindgen_file("../csbindgen-tests/src/only_enums_and_structs.rs")
     //         .generate_csharp_file(generated_file_path)
     //         .unwrap();
 
     //     compare_and_delete_files(
-    //         "dotnet-sandbox/only_enums_and_structs_original.cs",
+    //         "../dotnet-sandbox/only_enums_and_structs_original.cs",
     //         generated_file_path,
     //     );
     // }
