@@ -4,7 +4,7 @@ use crate::util::get_str_from_meta;
 use crate::{alias_map::AliasMap, builder::BindgenOptions, field_map::FieldMap, type_meta::*};
 use regex::Regex;
 use std::collections::HashSet;
-use convert_case::{Case, Casing};
+use convert_case::Casing;
 use syn::{ForeignItem, Item, Pat, ReturnType};
 
 enum FnItem {
