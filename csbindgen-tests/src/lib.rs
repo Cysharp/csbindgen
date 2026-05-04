@@ -3,6 +3,7 @@ use std::{
 };
 
 mod counter;
+mod field_casing;
 
 #[allow(dead_code)]
 #[allow(non_snake_case)]
