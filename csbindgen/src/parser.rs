@@ -269,12 +269,12 @@ pub fn collect_type_alias(ast: &syn::File, result: &mut AliasMap) {
     }
 }
 
-pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
+pub fn collect_struct(ast: &syn::File, options: &BindgenOptions, result: &mut Vec<RustStruct>) {
     // collect union or struct
     for item in depth_first_module_walk(&ast.items) {
         if let Item::Union(t) = item {
             let struct_name = t.ident.to_string();
-            let fields = collect_fields(&t.fields);
+            let fields = collect_fields(&t.fields, options);
 
             result.push(RustStruct {
                 struct_name,
@@ -295,7 +295,7 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
             if repr {
                 if let syn::Fields::Named(f) = &t.fields {
                     let struct_name = t.ident.to_string();
-                    let fields = collect_fields(f);
+                    let fields = collect_fields(f, options);
                     result.push(RustStruct {
                         struct_name,
                         fields,
@@ -336,14 +336,19 @@ pub fn collect_struct(ast: &syn::File, result: &mut Vec<RustStruct>) {
     }
 }
 
-fn collect_fields(fields: &syn::FieldsNamed) -> Vec<FieldMember> {
+fn collect_fields(fields: &syn::FieldsNamed, options: &BindgenOptions) -> Vec<FieldMember> {
     let mut result = Vec::new();
 
     for field in &fields.named {
         if let Some(x) = &field.ident {
+            let name = match options.csharp_field_casing {
+                Some(case) => x.to_string().to_case(case),
+                None => x.to_string(),
+            };
+
             let t = parse_type(&field.ty);
             result.push(FieldMember {
-                name: x.to_string().to_case(Case::UpperCamel),
+                name,
                 rust_type: t,
                 doc_comment: gather_docs(&field.attrs),
             });

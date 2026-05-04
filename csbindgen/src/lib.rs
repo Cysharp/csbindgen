@@ -17,6 +17,8 @@ use parser::*;
 use std::{collections::HashSet, error::Error};
 use type_meta::{ExternMethod, RustConst, RustEnum, RustStruct, RustType};
 
+pub use convert_case::Case;
+
 enum GenerateKind {
     InputBindgen,
     InputExtern,
@@ -47,7 +49,7 @@ pub(crate) fn generate(
             GenerateKind::InputExtern => collect_extern_method(&file_ast, options, &mut methods),
         };
         collect_type_alias(&file_ast, &mut aliases);
-        collect_struct(&file_ast, &mut structs);
+        collect_struct(&file_ast, options, &mut structs);
         collect_enum(&file_ast, &mut enums);
 
         collect_const(&file_ast, &mut consts, options.csharp_generate_const_filter);
