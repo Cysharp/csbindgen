@@ -20,6 +20,22 @@ jobs:
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
+      - name: Load secrets
+        if: ${{ inputs.use-bot-token }}
+        id: op-load-secret
+        uses: 1password/load-secrets-action@e544b780808654ba8ceba5fb2fe2897103d92ff4 # v5.0.0
+        with:
+          export-env: false
+        env:
+          OP_SERVICE_ACCOUNT_TOKEN: ${{ secrets.OP_SERVICE_ACCOUNT_TOKEN_PUBLIC }}
+          ACTIONBOT_PRIVATE_KEY: "op://${{ vars.OP_VAULT_ACTIONS_PUBLIC }}/GITHUB_ACTIONS_BOT/private key"
+          ACTIONBOT_APPID: "op://${{ vars.OP_VAULT_ACTIONS_PUBLIC }}/GITHUB_ACTIONS_BOT/appid"
+      - uses: actions/create-github-app-token@bcd2ba49218906704ab6c1aa796996da409d3eb1 # v3.2.0
+        id: app-token
+        with:
+          app-id: ${{ steps.op-load-secret.outputs.ACTIONBOT_APPID }}
+          private-key: ${{ steps.op-load-secret.outputs.ACTIONBOT_PRIVATE_KEY }}
+          permission-contents: write
       - uses: Cysharp/Actions/.github/actions/checkout@main
       - uses: rust-lang/crates-io-auth-action@b7e9a28eded4986ec6b1fa40eeee8f8f165559ec # v1.0.3
         id: auth
@@ -38,7 +54,7 @@ jobs:
         if: ${{ !inputs.dry-run }}
         uses: ad-m/github-push-action@77c5b412c50b723d2a4fbc6d71fb5723bcd439aa
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
+          github_token: ${{ steps.app-token.outputs.token }}
           branch: ${{ github.ref }}
           tags: true
 
