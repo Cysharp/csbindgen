@@ -21,7 +21,6 @@ jobs:
     timeout-minutes: 10
     steps:
       - name: Load secrets
-        if: ${{ inputs.use-bot-token }}
         id: op-load-secret
         uses: 1password/load-secrets-action@e544b780808654ba8ceba5fb2fe2897103d92ff4 # v5.0.0
         with:
