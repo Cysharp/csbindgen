@@ -51,7 +51,7 @@ jobs:
       - run: git tag ${{ inputs.tag }}
       - name: Push changes
         if: ${{ !inputs.dry-run }}
-        uses: ad-m/github-push-action@77c5b412c50b723d2a4fbc6d71fb5723bcd439aa
+        uses: ad-m/github-push-action@4cc74773234f74829a8c21bc4d69dd4be9cfa599
         with:
           github_token: ${{ steps.app-token.outputs.token }}
           branch: ${{ github.ref }}
