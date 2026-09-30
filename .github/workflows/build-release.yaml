@@ -12,13 +12,28 @@ on:
         default: false
         type: boolean
 
+concurrency:
+  group: release
+  cancel-in-progress: false
+
 jobs:
-  build-and-push-rust:
+  validate-release:
+    permissions:
+      contents: read
+    uses: Cysharp/Actions/.github/workflows/validate-release.yaml@main
+    with:
+      tag: ${{ inputs.tag }}
+
+  update-version:
+    needs: [validate-release]
     permissions:
       contents: write
-      id-token: write # required for crates.io publish
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    outputs:
+      sha: ${{ steps.version.outputs.sha }}
+      branch: ${{ steps.version.outputs.branch }}
+      is-branch-created: ${{ steps.branch-created.outputs.value }}
     steps:
       - name: Load secrets
         id: op-load-secret
@@ -36,66 +51,119 @@ jobs:
           private-key: ${{ steps.op-load-secret.outputs.ACTIONBOT_PRIVATE_KEY }}
           permission-contents: write
       - uses: Cysharp/Actions/.github/actions/checkout@main
-      - uses: rust-lang/crates-io-auth-action@b7e9a28eded4986ec6b1fa40eeee8f8f165559ec # v1.0.3
-        id: auth
-      - run: cargo build --verbose
-      - run: cargo test update_package_version -- ${{ inputs.tag }} --nocapture
-      - run: |
+      - name: Update Cargo version and commit
+        id: version
+        shell: bash
+        run: |
+          [[ "$RELEASE_REF_TYPE" == branch ]] || { echo "Run releases from a branch."; exit 1; }
+          branch="$RELEASE_BRANCH"
+          if [[ "$DRY_RUN" == true ]]; then
+            branch="test-release/$TAG-$GITHUB_RUN_ID-$GITHUB_RUN_ATTEMPT"
+            git switch -c "$branch"
+          fi
+          cargo test -p csbindgen update_package_version -- "$VERSION" --nocapture
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git config --local user.name "github-actions[bot]"
-          git commit -m "Update cargo.toml version to ${{ inputs.tag }}" -a
-      - run: cargo publish --manifest-path csbindgen/Cargo.toml
-        if: ${{ !inputs.dry-run }}
+          git add csbindgen/Cargo.toml
+          if [[ "$DRY_RUN" == true ]] || ! git diff --cached --quiet; then
+            git commit --allow-empty -m "Update Cargo.toml version to $VERSION"
+          fi
+          echo "sha=$(git rev-parse HEAD)" >> "$GITHUB_OUTPUT"
+          echo "branch=$branch" >> "$GITHUB_OUTPUT"
         env:
-          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
-      - run: git tag ${{ inputs.tag }}
-      - name: Push changes
-        if: ${{ !inputs.dry-run }}
-        uses: ad-m/github-push-action@77c5b412c50b723d2a4fbc6d71fb5723bcd439aa
-        with:
-          github_token: ${{ steps.app-token.outputs.token }}
-          branch: ${{ github.ref }}
-          tags: true
+          RELEASE_BRANCH: ${{ github.ref_name }}
+          RELEASE_REF_TYPE: ${{ github.ref_type }}
+          TAG: ${{ needs.validate-release.outputs.tag }}
+          VERSION: ${{ needs.validate-release.outputs.version }}
+          DRY_RUN: ${{ inputs.dry-run }}
+      - name: Push version commit
+        shell: bash
+        run: |
+          gh auth setup-git
+          git push origin "HEAD:refs/heads/$BRANCH"
+        env:
+          GH_TOKEN: ${{ steps.app-token.outputs.token }}
+          BRANCH: ${{ steps.version.outputs.branch }}
+      - name: Record temporary branch creation
+        id: branch-created
+        if: ${{ inputs.dry-run }}
+        run: echo "value=true" >> "$GITHUB_OUTPUT"
 
-  build-dotnet:
-    needs: [build-and-push-rust]
+  build-rust:
+    needs: [update-version]
     permissions:
       contents: read
-      id-token: write # required for NuGet Trusted Publish
     runs-on: ubuntu-24.04
     timeout-minutes: 10
     steps:
       - uses: Cysharp/Actions/.github/actions/checkout@main
+        with:
+          ref: ${{ needs.update-version.outputs.sha }}
+      - run: cargo build --verbose
+
+  build-dotnet:
+    needs: [validate-release, update-version]
+    permissions:
+      contents: read
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: Cysharp/Actions/.github/actions/checkout@main
+        with:
+          ref: ${{ needs.update-version.outputs.sha }}
       - uses: Cysharp/Actions/.github/actions/setup-dotnet@main
-      # pack nuget (.nupkg and .symbols.nupkg will be created)
-      - run: dotnet build -c Release -p:Version=${{ inputs.tag }}
-      - run: dotnet pack -c Release --no-build -p:Version=${{ inputs.tag }} -p:IncludeSymbols=true -o ./publish
+      # Pack NuGet packages with the validated version.
+      - run: dotnet build -c Release -p:Version="$VERSION"
+        env:
+          VERSION: ${{ needs.validate-release.outputs.version }}
+      - run: dotnet pack -c Release --no-build -p:Version="$VERSION" -p:IncludeSymbols=true -o ./publish
+        env:
+          VERSION: ${{ needs.validate-release.outputs.version }}
       - uses: Cysharp/Actions/.github/actions/upload-artifact@main
         with:
           name: nuget
           path: ./publish
-          retention-days: 1
-      # push nuget
-      - name: NuGet login (OIDC)
-        uses: NuGet/login@8d196754b4036150537f80ac539e15c2f1028841 # v1.2.0
-        id: login
-        with:
-          user: ${{ secrets.NUGET_USER }}
-      - run: dotnet nuget push "./publish/*.nupkg" --skip-duplicate -s https://api.nuget.org/v3/index.json -k "${NUGET_KEY}"
-        if: ${{ !inputs.dry-run }}
-        env:
-          NUGET_KEY: ${{ steps.login.outputs.NUGET_API_KEY }}
+          retention-days: 7
 
   create-release:
-    needs: [build-dotnet, build-and-push-rust]
+    needs: [validate-release, update-version, build-rust, build-dotnet]
     permissions:
       contents: write
-      id-token: write # required for NuGet Trusted Publish
     uses: Cysharp/Actions/.github/workflows/create-release.yaml@main
     with:
-      commit-id: ""
+      commit-id: ${{ needs.update-version.outputs.sha }}
       dry-run: ${{ inputs.dry-run }}
-      tag: ${{ inputs.tag }}
-      nuget-push: false
+      tag: ${{ needs.validate-release.outputs.tag }}
       release-upload: false
     secrets: inherit
+
+  publish-package:
+    needs: [validate-release, update-version, build-rust, create-release]
+    if: ${{ !inputs.dry-run }}
+    permissions:
+      contents: read
+      id-token: write
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    steps:
+      - uses: Cysharp/Actions/.github/actions/checkout@main
+        with:
+          ref: ${{ needs.update-version.outputs.sha }}
+      - uses: Cysharp/Actions/.github/actions/publish-crates@main
+        with:
+          manifest-path: csbindgen/Cargo.toml
+          version: ${{ needs.validate-release.outputs.version }}
+      - uses: Cysharp/Actions/.github/actions/publish-nuget@main
+        with:
+          artifact-name: nuget
+          user: ${{ secrets.NUGET_USER }}
+          version: ${{ needs.validate-release.outputs.version }}
+
+  cleanup:
+    if: ${{ always() && needs.update-version.outputs.is-branch-created == 'true' }}
+    needs: [update-version, build-rust, build-dotnet, create-release, publish-package]
+    permissions:
+      contents: write
+    uses: Cysharp/Actions/.github/workflows/clean-packagejson-branch.yaml@main
+    with:
+      branch: ${{ needs.update-version.outputs.branch }}
