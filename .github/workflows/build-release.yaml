@@ -138,7 +138,7 @@ jobs:
     secrets: inherit
 
   publish-package:
-    needs: [validate-release, update-version, build-rust, create-release]
+    needs: [validate-release, update-version, create-release]
     if: ${{ !inputs.dry-run }}
     permissions:
       contents: read
@@ -161,14 +161,7 @@ jobs:
 
   cleanup:
     if: ${{ always() && needs.update-version.outputs.is-branch-created == 'true' }}
-    needs:
-      [
-        update-version,
-        build-rust,
-        build-dotnet,
-        create-release,
-        publish-package,
-      ]
+    needs: [update-version, create-release, publish-package]
     permissions:
       contents: write
     uses: Cysharp/Actions/.github/workflows/clean-packagejson-branch.yaml@main
