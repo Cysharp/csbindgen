@@ -40,6 +40,9 @@ namespace CsBindgen
         [DllImport(__DllName, EntryPoint = "other_2", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         internal static extern void other_2(NfcCard _hoge);
 
+        [DllImport(__DllName, EntryPoint = "wildcard_parameter", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
+        internal static extern void wildcard_parameter(int arg1, int _y, float arg3);
+
         [DllImport(__DllName, EntryPoint = "event", CallingConvention = CallingConvention.Cdecl, ExactSpelling = true)]
         internal static extern void @event(@event @event);
 
