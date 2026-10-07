@@ -155,6 +155,9 @@ pub struct NfcCard {
 #[no_mangle]
 pub extern "C" fn other_2(_hoge: NfcCard) {}
 
+#[no_mangle]
+pub extern "C" fn wildcard_parameter(_: i32, _y: i32, _: f32) {}
+
 #[repr(C)]
 pub struct ByteArray {
     pub i: i32,

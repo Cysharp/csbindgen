@@ -125,13 +125,13 @@ fn parse_method(item: FnItem, options: &BindgenOptions) -> Option<ExternMethod> 
     let mut return_type: Option<RustType> = None;
 
     // argument
-    for arg in sig.inputs.iter() {
+    for (index, arg) in sig.inputs.iter().enumerate() {
         if let syn::FnArg::Typed(t) = arg {
-            let mut parameter_name: String = "".to_string();
-
-            if let Pat::Ident(ident) = &*t.pat {
-                parameter_name = ident.ident.to_string();
-            }
+            let parameter_name = match &*t.pat {
+                Pat::Ident(ident) => ident.ident.to_string(),
+                // `_` (or any other non-ident pattern) has no name, but C# requires one
+                _ => format!("arg{}", index + 1),
+            };
 
             let rust_type = parse_type(&t.ty);
             if rust_type.type_name.is_empty() {
