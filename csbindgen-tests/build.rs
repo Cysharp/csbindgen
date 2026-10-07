@@ -102,6 +102,15 @@ fn main() -> Result<(), Box<dyn Error>> {
         .generate_csharp_file("../dotnet-sandbox/NestedModuleTests.cs")
         .unwrap();
 
+    csbindgen::Builder::default()
+        .input_extern_file("src/negative_constants.rs")
+        .csharp_class_name("NegativeConstantsTests")
+        .csharp_dll_name("csbindgen_tests_negative_constants")
+        .csharp_use_function_pointer(true)
+        .csharp_generate_const_filter(|_| true)
+        .generate_csharp_file("../dotnet-sandbox/NegativeConstantsTests.cs")
+        .unwrap();
+
     csbindgen::Builder::new()
         .input_bindgen_file("src/zstd.rs")
         .method_filter(|x| x.starts_with("ZSTD_"))
