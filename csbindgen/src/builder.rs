@@ -6,7 +6,7 @@ use std::{
     path::Path,
 };
 use std::convert::identity;
-
+use crate::Case;
 use crate::{generate, GenerateKind};
 
 pub struct Builder {
@@ -35,6 +35,7 @@ pub struct BindgenOptions {
     pub csharp_type_rename: fn(type_name: String) -> String,
     pub csharp_file_header: String,
     pub csharp_file_footer: String,
+    pub csharp_field_casing: Option<Case<'static>>,
     pub always_included_types: Vec<String>,
 }
 
@@ -63,6 +64,7 @@ impl Default for Builder {
                 csharp_type_rename: identity,
                 csharp_file_header: "".to_string(),
                 csharp_file_footer: "".to_string(),
+                csharp_field_casing: None,
                 always_included_types: vec![],
             },
         }
@@ -235,6 +237,13 @@ impl Builder {
     /// configure the additional footer for the generated C# code.
     pub fn csharp_file_footer<T: Into<String>>(mut self, csharp_file_footer: T) -> Builder {
         self.options.csharp_file_footer = csharp_file_footer.into();
+        self
+    }
+
+    /// configure the casing of the generated C# field names, default is to use the input field
+    /// names verbatim (ie. most likely snake_case)
+    pub fn csharp_field_casing(mut self, field_casing: Case<'static>) -> Builder {
+        self.options.csharp_field_casing = Some(field_casing);
         self
     }
 
