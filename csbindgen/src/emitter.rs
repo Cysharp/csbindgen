@@ -301,7 +301,9 @@ pub fn emit_csharp(
                 Some(x) => format!(" = {x},"),
                 None => ",".to_string(),
             };
-            enum_string.push_str_ln(format!("        {}{}", field.name, value).as_str());
+            enum_string.push_str_ln(
+                format!("        {}{}", escape_csharp_name(&field.name), value).as_str(),
+            );
         }
         enum_string.push_str_ln("    }");
         enum_string.push('\n');
