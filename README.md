@@ -21,7 +21,7 @@ showcase:
 
 Getting Started
 ---
-Install on `Cargo.toml` as `build-dependencies` and set up `bindgen::Builder` on `build.rs`.
+Install on `Cargo.toml` as `build-dependencies` and set up `csbindgen::Builder` on `build.rs`.
 
 ```toml
 [package]
@@ -128,6 +128,7 @@ fn main() -> Result<(), Box<dyn Error>> {
     // csbindgen code, generate C# dll import
     csbindgen::Builder::default()
         .input_bindgen_file("lz4.rs") // read from bindgen generated code
+        .csharp_dll_name("lz4")
      // .csharp_generate_const_filter(|x| x.starts_with("LZ4_")) // use csharp_generate_const_filter if you want to generate const
         .generate_csharp_file("../dotnet/NativeMethods.lz4.g.cs")?;
 
@@ -240,14 +241,14 @@ csbindgen::Builder::default()
     .csharp_method_prefix("")               // optional, default: ""
     .csharp_use_function_pointer(true)      // optional, default: true
     .csharp_disable_emit_dll_name(false)    // optional, default: false
-    .csharp_imported_namespaces("MyLib")    // optional, default: empty
+    .csharp_import_namespace("MyLib")      // optional, default: empty
     .csharp_generate_const_filter (|_|false) // optional, default: `|_|false`
     .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal") // optional, default: "", allows multiple call
-    .csharp_type_rename(|rust_type_name| match rust_type_name {     // optional, default: `|x| x`
+    .csharp_type_rename(|rust_type_name| match rust_type_name.as_str() { // optional, default: `|x| x`
         "FfiConfiguration" => "Configuration".into(),
-        _ => x,
+        _ => rust_type_name,
     })
-    .always_included_types(["ZL_StandardGraphID", "ZL_StandardNodeID"])` // optional, default: []
+    .always_included_types(["ZL_StandardGraphID", "ZL_StandardNodeID"]) // optional, default: []
     .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs")     // required
     .unwrap();
 ```
@@ -292,7 +293,7 @@ csbindgen::Builder::default()
     .generate_csharp_file("../dotnet-sandbox/NativeMethods.cs");
 ```
 
-also `csharp_imported_namespaces` can call multiple times.
+also `csharp_import_namespace` can call multiple times.
 
 `always_included_types` is optional. Types and enums that exist in the input file are all trimmed and not generated if they are not used in method definitions. If set name, do not trim and generate type to C#.
 
@@ -347,14 +348,14 @@ csbindgen::Builder::default()
     .csharp_entry_point_prefix("csbindgen_")      // optional, default: "", for C to Rust to C#, you must set same as rust_method_prefix
     .csharp_method_prefix("")                     // optional, default: ""
     .csharp_use_function_pointer(true)            // optional, default: true
-    .csharp_imported_namespaces("MyLib")          // optional, default: empty
+    .csharp_import_namespace("MyLib")            // optional, default: empty
     .csharp_generate_const_filter(|_|false)       // optional, default:|_|false
     .csharp_dll_name_if("UNITY_IOS && !UNITY_EDITOR", "__Internal") // optional, default: "", allows multiple call
-    .csharp_type_rename(|rust_type_name| match rust_type_name.as_str() {    // optional, default: `|x| x`
+    .csharp_type_rename(|rust_type_name| match rust_type_name.as_str() { // optional, default: `|x| x`
         "FfiConfiguration" => "Configuration".into(),
-        _ => x,
+        _ => rust_type_name,
     })
-    .always_included_types(["ZL_StandardGraphID", "ZL_StandardNodeID"])` // optional, default: []
+    .always_included_types(["ZL_StandardGraphID", "ZL_StandardNodeID"]) // optional, default: []
     .csharp_file_header("#if !UNITY_WEBGL")       // optional, default: ""
     .csharp_file_footer("#endif")                 // optional, default: ""
     .generate_to_file("src/lz4_ffi.rs", "../dotnet-sandbox/lz4_bindgen.cs") // for C to Rust to C#, if C to C#, use generate_csharp_file instead.
@@ -429,7 +430,7 @@ internal static unsafe partial class NativeMethods
                 ext = ".so";
             }
 
-            var arch = RuntimeInformation.OSArchitecture switch
+            var arch = RuntimeInformation.ProcessArchitecture switch
             {
                 Architecture.Arm64 => "arm64",
                 Architecture.X64 => "x64",
@@ -581,8 +582,8 @@ Older C# version do not support `nint` and `nuint`. You can use `csharp_use_nint
     csbindgen::Builder::default()
         .input_extern_file("lib.rs")
         .csharp_dll_name("nativelib")
-        .generate_csharp_file("../dotnet/NativeMethods.g.cs")
         .csharp_use_nint_types(false)
+        .generate_csharp_file("../dotnet/NativeMethods.g.cs")
         .unwrap();
 ```
 
@@ -819,7 +820,7 @@ Allocated Rust memory in heap can send to C# via pointer and `Box::into_raw` and
 ```rust
 #[no_mangle]
 pub extern "C" fn create_context() -> *mut Context {
-    let ctx = Box::new(Context { foo: true });
+    let ctx = Box::new(Context { foo: true, bar: 42, baz: 123 });
     Box::into_raw(ctx)
 }
 
