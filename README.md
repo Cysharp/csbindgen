@@ -239,6 +239,7 @@ csbindgen::Builder::default()
     .csharp_entry_point_prefix("")          // optional, default: ""
     .csharp_method_prefix("")               // optional, default: ""
     .csharp_use_function_pointer(true)      // optional, default: true
+    .csharp_updated_memory_safety_rules(false) // optional, default: false
     .csharp_disable_emit_dll_name(false)    // optional, default: false
     .csharp_imported_namespaces("MyLib")    // optional, default: empty
     .csharp_generate_const_filter (|_|false) // optional, default: `|_|false`
@@ -1164,6 +1165,16 @@ fixed (byte* p = bytes)
 ```
 
 Again, the important thing is that memory allocated in Rust must release in Rust and memory allocated in C# must release in C#.
+
+### Updated memory safety rules
+
+Set `csharp_updated_memory_safety_rules(true)` to generate code for the C# 15 [updated memory safety rules](https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-options/language#enable-the-updated-memory-safety-rules):
+
+- Generated types are no longer marked `unsafe`.
+- Every extern method is marked `unsafe`.
+- Fields with pointer, function pointer or fixed-size buffer types are marked `unsafe`, and the remaining fields of unions are marked `safe`.
+
+The default output is for the original rules, where an `unsafe` modifier on a type provides an unsafe context.
 
 Build Tracing
 ---
