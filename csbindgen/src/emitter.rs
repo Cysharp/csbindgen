@@ -89,6 +89,9 @@ pub fn emit_csharp(
     let class_name = &options.csharp_class_name;
     let method_prefix = &options.csharp_method_prefix;
     let accessibility = &options.csharp_class_accessibility;
+    let updated_rules = options.csharp_updated_memory_safety_rules;
+    let type_unsafe = if updated_rules { "" } else { " unsafe" };
+    let method_unsafe = if updated_rules { " unsafe" } else { "" };
 
     let dll_name = if options.csharp_disable_emit_dll_name {
         "".to_string()
@@ -191,7 +194,7 @@ pub fn emit_csharp(
             method_list_string.push_str_ln("        [return: MarshalAs(UnmanagedType.U1)]");
         }
         method_list_string.push_str_ln(
-            format!("        {accessibility} static extern {return_type} {method_prefix}{method_name}({parameters});").as_str(),
+            format!("        {accessibility} static{method_unsafe} extern {return_type} {method_prefix}{method_name}({parameters});").as_str(),
         );
         method_list_string.push('\n');
     }
@@ -212,7 +215,7 @@ pub fn emit_csharp(
         structs_string
             .push_str_ln(format!("    [StructLayout(LayoutKind.{layout_kind})]").as_str());
         structs_string
-            .push_str_ln(format!("    {accessibility} unsafe partial struct {name}").as_str());
+            .push_str_ln(format!("    {accessibility}{type_unsafe} partial struct {name}").as_str());
         structs_string.push_str_ln("    {");
         for field in &item.fields {
             if let Some(doc_comment) = escape_doc_comment(&field.doc_comment, "        ") {
@@ -236,10 +239,21 @@ pub fn emit_csharp(
                 "".to_string()
             };
 
+            let safety = if !updated_rules {
+                ""
+            } else if type_name.contains('*') || type_name.starts_with("fixed ") {
+                "unsafe "
+            } else if item.is_union {
+                "safe "
+            } else {
+                ""
+            };
+
             structs_string.push_str(
                 format!(
-                    "        {}public {} {}",
+                    "        {}public {}{} {}",
                     attr,
+                    safety,
                     type_name,
                     escape_csharp_name(field.name.as_str())
                 )
@@ -373,7 +387,7 @@ pub fn emit_csharp(
         String::new()
     } else {
         format!(
-            "{accessibility} static unsafe partial class {class_name}
+            "{accessibility} static{type_unsafe} partial class {class_name}
     {{
 {dll_name}
 

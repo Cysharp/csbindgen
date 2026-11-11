@@ -30,6 +30,7 @@ pub struct BindgenOptions {
     pub csharp_if_dll_imports: Vec<(String, String)>,
     pub csharp_use_function_pointer: bool,
     pub csharp_use_nint_types: bool,
+    pub csharp_updated_memory_safety_rules: bool,
     pub csharp_imported_namespaces: Vec<String>,
     pub csharp_generate_const_filter: fn(const_name: &str) -> bool,
     pub csharp_type_rename: fn(type_name: String) -> String,
@@ -58,6 +59,7 @@ impl Default for Builder {
                 csharp_if_dll_imports: vec![],
                 csharp_use_function_pointer: true,
                 csharp_use_nint_types: true,
+                csharp_updated_memory_safety_rules: false,
                 csharp_imported_namespaces: vec![],
                 csharp_generate_const_filter: |_| false,
                 csharp_type_rename: identity,
@@ -204,6 +206,14 @@ impl Builder {
     /// (use `nint`/`nuint`)
     pub fn csharp_use_nint_types(mut self, csharp_use_nint_types: bool) -> Builder {
         self.options.csharp_use_nint_types = csharp_use_nint_types;
+        self
+    }
+
+    /// configure C# generation for the C# 15 updated memory safety rules, default is false
+    ///
+    /// When false, the output is for the original unsafe rules.
+    pub fn csharp_updated_memory_safety_rules(mut self, csharp_updated_memory_safety_rules: bool) -> Builder {
+        self.options.csharp_updated_memory_safety_rules = csharp_updated_memory_safety_rules;
         self
     }
 
